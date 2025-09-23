@@ -66,17 +66,17 @@ PrimitiveDataInformation* DataInformationFactory::newPrimitive(const PrimitivePa
 
 namespace {
 template <class T>
-T* newEnumOrFlags(const EnumParsedData& pd)
+std::unique_ptr<T> newEnumOrFlags(const EnumParsedData& pd)
 {
     LoggerWithContext lwc(pd.logger, pd.context() + QLatin1String(" (type)"));
     const PrimitiveDataType primitiveType = PrimitiveFactory::typeStringToType(pd.type, lwc);
     if (primitiveType == PrimitiveDataType::Invalid || primitiveType == PrimitiveDataType::Bitfield) {
         pd.error() << "Unrecognized enum type: " << pd.type;
-        return nullptr;
+        return  {};
     }
     if (primitiveType == PrimitiveDataType::Float || primitiveType == PrimitiveDataType::Double) {
         pd.error() << "Floating-point enums are not allowed since they make little sense.";
-        return nullptr;
+        return {};
     }
     EnumDefinition::Ptr definition = pd.enumDef;
     if (!definition) {
@@ -91,7 +91,7 @@ T* newEnumOrFlags(const EnumParsedData& pd)
     if (definition->type() != primitiveType) {
         pd.error().nospace() << "Enum type (" << definition->type() << ") and value type (" << primitiveType
                              << ") do not match!";
-        return nullptr;
+        return {};
     }
     auto primData = std::unique_ptr<PrimitiveDataInformation>(PrimitiveFactory::newInstance(pd.name, primitiveType, lwc));
     // TODO allow bitfields?
@@ -99,7 +99,7 @@ T* newEnumOrFlags(const EnumParsedData& pd)
         pd.error() << "Could not create a value object for this enum!";
         return nullptr;
     }
-    return new T(pd.name, std::move(primData), definition, pd.parent);
+    return std::make_unique<T>(pd.name, std::move(primData), definition, pd.parent);
 }
 
 template <class T>
@@ -169,14 +169,14 @@ QString generateLengthFunction(DataInformation* current, DataInformation* last, 
 
 }
 
-EnumDataInformation* DataInformationFactory::newEnum(const EnumParsedData& pd)
+std::unique_ptr<EnumDataInformation> DataInformationFactory::newEnum(const EnumParsedData& pd)
 {
     return newEnumOrFlags<EnumDataInformation>(pd);
 }
 
 std::unique_ptr<FlagDataInformation> DataInformationFactory::newFlags(const EnumParsedData& pd)
 {
-    return std::unique_ptr<FlagDataInformation>(newEnumOrFlags<FlagDataInformation>(pd));
+    return newEnumOrFlags<FlagDataInformation>(pd);
 }
 
 std::unique_ptr<ArrayDataInformation> DataInformationFactory::newArray(ArrayParsedData& pd)

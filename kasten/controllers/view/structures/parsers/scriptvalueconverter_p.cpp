@@ -207,7 +207,7 @@ std::unique_ptr<EnumDataInformation> toEnum(const QScriptValue& value, bool flag
         return DataInformationFactory::newFlags(epd);
     }
 
-    return std::unique_ptr<EnumDataInformation>(DataInformationFactory::newEnum(epd));
+    return DataInformationFactory::newEnum(epd);
 }
 
 std::unique_ptr<StringDataInformation> toString(const QScriptValue& value, const ParserInfo& info)

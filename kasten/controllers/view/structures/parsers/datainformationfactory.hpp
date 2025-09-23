@@ -170,7 +170,7 @@ struct StructOrUnionParsedData : public ParserInfo
 namespace DataInformationFactory {
 AbstractBitfieldDataInformation* newBitfield(const BitfieldParsedData& pd);
 PrimitiveDataInformation* newPrimitive(const PrimitiveParsedData& pd);
-EnumDataInformation* newEnum(const EnumParsedData& pd);
+std::unique_ptr<EnumDataInformation> newEnum(const EnumParsedData& pd);
 std::unique_ptr<FlagDataInformation> newFlags(const EnumParsedData& pd);
 std::unique_ptr<ArrayDataInformation> newArray(ArrayParsedData& pd);
 std::unique_ptr<StringDataInformation> newString(const StringParsedData& pd);
