@@ -160,7 +160,7 @@ std::vector<std::unique_ptr<TopLevelDataInformation>> OsdParser::parseStructures
         QVector<EnumDefinition::Ptr> enums = parseEnums(rootElem, logger.get());
         OsdParserInfo info(QString(), logger.get(), nullptr, eng.get(), enums);
 
-        auto data = std::unique_ptr<DataInformation>(parseElement(elem, info));
+        auto data = parseElement(elem, info);
 
         if (!data) {
             QString name = readProperty(elem, PROPERTY_NAME());
@@ -258,7 +258,7 @@ ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, const 
     }
     // first check whether there is a <type> element and use the inner element
     // if that doesn't exist use the first child element as the type, but only if there is only one child
-    apd.arrayType = std::unique_ptr<DataInformation>(parseType(xmlElem, info, NAME_ARRAY_TYPE()));
+    apd.arrayType = parseType(xmlElem, info, NAME_ARRAY_TYPE());
     if (!apd.arrayType) {
         // was not specified as <type> element or type="attribute", use first child
         DummyDataInformation dummy(info.parent, info.name); // dummy so that we have a proper chain
@@ -276,7 +276,7 @@ ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, const 
     return DataInformationFactory::newArray(apd);
 }
 
-DataInformation* OsdParser::parseChildElement(const QDomElement& xmlElem, const OsdParserInfo& info, const QString& name)
+std::unique_ptr<DataInformation> OsdParser::parseChildElement(const QDomElement& xmlElem, const OsdParserInfo& info, const QString& name)
 {
     OsdParserInfo newInfo(info);
     // instantiate a dummy so that a property chain up to the root element exists
@@ -286,13 +286,13 @@ DataInformation* OsdParser::parseChildElement(const QDomElement& xmlElem, const 
     return parseElement(xmlElem, newInfo);
 }
 
-DataInformation* OsdParser::parseType(const QDomElement& xmlElem, const OsdParserInfo& info, const QString& name)
+std::unique_ptr<DataInformation> OsdParser::parseType(const QDomElement& xmlElem, const OsdParserInfo& info, const QString& name)
 {
     const QString typeAttribute = xmlElem.attribute(PROPERTY_TYPE());
     if (!typeAttribute.isEmpty()) {
         // type was specified as a primitive string
         LoggerWithContext lwc(info.logger, info.context() + name);
-        DataInformation* ret = PrimitiveFactory::newInstance(name, typeAttribute, lwc);
+        auto ret = std::unique_ptr<DataInformation>(PrimitiveFactory::newInstance(name, typeAttribute, lwc));
         if (!ret) {
             info.error() << typeAttribute << "is not a valid type identifier";
         }
@@ -308,7 +308,7 @@ DataInformation* OsdParser::parseType(const QDomElement& xmlElem, const OsdParse
         info.warn() << "<type> element has more than one child!";
     }
     // TODO have this newInfo code only in one location
-    DataInformation* ret = parseChildElement(toParse, info, name);
+    std::unique_ptr<DataInformation> ret = parseChildElement(toParse, info, name);
     if (!ret) {
         info.error() << "Failed to parse element defined in <type>";
     }
@@ -319,7 +319,7 @@ PointerDataInformation* OsdParser::pointerFromXML(const QDomElement& xmlElem, co
 {
     PointerParsedData ppd(info);
 
-    ppd.valueType = std::unique_ptr<DataInformation>(parseType(xmlElem, info, NAME_POINTER_VALUE_TYPE()));
+    ppd.valueType = parseType(xmlElem, info, NAME_POINTER_VALUE_TYPE());
 
     // first check whether there is a <target> element and use the inner element
     // if that doesn't exist use the first child element as the type, but only if there is only one child
@@ -337,7 +337,7 @@ PointerDataInformation* OsdParser::pointerFromXML(const QDomElement& xmlElem, co
             return nullptr;
         }
     }
-    ppd.pointerTarget = std::unique_ptr<DataInformation>(parseChildElement(childElement, info, NAME_POINTER_TARGET()));
+    ppd.pointerTarget = parseChildElement(childElement, info, NAME_POINTER_TARGET());
     return DataInformationFactory::newPointer(ppd);
 }
 
@@ -405,37 +405,37 @@ StringDataInformation* OsdParser::stringFromXML(const QDomElement& xmlElem,
     return DataInformationFactory::newString(spd);
 }
 
-DataInformation* OsdParser::parseElement(const QDomElement& elem, const OsdParserInfo& oldInfo)
+std::unique_ptr<DataInformation> OsdParser::parseElement(const QDomElement& elem, const OsdParserInfo& oldInfo)
 {
     Q_ASSERT(!elem.isNull());
-    DataInformation* data = nullptr;
+    std::unique_ptr<DataInformation> data;
     const QString tag = elem.tagName();
     OsdParserInfo info(oldInfo);
     info.name = readProperty(elem, PROPERTY_NAME(), QStringLiteral("<anonymous>"));
     if (tag == TYPE_STRUCT()) {
-        data = structFromXML(elem, info);
+        data = std::unique_ptr<DataInformation>(structFromXML(elem, info));
     } else if (tag == TYPE_ARRAY()) {
-        data = arrayFromXML(elem, info);
+        data = std::unique_ptr<DataInformation>(arrayFromXML(elem, info));
     } else if (tag == TYPE_BITFIELD()) {
-        data = bitfieldFromXML(elem, info);
+        data = std::unique_ptr<DataInformation>(bitfieldFromXML(elem, info));
     } else if (tag == TYPE_PRIMITIVE()) {
-        data = primitiveFromXML(elem, info);
+        data = std::unique_ptr<DataInformation>(primitiveFromXML(elem, info));
     } else if (tag == TYPE_UNION()) {
-        data = unionFromXML(elem, info);
+        data = std::unique_ptr<DataInformation>(unionFromXML(elem, info));
     } else if (tag == TYPE_ENUM()) {
-        data = enumFromXML(elem, false, info);
+        data = std::unique_ptr<DataInformation>(enumFromXML(elem, false, info));
     } else if (tag == TYPE_FLAGS()) {
-        data = enumFromXML(elem, true, info);
+        data = std::unique_ptr<DataInformation>(enumFromXML(elem, true, info));
     } else if (tag == TYPE_STRING()) {
-        data = stringFromXML(elem, info);
+        data = std::unique_ptr<DataInformation>(stringFromXML(elem, info));
     } else if (tag == TYPE_POINTER()) {
-        data = pointerFromXML(elem, info);
+        data = std::unique_ptr<DataInformation>(pointerFromXML(elem, info));
     } else if (tag == TYPE_TAGGED_UNION()) {
-        data = taggedUnionFromXML(elem, info);
+        data = std::unique_ptr<DataInformation>(taggedUnionFromXML(elem, info));
     } else {
         LoggerWithContext lwc(info.logger, info.context());
         // use the type tag as a primitive type
-        data = PrimitiveFactory::newInstance(info.name, tag, lwc);
+        data = std::unique_ptr<DataInformation>(PrimitiveFactory::newInstance(info.name, tag, lwc));
         if (!data) {
             info.error() << "Cannot parse unknown tag: " << tag;
         }
@@ -452,9 +452,9 @@ DataInformation* OsdParser::parseElement(const QDomElement& elem, const OsdParse
         cpd.validationFunc = ParserUtils::functionSafeEval(info.engine, readProperty(elem, PROPERTY_VALIDATION_FUNC()));
         cpd.toStringFunc = ParserUtils::functionSafeEval(info.engine, readProperty(elem, PROPERTY_TO_STRING_FUNC()));
         cpd.customTypeName = readProperty(elem, PROPERTY_CUSTOM_TYPE_NAME());
-        if (!DataInformationFactory::commonInitialization(data, cpd)) {
-            delete data; // error message has already been logged
-            return nullptr;
+        if (!DataInformationFactory::commonInitialization(data.get(), cpd)) {
+            data.reset(); // error message has already been logged
+            return {};
         }
     }
     return data;
@@ -550,7 +550,7 @@ std::unique_ptr<DataInformation> OsdChildrenParser::next()
         mInfo.warn() << "Reached end of fields, but next() was requested!";
         return {};
     }
-    auto ret = std::unique_ptr<DataInformation>(OsdParser::parseElement(mElem, mInfo));
+    std::unique_ptr<DataInformation> ret = OsdParser::parseElement(mElem, mInfo);
     mElem = mElem.nextSiblingElement();
     return ret;
 }
@@ -587,7 +587,7 @@ std::unique_ptr<DataInformation> SingleElementOsdChildrenParser::next()
 {
     Q_ASSERT(!mParsed);
     mParsed = true;
-    return std::unique_ptr<DataInformation>(OsdParser::parseElement(mElem, mInfo));
+    return OsdParser::parseElement(mElem, mInfo);
 }
 
 bool SingleElementOsdChildrenParser::hasNext()

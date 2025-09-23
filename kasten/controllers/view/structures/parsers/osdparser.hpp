@@ -53,7 +53,7 @@ public:
     QStringList parseStructureNames() const override;
     std::vector<std::unique_ptr<TopLevelDataInformation>> parseStructures() const override;
 
-    static DataInformation* parseElement(const QDomElement& elem, const OsdParserInfo& oldInfo);
+    static std::unique_ptr<DataInformation> parseElement(const QDomElement& elem, const OsdParserInfo& oldInfo);
 
 private:
     static PrimitiveDataInformation* primitiveFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
@@ -70,8 +70,8 @@ private:
      * @param xmlElem the parent XML element
      * @param info the parser info
      * @return The parsed element or null if not possible. */
-    static DataInformation* parseType(const QDomElement& xmlElem, const OsdParserInfo& info, const QString& name);
-    static DataInformation* parseChildElement(const QDomElement& xmlElem, const OsdParserInfo& info, const QString& name);
+    static std::unique_ptr<DataInformation> parseType(const QDomElement& xmlElem, const OsdParserInfo& info, const QString& name);
+    static std::unique_ptr<DataInformation> parseChildElement(const QDomElement& xmlElem, const OsdParserInfo& info, const QString& name);
 
     static EnumDefinition::Ptr findEnum(const QString& defName, const OsdParserInfo& info);
 
