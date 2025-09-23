@@ -17,7 +17,7 @@
 // Std
 #include <utility>
 
-AbstractBitfieldDataInformation* DataInformationFactory::newBitfield(const BitfieldParsedData& pd)
+std::unique_ptr<AbstractBitfieldDataInformation> DataInformationFactory::newBitfield(const BitfieldParsedData& pd)
 {
     if (!pd.width.isValid) {
         if (pd.width.string.isEmpty()) {
@@ -25,26 +25,26 @@ AbstractBitfieldDataInformation* DataInformationFactory::newBitfield(const Bitfi
         } else {
             pd.error() << "Width of bitfield is not a valid number: " << pd.width.string;
         }
-        return nullptr;
+        return {};
     }
     if (pd.width.value <= 0 || pd.width.value > 64) {
         pd.error() << "Width of bitfield is not a value from 1-64:" << pd.width.value;
-        return nullptr;
+        return {};
     }
-    AbstractBitfieldDataInformation* bitf = nullptr;
+    std::unique_ptr<AbstractBitfieldDataInformation> bitf;
     const QString type = pd.type.toLower();
     if (type.isEmpty()) {
         pd.info() << "No bitfield type specified, defaulting to unsigned.";
-        bitf = new UnsignedBitfieldDataInformation(pd.name, pd.width.value, pd.parent);
+        bitf = std::make_unique<UnsignedBitfieldDataInformation>(pd.name, pd.width.value, pd.parent);
     } else if (type == QLatin1String("bool")) {
-        bitf = new BoolBitfieldDataInformation(pd.name, pd.width.value, pd.parent);
+        bitf = std::make_unique<BoolBitfieldDataInformation>(pd.name, pd.width.value, pd.parent);
     } else if (type == QLatin1String("unsigned")) {
-        bitf = new UnsignedBitfieldDataInformation(pd.name, pd.width.value, pd.parent);
+        bitf = std::make_unique<UnsignedBitfieldDataInformation>(pd.name, pd.width.value, pd.parent);
     } else if (type == QLatin1String("signed")) {
-        bitf = new SignedBitfieldDataInformation(pd.name, pd.width.value, pd.parent);
+        bitf = std::make_unique<SignedBitfieldDataInformation>(pd.name, pd.width.value, pd.parent);
     } else {
         pd.error() << "invalid bitfield type attribute given:" << type;
-        return nullptr;
+        return {};
     }
     return bitf;
 }

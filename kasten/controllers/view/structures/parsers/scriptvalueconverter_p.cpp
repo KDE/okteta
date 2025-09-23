@@ -145,7 +145,7 @@ std::unique_ptr<AbstractBitfieldDataInformation> toBitfield(const QScriptValue& 
     BitfieldParsedData bpd(info);
     bpd.type = value.property(PROPERTY_TYPE()).toString();
     bpd.width = ParserUtils::intFromScriptValue(value.property(PROPERTY_WIDTH()));
-    return std::unique_ptr<AbstractBitfieldDataInformation>(DataInformationFactory::newBitfield(bpd));
+    return DataInformationFactory::newBitfield(bpd);
 }
 
 std::unique_ptr<PrimitiveDataInformation> toPrimitive(const QScriptValue& value, const ParserInfo& info)

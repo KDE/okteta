@@ -355,7 +355,7 @@ std::unique_ptr<AbstractBitfieldDataInformation> OsdParser::bitfieldFromXML(cons
     bpd.type = readProperty(xmlElem, PROPERTY_TYPE());
     QString width = readProperty(xmlElem, PROPERTY_WIDTH());
     bpd.width = ParserUtils::intFromString(width);
-    return std::unique_ptr<AbstractBitfieldDataInformation>(DataInformationFactory::newBitfield(bpd));
+    return DataInformationFactory::newBitfield(bpd);
 }
 
 std::unique_ptr<UnionDataInformation> OsdParser::unionFromXML(const QDomElement& xmlElem, const OsdParserInfo& info)
