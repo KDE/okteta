@@ -402,7 +402,7 @@ std::unique_ptr<StringDataInformation> OsdParser::stringFromXML(const QDomElemen
     spd.termination = ParserUtils::uintFromString(readProperty(xmlElem, PROPERTY_TERMINATED_BY()));
     spd.maxByteCount = ParserUtils::uintFromString(readProperty(xmlElem, PROPERTY_MAX_BYTE_COUNT()));
     spd.maxCharCount = ParserUtils::uintFromString(readProperty(xmlElem, PROPERTY_MAX_CHAR_COUNT()));
-    return std::unique_ptr<StringDataInformation>(DataInformationFactory::newString(spd));
+    return DataInformationFactory::newString(spd);
 }
 
 std::unique_ptr<DataInformation> OsdParser::parseElement(const QDomElement& elem, const OsdParserInfo& oldInfo)

@@ -217,19 +217,19 @@ ArrayDataInformation* DataInformationFactory::newArray(ArrayParsedData& pd)
     return new ArrayDataInformation(pd.name, 0, std::move(pd.arrayType), pd.parent, lengthFunction);
 }
 
-StringDataInformation* DataInformationFactory::newString(const StringParsedData& pd)
+std::unique_ptr<StringDataInformation> DataInformationFactory::newString(const StringParsedData& pd)
 {
     if (pd.maxByteCount.isValid && pd.maxCharCount.isValid) {
         pd.error() << "Both maxCharCount and maxByteCount are set, only one is allowed.";
-        return nullptr;
+        return {};
     }
     StringDataInformation::StringType encoding = ParserUtils::toStringEncoding(pd.encoding,
                                                                                LoggerWithContext(pd.logger, pd.context()));
     if (encoding == StringDataInformation::StringType::InvalidEncoding) {
         pd.error() << "Bad string encoding given:" << pd.encoding;
-        return nullptr;
+        return {};
     }
-    auto* data = new StringDataInformation(pd.name, encoding, pd.parent);
+    auto data = std::make_unique<StringDataInformation>(pd.name, encoding, pd.parent);
     bool modeSet = false;
     if (pd.termination.isValid) {
         data->setTerminationCodePoint(pd.termination.value);

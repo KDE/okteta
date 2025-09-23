@@ -217,7 +217,7 @@ std::unique_ptr<StringDataInformation> toString(const QScriptValue& value, const
     spd.termination = ParserUtils::uintFromScriptValue(value.property(PROPERTY_TERMINATED_BY()));
     spd.maxByteCount = ParserUtils::uintFromScriptValue(value.property(PROPERTY_MAX_BYTE_COUNT()));
     spd.maxCharCount = ParserUtils::uintFromScriptValue(value.property(PROPERTY_MAX_CHAR_COUNT()));
-    return std::unique_ptr<StringDataInformation>(DataInformationFactory::newString(spd));
+    return DataInformationFactory::newString(spd);
 }
 
 std::unique_ptr<TaggedUnionDataInformation> toTaggedUnion(const QScriptValue& value, const ParserInfo& info)
