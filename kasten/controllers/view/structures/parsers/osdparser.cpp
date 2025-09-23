@@ -258,18 +258,17 @@ ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, const 
     }
     // first check whether there is a <type> element and use the inner element
     // if that doesn't exist use the first child element as the type, but only if there is only one child
-    apd.arrayType = parseType(xmlElem, info, NAME_ARRAY_TYPE());
+    apd.arrayType = std::unique_ptr<DataInformation>(parseType(xmlElem, info, NAME_ARRAY_TYPE()));
     if (!apd.arrayType) {
         // was not specified as <type> element or type="attribute", use first child
         DummyDataInformation dummy(info.parent, info.name); // dummy so that we have a proper chain
         OsdChildrenParser typeParser(info, xmlElem.firstChildElement());
         typeParser.setParent(&dummy);
         if (typeParser.hasNext()) {
-            apd.arrayType = typeParser.next();
+            apd.arrayType = std::unique_ptr<DataInformation>(typeParser.next());
             if (typeParser.hasNext()) {
                 info.error() << "More than one possible type for array!";
-                delete apd.arrayType;
-                apd.arrayType = nullptr;
+                apd.arrayType.reset();
                 return nullptr;
             }
         }
@@ -320,7 +319,7 @@ PointerDataInformation* OsdParser::pointerFromXML(const QDomElement& xmlElem, co
 {
     PointerParsedData ppd(info);
 
-    ppd.valueType = parseType(xmlElem, info, NAME_POINTER_VALUE_TYPE());
+    ppd.valueType = std::unique_ptr<DataInformation>(parseType(xmlElem, info, NAME_POINTER_VALUE_TYPE()));
 
     // first check whether there is a <target> element and use the inner element
     // if that doesn't exist use the first child element as the type, but only if there is only one child
@@ -338,7 +337,7 @@ PointerDataInformation* OsdParser::pointerFromXML(const QDomElement& xmlElem, co
             return nullptr;
         }
     }
-    ppd.pointerTarget = parseChildElement(childElement, info, NAME_POINTER_TARGET());
+    ppd.pointerTarget = std::unique_ptr<DataInformation>(parseChildElement(childElement, info, NAME_POINTER_TARGET()));
     return DataInformationFactory::newPointer(ppd);
 }
 

@@ -106,7 +106,6 @@ struct ArrayParsedData : public ParserInfo
 {
     inline explicit ArrayParsedData(const ParserInfo& i)
         : ParserInfo(i)
-        , arrayType(nullptr)
     {}
     ArrayParsedData(const ArrayParsedData&) = delete;
 
@@ -115,15 +114,13 @@ struct ArrayParsedData : public ParserInfo
     ArrayParsedData& operator=(const ArrayParsedData&) = delete;
 
     QScriptValue length;
-    DataInformation* arrayType;
+    std::unique_ptr<DataInformation> arrayType;
 };
 
 struct PointerParsedData : public ParserInfo
 {
     inline explicit PointerParsedData(const ParserInfo& i)
         : ParserInfo(i)
-        , valueType(nullptr)
-        , pointerTarget(nullptr)
         , pointerScale(1)
     {}
     PointerParsedData(const PointerParsedData&) = delete;
@@ -132,8 +129,8 @@ struct PointerParsedData : public ParserInfo
 
     PointerParsedData& operator=(const PointerParsedData&) = delete;
 
-    DataInformation* valueType;
-    DataInformation* pointerTarget;
+    std::unique_ptr<DataInformation> valueType;
+    std::unique_ptr<DataInformation> pointerTarget;
     qint64           pointerScale;
     QScriptValue     interpretFunc;
 };
@@ -175,9 +172,9 @@ AbstractBitfieldDataInformation* newBitfield(const BitfieldParsedData& pd);
 PrimitiveDataInformation* newPrimitive(const PrimitiveParsedData& pd);
 EnumDataInformation* newEnum(const EnumParsedData& pd);
 FlagDataInformation* newFlags(const EnumParsedData& pd);
-ArrayDataInformation* newArray(const ArrayParsedData& pd);
+ArrayDataInformation* newArray(ArrayParsedData& pd);
 StringDataInformation* newString(const StringParsedData& pd);
-PointerDataInformation* newPointer(const PointerParsedData& pd);
+PointerDataInformation* newPointer(PointerParsedData& pd);
 UnionDataInformation* newUnion(const StructOrUnionParsedData& pd);
 StructureDataInformation* newStruct(const StructOrUnionParsedData& pd);
 TaggedUnionDataInformation* newTaggedUnion(const TaggedUnionParsedData& pd);

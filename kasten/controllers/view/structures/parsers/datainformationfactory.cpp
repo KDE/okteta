@@ -179,7 +179,7 @@ FlagDataInformation* DataInformationFactory::newFlags(const EnumParsedData& pd)
     return newEnumOrFlags<FlagDataInformation>(pd);
 }
 
-ArrayDataInformation* DataInformationFactory::newArray(const ArrayParsedData& pd)
+ArrayDataInformation* DataInformationFactory::newArray(ArrayParsedData& pd)
 {
     if (!pd.arrayType) {
         pd.error() << "Failed to parse array type!";
@@ -191,12 +191,10 @@ ArrayDataInformation* DataInformationFactory::newArray(const ArrayParsedData& pd
     }
     const ParsedNumber<uint> fixedLength = ParserUtils::uintFromScriptValue(pd.length);
     if (fixedLength.isValid) {
-        return new ArrayDataInformation(pd.name, fixedLength.value,
-                                        std::unique_ptr<DataInformation>(pd.arrayType), pd.parent, QScriptValue());
+        return new ArrayDataInformation(pd.name, fixedLength.value, std::move(pd.arrayType), pd.parent, QScriptValue());
     }
     if (pd.length.isFunction()) {
-        return new ArrayDataInformation(pd.name, 0,
-                                        std::unique_ptr<DataInformation>(pd.arrayType), pd.parent, pd.length);
+        return new ArrayDataInformation(pd.name, 0, std::move(pd.arrayType), pd.parent, pd.length);
     }
 
     // neither integer nor function, must be a string containing the name of another element.
@@ -216,8 +214,7 @@ ArrayDataInformation* DataInformationFactory::newArray(const ArrayParsedData& pd
         return nullptr;
     }
     QScriptValue lengthFunction = ParserUtils::functionSafeEval(pd.engine, lengthFunctionString);
-    return new ArrayDataInformation(pd.name, 0,
-                                    std::unique_ptr<DataInformation>(pd.arrayType), pd.parent, lengthFunction);
+    return new ArrayDataInformation(pd.name, 0, std::move(pd.arrayType), pd.parent, lengthFunction);
 }
 
 StringDataInformation* DataInformationFactory::newString(const StringParsedData& pd)
@@ -303,7 +300,7 @@ bool DataInformationFactory::commonInitialization(DataInformation* data, const C
 
 }
 
-PointerDataInformation* DataInformationFactory::newPointer(const PointerParsedData& pd)
+PointerDataInformation* DataInformationFactory::newPointer(PointerParsedData& pd)
 {
     if (!pd.pointerTarget) {
         pd.error() << "Missing pointer target";
@@ -321,14 +318,16 @@ PointerDataInformation* DataInformationFactory::newPointer(const PointerParsedDa
         pd.error() << "Bad pointer interpretation, only functions are allowed";
         return nullptr;
     }
-    PrimitiveDataInformation* primValue = pd.valueType->asPrimitive();
+    DataInformation* const valueType = pd.valueType.release();
+    auto primValue = std::unique_ptr<PrimitiveDataInformation>(valueType->asPrimitive());
     if (!(primValue->type() == PrimitiveDataType::UInt8 || primValue->type() == PrimitiveDataType::UInt16
           || primValue->type() == PrimitiveDataType::UInt32 || primValue->type() == PrimitiveDataType::UInt64)) {
         pd.error() << "Bad pointer type, only unsigned integers are allowed"; // TODO offsets (signed int + bitfields)
         return nullptr;
     }
-    return new PointerDataInformation(pd.name, std::unique_ptr<DataInformation>(pd.pointerTarget),
-                                      std::unique_ptr<PrimitiveDataInformation>(primValue),
+    return new PointerDataInformation(pd.name,
+                                      std::move(pd.pointerTarget),
+                                      std::move(primValue),
                                       pd.parent,
                                       pd.pointerScale, pd.interpretFunc);
 }

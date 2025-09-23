@@ -135,7 +135,7 @@ ArrayDataInformation* toArray(const QScriptValue& value, const ParserInfo& info)
     ParserInfo childInfo(info);
     DummyDataInformation dummy(info.parent, info.name + QLatin1Char('.') + NAME_ARRAY_TYPE());
     childInfo.parent = &dummy;
-    apd.arrayType = toDataInformation(childType, childInfo);
+    apd.arrayType = std::unique_ptr<DataInformation>(toDataInformation(childType, childInfo));
 
     return DataInformationFactory::newArray(apd);
 }
@@ -183,9 +183,9 @@ PointerDataInformation* toPointer(const QScriptValue& value, const ParserInfo& i
     DummyDataInformation dummy(info.parent, info.name);
     childInfo.parent = &dummy;
     childInfo.name = NAME_POINTER_TARGET();
-    ppd.pointerTarget = toDataInformation(value.property(PROPERTY_TARGET()), childInfo);
+    ppd.pointerTarget = std::unique_ptr<DataInformation>(toDataInformation(value.property(PROPERTY_TARGET()), childInfo));
     childInfo.name = NAME_POINTER_VALUE_TYPE();
-    ppd.valueType = toDataInformation(value.property(PROPERTY_TYPE()), childInfo);
+    ppd.valueType = std::unique_ptr<DataInformation>(toDataInformation(value.property(PROPERTY_TYPE()), childInfo));
 
     return DataInformationFactory::newPointer(ppd);
 }
