@@ -135,17 +135,18 @@ DataInformation* PointerDataInformation::childAt(uint index) const
     return index == 0 ? mPointerTarget.get() : nullptr;
 }
 
-bool PointerDataInformation::setPointerType(DataInformation* type)
+bool PointerDataInformation::setPointerType(std::unique_ptr<DataInformation>&& type)
 {
     Q_CHECK_PTR(type);
     if (!type->isPrimitive()) {
         logError() << "New pointer type is not primitive!";
         return false;
     }
-    PrimitiveDataInformation* prim = type->asPrimitive();
+    DataInformation* const pointerType = type.release();
+    auto prim = std::unique_ptr<PrimitiveDataInformation>(pointerType->asPrimitive());
     const PrimitiveDataType pdt = prim->type();
     if (pdt == PrimitiveDataType::UInt8 || pdt == PrimitiveDataType::UInt16 || pdt == PrimitiveDataType::UInt32 || pdt == PrimitiveDataType::UInt64) {
-        mValue.reset(prim);
+        mValue = std::move(prim);
         mValue->setParent(this);
         return true;
     }

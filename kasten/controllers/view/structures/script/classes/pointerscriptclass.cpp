@@ -63,7 +63,7 @@ bool PointerScriptClass::setAdditionalProperty(DataInformation* data, const QScr
                                                                  data->logger(), data);
         if (!newType) {
             data->logError() << "Could not set new pointer type.";
-        } else if (!data->asPointer()->setPointerType(newType)) {
+        } else if (!data->asPointer()->setPointerType(std::unique_ptr<DataInformation>(newType))) {
             delete newType;
         }
 

@@ -67,7 +67,7 @@ public:
      * @return true if type was set, false if not
      */
     [[nodiscard]]
-    bool setPointerType(DataInformation* type);
+    bool setPointerType(std::unique_ptr<DataInformation>&& type);
 
     [[nodiscard]]
     qint64 pointerScale() const;
