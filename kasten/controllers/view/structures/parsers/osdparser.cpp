@@ -265,7 +265,7 @@ ArrayDataInformation* OsdParser::arrayFromXML(const QDomElement& xmlElem, const 
         OsdChildrenParser typeParser(info, xmlElem.firstChildElement());
         typeParser.setParent(&dummy);
         if (typeParser.hasNext()) {
-            apd.arrayType = std::unique_ptr<DataInformation>(typeParser.next());
+            apd.arrayType = typeParser.next();
             if (typeParser.hasNext()) {
                 info.error() << "More than one possible type for array!";
                 apd.arrayType.reset();
@@ -538,7 +538,7 @@ OsdChildrenParser::OsdChildrenParser(const OsdParserInfo& info, const QDomElemen
 
 OsdChildrenParser::~OsdChildrenParser() = default;
 
-DataInformation* OsdChildrenParser::next()
+std::unique_ptr<DataInformation> OsdChildrenParser::next()
 {
     Q_ASSERT(!mElem.isNull());
     // skip all known properties
@@ -548,9 +548,9 @@ DataInformation* OsdChildrenParser::next()
     }
     if (mElem.isNull()) {
         mInfo.warn() << "Reached end of fields, but next() was requested!";
-        return nullptr;
+        return {};
     }
-    DataInformation* ret = OsdParser::parseElement(mElem, mInfo);
+    auto ret = std::unique_ptr<DataInformation>(OsdParser::parseElement(mElem, mInfo));
     mElem = mElem.nextSiblingElement();
     return ret;
 }
@@ -583,11 +583,11 @@ SingleElementOsdChildrenParser::SingleElementOsdChildrenParser(const OsdParserIn
 
 SingleElementOsdChildrenParser::~SingleElementOsdChildrenParser() = default;
 
-DataInformation* SingleElementOsdChildrenParser::next()
+std::unique_ptr<DataInformation> SingleElementOsdChildrenParser::next()
 {
     Q_ASSERT(!mParsed);
     mParsed = true;
-    return OsdParser::parseElement(mElem, mInfo);
+    return std::unique_ptr<DataInformation>(OsdParser::parseElement(mElem, mInfo));
 }
 
 bool SingleElementOsdChildrenParser::hasNext()

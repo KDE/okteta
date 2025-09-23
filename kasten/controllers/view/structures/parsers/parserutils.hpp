@@ -62,7 +62,7 @@ class ChildrenParser
 public:
     virtual ~ChildrenParser() = default;
 
-    virtual DataInformation* next() = 0;
+    virtual std::unique_ptr<DataInformation> next() = 0;
     virtual bool hasNext() = 0;
     virtual void setParent(DataInformation* parent) = 0;
 };

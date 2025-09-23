@@ -98,7 +98,7 @@ public:
 
     OsdChildrenParser& operator=(const OsdChildrenParser&) = delete;
 
-    DataInformation* next() override;
+    std::unique_ptr<DataInformation> next() override;
     bool hasNext() override;
     void setParent(DataInformation* newParent) override;
 
@@ -112,7 +112,7 @@ class SingleElementOsdChildrenParser : public OsdChildrenParser
 public:
     SingleElementOsdChildrenParser(const OsdParserInfo& info, const QDomElement& element);
     ~SingleElementOsdChildrenParser() override;
-    DataInformation* next() override;
+    std::unique_ptr<DataInformation> next() override;
     bool hasNext() override;
 
 private:

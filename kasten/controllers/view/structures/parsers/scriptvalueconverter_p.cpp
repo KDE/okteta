@@ -256,7 +256,7 @@ ScriptValueConverter::ScriptValueChildrenParser::ScriptValueChildrenParser(const
 
 ScriptValueConverter::ScriptValueChildrenParser::~ScriptValueChildrenParser() = default;
 
-DataInformation* ScriptValueConverter::ScriptValueChildrenParser::next()
+std::unique_ptr<DataInformation> ScriptValueConverter::ScriptValueChildrenParser::next()
 {
     Q_ASSERT(hasNext());
     mIter.next();
@@ -264,7 +264,7 @@ DataInformation* ScriptValueConverter::ScriptValueChildrenParser::next()
         mIter.next(); // skip length property
     }
     mInfo.name = mIter.name();
-    return toDataInformation(mIter.value(), mInfo);
+    return std::unique_ptr<DataInformation>(toDataInformation(mIter.value(), mInfo));
 }
 
 bool ScriptValueConverter::ScriptValueChildrenParser::hasNext()

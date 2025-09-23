@@ -108,9 +108,9 @@ T* newStructOrUnion(const StructOrUnionParsedData& supd)
     auto* structOrUnion = new T(supd.name, std::vector<std::unique_ptr<DataInformation>>(), supd.parent);
     supd.children->setParent(structOrUnion);
     while (supd.children->hasNext()) {
-        DataInformation* data = supd.children->next();
+        std::unique_ptr<DataInformation> data = supd.children->next();
         if (data) {
-            structOrUnion->appendChild(std::unique_ptr<DataInformation>(data), false);
+            structOrUnion->appendChild(std::move(data), false);
         } else {
             return nullptr; // error message should be logged already
         }
@@ -337,9 +337,9 @@ TaggedUnionDataInformation* DataInformationFactory::newTaggedUnion(const TaggedU
     auto tagged = std::make_unique<TaggedUnionDataInformation>(pd.name, pd.parent);
     pd.children->setParent(tagged.get());
     while (pd.children->hasNext()) {
-        DataInformation* data = pd.children->next();
+        std::unique_ptr<DataInformation> data = pd.children->next();
         if (data) {
-            tagged->appendChild(std::unique_ptr<DataInformation>(data), false);
+            tagged->appendChild(std::move(data), false);
         } else {
             return nullptr; // error message should be logged already
         }
@@ -369,9 +369,9 @@ TaggedUnionDataInformation* DataInformationFactory::newTaggedUnion(const TaggedU
         }
         std::vector<std::unique_ptr<DataInformation>> children;
         while (fi.fields->hasNext()) {
-            DataInformation* next = fi.fields->next();
+            std::unique_ptr<DataInformation> next = fi.fields->next();
             if (next) {
-                children.emplace_back(std::unique_ptr<DataInformation>(next));
+                children.emplace_back(std::move(next));
             } else {
                 pd.error() << "Alternative number" << i << "has an invalid field!";
                 alternativesValid = false;
@@ -388,9 +388,9 @@ TaggedUnionDataInformation* DataInformationFactory::newTaggedUnion(const TaggedU
 
     pd.defaultFields->setParent(tagged.get());
     while (pd.defaultFields->hasNext()) {
-        DataInformation* data = pd.defaultFields->next();
+        std::unique_ptr<DataInformation> data = pd.defaultFields->next();
         if (data) {
-            tagged->appendDefaultField(std::unique_ptr<DataInformation>(data), false);
+            tagged->appendDefaultField(std::move(data), false);
         } else {
             return nullptr; // error message should be logged already
         }
