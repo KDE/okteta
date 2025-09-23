@@ -394,15 +394,15 @@ EnumDataInformation* OsdParser::enumFromXML(const QDomElement& xmlElem, bool isF
     return DataInformationFactory::newEnum(epd);
 }
 
-StringDataInformation* OsdParser::stringFromXML(const QDomElement& xmlElem,
-                                                const OsdParserInfo& info)
+std::unique_ptr<StringDataInformation> OsdParser::stringFromXML(const QDomElement& xmlElem,
+                                                                const OsdParserInfo& info)
 {
     StringParsedData spd(info);
     spd.encoding = readProperty(xmlElem, PROPERTY_ENCODING());
     spd.termination = ParserUtils::uintFromString(readProperty(xmlElem, PROPERTY_TERMINATED_BY()));
     spd.maxByteCount = ParserUtils::uintFromString(readProperty(xmlElem, PROPERTY_MAX_BYTE_COUNT()));
     spd.maxCharCount = ParserUtils::uintFromString(readProperty(xmlElem, PROPERTY_MAX_CHAR_COUNT()));
-    return DataInformationFactory::newString(spd);
+    return std::unique_ptr<StringDataInformation>(DataInformationFactory::newString(spd));
 }
 
 std::unique_ptr<DataInformation> OsdParser::parseElement(const QDomElement& elem, const OsdParserInfo& oldInfo)
@@ -427,7 +427,7 @@ std::unique_ptr<DataInformation> OsdParser::parseElement(const QDomElement& elem
     } else if (tag == TYPE_FLAGS()) {
         data = std::unique_ptr<DataInformation>(enumFromXML(elem, true, info));
     } else if (tag == TYPE_STRING()) {
-        data = std::unique_ptr<DataInformation>(stringFromXML(elem, info));
+        data = stringFromXML(elem, info);
     } else if (tag == TYPE_POINTER()) {
         data = std::unique_ptr<DataInformation>(pointerFromXML(elem, info));
     } else if (tag == TYPE_TAGGED_UNION()) {
