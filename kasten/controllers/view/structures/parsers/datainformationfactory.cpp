@@ -368,25 +368,21 @@ TaggedUnionDataInformation* DataInformationFactory::newTaggedUnion(const TaggedU
                 alternativesValid = false;
             }
         }
-        QVector<DataInformation*> children;
+        std::vector<std::unique_ptr<DataInformation>> children;
         while (fi.fields->hasNext()) {
             DataInformation* next = fi.fields->next();
             if (next) {
-                children.append(next);
+                children.emplace_back(std::unique_ptr<DataInformation>(next));
             } else {
                 pd.error() << "Alternative number" << i << "has an invalid field!";
                 alternativesValid = false;
             }
         }
-        altInfo.emplace_back(TaggedUnionDataInformation::FieldInfo(fi.name, fi.selectIf, children));
+        altInfo.emplace_back(TaggedUnionDataInformation::FieldInfo(fi.name, fi.selectIf, std::move(children)));
 
     }
 
     if (!alternativesValid) {
-        for (const auto& info : std::as_const(altInfo)) {
-            qDeleteAll(info.fields);
-        }
-
         return nullptr;
     }
     tagged->setAlternatives(std::move(altInfo), false);

@@ -12,8 +12,8 @@
 #include <allprimitivetypes.hpp>
 // Qt
 #include <QScriptValue>
-#include <QVector>
 // Std
+#include <memory>
 #include <vector>
 
 /** A class holding the data of a struct for Okteta*/
@@ -28,16 +28,20 @@ public:
      *  If name is not empty it is used instead of the name of this tagged union */
     struct FieldInfo
     {
-        inline explicit FieldInfo(const QString& n, const QScriptValue& s, const QVector<DataInformation*>& f)
+        inline explicit FieldInfo(const QString& n, const QScriptValue& s,
+                                  std::vector<std::unique_ptr<DataInformation>>&& f)
             : name(n)
             , selectIf(s)
-            , fields(f)
+            , fields(std::move(f))
         {}
         FieldInfo() = default;
+        FieldInfo(const FieldInfo&) = delete;
+        FieldInfo(FieldInfo&&) = default;
+
         /** The name this tagged union gets when this is selected */
         QString name;
         QScriptValue selectIf;
-        QVector<DataInformation*> fields;
+        std::vector<std::unique_ptr<DataInformation>> fields;
     };
 
 public:
@@ -80,17 +84,13 @@ private: // DataInformation API
 
 private:
     [[nodiscard]]
-    const QVector<DataInformation*>& currentChildren() const;
+    const std::vector<std::unique_ptr<DataInformation>>& currentChildren() const;
     [[nodiscard]]
     int determineSelection(TopLevelDataInformation* top);
 
 private:
-    [[nodiscard]]
-    static QVector<DataInformation*> cloneList(const QVector<DataInformation*>& other, DataInformation* parent);
-
-private:
     std::vector<FieldInfo> mAlternatives;
-    QVector<DataInformation*> mDefaultFields; // always sorted
+    std::vector<std::unique_ptr<DataInformation>> mDefaultFields; // always sorted
     // TODO
 //    /** If mUnion is non-null the children are displayed inside a union and the correct
 //     * child is highlighted. Otherwise only the correct fields will be appended after mChildren
@@ -99,7 +99,7 @@ private:
     int mLastIndex = -1;
 };
 
-inline const QVector<DataInformation*>& TaggedUnionDataInformation::currentChildren() const
+inline const std::vector<std::unique_ptr<DataInformation>>& TaggedUnionDataInformation::currentChildren() const
 {
     Q_ASSERT(mLastIndex < static_cast<int>(mAlternatives.size()));
     return mLastIndex >= 0 ? mAlternatives.at(mLastIndex).fields : mDefaultFields;

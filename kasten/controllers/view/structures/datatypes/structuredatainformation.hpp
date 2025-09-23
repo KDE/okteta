@@ -9,8 +9,6 @@
 
 // lib
 #include "datainformationwithchildren.hpp"
-// Qt
-#include <QVector>
 
 /** A class holding the data of a struct for Okteta*/
 class StructureDataInformation : public DataInformationWithChildren
@@ -34,14 +32,6 @@ public: // DataInformation API
 public: // DataInformation API
     [[nodiscard]]
     bool isStruct() const override;
-
-public:
-    using DataInformationWithChildren::readChildren;
-    [[nodiscard]]
-    static bool readChildren(const QVector<DataInformation*>& children,
-                             const Okteta::AbstractByteArrayModel* input,
-                             Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset, qint64* readBitsPtr,
-                             TopLevelDataInformation* top);
 
 private: // DataInformation API
     [[nodiscard]]

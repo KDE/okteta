@@ -25,20 +25,14 @@ TaggedUnionDataInformation::TaggedUnionDataInformation(const TaggedUnionDataInfo
     : DataInformationWithChildren(d)
     , mDefaultFields(cloneList(d.mDefaultFields, this))
 {
-    Q_ASSERT(mDefaultFields.isEmpty() || mDefaultFields.at(0) != nullptr);
+    Q_ASSERT(mDefaultFields.empty() || mDefaultFields.at(0) != nullptr);
     mAlternatives.reserve(d.mAlternatives.size());
     for (const FieldInfo& fi : d.mAlternatives) {
         mAlternatives.emplace_back(FieldInfo(fi.name, fi.selectIf, cloneList(fi.fields, this)));
     }
 }
 
-TaggedUnionDataInformation::~TaggedUnionDataInformation()
-{
-    qDeleteAll(mDefaultFields);
-    for (const FieldInfo& fi : mAlternatives) {
-        qDeleteAll(fi.fields);
-    }
-}
+TaggedUnionDataInformation::~TaggedUnionDataInformation() = default;
 
 QString TaggedUnionDataInformation::typeNameImpl() const
 {
@@ -55,7 +49,7 @@ void TaggedUnionDataInformation::appendDefaultField(DataInformation* field, bool
     if (emitSignal && mLastIndex == -1) {
         topLevelDataInformation()->_childCountAboutToChange(this, oldCount, oldCount + 1);
     }
-    mDefaultFields.append(field);
+    mDefaultFields.emplace_back(field);
     if (emitSignal && mLastIndex == -1) {
         topLevelDataInformation()->_childCountChanged(this, oldCount, oldCount + 1);
     }
@@ -69,16 +63,12 @@ void TaggedUnionDataInformation::setAlternatives(std::vector<FieldInfo>&& altern
     if (emitSignal) {
         topLevelDataInformation()->_childCountAboutToChange(this, oldChildCount, newChidCount);
     }
-    // remove them all
-    for (const FieldInfo& fi : mAlternatives) {
-        qDeleteAll(fi.fields);
-    }
 
     mAlternatives = std::move(alternatives);
 
     // set parent
     for (const FieldInfo& fi : mAlternatives) {
-        for (auto* field : fi.fields) {
+        for (const auto& field : fi.fields) {
             field->setParent(this);
         }
     }
@@ -138,12 +128,12 @@ qint64 TaggedUnionDataInformation::readData(const Okteta::AbstractByteArrayModel
     TopLevelDataInformation* top = topLevelDataInformation();
     Q_CHECK_PTR(top);
 
-    const QVector<DataInformation*>& oldChildren = currentChildren();
+    const std::vector<std::unique_ptr<DataInformation>>& oldChildren = currentChildren();
 
     qint64 readBits = 0;
     mWasAbleToRead = readChildren(mChildren, input, address, bitsRemaining, bitOffset, &readBits, top);
     mLastIndex = determineSelection(top);
-    const QVector<DataInformation*>& others = currentChildren();
+    const std::vector<std::unique_ptr<DataInformation>>& others = currentChildren();
     // check whether we have different children now, if yes we have to emit child count changed
     if (oldChildren != others) {
         const std::size_t fixedSize = mChildren.size();
@@ -156,7 +146,7 @@ qint64 TaggedUnionDataInformation::readData(const Okteta::AbstractByteArrayModel
 
     // this is important since the remaining children might have changed since before the read
     // where beginRead was called on the children at that time
-    for (auto* other : others) {
+    for (const auto& other : others) {
         other->beginRead();
     }
 
@@ -185,9 +175,9 @@ BitCount64 TaggedUnionDataInformation::childPosition(const DataInformation* chil
     }
 
     if (!found) {
-        const QVector<DataInformation*>& others = currentChildren();
-        for (auto* current : others) {
-            if (current == child) {
+        const std::vector<std::unique_ptr<DataInformation>>& others = currentChildren();
+        for (const auto& current : others) {
+            if (current.get() == child) {
                 found = true;
                 break;
             }
@@ -209,8 +199,8 @@ BitCount32 TaggedUnionDataInformation::size() const
         total += child->size();
     }
 
-    const QVector<DataInformation*>& others = currentChildren();
-    for (auto* other : others) {
+    const std::vector<std::unique_ptr<DataInformation>>& others = currentChildren();
+    for (const auto& other : others) {
         total += other->size();
     }
 
@@ -235,9 +225,9 @@ int TaggedUnionDataInformation::indexOf(const DataInformation* const data) const
         index++;
     }
 
-    const QVector<DataInformation*>& others = currentChildren();
-    for (auto* other : others) {
-        if (other == data) {
+    const std::vector<std::unique_ptr<DataInformation>>& others = currentChildren();
+    for (const auto& other : others) {
+        if (other.get() == data) {
             return index;
         }
         index++;
@@ -253,9 +243,9 @@ DataInformation* TaggedUnionDataInformation::childAt(unsigned int index) const
     if (index < permanentChildCount) {
         return mChildren[index].get();
     }
-    const QVector<DataInformation*>& others = currentChildren();
+    const std::vector<std::unique_ptr<DataInformation>>& others = currentChildren();
     if (index < permanentChildCount + others.size()) {
-        return others.at(index - permanentChildCount);
+        return others[index - permanentChildCount].get();
     }
     Q_ASSERT(false); // should never happen
     return nullptr;
@@ -269,20 +259,4 @@ unsigned int TaggedUnionDataInformation::childCount() const
 bool TaggedUnionDataInformation::isTaggedUnion() const
 {
     return true;
-}
-
-QVector<DataInformation*> TaggedUnionDataInformation::cloneList(const QVector<DataInformation*>& other,
-                                                                DataInformation* parent)
-{
-    int count = other.size();
-    QVector<DataInformation*> ret;
-    ret.reserve(count);
-    for (int i = 0; i < count; ++i) {
-        DataInformation* dat = other.at(i);
-        DataInformation* newChild = dat->clone();
-        newChild->setParent(parent);
-        ret.append(newChild);
-    }
-
-    return ret;
 }
