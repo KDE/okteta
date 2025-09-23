@@ -28,14 +28,14 @@ TaggedUnionDataInformation::TaggedUnionDataInformation(const TaggedUnionDataInfo
     Q_ASSERT(mDefaultFields.isEmpty() || mDefaultFields.at(0) != nullptr);
     mAlternatives.reserve(d.mAlternatives.size());
     for (const FieldInfo& fi : d.mAlternatives) {
-        mAlternatives.append(FieldInfo(fi.name, fi.selectIf, cloneList(fi.fields, this)));
+        mAlternatives.emplace_back(FieldInfo(fi.name, fi.selectIf, cloneList(fi.fields, this)));
     }
 }
 
 TaggedUnionDataInformation::~TaggedUnionDataInformation()
 {
     qDeleteAll(mDefaultFields);
-    for (const FieldInfo& fi : std::as_const(mAlternatives)) {
+    for (const FieldInfo& fi : mAlternatives) {
         qDeleteAll(fi.fields);
     }
 }
@@ -61,7 +61,7 @@ void TaggedUnionDataInformation::appendDefaultField(DataInformation* field, bool
     }
 }
 
-void TaggedUnionDataInformation::setAlternatives(const QVector<FieldInfo>& alternatives, bool emitSignal)
+void TaggedUnionDataInformation::setAlternatives(std::vector<FieldInfo>&& alternatives, bool emitSignal)
 {
     const uint oldChildCount = childCount();
     mLastIndex = -1;
@@ -70,14 +70,14 @@ void TaggedUnionDataInformation::setAlternatives(const QVector<FieldInfo>& alter
         topLevelDataInformation()->_childCountAboutToChange(this, oldChildCount, newChidCount);
     }
     // remove them all
-    for (const FieldInfo& fi : std::as_const(mAlternatives)) {
+    for (const FieldInfo& fi : mAlternatives) {
         qDeleteAll(fi.fields);
     }
 
-    mAlternatives.clear();
-    mAlternatives = alternatives;
+    mAlternatives = std::move(alternatives);
+
     // set parent
-    for (const FieldInfo& fi : std::as_const(mAlternatives)) {
+    for (const FieldInfo& fi : mAlternatives) {
         for (auto* field : fi.fields) {
             field->setParent(this);
         }
@@ -91,7 +91,7 @@ void TaggedUnionDataInformation::setAlternatives(const QVector<FieldInfo>& alter
 int TaggedUnionDataInformation::determineSelection(TopLevelDataInformation* top)
 {
     // now find out which one of the alternatives to select
-    for (int i = 0; i < mAlternatives.size(); ++i) {
+    for (std::size_t i = 0; i < mAlternatives.size(); ++i) {
         const FieldInfo& fi = mAlternatives.at(i);
         if (fi.selectIf.isFunction()) {
             QScriptValue result = top->scriptHandler()->callFunction(fi.selectIf, this,

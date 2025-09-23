@@ -351,7 +351,7 @@ TaggedUnionDataInformation* DataInformationFactory::newTaggedUnion(const TaggedU
     }
     // verify alternatives
     bool alternativesValid = true;
-    QVector<TaggedUnionDataInformation::FieldInfo> altInfo;
+    std::vector<TaggedUnionDataInformation::FieldInfo> altInfo;
     altInfo.reserve(pd.alternatives.size());
     for (std::size_t i = 0; i < pd.alternatives.size(); ++i) {
         const auto& fi = pd.alternatives[i];
@@ -378,7 +378,7 @@ TaggedUnionDataInformation* DataInformationFactory::newTaggedUnion(const TaggedU
                 alternativesValid = false;
             }
         }
-        altInfo.append(TaggedUnionDataInformation::FieldInfo(fi.name, fi.selectIf, children));
+        altInfo.emplace_back(TaggedUnionDataInformation::FieldInfo(fi.name, fi.selectIf, children));
 
     }
 
@@ -389,7 +389,7 @@ TaggedUnionDataInformation* DataInformationFactory::newTaggedUnion(const TaggedU
 
         return nullptr;
     }
-    tagged->setAlternatives(altInfo, false);
+    tagged->setAlternatives(std::move(altInfo), false);
 
     pd.defaultFields->setParent(tagged.get());
     while (pd.defaultFields->hasNext()) {

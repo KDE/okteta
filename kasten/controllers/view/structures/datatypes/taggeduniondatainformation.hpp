@@ -13,6 +13,8 @@
 // Qt
 #include <QScriptValue>
 #include <QVector>
+// Std
+#include <vector>
 
 /** A class holding the data of a struct for Okteta*/
 class TaggedUnionDataInformation : public DataInformationWithChildren
@@ -70,7 +72,7 @@ public: // DataInformation API
 
 public:
     void appendDefaultField(DataInformation* field, bool emitSignal);
-    void setAlternatives(const QVector<FieldInfo>& alternatives, bool emitSignal);
+    void setAlternatives(std::vector<FieldInfo>&& alternatives, bool emitSignal);
 
 private: // DataInformation API
     [[nodiscard]]
@@ -87,7 +89,7 @@ private:
     static QVector<DataInformation*> cloneList(const QVector<DataInformation*>& other, DataInformation* parent);
 
 private:
-    QVector<FieldInfo> mAlternatives;
+    std::vector<FieldInfo> mAlternatives;
     QVector<DataInformation*> mDefaultFields; // always sorted
     // TODO
 //    /** If mUnion is non-null the children are displayed inside a union and the correct
@@ -99,7 +101,7 @@ private:
 
 inline const QVector<DataInformation*>& TaggedUnionDataInformation::currentChildren() const
 {
-    Q_ASSERT(mLastIndex < mAlternatives.size());
+    Q_ASSERT(mLastIndex < static_cast<int>(mAlternatives.size()));
     return mLastIndex >= 0 ? mAlternatives.at(mLastIndex).fields : mDefaultFields;
 }
 
