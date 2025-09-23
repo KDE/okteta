@@ -23,11 +23,7 @@
 // Std
 #include <memory>
 #include <limits>
-
-inline uint qHash(PrimitiveDataType type)
-{
-    return ::qHash(static_cast<int>(type));
-}
+#include <unordered_map>
 
 class PrimitiveDataInformationTest : public QObject
 {
@@ -59,7 +55,7 @@ private Q_SLOTS:
     void cleanupTestCase();
 
 private:
-    QHash<PrimitiveDataType, PrimitiveDataInformation*> basic;
+    std::unordered_map<PrimitiveDataType, std::unique_ptr<PrimitiveDataInformation>> basic;
     SignedBitfieldDataInformation* signedBitfield;
     UnsignedBitfieldDataInformation* unsignedBitfield;
     BoolBitfieldDataInformation* boolBitfield;
@@ -121,7 +117,7 @@ void PrimitiveDataInformationTest::initTestCase()
 
     PrimitiveDataType type = PrimitiveDataType::START;
     while (type < PrimitiveDataType::Bitfield) {
-        basic.insert(type, PrimitiveFactory::newInstance(QStringLiteral("prim"), type, lwc));
+        basic.emplace(type, std::unique_ptr<PrimitiveDataInformation>(PrimitiveFactory::newInstance(QStringLiteral("prim"), type, lwc)));
         type = static_cast<PrimitiveDataType>(static_cast<int>(type) + 1);
     }
     boolBitfield = new BoolBitfieldDataInformation(QStringLiteral("bitfield"), 24);
@@ -515,25 +511,25 @@ void PrimitiveDataInformationTest::addRowsGetAndSetSigned(PrimitiveDataType type
 {
     QString msg = QString::fromUtf8(name);
     QTest::newRow(msg.arg(QStringLiteral("-325")).toUtf8().constData())
-        << basic[type] << AllPrimitiveTypes(-325) << AllPrimitiveTypes(signedType(-325));
+        << basic[type].get() << AllPrimitiveTypes(-325) << AllPrimitiveTypes(signedType(-325));
     QTest::newRow(msg.arg(QStringLiteral("0")).toUtf8().constData())
-        << basic[type] << AllPrimitiveTypes(0) << AllPrimitiveTypes(signedType(0));
+        << basic[type].get() << AllPrimitiveTypes(0) << AllPrimitiveTypes(signedType(0));
     QTest::newRow(msg.arg(QStringLiteral("-1")).toUtf8().constData())
-        << basic[type] << AllPrimitiveTypes(-1) << AllPrimitiveTypes(signedType(-1));
+        << basic[type].get() << AllPrimitiveTypes(-1) << AllPrimitiveTypes(signedType(-1));
     QTest::newRow(msg.arg(QStringLiteral("357891")).toUtf8().constData())
-        << basic[type] << AllPrimitiveTypes(357891) << AllPrimitiveTypes(signedType(357891));
+        << basic[type].get() << AllPrimitiveTypes(357891) << AllPrimitiveTypes(signedType(357891));
 
     QTest::newRow(msg.arg(QStringLiteral("max")).toUtf8().constData())
-        << basic[type] << AllPrimitiveTypes(std::numeric_limits<signedType>::max())
+        << basic[type].get() << AllPrimitiveTypes(std::numeric_limits<signedType>::max())
         << AllPrimitiveTypes(signedType(std::numeric_limits<signedType>::max()));
     QTest::newRow(msg.arg(QStringLiteral("min")).toUtf8().constData())
-        << basic[type] << AllPrimitiveTypes(std::numeric_limits<signedType>::min())
+        << basic[type].get() << AllPrimitiveTypes(std::numeric_limits<signedType>::min())
         << AllPrimitiveTypes(signedType(std::numeric_limits<signedType>::min()));
     QTest::newRow(msg.arg(QStringLiteral("u_max")).toUtf8().constData())
-        << basic[type] << AllPrimitiveTypes(std::numeric_limits<unsignedType>::max())
+        << basic[type].get() << AllPrimitiveTypes(std::numeric_limits<unsignedType>::max())
         << AllPrimitiveTypes(signedType(std::numeric_limits<unsignedType>::max()));
     QTest::newRow(msg.arg(QStringLiteral("u_min")).toUtf8().constData())
-        << basic[type] << AllPrimitiveTypes(std::numeric_limits<unsignedType>::min())
+        << basic[type].get() << AllPrimitiveTypes(std::numeric_limits<unsignedType>::min())
         << AllPrimitiveTypes(signedType(std::numeric_limits<unsignedType>::min()));
 }
 
@@ -542,19 +538,19 @@ void PrimitiveDataInformationTest::addRowsGetAndSetUnsigned(PrimitiveDataType ty
 {
     QString msg = QString::fromUtf8(name);
     QTest::newRow(msg.arg(QStringLiteral("-325")).toUtf8().constData())
-        << basic[type] << AllPrimitiveTypes(-325) << AllPrimitiveTypes(signedType(-325));
+        << basic[type].get() << AllPrimitiveTypes(-325) << AllPrimitiveTypes(signedType(-325));
     QTest::newRow(msg.arg(QStringLiteral("0")).toUtf8().constData())
-        << basic[type] << AllPrimitiveTypes(0) << AllPrimitiveTypes(signedType(0));
+        << basic[type].get() << AllPrimitiveTypes(0) << AllPrimitiveTypes(signedType(0));
     QTest::newRow(msg.arg(QStringLiteral("-1")).toUtf8().constData())
-        << basic[type] << AllPrimitiveTypes(-1) << AllPrimitiveTypes(signedType(-1));
+        << basic[type].get() << AllPrimitiveTypes(-1) << AllPrimitiveTypes(signedType(-1));
     QTest::newRow(msg.arg(QStringLiteral("357891")).toUtf8().constData())
-        << basic[type] << AllPrimitiveTypes(357891) << AllPrimitiveTypes(signedType(357891));
+        << basic[type].get() << AllPrimitiveTypes(357891) << AllPrimitiveTypes(signedType(357891));
 
     QTest::newRow(msg.arg(QStringLiteral("max")).toUtf8().constData())
-        << basic[type] << AllPrimitiveTypes(std::numeric_limits<signedType>::max())
+        << basic[type].get() << AllPrimitiveTypes(std::numeric_limits<signedType>::max())
         << AllPrimitiveTypes(signedType(std::numeric_limits<signedType>::max()));
     QTest::newRow(msg.arg(QStringLiteral("min")).toUtf8().constData())
-        << basic[type] << AllPrimitiveTypes(std::numeric_limits<signedType>::min())
+        << basic[type].get() << AllPrimitiveTypes(std::numeric_limits<signedType>::min())
         << AllPrimitiveTypes(signedType(std::numeric_limits<signedType>::min()));
 }
 
@@ -572,7 +568,6 @@ void PrimitiveDataInformationTest::testGetAndSetValue_data()
 
 void PrimitiveDataInformationTest::cleanupTestCase()
 {
-    qDeleteAll(basic);
     delete signedBitfield;
     delete unsignedBitfield;
     delete boolBitfield;
