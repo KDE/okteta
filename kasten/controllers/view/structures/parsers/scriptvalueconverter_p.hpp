@@ -12,19 +12,21 @@
 // Qt
 #include <QScriptValue>
 #include <QScriptValueIterator>
+// Std
+#include <memory>
 
 namespace ScriptValueConverter {
 
-DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& info);
-ArrayDataInformation* toArray(const QScriptValue& value, const ParserInfo& info);
-AbstractBitfieldDataInformation* toBitfield(const QScriptValue& value, const ParserInfo& info);
-PrimitiveDataInformation* toPrimitive(const QScriptValue& value, const ParserInfo& info);
-StructureDataInformation* toStruct(const QScriptValue& value, const ParserInfo& info);
-UnionDataInformation* toUnion(const QScriptValue& value, const ParserInfo& info);
-StringDataInformation* toString(const QScriptValue& value, const ParserInfo& info);
-PointerDataInformation* toPointer(const QScriptValue& value, const ParserInfo& info);
-EnumDataInformation* toEnum(const QScriptValue& value, bool isFlags, const ParserInfo& info);
-TaggedUnionDataInformation* toTaggedUnion(const QScriptValue& value, const ParserInfo& info);
+std::unique_ptr<DataInformation> toDataInformation(const QScriptValue& value, const ParserInfo& info);
+std::unique_ptr<ArrayDataInformation> toArray(const QScriptValue& value, const ParserInfo& info);
+std::unique_ptr<AbstractBitfieldDataInformation> toBitfield(const QScriptValue& value, const ParserInfo& info);
+std::unique_ptr<PrimitiveDataInformation> toPrimitive(const QScriptValue& value, const ParserInfo& info);
+std::unique_ptr<StructureDataInformation> toStruct(const QScriptValue& value, const ParserInfo& info);
+std::unique_ptr<UnionDataInformation> toUnion(const QScriptValue& value, const ParserInfo& info);
+std::unique_ptr<StringDataInformation> toString(const QScriptValue& value, const ParserInfo& info);
+std::unique_ptr<PointerDataInformation> toPointer(const QScriptValue& value, const ParserInfo& info);
+std::unique_ptr<EnumDataInformation> toEnum(const QScriptValue& value, bool isFlags, const ParserInfo& info);
+std::unique_ptr<TaggedUnionDataInformation> toTaggedUnion(const QScriptValue& value, const ParserInfo& info);
 
 class ScriptValueChildrenParser : public ChildrenParser
 {

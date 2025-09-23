@@ -20,11 +20,11 @@ using namespace ParserStrings;
 
 namespace ScriptValueConverter {
 
-DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& oldInfo)
+std::unique_ptr<DataInformation> toDataInformation(const QScriptValue& value, const ParserInfo& oldInfo)
 {
     if (!value.isValid()) {
         oldInfo.error() << "invalid value passed!";
-        return nullptr;
+        return {};
     }
     ParserInfo info(oldInfo);
     QString nameOverride = value.property(PROPERTY_NAME()).toString();
@@ -36,23 +36,23 @@ DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& 
     if (value.isRegExp()) {
         // apparently regexp is a function
         info.error() << "Cannot convert a RegExp object to DataInformation!";
-        return nullptr;
+        return {};
     }
     if (value.isFunction()) {
         info.error() << "Cannot convert a Function object to DataInformation!";
-        return nullptr;
+        return {};
     }
     if (value.isArray()) {
         info.error() << "Cannot convert a Array object to DataInformation!";
-        return nullptr;
+        return {};
     }
     if (value.isDate()) {
         info.error() << "Cannot convert a Date object to DataInformation!";
-        return nullptr;
+        return {};
     }
     if (value.isError()) {
         info.error() << "Cannot convert a Error object to DataInformation!";
-        return nullptr;
+        return {};
     }
     // variant and qobject are also object types, however they cannot appear from user code, no need to check
 
@@ -74,15 +74,15 @@ DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& 
             info.error() << "Cannot convert object of unknown type to DataInformation!";
         }
 
-        return nullptr; // no point trying to convert
+        return {}; // no point trying to convert
     }
 
     QString type = value.property(PROPERTY_INTERNAL_TYPE()).toString();
     if (type.isEmpty()) {
         info.error() << "Cannot convert object since type of object could not be determined!";
-        return nullptr;
+        return {};
     }
-    DataInformation* returnVal = nullptr;
+    std::unique_ptr<DataInformation> returnVal;
 
     if (type == TYPE_ARRAY()) {
         returnVal = toArray(value, info);
@@ -119,15 +119,15 @@ DataInformation* toDataInformation(const QScriptValue& value, const ParserInfo& 
         cpd.validationFunc = value.property(PROPERTY_VALIDATION_FUNC());
         cpd.toStringFunc = value.property(PROPERTY_TO_STRING_FUNC());
         cpd.customTypeName = value.property(PROPERTY_CUSTOM_TYPE_NAME()).toString();
-        if (!DataInformationFactory::commonInitialization(returnVal, cpd)) {
-            delete returnVal; // error message has already been logged
-            return nullptr;
+        if (!DataInformationFactory::commonInitialization(returnVal.get(), cpd)) {
+            returnVal.reset(); // error message has already been logged
+            return {};
         }
     }
     return returnVal;
 }
 
-ArrayDataInformation* toArray(const QScriptValue& value, const ParserInfo& info)
+std::unique_ptr<ArrayDataInformation> toArray(const QScriptValue& value, const ParserInfo& info)
 {
     ArrayParsedData apd(info);
     apd.length = value.property(PROPERTY_LENGTH());
@@ -135,41 +135,41 @@ ArrayDataInformation* toArray(const QScriptValue& value, const ParserInfo& info)
     ParserInfo childInfo(info);
     DummyDataInformation dummy(info.parent, info.name + QLatin1Char('.') + NAME_ARRAY_TYPE());
     childInfo.parent = &dummy;
-    apd.arrayType = std::unique_ptr<DataInformation>(toDataInformation(childType, childInfo));
+    apd.arrayType = toDataInformation(childType, childInfo);
 
-    return DataInformationFactory::newArray(apd);
+    return std::unique_ptr<ArrayDataInformation>(DataInformationFactory::newArray(apd));
 }
 
-AbstractBitfieldDataInformation* toBitfield(const QScriptValue& value, const ParserInfo& info)
+std::unique_ptr<AbstractBitfieldDataInformation> toBitfield(const QScriptValue& value, const ParserInfo& info)
 {
     BitfieldParsedData bpd(info);
     bpd.type = value.property(PROPERTY_TYPE()).toString();
     bpd.width = ParserUtils::intFromScriptValue(value.property(PROPERTY_WIDTH()));
-    return DataInformationFactory::newBitfield(bpd);
+    return std::unique_ptr<AbstractBitfieldDataInformation>(DataInformationFactory::newBitfield(bpd));
 }
 
-PrimitiveDataInformation* toPrimitive(const QScriptValue& value, const ParserInfo& info)
+std::unique_ptr<PrimitiveDataInformation> toPrimitive(const QScriptValue& value, const ParserInfo& info)
 {
     PrimitiveParsedData ppd(info);
     ppd.type = value.isString() ? value.toString() : value.property(PROPERTY_TYPE()).toString();
-    return DataInformationFactory::newPrimitive(ppd);
+    return std::unique_ptr<PrimitiveDataInformation>(DataInformationFactory::newPrimitive(ppd));
 }
 
-StructureDataInformation* toStruct(const QScriptValue& value, const ParserInfo& info)
+std::unique_ptr<StructureDataInformation> toStruct(const QScriptValue& value, const ParserInfo& info)
 {
     StructOrUnionParsedData supd(info);
     supd.children = std::make_unique<ScriptValueChildrenParser>(info, value.property(PROPERTY_CHILDREN()));
-    return DataInformationFactory::newStruct(supd);
+    return std::unique_ptr<StructureDataInformation>(DataInformationFactory::newStruct(supd));
 }
 
-UnionDataInformation* toUnion(const QScriptValue& value, const ParserInfo& info)
+std::unique_ptr<UnionDataInformation> toUnion(const QScriptValue& value, const ParserInfo& info)
 {
     StructOrUnionParsedData supd(info);
     supd.children = std::make_unique<ScriptValueChildrenParser>(info, value.property(PROPERTY_CHILDREN()));
-    return DataInformationFactory::newUnion(supd);
+    return std::unique_ptr<UnionDataInformation>(DataInformationFactory::newUnion(supd));
 }
 
-PointerDataInformation* toPointer(const QScriptValue& value, const ParserInfo& info)
+std::unique_ptr<PointerDataInformation> toPointer(const QScriptValue& value, const ParserInfo& info)
 {
     PointerParsedData ppd(info);
     QScriptValue pointerScale = value.property(PROPERTY_SCALE());
@@ -183,14 +183,14 @@ PointerDataInformation* toPointer(const QScriptValue& value, const ParserInfo& i
     DummyDataInformation dummy(info.parent, info.name);
     childInfo.parent = &dummy;
     childInfo.name = NAME_POINTER_TARGET();
-    ppd.pointerTarget = std::unique_ptr<DataInformation>(toDataInformation(value.property(PROPERTY_TARGET()), childInfo));
+    ppd.pointerTarget = toDataInformation(value.property(PROPERTY_TARGET()), childInfo);
     childInfo.name = NAME_POINTER_VALUE_TYPE();
-    ppd.valueType = std::unique_ptr<DataInformation>(toDataInformation(value.property(PROPERTY_TYPE()), childInfo));
+    ppd.valueType = toDataInformation(value.property(PROPERTY_TYPE()), childInfo);
 
-    return DataInformationFactory::newPointer(ppd);
+    return std::unique_ptr<PointerDataInformation>(DataInformationFactory::newPointer(ppd));
 }
 
-EnumDataInformation* toEnum(const QScriptValue& value, bool flags, const ParserInfo& info)
+std::unique_ptr<EnumDataInformation> toEnum(const QScriptValue& value, bool flags, const ParserInfo& info)
 {
     EnumParsedData epd(info);
     QScriptValue enumType = value.property(PROPERTY_TYPE());
@@ -204,23 +204,23 @@ EnumDataInformation* toEnum(const QScriptValue& value, bool flags, const ParserI
     epd.enumValuesObject = value.property(PROPERTY_ENUM_VALUES());
 
     if (flags) {
-        return DataInformationFactory::newFlags(epd);
+        return std::unique_ptr<EnumDataInformation>(DataInformationFactory::newFlags(epd));
     }
 
-    return DataInformationFactory::newEnum(epd);
+    return std::unique_ptr<EnumDataInformation>(DataInformationFactory::newEnum(epd));
 }
 
-StringDataInformation* toString(const QScriptValue& value, const ParserInfo& info)
+std::unique_ptr<StringDataInformation> toString(const QScriptValue& value, const ParserInfo& info)
 {
     StringParsedData spd(info);
     spd.encoding = value.property(PROPERTY_ENCODING()).toString();
     spd.termination = ParserUtils::uintFromScriptValue(value.property(PROPERTY_TERMINATED_BY()));
     spd.maxByteCount = ParserUtils::uintFromScriptValue(value.property(PROPERTY_MAX_BYTE_COUNT()));
     spd.maxCharCount = ParserUtils::uintFromScriptValue(value.property(PROPERTY_MAX_CHAR_COUNT()));
-    return DataInformationFactory::newString(spd);
+    return std::unique_ptr<StringDataInformation>(DataInformationFactory::newString(spd));
 }
 
-TaggedUnionDataInformation* toTaggedUnion(const QScriptValue& value, const ParserInfo& info)
+std::unique_ptr<TaggedUnionDataInformation> toTaggedUnion(const QScriptValue& value, const ParserInfo& info)
 {
     TaggedUnionParsedData tpd(info);
     QScriptValue alternatives = value.property(PROPERTY_ALTERNATIVES());
@@ -241,7 +241,7 @@ TaggedUnionDataInformation* toTaggedUnion(const QScriptValue& value, const Parse
 
     tpd.children = std::make_unique<ScriptValueChildrenParser>(info, value.property(PROPERTY_CHILDREN()));
     tpd.defaultFields = std::make_unique<ScriptValueChildrenParser>(info, value.property(PROPERTY_DEFAULT_CHILDREN()));
-    return DataInformationFactory::newTaggedUnion(tpd);
+    return std::unique_ptr<TaggedUnionDataInformation>(DataInformationFactory::newTaggedUnion(tpd));
 }
 
 } // namespace ScriptValueConverter
@@ -264,7 +264,7 @@ std::unique_ptr<DataInformation> ScriptValueConverter::ScriptValueChildrenParser
         mIter.next(); // skip length property
     }
     mInfo.name = mIter.name();
-    return std::unique_ptr<DataInformation>(toDataInformation(mIter.value(), mInfo));
+    return toDataInformation(mIter.value(), mInfo);
 }
 
 bool ScriptValueConverter::ScriptValueChildrenParser::hasNext()

@@ -22,7 +22,7 @@ std::unique_ptr<DataInformation> convert(const QScriptValue& value, const QStrin
 {
     // TODO Q_CHECK_PTR(parent)
     const ParserInfo info(name, logger, parent, value.engine());
-    return std::unique_ptr<DataInformation>(toDataInformation(value, info)); // could be NULL
+    return toDataInformation(value, info); // could be NULL
 }
 
 std::vector<std::unique_ptr<DataInformation>> convertValues(const QScriptValue& value, ScriptLogger* logger,
@@ -38,10 +38,10 @@ std::vector<std::unique_ptr<DataInformation>> convertValues(const QScriptValue& 
             continue; // skip the length property of arrays
         }
         const ParserInfo info(it.name(), logger, parent, value.engine());
-        DataInformation* inf = toDataInformation(it.value(), info);
+        std::unique_ptr<DataInformation> inf = toDataInformation(it.value(), info);
 
         if (inf) {
-            ret.emplace_back(std::unique_ptr<DataInformation>(inf));
+            ret.emplace_back(std::move(inf));
         } else { // TODO remove the null check once parent must be nonnull
             logger->info(parent ? parent->fullObjectPath() : QString()).nospace()
                 << "Could not convert property '" << it.name() << "'.";
