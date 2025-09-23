@@ -64,7 +64,7 @@ private:
     static UnionDataInformation* unionFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
     static StructureDataInformation* structFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
     static ArrayDataInformation* arrayFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
-    static TaggedUnionDataInformation* taggedUnionFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
+    static std::unique_ptr<TaggedUnionDataInformation> taggedUnionFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
     /** Get the child type from the <type> element or type="" attribute.
      * This handles both the case where it is passed as an XML element and as a primitive type string
      * @param xmlElem the parent XML element

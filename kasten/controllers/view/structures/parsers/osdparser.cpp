@@ -431,7 +431,7 @@ std::unique_ptr<DataInformation> OsdParser::parseElement(const QDomElement& elem
     } else if (tag == TYPE_POINTER()) {
         data = std::unique_ptr<DataInformation>(pointerFromXML(elem, info));
     } else if (tag == TYPE_TAGGED_UNION()) {
-        data = std::unique_ptr<DataInformation>(taggedUnionFromXML(elem, info));
+        data = taggedUnionFromXML(elem, info);
     } else {
         LoggerWithContext lwc(info.logger, info.context());
         // use the type tag as a primitive type
@@ -487,8 +487,8 @@ QString OsdParser::readProperty(const QDomElement& elem, const QString& property
     return defaultVal;
 }
 
-TaggedUnionDataInformation* OsdParser::taggedUnionFromXML(const QDomElement& xmlElem,
-                                                          const OsdParserInfo& info)
+std::unique_ptr<TaggedUnionDataInformation> OsdParser::taggedUnionFromXML(const QDomElement& xmlElem,
+                                                                          const OsdParserInfo& info)
 {
     TaggedUnionParsedData tpd(info);
     // can be null
@@ -502,7 +502,7 @@ TaggedUnionDataInformation* OsdParser::taggedUnionFromXML(const QDomElement& xml
     QDomElement alternatives = xmlElem.firstChildElement(PROPERTY_ALTERNATIVES());
     if (alternatives.isNull()) {
         info.error() << "Missing <alternatives> element, tagged union cannot exist without at least one alternative";
-        return nullptr;
+        return {};
     }
 
     int alternativeCount = 0;
@@ -527,7 +527,7 @@ TaggedUnionDataInformation* OsdParser::taggedUnionFromXML(const QDomElement& xml
         }
     }
 
-    return DataInformationFactory::newTaggedUnion(tpd);
+    return std::unique_ptr<TaggedUnionDataInformation>(DataInformationFactory::newTaggedUnion(tpd));
 }
 
 OsdChildrenParser::OsdChildrenParser(const OsdParserInfo& info, const QDomElement& firstChild)
