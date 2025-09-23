@@ -365,11 +365,11 @@ UnionDataInformation* OsdParser::unionFromXML(const QDomElement& xmlElem, const 
     return DataInformationFactory::newUnion(supd);
 }
 
-StructureDataInformation* OsdParser::structFromXML(const QDomElement& xmlElem, const OsdParserInfo& info)
+std::unique_ptr<StructureDataInformation> OsdParser::structFromXML(const QDomElement& xmlElem, const OsdParserInfo& info)
 {
     StructOrUnionParsedData supd(info);
     supd.children = std::make_unique<OsdChildrenParser>(info, xmlElem.firstChildElement());
-    return DataInformationFactory::newStruct(supd);
+    return std::unique_ptr<StructureDataInformation>(DataInformationFactory::newStruct(supd));
 }
 
 EnumDataInformation* OsdParser::enumFromXML(const QDomElement& xmlElem, bool isFlags,
@@ -413,7 +413,7 @@ std::unique_ptr<DataInformation> OsdParser::parseElement(const QDomElement& elem
     OsdParserInfo info(oldInfo);
     info.name = readProperty(elem, PROPERTY_NAME(), QStringLiteral("<anonymous>"));
     if (tag == TYPE_STRUCT()) {
-        data = std::unique_ptr<DataInformation>(structFromXML(elem, info));
+        data = structFromXML(elem, info);
     } else if (tag == TYPE_ARRAY()) {
         data = arrayFromXML(elem, info);
     } else if (tag == TYPE_BITFIELD()) {
