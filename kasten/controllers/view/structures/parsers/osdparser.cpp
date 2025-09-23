@@ -358,11 +358,11 @@ AbstractBitfieldDataInformation* OsdParser::bitfieldFromXML(const QDomElement& x
     return DataInformationFactory::newBitfield(bpd);
 }
 
-UnionDataInformation* OsdParser::unionFromXML(const QDomElement& xmlElem, const OsdParserInfo& info)
+std::unique_ptr<UnionDataInformation> OsdParser::unionFromXML(const QDomElement& xmlElem, const OsdParserInfo& info)
 {
     StructOrUnionParsedData supd(info);
     supd.children = std::make_unique<OsdChildrenParser>(info, xmlElem.firstChildElement());
-    return DataInformationFactory::newUnion(supd);
+    return std::unique_ptr<UnionDataInformation>(DataInformationFactory::newUnion(supd));
 }
 
 std::unique_ptr<StructureDataInformation> OsdParser::structFromXML(const QDomElement& xmlElem, const OsdParserInfo& info)
@@ -421,7 +421,7 @@ std::unique_ptr<DataInformation> OsdParser::parseElement(const QDomElement& elem
     } else if (tag == TYPE_PRIMITIVE()) {
         data = std::unique_ptr<DataInformation>(primitiveFromXML(elem, info));
     } else if (tag == TYPE_UNION()) {
-        data = std::unique_ptr<DataInformation>(unionFromXML(elem, info));
+        data = unionFromXML(elem, info);
     } else if (tag == TYPE_ENUM()) {
         data = std::unique_ptr<DataInformation>(enumFromXML(elem, false, info));
     } else if (tag == TYPE_FLAGS()) {

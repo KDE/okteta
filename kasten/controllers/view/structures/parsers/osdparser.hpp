@@ -61,7 +61,7 @@ private:
     static AbstractBitfieldDataInformation* bitfieldFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
     static EnumDataInformation* enumFromXML(const QDomElement& elem, bool isFlags, const OsdParserInfo& info);
     static StringDataInformation* stringFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
-    static UnionDataInformation* unionFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
+    static std::unique_ptr<UnionDataInformation> unionFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
     static std::unique_ptr<StructureDataInformation> structFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
     static std::unique_ptr<ArrayDataInformation> arrayFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
     static std::unique_ptr<TaggedUnionDataInformation> taggedUnionFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
