@@ -179,8 +179,7 @@ void JsParserTest::testCommon(DataInformation** dataPtr)
     QVERIFY(!value.isError());
     QVERIFY(value.isObject());
     ScriptLogger logger;
-    std::unique_ptr<DataInformation> data
-        (ScriptValueConverter::convert(value, QStringLiteral("converted"), &logger));
+    std::unique_ptr<DataInformation> data = ScriptValueConverter::convert(value, QStringLiteral("converted"), &logger);
     QVERIFY(logger.rowCount() == 0);
     QVERIFY(data);
     checkFunction(data.get());

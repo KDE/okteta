@@ -183,7 +183,7 @@ void DefaultScriptClass::setDataType(const QScriptValue& value, DataInformation*
         return;
     }
     // change the type of the underlying object
-    auto newType = std::unique_ptr<DataInformation>(ScriptValueConverter::convert(value, data->name(), data->logger(), data));
+    std::unique_ptr<DataInformation> newType = ScriptValueConverter::convert(value, data->name(), data->logger(), data);
     if (!newType) {
         data->logError() << "Failed to set new type, could not convert value!";
         return;

@@ -34,21 +34,21 @@ private Q_SLOTS:
     void testParseEnum_data();
 
 private:
-    DataInformation* convert(const QString& code);
-    DataInformation* convert(const QScriptValue& value);
+    std::unique_ptr<DataInformation> convert(const QString& code);
+    std::unique_ptr<DataInformation> convert(const QScriptValue& value);
     QScriptValue evaluate(const char* code);
     void dumpLoggerOutput();
     std::unique_ptr<QScriptEngine> engine;
     std::unique_ptr<ScriptLogger> logger;
 };
 
-DataInformation* ScriptValueConverterTest::convert(const QString& code)
+std::unique_ptr<DataInformation> ScriptValueConverterTest::convert(const QString& code)
 {
     QScriptValue value = engine->evaluate(code);
     return ScriptValueConverter::convert(value, QStringLiteral("value"), logger.get());
 }
 
-DataInformation* ScriptValueConverterTest::convert(const QScriptValue& value)
+std::unique_ptr<DataInformation> ScriptValueConverterTest::convert(const QScriptValue& value)
 {
     return ScriptValueConverter::convert(value, QStringLiteral("value"), logger.get());
 }
@@ -201,10 +201,10 @@ void ScriptValueConverterTest::testPrimitives()
     if (type == PrimitiveDataType::Invalid) {
         return; // the cast will fail
     }
-    std::unique_ptr<DataInformation> data1(ScriptValueConverter::convert(val1, QStringLiteral("val1"),
-                                                                        logger.get()));
-    std::unique_ptr<DataInformation> data2(ScriptValueConverter::convert(val2, QStringLiteral("val2"),
-                                                                        logger.get()));
+    std::unique_ptr<DataInformation> data1 = ScriptValueConverter::convert(val1, QStringLiteral("val1"),
+                                                                           logger.get());
+    std::unique_ptr<DataInformation> data2 = ScriptValueConverter::convert(val2, QStringLiteral("val2"),
+                                                                           logger.get());
     QVERIFY(data1);
     QVERIFY(data2);
     PrimitiveDataInformation* p1 = data1->asPrimitive();
@@ -216,7 +216,7 @@ void ScriptValueConverterTest::testPrimitives()
     if (type == PrimitiveDataType::Bitfield) {
         return; // the following tests don't work with bitfields
     }
-    std::unique_ptr<DataInformation> data3(convert(QStringLiteral("\"%1\"").arg(typeString)));
+    std::unique_ptr<DataInformation> data3 = convert(QStringLiteral("\"%1\"").arg(typeString));
     QVERIFY(data3);
     PrimitiveDataInformation* p3 = data3->asPrimitive();
     QVERIFY(p3);
@@ -237,7 +237,7 @@ void ScriptValueConverterTest::testParseEnum()
     QVERIFY(val.isObject());
     QCOMPARE(val.property(ParserStrings::PROPERTY_INTERNAL_TYPE()).toString(), QStringLiteral("enum"));
 
-    std::unique_ptr<DataInformation> data(ScriptValueConverter::convert(val, QStringLiteral("val"), logger.get()));
+    std::unique_ptr<DataInformation> data = ScriptValueConverter::convert(val, QStringLiteral("val"), logger.get());
     if (expectedCount > 0) {
         QVERIFY(data);
     } else {

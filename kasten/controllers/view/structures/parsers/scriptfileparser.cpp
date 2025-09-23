@@ -40,7 +40,7 @@ std::vector<std::unique_ptr<TopLevelDataInformation>> ScriptFileParser::parseStr
     if (!value.isValid()) {
         dataInf = std::make_unique<DummyDataInformation>(nullptr, mPluginName);
     } else {
-        dataInf = std::unique_ptr<DataInformation>(ScriptValueConverter::convert(value, mPluginName, logger.get()));
+        dataInf = ScriptValueConverter::convert(value, mPluginName, logger.get());
     }
 
     if (!dataInf) {

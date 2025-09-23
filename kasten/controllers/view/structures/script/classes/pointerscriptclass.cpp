@@ -59,19 +59,19 @@ bool PointerScriptClass::setAdditionalProperty(DataInformation* data, const QScr
                                                const QScriptValue& value)
 {
     if (name == s_type) {
-        DataInformation* newType = ScriptValueConverter::convert(value, QStringLiteral("(pointer value)"),
-                                                                 data->logger(), data);
+        std::unique_ptr<DataInformation> newType = ScriptValueConverter::convert(value, QStringLiteral("(pointer value)"),
+                                                                                 data->logger(), data);
         if (!newType) {
             data->logError() << "Could not set new pointer type.";
-        } else if (!data->asPointer()->setPointerType(std::unique_ptr<DataInformation>(newType))) {
-            delete newType;
+        } else {
+            std::ignore = data->asPointer()->setPointerType(std::move(newType));
         }
 
         return true;
     }
     if (name == s_target) {
-        auto newTarget = std::unique_ptr<DataInformation>(ScriptValueConverter::convert(value, QStringLiteral("(pointer value)"),
-                                                                                        data->logger(), data));
+        std::unique_ptr<DataInformation> newTarget = ScriptValueConverter::convert(value, QStringLiteral("(pointer value)"),
+                                                                                   data->logger(), data);
         if (!newTarget) {
             data->logError() << "Could not set new pointer target.";
         } else {

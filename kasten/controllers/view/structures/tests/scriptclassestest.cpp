@@ -306,7 +306,7 @@ void ScriptClassesTest::testReplaceObject()
         QT_UNICODE_LITERAL("});\n"));
     QScriptValue val = ownedEngine->evaluate(unionDef);
     QVERIFY(val.isObject());
-    auto managedMain = std::unique_ptr<DataInformation>(ScriptValueConverter::convert(val, QStringLiteral("container"), logger.get(), nullptr));
+    std::unique_ptr<DataInformation> managedMain = ScriptValueConverter::convert(val, QStringLiteral("container"), logger.get(), nullptr);
     QVERIFY(managedMain);
     QCOMPARE(logger->rowCount(), 0);
 

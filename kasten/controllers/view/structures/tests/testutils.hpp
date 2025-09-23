@@ -46,7 +46,7 @@ std::unique_ptr<DataInformation> evalAndParse(QScriptEngine* eng, const QString&
     if (result.isError()) {
         qWarning() << "error parsing" << code << ":" << result.toString();
     }
-    return std::unique_ptr<DataInformation>(ScriptValueConverter::convert(result, QStringLiteral("result"), logger));
+    return ScriptValueConverter::convert(result, QStringLiteral("result"), logger);
 }
 
 std::unique_ptr<DataInformation> evalAndParse(QScriptEngine* eng, const char* code, ScriptLogger* logger)

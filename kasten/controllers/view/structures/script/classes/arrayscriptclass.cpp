@@ -114,8 +114,7 @@ bool ArrayScriptClass::setAdditionalProperty(DataInformation* data, const QScrip
             aData->logWarn() << "Using property 'childType' is deprecated, use the new name 'type' instead";
         }
 
-        auto newChildType = std::unique_ptr<DataInformation>(ScriptValueConverter::convert(value,
-                                                                                           aData->name(), aData->logger(), aData));
+        std::unique_ptr<DataInformation> newChildType = ScriptValueConverter::convert(value, aData->name(), aData->logger(), aData);
 
         if (!newChildType) {
             aData->logError() << "Failed to parse new child type:" << value.toString();

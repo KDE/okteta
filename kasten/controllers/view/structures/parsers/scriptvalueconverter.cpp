@@ -17,12 +17,12 @@
 
 namespace ScriptValueConverter {
 
-DataInformation* convert(const QScriptValue& value, const QString& name, ScriptLogger* logger,
-                         DataInformation* parent)
+std::unique_ptr<DataInformation> convert(const QScriptValue& value, const QString& name, ScriptLogger* logger,
+                                         DataInformation* parent)
 {
     // TODO Q_CHECK_PTR(parent)
     const ParserInfo info(name, logger, parent, value.engine());
-    return toDataInformation(value, info); // could be NULL
+    return std::unique_ptr<DataInformation>(toDataInformation(value, info)); // could be NULL
 }
 
 std::vector<std::unique_ptr<DataInformation>> convertValues(const QScriptValue& value, ScriptLogger* logger,
