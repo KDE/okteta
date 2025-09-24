@@ -195,44 +195,44 @@ void StringDataInformation::setEncoding(StringDataInformation::StringType encodi
         // only set endianness, since is already utf 32
         mData->setEndianness((encoding == StringType::UTF32_LE) ? QSysInfo::LittleEndian : QSysInfo::BigEndian);
     } else {
-        StringData* data = nullptr;
+        std::unique_ptr<StringData> data;
         switch (encoding) {
         case StringType::ASCII:
-            data = new AsciiStringData(this);
+            data = std::make_unique<AsciiStringData>(this);
             break;
         case StringType::Latin1:
-            data = new Latin1StringData(this);
+            data = std::make_unique<Latin1StringData>(this);
             break;
         case StringType::UTF8:
-            data = new Utf8StringData(this);
+            data = std::make_unique<Utf8StringData>(this);
             break;
         case StringType::UTF16_LE:
-            data = new Utf16StringData(this);
+            data = std::make_unique<Utf16StringData>(this);
             data->setEndianness(QSysInfo::LittleEndian);
             break;
         case StringType::UTF16_BE:
-            data = new Utf16StringData(this);
+            data = std::make_unique<Utf16StringData>(this);
             data->setEndianness(QSysInfo::BigEndian);
             break;
         case StringType::UTF32_LE:
-            data = new Utf32StringData(this);
+            data = std::make_unique<Utf32StringData>(this);
             data->setEndianness(QSysInfo::LittleEndian);
             break;
         case StringType::UTF32_BE:
-            data = new Utf32StringData(this);
+            data = std::make_unique<Utf32StringData>(this);
             data->setEndianness(QSysInfo::BigEndian);
             break;
         case StringType::EBCDIC:
-            data = new EbcdicStringData(this);
+            data = std::make_unique<EbcdicStringData>(this);
             break;
         default:
-            data = new AsciiStringData(this);     // TODO add the other classes
+            data = std::make_unique<AsciiStringData>(this);     // TODO add the other classes
             break;
         }
         if (mData) {
             data->copyTerminationFrom(mData.get());
         }
-        mData.reset(data);
+        mData = std::move(data);
     }
     mEncoding = encoding;
 }
