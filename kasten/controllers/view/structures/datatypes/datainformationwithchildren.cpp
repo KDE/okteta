@@ -222,9 +222,9 @@ std::vector<std::unique_ptr<DataInformation>> DataInformationWithChildren::clone
     std::vector<std::unique_ptr<DataInformation>> ret;
     ret.reserve(other.size());
     for (const auto& info : other) {
-        DataInformation* const newChild = info->clone();
+        std::unique_ptr<DataInformation> newChild = info->clone();
         newChild->setParent(parent);
-        ret.emplace_back(std::unique_ptr<DataInformation>(newChild));
+        ret.emplace_back(std::move(newChild));
     }
 
     return ret;

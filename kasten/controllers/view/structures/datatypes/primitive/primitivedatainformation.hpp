@@ -49,9 +49,6 @@ public: // API to implement
 
 public: // DataInformation API
     [[nodiscard]]
-    PrimitiveDataInformation* clone() const override = 0;
-
-    [[nodiscard]]
     unsigned int childCount() const override;
     [[nodiscard]]
     DataInformation* childAt(unsigned int) const override;
@@ -69,6 +66,10 @@ public: // DataInformationBase API
     bool isPrimitive() const override;
 
 public:
+    [[nodiscard]]
+    std::unique_ptr<PrimitiveDataInformation> clone() const;
+
+public:
     /** @return the matching prefix for the base (nothing, '0x', '0b' or '0o') */
     [[nodiscard]]
     static QString basePrefix(int base);
@@ -76,7 +77,16 @@ public:
 protected: // API to implement
     [[nodiscard]]
     virtual BitCount32 offset(unsigned int index) const;
+
+private: // DataInformationBase API
+    [[nodiscard]]
+    PrimitiveDataInformation* cloneImpl() const override = 0;
 };
+
+inline std::unique_ptr<PrimitiveDataInformation> PrimitiveDataInformation::clone() const
+{
+    return std::unique_ptr<PrimitiveDataInformation>(cloneImpl());
+}
 
 /**
  * A base class for data types which just wrap an underlying primitive data type.

@@ -43,9 +43,6 @@ public: // PrimitiveDataInformation API
 
 public: // DataInformation API
     [[nodiscard]]
-    BasicPrimitiveDataInformation<T, C>* clone() const override;
-
-    [[nodiscard]]
     QWidget* createEditWidget(QWidget* parent) const override;
     [[nodiscard]]
     QVariant dataFromWidget(const QWidget* w) const override;
@@ -61,7 +58,14 @@ public: // DataInformation API
     bool setData(const QVariant& value, Okteta::AbstractByteArrayModel* out,
                  Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset) override;
 
+public:
+    [[nodiscard]]
+    std::unique_ptr<BasicPrimitiveDataInformation<T, C>> clone() const;
+
 private: // DataInformation API
+    [[nodiscard]]
+    BasicPrimitiveDataInformation<T, C>* cloneImpl() const override;
+
     [[nodiscard]]
     QString typeNameImpl() const override;
     [[nodiscard]]
@@ -90,6 +94,12 @@ inline BasicPrimitiveDataInformation<T, C>::BasicPrimitiveDataInformation(
 
 template <typename T, typename C>
 inline BasicPrimitiveDataInformation<T, C>::~BasicPrimitiveDataInformation() = default;
+
+template <typename T, typename C>
+inline std::unique_ptr<BasicPrimitiveDataInformation<T, C>> BasicPrimitiveDataInformation<T, C>::clone() const
+{
+    return std::unique_ptr<BasicPrimitiveDataInformation<T, C>>(cloneImpl());
+}
 
 template <typename T, typename C>
 inline QString BasicPrimitiveDataInformation<T, C>::typeNameImpl() const
@@ -141,7 +151,7 @@ inline PrimitiveDataType BasicPrimitiveDataInformation<T, C>::type() const
 }
 
 template <typename T, typename C>
-inline BasicPrimitiveDataInformation<T, C>* BasicPrimitiveDataInformation<T, C>::clone() const
+inline BasicPrimitiveDataInformation<T, C>* BasicPrimitiveDataInformation<T, C>::cloneImpl() const
 {
     return new BasicPrimitiveDataInformation<T, C>(*this);
 }

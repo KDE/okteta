@@ -41,7 +41,7 @@ ArrayDataInformation::ArrayDataInformation(const ArrayDataInformation& d)
 {
     uint length = d.mData->length();
     DataInformation* childType = d.mData->childType();
-    mData = AbstractArrayData::newArrayData(length, std::unique_ptr<DataInformation>(childType->clone()), this);
+    mData = AbstractArrayData::newArrayData(length, childType->clone(), this);
 }
 
 ArrayDataInformation::~ArrayDataInformation() = default;

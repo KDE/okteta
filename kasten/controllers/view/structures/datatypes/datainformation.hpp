@@ -18,13 +18,15 @@
 // Qt
 #include <QString>
 #include <QMetaType>
+// Std
+#include <memory>
 
-/** Implement the clone() method and add the copy constructor declaration
+/** Implement the cloneImpl() method and add the copy constructor declaration
  * After this macro visibility will be set to protected */
 #define DATAINFORMATION_CLONE_DECL(type, supertype) \
-    public: \
+    private: \
         [[nodiscard]] \
-        inline type* clone() const override { return new type(*this); } \
+        inline type* cloneImpl() const override { return new type(*this); } \
     protected: \
         type(const type& d)
 
@@ -79,9 +81,6 @@ public:
     ~DataInformation() override;
 
 public: // API to implement
-    [[nodiscard]]
-    virtual DataInformation* clone() const = 0;
-
     // methods for children:
     [[nodiscard]]
     virtual unsigned int childCount() const = 0;
@@ -173,6 +172,13 @@ public: // DataInformationBase API
     bool isTopLevel() const override;
 
 public:
+    /**
+     * Redefine in subclasses where covariance of return type is wanted.
+     * See also cloneImpl() for actual per-class-specific cloning.
+     */
+    [[nodiscard]]
+    std::unique_ptr<DataInformation> clone() const;
+
     [[nodiscard]]
     int row() const;
     [[nodiscard]]
@@ -273,7 +279,10 @@ protected:
     static QVariant eofReachedData(int role);
     void setAdditionalFunction(AdditionalData::AdditionalDataType entry, const QScriptValue& value, const char* name);
 
-private:
+private: // API to implement
+    [[nodiscard]]
+    virtual DataInformation* cloneImpl() const = 0;
+
     [[nodiscard]]
     virtual QString typeNameImpl() const = 0;
     [[nodiscard]]
@@ -304,6 +313,11 @@ protected:
 
 Q_DECLARE_METATYPE(DataInformation*)
 Q_DECLARE_METATYPE(const DataInformation*)
+
+inline std::unique_ptr<DataInformation> DataInformation::clone() const
+{
+    return std::unique_ptr<DataInformation>(cloneImpl());
+}
 
 inline Qt::ItemFlags DataInformation::flags(int column, bool fileLoaded) const
 {

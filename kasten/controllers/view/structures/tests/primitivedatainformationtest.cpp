@@ -501,7 +501,7 @@ void PrimitiveDataInformationTest::testGetAndSetValue()
     QFETCH(AllPrimitiveTypes, newVal);
     QFETCH(AllPrimitiveTypes, expected);
 
-    std::unique_ptr<PrimitiveDataInformation> clone(data->clone());
+    std::unique_ptr<PrimitiveDataInformation> clone = data->clone();
     clone->setValue(newVal);
     QCOMPARE(clone->value(), expected);
 }

@@ -231,13 +231,13 @@ void BasicDataInformationTest::basicTest(DataInformationBase* data, const Expect
     QCOMPARE(dataInf->size(), expected.size);
     QCOMPARE(dataInf->parent(), expected.parent);
 
-    auto managedClone1 = std::unique_ptr<DataInformation>(dataInf->clone());
+    auto managedClone1 = dataInf->clone();
     DataInformation* const clone1 = managedClone1.get();
     const auto top = std::make_unique<TopLevelDataInformation>(std::move(managedClone1));
     QCOMPARE(clone1->parent(), top.get()); // top takes ownership of clone1
     QCOMPARE(top->actualDataInformation(), clone1);
 
-    std::unique_ptr<DataInformation> clone2(clone1->clone());
+    std::unique_ptr<DataInformation> clone2 = clone1->clone();
     QVERIFY(clone2->parent() == nullptr); // cloning should reset parent to NULL, else we get dangling pointers
 
     QCOMPARE(dataInf->flags(DataInformation::ColumnName, true), expected.columnFlags[DataInformation::ColumnName]);
@@ -280,9 +280,9 @@ void BasicDataInformationTest::initTestCase()
 
     emptyPrimitiveArray = std::make_unique<ArrayDataInformation>(QStringLiteral("emptyPrimitiveArray"), 0,
                                                                  PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc));
-    emptyComplexArray = std::make_unique<ArrayDataInformation>(QStringLiteral("emptyComplexArray"), 0, std::unique_ptr<DataInformation>(structWithChildren->clone()));
+    emptyComplexArray = std::make_unique<ArrayDataInformation>(QStringLiteral("emptyComplexArray"), 0, structWithChildren->clone());
     primitiveArrayWithChildren = std::make_unique<ArrayDataInformation>(QStringLiteral("primitiveArrayWithChildren"), 2, PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc));
-    complexArrayWithChildren = std::make_unique<ArrayDataInformation>(QStringLiteral("complexArrayWithChildren"), 2, std::unique_ptr<DataInformation>(structWithChildren->clone()));
+    complexArrayWithChildren = std::make_unique<ArrayDataInformation>(QStringLiteral("complexArrayWithChildren"), 2, structWithChildren->clone());
 
     QMap<AllPrimitiveTypes, QString> enumVals;
     enumVals[1] = QStringLiteral("one");

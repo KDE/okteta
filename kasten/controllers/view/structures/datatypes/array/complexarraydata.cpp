@@ -35,10 +35,10 @@ void ComplexArrayData::appendChildren(uint from, uint to)
 {
     mChildren.reserve(mChildren.size() + to - from);
     for (uint i = from; i < to; ++i) {
-        DataInformation* arrayElem = mChildType->clone();
+        std::unique_ptr<DataInformation> arrayElem = mChildType->clone();
         arrayElem->setName(QString::number(i));
         arrayElem->setParent(mParent);
-        mChildren.emplace_back(std::unique_ptr<DataInformation>(arrayElem));
+        mChildren.emplace_back(std::move(arrayElem));
     }
 }
 
