@@ -257,7 +257,7 @@ void BasicDataInformationTest::initTestCase()
 
     PrimitiveDataType type = PrimitiveDataType::START;
     while (type < PrimitiveDataType::Bitfield) {
-        primitives.emplace_back(std::unique_ptr<PrimitiveDataInformation>(PrimitiveFactory::newInstance(QStringLiteral("prim"), type, lwc)));
+        primitives.emplace_back(PrimitiveFactory::newInstance(QStringLiteral("prim"), type, lwc));
         type = static_cast<PrimitiveDataType>(static_cast<int>(type) + 1);
     }
     QCOMPARE(PrimitiveFactory::newInstance(QStringLiteral("invalid"), PrimitiveDataType::Bitfield, lwc).get(), static_cast<PrimitiveDataInformation*>(nullptr));
