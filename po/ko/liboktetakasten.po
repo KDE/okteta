@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-22 02:00+0000\n"
+"POT-Creation-Date: 2025-09-24 02:01+0000\n"
 "PO-Revision-Date: 2025-06-10 22:40+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -1828,7 +1828,7 @@ msgid "1 string extracted."
 msgid_plural "%1 strings extracted."
 msgstr[0] "문자열 %1개를 추출했습니다."
 
-#: controllers/view/structures/datatypes/array/complexarraydata.cpp:94
+#: controllers/view/structures/datatypes/array/complexarraydata.cpp:96
 #, kde-format
 msgctxt "type name, then array length"
 msgid "%1[%2]"
@@ -1940,19 +1940,19 @@ msgctxt "boolean value with actual value"
 msgid "true (%1)"
 msgstr "참(%1)"
 
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:40
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:79
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:41
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:80
 #, kde-format
 msgid "%1 (value not in enum)"
 msgstr "%1(열거형에 값 없음)"
 
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:48
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:76
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:49
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:77
 #, kde-format
 msgid "%1 (%2)"
 msgstr "%1(%2)"
 
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:86
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:87
 #, kde-format
 msgctxt ""
 "Displayed in the type column. first comes the name of the enum, then the "
@@ -1960,12 +1960,12 @@ msgctxt ""
 msgid "enum %1 (%2)"
 msgstr "열거형 %1(%2)"
 
-#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:76
+#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:77
 #, kde-format
 msgid "0x%1 (no matching flags)"
 msgstr "0x%1(일치하는 플래그 없음)"
 
-#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:106
+#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:107
 #, kde-format
 msgctxt ""
 "Displayed in the type column. first comes the name of the enum, then the "
@@ -1973,7 +1973,7 @@ msgctxt ""
 msgid "flag %1 (%2)"
 msgstr "플래그 %1(%2)"
 
-#: controllers/view/structures/datatypes/primitive/pointerdatainformation.cpp:115
+#: controllers/view/structures/datatypes/primitive/pointerdatainformation.cpp:118
 #, kde-format
 msgctxt "memory pointer with underlying type"
 msgid "%1 pointer"
@@ -2172,13 +2172,13 @@ msgid "UTF8 string"
 msgstr "UTF8 문자열"
 
 #: controllers/view/structures/datatypes/structuredatainformation.cpp:27
-#: controllers/view/structures/datatypes/taggeduniondatainformation.cpp:46
+#: controllers/view/structures/datatypes/taggeduniondatainformation.cpp:40
 #, kde-format
 msgctxt "data type in C/C++, then name"
 msgid "struct %1"
 msgstr "구조체 %1"
 
-#: controllers/view/structures/datatypes/taggeduniondatainformation.cpp:49
+#: controllers/view/structures/datatypes/taggeduniondatainformation.cpp:43
 #, kde-format
 msgctxt "data type, then name"
 msgid "tagged union %1"

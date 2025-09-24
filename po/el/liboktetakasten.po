@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-22 02:00+0000\n"
+"POT-Creation-Date: 2025-09-24 02:01+0000\n"
 "PO-Revision-Date: 2023-01-03 09:17+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -1952,7 +1952,7 @@ msgid_plural "%1 strings extracted."
 msgstr[0] ""
 msgstr[1] ""
 
-#: controllers/view/structures/datatypes/array/complexarraydata.cpp:94
+#: controllers/view/structures/datatypes/array/complexarraydata.cpp:96
 #, kde-format
 msgctxt "type name, then array length"
 msgid "%1[%2]"
@@ -2074,19 +2074,19 @@ msgctxt "boolean value with actual value"
 msgid "true (%1)"
 msgstr "true (%1)"
 
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:40
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:79
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:41
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:80
 #, kde-format
 msgid "%1 (value not in enum)"
 msgstr "%1 (η τιμή δεν είναι στο enum)"
 
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:48
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:76
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:49
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:77
 #, kde-format
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:86
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:87
 #, kde-format
 msgctxt ""
 "Displayed in the type column. first comes the name of the enum, then the "
@@ -2094,12 +2094,12 @@ msgctxt ""
 msgid "enum %1 (%2)"
 msgstr "enum %1 (%2)"
 
-#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:76
+#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:77
 #, kde-format
 msgid "0x%1 (no matching flags)"
 msgstr "0x%1 (αταίριαστες σημαίες)"
 
-#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:106
+#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:107
 #, kde-format
 msgctxt ""
 "Displayed in the type column. first comes the name of the enum, then the "
@@ -2107,7 +2107,7 @@ msgctxt ""
 msgid "flag %1 (%2)"
 msgstr "σημαία %1 (%2)"
 
-#: controllers/view/structures/datatypes/primitive/pointerdatainformation.cpp:115
+#: controllers/view/structures/datatypes/primitive/pointerdatainformation.cpp:118
 #, kde-format
 msgctxt "memory pointer with underlying type"
 msgid "%1 pointer"
@@ -2306,13 +2306,13 @@ msgid "UTF8 string"
 msgstr "UTF8 string"
 
 #: controllers/view/structures/datatypes/structuredatainformation.cpp:27
-#: controllers/view/structures/datatypes/taggeduniondatainformation.cpp:46
+#: controllers/view/structures/datatypes/taggeduniondatainformation.cpp:40
 #, kde-format
 msgctxt "data type in C/C++, then name"
 msgid "struct %1"
 msgstr "struct %1"
 
-#: controllers/view/structures/datatypes/taggeduniondatainformation.cpp:49
+#: controllers/view/structures/datatypes/taggeduniondatainformation.cpp:43
 #, kde-format
 msgctxt "data type, then name"
 msgid "tagged union %1"
