@@ -15,7 +15,7 @@ class KAboutLicense;
 
 class QString;
 
-class StructureMetaDataPrivsate;
+class StructureMetaDataPrivate;
 
 class StructureMetaData
 {
@@ -67,7 +67,7 @@ public:
     const KAboutLicense& license() const;
 
 private:
-    QExplicitlySharedDataPointer<StructureMetaDataPrivsate> d;
+    QExplicitlySharedDataPointer<StructureMetaDataPrivate> d;
 };
 
 Q_DECLARE_TYPEINFO(StructureMetaData, Q_MOVABLE_TYPE);

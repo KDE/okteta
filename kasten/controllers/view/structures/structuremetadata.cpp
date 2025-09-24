@@ -15,10 +15,10 @@
 // Qt
 #include <QSharedData>
 
-class StructureMetaDataPrivsate : public QSharedData
+class StructureMetaDataPrivate : public QSharedData
 {
 public:
-    StructureMetaDataPrivsate();
+    StructureMetaDataPrivate();
 
 public:
     QString id;
@@ -35,11 +35,11 @@ public:
     KAboutLicense license;
 };
 
-StructureMetaDataPrivsate::StructureMetaDataPrivsate() = default;
+StructureMetaDataPrivate::StructureMetaDataPrivate() = default;
 
 
 StructureMetaData::StructureMetaData(const QString& filename)
-    : d(new StructureMetaDataPrivsate)
+    : d(new StructureMetaDataPrivate)
 {
     KDesktopFile file(filename);
 
@@ -68,7 +68,7 @@ StructureMetaData::StructureMetaData(const QString& filename)
 }
 
 StructureMetaData::StructureMetaData()
-    : d(new StructureMetaDataPrivsate())
+    : d(new StructureMetaDataPrivate())
 {
 }
 
