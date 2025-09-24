@@ -61,7 +61,7 @@ std::unique_ptr<PrimitiveDataInformation> DataInformationFactory::newPrimitive(c
         pd.error() << "Unrecognized primitive type: " << pd.type;
         return {};
     }
-    return std::unique_ptr<PrimitiveDataInformation>(PrimitiveFactory::newInstance(pd.name, primitiveType, lwc, pd.parent));
+    return PrimitiveFactory::newInstance(pd.name, primitiveType, lwc, pd.parent);
 }
 
 namespace {
@@ -93,7 +93,7 @@ std::unique_ptr<T> newEnumOrFlags(const EnumParsedData& pd)
                              << ") do not match!";
         return {};
     }
-    auto primData = std::unique_ptr<PrimitiveDataInformation>(PrimitiveFactory::newInstance(pd.name, primitiveType, lwc));
+    auto primData = PrimitiveFactory::newInstance(pd.name, primitiveType, lwc);
     // TODO allow bitfields?
     if (!primData) {
         pd.error() << "Could not create a value object for this enum!";

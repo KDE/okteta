@@ -8,12 +8,12 @@
 #define KASTEN_PRIMITIVEFACTORY_HPP
 
 // lib
-#include "primitivedatatype.hpp"
+#include "primitivedatainformation.hpp"
+// Std
+#include <memory>
 
-class PrimitiveDataInformation;
 struct LoggerWithContext;
 class QString;
-class DataInformation;
 
 namespace PrimitiveFactory {
 
@@ -22,11 +22,11 @@ namespace PrimitiveFactory {
  */
 PrimitiveDataType typeStringToType(const QString& string, const LoggerWithContext& logger);
 
-PrimitiveDataInformation* newInstance(const QString& name, PrimitiveDataType type,
-                                      const LoggerWithContext& logger, DataInformation* parent = nullptr);
+std::unique_ptr<PrimitiveDataInformation> newInstance(const QString& name, PrimitiveDataType type,
+                                                      const LoggerWithContext& logger, DataInformation* parent = nullptr);
 
-inline PrimitiveDataInformation* newInstance(const QString& name, const QString& typeString,
-                                             const LoggerWithContext& logger, DataInformation* parent = nullptr)
+inline std::unique_ptr<PrimitiveDataInformation> newInstance(const QString& name, const QString& typeString,
+                                                             const LoggerWithContext& logger, DataInformation* parent = nullptr)
 {
     return newInstance(name, typeStringToType(typeString, logger), logger, parent);
 }

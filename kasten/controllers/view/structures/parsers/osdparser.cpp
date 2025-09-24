@@ -292,7 +292,7 @@ std::unique_ptr<DataInformation> OsdParser::parseType(const QDomElement& xmlElem
     if (!typeAttribute.isEmpty()) {
         // type was specified as a primitive string
         LoggerWithContext lwc(info.logger, info.context() + name);
-        auto ret = std::unique_ptr<DataInformation>(PrimitiveFactory::newInstance(name, typeAttribute, lwc));
+        auto ret = PrimitiveFactory::newInstance(name, typeAttribute, lwc);
         if (!ret) {
             info.error() << typeAttribute << "is not a valid type identifier";
         }
@@ -435,7 +435,7 @@ std::unique_ptr<DataInformation> OsdParser::parseElement(const QDomElement& elem
     } else {
         LoggerWithContext lwc(info.logger, info.context());
         // use the type tag as a primitive type
-        data = std::unique_ptr<DataInformation>(PrimitiveFactory::newInstance(info.name, tag, lwc));
+        data = PrimitiveFactory::newInstance(info.name, tag, lwc);
         if (!data) {
             info.error() << "Cannot parse unknown tag: " << tag;
         }

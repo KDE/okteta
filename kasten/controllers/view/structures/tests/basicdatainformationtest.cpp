@@ -260,28 +260,28 @@ void BasicDataInformationTest::initTestCase()
         primitives.emplace_back(std::unique_ptr<PrimitiveDataInformation>(PrimitiveFactory::newInstance(QStringLiteral("prim"), type, lwc)));
         type = static_cast<PrimitiveDataType>(static_cast<int>(type) + 1);
     }
-    QCOMPARE(PrimitiveFactory::newInstance(QStringLiteral("invalid"), PrimitiveDataType::Bitfield, lwc), static_cast<PrimitiveDataInformation*>(nullptr));
-    QCOMPARE(PrimitiveFactory::newInstance(QStringLiteral("invalid"), QStringLiteral("invalid_type"), lwc), static_cast<PrimitiveDataInformation*>(nullptr));
+    QCOMPARE(PrimitiveFactory::newInstance(QStringLiteral("invalid"), PrimitiveDataType::Bitfield, lwc).get(), static_cast<PrimitiveDataInformation*>(nullptr));
+    QCOMPARE(PrimitiveFactory::newInstance(QStringLiteral("invalid"), QStringLiteral("invalid_type"), lwc).get(), static_cast<PrimitiveDataInformation*>(nullptr));
     bitfields.emplace_back(std::make_unique<BoolBitfieldDataInformation>(QStringLiteral("bitfield"), 24));
     bitfields.emplace_back(std::make_unique<UnsignedBitfieldDataInformation>(QStringLiteral("bitfield"), 24));
     bitfields.emplace_back(std::make_unique<SignedBitfieldDataInformation>(QStringLiteral("bitfield"), 24));
 
     emptyStruct = std::make_unique<StructureDataInformation>(QStringLiteral("emptyStruct"));
     std::vector<std::unique_ptr<DataInformation>> structChildren;
-    structChildren.emplace_back(std::unique_ptr<DataInformation>(PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc)));
-    structChildren.emplace_back(std::unique_ptr<DataInformation>(PrimitiveFactory::newInstance(QStringLiteral("prim2"), PrimitiveDataType::UInt64, lwc)));
+    structChildren.emplace_back(PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc));
+    structChildren.emplace_back(PrimitiveFactory::newInstance(QStringLiteral("prim2"), PrimitiveDataType::UInt64, lwc));
     structWithChildren = std::make_unique<StructureDataInformation>(QStringLiteral("structWithChildren"), std::move(structChildren));
 
     emptyUnion = std::make_unique<UnionDataInformation>(QStringLiteral("emptyUnion"));
     std::vector<std::unique_ptr<DataInformation>> unionChildren;
-    unionChildren.emplace_back(std::unique_ptr<DataInformation>(PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc)));
-    unionChildren.emplace_back(std::unique_ptr<DataInformation>(PrimitiveFactory::newInstance(QStringLiteral("prim2"), PrimitiveDataType::UInt64, lwc)));
+    unionChildren.emplace_back(PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc));
+    unionChildren.emplace_back(PrimitiveFactory::newInstance(QStringLiteral("prim2"), PrimitiveDataType::UInt64, lwc));
     unionWithChildren = std::make_unique<UnionDataInformation>(QStringLiteral("unionWithChildren"), std::move(unionChildren));
 
     emptyPrimitiveArray = std::make_unique<ArrayDataInformation>(QStringLiteral("emptyPrimitiveArray"), 0,
-                                                                 std::unique_ptr<DataInformation>(PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc)));
+                                                                 PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc));
     emptyComplexArray = std::make_unique<ArrayDataInformation>(QStringLiteral("emptyComplexArray"), 0, std::unique_ptr<DataInformation>(structWithChildren->clone()));
-    primitiveArrayWithChildren = std::make_unique<ArrayDataInformation>(QStringLiteral("primitiveArrayWithChildren"), 2, std::unique_ptr<DataInformation>(PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc)));
+    primitiveArrayWithChildren = std::make_unique<ArrayDataInformation>(QStringLiteral("primitiveArrayWithChildren"), 2, PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc));
     complexArrayWithChildren = std::make_unique<ArrayDataInformation>(QStringLiteral("complexArrayWithChildren"), 2, std::unique_ptr<DataInformation>(structWithChildren->clone()));
 
     QMap<AllPrimitiveTypes, QString> enumVals;
@@ -289,8 +289,8 @@ void BasicDataInformationTest::initTestCase()
     enumVals[2] = QStringLiteral("two");
     enumVals[4] = QStringLiteral("four");
     EnumDefinition::Ptr edef(new EnumDefinition(enumVals, QStringLiteral("eDef"), PrimitiveDataType::UInt32));
-    flagData = std::make_unique<FlagDataInformation>(QStringLiteral("flagData"), std::unique_ptr<PrimitiveDataInformation>(PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc)), edef);
-    enumData = std::make_unique<EnumDataInformation>(QStringLiteral("enumData"), std::unique_ptr<PrimitiveDataInformation>(PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc)), edef);
+    flagData = std::make_unique<FlagDataInformation>(QStringLiteral("flagData"), PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc), edef);
+    enumData = std::make_unique<EnumDataInformation>(QStringLiteral("enumData"), PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc), edef);
     emptyString = std::make_unique<StringDataInformation>(QStringLiteral("string"), StringDataInformation::StringType::ASCII);
     dummy = std::make_unique<DummyDataInformation>(nullptr);
     topLevel = std::make_unique<TopLevelDataInformation>(std::make_unique<DummyDataInformation>(nullptr));

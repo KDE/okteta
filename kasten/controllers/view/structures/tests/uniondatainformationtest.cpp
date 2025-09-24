@@ -55,9 +55,9 @@ void UnionDataInformationTest::testSize()
     UnionDataInformation empty(QStringLiteral("empty"));
     QCOMPARE(empty.size(), BitCount32(0));
     std::vector<std::unique_ptr<DataInformation>> size54;
-    size54.emplace_back(std::unique_ptr<DataInformation>(PrimitiveFactory::newInstance(QStringLiteral("8"), PrimitiveDataType::Bool8, lwc)));
-    size54.emplace_back(std::unique_ptr<DataInformation>(PrimitiveFactory::newInstance(QStringLiteral("16"), PrimitiveDataType::Int16, lwc)));
-    size54.emplace_back(std::unique_ptr<DataInformation>(PrimitiveFactory::newInstance(QStringLiteral("32"), PrimitiveDataType::Float, lwc)));
+    size54.emplace_back(PrimitiveFactory::newInstance(QStringLiteral("8"), PrimitiveDataType::Bool8, lwc));
+    size54.emplace_back(PrimitiveFactory::newInstance(QStringLiteral("16"), PrimitiveDataType::Int16, lwc));
+    size54.emplace_back(PrimitiveFactory::newInstance(QStringLiteral("32"), PrimitiveDataType::Float, lwc));
     size54.emplace_back(std::make_unique<UnsignedBitfieldDataInformation>(QStringLiteral("54"), 54));
     UnionDataInformation fourChildren(QStringLiteral("four"), std::move(size54));
     QCOMPARE(fourChildren.size(), BitCount32(54));
@@ -67,15 +67,19 @@ void UnionDataInformationTest::testReadData1()
 {
     LoggerWithContext lwc(nullptr, QString());
 
-    PrimitiveDataInformation* b8 = PrimitiveFactory::newInstance(QStringLiteral("8"), PrimitiveDataType::Bool8, lwc);
-    PrimitiveDataInformation* u32 = PrimitiveFactory::newInstance(QStringLiteral("32"), PrimitiveDataType::UInt32, lwc);
-    PrimitiveDataInformation* i16 = PrimitiveFactory::newInstance(QStringLiteral("16"), PrimitiveDataType::Int16, lwc);
-    auto* u54 = new UnsignedBitfieldDataInformation(QStringLiteral("54"), 54);
+    std::unique_ptr<PrimitiveDataInformation> managedB8 = PrimitiveFactory::newInstance(QStringLiteral("8"), PrimitiveDataType::Bool8, lwc);
+    PrimitiveDataInformation* const b8 = managedB8.get();
+    std::unique_ptr<PrimitiveDataInformation> managedU32 = PrimitiveFactory::newInstance(QStringLiteral("32"), PrimitiveDataType::UInt32, lwc);
+    PrimitiveDataInformation* const u32 = managedU32.get();
+    std::unique_ptr<PrimitiveDataInformation> managedI16 = PrimitiveFactory::newInstance(QStringLiteral("16"), PrimitiveDataType::Int16, lwc);
+    PrimitiveDataInformation* const i16 = managedI16.get();
+    auto managedU54 = std::make_unique<UnsignedBitfieldDataInformation>(QStringLiteral("54"), 54);
+    UnsignedBitfieldDataInformation* const u54 = managedU54.get();
     std::vector<std::unique_ptr<DataInformation>>  children;
-    children.emplace_back(std::unique_ptr<DataInformation>(b8));
-    children.emplace_back(std::unique_ptr<DataInformation>(u32));
-    children.emplace_back(std::unique_ptr<DataInformation>(i16));
-    children.emplace_back(std::unique_ptr<DataInformation>(u54));
+    children.emplace_back(std::move(managedB8));
+    children.emplace_back(std::move(managedU32));
+    children.emplace_back(std::move(managedI16));
+    children.emplace_back(std::move(managedU54));
     auto managedUn = std::make_unique<UnionDataInformation>(QStringLiteral("un"), std::move(children));
     managedUn->setByteOrder(DataInformation::DataInformationEndianness::EndiannessLittle);
     UnionDataInformation* const un = managedUn.get();

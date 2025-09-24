@@ -43,7 +43,7 @@ void ArrayDataInformationTest::initTestCase()
     LoggerWithContext lwc(nullptr, QString());
 
     auto managedPrimitive = std::make_unique<ArrayDataInformation>(QStringLiteral("primitives"), 0,
-                                                                   std::unique_ptr<DataInformation>(PrimitiveFactory::newInstance(QStringLiteral("child"), PrimitiveDataType::UInt32, lwc)));
+                                                                   PrimitiveFactory::newInstance(QStringLiteral("child"), PrimitiveDataType::UInt32, lwc));
     primitive = managedPrimitive.get();
     primitiveSize = 32;
     primitiveTop = std::make_unique<TopLevelDataInformation>(std::move(managedPrimitive));
@@ -65,8 +65,8 @@ void ArrayDataInformationTest::initTestCase()
     QCOMPARE(primitive->topLevelDataInformation(), primitiveTop.get());
 
     std::vector<std::unique_ptr<DataInformation>> structsChildren;
-    structsChildren.emplace_back(std::unique_ptr<DataInformation>(PrimitiveFactory::newInstance(QStringLiteral("first"), PrimitiveDataType::UInt32, lwc)));
-    structsChildren.emplace_back(std::unique_ptr<DataInformation>(PrimitiveFactory::newInstance(QStringLiteral("second"), PrimitiveDataType::UInt32, lwc)));
+    structsChildren.emplace_back(PrimitiveFactory::newInstance(QStringLiteral("first"), PrimitiveDataType::UInt32, lwc));
+    structsChildren.emplace_back(PrimitiveFactory::newInstance(QStringLiteral("second"), PrimitiveDataType::UInt32, lwc));
 
     auto structs = std::make_unique<StructureDataInformation>(QStringLiteral("vals"), std::move(structsChildren));
 

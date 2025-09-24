@@ -129,7 +129,7 @@ void ScriptClassesTest::initTestCase()
     LoggerWithContext lwc(nullptr, QString());
     PrimitiveDataType type = PrimitiveDataType::START;
     while (type < PrimitiveDataType::Bitfield) {
-        auto prim = std::unique_ptr<PrimitiveDataInformation>(PrimitiveFactory::newInstance(QStringLiteral("prim"), type, lwc));
+        auto prim = PrimitiveFactory::newInstance(QStringLiteral("prim"), type, lwc);
         prim->setValue(10);
         primitives.emplace_back(std::make_unique<TopLevelDataInformation>(std::move(prim)));
         type = static_cast<PrimitiveDataType>(static_cast<int>(type) + 1);
@@ -147,11 +147,11 @@ void ScriptClassesTest::initTestCase()
     EnumDefinition::Ptr enumDef(new EnumDefinition(enumValues,
                                                    QStringLiteral("theEnum"), PrimitiveDataType::Int32));
     auto managedEnumData = std::make_unique<EnumDataInformation>(QStringLiteral("enumData"),
-                                                                 std::unique_ptr<PrimitiveDataInformation>(PrimitiveFactory::newInstance(QStringLiteral("dummy"), PrimitiveDataType::Int32, lwc)), enumDef);
+                                                                 PrimitiveFactory::newInstance(QStringLiteral("dummy"), PrimitiveDataType::Int32, lwc), enumDef);
     enumData = managedEnumData.get();
     enumDataTop = std::make_unique<TopLevelDataInformation>(std::move(managedEnumData), nullptr, ScriptEngineInitializer::newEngine());
     auto managedFlagData = std::make_unique<FlagDataInformation>(QStringLiteral("flagData"),
-                                                                 std::unique_ptr<PrimitiveDataInformation>(PrimitiveFactory::newInstance(QStringLiteral("dummy"), PrimitiveDataType::Int32, lwc)), enumDef);
+                                                                 PrimitiveFactory::newInstance(QStringLiteral("dummy"), PrimitiveDataType::Int32, lwc), enumDef);
     flagData = managedFlagData.get();
     flagDataTop = std::make_unique<TopLevelDataInformation>(std::move(managedFlagData), nullptr, ScriptEngineInitializer::newEngine());
 
@@ -180,7 +180,7 @@ void ScriptClassesTest::initTestCase()
                     << pair("type", QScriptValue::Undeletable);
     std::sort(arrayProperties.begin(), arrayProperties.end());
     auto managedArrayData = std::make_unique<ArrayDataInformation>(QStringLiteral("array"), 20,
-                                                                   std::unique_ptr<DataInformation>(PrimitiveFactory::newInstance(QStringLiteral("inner"), PrimitiveDataType::Int32, lwc)));
+                                                                   PrimitiveFactory::newInstance(QStringLiteral("inner"), PrimitiveDataType::Int32, lwc));
     arrayData = managedArrayData.get();
     arrayDataTop = std::make_unique<TopLevelDataInformation>(std::move(managedArrayData), nullptr, ScriptEngineInitializer::newEngine());
 

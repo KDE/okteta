@@ -63,44 +63,44 @@ PrimitiveDataType typeStringToType(const QString& string, const LoggerWithContex
     logger.warn() << typeStr << "does not name a valid primitive type";
     return PrimitiveDataType::Invalid; // just return a default value
 }
-PrimitiveDataInformation* newInstance(const QString& name, PrimitiveDataType type,
-                                      const LoggerWithContext& logger, DataInformation* parent)
+std::unique_ptr<PrimitiveDataInformation> newInstance(const QString& name, PrimitiveDataType type,
+                                                      const LoggerWithContext& logger, DataInformation* parent)
 {
     switch (type)
     {
     case PrimitiveDataType::Char:
-        return new PrimitiveInfo<PrimitiveDataType::Char>::Class(name, parent);
+        return std::make_unique<PrimitiveInfo<PrimitiveDataType::Char>::Class>(name, parent);
     case PrimitiveDataType::Int8:
-        return new PrimitiveInfo<PrimitiveDataType::Int8>::Class(name, parent);
+        return std::make_unique<PrimitiveInfo<PrimitiveDataType::Int8>::Class>(name, parent);
     case PrimitiveDataType::Int16:
-        return new PrimitiveInfo<PrimitiveDataType::Int16>::Class(name, parent);
+        return std::make_unique<PrimitiveInfo<PrimitiveDataType::Int16>::Class>(name, parent);
     case PrimitiveDataType::Int32:
-        return new PrimitiveInfo<PrimitiveDataType::Int32>::Class(name, parent);
+        return std::make_unique<PrimitiveInfo<PrimitiveDataType::Int32>::Class>(name, parent);
     case PrimitiveDataType::Int64:
-        return new PrimitiveInfo<PrimitiveDataType::Int64>::Class(name, parent);
+        return std::make_unique<PrimitiveInfo<PrimitiveDataType::Int64>::Class>(name, parent);
     case PrimitiveDataType::UInt8:
-        return new PrimitiveInfo<PrimitiveDataType::UInt8>::Class(name, parent);
+        return std::make_unique<PrimitiveInfo<PrimitiveDataType::UInt8>::Class>(name, parent);
     case PrimitiveDataType::UInt16:
-        return new PrimitiveInfo<PrimitiveDataType::UInt16>::Class(name, parent);
+        return std::make_unique<PrimitiveInfo<PrimitiveDataType::UInt16>::Class>(name, parent);
     case PrimitiveDataType::UInt32:
-        return new PrimitiveInfo<PrimitiveDataType::UInt32>::Class(name, parent);
+        return std::make_unique<PrimitiveInfo<PrimitiveDataType::UInt32>::Class>(name, parent);
     case PrimitiveDataType::UInt64:
-        return new PrimitiveInfo<PrimitiveDataType::UInt64>::Class(name, parent);
+        return std::make_unique<PrimitiveInfo<PrimitiveDataType::UInt64>::Class>(name, parent);
     case PrimitiveDataType::Bool8:
-        return new PrimitiveInfo<PrimitiveDataType::Bool8>::Class(name, parent);
+        return std::make_unique<PrimitiveInfo<PrimitiveDataType::Bool8>::Class>(name, parent);
     case PrimitiveDataType::Bool16:
-        return new PrimitiveInfo<PrimitiveDataType::Bool16>::Class(name, parent);
+        return std::make_unique<PrimitiveInfo<PrimitiveDataType::Bool16>::Class>(name, parent);
     case PrimitiveDataType::Bool32:
-        return new PrimitiveInfo<PrimitiveDataType::Bool32>::Class(name, parent);
+        return std::make_unique<PrimitiveInfo<PrimitiveDataType::Bool32>::Class>(name, parent);
     case PrimitiveDataType::Bool64:
-        return new PrimitiveInfo<PrimitiveDataType::Bool64>::Class(name, parent);
+        return std::make_unique<PrimitiveInfo<PrimitiveDataType::Bool64>::Class>(name, parent);
     case PrimitiveDataType::Float:
-        return new PrimitiveInfo<PrimitiveDataType::Float>::Class(name, parent);
+        return std::make_unique<PrimitiveInfo<PrimitiveDataType::Float>::Class>(name, parent);
     case PrimitiveDataType::Double:
-        return new PrimitiveInfo<PrimitiveDataType::Double>::Class(name, parent);
+        return std::make_unique<PrimitiveInfo<PrimitiveDataType::Double>::Class>(name, parent);
     default:
         logger.error().nospace() << "could not convert '" << type << "' to a primitive type";
-        return nullptr; // invalid type
+        return {}; // invalid type
     }
 }
 

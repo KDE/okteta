@@ -184,7 +184,7 @@ void PrimitiveArrayTest::testReadCustomizedPrimitiveInternal()
     LoggerWithContext lwc(nullptr, QString());
     std::unique_ptr<QScriptEngine> engine = ScriptEngineInitializer::newEngine();
 
-    auto primInfo = std::unique_ptr<PrimitiveDataInformation>(PrimitiveFactory::newInstance(QStringLiteral("value"), primType, lwc));
+    auto primInfo = PrimitiveFactory::newInstance(QStringLiteral("value"), primType, lwc);
     primInfo->setByteOrder(NON_CURRENT_BYTE_ORDER);
     primInfo->setCustomTypeName(QStringLiteral("mytype"));
     primInfo->setToStringFunction(engine->newFunction(customToStringFunc));
@@ -232,7 +232,7 @@ void PrimitiveArrayTest::testReadPrimitiveInternal()
     LoggerWithContext lwc(nullptr, QString());
     auto managedDataInf = std::make_unique<ArrayDataInformation>(QStringLiteral("values"),
                                                                  model->size() / sizeof(T),
-                                                                 std::unique_ptr<DataInformation>(PrimitiveFactory::newInstance(QStringLiteral("value"), primType, lwc)));
+                                                                 PrimitiveFactory::newInstance(QStringLiteral("value"), primType, lwc));
     managedDataInf->setByteOrder(CURRENT_BYTE_ORDER);
     ArrayDataInformation* const dataInf = managedDataInf.get();
     const auto top = std::make_unique<TopLevelDataInformation>(std::move(managedDataInf), nullptr, ScriptEngineInitializer::newEngine());

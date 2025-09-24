@@ -117,7 +117,7 @@ void PrimitiveDataInformationTest::initTestCase()
 
     PrimitiveDataType type = PrimitiveDataType::START;
     while (type < PrimitiveDataType::Bitfield) {
-        basic.emplace(type, std::unique_ptr<PrimitiveDataInformation>(PrimitiveFactory::newInstance(QStringLiteral("prim"), type, lwc)));
+        basic.emplace(type, PrimitiveFactory::newInstance(QStringLiteral("prim"), type, lwc));
         type = static_cast<PrimitiveDataType>(static_cast<int>(type) + 1);
     }
     boolBitfield = new BoolBitfieldDataInformation(QStringLiteral("bitfield"), 24);
