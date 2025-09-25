@@ -9,7 +9,8 @@
 
 // Qt
 #include <QVector>
-#include <QHash>
+// Std
+#include <unordered_map>
 
 class QStringList;
 
@@ -46,7 +47,7 @@ public:
 public:
     void setEnabledStructures(const QStringList& enabledStructures);
     // drop no longer existing structures from the enabled list
-    void removeStructures(const QHash<QString, QStringList>& structures);
+    void removeStructures(const std::unordered_map<QString, QStringList>& structures);
 
     void setEnabled(const QString& id, bool  isEnabled);
 

@@ -13,8 +13,8 @@
 #include <KLocalizedString>
 // Qt
 #include <QRegularExpression>
-#include <QHash>
 // Std
+#include <unordered_map>
 #include <algorithm>
 
 StructuresSelectionModel::StructuresSelectionModel(QObject* parent)
@@ -36,13 +36,13 @@ void StructuresSelectionModel::setStructures(const std::map<QString, std::unique
     const int lastRowInserted = structureDefs.size() - 1;
     beginInsertRows(QModelIndex(), firstRowInserted, lastRowInserted);
 
-    QHash<QString, QStringList> ids;
+    std::unordered_map<QString, QStringList> ids;
     ids.reserve(structureDefs.size());
     m_metaDataList.reserve(structureDefs.size());
     // consider storing structureDefs directly in the model, but needs rework to not use raw pointers
     for (const auto& [key, def] : structureDefs) {
         const auto& metaData = m_metaDataList.emplace_back(def->metaData());
-        ids.insert(metaData.id(), def->structureNames());
+        ids.emplace(metaData.id(), def->structureNames());
     }
 
     // drop no longer existing ids from the enabled list

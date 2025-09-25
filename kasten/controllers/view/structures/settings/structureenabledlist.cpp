@@ -30,14 +30,14 @@ void StructureEnabledList::setEnabledStructures(const QStringList& enabledStruct
     }
 }
 
-void StructureEnabledList::removeStructures(const QHash<QString, QStringList>& structures)
+void StructureEnabledList::removeStructures(const std::unordered_map<QString, QStringList>& structures)
 {
     auto it = m_enabledList.begin();
     while (it != m_enabledList.end()) {
-        auto idIt = structures.constFind(it->id);
+        const auto idIt = structures.find(it->id);
         bool remove = false;
-        if (idIt != structures.constEnd()) {
-            if ((it->structure != ::wildCard()) && !idIt.value().contains(it->structure)) {
+        if (idIt != structures.end()) {
+            if ((it->structure != ::wildCard()) && !idIt->second.contains(it->structure)) {
                 remove = true;
             }
         } else {
