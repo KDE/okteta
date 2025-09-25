@@ -14,7 +14,6 @@
 // Okteta core
 #include <Okteta/ArrayChangeMetricsList>
 // Qt
-#include <QHash>
 #include <QFileInfo>
 #include <QSharedPointer>
 #include <QQueue>
@@ -22,6 +21,7 @@
 #include <QScriptEngine>
 // Std
 #include <memory>
+#include <unordered_map>
 
 namespace Okteta {
 class AbstractByteArrayModel;
@@ -139,7 +139,7 @@ private:
      * QObject::destroyed() has to be connected to slot removeByteArrayModel()
      * so that no dangling pointers remain
      */
-    QHash<const Okteta::AbstractByteArrayModel*, Okteta::Address> mLockedPositions;
+    std::unordered_map<const Okteta::AbstractByteArrayModel*, Okteta::Address> mLockedPositions;
     int mIndex = -1;
     bool mValid : 1;
     bool mChildDataChanged : 1;

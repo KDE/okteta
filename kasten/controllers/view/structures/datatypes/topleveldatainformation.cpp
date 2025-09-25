@@ -178,9 +178,9 @@ void TopLevelDataInformation::lockPositionToOffset(Okteta::Address offset, const
     }
     auto it = mLockedPositions.find(model);
     if (it != mLockedPositions.end()) {
-        it.value() = offset;
+        it->second = offset;
     } else {
-        mLockedPositions.insert(model, offset);
+        mLockedPositions.emplace(model, offset);
         // remove when deleted
         connect(model, &Okteta::AbstractByteArrayModel::destroyed,
                 this, &TopLevelDataInformation::removeByteArrayModelFromList);
@@ -191,10 +191,10 @@ void TopLevelDataInformation::lockPositionToOffset(Okteta::Address offset, const
 
 void TopLevelDataInformation::unlockPosition(const Okteta::AbstractByteArrayModel* model)
 {
-    Q_ASSERT(mLockedPositions.contains(model) && mLockedPositions.value(model) != INVALID_OFFSET);
+    Q_ASSERT(isLockedFor(model) && mLockedPositions.at(model) != INVALID_OFFSET);
     qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES)
-        << "removing lock at position" << mLockedPositions.value(model) << ", model=" << model;
-    mLockedPositions.remove(model);
+        << "removing lock at position" << mLockedPositions.at(model) << ", model=" << model;
+    mLockedPositions.erase(model);
     disconnect(model, &Okteta::AbstractByteArrayModel::destroyed,
                this, &TopLevelDataInformation::removeByteArrayModelFromList);
 }
@@ -202,7 +202,7 @@ void TopLevelDataInformation::unlockPosition(const Okteta::AbstractByteArrayMode
 void TopLevelDataInformation::removeByteArrayModelFromList(QObject* obj)
 {
     const Okteta::AbstractByteArrayModel* model = static_cast<Okteta::AbstractByteArrayModel*>(obj);
-    mLockedPositions.remove(model);
+    mLockedPositions.erase(model);
 }
 
 bool TopLevelDataInformation::isLockedByDefault() const
@@ -222,7 +222,7 @@ void TopLevelDataInformation::setDefaultLockOffset(Okteta::Address offset)
 
 void TopLevelDataInformation::newModelActivated(Okteta::AbstractByteArrayModel* model)
 {
-    if (!model || mLockedPositions.contains(model)) {
+    if (!model || isLockedFor(model)) {
         return;
     }
 
@@ -238,13 +238,14 @@ void TopLevelDataInformation::newModelActivated(Okteta::AbstractByteArrayModel* 
 
 bool TopLevelDataInformation::isLockedFor(const Okteta::AbstractByteArrayModel* model) const
 {
-    return mLockedPositions.contains(model);
+    return (mLockedPositions.find(model) != mLockedPositions.end());
 }
 
 Okteta::Address TopLevelDataInformation::lockPositionFor(const Okteta::AbstractByteArrayModel* model) const
 {
-    Q_ASSERT(mLockedPositions.contains(model) && mLockedPositions.value(model) != INVALID_OFFSET);
-    return mLockedPositions.value(model, INVALID_OFFSET);
+    Q_ASSERT(isLockedFor(model) && mLockedPositions.at(model) != INVALID_OFFSET);
+    const auto it = mLockedPositions.find(model);
+    return (it != mLockedPositions.end()) ? it->second : INVALID_OFFSET;
 }
 
 int TopLevelDataInformation::indexOf(const DataInformation* const data) const
