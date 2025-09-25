@@ -13,6 +13,7 @@
 #include <Okteta/Address>
 // Qt
 #include <QSysInfo>
+#include <QFlags>
 
 class StringDataInformation;
 
