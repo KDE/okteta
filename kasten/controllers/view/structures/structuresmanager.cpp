@@ -25,14 +25,10 @@ StructuresManager::StructuresManager()
     reloadPaths();
 }
 
-StructuresManager::~StructuresManager()
-{
-    qDeleteAll(mDefs);
-}
+StructuresManager::~StructuresManager() = default;
 
 void StructuresManager::reloadPaths()
 {
-    qDeleteAll(mDefs);
     mDefs.clear();
     mLoadedFiles.clear();
     QStringList paths;
@@ -61,13 +57,13 @@ void StructuresManager::reloadPaths()
 void StructuresManager::addStructDef(const StructureMetaData& metaData)
 {
     const QString id = metaData.id();
-    if (mDefs.contains(id)) {
+    const auto it = mDefs.find(id);
+    if (it != mDefs.end()) {
         qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "Skipping structure already loaded: " << id;
         return;
     }
 
-    auto* def = new StructureDefinitionFile(metaData);
-    mDefs.insert(id, def);
+    mDefs.emplace(id, std::make_unique<StructureDefinitionFile>(metaData));
 }
 
 StructureDefinitionFile* StructuresManager::definition(const QString& pluginName) const
@@ -78,10 +74,10 @@ StructureDefinitionFile* StructuresManager::definition(const QString& pluginName
         return nullptr;
     }
 
-    return definitionIt.value();
+    return definitionIt->second.get();
 }
 
-QMap<QString, StructureDefinitionFile*> StructuresManager::structureDefs() const
+const std::map<QString, std::unique_ptr<StructureDefinitionFile>>& StructuresManager::structureDefs() const
 {
     return mDefs;
 }

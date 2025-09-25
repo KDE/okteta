@@ -9,6 +9,9 @@
 
 // Qt
 #include <QWidget>
+// Std
+#include <map>
+#include <memory>
 
 class QPushButton;
 class QLabel;
@@ -24,7 +27,7 @@ class StructureAddRemoveWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit StructureAddRemoveWidget(const QMap<QString, Kasten::StructureDefinitionFile*>& structureDefs,
+    explicit StructureAddRemoveWidget(const std::map<QString, std::unique_ptr<Kasten::StructureDefinitionFile>>& structureDefs,
                                       const StructureEnabledList& enabledList, QWidget* parent = nullptr);
     ~StructureAddRemoveWidget() override;
 
@@ -39,7 +42,7 @@ private Q_SLOTS:
     void moveDown();
 
 private:
-    void buildAvailableList(const QMap<QString, Kasten::StructureDefinitionFile*>& structureDefs,
+    void buildAvailableList(const std::map<QString, std::unique_ptr<Kasten::StructureDefinitionFile>>& structureDefs,
                             const StructureEnabledList& enabledList);
     void appendEnabledStructureItem(const QString& id, const QString& structure, bool isOnlyOne);
 

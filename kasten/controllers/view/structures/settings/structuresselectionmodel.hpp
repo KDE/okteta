@@ -12,8 +12,9 @@
 #include <structuremetadata.hpp>
 // Qt
 #include <QAbstractListModel>
-#include <QMap>
 // Std
+#include <map>
+#include <memory>
 #include <vector>
 
 namespace Kasten {
@@ -42,7 +43,7 @@ public:
     int rowCount(const QModelIndex& parent = QModelIndex()) const override;
 
 public:
-    void setStructures(const QMap<QString, Kasten::StructureDefinitionFile*>& structureDefs);
+    void setStructures(const std::map<QString, std::unique_ptr<Kasten::StructureDefinitionFile>>& structureDefs);
     void setEnabledStructures(const QStringList& enabledStructures);
     [[nodiscard]]
     QStringList enabledStructures() const;

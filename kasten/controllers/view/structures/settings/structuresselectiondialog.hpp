@@ -10,7 +10,9 @@
 
 // Qt
 #include <QDialog>
-#include <QMap>
+// Std
+#include <map>
+#include <memory>
 
 namespace Kasten {
 class StructureDefinitionFile;
@@ -24,7 +26,7 @@ class StructuresSelectionDialog : public QDialog
     Q_OBJECT
 
 public:
-    explicit StructuresSelectionDialog(const QMap<QString, Kasten::StructureDefinitionFile*>& structureDefs,
+    explicit StructuresSelectionDialog(const std::map<QString, std::unique_ptr<Kasten::StructureDefinitionFile>>& structureDefs,
                                        const StructureEnabledList& enabledList,
                                        QWidget* parent = nullptr);
 

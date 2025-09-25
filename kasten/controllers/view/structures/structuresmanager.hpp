@@ -14,6 +14,9 @@
 // Qt
 #include <QStringList>
 #include <QDir>
+// Std
+#include <map>
+#include <memory>
 
 class StructureMetaData;
 
@@ -30,7 +33,7 @@ public:
 
 public:
     [[nodiscard]]
-    QMap<QString, StructureDefinitionFile*> structureDefs() const;
+    const std::map<QString, std::unique_ptr<StructureDefinitionFile>>& structureDefs() const;
 
     [[nodiscard]]
     KSharedConfig::Ptr config() const;
@@ -42,7 +45,7 @@ private:
     void addStructDef(const StructureMetaData& metaData);
 
 private:
-    QMap<QString, StructureDefinitionFile*> mDefs;
+    std::map<QString, std::unique_ptr<StructureDefinitionFile>> mDefs;
     QStringList mLoadedFiles;
     KSharedConfig::Ptr mConfig;
 };

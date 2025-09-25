@@ -16,7 +16,7 @@
 #include <QDialogButtonBox>
 #include <QVBoxLayout>
 
-StructuresSelectionDialog::StructuresSelectionDialog(const QMap<QString, Kasten::StructureDefinitionFile*>& structureDefs,
+StructuresSelectionDialog::StructuresSelectionDialog(const std::map<QString, std::unique_ptr<Kasten::StructureDefinitionFile>>& structureDefs,
                                                      const StructureEnabledList& enabledList,
                                                      QWidget* parent)
     : QDialog(parent)

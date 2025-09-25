@@ -68,7 +68,7 @@ StructuresSelector::~StructuresSelector()
     delete m_listView;
 }
 
-void StructuresSelector::setStructures(const QMap<QString, Kasten::StructureDefinitionFile*>& structureDefs)
+void StructuresSelector::setStructures(const std::map<QString, std::unique_ptr<Kasten::StructureDefinitionFile>>& structureDefs)
 {
     m_structuresModel->setStructures(structureDefs);
     m_soirtFilterProxyModel->sort(0);

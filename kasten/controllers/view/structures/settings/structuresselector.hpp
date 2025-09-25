@@ -11,7 +11,9 @@
 #include <structuremetadata.hpp>
 // Qt
 #include <QWidget>
-#include <QMap>
+// Std
+#include <map>
+#include <memory>
 
 class KCategorizedView;
 class KCategoryDrawer;
@@ -36,7 +38,7 @@ public:
     ~StructuresSelector() override;
 
 public:
-    void setStructures(const QMap<QString, Kasten::StructureDefinitionFile*>& structureDefs);
+    void setStructures(const std::map<QString, std::unique_ptr<Kasten::StructureDefinitionFile>>& structureDefs);
     void setEnabledStructures(const QStringList& enabledStructures);
 
     [[nodiscard]]

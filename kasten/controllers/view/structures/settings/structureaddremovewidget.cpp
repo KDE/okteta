@@ -35,7 +35,7 @@ constexpr int OnlyOneRowColumn = 0;
 
 }
 
-StructureAddRemoveWidget::StructureAddRemoveWidget(const QMap<QString, Kasten::StructureDefinitionFile*>& structureDefs,
+StructureAddRemoveWidget::StructureAddRemoveWidget(const std::map<QString, std::unique_ptr<Kasten::StructureDefinitionFile>>& structureDefs,
                                                    const StructureEnabledList& enabledList,
                                                    QWidget* parent)
     : QWidget(parent)
@@ -96,10 +96,11 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(const QMap<QString, Kasten::S
     for (const StructureEnabledData& enabledData : enabledList) {
         if (enabledData.structure == QLatin1String("*")) {
             // add all of them
-            StructureDefinitionFile* def = structureDefs.value(enabledData.id);
-            if (!def) {
+            const auto it = structureDefs.find(enabledData.id);
+            if (it == structureDefs.end()) {
                 continue;
             }
+            const std::unique_ptr<Kasten::StructureDefinitionFile>& def = it->second;
             const auto structureNames = def->structureNames();
             const bool isOnlyOne = (structureNames.size() == 1);
             for (const QString& structure : structureNames) {
@@ -131,11 +132,11 @@ QStringList StructureAddRemoveWidget::values() const
     return enabledStructures;
 }
 
-void StructureAddRemoveWidget::buildAvailableList(const QMap<QString, Kasten::StructureDefinitionFile*>& structureDefs,
+void StructureAddRemoveWidget::buildAvailableList(const std::map<QString, std::unique_ptr<Kasten::StructureDefinitionFile>>& structureDefs,
                                                   const StructureEnabledList& enabledList)
 {
     QList<QTreeWidgetItem*> availableItems;
-    for (StructureDefinitionFile* def : structureDefs) {
+    for (const auto& [key, def] : structureDefs) {
         if (!def->isValid()) {
             continue;
         }

@@ -24,7 +24,7 @@ StructuresSelectionModel::StructuresSelectionModel(QObject* parent)
 
 StructuresSelectionModel::~StructuresSelectionModel() = default;
 
-void StructuresSelectionModel::setStructures(const QMap<QString, Kasten::StructureDefinitionFile*>& structureDefs)
+void StructuresSelectionModel::setStructures(const std::map<QString, std::unique_ptr<Kasten::StructureDefinitionFile>>& structureDefs)
 {
     // KCategorizedView at least with KF 5.95 fails to handle replacement in one go
     // so split up
@@ -40,7 +40,7 @@ void StructuresSelectionModel::setStructures(const QMap<QString, Kasten::Structu
     ids.reserve(structureDefs.size());
     m_metaDataList.reserve(structureDefs.size());
     // consider storing structureDefs directly in the model, but needs rework to not use raw pointers
-    for (const Kasten::StructureDefinitionFile* def : structureDefs) {
+    for (const auto& [key, def] : structureDefs) {
         const auto& metaData = m_metaDataList.emplace_back(def->metaData());
         ids.insert(metaData.id(), def->structureNames());
     }
