@@ -39,6 +39,7 @@ ecm_add_test(
     LINK_LIBRARIES
         OktetaKastenControllersStructuresDataTypes
         KF5::I18n
+        Qt5::Xml
         Qt5::Test
 )
 target_compile_definitions(osdparsertest PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")
