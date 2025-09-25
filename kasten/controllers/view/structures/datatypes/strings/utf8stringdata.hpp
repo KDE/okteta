@@ -9,9 +9,8 @@
 
 // lib
 #include "stringdata.hpp"
-// Qt
-#include <QHash>
 // Std
+#include <unordered_map>
 #include <vector>
 
 class Utf8StringData : public StringData
@@ -30,7 +29,7 @@ public:
     QString typeName() const override;
 
 private:
-    QHash<int, quint8> mErrorIndices;
+    std::unordered_map<int, quint8> mErrorIndices;
     std::vector<quint32> mCodePoints;
     uint mOneByteCount = 0;
     uint mTwoByteCount = 0;

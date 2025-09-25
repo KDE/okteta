@@ -70,7 +70,7 @@ QString Utf8StringData::completeString() const
     for (std::size_t idx = 0; idx < codePointCount; ++idx) {
         const uint val = mCodePoints[idx];
         // if error at idx is set also skip
-        if (val > UNICODE_MAX || mErrorIndices.value(idx)) {
+        if (val > UNICODE_MAX || (mErrorIndices.find(idx) != mErrorIndices.end())) {
             data[i] = QChar::ReplacementCharacter;
         } else if (val > BMP_MAX) {
             data[i] = QChar::highSurrogate(val);
@@ -129,7 +129,7 @@ qint64 Utf8StringData::read(const Okteta::AbstractByteArrayModel* input, Okteta:
         quint8 byte = input->byte(addr);
         bool terminate = false;
         // clear any old entry
-        mErrorIndices.remove(count);
+        mErrorIndices.erase(count);
 
         if (byte <= ASCII_MAX) {
             mOneByteCount++;
@@ -288,8 +288,9 @@ BitCount32 Utf8StringData::size() const
 BitCount32 Utf8StringData::sizeAt(uint i) const
 {
     Q_ASSERT(i <= count());
-    quint8 isError = mErrorIndices[i];
-    if (isError != 0) {
+    const auto it = mErrorIndices.find(i);
+    if (it != mErrorIndices.end()) {
+        const quint8 isError = it->second;
         return isError * 8; // error is number of bytes
     }
     const uint val = mCodePoints[i];
