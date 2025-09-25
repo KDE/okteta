@@ -104,11 +104,11 @@ void CustomToStringTest::testUuid()
     QCOMPARE(structure->childAt(2)->effectiveByteOrder(),
              isGUID ? QSysInfo::LittleEndian : QSysInfo::BigEndian);
     bool ok;
-    quint32 val1 = uuidString.midRef(1, 8).toUInt(&ok, 16);
+    quint32 val1 = QStringView(uuidString).mid(1, 8).toUInt(&ok, 16);
     QVERIFY(ok);
-    quint16 val2 = uuidString.midRef(10, 4).toUShort(&ok, 16);
+    quint16 val2 = QStringView(uuidString).mid(10, 4).toUShort(&ok, 16);
     QVERIFY(ok);
-    quint16 val3 = uuidString.midRef(15, 4).toUShort(&ok, 16);
+    quint16 val3 = QStringView(uuidString).mid(15, 4).toUShort(&ok, 16);
     QVERIFY(ok);
     qDebug() << Qt::hex << val1 << val2 << val3;
     QCOMPARE(structure->childAt(0)->asPrimitive()->value().value<quint32>(), val1);

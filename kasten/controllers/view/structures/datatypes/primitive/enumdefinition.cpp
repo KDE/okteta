@@ -114,7 +114,7 @@ QPair<AllPrimitiveTypes, QString> EnumDefinition::convertToEnumEntry(const QStri
         const QString valueString = value.toString();
         bool ok = false;
         if (valueString.startsWith(QLatin1String("0x"))) {
-            intValue = valueString.midRef(2).toULongLong(&ok, 16);
+            intValue = QStringView(valueString).mid(2).toULongLong(&ok, 16);
         } else {
             if (type == PrimitiveDataType::UInt64 || type == PrimitiveDataType::Bool64) {
                 intValue = valueString.toULongLong(&ok, 10);
