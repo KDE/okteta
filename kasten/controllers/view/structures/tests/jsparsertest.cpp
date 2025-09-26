@@ -19,6 +19,7 @@
 #include <memory>
 #include <functional>
 #include <utility>
+#include <vector>
 
 struct JsTestData
 {
@@ -42,6 +43,7 @@ class JsParserTest : public QObject
 
 private Q_SLOTS:
     void initTestCase();
+
     void testValidationFunc();
     void testValidationFunc_data();
     void testUpdateFunc();
@@ -62,9 +64,7 @@ private:
 
 private:
     QScriptEngine engine;
-    QVector<JsTestData> primitiveData;
-    QVector<JsTestData> bitfieldData;
-    QVector<JsTestData> allData;
+    std::vector<JsTestData> allData;
 };
 
 static JsTestData::CheckCallback primitiveTypeCheck(PrimitiveDataType type)
@@ -87,36 +87,37 @@ void JsParserTest::initTestCase()
 {
     ScriptEngineInitializer::addFuctionsToScriptEngine(&engine);
 
-    primitiveData
-        << JsTestData("float", "float()", primitiveTypeCheck(PrimitiveDataType::Float))
-        << JsTestData("double", "double()", primitiveTypeCheck(PrimitiveDataType::Double))
-        << JsTestData("char", "char()", primitiveTypeCheck(PrimitiveDataType::Char))
+    allData = {
+        // primitive data;
+        JsTestData("float", "float()", primitiveTypeCheck(PrimitiveDataType::Float)),
+        JsTestData("double", "double()", primitiveTypeCheck(PrimitiveDataType::Double)),
+        JsTestData("char", "char()", primitiveTypeCheck(PrimitiveDataType::Char)),
 
-        << JsTestData("uint8", "uint8()", primitiveTypeCheck(PrimitiveDataType::UInt8))
-        << JsTestData("uint16", "uint16()", primitiveTypeCheck(PrimitiveDataType::UInt16))
-        << JsTestData("uint32", "uint32()", primitiveTypeCheck(PrimitiveDataType::UInt32))
-        << JsTestData("uint64", "uint64()", primitiveTypeCheck(PrimitiveDataType::UInt64))
+        JsTestData("uint8", "uint8()", primitiveTypeCheck(PrimitiveDataType::UInt8)),
+        JsTestData("uint16", "uint16()", primitiveTypeCheck(PrimitiveDataType::UInt16)),
+        JsTestData("uint32", "uint32()", primitiveTypeCheck(PrimitiveDataType::UInt32)),
+        JsTestData("uint64", "uint64()", primitiveTypeCheck(PrimitiveDataType::UInt64)),
 
-        << JsTestData("int8", "int8()", primitiveTypeCheck(PrimitiveDataType::Int8))
-        << JsTestData("int16", "int16()", primitiveTypeCheck(PrimitiveDataType::Int16))
-        << JsTestData("int32", "int32()", primitiveTypeCheck(PrimitiveDataType::Int32))
-        << JsTestData("int64", "int64()", primitiveTypeCheck(PrimitiveDataType::Int64))
+        JsTestData("int8", "int8()", primitiveTypeCheck(PrimitiveDataType::Int8)),
+        JsTestData("int16", "int16()", primitiveTypeCheck(PrimitiveDataType::Int16)),
+        JsTestData("int32", "int32()", primitiveTypeCheck(PrimitiveDataType::Int32)),
+        JsTestData("int64", "int64()", primitiveTypeCheck(PrimitiveDataType::Int64)),
 
-        << JsTestData("bool8", "bool8()", primitiveTypeCheck(PrimitiveDataType::Bool8))
-        << JsTestData("bool16", "bool16()", primitiveTypeCheck(PrimitiveDataType::Bool16))
-        << JsTestData("bool32", "bool32()", primitiveTypeCheck(PrimitiveDataType::Bool32))
-        << JsTestData("bool64", "bool64()", primitiveTypeCheck(PrimitiveDataType::Bool64));
+        JsTestData("bool8", "bool8()", primitiveTypeCheck(PrimitiveDataType::Bool8)),
+        JsTestData("bool16", "bool16()", primitiveTypeCheck(PrimitiveDataType::Bool16)),
+        JsTestData("bool32", "bool32()", primitiveTypeCheck(PrimitiveDataType::Bool32)),
+        JsTestData("bool64", "bool64()", primitiveTypeCheck(PrimitiveDataType::Bool64)),
 
-    bitfieldData
-        << JsTestData("signed bitfield", "bitfield(\"signed\", 5)",
-                      bitfieldCheck(AbstractBitfieldDataInformation::Type::Signed))
-        << JsTestData("unsigned bitfield", "bitfield(\"unsigned\", 5)",
-                  bitfieldCheck(AbstractBitfieldDataInformation::Type::Unsigned))
-        << JsTestData("bool bitfield", "bitfield(\"bool\", 5)",
-                  bitfieldCheck(AbstractBitfieldDataInformation::Type::Boolean));
-
-    allData << primitiveData << bitfieldData;
+        // bitfield data
+        JsTestData("signed bitfield", "bitfield(\"signed\", 5)",
+                   bitfieldCheck(AbstractBitfieldDataInformation::Type::Signed)),
+        JsTestData("unsigned bitfield", "bitfield(\"unsigned\", 5)",
+                   bitfieldCheck(AbstractBitfieldDataInformation::Type::Unsigned)),
+        JsTestData("bool bitfield", "bitfield(\"bool\", 5)",
+                   bitfieldCheck(AbstractBitfieldDataInformation::Type::Boolean))
+    };
     // TODO struct, union, taggedUnion, pointer, flags, enum, array, string
+
 
     // needed so that imports can be resolved
     QString resources = QFINDTESTDATA("resources");
@@ -134,7 +135,7 @@ void JsParserTest::testByteOrder_data()
     QTest::addColumn<JsTestData::CheckCallback>("checkFunction");
     QTest::addColumn<int>("expectedByteOrder");
     // verify that default is inherit
-    for (const JsTestData& data : std::as_const(allData)) {
+    for (const JsTestData& data : allData) {
         // default should be inherit
         QString codeStr = QStringLiteral("%1;");
         QTest::newRow(data.tag.constData()) << codeStr.arg(data.constructorCall)
@@ -206,7 +207,7 @@ void JsParserTest::testUpdateFunc_data()
     QTest::addColumn<QString>("code");
     QTest::addColumn<JsTestData::CheckCallback>("checkFunction");
 
-    for (const JsTestData& data : std::as_const(allData)) {
+    for (const JsTestData& data : allData) {
         QString codeStr = QStringLiteral("%1.setUpdate(") + updateFunction() + QStringLiteral(");");
         QTest::newRow((data.tag + "-setUpdate()").constData())
             << codeStr.arg(data.constructorCall) << data.check;
@@ -244,7 +245,7 @@ void JsParserTest::testValidationFunc_data()
     QTest::addColumn<QString>("code");
     QTest::addColumn<JsTestData::CheckCallback>("checkFunction");
 
-    for (const JsTestData& data : std::as_const(allData)) {
+    for (const JsTestData& data : allData) {
         QString codeStr = QStringLiteral("%1.setValidation(") + validationFunction() + QStringLiteral(");");
         QTest::newRow((data.tag + "-setUpdate()").constData())
             << codeStr.arg(data.constructorCall) << data.check;
@@ -278,7 +279,7 @@ void JsParserTest::testName_data()
     QTest::addColumn<QString>("code");
     QTest::addColumn<JsTestData::CheckCallback>("checkFunction");
 
-    for (const JsTestData& data : std::as_const(allData)) {
+    for (const JsTestData& data : allData) {
         QString codeStr = QStringLiteral("%1.set({name: \"expectedName\"});");
         QTest::newRow((data.tag + "-set()").constData())
             << codeStr.arg(data.constructorCall) << data.check;
@@ -305,7 +306,7 @@ void JsParserTest::testCustomTypeName_data()
     QTest::addColumn<QString>("code");
     QTest::addColumn<JsTestData::CheckCallback>("checkFunction");
 
-    for (const JsTestData& data : std::as_const(allData)) {
+    for (const JsTestData& data : allData) {
         QString codeStr = QStringLiteral("%1.set({typeName: 'myCustomType'});");
         QTest::newRow((data.tag + "-set()").constData())
             << codeStr.arg(data.constructorCall) << data.check;
