@@ -2,22 +2,23 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Youness BOUTYOUR <niceboy@linuxac.org>, 2008.
 # Youness BOUTYOUR <niceboy120@gmail.com>, 2008.
-# Zayed Al-Saidi <zayed.alsaidi@gmail.com>, 2010.
+# SPDX-FileCopyrightText: 2010, 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 # Abdalrahim Fakhouri <abdilra7eem@yahoo.com>, 2012.
 msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-09-17 01:57+0000\n"
-"PO-Revision-Date: 2012-02-09 17:27+0200\n"
-"Last-Translator: Abdalrahim Fakhouri <abdilra7eem@yahoo.com>\n"
-"Language-Team: Arabic <linuxac-kde-arabic-team@googlegroups.com>\n"
+"PO-Revision-Date: 2025-09-25 17:29+0400\n"
+"Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
+"Language-Team: ar\n"
 "Language: ar\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=6; plural=n==0 ? 0 : n==1 ? 1 : n==2 ? 2 : n%100>=3 "
 "&& n%100<=10 ? 3 : n%100>=11 ? 4 : 5;\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -35,51 +36,43 @@ msgid "Okteta"
 msgstr "أكتيتا"
 
 #: about.cpp:17
-#, fuzzy, kde-format
-#| msgid "Hex editor"
+#, kde-format
 msgctxt "@info"
 msgid "Hex editor"
 msgstr "محرّر ستّ-عشريّ"
 
 #: about.cpp:19
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "@info"
 msgid "2006-%1 Friedrich W. H. Kossebau"
-msgstr "Copyright 2006-2011 Friedrich W. H. Kossebau"
+msgstr "2006-%1 فريدريش دبليو اتش كوسباو"
 
 #: about.cpp:20
-#, fuzzy, kde-format
-#| msgid "Edit the raw data of files"
+#, kde-format
 msgctxt "@info"
 msgid "Edit the raw data of files"
 msgstr "حرر البيانات الخام للملفات"
 
 #: about.cpp:25
-#, fuzzy, kde-format
-#| msgid "Friedrich W. H. Kossebau"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Friedrich W. H. Kossebau"
-msgstr "Friedrich W. H. Kossebau"
+msgstr "فريدريش دبليو اتش كوسباو"
 
 #: about.cpp:26
-#, fuzzy, kde-format
-#| msgid "Author"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Author"
 msgstr "المؤلف"
 
 #: about.cpp:28
-#, fuzzy, kde-format
-#| msgctxt "Author"
-#| msgid "Alexander Richardson"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Alexander Richardson"
-msgstr "Alexander Richardson"
+msgstr "الكسندر ريتشاردسون"
 
 #: about.cpp:29
-#, fuzzy, kde-format
-#| msgctxt "Task description"
-#| msgid "Structures tool"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Structures tool"
 msgstr "أداة البنى"
@@ -101,14 +94,13 @@ msgstr "ال&نوافذ"
 #: oktetaui.rc:80
 #, kde-format
 msgid "Main Toolbar"
-msgstr "شريط الأدوات الرئيسي"
+msgstr "شريط الأدوات الرئيس"
 
 #: program.cpp:87
-#, fuzzy, kde-format
-#| msgid "File(s) to load"
+#, kde-format
 msgctxt "@info"
 msgid "File(s) to load."
-msgstr "ملف(ات) للتحميل"
+msgstr "الملف(ات) المراد تحميله."
 
 #~ msgctxt "@title:menu"
 #~ msgid "Insert"
