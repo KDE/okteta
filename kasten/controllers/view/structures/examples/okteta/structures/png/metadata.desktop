@@ -50,6 +50,7 @@ Name[uk]=Заголовок файла PNG
 Name[zh_CN]=PNG 文件头
 Name[zh_TW]=PNG 檔案標頭
 Comment=A test structure containing the PNG file header (file must be set to big-endian)
+Comment[ar]=بنية اختبار تحتوي على ترويسة ملفات PNG (يجب أن يكون الملف بإزاحة البت الكبرى)
 Comment[bs]=Probna struktura koja sadrži zaglavlje PNG datoteke (datoteka treba biti postavljena na big endian)
 Comment[ca]=Una estructura de proves que conté la capçalera d'un fitxer PNG (el fitxer s'ha de definir com a «big-endian»)
 Comment[ca@valencia]=Una estructura de proves que conté la capçalera d'un fitxer PNG (el fitxer s'ha de definir com a «big-endian»)

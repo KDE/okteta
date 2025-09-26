@@ -2,6 +2,7 @@
 Type=Service
 Icon=okteta
 Name=Okteta Hex Viewer
+Name[ar]=عارض أكتيتا الستة عشري
 Name[bs]=Okteta heksadekadni prikazivač
 Name[ca]=Visualitzador hexadecimal Okteta
 Name[ca@valencia]=Visor hexadecimal Okteta

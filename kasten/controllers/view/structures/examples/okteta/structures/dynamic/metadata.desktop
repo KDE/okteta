@@ -4,6 +4,7 @@ Type=Service
 ServiceTypes=KPluginInfo
 
 Name=Testing dynamic length arrays
+Name[ar]=اختبار المصفوفات ديناميكية الطول
 Name[bs]=Proba nizova dinamičke dužine
 Name[ca]=Proves de matrius de longitud dinàmica
 Name[ca@valencia]=Proves de matrius de llargària dinàmica
@@ -47,6 +48,7 @@ Name[uk]=Тестування масивів зі змінною розмірн�
 Name[zh_CN]=测试动态数组
 Name[zh_TW]=測試動態長度陣列
 Comment=A test structure for dynamic arrays
+Comment[ar]=بنية اختبار للمصفوفات الديناميكية
 Comment[bs]=Probna struktura za dinamičke nizove
 Comment[ca]=Una estructura de proves per a matrius dinàmiques
 Comment[ca@valencia]=Una estructura de proves per a matrius dinàmiques
