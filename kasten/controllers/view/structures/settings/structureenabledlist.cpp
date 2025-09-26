@@ -25,7 +25,7 @@ void StructureEnabledList::setEnabledStructures(const QStringList& enabledStruct
         if (match.hasMatch()) {
             const QString id = match.captured(1);
             const QString structure = match.captured(2);
-            m_enabledList.append(StructureEnabledData(id, structure));
+            m_enabledList.emplace_back(StructureEnabledData(id, structure));
         }
     }
 }
@@ -61,7 +61,7 @@ void StructureEnabledList::setEnabled(const QString& id, bool  isEnabled)
         }
     }
     if (!isListed && isEnabled) {
-        m_enabledList.append(StructureEnabledData(id, {wildCard()}));
+        m_enabledList.emplace_back(StructureEnabledData(id, {wildCard()}));
     }
 }
 

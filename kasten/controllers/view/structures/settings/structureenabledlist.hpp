@@ -8,9 +8,10 @@
 #define STRUCTUREENABLEDLIST_HPP
 
 // Qt
-#include <QVector>
+#include <QString>
 // Std
 #include <unordered_map>
+#include <vector>
 
 class QStringList;
 
@@ -18,7 +19,11 @@ class StructureEnabledData
 {
 public:
     explicit StructureEnabledData(const QString& id, const QString& structure);
-    StructureEnabledData(const StructureEnabledData& other) = default;
+    StructureEnabledData(StructureEnabledData&& other) = default;
+    StructureEnabledData(const StructureEnabledData& other) = delete;
+
+    StructureEnabledData& operator=(StructureEnabledData&& other) = default;
+    StructureEnabledData& operator=(const StructureEnabledData& other) = delete;
 
 public:
     QString id;
@@ -33,9 +38,6 @@ inline StructureEnabledData::StructureEnabledData(const QString& id, const QStri
 {
 }
 
-Q_DECLARE_TYPEINFO(StructureEnabledData, Q_MOVABLE_TYPE);
-
-
 // Any actively disabled entries are keot in place,
 // in case it gets enabled again during editing
 // so does not lose any previous position and structures.
@@ -43,6 +45,12 @@ class StructureEnabledList
 {
 public:
     StructureEnabledList() = default;
+    StructureEnabledList(const StructureEnabledList& other) = delete;
+    StructureEnabledList(StructureEnabledList&& other) = delete;
+
+public:
+    StructureEnabledList& operator=(const StructureEnabledList& other) = delete;
+    StructureEnabledList& operator=(StructureEnabledList&& other) = delete;
 
 public:
     void setEnabledStructures(const QStringList& enabledStructures);
@@ -57,20 +65,20 @@ public:
     QStringList toQStringList() const;
 
     [[nodiscard]]
-    QVector<StructureEnabledData>::ConstIterator begin() const;
+    std::vector<StructureEnabledData>::const_iterator begin() const;
     [[nodiscard]]
-    QVector<StructureEnabledData>::ConstIterator end() const;
+    std::vector<StructureEnabledData>::const_iterator end() const;
 
 private:
-    QVector<StructureEnabledData> m_enabledList;
+    std::vector<StructureEnabledData> m_enabledList;
 };
 
-inline QVector<StructureEnabledData>::ConstIterator StructureEnabledList::begin() const
+inline std::vector<StructureEnabledData>::const_iterator StructureEnabledList::begin() const
 {
     return m_enabledList.begin();
 }
 
-inline QVector<StructureEnabledData>::ConstIterator StructureEnabledList::end() const
+inline std::vector<StructureEnabledData>::const_iterator StructureEnabledList::end() const
 {
     return m_enabledList.end();
 }
