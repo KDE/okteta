@@ -19,6 +19,7 @@ Notes:
     <sub-class-of type="text/plain"/>
     <generic-icon name="text-x-hex"/>
     <comment>Motorola S-Records</comment>
+    <comment xml:lang="ar">سجلات Motorola S</comment>
     <comment xml:lang="ca">Registres S de Motorola</comment>
     <comment xml:lang="ca@valencia">Registres S de Motorola</comment>
     <comment xml:lang="de">Motorola-S-Records</comment>
@@ -66,6 +67,7 @@ Notes:
     <generic-icon name="text-x-hex"/>
 <!--     <generic-icon name="application-octet-stream"/> -->
     <comment>Intel hexadecimal object file</comment>
+    <comment xml:lang="ar">ملف كائن ست عشري من إنتل</comment>
     <comment xml:lang="ca">Fitxer objecte hexadecimal d'Intel</comment>
     <comment xml:lang="ca@valencia">Fitxer objecte hexadecimal d'Intel</comment>
     <comment xml:lang="cs">Hexadecimální objektový soubor Intel®</comment>
@@ -111,6 +113,7 @@ Notes:
     <sub-class-of type="text/plain"/>
     <generic-icon name="text-x-hex"/>
     <comment>Base64 encoded data</comment>
+    <comment xml:lang="ar">بيانات مشفرة بـ Base64</comment>
     <comment xml:lang="ca">Dades codificades en Base64</comment>
     <comment xml:lang="ca@valencia">Dades codificades en Base64</comment>
     <comment xml:lang="cs">Data kódovaná Base64</comment>
@@ -150,6 +153,7 @@ Notes:
     <sub-class-of type="text/plain"/>
     <generic-icon name="text-x-hex"/>
     <comment>Base32 encoded data</comment>
+    <comment xml:lang="ar">بيانات مشفرة بـ Base32</comment>
     <comment xml:lang="ca">Dades codificades en Base32</comment>
     <comment xml:lang="ca@valencia">Dades codificades en Base32</comment>
     <comment xml:lang="cs">Data kódovaná Base32</comment>
@@ -188,6 +192,7 @@ Notes:
     <sub-class-of type="text/plain"/>
     <generic-icon name="text-x-hex"/>
     <comment>Btoa Encoded File</comment>
+    <comment xml:lang="ar">ملف مشفر بـ Btoa</comment>
     <comment xml:lang="ca">Fitxer BTOA codificat</comment>
     <comment xml:lang="ca@valencia">Fitxer BTOA codificat</comment>
     <comment xml:lang="cs">Data kódovaná Btoa</comment>
@@ -230,6 +235,7 @@ Notes:
     <sub-class-of type="text/plain"/>
     <generic-icon name="text-x-hex"/>
     <comment>Ascii85 encoded data</comment>
+    <comment xml:lang="ar">بيانات مشفرة بـ Ascii85</comment>
     <comment xml:lang="ca">Dades codificades en ASCII85</comment>
     <comment xml:lang="ca@valencia">Dades codificades en ASCII85</comment>
     <comment xml:lang="cs">Data kódovaná Ascii85</comment>
@@ -271,6 +277,7 @@ Notes:
     <sub-class-of type="text/plain"/>
     <generic-icon name="text-x-hex"/>
     <comment>Uuencoded file</comment>
+    <comment xml:lang="ar">ملف Uuencoded</comment>
     <comment xml:lang="ca">Fitxer «uuencoded»</comment>
     <comment xml:lang="ca@valencia">Fitxer «uuencoded»</comment>
     <comment xml:lang="de">UUencode-Datei</comment>
@@ -314,6 +321,7 @@ Notes:
     <sub-class-of type="text/plain"/>
     <generic-icon name="text-x-hex"/>
     <comment>Xxencoded file</comment>
+    <comment xml:lang="ar">ملف Xxencoded</comment>
     <comment xml:lang="ca">Fitxer «xxencoded»</comment>
     <comment xml:lang="ca@valencia">Fitxer «xxencoded»</comment>
     <comment xml:lang="de">Xxencode-Datei</comment>
@@ -353,6 +361,7 @@ Notes:
   <mime-type type="application/x-vnd.kde.okteta.structure">
     <sub-class-of type="application/xml"/>
     <comment>Okteta Structure definition</comment>
+    <comment xml:lang="ar">تعريف بنية أكتيتا</comment>
     <comment xml:lang="ca">Definició d'estructura de l'Okteta</comment>
     <comment xml:lang="ca@valencia">Definició d'estructura d'Okteta</comment>
     <comment xml:lang="cs">Definice struktury Okteta</comment>
