@@ -11,10 +11,11 @@
 #include "printjob.hpp"
 #include "printdialog.hpp"
 #include "printpreviewdialog.hpp"
-#include "framestopaperprinter.hpp"
-#include "headerfooterframerenderer.hpp"
 #include "bytearraycolumnframerenderer.hpp"
 #include "bytearrayrowframerenderer.hpp"
+// framesprint
+#include <framestopaperprinter.hpp>
+#include <headerfooterframerenderer.hpp>
 // Okteta Kasten gui
 #include <Kasten/Okteta/ByteArrayView>
 // Okteta Kasten core

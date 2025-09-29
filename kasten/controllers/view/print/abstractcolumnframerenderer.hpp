@@ -7,8 +7,8 @@
 #ifndef KASTEN_ABSTRACTCOLUMNFRAMERENDERER_HPP
 #define KASTEN_ABSTRACTCOLUMNFRAMERENDERER_HPP
 
-// lib
-#include "abstractframerenderer.hpp"
+// framesprint
+#include <abstractframerenderer.hpp>
 // Okteta gui
 #include <Okteta/PixelMetrics>
 #include <Okteta/Line>
