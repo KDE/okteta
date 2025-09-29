@@ -8,7 +8,6 @@
 #define FRAMESPRINT_HEADERFOOTERFRAMERENDERER_HPP
 
 // lib
-#include "printinfo.hpp"
 #include "abstractframerenderer.hpp"
 // Qt
 #include <QFont>
@@ -17,6 +16,8 @@
 #include <array>
 
 namespace FramesPrint {
+
+class PrintInfo;
 
 class HeaderFooterFrameRenderer : public AbstractFrameRenderer
 {

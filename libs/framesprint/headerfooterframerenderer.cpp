@@ -6,6 +6,8 @@
 
 #include "headerfooterframerenderer.hpp"
 
+// lib
+#include "printinfo.hpp"
 // KF
 #include <KUser>
 // Qt

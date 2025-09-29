@@ -16,6 +16,7 @@
 // framesprint
 #include <framestopaperprinter.hpp>
 #include <headerfooterframerenderer.hpp>
+#include <printinfo.hpp>
 // Okteta Kasten gui
 #include <Kasten/Okteta/ByteArrayView>
 // Okteta Kasten core
