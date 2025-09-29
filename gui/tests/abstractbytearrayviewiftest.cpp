@@ -14,6 +14,8 @@
 #include <QFont>
 #include <QTest>
 #include <QSignalSpy>
+// Std
+#include <utility>
 
 namespace Okteta {
 

@@ -27,6 +27,8 @@
 #include <QGroupBox>
 #include <QAction>
 #include <QIcon>
+// Std
+#include <utility>
 
 namespace Kasten {
 

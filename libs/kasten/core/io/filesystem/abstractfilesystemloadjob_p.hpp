@@ -16,6 +16,7 @@
 #include <QUrl>
 // Std
 #include <memory>
+#include <utility>
 
 namespace Kasten {
 

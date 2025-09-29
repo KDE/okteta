@@ -13,6 +13,8 @@
 #include "bytearraydocument.hpp"
 // Qt
 #include <QCoreApplication>
+// Std
+#include <utility>
 
 namespace Kasten {
 

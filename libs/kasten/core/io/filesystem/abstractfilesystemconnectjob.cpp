@@ -7,6 +7,9 @@
 #include "abstractfilesystemconnectjob.hpp"
 #include "abstractfilesystemconnectjob_p.hpp"
 
+// Std
+#include <utility>
+
 namespace Kasten {
 
 AbstractFileSystemConnectJob::AbstractFileSystemConnectJob(std::unique_ptr<AbstractModelFileSystemSynchronizer>&& synchronizer,

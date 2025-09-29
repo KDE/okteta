@@ -16,6 +16,8 @@
 #include <KLocalizedString>
 // Qt
 #include <QUrl>
+// Std
+#include <utility>
 
 namespace Kasten {
 

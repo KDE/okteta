@@ -18,6 +18,7 @@
 #include <QTest>
 // Std
 #include <memory>
+#include <utility>
 
 class UnionDataInformationTest : public QObject
 {

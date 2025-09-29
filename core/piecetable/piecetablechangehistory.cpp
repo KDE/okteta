@@ -11,6 +11,8 @@
 //
 #include <addressrangelist.hpp>
 #include <arraychangemetricslist.hpp>
+// Std
+#include <utility>
 
 namespace KPieceTable {
 

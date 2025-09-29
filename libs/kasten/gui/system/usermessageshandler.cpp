@@ -7,6 +7,9 @@
 #include "usermessageshandler.hpp"
 #include "usermessageshandler_p.hpp"
 
+// Std
+#include <utility>
+
 namespace Kasten {
 
 UserMessagesHandler::UserMessagesHandler(QWidget* widget)

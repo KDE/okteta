@@ -13,6 +13,7 @@
 #include <QThread>
 // Std
 #include <memory>
+#include <utility>
 
 class QFile;
 

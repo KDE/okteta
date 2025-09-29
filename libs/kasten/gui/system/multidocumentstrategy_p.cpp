@@ -20,6 +20,8 @@
 #include <QApplication>
 #include <QMimeData>
 #include <QUrl>
+// Std
+#include <utility>
 
 namespace Kasten {
 

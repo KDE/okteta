@@ -27,6 +27,8 @@
 #include <QUrl>
 #include <QFileDialog>
 #include <QPointer>
+// Std
+#include <utility>
 
 namespace Kasten {
 

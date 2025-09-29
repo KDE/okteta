@@ -7,6 +7,9 @@
 #include "abstractconnectjob.hpp"
 #include "abstractconnectjob_p.hpp"
 
+// Std
+#include <utility>
+
 namespace Kasten {
 
 AbstractConnectJob::AbstractConnectJob(std::unique_ptr<AbstractConnectJobPrivate>&& dd)

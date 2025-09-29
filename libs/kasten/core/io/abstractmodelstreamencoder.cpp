@@ -7,6 +7,9 @@
 #include "abstractmodelstreamencoder.hpp"
 #include "abstractmodelstreamencoder_p.hpp"
 
+// Std
+#include <utility>
+
 namespace Kasten {
 
 AbstractModelStreamEncoder::AbstractModelStreamEncoder(std::unique_ptr<AbstractModelStreamEncoderPrivate>&& dd)

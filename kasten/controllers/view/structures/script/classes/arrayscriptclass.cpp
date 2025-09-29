@@ -14,6 +14,8 @@
 #include <structureslogging.hpp>
 // Qt
 #include <QScriptContext>
+// Std
+#include <utility>
 
 ArrayScriptClass::ArrayScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : DefaultScriptClass(engine, handlerInfo, 2)

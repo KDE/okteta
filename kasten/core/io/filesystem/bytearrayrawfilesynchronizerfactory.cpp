@@ -14,6 +14,8 @@
 // Qt
 #include <QString>
 #include <QUrl>
+// Std
+#include <utility>
 
 namespace Kasten {
 

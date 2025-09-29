@@ -28,6 +28,8 @@
 #include <QMimeData>
 #include <QClipboard>
 #include <QApplication>
+// Std
+#include <utility>
 
 namespace Kasten {
 

@@ -15,6 +15,8 @@
 // Qt
 #include <QTest>
 #include <QSignalSpy>
+// Std
+#include <utility>
 
 Q_DECLARE_METATYPE(Okteta::ArrayChangeMetricsList)
 

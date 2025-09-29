@@ -11,6 +11,8 @@
 #include <abstractmodelstreamencoderconfigeditor.hpp>
 #include <abstractmodelexporterconfigeditor.hpp>
 #include <abstractmodeldatageneratorconfigeditor.hpp>
+// Std
+#include <utility>
 
 namespace Kasten {
 

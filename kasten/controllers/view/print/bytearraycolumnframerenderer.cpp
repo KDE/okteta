@@ -22,6 +22,8 @@
 // Qt
 #include <QFontMetrics>
 #include <QFontDatabase>
+// Std
+#include <utility>
 
 static constexpr Okteta::OffsetFormat::Format DefaultColumnOffsetCoding =  Okteta::OffsetFormat::Hexadecimal; // krazy:exclude=staticobjects
 

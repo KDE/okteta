@@ -25,6 +25,8 @@
 // Qt
 #include <QMimeData>
 #include <QApplication>
+// Std
+#include <utility>
 
 namespace Kasten {
 

@@ -25,6 +25,8 @@
 #include <QScriptEngine>
 #include <QBrush>
 #include <QString>
+// Std
+#include <utility>
 
 const QString StringDataInformation::encodingNames[static_cast<int>(StringDataInformation::StringType::EBCDIC)+2] = {
     QStringLiteral("<invalid>"), // -1

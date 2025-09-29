@@ -7,6 +7,9 @@
 #include "abstractgroupedviews.hpp"
 #include "abstractgroupedviews_p.hpp"
 
+// Std
+#include <utility>
+
 namespace Kasten {
 
 AbstractGroupedViews::AbstractGroupedViews()

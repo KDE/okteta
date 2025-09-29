@@ -11,6 +11,8 @@
 #include "removepiecetablechange.hpp"
 #include "replacepiecetablechange.hpp"
 #include "swaprangespiecetablechange.hpp"
+// Std
+#include <utility>
 
 namespace KPieceTable {
 

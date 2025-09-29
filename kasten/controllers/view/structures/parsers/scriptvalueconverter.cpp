@@ -14,6 +14,8 @@
 #include <QScriptValue>
 #include <QScriptEngine>
 #include <QScriptValueIterator>
+// Std
+#include <utility>
 
 namespace ScriptValueConverter {
 

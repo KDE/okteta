@@ -43,7 +43,8 @@
 #include <KConfigGroup>
 #include <KSharedConfig>
 #include <KLocalizedString>
-
+// Std
+#include <utility>
 
 namespace Kasten {
 

@@ -20,6 +20,8 @@
 #include <KLocalizedString>
 // Qt
 #include <QMimeData>
+// Std
+#include <utility>
 
 namespace Kasten {
 

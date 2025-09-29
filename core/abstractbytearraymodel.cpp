@@ -10,6 +10,8 @@
 // lib
 #include "charcodec.hpp"
 #include "character.hpp"
+// Std
+#include <utility>
 
 namespace Okteta {
 

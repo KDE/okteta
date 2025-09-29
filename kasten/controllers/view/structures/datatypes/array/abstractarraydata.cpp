@@ -11,6 +11,8 @@
 #include "primitivearraydata.hpp"
 #include "complexarraydata.hpp"
 #include <primitivedatainformation.hpp>
+// Std
+#include <utility>
 
 AbstractArrayData::AbstractArrayData(std::unique_ptr<DataInformation>&& childType, ArrayDataInformation* parent)
     : mParent(parent)

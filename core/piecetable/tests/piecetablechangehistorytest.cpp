@@ -16,6 +16,8 @@
 #include <addressrangelist.hpp>
 // Qt
 #include <QTest>
+// Std
+#include <utility>
 
 namespace KPieceTable {
 

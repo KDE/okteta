@@ -7,6 +7,9 @@
 #include "abstractfilesystemloadjob.hpp"
 #include "abstractfilesystemloadjob_p.hpp"
 
+// Std
+#include <utility>
+
 namespace Kasten {
 
 AbstractFileSystemLoadJob::AbstractFileSystemLoadJob(std::unique_ptr<AbstractModelFileSystemSynchronizer>&& synchronizer,

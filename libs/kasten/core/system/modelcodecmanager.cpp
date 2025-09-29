@@ -7,6 +7,9 @@
 #include "modelcodecmanager.hpp"
 #include "modelcodecmanager_p.hpp"
 
+// Std
+#include <utility>
+
 namespace Kasten {
 
 ModelCodecManager::ModelCodecManager()

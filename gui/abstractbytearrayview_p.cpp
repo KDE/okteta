@@ -44,6 +44,8 @@
 #include <QIcon>
 #include <QScroller>
 #include <QScrollerProperties>
+// Std
+#include <utility>
 
 namespace Okteta {
 

@@ -29,6 +29,7 @@
 #include <QScriptEngine>
 // Std
 #include <memory>
+#include <utility>
 
 using namespace ParserStrings;
 

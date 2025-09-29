@@ -13,6 +13,8 @@
 // KF
 #include <KComboBox>
 #include <KLocalizedString>
+// Std
+#include <utility>
 
 EnumDataInformation::EnumDataInformation(const QString& name,
                                          std::unique_ptr<PrimitiveDataInformation>&& type,

@@ -7,6 +7,9 @@
 #include "abstractcolumnstylist.hpp"
 #include "abstractcolumnstylist_p.hpp"
 
+// Std
+#include <utility>
+
 namespace Okteta {
 
 AbstractColumnStylist::AbstractColumnStylist()

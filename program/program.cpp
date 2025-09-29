@@ -42,6 +42,8 @@
 #include <QCommandLineParser>
 #include <QUrl>
 #include <QDir>
+// Std
+#include <utility>
 
 namespace Kasten {
 

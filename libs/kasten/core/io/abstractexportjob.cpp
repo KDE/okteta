@@ -7,6 +7,9 @@
 #include "abstractexportjob.hpp"
 #include "abstractexportjob_p.hpp"
 
+// Std
+#include <utility>
+
 namespace Kasten {
 
 AbstractExportJob::AbstractExportJob(std::unique_ptr<AbstractExportJobPrivate>&& dd)

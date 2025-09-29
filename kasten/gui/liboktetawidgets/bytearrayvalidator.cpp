@@ -10,6 +10,8 @@
 #include "bytearraychar8stringvalidator.hpp"
 #include "bytearrayutf8stringvalidator.hpp"
 #include "bytearrayvaluestringvalidator.hpp"
+// Std
+#include <utility>
 
 namespace Okteta {
 

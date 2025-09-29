@@ -14,6 +14,8 @@
 // Qt
 #include <QCoreApplication>
 #include <QUrl>
+// Std
+#include <utility>
 
 namespace Kasten {
 

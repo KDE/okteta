@@ -7,6 +7,9 @@
 #include "abstractdocument.hpp"
 #include "abstractdocument_p.hpp"
 
+// Std
+#include <utility>
+
 namespace Kasten {
 
 AbstractDocument::AbstractDocument()

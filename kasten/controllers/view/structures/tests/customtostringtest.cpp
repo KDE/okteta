@@ -15,6 +15,8 @@
 // Qt
 #include <QTest>
 #include <QScriptEngine>
+// Std
+#include <utility>
 
 class CustomToStringTest : public QObject
 {

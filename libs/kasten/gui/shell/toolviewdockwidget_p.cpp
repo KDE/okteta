@@ -10,6 +10,8 @@
 #include <abstracttoolview.hpp>
 // Kasten core
 #include <Kasten/AbstractTool>
+// Std
+#include <utility>
 
 namespace Kasten {
 

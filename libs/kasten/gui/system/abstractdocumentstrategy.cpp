@@ -7,6 +7,9 @@
 #include "abstractdocumentstrategy.hpp"
 #include "abstractdocumentstrategy_p.hpp"
 
+// Std
+#include <utility>
+
 namespace Kasten {
 
 AbstractDocumentStrategy::AbstractDocumentStrategy()

@@ -7,6 +7,9 @@
 #include "abstractmodeldatagenerator.hpp"
 #include "abstractmodeldatagenerator_p.hpp"
 
+// Std
+#include <utility>
+
 namespace Kasten {
 
 AbstractModelDataGenerator::AbstractModelDataGenerator(std::unique_ptr<AbstractModelDataGeneratorPrivate>&& dd)

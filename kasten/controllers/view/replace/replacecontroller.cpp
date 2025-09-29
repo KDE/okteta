@@ -23,6 +23,8 @@
 #include <KStandardGuiItem>
 // Qt
 #include <QAction>
+// Std
+#include <utility>
 
 namespace Kasten {
 

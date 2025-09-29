@@ -20,6 +20,8 @@
 #include <Okteta/ChangesDescribable>
 // KF
 #include <KLocalizedString>
+// Std
+#include <utility>
 
 namespace Kasten {
 

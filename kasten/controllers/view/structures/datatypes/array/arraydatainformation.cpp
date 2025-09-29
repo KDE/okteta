@@ -15,6 +15,8 @@
 #include <arrayscriptclass.hpp>
 #include <scripthandlerinfo.hpp>
 #include <scriptlogger.hpp>
+// Std
+#include <utility>
 
 ArrayDataInformation::ArrayDataInformation(const QString& name, uint length,
                                            std::unique_ptr<DataInformation>&& childType,

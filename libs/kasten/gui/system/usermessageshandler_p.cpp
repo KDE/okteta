@@ -17,6 +17,8 @@
 #include <KMessageBox>
 // Qt
 #include <QDialog>
+// Std
+#include <utility>
 
 namespace Kasten {
 

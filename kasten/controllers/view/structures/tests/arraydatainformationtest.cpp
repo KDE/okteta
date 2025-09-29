@@ -14,6 +14,8 @@
 // Qt
 #include <QTest>
 #include <QSignalSpy>
+// Std
+#include <utility>
 
 class ArrayDataInformationTest : public QObject
 {

@@ -7,6 +7,9 @@
 #include "abstractloadjob.hpp"
 #include "abstractloadjob_p.hpp"
 
+// Std
+#include <utility>
+
 namespace Kasten {
 
 AbstractLoadJob::AbstractLoadJob(std::unique_ptr<AbstractLoadJobPrivate>&& dd)

@@ -36,6 +36,8 @@
 #include <QApplication>
 #include <QFontMetrics>
 #include <QIcon>
+// Std
+#include <utility>
 
 namespace Kasten {
 

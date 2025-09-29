@@ -7,6 +7,9 @@
 #include "viewmanager.hpp"
 #include "viewmanager_p.hpp"
 
+// Std
+#include <utility>
+
 namespace Kasten {
 
 ViewManager::ViewManager()

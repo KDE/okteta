@@ -10,6 +10,8 @@
 #include <datainformation.hpp>
 #include <topleveldatainformation.hpp>
 #include <structureviewpreferences.hpp>
+// Std
+#include <utility>
 
 PrimitiveDataInformationWrapper::PrimitiveDataInformationWrapper(const PrimitiveDataInformationWrapper& d)
     : PrimitiveDataInformation(d)

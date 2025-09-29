@@ -7,6 +7,9 @@
 #include "abstractsyncfromremotejob.hpp"
 #include "abstractsyncfromremotejob_p.hpp"
 
+// Std
+#include <utility>
+
 namespace Kasten {
 
 AbstractSyncFromRemoteJob::AbstractSyncFromRemoteJob(std::unique_ptr<AbstractSyncFromRemoteJobPrivate>&& dd)

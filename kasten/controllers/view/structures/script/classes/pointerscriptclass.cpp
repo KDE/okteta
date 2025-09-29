@@ -10,6 +10,8 @@
 #include <pointerdatainformation.hpp>
 #include <parserutils.hpp>
 #include <scriptvalueconverter.hpp>
+// Std
+#include <utility>
 
 PointerScriptClass::PointerScriptClass(QScriptEngine* engine, ScriptHandlerInfo* handlerInfo)
     : PrimitiveScriptClass(engine, handlerInfo, 4)

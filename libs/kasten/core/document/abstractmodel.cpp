@@ -7,6 +7,9 @@
 #include "abstractmodel.hpp"
 #include "abstractmodel_p.hpp"
 
+// Std
+#include <utility>
+
 namespace Kasten {
 
 AbstractModel::AbstractModel(AbstractModel* baseModel)

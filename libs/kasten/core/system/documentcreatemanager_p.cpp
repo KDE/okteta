@@ -10,6 +10,8 @@
 #include "abstractdocumentfactory.hpp"
 #include "documentmanager.hpp"
 #include <abstractdocument.hpp>
+// Std
+#include <utility>
 
 namespace Kasten {
 

@@ -21,6 +21,8 @@
 #include <QString>
 #include <QTest>
 #include <QScriptEngine>
+// Std
+#include <utility>
 
 namespace Utils {
 

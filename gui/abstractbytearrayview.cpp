@@ -11,6 +11,8 @@
 #include "bytearraytablelayout.hpp"
 // Qt
 #include <QMimeData>
+// Std
+#include <utility>
 
 namespace Okteta {
 

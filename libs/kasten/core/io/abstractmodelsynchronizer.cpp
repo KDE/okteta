@@ -7,6 +7,9 @@
 #include "abstractmodelsynchronizer.hpp"
 #include "abstractmodelsynchronizer_p.hpp"
 
+// Std
+#include <utility>
+
 namespace Kasten {
 
 AbstractModelSynchronizer::AbstractModelSynchronizer(std::unique_ptr<AbstractModelSynchronizerPrivate>&& dd)

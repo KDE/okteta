@@ -15,6 +15,8 @@
 #include <scriptlogger.hpp>
 // Qt
 #include <QScriptEngine>
+// Std
+#include <utility>
 
 ScriptFileParser::ScriptFileParser(const QString& pluginName, const QString& absolutePath)
     : AbstractStructureParser(pluginName, absolutePath)

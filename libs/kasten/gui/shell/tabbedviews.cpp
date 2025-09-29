@@ -7,6 +7,9 @@
 #include "tabbedviews.hpp"
 #include "tabbedviews_p.hpp"
 
+// Std
+#include <utility>
+
 namespace Kasten {
 
 TabbedViews::TabbedViews(std::unique_ptr<TabbedViewsPrivate>&& dd)

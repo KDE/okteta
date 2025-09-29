@@ -12,6 +12,8 @@
 #include <bytearrayviewprofilesynchronizer.hpp>
 // Okteta Kasten core
 #include <Kasten/Okteta/ByteArrayDocument>
+// Std
+#include <utility>
 
 namespace Kasten {
 

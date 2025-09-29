@@ -11,6 +11,9 @@
 #include "abstractloadjob.hpp"
 #include "abstractdocument.hpp"
 
+// Std
+#include <utility>
+
 namespace Kasten {
 
 class AbstractLoadJobPrivate

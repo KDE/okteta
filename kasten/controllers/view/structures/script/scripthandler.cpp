@@ -18,6 +18,8 @@
 #include <QStringList>
 #include <QScriptValue>
 #include <QScriptEngine>
+// Std
+#include <utility>
 
 ScriptHandler::ScriptHandler(std::unique_ptr<QScriptEngine>&& engine, TopLevelDataInformation* topLevel)
     : mEngine(std::move(engine))

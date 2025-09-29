@@ -28,6 +28,8 @@
 #include <QModelIndex>
 #include <QRegularExpression>
 #include <QByteArray>
+// Std
+#include <utility>
 
 namespace Kasten {
 

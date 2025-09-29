@@ -10,6 +10,8 @@
 #include <KLocalizedString>
 // Qt
 #include <QVarLengthArray>
+// Std
+#include <utility>
 
 FlagDataInformation::FlagDataInformation(const QString& name,
                                          std::unique_ptr<PrimitiveDataInformation>&& type,

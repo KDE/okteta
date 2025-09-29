@@ -24,6 +24,8 @@
 #include <QClipboard>
 #include <QUrl>
 #include <QApplication>
+// Std
+#include <utility>
 
 namespace Kasten {
 

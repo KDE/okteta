@@ -12,6 +12,7 @@
 #include <KLocalizedString>
 // Std
 #include <limits>
+#include <utility>
 
 StructureDataInformation::StructureDataInformation(const QString& name,
                                                    std::vector<std::unique_ptr<DataInformation>>&& children,

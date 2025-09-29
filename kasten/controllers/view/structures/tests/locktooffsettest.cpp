@@ -14,6 +14,7 @@
 #include <QTest>
 // Std
 #include <limits>
+#include <utility>
 
 class LockToOffsetTest : public QObject
 {

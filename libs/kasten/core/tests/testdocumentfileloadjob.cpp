@@ -12,6 +12,8 @@
 #include "testdocument.hpp"
 // Qt
 #include <QCoreApplication>
+// Std
+#include <utility>
 
 namespace Kasten {
 

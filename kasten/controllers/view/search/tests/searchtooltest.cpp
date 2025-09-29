@@ -20,6 +20,7 @@
 #include <QTest>
 // Std
 #include <memory>
+#include <utility>
 
 Q_DECLARE_METATYPE(Okteta::AddressRange)
 namespace Okteta {

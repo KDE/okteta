@@ -12,6 +12,7 @@
 #include "primitivedatainformation.hpp"
 // Std
 #include <memory>
+#include <utility>
 
 class PointerDataInformation : public PrimitiveDataInformationWrapper
 {

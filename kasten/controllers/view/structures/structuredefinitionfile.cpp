@@ -16,6 +16,8 @@
 #include <QFile>
 #include <QDir>
 #include <QStringList>
+// Std
+#include <utility>
 
 namespace Kasten {
 

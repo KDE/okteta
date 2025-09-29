@@ -15,6 +15,7 @@
 #include <QSignalSpy>
 // Std
 #include <memory>
+#include <utility>
 
 void DocumentManagerTest::checkAdded(QSignalSpy* changedSpy, Kasten::AbstractDocument* document)
 {

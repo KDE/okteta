@@ -17,7 +17,8 @@
 // Qt
 #include <QLocale>
 #include <QScriptValue>
-
+// Std
+#include <utility>
 
 namespace {
 QString charString(quint8 value)

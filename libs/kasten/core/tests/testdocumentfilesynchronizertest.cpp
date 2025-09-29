@@ -25,6 +25,8 @@
 #include <QFile>
 #include <QDataStream>
 #include <QUrl>
+// Std
+#include <utility>
 
 static constexpr char TestDirectory[] = "testdocumentfilesynchronizertest";
 static constexpr char TestFileName1[] = "test1.data";

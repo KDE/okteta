@@ -10,6 +10,8 @@
 #include <Okteta/PieceTableByteArrayModel>
 // KF
 #include <KLocalizedString>
+// Std
+#include <utility>
 
 using Okteta::PieceTableByteArrayModel;
 

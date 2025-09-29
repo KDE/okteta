@@ -12,6 +12,8 @@
 #include <abstractmodelstreamencoderconfigeditor.hpp>
 // Kasten core
 #include <Kasten/ModelEncoderFileSystemExporter>
+// Std
+#include <utility>
 
 namespace Kasten {
 

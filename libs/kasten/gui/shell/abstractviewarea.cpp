@@ -7,6 +7,9 @@
 #include "abstractviewarea.hpp"
 #include "abstractviewarea_p.hpp"
 
+// Std
+#include <utility>
+
 namespace Kasten {
 
 AbstractViewArea::AbstractViewArea()

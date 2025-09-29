@@ -14,6 +14,7 @@
 #include <QScriptValue>
 // Std
 #include <memory>
+#include <utility>
 #include <vector>
 
 /** A class holding the data of a struct for Okteta*/

@@ -7,6 +7,8 @@
 #include "abstractmodelfilesystemsynchronizer.hpp"
 #include "abstractmodelfilesystemsynchronizer_p.hpp"
 
+// Std
+#include <utility>
 // lib
 #include <abstractdocument.hpp>
 

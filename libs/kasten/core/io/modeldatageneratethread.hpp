@@ -14,6 +14,7 @@
 #include <QThread>
 // Std
 #include <memory>
+#include <utility>
 
 namespace Kasten {
 

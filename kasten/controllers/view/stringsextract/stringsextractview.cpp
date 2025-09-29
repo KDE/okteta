@@ -32,6 +32,8 @@
 #include <QFocusEvent>
 #include <QAction>
 #include <QIcon>
+// Std
+#include <utility>
 
 namespace Kasten {
 

@@ -21,6 +21,7 @@
 #include <QSignalSpy>
 // Std
 #include <memory>
+#include <utility>
 
 Q_DECLARE_METATYPE(QVector<Kasten::ReplaceBehaviour>)
 

@@ -7,6 +7,9 @@
 #include "documentmanager.hpp"
 #include "documentmanager_p.hpp"
 
+// Std
+#include <utility>
+
 namespace Kasten {
 
 DocumentManager::DocumentManager()

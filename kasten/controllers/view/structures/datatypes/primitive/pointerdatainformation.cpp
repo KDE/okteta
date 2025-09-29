@@ -19,6 +19,7 @@
 #include <KLocalizedString>
 // Std
 #include <limits>
+#include <utility>
 
 PointerDataInformation::PointerDataInformation(const QString& name,
                                                std::unique_ptr<DataInformation>&& pointerTarget,

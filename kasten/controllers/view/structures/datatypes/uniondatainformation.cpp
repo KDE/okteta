@@ -10,6 +10,8 @@
 #include "topleveldatainformation.hpp"
 // KF
 #include <KLocalizedString>
+// Std
+#include <utility>
 
 UnionDataInformation::UnionDataInformation(const QString& name,
                                            std::vector<std::unique_ptr<DataInformation>>&& children,

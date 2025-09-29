@@ -20,6 +20,7 @@
 // Std
 #include <memory>
 #include <limits>
+#include <utility>
 
 class PrimitiveArrayTest : public QObject
 {

@@ -11,6 +11,8 @@
 #include <KJobWidgets>
 // Qt
 #include <QTemporaryFile>
+// Std
+#include <utility>
 
 namespace Kasten {
 

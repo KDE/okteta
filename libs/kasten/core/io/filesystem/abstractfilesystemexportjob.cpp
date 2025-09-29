@@ -7,6 +7,9 @@
 #include "abstractfilesystemexportjob.hpp"
 #include "abstractfilesystemexportjob_p.hpp"
 
+// Std
+#include <utility>
+
 namespace Kasten {
 
 AbstractFileSystemExportJob::AbstractFileSystemExportJob(AbstractModel* model, const AbstractModelSelection* selection,

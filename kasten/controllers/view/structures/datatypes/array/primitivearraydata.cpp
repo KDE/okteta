@@ -18,6 +18,7 @@
 #include <KLocalizedString>
 // Std
 #include <limits>
+#include <utility>
 
 template <PrimitiveDataType type>
 inline PrimitiveArrayData<type>::PrimitiveArrayData(unsigned int initialLength,

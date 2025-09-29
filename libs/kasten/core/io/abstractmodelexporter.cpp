@@ -7,6 +7,9 @@
 #include "abstractmodelexporter.hpp"
 #include "abstractmodelexporter_p.hpp"
 
+// Std
+#include <utility>
+
 namespace Kasten {
 
 AbstractModelExporter::AbstractModelExporter(std::unique_ptr<AbstractModelExporterPrivate>&& dd)

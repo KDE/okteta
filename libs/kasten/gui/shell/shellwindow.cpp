@@ -7,6 +7,9 @@
 #include "shellwindow.hpp"
 #include "shellwindow_p.hpp"
 
+// Std
+#include <utility>
+
 namespace Kasten {
 
 ShellWindow::ShellWindow(ViewManager* viewManager)

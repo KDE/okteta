@@ -25,6 +25,8 @@
 #include <Kasten/UserMessagesHandler>
 // KF
 #include <KPluginMetaData>
+// Std
+#include <utility>
 
 OktetaPartFactory::OktetaPartFactory()
     : mByteArrayViewProfileManager(std::make_unique<Kasten::ByteArrayViewProfileManager>())

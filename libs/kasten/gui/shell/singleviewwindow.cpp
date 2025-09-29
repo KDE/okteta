@@ -7,6 +7,9 @@
 #include "singleviewwindow.hpp"
 #include "singleviewwindow_p.hpp"
 
+// Std
+#include <utility>
+
 namespace Kasten {
 
 SingleViewWindow::SingleViewWindow(AbstractView* view)

@@ -32,6 +32,8 @@
 // Qt
 #include <QApplication>
 #include <QPrinter>
+// Std
+#include <utility>
 
 namespace Kasten {
 

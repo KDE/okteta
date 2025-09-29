@@ -24,6 +24,8 @@
 #include <KSelectAction>
 // Qt
 #include <QApplication>
+// Std
+#include <utility>
 
 namespace Kasten {
 

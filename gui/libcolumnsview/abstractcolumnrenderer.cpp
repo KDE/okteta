@@ -7,6 +7,9 @@
 #include "abstractcolumnrenderer.hpp"
 #include "abstractcolumnrenderer_p.hpp"
 
+// Std
+#include <utility>
+
 namespace Okteta {
 
 AbstractColumnRenderer::AbstractColumnRenderer(std::unique_ptr<AbstractColumnRendererPrivate>&& dd)
