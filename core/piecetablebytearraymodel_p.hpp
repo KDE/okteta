@@ -24,6 +24,9 @@ namespace Okteta {
 
 class PieceTableByteArrayModelPrivate : public AbstractByteArrayModelPrivate
 {
+private:
+    static constexpr int InvalidVersionIndex = -1;
+
 public:
     /**  */
     explicit PieceTableByteArrayModelPrivate(PieceTableByteArrayModel* parent, const QByteArray& data);
@@ -103,9 +106,9 @@ private: // data
     /** */
     BookmarkList mBookmarks;
     /** temporary workaround for cancelling groups. If -1 no group is opened. */
-    int mBeforeGroupedChangeVersionIndex;
+    int mBeforeGroupedChangeVersionIndex = InvalidVersionIndex;
 
-    int mBeforeChangesVersionIndex;
+    int mBeforeChangesVersionIndex = InvalidVersionIndex;
     ArrayChangeMetricsList mChangeMetrics;
     QVector<ByteArrayChange> mChanges;
     bool mBeforeChangesModified : 1;

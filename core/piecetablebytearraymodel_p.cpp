@@ -14,8 +14,6 @@
 
 namespace Okteta {
 
-static constexpr int InvalidVersionIndex = -1;
-
 PieceTableByteArrayModelPrivate::PieceTableByteArrayModelPrivate(PieceTableByteArrayModel* parent, const QByteArray& data)
     : AbstractByteArrayModelPrivate(parent)
     , mReadOnly(false)
