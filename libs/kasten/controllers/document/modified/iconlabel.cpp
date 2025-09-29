@@ -42,7 +42,7 @@ void IconLabel::changeEvent(QEvent* event)
 QSize IconLabel::iconSize() const
 {
     const int iconSizeExtent = style()->pixelMetric(QStyle::PM_ButtonIconSize, nullptr, this);
-    return QSize(iconSizeExtent, iconSizeExtent);
+    return {iconSizeExtent, iconSizeExtent};
 }
 
 void IconLabel::updateSize()
