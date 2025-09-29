@@ -11,10 +11,11 @@
 #include <Kasten/AbstractXmlGuiController>
 // Qt
 #include <QList>
-#include <QUrl>
 
 class KRecentFilesAction;
 class KXMLGUIClient;
+
+class QUrl;
 
 namespace Kasten {
 
