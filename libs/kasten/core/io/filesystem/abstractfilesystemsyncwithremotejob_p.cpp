@@ -8,7 +8,6 @@
 
 // library
 #include "abstractmodelfilesystemsynchronizer.hpp"
-#include <abstractdocument.hpp>
 // KF
 #include <KIO/FileCopyJob>
 #include <KJobWidgets>

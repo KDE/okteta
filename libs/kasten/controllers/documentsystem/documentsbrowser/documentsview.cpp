@@ -16,7 +16,6 @@
 // Qt
 #include <QTreeView>
 #include <QLabel>
-#include <QHBoxLayout>
 #include <QVBoxLayout>
 
 namespace Kasten {

@@ -24,7 +24,6 @@
 #include <KStandardAction>
 #include <KStandardGuiItem>
 // Qt
-#include <QToolBar>
 #include <QLabel>
 #include <QVBoxLayout>
 #include <QCheckBox>

@@ -9,8 +9,6 @@
 
 // Std
 #include <utility>
-// lib
-#include <abstractdocument.hpp>
 
 namespace Kasten {
 
