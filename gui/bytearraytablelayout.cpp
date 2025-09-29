@@ -206,9 +206,9 @@ Coord ByteArrayTableLayout::coordOfIndex(Address index) const
 
 CoordRange ByteArrayTableLayout::coordRangeOfIndizes(const AddressRange& indizes) const
 {
-    return CoordRange(
+    return {
         Coord::fromIndex(indizes.start() + mRelativeStartOffset - mByteArrayOffset, mNoOfBytesPerLine),
-        Coord::fromIndex(indizes.end() + mRelativeStartOffset - mByteArrayOffset,   mNoOfBytesPerLine));
+        Coord::fromIndex(indizes.end() + mRelativeStartOffset - mByteArrayOffset,   mNoOfBytesPerLine)};
 }
 
 Address ByteArrayTableLayout::correctIndex(Address index) const
@@ -240,7 +240,7 @@ bool ByteArrayTableLayout::atLastLinePosition(Coord coord) const
 
 LinePositionRange ByteArrayTableLayout::linePositions(Line line) const
 {
-    return LinePositionRange(firstLinePosition(line), lastLinePosition(line));
+    return {firstLinePosition(line), lastLinePosition(line)};
 }
 
 LinePosition ByteArrayTableLayout::firstLinePosition(Coord coord) const

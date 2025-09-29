@@ -195,7 +195,7 @@ inline Coord Coord::fromIndex(Address index, LinePositionSize lineWidth)
 {
     const Line line = index / lineWidth;
     const LinePosition pos  = index - line * lineWidth;
-    return Coord(pos, line);
+    return {pos, line};
 }
 
 inline constexpr bool Coord::operator==(const Coord& other) const { return mPos == other.mPos && mLine == other.mLine; }
@@ -304,7 +304,7 @@ inline constexpr bool Coord::isAtStart()                   const { return mPos =
 
 inline Coord operator+(Coord other, LinePosition pos)
 {
-    return Coord(other.pos() + pos, other.line());
+    return {other.pos() + pos, other.line()};
 }
 
 }

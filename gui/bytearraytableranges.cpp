@@ -134,7 +134,7 @@ void ByteArrayTableRanges::setSelectionEnd(Address endIndex)
 AddressRange ByteArrayTableRanges::removeSelection(int id)
 {
     if (id > 0) {
-        return AddressRange();
+        return {};
     }
 
     AddressRange range = mSelection.range();

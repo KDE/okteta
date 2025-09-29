@@ -200,12 +200,12 @@ inline Line ColumnsViewScrollAreaEngine::lineAt(PixelY y) const
 inline LineRange ColumnsViewScrollAreaEngine::visibleLines() const
 {
     const PixelYRange ySpan = PixelYRange::fromWidth(yOffset(), visibleHeight());
-    return LineRange(lineAt(ySpan.start()), lineAt(ySpan.end()));
+    return {lineAt(ySpan.start()), lineAt(ySpan.end())};
 }
 
 inline LineRange ColumnsViewScrollAreaEngine::visibleLines(PixelYRange yPixels) const
 {
-    return LineRange(lineAt(yPixels.start()), lineAt(yPixels.end()));
+    return {lineAt(yPixels.start()), lineAt(yPixels.end())};
 }
 
 inline PixelX ColumnsViewScrollAreaEngine::visibleWidth() const

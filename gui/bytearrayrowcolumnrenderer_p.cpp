@@ -333,7 +333,7 @@ LinePositionRange ByteArrayRowColumnRendererPrivate::linePositionsOfX(PixelX x, 
     Q_Q(const ByteArrayRowColumnRenderer);
 
     if (mLinePosLeftPixelX.empty()) {
-        return LinePositionRange();
+        return {};
     }
 
     // translate
@@ -392,7 +392,7 @@ LinePosition ByteArrayRowColumnRendererPrivate::linePositionOfColumnX(PixelX PX)
 LinePositionRange ByteArrayRowColumnRendererPrivate::linePositionsOfColumnXs(PixelX pixelX, PixelX pixelWidth) const
 {
     if (mLinePosLeftPixelX.empty()) {
-        return LinePositionRange();
+        return {};
     }
 
     const PixelX rightPixelX = pixelX + pixelWidth - 1;
@@ -433,7 +433,7 @@ PixelXRange ByteArrayRowColumnRendererPrivate::xsOfLinePositionsInclSpaces(LineP
                                                    xOfLinePosition(linePositions.start());
     const PixelX rightX = (linePositions.end() < mLastLinePos) ? xOfLinePosition(linePositions.nextBehindEnd()) - 1 :
                                                                  rightXOfLinePosition(linePositions.end());
-    return PixelXRange(x, rightX);
+    return {x, rightX};
 }
 
 PixelXRange ByteArrayRowColumnRendererPrivate::columnXsOfLinePositionsInclSpaces(LinePositionRange linePositions) const
@@ -442,7 +442,7 @@ PixelXRange ByteArrayRowColumnRendererPrivate::columnXsOfLinePositionsInclSpaces
                                                    columnXOfLinePosition(linePositions.start());
     const PixelX rightX = (linePositions.end() < mLastLinePos) ? columnXOfLinePosition(linePositions.nextBehindEnd()) - 1 :
                                                                  columnRightXOfLinePosition(linePositions.end());
-    return PixelXRange(x, rightX);
+    return {x, rightX};
 }
 
 QRect ByteArrayRowColumnRendererPrivate::byteRect(Coord coord) const

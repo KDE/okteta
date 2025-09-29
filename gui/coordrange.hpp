@@ -23,7 +23,7 @@ struct RangeNullValue<Coord>
 {
     constexpr Coord operator()() const
     {
-        return Coord(-1, -1);
+        return {-1, -1};
     }
 };
 

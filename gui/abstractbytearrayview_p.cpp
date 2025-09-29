@@ -57,7 +57,7 @@ static constexpr int DefaultZoomStep = 1;
 
 static constexpr AbstractByteArrayView::ValueCoding DefaultValueCoding =  AbstractByteArrayView::HexadecimalCoding;
 
-static inline QString DefaultCharCoding() { return QString(); } // -> local 8-bit
+static inline QString DefaultCharCoding() { return {}; } // -> local 8-bit
 
 static constexpr AbstractByteArrayView::LayoutStyle DefaultResizeStyle = AbstractByteArrayView::FixedLayoutStyle;
 
