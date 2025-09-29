@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-07-18 03:22+0000\n"
+"POT-Creation-Date: 2025-09-22 03:32+0000\n"
 "PO-Revision-Date: 2020-05-02 23:21+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -1726,20 +1726,20 @@ msgstr ""
 "%5"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:229
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:230
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:211
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed."
 msgstr "Feil ved validering."
 
 #: controllers/view/structures/datatypes/datainformation.cpp:232
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:233
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:214
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed: \"%1\""
 msgstr "Feil ved validering: «%1»"
 
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:235
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:216
 #, kde-format
 msgid ""
 "Name: %2\n"
@@ -1774,7 +1774,7 @@ msgstr[1] ""
 "\n"
 " %6"
 
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:240
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:221
 #, kde-format
 msgid ""
 "Name: %2\n"
@@ -1992,17 +1992,17 @@ msgstr "bitfelt"
 msgid "invalid type"
 msgstr "ugyldig type"
 
-#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:135
+#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:129
 #, kde-format
 msgid "Non-ASCII char: 0x%1"
 msgstr "Ikkje-ASCII-teikn: 0x1%1"
 
-#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:143
+#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:137
 #, kde-format
 msgid "ASCII char"
 msgstr "ASCII-teikn"
 
-#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:153
+#: controllers/view/structures/datatypes/strings/asciistringdata.cpp:147
 #, kde-format
 msgid "ASCII string"
 msgstr "ASCII-streng"
@@ -2017,12 +2017,12 @@ msgstr "EBCDIC-teikn"
 msgid "EBCDIC string"
 msgstr "EBCDIC-streng"
 
-#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:131
+#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:130
 #, kde-format
 msgid "Latin1 char"
 msgstr "Latin1-teikn"
 
-#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:141
+#: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:140
 #, kde-format
 msgid "Latin1 string"
 msgstr "Latin1-streng"
