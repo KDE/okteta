@@ -31,7 +31,7 @@ inline PrimitiveDataType CharDataInformationMethods::staticType()
 
 inline QVariant CharDataInformationMethods::staticToQVariant(quint8 value)
 {
-    return QVariant(value);
+    return {value};
 }
 
 inline quint8 CharDataInformationMethods::fromVariant(const QVariant& value, bool* ok)

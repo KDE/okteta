@@ -78,12 +78,12 @@ void StructuresSelectionModel::setEnabledStructures(const QStringList& enabledSt
 QVariant StructuresSelectionModel::data(const QModelIndex &index, int role) const
 {
     if (!index.isValid()) {
-        return QVariant();
+        return {};
     }
 
     const int row = index.row();
     if ((row < 0) || (row >= static_cast<int>(m_metaDataList.size()))) {
-        return QVariant();
+        return {};
     }
 
     const StructureMetaData& metaData = m_metaDataList[row];
@@ -107,7 +107,7 @@ QVariant StructuresSelectionModel::data(const QModelIndex &index, int role) cons
         case KCategorizedSortFilterProxyModel::CategorySortRole:
             return metaData.categoryId();
         default:
-            return QVariant();
+            return {};
     }
 }
 

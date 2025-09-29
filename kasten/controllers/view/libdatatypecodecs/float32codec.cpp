@@ -33,7 +33,7 @@ QByteArray Float32Codec::valueToBytes(const QVariant& value) const
 {
     const float number = value.value<Float32>().value;
 
-    return QByteArray((const char*)&number, sizeof(float));
+    return {(const char*)&number, sizeof(float)};
 }
 
 bool Float32Codec::areEqual(const QVariant& value, QVariant& otherValue) const

@@ -41,7 +41,7 @@ QVariant Utf16Codec::value(const PODData& data, int* byteCount) const
         }
     }
     *byteCount = 0;
-    return QVariant();
+    return {};
 }
 
 QByteArray Utf16Codec::valueToBytes(const QVariant& value) const

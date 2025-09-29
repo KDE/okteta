@@ -69,7 +69,7 @@ int ByteArrayDocument::versionCount() const { return mByteArray->versionCount();
 DocumentVersionData ByteArrayDocument::versionData(int versionIndex) const
 {
     const QString changeComment = (versionIndex == 0) ? mInitDescription : mByteArray->versionDescription(versionIndex);
-    return DocumentVersionData(versionIndex, changeComment);
+    return {versionIndex, changeComment};
 }
 
 void ByteArrayDocument::revertToVersionByIndex(int versionIndex) { mByteArray->revertToVersionByIndex(versionIndex); }

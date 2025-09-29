@@ -21,7 +21,7 @@ QString AbstractColumnHtmlRenderer::whiteSpace(unsigned int length)
 QString AbstractColumnHtmlRenderer::emptyCells(unsigned int length, unsigned int codingWidth)
 {
     if (length == 0) {
-        return QString();
+        return {};
     }
     if (codingWidth == 0) {
         return QStringLiteral("<td colspan=%1></td>").arg(length);

@@ -96,7 +96,7 @@ QSize StructureItemDelegate::sizeHint(const QStyleOptionViewItem& option, const 
 
     const int width = checkBoxRect.width() + iconRect.width() + textRect.width() + aboutButtonRect.width() + 8 * focusFrameHMargin;
     const int height = qMax(checkBoxRect.height(), qMax(iconRect.height(), qMax(textRect.height(), aboutButtonRect.height()))) + 2 * focusFrameHMargin;
-    return QSize(width, height);
+    return {width, height};
 }
 
 QList<QWidget*> StructureItemDelegate::createItemWidgets(const QModelIndex& index) const

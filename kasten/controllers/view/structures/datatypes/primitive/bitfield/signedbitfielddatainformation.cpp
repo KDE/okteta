@@ -87,7 +87,7 @@ void SignedBitfieldDataInformation::setValue(AllPrimitiveTypes newVal)
 
 AllPrimitiveTypes SignedBitfieldDataInformation::fromVariant(const QVariant& variant, bool* ok) const
 {
-    return AllPrimitiveTypes(variant.toLongLong(ok));
+    return {variant.toLongLong(ok)};
 }
 
 QString SignedBitfieldDataInformation::typeNameImpl() const

@@ -56,7 +56,7 @@ private:
     static PropertyPair pair(const char* name,
                              QScriptValue::PropertyFlags flags = QScriptValue::Undeletable | QScriptValue::ReadOnly)
     {
-        return PropertyPair(QString::fromUtf8(name), flags);
+        return {QString::fromUtf8(name), flags};
     }
 
 private Q_SLOTS:

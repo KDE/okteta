@@ -22,7 +22,7 @@ static constexpr Okteta::Address DefaultFirstLineOffset = 0;
 static constexpr int DefaultNoOfBytesPerLine =  16;
 static constexpr LayoutStyle DefaultResizeStyle = FixedLayoutStyle; // krazy:exclude=staticobjects
 static constexpr Okteta::ValueCoding DefaultValueCoding =  Okteta::HexadecimalCoding; // krazy:exclude=staticobjects
-static inline QString DefaultCharCoding() { return QString(); } // -> local 8-bit
+static inline QString DefaultCharCoding() { return {}; } // -> local 8-bit
 
 static constexpr int BAFInitialHeight = 50;
 static constexpr int BAFInitialWidth = 50;

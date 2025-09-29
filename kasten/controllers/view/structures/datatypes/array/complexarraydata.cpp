@@ -98,7 +98,7 @@ QString ComplexArrayData::typeName() const
 
 QString ComplexArrayData::valueString() const
 {
-    return QString();
+    return {};
 }
 
 void ComplexArrayData::setNewParentForChildren()

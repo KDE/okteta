@@ -33,7 +33,7 @@ QByteArray Float64Codec::valueToBytes(const QVariant& value) const
 {
     const double number = value.value<Float64>().value;
 
-    return QByteArray((const char*)&number, sizeof(double));
+    return {(const char*)&number, sizeof(double)};
 }
 
 bool Float64Codec::areEqual(const QVariant& value, QVariant& otherValue) const

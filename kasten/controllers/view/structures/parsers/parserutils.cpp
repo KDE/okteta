@@ -128,13 +128,14 @@ ParsedNumber<int> ParserUtils::intFromString(const QString& str)
     } else if (str.startsWith(QLatin1String("-0x"))) {
         // special case for minimum possible value
         if (str == QLatin1String("-0x80000000")) {
+            // TODO: deal with narrowing type here for unsigned int to int
             return ParsedNumber<int>(-0x80000000, str, true);
         }
         value = -QStringView(str).mid(3).toInt(&okay, 16);
     } else {
         value = str.toInt(&okay, 10);
     }
-    return ParsedNumber<int>(value, str, okay);
+    return {value, str, okay};
 }
 
 ParsedNumber<uint> ParserUtils::uintFromString(const QString& str)
@@ -146,7 +147,7 @@ ParsedNumber<uint> ParserUtils::uintFromString(const QString& str)
     } else {
         value = str.toUInt(&okay, 10);
     }
-    return ParsedNumber<uint>(value, str, okay);
+    return {value, str, okay};
 }
 
 ParsedNumber<quint64> ParserUtils::uint64FromString(const QString& str)
@@ -158,7 +159,7 @@ ParsedNumber<quint64> ParserUtils::uint64FromString(const QString& str)
     } else {
         value = str.toULongLong(&okay, 10);
     }
-    return ParsedNumber<quint64>(value, str, okay);
+    return {value, str, okay};
 }
 
 DataInformation::DataInformationEndianness ParserUtils::byteOrderFromString(const QString& string,
@@ -191,7 +192,7 @@ ParsedNumber<int> ParserUtils::intFromScriptValue(const QScriptValue& val)
         if (doubleVal != qsreal(value)) {
             return ParsedNumber<int>::badInput(val.toString());
         }
-        return ParsedNumber<int>(value, val.toString(), true);
+        return {value, val.toString(), true};
     }
     if (val.isString()) {
         return intFromString(val.toString());
@@ -208,7 +209,7 @@ ParsedNumber<uint> ParserUtils::uintFromScriptValue(const QScriptValue& val)
         if (doubleVal != qsreal(value)) {
             return ParsedNumber<uint>::badInput(val.toString());
         }
-        return ParsedNumber<uint>(value, val.toString(), true);
+        return {value, val.toString(), true};
     }
     if (val.isString()) {
         return uintFromString(val.toString());
@@ -225,7 +226,7 @@ ParsedNumber<quint64> ParserUtils::uint64FromScriptValue(const QScriptValue& val
         if (doubleVal != qsreal(value)) {
             return ParsedNumber<quint64>::badInput(val.toString());
         }
-        return ParsedNumber<quint64>(value, val.toString(), true);
+        return {value, val.toString(), true};
     }
     if (val.isString()) {
         return uint64FromString(val.toString());

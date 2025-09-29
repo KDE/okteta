@@ -33,7 +33,7 @@ QByteArray SInt16Codec::valueToBytes(const QVariant& value) const
 {
     const qint16 number = value.value<SInt16>().value;
 
-    return QByteArray((const char*)&number, sizeof(qint16));
+    return {(const char*)&number, sizeof(qint16)};
 }
 
 bool SInt16Codec::areEqual(const QVariant& value, QVariant& otherValue) const

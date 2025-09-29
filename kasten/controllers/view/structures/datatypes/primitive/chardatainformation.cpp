@@ -106,5 +106,5 @@ QScriptValue CharDataInformationMethods::asScriptValue(quint8 value, QScriptEngi
 {
     Q_UNUSED(engine)
     Q_UNUSED(handler)
-    return QScriptValue(QString(value > 127 ? QChar::ReplacementCharacter : QChar(value, 0)));
+    return {QString(value > 127 ? QChar::ReplacementCharacter : QChar(value, 0))};
 }

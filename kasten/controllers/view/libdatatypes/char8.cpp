@@ -15,7 +15,7 @@ namespace Okteta {
 QString Char8::toString() const
 {
     if (character.isUndefined()) {
-        return QString(Okteta::DefaultUndefinedChar);
+        return {Okteta::DefaultUndefinedChar};
     }
 
     switch (character.unicode()) {
@@ -30,7 +30,7 @@ QString Char8::toString() const
     default: break;
     }
 
-    return QString(character);
+    return {character};
 }
 
 }

@@ -37,7 +37,7 @@ public:
 inline Utf16::Utf16() = default;
 inline Utf16::Utf16(QChar v) : value(v) {}
 
-inline QString Utf16::toString() const { return QString(value); }
+inline QString Utf16::toString() const { return {value}; }
 
 }
 

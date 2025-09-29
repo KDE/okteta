@@ -33,7 +33,7 @@ static constexpr int DefaultViewModus = 0;
 static constexpr int DefaultVisibleByteArrayCodings = 3;
 static constexpr int DefaultOffsetCoding = 0;
 static constexpr int DefaultValueCoding = 0;
-static inline QString DefaultCharCoding() { return QString(); } // -> local 8-bit
+static inline QString DefaultCharCoding() { return {}; } // -> local 8-bit
 
 static QVector<ByteArrayViewProfile::Id>
 lockedViewProfileIds(const ByteArrayViewProfileFileInfoLookup& viewProfileFileInfoLookup)
@@ -245,7 +245,7 @@ ByteArrayViewProfileManager::createLock(const ByteArrayViewProfile::Id& viewProf
 {
     const QString viewProfileFilePath = filePathOfViewProfile(viewProfileId);
 
-    return ByteArrayViewProfileLock(viewProfileFilePath, viewProfileId);
+    return {viewProfileFilePath, viewProfileId};
 }
 
 /*

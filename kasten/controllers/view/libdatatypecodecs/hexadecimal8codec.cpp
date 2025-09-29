@@ -33,7 +33,7 @@ QByteArray Hexadecimal8Codec::valueToBytes(const QVariant& value) const
 {
     const quint8 number = value.value<Hexadecimal8>().value;
 
-    return QByteArray((const char*)&number, sizeof(quint8));
+    return {(const char*)&number, sizeof(quint8)};
 }
 
 bool Hexadecimal8Codec::areEqual(const QVariant& value, QVariant& otherValue) const

@@ -31,7 +31,7 @@ inline PrimitiveDataType DoubleDataInformationMethods::staticType()
 
 inline QVariant DoubleDataInformationMethods::staticToQVariant(double value)
 {
-    return QVariant(value);
+    return {value};
 }
 
 inline double DoubleDataInformationMethods::fromVariant(const QVariant& value, bool* ok)

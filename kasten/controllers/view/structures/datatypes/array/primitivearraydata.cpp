@@ -282,7 +282,7 @@ QString PrimitiveArrayData<type>::typeName() const
 template <PrimitiveDataType type>
 QString PrimitiveArrayData<type>::valueString() const
 {
-    return QString();
+    return {};
 }
 
 template <PrimitiveDataType type>

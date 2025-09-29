@@ -25,7 +25,7 @@ QString ByteArrayChar8StringEncoder::encodeAsControlString(Character character)
     case '\r': return QStringLiteral("\\r"); break;
     case '\t': return QStringLiteral("\\t"); break;
     case '\v': return QStringLiteral("\\v"); break;
-    default: return QString(); break;
+    default: return {}; break;
     }
 }
 
@@ -76,7 +76,7 @@ QString ByteArrayChar8StringEncoder::encodeAsString(Byte byte,
                 return QStringLiteral("\\\\");
             }
 
-            return QString(character);
+            return {character};
         }
         const QString controlString = encodeAsControlString(character);
         if (!controlString.isEmpty()) {

@@ -88,7 +88,7 @@ bool AbstractBitfieldDataInformation::setData(const QVariant& valueVariant,
 
 AllPrimitiveTypes AbstractBitfieldDataInformation::fromVariant(const QVariant& variant, bool* ok) const
 {
-    return AllPrimitiveTypes(variant.toULongLong(ok));
+    return {variant.toULongLong(ok)};
 }
 
 QScriptClass* AbstractBitfieldDataInformation::scriptClass(ScriptHandlerInfo* handlerInfo) const
