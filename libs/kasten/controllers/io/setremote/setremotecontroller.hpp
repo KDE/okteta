@@ -37,7 +37,7 @@ private:
     QAction* mSaveAsAction;
 
     DocumentSyncManager* mSyncManager;
-    AbstractDocument* mDocument;
+    AbstractDocument* mDocument = nullptr;
 };
 
 }
