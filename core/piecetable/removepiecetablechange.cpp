@@ -53,14 +53,14 @@ AddressRange RemovePieceTableChange::apply(PieceTable* pieceTable) const
 
     pieceTable->remove(mRemoveRange);
 
-    return AddressRange(mRemoveRange.start(), oldLast);
+    return {mRemoveRange.start(), oldLast};
 }
 
 AddressRange RemovePieceTableChange::revert(PieceTable* pieceTable) const
 {
     pieceTable->insert(mRemoveRange.start(), mRemovedPieces);
 
-    return AddressRange(mRemoveRange.start(), pieceTable->size() - 1);
+    return {mRemoveRange.start(), pieceTable->size() - 1};
 }
 
 ArrayChangeMetrics RemovePieceTableChange::metrics() const

@@ -408,7 +408,7 @@ Piece PieceTable::replaceOne(Address dataOffset, Address storageOffset, int stor
         it.next();
         dataRange.setStart(dataRange.nextBehindEnd());
     }
-    return Piece(replacedStorageOffset, 1, replacedStorageId);
+    return {replacedStorageOffset, 1, replacedStorageId};
 }
 
 }

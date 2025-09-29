@@ -37,7 +37,7 @@ AddressRange GroupPieceTableChange::apply(PieceTable* pieceTable) const
     Q_UNUSED(pieceTable)
 //     pieceTable->insert( mInsertOffset, mInsertLength, mStorageOffset );
 
-    return AddressRange();// ( mInsertOffset, pieceTable->size()-1 );
+    return {}; // ( mInsertOffset, pieceTable->size()-1 );
 }
 
 AddressRange GroupPieceTableChange::revert(PieceTable* pieceTable) const
@@ -45,7 +45,7 @@ AddressRange GroupPieceTableChange::revert(PieceTable* pieceTable) const
     Q_UNUSED(pieceTable)
 //     const int oldLast = pieceTable->size() - 1;
 //     pieceTable->remove( AddressRange::fromWidth(mInsertOffset,mInsertLength) );
-    return AddressRange();// ( mInsertOffset, oldLast );
+    return {}; // ( mInsertOffset, oldLast );
 }
 
 ArrayChangeMetrics GroupPieceTableChange::metrics() const

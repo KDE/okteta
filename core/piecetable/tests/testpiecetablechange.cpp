@@ -38,14 +38,14 @@ AddressRange TestPieceTableChange::apply(PieceTable* pieceTable) const
 {
     pieceTable->replaceOne(mPosition, mStoragePosition, mStorageId);
 
-    return AddressRange(mPosition, mPosition);
+    return {mPosition, mPosition};
 }
 
 AddressRange TestPieceTableChange::revert(PieceTable* pieceTable) const
 {
     pieceTable->replaceOne(mPosition, mReplacedStoragePosition, mReplacedStorageId);
 
-    return AddressRange(mPosition, mPosition);
+    return {mPosition, mPosition};
 }
 
 ArrayChangeMetrics TestPieceTableChange::metrics() const

@@ -115,7 +115,7 @@ inline Size PieceTableChangeHistory::appliedChangesDataSize()    const { return 
 inline QString PieceTableChangeHistory::changeDescription(int changeId) const
 {
     if ((changeId < 0) || (static_cast<int>(mChangeStack.size()) <= changeId)) {
-        return QString();
+        return {};
     }
 
     return mChangeStack[changeId]->description();

@@ -26,14 +26,14 @@ AddressRange SwapRangesPieceTableChange::apply(PieceTable* pieceTable) const
 {
     pieceTable->swap(mFirstStart, mSecondRange);
 
-    return AddressRange(mFirstStart, mSecondRange.end());
+    return {mFirstStart, mSecondRange.end()};
 }
 
 AddressRange SwapRangesPieceTableChange::revert(PieceTable* pieceTable) const
 {
     pieceTable->swap(mFirstStart, AddressRange(mFirstStart + mSecondRange.width(), mSecondRange.end()));
 
-    return AddressRange(mFirstStart, mSecondRange.end());
+    return {mFirstStart, mSecondRange.end()};
 }
 
 ArrayChangeMetrics SwapRangesPieceTableChange::metrics() const

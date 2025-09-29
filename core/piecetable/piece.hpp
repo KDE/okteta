@@ -79,36 +79,36 @@ inline void Piece::setStorageId(int storageId) { mStorageId = storageId; }
 
 inline Piece Piece::splitAt(Address storageOffset)
 {
-    return Piece(AddressRange::splitAt(storageOffset), mStorageId);
+    return {AddressRange::splitAt(storageOffset), mStorageId};
 }
 inline Piece Piece::splitAtLocal(Address localStorageOffset)
 {
-    return Piece(AddressRange::splitAtLocal(localStorageOffset), mStorageId);
+    return {AddressRange::splitAtLocal(localStorageOffset), mStorageId};
 }
 inline Piece Piece::remove(const AddressRange& removeStorageRange)
 {
-    return Piece(AddressRange::remove(removeStorageRange), mStorageId);
+    return {AddressRange::remove(removeStorageRange), mStorageId};
 }
 inline Piece Piece::removeLocal(const AddressRange& localRemoveStorageRange)
 {
-    return Piece(AddressRange::removeLocal(localRemoveStorageRange), mStorageId);
+    return {AddressRange::removeLocal(localRemoveStorageRange), mStorageId};
 }
 inline Piece Piece::removeStartBeforeLocal(Address storageOffset)
 {
     const Address oldStart = start();
     moveStartBy(storageOffset);
-    return Piece(AddressRange(oldStart, nextBeforeStart()), mStorageId);
+    return {AddressRange(oldStart, nextBeforeStart()), mStorageId};
 }
 inline Piece Piece::removeEndBehindLocal(Address storageOffset)
 {
     const Address oldEnd = end();
     setEndByWidth(storageOffset + 1);
-    return Piece(AddressRange(nextBehindEnd(), oldEnd), mStorageId);
+    return {AddressRange(nextBehindEnd(), oldEnd), mStorageId};
 }
 
 inline Piece Piece::subPiece(const AddressRange& local) const
 {
-    return Piece(AddressRange::subRange(local), mStorageId);
+    return {AddressRange::subRange(local), mStorageId};
 }
 
 inline bool Piece::prepend(const Piece& other)

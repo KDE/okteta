@@ -55,7 +55,7 @@ AddressRange ReplacePieceTableChange::apply(PieceTable* pieceTable) const
     const Address lastChanged = (newSize == oldSize) ? mRemoveRange.end() :
                                 (newSize > oldSize) ?  newSize - 1 :
                                                        oldSize - 1;
-    return AddressRange(mRemoveRange.start(), lastChanged);
+    return {mRemoveRange.start(), lastChanged};
 }
 
 AddressRange ReplacePieceTableChange::revert(PieceTable* pieceTable) const
@@ -69,7 +69,7 @@ AddressRange ReplacePieceTableChange::revert(PieceTable* pieceTable) const
     const Address lastChanged = (newSize == oldSize) ? insertedSection.end() :
                                 (newSize > oldSize) ?  newSize - 1 :
                                                        oldSize - 1;
-    return AddressRange(mRemoveRange.start(), lastChanged);
+    return {mRemoveRange.start(), lastChanged};
 }
 
 ArrayChangeMetrics ReplacePieceTableChange::metrics() const

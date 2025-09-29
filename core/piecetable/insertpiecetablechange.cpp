@@ -45,14 +45,14 @@ AddressRange InsertPieceTableChange::apply(PieceTable* pieceTable) const
 {
     pieceTable->insert(mInsertOffset, mInsertLength, mStorageOffset);
 
-    return AddressRange(mInsertOffset, pieceTable->size() - 1);
+    return {mInsertOffset, pieceTable->size() - 1};
 }
 
 AddressRange InsertPieceTableChange::revert(PieceTable* pieceTable) const
 {
     const Address oldLast = pieceTable->size() - 1;
     pieceTable->remove(AddressRange::fromWidth(mInsertOffset, mInsertLength));
-    return AddressRange(mInsertOffset, oldLast);
+    return {mInsertOffset, oldLast};
 }
 
 ArrayChangeMetrics InsertPieceTableChange::metrics() const
