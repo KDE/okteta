@@ -41,12 +41,15 @@ public:
 public:
     void connectWithFile();
 
-protected:
+private:
     AbstractModelFileSystemSynchronizer* const mSynchronizer;
     AbstractDocument* const mDocument;
+
     const QUrl mUrl;
     const AbstractModelSynchronizer::ConnectOption mOption;
+
     QFile* mFile = nullptr;
+
     QString mWorkFilePath;
     QString mTempFilePath;
 

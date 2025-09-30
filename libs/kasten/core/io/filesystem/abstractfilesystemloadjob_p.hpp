@@ -38,10 +38,13 @@ public:
 public: // slots
     void load();
 
-protected:
+private:
     AbstractModelFileSystemSynchronizer* const mSynchronizer;
+
     const QUrl mUrl;
+
     QFile* mFile = nullptr;
+
     QString mWorkFilePath;
     QString mTempFilePath;
 

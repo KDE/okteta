@@ -40,7 +40,7 @@ public:
 public:  // slots
     void syncFromRemote();
 
-protected:
+private:
     AbstractModelFileSystemSynchronizer* mSynchronizer;
 
     QFile* mFile = nullptr;
