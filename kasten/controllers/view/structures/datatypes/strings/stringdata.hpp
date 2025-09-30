@@ -76,7 +76,7 @@ protected:
     union {
         uint maxChars;
         uint maxBytes;
-    } mLength;
+    } mLength = {0}; // default to zero terminated strings
     quint32 mTerminationCodePoint = 0;
     uint mMode : 4;
     bool mLittleEndian : 1;

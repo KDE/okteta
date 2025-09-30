@@ -200,11 +200,10 @@ inline T AllPrimitiveTypes::readValue(const Okteta::AbstractByteArrayModel* inpu
     Q_ASSERT(BitCount64(input->size() - address) * 8 - bitOffset >= sizeof(T) * 8);
     Q_ASSERT(bitOffset < 8);
     // this union exists to force unsigned shifts
-    union {
-        T value;
+    const union {
         typename QIntegerForSizeof<T>::Unsigned unsignedValue;
-    } u;
-    u.unsignedValue = readValuePrivate<sizeof(T)>(input, address, endianness, bitOffset);
+        T value;
+    } u = {readValuePrivate<sizeof(T)>(input, address, endianness, bitOffset)};
     return u.value;
 }
 

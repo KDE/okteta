@@ -15,8 +15,6 @@ StringData::StringData(StringDataInformation* parent)
     , mLittleEndian(true)
     , mEofReached(false)
 {
-    // default to zero terminated strings
-    mLength.maxBytes = 0;
 }
 
 StringData::~StringData() = default;

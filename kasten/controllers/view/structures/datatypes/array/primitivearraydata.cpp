@@ -185,10 +185,10 @@ void PrimitiveArrayData<PrimitiveDataType::Float>::writeOneItem(float value, Okt
                                                                 QSysInfo::Endian endianness)
 {
     Q_ASSERT(sizeof(float) == sizeof(quint32));
-    union {
-        quint32 intVal; float floatVal;
-    } un;
-    un.floatVal = value;
+    const union {
+        float floatVal;
+        quint32 intVal;
+    } un = {value};
     PrimitiveArrayData<PrimitiveDataType::UInt32>::writeOneItem(un.intVal, addr, out, endianness);
 }
 
@@ -198,10 +198,10 @@ void PrimitiveArrayData<PrimitiveDataType::Double>::writeOneItem(double value, O
                                                                  QSysInfo::Endian endianness)
 {
     Q_ASSERT(sizeof(double) == sizeof(quint64));
-    union {
-        quint64 intVal; double doubleVal;
-    } un;
-    un.doubleVal = value;
+    const union {
+        double doubleVal;
+        quint64 intVal;
+    } un = {value};
     PrimitiveArrayData<PrimitiveDataType::UInt64>::writeOneItem(un.intVal, addr, out, endianness);
 }
 
