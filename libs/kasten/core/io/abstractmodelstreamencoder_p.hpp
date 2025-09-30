@@ -33,6 +33,7 @@ public:
 protected:
     AbstractModelStreamEncoder* const q_ptr;
 
+private:
     const QString mRemoteTypeName;
     const QString mRemoteMimeType;
     const QString mRemoteClipboardMimeType;

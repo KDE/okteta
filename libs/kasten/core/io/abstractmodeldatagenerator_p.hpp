@@ -33,6 +33,7 @@ public:
 protected:
     AbstractModelDataGenerator* const q_ptr;
 
+private:
     const QString mTypeName;
     const QString mMimeType;
     const AbstractModelDataGenerator::Flags mFlags;
