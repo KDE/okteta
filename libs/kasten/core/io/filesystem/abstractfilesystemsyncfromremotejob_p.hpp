@@ -42,9 +42,11 @@ public:  // slots
 
 protected:
     AbstractModelFileSystemSynchronizer* mSynchronizer;
+
+    QFile* mFile = nullptr;
+
     QString mWorkFilePath;
     QString mTempFilePath;
-    QFile* mFile = nullptr;
 
 private:
     Q_DECLARE_PUBLIC(AbstractFileSystemSyncFromRemoteJob)
