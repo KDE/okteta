@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-17 01:57+0000\n"
+"POT-Creation-Date: 2025-09-30 02:13+0000\n"
 "PO-Revision-Date: 2025-02-15 14:15+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -94,7 +94,7 @@ msgstr "&Fenestroj"
 msgid "Main Toolbar"
 msgstr "Ĉefa ilobreto"
 
-#: program.cpp:87
+#: program.cpp:89
 #, kde-format
 msgctxt "@info"
 msgid "File(s) to load."

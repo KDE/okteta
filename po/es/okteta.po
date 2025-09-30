@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-17 01:57+0000\n"
+"POT-Creation-Date: 2025-09-30 02:13+0000\n"
 "PO-Revision-Date: 2025-05-24 18:24+0100\n"
 "Last-Translator: Sofía Priego <spriego@darksylvania.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -101,7 +101,7 @@ msgstr "&Ventanas"
 msgid "Main Toolbar"
 msgstr "Barra de herramientas principal"
 
-#: program.cpp:87
+#: program.cpp:89
 #, kde-format
 msgctxt "@info"
 msgid "File(s) to load."

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-17 01:57+0000\n"
+"POT-Creation-Date: 2025-09-30 02:13+0000\n"
 "PO-Revision-Date: 2010-09-16 06:02+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -152,7 +152,7 @@ msgctxt "@title:window"
 msgid "Documents"
 msgstr "Құжаттар"
 
-#: controllers/documentsystem/documentsbrowser/documentsview.cpp:50
+#: controllers/documentsystem/documentsbrowser/documentsview.cpp:49
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Documents"
@@ -173,13 +173,13 @@ msgctxt "@action:intoolbar"
 msgid "Folder of Current Document"
 msgstr "Назрдағы құжаттың қапшығы"
 
-#: controllers/io/copyas/copyascontroller.cpp:41
+#: controllers/io/copyas/copyascontroller.cpp:43
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy As"
 msgstr "Былай көшіріп алу"
 
-#: controllers/io/copyas/copyascontroller.cpp:92
+#: controllers/io/copyas/copyascontroller.cpp:94
 #, kde-format
 msgctxt "@item There are no encoders."
 msgid "Not available."
@@ -222,13 +222,13 @@ msgstr ""
 "таңдалған деректер жоғарда келтірілген параметрлерімен алмасу буферіне "
 "көшіріп алынады."
 
-#: controllers/io/export/exportcontroller.cpp:37
+#: controllers/io/export/exportcontroller.cpp:39
 #, kde-format
 msgctxt "@title:menu"
 msgid "Export"
 msgstr "Экспорт"
 
-#: controllers/io/export/exportcontroller.cpp:88
+#: controllers/io/export/exportcontroller.cpp:90
 #, kde-format
 msgctxt "@item There are no exporters."
 msgid "Not available."
@@ -265,13 +265,13 @@ msgstr ""
 "<interface>Файлға экспорттау</interface> батырмасын басқанда, таңдалған "
 "деректер жоғарда келтірілген параметрлерімен файлға көшірліп беріледі."
 
-#: controllers/io/insert/insertcontroller.cpp:37
+#: controllers/io/insert/insertcontroller.cpp:39
 #, kde-format
 msgctxt "@title:menu"
 msgid "Insert"
 msgstr "Енгізу"
 
-#: controllers/io/insert/insertcontroller.cpp:91
+#: controllers/io/insert/insertcontroller.cpp:93
 #, kde-format
 msgctxt "@item There are no generators."
 msgid "Not available."
@@ -402,19 +402,19 @@ msgctxt "@info:tooltip"
 msgid "Zoom: %1%"
 msgstr "Масштабы: %1%"
 
-#: core/system/documentsyncmanager_p.cpp:109
+#: core/system/documentsyncmanager_p.cpp:111
 #, kde-format
 msgctxt "@title:window"
 msgid "Save As"
 msgstr "Былай сақтау"
 
-#: core/system/documentsyncmanager_p.cpp:211
+#: core/system/documentsyncmanager_p.cpp:213
 #, kde-format
 msgctxt "@title:window"
 msgid "Close"
 msgstr "Жабу"
 
-#: core/system/documentsyncmanager_p.cpp:246
+#: core/system/documentsyncmanager_p.cpp:248
 #, kde-format
 msgctxt "@title:window"
 msgid "Reload"
@@ -454,7 +454,7 @@ msgstr ""
 "<interface>Құру</interface> батырмасын басқанда, жоғарда келтірілген "
 "параметрлерімен керек деректер құрылып, олар жаңа құжатқа енгізіледі."
 
-#: gui/system/dialoghandler.cpp:32
+#: gui/system/dialoghandler.cpp:34
 #, kde-kuit-format
 msgctxt "@info"
 msgid "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
@@ -462,7 +462,7 @@ msgstr ""
 "<filename>%1</filename><nl/>деп аталған файл бар екен.<nl/>Үстінен жазыла "
 "берсін бе?"
 
-#: gui/system/dialoghandler.cpp:53
+#: gui/system/dialoghandler.cpp:55
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -472,7 +472,7 @@ msgstr ""
 "<filename>%1</filename> деген файлда сақталмаған өзгерістері бар. Құжатты "
 "қайта жүктеп алсыңыз олар жоғалады.<nl/>Жоғала берсін бе?"
 
-#: gui/system/dialoghandler.cpp:70
+#: gui/system/dialoghandler.cpp:72
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -482,7 +482,7 @@ msgstr ""
 "<filename>%1</filename> деген файл өзгертілген.<nl/>Өзгерістеріңізді сақтап "
 "аласыз ба, әлде ысырып тастайсыз ба?"
 
-#: gui/system/dialoghandler.cpp:90
+#: gui/system/dialoghandler.cpp:92
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""

@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-24 02:01+0000\n"
+"POT-Creation-Date: 2025-09-30 02:13+0000\n"
 "PO-Revision-Date: 2025-07-03 23:46+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -237,7 +237,7 @@ msgid ""
 msgstr "若您按下此鍵，則可以編輯上次選取的書籤的名稱。"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:142
-#: controllers/view/stringsextract/stringsextractview.cpp:189
+#: controllers/view/stringsextract/stringsextractview.cpp:191
 #: controllers/view/structures/structureview.cpp:382
 #, kde-format
 msgctxt "@action"
@@ -245,7 +245,7 @@ msgid "Copy Offset"
 msgstr "複製位移"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:144
-#: controllers/view/stringsextract/stringsextractview.cpp:191
+#: controllers/view/stringsextract/stringsextractview.cpp:193
 #: controllers/view/structures/structureview.cpp:384
 #, kde-format
 msgctxt "@info:tooltip"
@@ -329,21 +329,21 @@ msgctxt "@info:tooltip column contains the character with the value"
 msgid "Character"
 msgstr "字元"
 
-#: controllers/view/bytetable/bytetabletool.cpp:35
+#: controllers/view/bytetable/bytetabletool.cpp:37
 #: controllers/view/bytetable/bytetabletoolviewfactory.cpp:22
 #, kde-format
 msgctxt "@title:window"
 msgid "Value/Char Table"
 msgstr "數值/字元表"
 
-#: controllers/view/bytetable/bytetabletool.cpp:94
+#: controllers/view/bytetable/bytetabletool.cpp:96
 #, kde-format
 msgctxt "@item"
 msgid "Inserted 1 Byte"
 msgid_plural "Inserted %1 Bytes"
 msgstr[0] "已插入 %1 個位元組"
 
-#: controllers/view/bytetable/bytetabletool.cpp:112
+#: controllers/view/bytetable/bytetabletool.cpp:114
 #, kde-format
 msgctxt "@info"
 msgid "1 byte inserted."
@@ -389,27 +389,27 @@ msgctxt "@title:window"
 msgid "Charset Conversion"
 msgstr "字元集轉換"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:50
+#: controllers/view/charsetconversion/charsetconversionview.cpp:52
 #, kde-format
 msgctxt ""
 "@item:inmenu Is converted _from_ charset (selected in combobox next to this)"
 msgid "From"
 msgstr "從"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:52
+#: controllers/view/charsetconversion/charsetconversionview.cpp:54
 #, kde-format
 msgctxt ""
 "@item:inmenu Is converted _to_ charset (selected in combobox next to this)"
 msgid "To"
 msgstr "到"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:59
+#: controllers/view/charsetconversion/charsetconversionview.cpp:61
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The direction the bytes are converted, to or from the selected charset."
 msgstr "要轉換位元組的方向，是來源還是目標字元集。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:63
+#: controllers/view/charsetconversion/charsetconversionview.cpp:65
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -417,26 +417,26 @@ msgid ""
 "charset."
 msgstr "選擇要轉換位元組的方向，是來源還是目標字元集。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:79
+#: controllers/view/charsetconversion/charsetconversionview.cpp:81
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The charset the bytes are converted to."
 msgstr "位元組要轉換為哪個字元集。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:83
+#: controllers/view/charsetconversion/charsetconversionview.cpp:85
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Select the charset the bytes are converted to."
 msgstr "選擇位元組要轉換為哪個字元集。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:99
+#: controllers/view/charsetconversion/charsetconversionview.cpp:101
 #, kde-format
 msgctxt ""
 "@option:check substitute bytes whose char is not part of the target charset"
 msgid "Substitute missing:"
 msgstr "替換不存在的目標字元："
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:104
+#: controllers/view/charsetconversion/charsetconversionview.cpp:106
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -446,7 +446,7 @@ msgstr ""
 "若是某個位元組在來源字元集中存在，但不存在於目標字元集因此無法轉換時，是否要"
 "以預設位元組替換。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:108
+#: controllers/view/charsetconversion/charsetconversionview.cpp:110
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -456,39 +456,39 @@ msgstr ""
 "若是某個位元組在來源字元集中存在，但不存在於目標字元集因此無法轉換時，設為"
 "「真」則會以預設位元組替換。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:124
+#: controllers/view/charsetconversion/charsetconversionview.cpp:126
 #, kde-format
 msgctxt ""
 "@label:textbox byte to use for chars which are not part of the target charset"
 msgid "Substitute byte:"
 msgstr "替換位元組："
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:131
+#: controllers/view/charsetconversion/charsetconversionview.cpp:133
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte to use for chars which are not part of the target charset."
 msgstr "若是目標位元組裡沒有該字元時，要用哪個位元組替代。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:134
+#: controllers/view/charsetconversion/charsetconversionview.cpp:136
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "Define the byte to use for chars which are not part of the target charset."
 msgstr "定義若是目標位元組裡沒有該字元時，要用哪個位元組替代。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:168
+#: controllers/view/charsetconversion/charsetconversionview.cpp:170
 #, kde-format
 msgctxt "@action:button"
 msgid "Convert"
 msgstr "轉換"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:171
+#: controllers/view/charsetconversion/charsetconversionview.cpp:173
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Converts the bytes in the selected range."
 msgstr "轉換在選取範圍內的位元組。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:173
+#: controllers/view/charsetconversion/charsetconversionview.cpp:175
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -499,33 +499,33 @@ msgstr ""
 "如果您按下<interface>轉換</interface>按鍵，會對選取範圍內的位元組執行取代為目"
 "標字元集的動作。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:221
+#: controllers/view/charsetconversion/charsetconversionview.cpp:223
 #, kde-format
 msgctxt "@info"
 msgid "No bytes converted."
 msgstr "沒有轉換任何位元組。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:222
+#: controllers/view/charsetconversion/charsetconversionview.cpp:224
 #, kde-format
 msgctxt "@info"
 msgid "1 byte converted."
 msgid_plural "%1 bytes converted."
 msgstr[0] "轉換了 %1 個位元組。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:232
+#: controllers/view/charsetconversion/charsetconversionview.cpp:234
 #, kde-format
 msgctxt "@info"
 msgid "No bytes substituted."
 msgstr "沒有替換任何位元組。"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:233
+#: controllers/view/charsetconversion/charsetconversionview.cpp:235
 #, kde-format
 msgctxt "@info"
 msgid "1 byte substituted."
 msgid_plural "%1 bytes substituted."
 msgstr[0] "替換了 %1 個位元組"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:241
+#: controllers/view/charsetconversion/charsetconversionview.cpp:243
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -592,14 +592,14 @@ msgctxt "@item name of the change"
 msgid "Crop"
 msgstr "裁剪"
 
-#: controllers/view/filter/filtertool.cpp:61
+#: controllers/view/filter/filtertool.cpp:62
 #: controllers/view/filter/filtertoolviewfactory.cpp:22
 #, kde-format
 msgctxt "@title:window"
 msgid "Binary Filter"
 msgstr "二進位過濾器"
 
-#: controllers/view/filter/filtertool.cpp:171
+#: controllers/view/filter/filtertool.cpp:172
 #, kde-format
 msgctxt "@info"
 msgid "1 byte filtered with %2."
@@ -779,7 +779,7 @@ msgstr ""
 "計。"
 
 #: controllers/view/info/infoview.cpp:120
-#: controllers/view/stringsextract/stringsextractview.cpp:161
+#: controllers/view/stringsextract/stringsextractview.cpp:163
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy"
@@ -888,14 +888,14 @@ msgid "Modular sum 8-bit"
 msgstr "模數和 8 位元"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:26
-#: controllers/view/poddecoder/podtableview.cpp:86
+#: controllers/view/poddecoder/podtableview.cpp:87
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Big-endian"
 msgstr "高位元優先"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:27
-#: controllers/view/poddecoder/podtableview.cpp:87
+#: controllers/view/poddecoder/podtableview.cpp:88
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Little-endian"
@@ -1247,8 +1247,8 @@ msgid "UTF-8"
 msgstr "UTF-8"
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:69
-#: controllers/view/search/searchcontroller.cpp:112
-#: controllers/view/search/searchcontroller.cpp:120
+#: controllers/view/search/searchcontroller.cpp:114
+#: controllers/view/search/searchcontroller.cpp:122
 #, kde-format
 msgctxt "@title:window"
 msgid "Find"
@@ -1332,20 +1332,20 @@ msgid ""
 "data."
 msgstr "選擇您是要插入還是要覆寫現有的資料。"
 
-#: controllers/view/poddecoder/poddecodertool.cpp:92
+#: controllers/view/poddecoder/poddecodertool.cpp:93
 #: controllers/view/poddecoder/poddecodertoolviewfactory.cpp:25
 #, kde-format
 msgctxt "@title:window"
 msgid "Decoding Table"
 msgstr "解碼表"
 
-#: controllers/view/poddecoder/poddecodertool.cpp:307
+#: controllers/view/poddecoder/poddecodertool.cpp:308
 #, kde-format
 msgctxt "@item Edited as datatype"
 msgid "Edited as %1"
 msgstr "編輯為 %1"
 
-#: controllers/view/poddecoder/poddecodertool.cpp:316
+#: controllers/view/poddecoder/poddecodertool.cpp:317
 #, kde-format
 msgctxt "@info Edited as datatype"
 msgid "Edited as %1"
@@ -1375,19 +1375,19 @@ msgctxt "@info:tooltip for column Value"
 msgid "The value of the bytes for the datatype"
 msgstr "此資料型態所佔位元數"
 
-#: controllers/view/poddecoder/podtableview.cpp:93
+#: controllers/view/poddecoder/podtableview.cpp:94
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte order to use for decoding the bytes."
 msgstr "用於將位元組解碼時的位元組順序。"
 
-#: controllers/view/poddecoder/podtableview.cpp:97
+#: controllers/view/poddecoder/podtableview.cpp:98
 #, kde-format
 msgctxt "@option:check"
 msgid "Unsigned as hexadecimal:"
 msgstr "將無號數以十六進位顯示："
 
-#: controllers/view/poddecoder/podtableview.cpp:106
+#: controllers/view/poddecoder/podtableview.cpp:107
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1395,7 +1395,7 @@ msgid ""
 "hexadecimal instead of as decimal."
 msgstr "將無號的整數型態以十六位元值的方式顯示。"
 
-#: controllers/view/poddecoder/podtableview.cpp:136
+#: controllers/view/poddecoder/podtableview.cpp:137
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1404,19 +1404,19 @@ msgid ""
 msgstr ""
 "新值需要較少的位元（%1 而不是 %2）。<nl/> 要保留沒用到的位元，還是要移除？"
 
-#: controllers/view/poddecoder/podtableview.cpp:141
+#: controllers/view/poddecoder/podtableview.cpp:142
 #, kde-format
 msgctxt "@action:button keep the unused bytes"
 msgid "&Keep"
 msgstr "保留(&K)"
 
-#: controllers/view/poddecoder/podtableview.cpp:144
+#: controllers/view/poddecoder/podtableview.cpp:145
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Keep the unused bytes with their old values."
 msgstr "保留沒用到的位元為舊值。"
 
-#: controllers/view/poddecoder/podtableview.cpp:161
+#: controllers/view/poddecoder/podtableview.cpp:162
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1426,82 +1426,82 @@ msgstr ""
 "新值需要較多的位元（%1 而不是 %2）。<nl/> 要覆寫接下來的位元，還是要插入新位"
 "元？"
 
-#: controllers/view/poddecoder/podtableview.cpp:256
+#: controllers/view/poddecoder/podtableview.cpp:257
 #: controllers/view/structures/structureview.cpp:368
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit"
 msgstr "編輯"
 
-#: controllers/view/poddecoder/podtableview.cpp:269
+#: controllers/view/poddecoder/podtableview.cpp:270
 #: controllers/view/structures/structureview.cpp:391
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Select"
 msgstr "選取"
 
-#: controllers/view/print/printtool.cpp:278
-#: controllers/view/print/printtool.cpp:308
+#: controllers/view/print/printtool.cpp:282
+#: controllers/view/print/printtool.cpp:312
 #, kde-format
 msgctxt "@title:window"
 msgid "Print Byte Array %1"
 msgstr "列印位元陣列 %1"
 
-#: controllers/view/print/printtool.cpp:303
+#: controllers/view/print/printtool.cpp:307
 #, kde-format
 msgctxt "@info"
 msgid "Could not print."
 msgstr "無法列印。"
 
-#: controllers/view/print/printtool.cpp:339
+#: controllers/view/print/printtool.cpp:343
 #, kde-format
 msgctxt "in the header of the printed page, e.g. Page 2 of 20"
 msgid "Page %p of %P"
 msgstr "第 %p 頁，共 %P 頁"
 
-#: controllers/view/print/printtool.cpp:345
+#: controllers/view/print/printtool.cpp:349
 #, kde-format
 msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
 msgid "Printed by: %U"
 msgstr "列印者：%U"
 
-#: controllers/view/replace/replacecontroller.cpp:72
-#: controllers/view/replace/replacecontroller.cpp:88
+#: controllers/view/replace/replacecontroller.cpp:74
+#: controllers/view/replace/replacecontroller.cpp:90
 #, kde-format
 msgctxt "@title:window"
 msgid "Replace"
 msgstr "取代"
 
-#: controllers/view/replace/replacecontroller.cpp:76
+#: controllers/view/replace/replacecontroller.cpp:78
 #, kde-format
 msgctxt "@info"
 msgid "Replace pattern not found in byte array."
 msgstr "在位元陣列中找不到要取代的對象。"
 
-#: controllers/view/replace/replacecontroller.cpp:79
-#: controllers/view/replace/replacecontroller.cpp:90
+#: controllers/view/replace/replacecontroller.cpp:81
+#: controllers/view/replace/replacecontroller.cpp:92
 #, kde-format
 msgctxt "@info"
 msgid "No replacements made."
 msgstr "沒有完成任何取代。"
 
-#: controllers/view/replace/replacecontroller.cpp:80
-#: controllers/view/replace/replacecontroller.cpp:91
+#: controllers/view/replace/replacecontroller.cpp:82
+#: controllers/view/replace/replacecontroller.cpp:93
 #, kde-format
 msgctxt "@info"
 msgid "1 replacement made."
 msgid_plural "%1 replacements made."
 msgstr[0] "完成了 %1 個取代。"
 
-#: controllers/view/replace/replacecontroller.cpp:93
-#: controllers/view/search/searchcontroller.cpp:122
+#: controllers/view/replace/replacecontroller.cpp:95
+#: controllers/view/search/searchcontroller.cpp:124
 #, kde-kuit-format
 msgctxt "@info"
 msgid "End of byte array reached.<nl/>Continue from the beginning?"
 msgstr "到達位元陣列的尾端。<nl/>要從開頭繼續嗎？"
 
-#: controllers/view/replace/replacecontroller.cpp:94
-#: controllers/view/search/searchcontroller.cpp:123
+#: controllers/view/replace/replacecontroller.cpp:96
+#: controllers/view/search/searchcontroller.cpp:125
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Beginning of byte array reached.<nl/>Continue from the end?"
@@ -1592,7 +1592,7 @@ msgctxt "@title"
 msgid "Replace"
 msgstr "取代"
 
-#: controllers/view/search/searchcontroller.cpp:113
+#: controllers/view/search/searchcontroller.cpp:115
 #, kde-format
 msgctxt "@info"
 msgid "Search key not found in byte array."
@@ -1706,20 +1706,20 @@ msgctxt "@title:window"
 msgid "Strings"
 msgstr "字串集"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:60
+#: controllers/view/stringsextract/stringsextractview.cpp:62
 #, kde-format
 msgctxt ""
 "@label:spinbox minimum length for consecutive chars to be seen as a string"
 msgid "Minimum length:"
 msgstr "最小長度："
 
-#: controllers/view/stringsextract/stringsextractview.cpp:72
+#: controllers/view/stringsextract/stringsextractview.cpp:74
 #, kde-format
 msgctxt "@action:button extract the strings from the byte array"
 msgid "&Extract"
 msgstr "解開(&E)"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:75
+#: controllers/view/stringsextract/stringsextractview.cpp:77
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1727,7 +1727,7 @@ msgid ""
 "below."
 msgstr "尋找包含在選取的範圍內的字串，並列在底下的檢視內。"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:77
+#: controllers/view/stringsextract/stringsextractview.cpp:79
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1738,31 +1738,31 @@ msgstr ""
 "如果您按下<interface>解開</interface>按鍵，會在選取的範圍內搜尋所有超過最小長"
 "度設定的字串。找到的字串會被列在下方的檢視內。"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:88
+#: controllers/view/stringsextract/stringsextractview.cpp:90
 #, kde-format
 msgctxt "@label:lineedit filter term for displayed strings"
 msgid "Filter:"
 msgstr "過濾器："
 
-#: controllers/view/stringsextract/stringsextractview.cpp:92
+#: controllers/view/stringsextract/stringsextractview.cpp:94
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter a term to limit the list."
 msgstr "在此輸入過濾清單的字串。"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:143
+#: controllers/view/stringsextract/stringsextractview.cpp:145
 #, kde-format
 msgctxt "@info"
 msgid "No strings"
 msgstr "沒有字串"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:163
+#: controllers/view/stringsextract/stringsextractview.cpp:165
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected strings to the clipboard."
 msgstr "複製選取的字串到剪貼簿中。"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:165
+#: controllers/view/stringsextract/stringsextractview.cpp:167
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1771,19 +1771,19 @@ msgid ""
 msgstr ""
 "如果您按下<interface>複製</interface>按鍵，則會將選取的字串複製到剪貼簿中。"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:176
+#: controllers/view/stringsextract/stringsextractview.cpp:178
 #, kde-format
 msgctxt "@action:button"
 msgid "Show"
 msgstr "顯示"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:178
+#: controllers/view/stringsextract/stringsextractview.cpp:180
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Shows the selected string in the view."
 msgstr "在檢視中顯示選取的字串。"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:180
+#: controllers/view/stringsextract/stringsextractview.cpp:182
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1791,25 +1791,25 @@ msgid ""
 "last selected is marked and shown in the view."
 msgstr "如果您按下<interface>跳到</interface>按鍵，字串會標記並顯示在檢視中。"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:196
+#: controllers/view/stringsextract/stringsextractview.cpp:198
 #, kde-format
 msgctxt "@action"
 msgid "Select"
 msgstr "選取"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:198
+#: controllers/view/stringsextract/stringsextractview.cpp:200
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Selects the selected string in the view."
 msgstr "在檢視中顯示已選的字串。"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:342
+#: controllers/view/stringsextract/stringsextractview.cpp:344
 #, kde-format
 msgctxt "@info"
 msgid "No strings extracted."
 msgstr "沒有取出任何字串。"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:343
+#: controllers/view/stringsextract/stringsextractview.cpp:345
 #, kde-format
 msgctxt "@info"
 msgid "1 string extracted."
@@ -1928,19 +1928,19 @@ msgctxt "boolean value with actual value"
 msgid "true (%1)"
 msgstr "真 (%1)"
 
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:41
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:80
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:43
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:82
 #, kde-format
 msgid "%1 (value not in enum)"
 msgstr "%1（數值不在列舉中）"
 
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:49
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:77
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:51
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:79
 #, kde-format
 msgid "%1 (%2)"
 msgstr "%1（%2）"
 
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:87
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:89
 #, kde-format
 msgctxt ""
 "Displayed in the type column. first comes the name of the enum, then the "
@@ -1948,12 +1948,12 @@ msgctxt ""
 msgid "enum %1 (%2)"
 msgstr "列舉 %1（%2）"
 
-#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:77
+#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:79
 #, kde-format
 msgid "0x%1 (no matching flags)"
 msgstr "0x%1（沒有符合的旗標）"
 
-#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:107
+#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:109
 #, kde-format
 msgctxt ""
 "Displayed in the type column. first comes the name of the enum, then the "
@@ -1961,7 +1961,7 @@ msgctxt ""
 msgid "flag %1 (%2)"
 msgstr "旗標 %1（%2）"
 
-#: controllers/view/structures/datatypes/primitive/pointerdatainformation.cpp:118
+#: controllers/view/structures/datatypes/primitive/pointerdatainformation.cpp:119
 #, kde-format
 msgctxt "memory pointer with underlying type"
 msgid "%1 pointer"
@@ -2087,7 +2087,7 @@ msgstr "Latin1 字元"
 msgid "Latin1 string"
 msgstr "Latin1 字串"
 
-#: controllers/view/structures/datatypes/strings/stringdatainformation.cpp:315
+#: controllers/view/structures/datatypes/strings/stringdatainformation.cpp:317
 #, kde-format
 msgid "End of file reached prematurely"
 msgstr "意外地遇到檔案結尾"
@@ -2159,7 +2159,7 @@ msgstr "UTF8 字元"
 msgid "UTF8 string"
 msgstr "UTF8 字串"
 
-#: controllers/view/structures/datatypes/structuredatainformation.cpp:27
+#: controllers/view/structures/datatypes/structuredatainformation.cpp:28
 #: controllers/view/structures/datatypes/taggeduniondatainformation.cpp:40
 #, kde-format
 msgctxt "data type in C/C++, then name"
@@ -2172,14 +2172,14 @@ msgctxt "data type, then name"
 msgid "tagged union %1"
 msgstr "tagged union %1"
 
-#: controllers/view/structures/datatypes/uniondatainformation.cpp:25
+#: controllers/view/structures/datatypes/uniondatainformation.cpp:27
 #, kde-format
 msgctxt "data type in C/C++, then name"
 msgid "union %1"
 msgstr "union %1"
 
-#: controllers/view/structures/parsers/osdparser.cpp:119
-#: controllers/view/structures/parsers/osdparser.cpp:201
+#: controllers/view/structures/parsers/osdparser.cpp:120
+#: controllers/view/structures/parsers/osdparser.cpp:202
 #, kde-format
 msgid "<invalid name>"
 msgstr "<不合法的名稱>"
@@ -2477,32 +2477,32 @@ msgstr "顯示字元的數值"
 msgid "Character value:"
 msgstr "字元數值："
 
-#: controllers/view/structures/structurestool.cpp:69
+#: controllers/view/structures/structurestool.cpp:71
 #: controllers/view/structures/structurestoolviewfactory.cpp:27
 #, kde-format
 msgctxt "@title:window"
 msgid "Structures"
 msgstr "結構"
 
-#: controllers/view/structures/structurestool.cpp:198
+#: controllers/view/structures/structurestool.cpp:200
 #, kde-format
 msgctxt "name of a data structure"
 msgid "Name"
 msgstr "名稱"
 
-#: controllers/view/structures/structurestool.cpp:200
+#: controllers/view/structures/structurestool.cpp:202
 #, kde-format
 msgctxt "type of a data structure"
 msgid "Type"
 msgstr "型態"
 
-#: controllers/view/structures/structurestool.cpp:202
+#: controllers/view/structures/structurestool.cpp:204
 #, kde-format
 msgctxt "value of a data structure (primitive type)"
 msgid "Value"
 msgstr "數值"
 
-#: controllers/view/structures/structurestool.cpp:204
+#: controllers/view/structures/structurestool.cpp:206
 #, kde-format
 msgctxt "size of a data structure"
 msgid "Size"
@@ -3193,45 +3193,45 @@ msgctxt "@info:status selection: start offset - end offset (number of bytes)"
 msgid "Selection: %1 - %2 (%3)"
 msgstr "選擇區：%1 - %2 （%3）"
 
-#: core/document/bytearraydocument.cpp:48
+#: core/document/bytearraydocument.cpp:50
 #, kde-format
 msgctxt "name of the data type"
 msgid "Byte Array"
 msgstr "位元陣列"
 
-#: core/document/bytearraydocumentfactory.cpp:38
+#: core/document/bytearraydocumentfactory.cpp:40
 #, kde-format
 msgctxt "The byte array was new created."
 msgid "New created."
 msgstr "已建立新的位元陣列。"
 
-#: core/document/bytearraydocumentfactory.cpp:45
-#: core/document/bytearraydocumentfactory.cpp:119
+#: core/document/bytearraydocumentfactory.cpp:47
+#: core/document/bytearraydocumentfactory.cpp:121
 #, kde-format
 msgctxt "numbered title for a created document without a filename"
 msgid "[New Byte Array]"
 msgid_plural "[New Byte Array %1]"
 msgstr[0] "【新位元陣列 %1】"
 
-#: core/document/bytearraydocumentfactory.cpp:112
+#: core/document/bytearraydocumentfactory.cpp:114
 #, kde-format
 msgctxt "origin of the byte array"
 msgid "Created from data."
 msgstr "已從資料建立。"
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:53
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:54
 #, kde-format
 msgctxt "destination of the byte array"
 msgid "Loaded from file."
 msgstr "從檔案載入。"
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:60
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:61
 #: core/io/filesystem/bytearrayrawfilereloadthread.cpp:53
 #, kde-format
 msgid "There is not enough free working memory to load this file."
 msgstr "沒有足夠的記憶體載入此檔案。"
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:63
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:64
 #: core/io/filesystem/bytearrayrawfilereloadthread.cpp:56
 #, kde-format
 msgid "Support to load files larger than 2 GiB has not yet been implemented."

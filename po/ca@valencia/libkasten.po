@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-17 01:57+0000\n"
+"POT-Creation-Date: 2025-09-30 02:13+0000\n"
 "PO-Revision-Date: 2024-10-22 09:49+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -147,7 +147,7 @@ msgctxt "@title:window"
 msgid "Documents"
 msgstr "Documents"
 
-#: controllers/documentsystem/documentsbrowser/documentsview.cpp:50
+#: controllers/documentsystem/documentsbrowser/documentsview.cpp:49
 #, kde-format
 msgctxt "@info"
 msgid "No documents"
@@ -166,13 +166,13 @@ msgctxt "@action:intoolbar"
 msgid "Folder of Current Document"
 msgstr "Carpeta del document actual"
 
-#: controllers/io/copyas/copyascontroller.cpp:41
+#: controllers/io/copyas/copyascontroller.cpp:43
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy As"
 msgstr "Copia com a"
 
-#: controllers/io/copyas/copyascontroller.cpp:92
+#: controllers/io/copyas/copyascontroller.cpp:94
 #, kde-format
 msgctxt "@item There are no encoders."
 msgid "Not available."
@@ -215,13 +215,13 @@ msgstr ""
 "dades seleccionades es copiaran a dins del porta-retalls amb els paràmetres "
 "que heu indicat més amunt."
 
-#: controllers/io/export/exportcontroller.cpp:37
+#: controllers/io/export/exportcontroller.cpp:39
 #, kde-format
 msgctxt "@title:menu"
 msgid "Export"
 msgstr "Exporta"
 
-#: controllers/io/export/exportcontroller.cpp:88
+#: controllers/io/export/exportcontroller.cpp:90
 #, kde-format
 msgctxt "@item There are no exporters."
 msgid "Not available."
@@ -257,13 +257,13 @@ msgstr ""
 "seleccionades es copiaran a un fitxer amb els paràmetres que heu indicat més "
 "amunt."
 
-#: controllers/io/insert/insertcontroller.cpp:37
+#: controllers/io/insert/insertcontroller.cpp:39
 #, kde-format
 msgctxt "@title:menu"
 msgid "Insert"
 msgstr "Inserix"
 
-#: controllers/io/insert/insertcontroller.cpp:91
+#: controllers/io/insert/insertcontroller.cpp:93
 #, kde-format
 msgctxt "@item There are no generators."
 msgid "Not available."
@@ -386,19 +386,19 @@ msgctxt "@info:tooltip"
 msgid "Zoom: %1%"
 msgstr "Zoom: %1%"
 
-#: core/system/documentsyncmanager_p.cpp:109
+#: core/system/documentsyncmanager_p.cpp:111
 #, kde-format
 msgctxt "@title:window"
 msgid "Save As"
 msgstr "Anomena i guarda"
 
-#: core/system/documentsyncmanager_p.cpp:211
+#: core/system/documentsyncmanager_p.cpp:213
 #, kde-format
 msgctxt "@title:window"
 msgid "Close"
 msgstr "Tanca"
 
-#: core/system/documentsyncmanager_p.cpp:246
+#: core/system/documentsyncmanager_p.cpp:248
 #, kde-format
 msgctxt "@title:window"
 msgid "Reload"
@@ -438,13 +438,13 @@ msgstr ""
 "Si premeu el botó <interface>Crea</interface>, les dades es generaran amb "
 "els paràmetres que heu introduït més amunt i s'inseriran en un document nou."
 
-#: gui/system/dialoghandler.cpp:32
+#: gui/system/dialoghandler.cpp:34
 #, kde-kuit-format
 msgctxt "@info"
 msgid "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
 msgstr "Ja hi ha un fitxer a <nl/><filename>%1</filename>.<nl/>El sobreescric?"
 
-#: gui/system/dialoghandler.cpp:53
+#: gui/system/dialoghandler.cpp:55
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -454,7 +454,7 @@ msgstr ""
 "Hi ha modificacions sense guardar a <filename>%1</filename>. Es perdran si "
 "torneu a carregar el document.<nl/>Voleu descartar-les?"
 
-#: gui/system/dialoghandler.cpp:70
+#: gui/system/dialoghandler.cpp:72
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -464,7 +464,7 @@ msgstr ""
 "<filename>%1</filename> s'ha modificat.<nl/>Voleu guardar els canvis o "
 "descartar-los?"
 
-#: gui/system/dialoghandler.cpp:90
+#: gui/system/dialoghandler.cpp:92
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""

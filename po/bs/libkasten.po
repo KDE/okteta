@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeutils\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-17 01:57+0000\n"
+"POT-Creation-Date: 2025-09-30 02:13+0000\n"
 "PO-Revision-Date: 2015-02-04 15:01+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -155,7 +155,7 @@ msgctxt "@title:window"
 msgid "Documents"
 msgstr "Dokumenti"
 
-#: controllers/documentsystem/documentsbrowser/documentsview.cpp:50
+#: controllers/documentsystem/documentsbrowser/documentsview.cpp:49
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Documents"
@@ -176,13 +176,13 @@ msgctxt "@action:intoolbar"
 msgid "Folder of Current Document"
 msgstr "Direktorij tekućeg dokumenta"
 
-#: controllers/io/copyas/copyascontroller.cpp:41
+#: controllers/io/copyas/copyascontroller.cpp:43
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy As"
 msgstr "Kopiraj kao"
 
-#: controllers/io/copyas/copyascontroller.cpp:92
+#: controllers/io/copyas/copyascontroller.cpp:94
 #, kde-format
 msgctxt "@item There are no encoders."
 msgid "Not available."
@@ -224,13 +224,13 @@ msgstr ""
 "Pritiskom na dugme <interface>Kopiraj u klipbord</interface>, izabrani "
 "podaci biće kopirani u klipbord s postavkama koje ste uneli iznad."
 
-#: controllers/io/export/exportcontroller.cpp:37
+#: controllers/io/export/exportcontroller.cpp:39
 #, kde-format
 msgctxt "@title:menu"
 msgid "Export"
 msgstr "Izvezi"
 
-#: controllers/io/export/exportcontroller.cpp:88
+#: controllers/io/export/exportcontroller.cpp:90
 #, kde-format
 msgctxt "@item There are no exporters."
 msgid "Not available."
@@ -267,13 +267,13 @@ msgstr ""
 "Pritiskom na dugme <interface>Izvezi u datoteku...</interface>, izabrani "
 "podaci biće kopirani u datoteku s postavkama koje ste unijeli iznad."
 
-#: controllers/io/insert/insertcontroller.cpp:37
+#: controllers/io/insert/insertcontroller.cpp:39
 #, kde-format
 msgctxt "@title:menu"
 msgid "Insert"
 msgstr "Ubaci"
 
-#: controllers/io/insert/insertcontroller.cpp:91
+#: controllers/io/insert/insertcontroller.cpp:93
 #, kde-format
 msgctxt "@item There are no generators."
 msgid "Not available."
@@ -403,19 +403,19 @@ msgctxt "@info:tooltip"
 msgid "Zoom: %1%"
 msgstr "Uveličaj: %1%"
 
-#: core/system/documentsyncmanager_p.cpp:109
+#: core/system/documentsyncmanager_p.cpp:111
 #, kde-format
 msgctxt "@title:window"
 msgid "Save As"
 msgstr "Snimi kao"
 
-#: core/system/documentsyncmanager_p.cpp:211
+#: core/system/documentsyncmanager_p.cpp:213
 #, kde-format
 msgctxt "@title:window"
 msgid "Close"
 msgstr "Zatvori"
 
-#: core/system/documentsyncmanager_p.cpp:246
+#: core/system/documentsyncmanager_p.cpp:248
 #, kde-format
 msgctxt "@title:window"
 msgid "Reload"
@@ -455,14 +455,14 @@ msgstr ""
 "Pritiskom na dugme <interface>Napravi</interface> biće generisani podaci "
 "prema postavkama koje ste uneli iznad i umetnuti u novi dokument."
 
-#: gui/system/dialoghandler.cpp:32
+#: gui/system/dialoghandler.cpp:34
 #, kde-kuit-format
 msgctxt "@info"
 msgid "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
 msgstr ""
 "Već postoji datoteka po imenu<nl/><filename>%1</filename>.<nl/>Prebrisati?"
 
-#: gui/system/dialoghandler.cpp:53
+#: gui/system/dialoghandler.cpp:55
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -472,7 +472,7 @@ msgstr ""
 "Datoteka <filename>%1</filename> sadrži nesačuvane izmjene, koje će biti "
 "izgubljene ako ponovo učitate dokument.<nl/>Želite li da odbacite izmjene?"
 
-#: gui/system/dialoghandler.cpp:70
+#: gui/system/dialoghandler.cpp:72
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -482,7 +482,7 @@ msgstr ""
 "<filename>%1</filename> je izmijenjena.<nl/>Želite li da sačuvate ili "
 "odbacite izmjene?"
 
-#: gui/system/dialoghandler.cpp:90
+#: gui/system/dialoghandler.cpp:92
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""

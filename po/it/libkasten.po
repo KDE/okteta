@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-17 01:57+0000\n"
+"POT-Creation-Date: 2025-09-30 02:13+0000\n"
 "PO-Revision-Date: 2024-10-31 15:00+0100\n"
 "Last-Translator: Paolo Zamponi <feus73@gmail.com>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -148,7 +148,7 @@ msgctxt "@title:window"
 msgid "Documents"
 msgstr "Documenti"
 
-#: controllers/documentsystem/documentsbrowser/documentsview.cpp:50
+#: controllers/documentsystem/documentsbrowser/documentsview.cpp:49
 #, kde-format
 msgctxt "@info"
 msgid "No documents"
@@ -167,13 +167,13 @@ msgctxt "@action:intoolbar"
 msgid "Folder of Current Document"
 msgstr "Cartella del documento corrente"
 
-#: controllers/io/copyas/copyascontroller.cpp:41
+#: controllers/io/copyas/copyascontroller.cpp:43
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy As"
 msgstr "Copia come"
 
-#: controllers/io/copyas/copyascontroller.cpp:92
+#: controllers/io/copyas/copyascontroller.cpp:94
 #, kde-format
 msgctxt "@item There are no encoders."
 msgid "Not available."
@@ -216,13 +216,13 @@ msgstr ""
 "selezionati saranno copiati negli appunti con le impostazioni che hai "
 "inserito sopra."
 
-#: controllers/io/export/exportcontroller.cpp:37
+#: controllers/io/export/exportcontroller.cpp:39
 #, kde-format
 msgctxt "@title:menu"
 msgid "Export"
 msgstr "Esporta"
 
-#: controllers/io/export/exportcontroller.cpp:88
+#: controllers/io/export/exportcontroller.cpp:90
 #, kde-format
 msgctxt "@item There are no exporters."
 msgid "Not available."
@@ -258,13 +258,13 @@ msgstr ""
 "selezionati saranno copiati in un file con le impostazioni che hai inserito "
 "sopra."
 
-#: controllers/io/insert/insertcontroller.cpp:37
+#: controllers/io/insert/insertcontroller.cpp:39
 #, kde-format
 msgctxt "@title:menu"
 msgid "Insert"
 msgstr "Inserisci"
 
-#: controllers/io/insert/insertcontroller.cpp:91
+#: controllers/io/insert/insertcontroller.cpp:93
 #, kde-format
 msgctxt "@item There are no generators."
 msgid "Not available."
@@ -387,19 +387,19 @@ msgctxt "@info:tooltip"
 msgid "Zoom: %1%"
 msgstr "Ingrandimento: %1%"
 
-#: core/system/documentsyncmanager_p.cpp:109
+#: core/system/documentsyncmanager_p.cpp:111
 #, kde-format
 msgctxt "@title:window"
 msgid "Save As"
 msgstr "Salva come"
 
-#: core/system/documentsyncmanager_p.cpp:211
+#: core/system/documentsyncmanager_p.cpp:213
 #, kde-format
 msgctxt "@title:window"
 msgid "Close"
 msgstr "Chiudi"
 
-#: core/system/documentsyncmanager_p.cpp:246
+#: core/system/documentsyncmanager_p.cpp:248
 #, kde-format
 msgctxt "@title:window"
 msgid "Reload"
@@ -439,13 +439,13 @@ msgstr ""
 "Se premi il pulsante <interface>Crea</interface>, i dati verranno generati "
 "con le impostazioni qui sopra ed inseriti in un nuovo documento."
 
-#: gui/system/dialoghandler.cpp:32
+#: gui/system/dialoghandler.cpp:34
 #, kde-kuit-format
 msgctxt "@info"
 msgid "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
 msgstr "C'è già un file in<nl/><filename>%1</filename>.<nl/>Sovrascrivo?"
 
-#: gui/system/dialoghandler.cpp:53
+#: gui/system/dialoghandler.cpp:55
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -455,7 +455,7 @@ msgstr ""
 "Ci sono delle modifiche non salvate in <filename>%1</filename>, che verranno "
 "perse se ricarichi il documento.<nl/>Vuoi scartarle?"
 
-#: gui/system/dialoghandler.cpp:70
+#: gui/system/dialoghandler.cpp:72
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -465,7 +465,7 @@ msgstr ""
 "<filename>%1</filename> è stato modificato.<nl/>Vuoi salvare o scartare le "
 "modifiche?"
 
-#: gui/system/dialoghandler.cpp:90
+#: gui/system/dialoghandler.cpp:92
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-17 01:57+0000\n"
+"POT-Creation-Date: 2025-09-30 02:13+0000\n"
 "PO-Revision-Date: 2024-10-22 17:21+0300\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -147,7 +147,7 @@ msgctxt "@title:window"
 msgid "Documents"
 msgstr "Документи"
 
-#: controllers/documentsystem/documentsbrowser/documentsview.cpp:50
+#: controllers/documentsystem/documentsbrowser/documentsview.cpp:49
 #, kde-format
 msgctxt "@info"
 msgid "No documents"
@@ -166,13 +166,13 @@ msgctxt "@action:intoolbar"
 msgid "Folder of Current Document"
 msgstr "Тека поточного документа"
 
-#: controllers/io/copyas/copyascontroller.cpp:41
+#: controllers/io/copyas/copyascontroller.cpp:43
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy As"
 msgstr "Копіювати як"
 
-#: controllers/io/copyas/copyascontroller.cpp:92
+#: controllers/io/copyas/copyascontroller.cpp:94
 #, kde-format
 msgctxt "@item There are no encoders."
 msgid "Not available."
@@ -214,13 +214,13 @@ msgstr ""
 "Якщо ви натиснете кнопку <interface>Копіювати до буфера</interface>, "
 "позначені дані буде скопійовано до буфера з параметрами, які ви вказали вище."
 
-#: controllers/io/export/exportcontroller.cpp:37
+#: controllers/io/export/exportcontroller.cpp:39
 #, kde-format
 msgctxt "@title:menu"
 msgid "Export"
 msgstr "Експортувати"
 
-#: controllers/io/export/exportcontroller.cpp:88
+#: controllers/io/export/exportcontroller.cpp:90
 #, kde-format
 msgctxt "@item There are no exporters."
 msgid "Not available."
@@ -255,13 +255,13 @@ msgstr ""
 "Якщо ви натиснете кнопку <interface>Експортувати до файла</interface>, "
 "позначені дані буде скопійовано до файла з параметрами, які ви вказали вище."
 
-#: controllers/io/insert/insertcontroller.cpp:37
+#: controllers/io/insert/insertcontroller.cpp:39
 #, kde-format
 msgctxt "@title:menu"
 msgid "Insert"
 msgstr "Вставка"
 
-#: controllers/io/insert/insertcontroller.cpp:91
+#: controllers/io/insert/insertcontroller.cpp:93
 #, kde-format
 msgctxt "@item There are no generators."
 msgid "Not available."
@@ -384,19 +384,19 @@ msgctxt "@info:tooltip"
 msgid "Zoom: %1%"
 msgstr "Масштаб: %1%"
 
-#: core/system/documentsyncmanager_p.cpp:109
+#: core/system/documentsyncmanager_p.cpp:111
 #, kde-format
 msgctxt "@title:window"
 msgid "Save As"
 msgstr "Зберегти як"
 
-#: core/system/documentsyncmanager_p.cpp:211
+#: core/system/documentsyncmanager_p.cpp:213
 #, kde-format
 msgctxt "@title:window"
 msgid "Close"
 msgstr "Закрити"
 
-#: core/system/documentsyncmanager_p.cpp:246
+#: core/system/documentsyncmanager_p.cpp:248
 #, kde-format
 msgctxt "@title:window"
 msgid "Reload"
@@ -437,13 +437,13 @@ msgstr ""
 "дані відповідно до вказаних вище параметрів і вставить їх до нового "
 "документа."
 
-#: gui/system/dialoghandler.cpp:32
+#: gui/system/dialoghandler.cpp:34
 #, kde-kuit-format
 msgctxt "@info"
 msgid "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
 msgstr "Уже існує файл <nl/><filename>%1</filename>.<nl/>Перезаписати?"
 
-#: gui/system/dialoghandler.cpp:53
+#: gui/system/dialoghandler.cpp:55
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -454,7 +454,7 @@ msgstr ""
 "втрачено, якщо ви перезавантажите документ.<nl/>Бажаєте відкинути внесені "
 "зміни?"
 
-#: gui/system/dialoghandler.cpp:70
+#: gui/system/dialoghandler.cpp:72
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -464,7 +464,7 @@ msgstr ""
 "<filename>%1</filename> було змінено.<nl/>Бажаєте зберегти внесені вами "
 "зміни чи відкинути їх?"
 
-#: gui/system/dialoghandler.cpp:90
+#: gui/system/dialoghandler.cpp:92
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""

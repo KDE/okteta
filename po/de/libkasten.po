@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-17 01:57+0000\n"
+"POT-Creation-Date: 2025-09-30 02:13+0000\n"
 "PO-Revision-Date: 2018-05-28 13:52+0100\n"
 "Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -145,7 +145,7 @@ msgctxt "@title:window"
 msgid "Documents"
 msgstr "Dokumente"
 
-#: controllers/documentsystem/documentsbrowser/documentsview.cpp:50
+#: controllers/documentsystem/documentsbrowser/documentsview.cpp:49
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Documents"
@@ -166,13 +166,13 @@ msgctxt "@action:intoolbar"
 msgid "Folder of Current Document"
 msgstr "Ordner des aktuellen Dokuments"
 
-#: controllers/io/copyas/copyascontroller.cpp:41
+#: controllers/io/copyas/copyascontroller.cpp:43
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy As"
 msgstr "Kopieren als"
 
-#: controllers/io/copyas/copyascontroller.cpp:92
+#: controllers/io/copyas/copyascontroller.cpp:94
 #, kde-format
 msgctxt "@item There are no encoders."
 msgid "Not available."
@@ -215,13 +215,13 @@ msgstr ""
 "drücken, werden die ausgewählten Bytes in die Zwischenablage kopiert. Dabei "
 "werden die Einstellungen verwendet, die Sie oben vorgenommen haben."
 
-#: controllers/io/export/exportcontroller.cpp:37
+#: controllers/io/export/exportcontroller.cpp:39
 #, kde-format
 msgctxt "@title:menu"
 msgid "Export"
 msgstr "Exportieren"
 
-#: controllers/io/export/exportcontroller.cpp:88
+#: controllers/io/export/exportcontroller.cpp:90
 #, kde-format
 msgctxt "@item There are no exporters."
 msgid "Not available."
@@ -259,13 +259,13 @@ msgstr ""
 "werden die ausgewählten Bytes in eine Datei kopiert. Dabei werden die "
 "Einstellungen verwendet, die Sie oben vorgenommen haben."
 
-#: controllers/io/insert/insertcontroller.cpp:37
+#: controllers/io/insert/insertcontroller.cpp:39
 #, kde-format
 msgctxt "@title:menu"
 msgid "Insert"
 msgstr "Einfügen"
 
-#: controllers/io/insert/insertcontroller.cpp:91
+#: controllers/io/insert/insertcontroller.cpp:93
 #, kde-format
 msgctxt "@item There are no generators."
 msgid "Not available."
@@ -388,19 +388,19 @@ msgctxt "@info:tooltip"
 msgid "Zoom: %1%"
 msgstr "Vergrößerung: %1 %"
 
-#: core/system/documentsyncmanager_p.cpp:109
+#: core/system/documentsyncmanager_p.cpp:111
 #, kde-format
 msgctxt "@title:window"
 msgid "Save As"
 msgstr "Speichern unter ..."
 
-#: core/system/documentsyncmanager_p.cpp:211
+#: core/system/documentsyncmanager_p.cpp:213
 #, kde-format
 msgctxt "@title:window"
 msgid "Close"
 msgstr "Schließen"
 
-#: core/system/documentsyncmanager_p.cpp:246
+#: core/system/documentsyncmanager_p.cpp:248
 #, kde-format
 msgctxt "@title:window"
 msgid "Reload"
@@ -441,7 +441,7 @@ msgstr ""
 "anhand der oben eingegebenen Einstellungen generiert und in einem neuen "
 "Dokument eingefügt."
 
-#: gui/system/dialoghandler.cpp:32
+#: gui/system/dialoghandler.cpp:34
 #, kde-kuit-format
 msgctxt "@info"
 msgid "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
@@ -449,7 +449,7 @@ msgstr ""
 "Es existiert bereits eine Datei unter <nl/><filename>%1</filename>.<nl/> "
 "Möchten Sie sie überschreiben?"
 
-#: gui/system/dialoghandler.cpp:53
+#: gui/system/dialoghandler.cpp:55
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -460,7 +460,7 @@ msgstr ""
 "Sie das Dokument neu laden, werden diese Änderungen verloren gehen.<nl/"
 ">Möchten Sie die Änderungen verwerfen?"
 
-#: gui/system/dialoghandler.cpp:70
+#: gui/system/dialoghandler.cpp:72
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -470,7 +470,7 @@ msgstr ""
 "<filename>%1</filename> ist geändert worden.<nl/>Möchten Sie Ihre Änderungen "
 "speichern oder verwerfen?"
 
-#: gui/system/dialoghandler.cpp:90
+#: gui/system/dialoghandler.cpp:92
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""

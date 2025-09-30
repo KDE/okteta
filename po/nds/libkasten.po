@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-17 01:57+0000\n"
+"POT-Creation-Date: 2025-09-30 02:13+0000\n"
 "PO-Revision-Date: 2010-04-11 06:23+0200\n"
 "Last-Translator: Manfred Wiese <m.j.wiese@web.de>\n"
 "Language-Team: Low Saxon <kde-i18n-nds@kde.org>\n"
@@ -155,7 +155,7 @@ msgctxt "@title:window"
 msgid "Documents"
 msgstr "Dokmenten"
 
-#: controllers/documentsystem/documentsbrowser/documentsview.cpp:50
+#: controllers/documentsystem/documentsbrowser/documentsview.cpp:49
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Documents"
@@ -176,13 +176,13 @@ msgctxt "@action:intoolbar"
 msgid "Folder of Current Document"
 msgstr "Orner vun't aktuelle Dokment"
 
-#: controllers/io/copyas/copyascontroller.cpp:41
+#: controllers/io/copyas/copyascontroller.cpp:43
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy As"
 msgstr "Koperen as"
 
-#: controllers/io/copyas/copyascontroller.cpp:92
+#: controllers/io/copyas/copyascontroller.cpp:94
 #, kde-format
 msgctxt "@item There are no encoders."
 msgid "Not available."
@@ -224,13 +224,13 @@ msgstr ""
 "Wenn Du den Knoop <interface>Na Tischenaflaag koperen</interface> anklickst, "
 "warrt de utsöchten Daten mit de Instellen baven na de Twischenaflaag kopeert"
 
-#: controllers/io/export/exportcontroller.cpp:37
+#: controllers/io/export/exportcontroller.cpp:39
 #, kde-format
 msgctxt "@title:menu"
 msgid "Export"
 msgstr "Exporteren"
 
-#: controllers/io/export/exportcontroller.cpp:88
+#: controllers/io/export/exportcontroller.cpp:90
 #, kde-format
 msgctxt "@item There are no exporters."
 msgid "Not available."
@@ -267,13 +267,13 @@ msgstr ""
 "Wenn Du den Knoop <interface>As Datei exporteren</interface> anklickst, "
 "warrt de utsöchten Daten mit de Instellen baven as en Datei sekert."
 
-#: controllers/io/insert/insertcontroller.cpp:37
+#: controllers/io/insert/insertcontroller.cpp:39
 #, kde-format
 msgctxt "@title:menu"
 msgid "Insert"
 msgstr "Infögen"
 
-#: controllers/io/insert/insertcontroller.cpp:91
+#: controllers/io/insert/insertcontroller.cpp:93
 #, kde-format
 msgctxt "@item There are no generators."
 msgid "Not available."
@@ -404,19 +404,19 @@ msgctxt "@info:tooltip"
 msgid "Zoom: %1%"
 msgstr "Ansichtgrött: %1%"
 
-#: core/system/documentsyncmanager_p.cpp:109
+#: core/system/documentsyncmanager_p.cpp:111
 #, kde-format
 msgctxt "@title:window"
 msgid "Save As"
 msgstr "Sekern as"
 
-#: core/system/documentsyncmanager_p.cpp:211
+#: core/system/documentsyncmanager_p.cpp:213
 #, kde-format
 msgctxt "@title:window"
 msgid "Close"
 msgstr "Tomaken"
 
-#: core/system/documentsyncmanager_p.cpp:246
+#: core/system/documentsyncmanager_p.cpp:248
 #, kde-format
 msgctxt "@title:window"
 msgid "Reload"
@@ -456,14 +456,14 @@ msgstr ""
 "Klickst Du op den Knoop <interface>Opstellen</interface>, warrt de Daten mit "
 "de baven ingeven Instellen opstellt un na en nieg Dokment inföögt."
 
-#: gui/system/dialoghandler.cpp:32
+#: gui/system/dialoghandler.cpp:34
 #, kde-kuit-format
 msgctxt "@info"
 msgid "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
 msgstr ""
 "Dat gifft al en Datei bi<nl/><filename>%1</filename>.<nl/>Överschrieven?"
 
-#: gui/system/dialoghandler.cpp:53
+#: gui/system/dialoghandler.cpp:55
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -473,7 +473,7 @@ msgstr ""
 "<filename>%1</filename> barg nich sekerte Ännern. De warrt Di wegkamen, wenn "
 "Du dat Dokment nieg laden deist.<nl/>Wullt Du Dien Ännern wegsmieten?"
 
-#: gui/system/dialoghandler.cpp:70
+#: gui/system/dialoghandler.cpp:72
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -483,7 +483,7 @@ msgstr ""
 "Du hest <filename>%1</filename> ännert.<nl/>Wullt Du Dien Ännern sekern oder "
 "wegsmieten?"
 
-#: gui/system/dialoghandler.cpp:90
+#: gui/system/dialoghandler.cpp:92
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""

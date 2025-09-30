@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-17 01:57+0000\n"
+"POT-Creation-Date: 2025-09-30 02:13+0000\n"
 "PO-Revision-Date: 2024-11-29 00:31+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -145,7 +145,7 @@ msgctxt "@title:window"
 msgid "Documents"
 msgstr "문서"
 
-#: controllers/documentsystem/documentsbrowser/documentsview.cpp:50
+#: controllers/documentsystem/documentsbrowser/documentsview.cpp:49
 #, kde-format
 msgctxt "@info"
 msgid "No documents"
@@ -164,13 +164,13 @@ msgctxt "@action:intoolbar"
 msgid "Folder of Current Document"
 msgstr "현재 문서의 폴더"
 
-#: controllers/io/copyas/copyascontroller.cpp:41
+#: controllers/io/copyas/copyascontroller.cpp:43
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy As"
 msgstr "다음으로 복사"
 
-#: controllers/io/copyas/copyascontroller.cpp:92
+#: controllers/io/copyas/copyascontroller.cpp:94
 #, kde-format
 msgctxt "@item There are no encoders."
 msgid "Not available."
@@ -212,13 +212,13 @@ msgstr ""
 "<interface>클립보드에 복사</interface> 단추를 누르면 지정한 설정대로 데이터"
 "를 클립보드에 복사합니다."
 
-#: controllers/io/export/exportcontroller.cpp:37
+#: controllers/io/export/exportcontroller.cpp:39
 #, kde-format
 msgctxt "@title:menu"
 msgid "Export"
 msgstr "내보내기"
 
-#: controllers/io/export/exportcontroller.cpp:88
+#: controllers/io/export/exportcontroller.cpp:90
 #, kde-format
 msgctxt "@item There are no exporters."
 msgid "Not available."
@@ -253,13 +253,13 @@ msgstr ""
 "<interface>파일로 내보내기</interface> 단추를 누르면 지정한 설정대로 데이터"
 "를 파일로 내보냅니다."
 
-#: controllers/io/insert/insertcontroller.cpp:37
+#: controllers/io/insert/insertcontroller.cpp:39
 #, kde-format
 msgctxt "@title:menu"
 msgid "Insert"
 msgstr "삽입"
 
-#: controllers/io/insert/insertcontroller.cpp:91
+#: controllers/io/insert/insertcontroller.cpp:93
 #, kde-format
 msgctxt "@item There are no generators."
 msgid "Not available."
@@ -381,19 +381,19 @@ msgctxt "@info:tooltip"
 msgid "Zoom: %1%"
 msgstr "확대/축소: %1%"
 
-#: core/system/documentsyncmanager_p.cpp:109
+#: core/system/documentsyncmanager_p.cpp:111
 #, kde-format
 msgctxt "@title:window"
 msgid "Save As"
 msgstr "다른 이름으로 저장"
 
-#: core/system/documentsyncmanager_p.cpp:211
+#: core/system/documentsyncmanager_p.cpp:213
 #, kde-format
 msgctxt "@title:window"
 msgid "Close"
 msgstr "닫기"
 
-#: core/system/documentsyncmanager_p.cpp:246
+#: core/system/documentsyncmanager_p.cpp:248
 #, kde-format
 msgctxt "@title:window"
 msgid "Reload"
@@ -433,14 +433,14 @@ msgstr ""
 "<interface>생성</interface> 단추를 누르면 위에 입력한 설정대로 데이터가 생성"
 "되며 새 문서에 삽입됩니다."
 
-#: gui/system/dialoghandler.cpp:32
+#: gui/system/dialoghandler.cpp:34
 #, kde-kuit-format
 msgctxt "@info"
 msgid "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
 msgstr ""
 "파일 <nl/><filename>%1</filename><nl/>이(가) 존재합니다. 덮어쓰시겠습니까?"
 
-#: gui/system/dialoghandler.cpp:53
+#: gui/system/dialoghandler.cpp:55
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -450,7 +450,7 @@ msgstr ""
 "파일 <filename>%1</filename>에 저장하지 않은 변경 사항이 있습니다. 문서를 새"
 "로 고치면 변경 사항이 삭제됩니다.<nl/>삭제하시겠습니까?"
 
-#: gui/system/dialoghandler.cpp:70
+#: gui/system/dialoghandler.cpp:72
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -460,7 +460,7 @@ msgstr ""
 "<emphasis>%1</emphasis>이(가) 수정되었습니다.<nl/>변경 사항을 저장하거나 무시"
 "하시겠습니까?"
 
-#: gui/system/dialoghandler.cpp:90
+#: gui/system/dialoghandler.cpp:92
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""

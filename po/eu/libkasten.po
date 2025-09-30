@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-17 01:57+0000\n"
+"POT-Creation-Date: 2025-09-30 02:13+0000\n"
 "PO-Revision-Date: 2020-03-21 20:44+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -147,7 +147,7 @@ msgctxt "@title:window"
 msgid "Documents"
 msgstr "Dokumentuak"
 
-#: controllers/documentsystem/documentsbrowser/documentsview.cpp:50
+#: controllers/documentsystem/documentsbrowser/documentsview.cpp:49
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Documents"
@@ -168,13 +168,13 @@ msgctxt "@action:intoolbar"
 msgid "Folder of Current Document"
 msgstr "Uneko dokumentuaren karpeta"
 
-#: controllers/io/copyas/copyascontroller.cpp:41
+#: controllers/io/copyas/copyascontroller.cpp:43
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy As"
 msgstr "Kopiatu honela"
 
-#: controllers/io/copyas/copyascontroller.cpp:92
+#: controllers/io/copyas/copyascontroller.cpp:94
 #, kde-format
 msgctxt "@item There are no encoders."
 msgid "Not available."
@@ -216,13 +216,13 @@ msgstr ""
 "<interface>Arbelara kopiatu</interface> botoia sakatzen baduzu, hautatutako "
 "datuak arbelara kopiatuko dira gainean sartu dituzun ezarpenekin."
 
-#: controllers/io/export/exportcontroller.cpp:37
+#: controllers/io/export/exportcontroller.cpp:39
 #, kde-format
 msgctxt "@title:menu"
 msgid "Export"
 msgstr "Esportatu"
 
-#: controllers/io/export/exportcontroller.cpp:88
+#: controllers/io/export/exportcontroller.cpp:90
 #, kde-format
 msgctxt "@item There are no exporters."
 msgid "Not available."
@@ -259,13 +259,13 @@ msgstr ""
 "<interface>Fitxategira esportatu</interface> botoia sakatzen baduzu, "
 "hautatutako data gainean sartutako ezarpenak dituen fitxategira kopiatuko da."
 
-#: controllers/io/insert/insertcontroller.cpp:37
+#: controllers/io/insert/insertcontroller.cpp:39
 #, kde-format
 msgctxt "@title:menu"
 msgid "Insert"
 msgstr "Sartu"
 
-#: controllers/io/insert/insertcontroller.cpp:91
+#: controllers/io/insert/insertcontroller.cpp:93
 #, kde-format
 msgctxt "@item There are no generators."
 msgid "Not available."
@@ -388,19 +388,19 @@ msgctxt "@info:tooltip"
 msgid "Zoom: %1%"
 msgstr "Zoom: %1%"
 
-#: core/system/documentsyncmanager_p.cpp:109
+#: core/system/documentsyncmanager_p.cpp:111
 #, kde-format
 msgctxt "@title:window"
 msgid "Save As"
 msgstr "Gorde honela"
 
-#: core/system/documentsyncmanager_p.cpp:211
+#: core/system/documentsyncmanager_p.cpp:213
 #, kde-format
 msgctxt "@title:window"
 msgid "Close"
 msgstr "Itxi"
 
-#: core/system/documentsyncmanager_p.cpp:246
+#: core/system/documentsyncmanager_p.cpp:248
 #, kde-format
 msgctxt "@title:window"
 msgid "Reload"
@@ -440,14 +440,14 @@ msgstr ""
 "<interface>Sortu</interface> botoia sakatzen baduzu, datuak gainean sartu "
 "dituzun ezarpenekin sortu eta dokumentu berri batean txertatuko dira."
 
-#: gui/system/dialoghandler.cpp:32
+#: gui/system/dialoghandler.cpp:34
 #, kde-kuit-format
 msgctxt "@info"
 msgid "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
 msgstr ""
 "Dagoeneko fitxategi bat dago <nl/><filename>%1</filename>-en.<nl/>Gainidatzi?"
 
-#: gui/system/dialoghandler.cpp:53
+#: gui/system/dialoghandler.cpp:55
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -458,7 +458,7 @@ msgstr ""
 "egingo dira dokumentua birzamatzen baduzu. <nl/>Aldaketa hauek baztertu nahi "
 "dituzu?"
 
-#: gui/system/dialoghandler.cpp:70
+#: gui/system/dialoghandler.cpp:72
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -468,7 +468,7 @@ msgstr ""
 "<filename>%1</filename> aldatu egin da.<nl/>Zure aldaketak gorde edo "
 "baztertu nahi dituzu?"
 
-#: gui/system/dialoghandler.cpp:90
+#: gui/system/dialoghandler.cpp:92
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""

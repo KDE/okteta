@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: playground-utils/okteta.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-17 01:57+0000\n"
+"POT-Creation-Date: 2025-09-30 02:13+0000\n"
 "PO-Revision-Date: 2007-11-05 08:28-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -102,7 +102,7 @@ msgstr "&Fuinneoga"
 msgid "Main Toolbar"
 msgstr "Príomhbharra Uirlisí"
 
-#: program.cpp:87
+#: program.cpp:89
 #, fuzzy, kde-format
 #| msgid "File(s) to load"
 msgctxt "@info"

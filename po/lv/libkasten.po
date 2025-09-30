@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-17 01:57+0000\n"
+"POT-Creation-Date: 2025-09-30 02:13+0000\n"
 "PO-Revision-Date: 2010-01-09 16:07+0200\n"
 "Last-Translator: Viesturs Zarins <viesturs.zarins@mii.lu.lv>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -153,7 +153,7 @@ msgctxt "@title:window"
 msgid "Documents"
 msgstr "Dokumenti"
 
-#: controllers/documentsystem/documentsbrowser/documentsview.cpp:50
+#: controllers/documentsystem/documentsbrowser/documentsview.cpp:49
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Documents"
@@ -174,13 +174,13 @@ msgctxt "@action:intoolbar"
 msgid "Folder of Current Document"
 msgstr "Aktīvā dokumenta mape"
 
-#: controllers/io/copyas/copyascontroller.cpp:41
+#: controllers/io/copyas/copyascontroller.cpp:43
 #, kde-format
 msgctxt "@title:menu"
 msgid "Copy As"
 msgstr "Kopēt kā"
 
-#: controllers/io/copyas/copyascontroller.cpp:92
+#: controllers/io/copyas/copyascontroller.cpp:94
 #, kde-format
 msgctxt "@item There are no encoders."
 msgid "Not available."
@@ -222,13 +222,13 @@ msgstr ""
 "Nospiežot pogu <interface>Kopēt uz starpliktuvi</interface>, iezīmētie dati "
 "tiks iekopēti starpliktuvē ar augstāk ievadītajiem iestatījumiem."
 
-#: controllers/io/export/exportcontroller.cpp:37
+#: controllers/io/export/exportcontroller.cpp:39
 #, kde-format
 msgctxt "@title:menu"
 msgid "Export"
 msgstr "Eksportēt"
 
-#: controllers/io/export/exportcontroller.cpp:88
+#: controllers/io/export/exportcontroller.cpp:90
 #, kde-format
 msgctxt "@item There are no exporters."
 msgid "Not available."
@@ -265,13 +265,13 @@ msgstr ""
 "Nospiežot pogu <interface>Eksportēt failā</interface>, iezīmētie dati tiks "
 "iekopēti failā ar augstāk ievadītajiem iestatījumiem."
 
-#: controllers/io/insert/insertcontroller.cpp:37
+#: controllers/io/insert/insertcontroller.cpp:39
 #, kde-format
 msgctxt "@title:menu"
 msgid "Insert"
 msgstr "Ievietot"
 
-#: controllers/io/insert/insertcontroller.cpp:91
+#: controllers/io/insert/insertcontroller.cpp:93
 #, kde-format
 msgctxt "@item There are no generators."
 msgid "Not available."
@@ -401,19 +401,19 @@ msgctxt "@info:tooltip"
 msgid "Zoom: %1%"
 msgstr "Izmērs: %1%"
 
-#: core/system/documentsyncmanager_p.cpp:109
+#: core/system/documentsyncmanager_p.cpp:111
 #, kde-format
 msgctxt "@title:window"
 msgid "Save As"
 msgstr "Saglabāt kā"
 
-#: core/system/documentsyncmanager_p.cpp:211
+#: core/system/documentsyncmanager_p.cpp:213
 #, kde-format
 msgctxt "@title:window"
 msgid "Close"
 msgstr "Aizvērt"
 
-#: core/system/documentsyncmanager_p.cpp:246
+#: core/system/documentsyncmanager_p.cpp:248
 #, kde-format
 msgctxt "@title:window"
 msgid "Reload"
@@ -455,13 +455,13 @@ msgstr ""
 "Nospiežot <interface>Izveidot</interface>, tiks ģenerēti dati un ievietoti "
 "jaunā dokumentā."
 
-#: gui/system/dialoghandler.cpp:32
+#: gui/system/dialoghandler.cpp:34
 #, kde-kuit-format
 msgctxt "@info"
 msgid "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
 msgstr "Šāds fails jau pastāv <nl/><filename>%1</filename>.<nl/>Pārrakstīt?"
 
-#: gui/system/dialoghandler.cpp:53
+#: gui/system/dialoghandler.cpp:55
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -471,7 +471,7 @@ msgstr ""
 "Failā <filename>%1</filename> ir nesaglabātas izmaiņas. Tās tiks pazaudētas "
 "dokumentu pārlādējot.<nl/>Vai izmest izmaiņas?"
 
-#: gui/system/dialoghandler.cpp:70
+#: gui/system/dialoghandler.cpp:72
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""
@@ -481,7 +481,7 @@ msgstr ""
 "<filename>%1</filename> ir mainīts.<nl/>Vai vēlaties saglabāt izmaiņas vai "
 "izmest tās?"
 
-#: gui/system/dialoghandler.cpp:90
+#: gui/system/dialoghandler.cpp:92
 #, kde-kuit-format
 msgctxt "@info \"%title\" has been modified."
 msgid ""

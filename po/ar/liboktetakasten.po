@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-24 02:01+0000\n"
+"POT-Creation-Date: 2025-09-30 02:13+0000\n"
 "PO-Revision-Date: 2025-09-25 18:03+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -232,7 +232,7 @@ msgid ""
 msgstr "اضغط على هذا الزر لتعديل اسم العلامة التي حددتها أخيراً."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:142
-#: controllers/view/stringsextract/stringsextractview.cpp:189
+#: controllers/view/stringsextract/stringsextractview.cpp:191
 #: controllers/view/structures/structureview.cpp:382
 #, kde-format
 msgctxt "@action"
@@ -240,7 +240,7 @@ msgid "Copy Offset"
 msgstr "انسخ الإزاحة"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:144
-#: controllers/view/stringsextract/stringsextractview.cpp:191
+#: controllers/view/stringsextract/stringsextractview.cpp:193
 #: controllers/view/structures/structureview.cpp:384
 #, kde-format
 msgctxt "@info:tooltip"
@@ -324,14 +324,14 @@ msgctxt "@info:tooltip column contains the character with the value"
 msgid "Character"
 msgstr "محرف"
 
-#: controllers/view/bytetable/bytetabletool.cpp:35
+#: controllers/view/bytetable/bytetabletool.cpp:37
 #: controllers/view/bytetable/bytetabletoolviewfactory.cpp:22
 #, kde-format
 msgctxt "@title:window"
 msgid "Value/Char Table"
 msgstr "جدول القيمة/الحرف"
 
-#: controllers/view/bytetable/bytetabletool.cpp:94
+#: controllers/view/bytetable/bytetabletool.cpp:96
 #, kde-format
 msgctxt "@item"
 msgid "Inserted 1 Byte"
@@ -343,7 +343,7 @@ msgstr[3] "أُدرج %1 بايت"
 msgstr[4] "أُدرج %1 بايتًا"
 msgstr[5] "أُدرج %1 بايت"
 
-#: controllers/view/bytetable/bytetabletool.cpp:112
+#: controllers/view/bytetable/bytetabletool.cpp:114
 #, kde-format
 msgctxt "@info"
 msgid "1 byte inserted."
@@ -394,27 +394,27 @@ msgctxt "@title:window"
 msgid "Charset Conversion"
 msgstr "تحويل مجموعة المحارف"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:50
+#: controllers/view/charsetconversion/charsetconversionview.cpp:52
 #, kde-format
 msgctxt ""
 "@item:inmenu Is converted _from_ charset (selected in combobox next to this)"
 msgid "From"
 msgstr "من"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:52
+#: controllers/view/charsetconversion/charsetconversionview.cpp:54
 #, kde-format
 msgctxt ""
 "@item:inmenu Is converted _to_ charset (selected in combobox next to this)"
 msgid "To"
 msgstr "إلى"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:59
+#: controllers/view/charsetconversion/charsetconversionview.cpp:61
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The direction the bytes are converted, to or from the selected charset."
 msgstr "اتجاه تحويل البايتات، إلى أو من مجموعة المحارف المحددة."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:63
+#: controllers/view/charsetconversion/charsetconversionview.cpp:65
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -422,26 +422,26 @@ msgid ""
 "charset."
 msgstr "حدد اتجاه تحويل البايتات، إلى أو من مجموعة المحارف المحددة."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:79
+#: controllers/view/charsetconversion/charsetconversionview.cpp:81
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The charset the bytes are converted to."
 msgstr "مجموعة المحارف التي تُحول إليها البايتات."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:83
+#: controllers/view/charsetconversion/charsetconversionview.cpp:85
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Select the charset the bytes are converted to."
 msgstr "حدد مجموعة المحارف التي تُحول إليها البايتات."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:99
+#: controllers/view/charsetconversion/charsetconversionview.cpp:101
 #, kde-format
 msgctxt ""
 "@option:check substitute bytes whose char is not part of the target charset"
 msgid "Substitute missing:"
 msgstr "استبدل المفقود:"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:104
+#: controllers/view/charsetconversion/charsetconversionview.cpp:106
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -451,7 +451,7 @@ msgstr ""
 "حدد إن كان ينبغي استبدال البايتات ببايت مبدئي إذا كان حرفها في مجموعة "
 "المحارف المصدر ليس جزءًا من مجموعة المحارف الهدف."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:108
+#: controllers/view/charsetconversion/charsetconversionview.cpp:110
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -461,39 +461,39 @@ msgstr ""
 "اضبط على نعم إذا كان ينبغي استبدال البايتات ببايت مبدئي إذا كان حرفها في "
 "مجموعة المحارف المصدر ليس جزءًا من مجموعة المحارف الهدف."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:124
+#: controllers/view/charsetconversion/charsetconversionview.cpp:126
 #, kde-format
 msgctxt ""
 "@label:textbox byte to use for chars which are not part of the target charset"
 msgid "Substitute byte:"
 msgstr "بايت الاستبدال:"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:131
+#: controllers/view/charsetconversion/charsetconversionview.cpp:133
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte to use for chars which are not part of the target charset."
 msgstr "البايت الذي يُستخدم للمحارف التي ليست جزءًا من مجموعة المحارف الهدف."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:134
+#: controllers/view/charsetconversion/charsetconversionview.cpp:136
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "Define the byte to use for chars which are not part of the target charset."
 msgstr "حدد البايت الذي يُستخدم للمحارف التي ليست جزءًا من مجموعة المحارف الهدف."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:168
+#: controllers/view/charsetconversion/charsetconversionview.cpp:170
 #, kde-format
 msgctxt "@action:button"
 msgid "Convert"
 msgstr "حوّل"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:171
+#: controllers/view/charsetconversion/charsetconversionview.cpp:173
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Converts the bytes in the selected range."
 msgstr "حول البايتات في النطاق المحدد."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:173
+#: controllers/view/charsetconversion/charsetconversionview.cpp:175
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -504,13 +504,13 @@ msgstr ""
 "اضغط على زر <interface>حوّل</interface> لكي تُستبدل كل البايتات في النطاق "
 "المحدد ببايتات تُمثل الحرف نفسه في مجموعة المحارف الهدف المحددة."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:221
+#: controllers/view/charsetconversion/charsetconversionview.cpp:223
 #, kde-format
 msgctxt "@info"
 msgid "No bytes converted."
 msgstr "لا يوجد بايتات محولة."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:222
+#: controllers/view/charsetconversion/charsetconversionview.cpp:224
 #, kde-format
 msgctxt "@info"
 msgid "1 byte converted."
@@ -522,13 +522,13 @@ msgstr[3] "حُولت %1 بايت."
 msgstr[4] "حُولت %1 بايتًا."
 msgstr[5] "حُولت %1 بايت."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:232
+#: controllers/view/charsetconversion/charsetconversionview.cpp:234
 #, kde-format
 msgctxt "@info"
 msgid "No bytes substituted."
 msgstr "لا يوجد بايتات مستبدلة."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:233
+#: controllers/view/charsetconversion/charsetconversionview.cpp:235
 #, kde-format
 msgctxt "@info"
 msgid "1 byte substituted."
@@ -540,7 +540,7 @@ msgstr[3] "اُستبدل %1 بايت."
 msgstr[4] "اُستبدل %1 بايتًا."
 msgstr[5] "اُستبدل %1 بايت."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:241
+#: controllers/view/charsetconversion/charsetconversionview.cpp:243
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -607,14 +607,14 @@ msgctxt "@item name of the change"
 msgid "Crop"
 msgstr "اقتصّ"
 
-#: controllers/view/filter/filtertool.cpp:61
+#: controllers/view/filter/filtertool.cpp:62
 #: controllers/view/filter/filtertoolviewfactory.cpp:22
 #, kde-format
 msgctxt "@title:window"
 msgid "Binary Filter"
 msgstr "المرشح الثنائي"
 
-#: controllers/view/filter/filtertool.cpp:171
+#: controllers/view/filter/filtertool.cpp:172
 #, kde-format
 msgctxt "@info"
 msgid "1 byte filtered with %2."
@@ -799,7 +799,7 @@ msgstr ""
 "في النطاق المحدد."
 
 #: controllers/view/info/infoview.cpp:120
-#: controllers/view/stringsextract/stringsextractview.cpp:161
+#: controllers/view/stringsextract/stringsextractview.cpp:163
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy"
@@ -914,14 +914,14 @@ msgid "Modular sum 8-bit"
 msgstr "المجموع المُعاملي 8-بت"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:26
-#: controllers/view/poddecoder/podtableview.cpp:86
+#: controllers/view/poddecoder/podtableview.cpp:87
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Big-endian"
 msgstr "ترتيب البايت كبير"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:27
-#: controllers/view/poddecoder/podtableview.cpp:87
+#: controllers/view/poddecoder/podtableview.cpp:88
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Little-endian"
@@ -1276,8 +1276,8 @@ msgid "UTF-8"
 msgstr "UTF-8"
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:69
-#: controllers/view/search/searchcontroller.cpp:112
-#: controllers/view/search/searchcontroller.cpp:120
+#: controllers/view/search/searchcontroller.cpp:114
+#: controllers/view/search/searchcontroller.cpp:122
 #, kde-format
 msgctxt "@title:window"
 msgid "Find"
@@ -1363,20 +1363,20 @@ msgid ""
 "data."
 msgstr "اختر إن كنت تريد إدراج المدخلات أو الكتابة فوق البيانات الموجودة."
 
-#: controllers/view/poddecoder/poddecodertool.cpp:92
+#: controllers/view/poddecoder/poddecodertool.cpp:93
 #: controllers/view/poddecoder/poddecodertoolviewfactory.cpp:25
 #, kde-format
 msgctxt "@title:window"
 msgid "Decoding Table"
 msgstr "جدول فك الترميز"
 
-#: controllers/view/poddecoder/poddecodertool.cpp:307
+#: controllers/view/poddecoder/poddecodertool.cpp:308
 #, kde-format
 msgctxt "@item Edited as datatype"
 msgid "Edited as %1"
 msgstr "حرر كـ%1"
 
-#: controllers/view/poddecoder/poddecodertool.cpp:316
+#: controllers/view/poddecoder/poddecodertool.cpp:317
 #, kde-format
 msgctxt "@info Edited as datatype"
 msgid "Edited as %1"
@@ -1406,19 +1406,19 @@ msgctxt "@info:tooltip for column Value"
 msgid "The value of the bytes for the datatype"
 msgstr "قيمة البايتات لنوع البيانات"
 
-#: controllers/view/poddecoder/podtableview.cpp:93
+#: controllers/view/poddecoder/podtableview.cpp:94
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte order to use for decoding the bytes."
 msgstr "ترتيب البايتات الذي يُستخدم لفك ترميز البايتات."
 
-#: controllers/view/poddecoder/podtableview.cpp:97
+#: controllers/view/poddecoder/podtableview.cpp:98
 #, kde-format
 msgctxt "@option:check"
 msgid "Unsigned as hexadecimal:"
 msgstr "غير صحيح كست عشري:"
 
-#: controllers/view/poddecoder/podtableview.cpp:106
+#: controllers/view/poddecoder/podtableview.cpp:107
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1427,7 +1427,7 @@ msgid ""
 msgstr ""
 "حدد إن كانت قيم أنواع الأعداد الصحيحة غير الصحيحة تُعرض كست عشري بدلًا من عشري."
 
-#: controllers/view/poddecoder/podtableview.cpp:136
+#: controllers/view/poddecoder/podtableview.cpp:137
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1437,19 +1437,19 @@ msgstr ""
 "القيمة الجديدة تحتاج <emphasis>بايتات أقل</emphasis> (%1 بدلًا من %2).<nl/"
 ">أبقِ البايتات غير المستخدمة أم احذفها؟"
 
-#: controllers/view/poddecoder/podtableview.cpp:141
+#: controllers/view/poddecoder/podtableview.cpp:142
 #, kde-format
 msgctxt "@action:button keep the unused bytes"
 msgid "&Keep"
 msgstr "أ&بقِ"
 
-#: controllers/view/poddecoder/podtableview.cpp:144
+#: controllers/view/poddecoder/podtableview.cpp:145
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Keep the unused bytes with their old values."
 msgstr "أبقِ البايتات غير المستخدمة بقيمها القديمة."
 
-#: controllers/view/poddecoder/podtableview.cpp:161
+#: controllers/view/poddecoder/podtableview.cpp:162
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1459,67 +1459,67 @@ msgstr ""
 "القيمة الجديدة تحتاج <emphasis>بايتات أكثر</emphasis> (%1 بدلًا من %2).<nl/"
 ">اكتب فوق البايتات التالية أم أدرج بايتات جديدة حسب الحاجة؟"
 
-#: controllers/view/poddecoder/podtableview.cpp:256
+#: controllers/view/poddecoder/podtableview.cpp:257
 #: controllers/view/structures/structureview.cpp:368
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit"
 msgstr "حرّر"
 
-#: controllers/view/poddecoder/podtableview.cpp:269
+#: controllers/view/poddecoder/podtableview.cpp:270
 #: controllers/view/structures/structureview.cpp:391
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Select"
 msgstr "اختر"
 
-#: controllers/view/print/printtool.cpp:278
-#: controllers/view/print/printtool.cpp:308
+#: controllers/view/print/printtool.cpp:282
+#: controllers/view/print/printtool.cpp:312
 #, kde-format
 msgctxt "@title:window"
 msgid "Print Byte Array %1"
 msgstr "طباعة مصفوفة البايت %1"
 
-#: controllers/view/print/printtool.cpp:303
+#: controllers/view/print/printtool.cpp:307
 #, kde-format
 msgctxt "@info"
 msgid "Could not print."
 msgstr "لا يمكن الطباعة."
 
-#: controllers/view/print/printtool.cpp:339
+#: controllers/view/print/printtool.cpp:343
 #, kde-format
 msgctxt "in the header of the printed page, e.g. Page 2 of 20"
 msgid "Page %p of %P"
 msgstr "صفحة %p من %P"
 
-#: controllers/view/print/printtool.cpp:345
+#: controllers/view/print/printtool.cpp:349
 #, kde-format
 msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
 msgid "Printed by: %U"
 msgstr "طبعه: %U"
 
-#: controllers/view/replace/replacecontroller.cpp:72
-#: controllers/view/replace/replacecontroller.cpp:88
+#: controllers/view/replace/replacecontroller.cpp:74
+#: controllers/view/replace/replacecontroller.cpp:90
 #, kde-format
 msgctxt "@title:window"
 msgid "Replace"
 msgstr "استبدل"
 
-#: controllers/view/replace/replacecontroller.cpp:76
+#: controllers/view/replace/replacecontroller.cpp:78
 #, kde-format
 msgctxt "@info"
 msgid "Replace pattern not found in byte array."
 msgstr "نسق التغيير غير موجود في جدول الأثمونات"
 
-#: controllers/view/replace/replacecontroller.cpp:79
-#: controllers/view/replace/replacecontroller.cpp:90
+#: controllers/view/replace/replacecontroller.cpp:81
+#: controllers/view/replace/replacecontroller.cpp:92
 #, kde-format
 msgctxt "@info"
 msgid "No replacements made."
 msgstr "لا يوجد استبدال."
 
-#: controllers/view/replace/replacecontroller.cpp:80
-#: controllers/view/replace/replacecontroller.cpp:91
+#: controllers/view/replace/replacecontroller.cpp:82
+#: controllers/view/replace/replacecontroller.cpp:93
 #, kde-format
 msgctxt "@info"
 msgid "1 replacement made."
@@ -1531,15 +1531,15 @@ msgstr[3] "تم %1 استبدالات."
 msgstr[4] "تم %1 استبدالًا"
 msgstr[5] "تم %1 استبدالًا"
 
-#: controllers/view/replace/replacecontroller.cpp:93
-#: controllers/view/search/searchcontroller.cpp:122
+#: controllers/view/replace/replacecontroller.cpp:95
+#: controllers/view/search/searchcontroller.cpp:124
 #, kde-kuit-format
 msgctxt "@info"
 msgid "End of byte array reached.<nl/>Continue from the beginning?"
 msgstr "وصلت إلى نهاية مصفوفة البايت.<nl/>أتريد المتابعة من البداية؟"
 
-#: controllers/view/replace/replacecontroller.cpp:94
-#: controllers/view/search/searchcontroller.cpp:123
+#: controllers/view/replace/replacecontroller.cpp:96
+#: controllers/view/search/searchcontroller.cpp:125
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Beginning of byte array reached.<nl/>Continue from the end?"
@@ -1631,7 +1631,7 @@ msgctxt "@title"
 msgid "Replace"
 msgstr "استبدل"
 
-#: controllers/view/search/searchcontroller.cpp:113
+#: controllers/view/search/searchcontroller.cpp:115
 #, kde-format
 msgctxt "@info"
 msgid "Search key not found in byte array."
@@ -1747,20 +1747,20 @@ msgctxt "@title:window"
 msgid "Strings"
 msgstr "السّلاسل"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:60
+#: controllers/view/stringsextract/stringsextractview.cpp:62
 #, kde-format
 msgctxt ""
 "@label:spinbox minimum length for consecutive chars to be seen as a string"
 msgid "Minimum length:"
 msgstr "الحد الأدنى للطول:"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:72
+#: controllers/view/stringsextract/stringsextractview.cpp:74
 #, kde-format
 msgctxt "@action:button extract the strings from the byte array"
 msgid "&Extract"
 msgstr "ا&ستخراج"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:75
+#: controllers/view/stringsextract/stringsextractview.cpp:77
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1768,7 +1768,7 @@ msgid ""
 "below."
 msgstr "بحث عن السلاسل التي يحتويها النطاق المحدد، وإدراجها في العرض أدناه."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:77
+#: controllers/view/stringsextract/stringsextractview.cpp:79
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1780,31 +1780,31 @@ msgstr ""
 "السلاسل التي تملك الحد الأدنى للطول. السلاسل التي عُثر عليها ستُدرج في العرض "
 "أدناه."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:88
+#: controllers/view/stringsextract/stringsextractview.cpp:90
 #, kde-format
 msgctxt "@label:lineedit filter term for displayed strings"
 msgid "Filter:"
 msgstr "المرشّح:"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:92
+#: controllers/view/stringsextract/stringsextractview.cpp:94
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter a term to limit the list."
 msgstr "أدخل مصطلحًا لتقييد القائمة."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:143
+#: controllers/view/stringsextract/stringsextractview.cpp:145
 #, kde-format
 msgctxt "@info"
 msgid "No strings"
 msgstr "لا يوجد سلاسل"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:163
+#: controllers/view/stringsextract/stringsextractview.cpp:165
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected strings to the clipboard."
 msgstr "نسخ السلاسل المحددة إلى الحافظة."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:165
+#: controllers/view/stringsextract/stringsextractview.cpp:167
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1814,19 +1814,19 @@ msgstr ""
 "اضغط على زر <interface>نسخ</interface> لكي تُنسخ كل السلاسل التي حددتها في "
 "القائمة إلى الحافظة."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:176
+#: controllers/view/stringsextract/stringsextractview.cpp:178
 #, kde-format
 msgctxt "@action:button"
 msgid "Show"
 msgstr "أظهر"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:178
+#: controllers/view/stringsextract/stringsextractview.cpp:180
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Shows the selected string in the view."
 msgstr "اعرض السلسلة المحددة."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:180
+#: controllers/view/stringsextract/stringsextractview.cpp:182
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1836,25 +1836,25 @@ msgstr ""
 "اضغط على زر <interface>اذهب إلى</interface> لكي تُحدد السلسلة التي حُددت أخيرًا "
 "وتُعرض في العرض."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:196
+#: controllers/view/stringsextract/stringsextractview.cpp:198
 #, kde-format
 msgctxt "@action"
 msgid "Select"
 msgstr "اختر"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:198
+#: controllers/view/stringsextract/stringsextractview.cpp:200
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Selects the selected string in the view."
 msgstr "حدد السلسلة المحددة."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:342
+#: controllers/view/stringsextract/stringsextractview.cpp:344
 #, kde-format
 msgctxt "@info"
 msgid "No strings extracted."
 msgstr "لا يوجد سلاسل مستخرجة."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:343
+#: controllers/view/stringsextract/stringsextractview.cpp:345
 #, kde-format
 msgctxt "@info"
 msgid "1 string extracted."
@@ -2008,19 +2008,19 @@ msgctxt "boolean value with actual value"
 msgid "true (%1)"
 msgstr "صحيح (%1)"
 
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:41
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:80
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:43
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:82
 #, kde-format
 msgid "%1 (value not in enum)"
 msgstr "%1 (القيمة ليست في enum)"
 
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:49
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:77
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:51
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:79
 #, kde-format
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:87
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:89
 #, kde-format
 msgctxt ""
 "Displayed in the type column. first comes the name of the enum, then the "
@@ -2028,12 +2028,12 @@ msgctxt ""
 msgid "enum %1 (%2)"
 msgstr "عناصر مجموعة %1 (%2)"
 
-#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:77
+#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:79
 #, kde-format
 msgid "0x%1 (no matching flags)"
 msgstr "0x%1 (لا يوجد علامات متطابقة)"
 
-#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:107
+#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:109
 #, kde-format
 msgctxt ""
 "Displayed in the type column. first comes the name of the enum, then the "
@@ -2041,7 +2041,7 @@ msgctxt ""
 msgid "flag %1 (%2)"
 msgstr "علم %1 (%2)"
 
-#: controllers/view/structures/datatypes/primitive/pointerdatainformation.cpp:118
+#: controllers/view/structures/datatypes/primitive/pointerdatainformation.cpp:119
 #, kde-format
 msgctxt "memory pointer with underlying type"
 msgid "%1 pointer"
@@ -2167,7 +2167,7 @@ msgstr "محرف Latin1"
 msgid "Latin1 string"
 msgstr "سلسلة Latin1"
 
-#: controllers/view/structures/datatypes/strings/stringdatainformation.cpp:315
+#: controllers/view/structures/datatypes/strings/stringdatainformation.cpp:317
 #, kde-format
 msgid "End of file reached prematurely"
 msgstr "وصل إلى نهاية الملف قبل الأوان"
@@ -2239,7 +2239,7 @@ msgstr "محرف UTF8"
 msgid "UTF8 string"
 msgstr "سلسلة UTF8"
 
-#: controllers/view/structures/datatypes/structuredatainformation.cpp:27
+#: controllers/view/structures/datatypes/structuredatainformation.cpp:28
 #: controllers/view/structures/datatypes/taggeduniondatainformation.cpp:40
 #, kde-format
 msgctxt "data type in C/C++, then name"
@@ -2252,14 +2252,14 @@ msgctxt "data type, then name"
 msgid "tagged union %1"
 msgstr "اتحاد موسوم %1"
 
-#: controllers/view/structures/datatypes/uniondatainformation.cpp:25
+#: controllers/view/structures/datatypes/uniondatainformation.cpp:27
 #, kde-format
 msgctxt "data type in C/C++, then name"
 msgid "union %1"
 msgstr "اتحاد %1"
 
-#: controllers/view/structures/parsers/osdparser.cpp:119
-#: controllers/view/structures/parsers/osdparser.cpp:201
+#: controllers/view/structures/parsers/osdparser.cpp:120
+#: controllers/view/structures/parsers/osdparser.cpp:202
 #, kde-format
 msgid "<invalid name>"
 msgstr "<اسم غير صالح>"
@@ -2561,32 +2561,32 @@ msgstr "اعرض القيمة العددية للمحارف"
 msgid "Character value:"
 msgstr "قيمة المحرف:"
 
-#: controllers/view/structures/structurestool.cpp:69
+#: controllers/view/structures/structurestool.cpp:71
 #: controllers/view/structures/structurestoolviewfactory.cpp:27
 #, kde-format
 msgctxt "@title:window"
 msgid "Structures"
 msgstr "البنى"
 
-#: controllers/view/structures/structurestool.cpp:198
+#: controllers/view/structures/structurestool.cpp:200
 #, kde-format
 msgctxt "name of a data structure"
 msgid "Name"
 msgstr "الاسم"
 
-#: controllers/view/structures/structurestool.cpp:200
+#: controllers/view/structures/structurestool.cpp:202
 #, kde-format
 msgctxt "type of a data structure"
 msgid "Type"
 msgstr "النوع"
 
-#: controllers/view/structures/structurestool.cpp:202
+#: controllers/view/structures/structurestool.cpp:204
 #, kde-format
 msgctxt "value of a data structure (primitive type)"
 msgid "Value"
 msgstr "القيمة"
 
-#: controllers/view/structures/structurestool.cpp:204
+#: controllers/view/structures/structurestool.cpp:206
 #, kde-format
 msgctxt "size of a data structure"
 msgid "Size"
@@ -3281,20 +3281,20 @@ msgctxt "@info:status selection: start offset - end offset (number of bytes)"
 msgid "Selection: %1 - %2 (%3)"
 msgstr "التحديد: %1 - %2 (%3)"
 
-#: core/document/bytearraydocument.cpp:48
+#: core/document/bytearraydocument.cpp:50
 #, kde-format
 msgctxt "name of the data type"
 msgid "Byte Array"
 msgstr "جدول الأثمونات"
 
-#: core/document/bytearraydocumentfactory.cpp:38
+#: core/document/bytearraydocumentfactory.cpp:40
 #, kde-format
 msgctxt "The byte array was new created."
 msgid "New created."
 msgstr "إنشاء جديد"
 
-#: core/document/bytearraydocumentfactory.cpp:45
-#: core/document/bytearraydocumentfactory.cpp:119
+#: core/document/bytearraydocumentfactory.cpp:47
+#: core/document/bytearraydocumentfactory.cpp:121
 #, kde-format
 msgctxt "numbered title for a created document without a filename"
 msgid "[New Byte Array]"
@@ -3306,25 +3306,25 @@ msgstr[3] "[جدول أثمون جديد %1]"
 msgstr[4] "[جدول أثمون جديد %1]"
 msgstr[5] "[جدول أثمون جديد %1]"
 
-#: core/document/bytearraydocumentfactory.cpp:112
+#: core/document/bytearraydocumentfactory.cpp:114
 #, kde-format
 msgctxt "origin of the byte array"
 msgid "Created from data."
 msgstr "أُنشئ من بيانات."
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:53
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:54
 #, kde-format
 msgctxt "destination of the byte array"
 msgid "Loaded from file."
 msgstr "تحميل من الملف"
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:60
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:61
 #: core/io/filesystem/bytearrayrawfilereloadthread.cpp:53
 #, kde-format
 msgid "There is not enough free working memory to load this file."
 msgstr "لا يوجد ما يكفي من ذاكرة العمل الخالية لتحميل هذا الملف."
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:63
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:64
 #: core/io/filesystem/bytearrayrawfilereloadthread.cpp:56
 #, kde-format
 msgid "Support to load files larger than 2 GiB has not yet been implemented."

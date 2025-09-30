@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-24 02:01+0000\n"
+"POT-Creation-Date: 2025-09-30 02:13+0000\n"
 "PO-Revision-Date: 2015-02-04 16:00+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: bosanski <bs@li.org>\n"
@@ -254,7 +254,7 @@ msgstr ""
 "Po pritisku ovog dugmeta moći ćete da uredite posljednju izabranu zabilješku."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:142
-#: controllers/view/stringsextract/stringsextractview.cpp:189
+#: controllers/view/stringsextract/stringsextractview.cpp:191
 #: controllers/view/structures/structureview.cpp:382
 #, fuzzy, kde-format
 #| msgctxt "@title:column offset of the bookmark"
@@ -264,7 +264,7 @@ msgid "Copy Offset"
 msgstr "Pomak"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:144
-#: controllers/view/stringsextract/stringsextractview.cpp:191
+#: controllers/view/stringsextract/stringsextractview.cpp:193
 #: controllers/view/structures/structureview.cpp:384
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
@@ -350,14 +350,14 @@ msgctxt "@info:tooltip column contains the character with the value"
 msgid "Character"
 msgstr "Znak"
 
-#: controllers/view/bytetable/bytetabletool.cpp:35
+#: controllers/view/bytetable/bytetabletool.cpp:37
 #: controllers/view/bytetable/bytetabletoolviewfactory.cpp:22
 #, kde-format
 msgctxt "@title:window"
 msgid "Value/Char Table"
 msgstr "Tabela vrijednost/znak"
 
-#: controllers/view/bytetable/bytetabletool.cpp:94
+#: controllers/view/bytetable/bytetabletool.cpp:96
 #, fuzzy, kde-format
 #| msgid "Inserted 1 Byte"
 #| msgid_plural "Inserted %1 Bytes"
@@ -368,7 +368,7 @@ msgstr[0] "Umetnut %1 bajt"
 msgstr[1] "Umetnuta %1 bajta"
 msgstr[2] "Umetnuto %1 bajtova"
 
-#: controllers/view/bytetable/bytetabletool.cpp:112
+#: controllers/view/bytetable/bytetabletool.cpp:114
 #, fuzzy, kde-format
 #| msgctxt "@info"
 #| msgid "1 byte converted."
@@ -428,27 +428,27 @@ msgctxt "@title:window"
 msgid "Charset Conversion"
 msgstr "Prevođenje skupa znakova"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:50
+#: controllers/view/charsetconversion/charsetconversionview.cpp:52
 #, kde-format
 msgctxt ""
 "@item:inmenu Is converted _from_ charset (selected in combobox next to this)"
 msgid "From"
 msgstr "Iz"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:52
+#: controllers/view/charsetconversion/charsetconversionview.cpp:54
 #, kde-format
 msgctxt ""
 "@item:inmenu Is converted _to_ charset (selected in combobox next to this)"
 msgid "To"
 msgstr "U"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:59
+#: controllers/view/charsetconversion/charsetconversionview.cpp:61
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The direction the bytes are converted, to or from the selected charset."
 msgstr "Pravac konvertovanih bajtova, u ili iz izabranog skupa znakova."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:63
+#: controllers/view/charsetconversion/charsetconversionview.cpp:65
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -456,26 +456,26 @@ msgid ""
 "charset."
 msgstr "Odaberite pravac konverzije bajtova, u ili iz izabranog skupa znakova."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:79
+#: controllers/view/charsetconversion/charsetconversionview.cpp:81
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The charset the bytes are converted to."
 msgstr "Skup znakova u koje se konvertuju bajtovi."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:83
+#: controllers/view/charsetconversion/charsetconversionview.cpp:85
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Select the charset the bytes are converted to."
 msgstr "Odaberite skup znakova u koje se konvertuju bajtovi."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:99
+#: controllers/view/charsetconversion/charsetconversionview.cpp:101
 #, kde-format
 msgctxt ""
 "@option:check substitute bytes whose char is not part of the target charset"
 msgid "Substitute missing:"
 msgstr "Zamijeni nedostajuće:"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:104
+#: controllers/view/charsetconversion/charsetconversionview.cpp:106
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -485,7 +485,7 @@ msgstr ""
 "Određuje da li se bajtovi trebaju zamijeniti podrazumijevanim bajtom ako "
 "njegov znak u izvornom skupu znakova nije dio odredišnog skupa znakova."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:108
+#: controllers/view/charsetconversion/charsetconversionview.cpp:110
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -495,21 +495,21 @@ msgstr ""
 "Postavite na tačno ako se bajtovi trebaju zamijeniti podrazumijevanim bajtom "
 "kada njegov znak u izvornom skupu znakova nije dio odredišnog skupa znakova."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:124
+#: controllers/view/charsetconversion/charsetconversionview.cpp:126
 #, kde-format
 msgctxt ""
 "@label:textbox byte to use for chars which are not part of the target charset"
 msgid "Substitute byte:"
 msgstr "Zamjenski bajt:"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:131
+#: controllers/view/charsetconversion/charsetconversionview.cpp:133
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte to use for chars which are not part of the target charset."
 msgstr ""
 "Bajt koji će se koristiti za znakove koji nisu dio odredišnog skupa znakova."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:134
+#: controllers/view/charsetconversion/charsetconversionview.cpp:136
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -518,20 +518,20 @@ msgstr ""
 "Definiše bajt koji će se koristiti za znakove koji nisu dio odredišnog skupa "
 "znakova."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:168
+#: controllers/view/charsetconversion/charsetconversionview.cpp:170
 #, fuzzy, kde-format
 #| msgid "Con&vert"
 msgctxt "@action:button"
 msgid "Convert"
 msgstr "Kon&verzija"
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:171
+#: controllers/view/charsetconversion/charsetconversionview.cpp:173
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Converts the bytes in the selected range."
 msgstr "Konvertuje bajtove u izabranom opsegu."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:173
+#: controllers/view/charsetconversion/charsetconversionview.cpp:175
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -543,13 +543,13 @@ msgstr ""
 "opsegu će biti zamijenjeni bajtovima koji predstavljaju isti znak u "
 "odredišnom skupu znakova."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:221
+#: controllers/view/charsetconversion/charsetconversionview.cpp:223
 #, kde-format
 msgctxt "@info"
 msgid "No bytes converted."
 msgstr "Nema konvertovanih bajtova."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:222
+#: controllers/view/charsetconversion/charsetconversionview.cpp:224
 #, kde-format
 msgctxt "@info"
 msgid "1 byte converted."
@@ -558,13 +558,13 @@ msgstr[0] "%1 konvertovan bajt."
 msgstr[1] "%1 konvertovana bajt."
 msgstr[2] "%1 konvertovanih bajtova."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:232
+#: controllers/view/charsetconversion/charsetconversionview.cpp:234
 #, kde-format
 msgctxt "@info"
 msgid "No bytes substituted."
 msgstr "Nema zamijenjenih bajtova."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:233
+#: controllers/view/charsetconversion/charsetconversionview.cpp:235
 #, kde-format
 msgctxt "@info"
 msgid "1 byte substituted."
@@ -573,7 +573,7 @@ msgstr[0] "%1 zamijenjen bajt."
 msgstr[1] "%1 zamijenjena bajta."
 msgstr[2] "%1 zamijenjenih bajtova."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:241
+#: controllers/view/charsetconversion/charsetconversionview.cpp:243
 #, kde-format
 msgctxt "@info"
 msgid ""
@@ -641,14 +641,14 @@ msgctxt "@item name of the change"
 msgid "Crop"
 msgstr ""
 
-#: controllers/view/filter/filtertool.cpp:61
+#: controllers/view/filter/filtertool.cpp:62
 #: controllers/view/filter/filtertoolviewfactory.cpp:22
 #, kde-format
 msgctxt "@title:window"
 msgid "Binary Filter"
 msgstr "Binarni filter"
 
-#: controllers/view/filter/filtertool.cpp:171
+#: controllers/view/filter/filtertool.cpp:172
 #, kde-format
 msgctxt "@info"
 msgid "1 byte filtered with %2."
@@ -835,7 +835,7 @@ msgstr ""
 "učestanosti bajtova za bajtove u izabranom opsegu."
 
 #: controllers/view/info/infoview.cpp:120
-#: controllers/view/stringsextract/stringsextractview.cpp:161
+#: controllers/view/stringsextract/stringsextractview.cpp:163
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy"
@@ -955,14 +955,14 @@ msgid "Modular sum 8-bit"
 msgstr "Suma po modulu, 8‑bitno"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:26
-#: controllers/view/poddecoder/podtableview.cpp:86
+#: controllers/view/poddecoder/podtableview.cpp:87
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Big-endian"
 msgstr "Big-endian"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:27
-#: controllers/view/poddecoder/podtableview.cpp:87
+#: controllers/view/poddecoder/podtableview.cpp:88
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Little-endian"
@@ -1336,8 +1336,8 @@ msgid "UTF-8"
 msgstr "UTF‑8"
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:69
-#: controllers/view/search/searchcontroller.cpp:112
-#: controllers/view/search/searchcontroller.cpp:120
+#: controllers/view/search/searchcontroller.cpp:114
+#: controllers/view/search/searchcontroller.cpp:122
 #, kde-format
 msgctxt "@title:window"
 msgid "Find"
@@ -1427,14 +1427,14 @@ msgstr ""
 "Izaberite želite li da se unos umeće u postojeće podatke, ili da ih "
 "prebrisuje."
 
-#: controllers/view/poddecoder/poddecodertool.cpp:92
+#: controllers/view/poddecoder/poddecodertool.cpp:93
 #: controllers/view/poddecoder/poddecodertoolviewfactory.cpp:25
 #, kde-format
 msgctxt "@title:window"
 msgid "Decoding Table"
 msgstr "Tabela dekodiranja"
 
-#: controllers/view/poddecoder/poddecodertool.cpp:307
+#: controllers/view/poddecoder/poddecodertool.cpp:308
 #, fuzzy, kde-format
 #| msgctxt "Edited as %datatype"
 #| msgid "Edited as %1"
@@ -1442,7 +1442,7 @@ msgctxt "@item Edited as datatype"
 msgid "Edited as %1"
 msgstr "Uređeno kao %1"
 
-#: controllers/view/poddecoder/poddecodertool.cpp:316
+#: controllers/view/poddecoder/poddecodertool.cpp:317
 #, fuzzy, kde-format
 #| msgctxt "Edited as %datatype"
 #| msgid "Edited as %1"
@@ -1474,19 +1474,19 @@ msgctxt "@info:tooltip for column Value"
 msgid "The value of the bytes for the datatype"
 msgstr "Vrijednost bajtova za tip podataka."
 
-#: controllers/view/poddecoder/podtableview.cpp:93
+#: controllers/view/poddecoder/podtableview.cpp:94
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte order to use for decoding the bytes."
 msgstr "Redoslijed bajtova koji se koristi za dekodiranje."
 
-#: controllers/view/poddecoder/podtableview.cpp:97
+#: controllers/view/poddecoder/podtableview.cpp:98
 #, kde-format
 msgctxt "@option:check"
 msgid "Unsigned as hexadecimal:"
 msgstr "Neoznačeni kao heksadekadni:"
 
-#: controllers/view/poddecoder/podtableview.cpp:106
+#: controllers/view/poddecoder/podtableview.cpp:107
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1496,7 +1496,7 @@ msgstr ""
 "Određuje da li će se vrijednosti neoznačenih cjelobrojnih tipova prikazivati "
 "heksadekadno umesto dekadno."
 
-#: controllers/view/poddecoder/podtableview.cpp:136
+#: controllers/view/poddecoder/podtableview.cpp:137
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1506,19 +1506,19 @@ msgstr ""
 "<para>Nova vijrednost traži <emphasis>manje</emphasis> bajtova (%1 umjesto "
 "%2).</para><para>Zadržati ili ukloniti neiskorišćene bajtove?</para>?"
 
-#: controllers/view/poddecoder/podtableview.cpp:141
+#: controllers/view/poddecoder/podtableview.cpp:142
 #, kde-format
 msgctxt "@action:button keep the unused bytes"
 msgid "&Keep"
 msgstr "&Zadrži"
 
-#: controllers/view/poddecoder/podtableview.cpp:144
+#: controllers/view/poddecoder/podtableview.cpp:145
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Keep the unused bytes with their old values."
 msgstr "Zadržite neiskorišćene bajtove na starim vrijednostima."
 
-#: controllers/view/poddecoder/podtableview.cpp:161
+#: controllers/view/poddecoder/podtableview.cpp:162
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1529,7 +1529,7 @@ msgstr ""
 "%2).</para><para>Prebrisati bajtove u nastavku ili umetnuti nove po potrebi?"
 "</para>?"
 
-#: controllers/view/poddecoder/podtableview.cpp:256
+#: controllers/view/poddecoder/podtableview.cpp:257
 #: controllers/view/structures/structureview.cpp:368
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
@@ -1538,7 +1538,7 @@ msgctxt "@action:inmenu"
 msgid "Edit"
 msgstr "&Izmijeni..."
 
-#: controllers/view/poddecoder/podtableview.cpp:269
+#: controllers/view/poddecoder/podtableview.cpp:270
 #: controllers/view/structures/structureview.cpp:391
 #, fuzzy, kde-format
 #| msgctxt "@title:window of the tool to select a range"
@@ -1547,53 +1547,53 @@ msgctxt "@action:inmenu"
 msgid "Select"
 msgstr "Odaberi"
 
-#: controllers/view/print/printtool.cpp:278
-#: controllers/view/print/printtool.cpp:308
+#: controllers/view/print/printtool.cpp:282
+#: controllers/view/print/printtool.cpp:312
 #, kde-format
 msgctxt "@title:window"
 msgid "Print Byte Array %1"
 msgstr "Štampanje niza bajtova %1"
 
-#: controllers/view/print/printtool.cpp:303
+#: controllers/view/print/printtool.cpp:307
 #, kde-format
 msgctxt "@info"
 msgid "Could not print."
 msgstr "Ne mogu da štampam."
 
-#: controllers/view/print/printtool.cpp:339
+#: controllers/view/print/printtool.cpp:343
 #, kde-format
 msgctxt "in the header of the printed page, e.g. Page 2 of 20"
 msgid "Page %p of %P"
 msgstr "Stranica %p od %P"
 
-#: controllers/view/print/printtool.cpp:345
+#: controllers/view/print/printtool.cpp:349
 #, kde-format
 msgctxt "in the footer of the printed page, e.g. Printed by: Joe User"
 msgid "Printed by: %U"
 msgstr "Odštampao: %U"
 
-#: controllers/view/replace/replacecontroller.cpp:72
-#: controllers/view/replace/replacecontroller.cpp:88
+#: controllers/view/replace/replacecontroller.cpp:74
+#: controllers/view/replace/replacecontroller.cpp:90
 #, kde-format
 msgctxt "@title:window"
 msgid "Replace"
 msgstr "Zamijeni"
 
-#: controllers/view/replace/replacecontroller.cpp:76
+#: controllers/view/replace/replacecontroller.cpp:78
 #, kde-format
 msgctxt "@info"
 msgid "Replace pattern not found in byte array."
 msgstr "Obrazac za zamjenu nije nađen u nizu bajtova."
 
-#: controllers/view/replace/replacecontroller.cpp:79
-#: controllers/view/replace/replacecontroller.cpp:90
+#: controllers/view/replace/replacecontroller.cpp:81
+#: controllers/view/replace/replacecontroller.cpp:92
 #, kde-format
 msgctxt "@info"
 msgid "No replacements made."
 msgstr "Ništa nije zamijenjeno."
 
-#: controllers/view/replace/replacecontroller.cpp:80
-#: controllers/view/replace/replacecontroller.cpp:91
+#: controllers/view/replace/replacecontroller.cpp:82
+#: controllers/view/replace/replacecontroller.cpp:93
 #, kde-format
 msgctxt "@info"
 msgid "1 replacement made."
@@ -1602,15 +1602,15 @@ msgstr[0] "Izvršena %1 zamjena."
 msgstr[1] "Izvršene %1 zamjene."
 msgstr[2] "Izvršeno %1 zamjena."
 
-#: controllers/view/replace/replacecontroller.cpp:93
-#: controllers/view/search/searchcontroller.cpp:122
+#: controllers/view/replace/replacecontroller.cpp:95
+#: controllers/view/search/searchcontroller.cpp:124
 #, kde-kuit-format
 msgctxt "@info"
 msgid "End of byte array reached.<nl/>Continue from the beginning?"
 msgstr "Dostignut kraj niza bajtova.<nl/>Nastaviti od početka?"
 
-#: controllers/view/replace/replacecontroller.cpp:94
-#: controllers/view/search/searchcontroller.cpp:123
+#: controllers/view/replace/replacecontroller.cpp:96
+#: controllers/view/search/searchcontroller.cpp:125
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Beginning of byte array reached.<nl/>Continue from the end?"
@@ -1704,7 +1704,7 @@ msgctxt "@title"
 msgid "Replace"
 msgstr "Izmjesti"
 
-#: controllers/view/search/searchcontroller.cpp:113
+#: controllers/view/search/searchcontroller.cpp:115
 #, kde-format
 msgctxt "@info"
 msgid "Search key not found in byte array."
@@ -1822,20 +1822,20 @@ msgctxt "@title:window"
 msgid "Strings"
 msgstr "Stringovi"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:60
+#: controllers/view/stringsextract/stringsextractview.cpp:62
 #, kde-format
 msgctxt ""
 "@label:spinbox minimum length for consecutive chars to be seen as a string"
 msgid "Minimum length:"
 msgstr "Najmanja dužina:"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:72
+#: controllers/view/stringsextract/stringsextractview.cpp:74
 #, kde-format
 msgctxt "@action:button extract the strings from the byte array"
 msgid "&Extract"
 msgstr "&Izvadi"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:75
+#: controllers/view/stringsextract/stringsextractview.cpp:77
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1843,7 +1843,7 @@ msgid ""
 "below."
 msgstr "Nalazi niske sadržane u izabranom opsegu i nabraja ih u prikazu ispod."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:77
+#: controllers/view/stringsextract/stringsextractview.cpp:79
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1855,20 +1855,20 @@ msgstr ""
 "niski zadate najmanje dužine u izabranom opsegu. Nađene niske biće nabrojane "
 "u donjem prikazu."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:88
+#: controllers/view/stringsextract/stringsextractview.cpp:90
 #, kde-format
 msgctxt "@label:lineedit filter term for displayed strings"
 msgid "Filter:"
 msgstr "Filter:"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:92
+#: controllers/view/stringsextract/stringsextractview.cpp:94
 #, fuzzy, kde-format
 #| msgid "Enter a term to limit the list."
 msgctxt "@info:placeholder"
 msgid "Enter a term to limit the list."
 msgstr "Unesite izraz za ograničavanje spiska."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:143
+#: controllers/view/stringsextract/stringsextractview.cpp:145
 #, fuzzy, kde-format
 #| msgctxt "@title:window of the tool to extract strings"
 #| msgid "Strings"
@@ -1876,13 +1876,13 @@ msgctxt "@info"
 msgid "No strings"
 msgstr "Stringovi"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:163
+#: controllers/view/stringsextract/stringsextractview.cpp:165
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected strings to the clipboard."
 msgstr "Kopira izabrane niske u klipbord."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:165
+#: controllers/view/stringsextract/stringsextractview.cpp:167
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1892,20 +1892,20 @@ msgstr ""
 "Pritiskom na dugme <interface>Kopiraj</interface> biće kopirane u klipbord "
 "sve izabrane stavke sa spiska."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:176
+#: controllers/view/stringsextract/stringsextractview.cpp:178
 #, fuzzy, kde-format
 #| msgid "&Show"
 msgctxt "@action:button"
 msgid "Show"
 msgstr "&Prikaži"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:178
+#: controllers/view/stringsextract/stringsextractview.cpp:180
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Shows the selected string in the view."
 msgstr "Prikazuje izabrane stavke."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:180
+#: controllers/view/stringsextract/stringsextractview.cpp:182
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1915,7 +1915,7 @@ msgstr ""
 "Pritiskom na dugme <interface>Prikaži</interface>, obilježava se i dovodi u "
 "prikaz posljednja izabrana niska."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:196
+#: controllers/view/stringsextract/stringsextractview.cpp:198
 #, fuzzy, kde-format
 #| msgctxt "@title:window of the tool to select a range"
 #| msgid "Select"
@@ -1923,7 +1923,7 @@ msgctxt "@action"
 msgid "Select"
 msgstr "Odaberi"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:198
+#: controllers/view/stringsextract/stringsextractview.cpp:200
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Shows the selected string in the view."
@@ -1931,7 +1931,7 @@ msgctxt "@info:tooltip"
 msgid "Selects the selected string in the view."
 msgstr "Prikazuje izabrane stavke."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:342
+#: controllers/view/stringsextract/stringsextractview.cpp:344
 #, fuzzy, kde-format
 #| msgctxt "@info"
 #| msgid "No bytes converted."
@@ -1939,7 +1939,7 @@ msgctxt "@info"
 msgid "No strings extracted."
 msgstr "Nema konvertovanih bajtova."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:343
+#: controllers/view/stringsextract/stringsextractview.cpp:345
 #, kde-format
 msgctxt "@info"
 msgid "1 string extracted."
@@ -2076,19 +2076,19 @@ msgctxt "boolean value with actual value"
 msgid "true (%1)"
 msgstr "tačno (%1)"
 
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:41
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:80
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:43
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:82
 #, kde-format
 msgid "%1 (value not in enum)"
 msgstr "%1 (vrijednost van nabrajanja)"
 
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:49
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:77
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:51
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:79
 #, kde-format
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:87
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:89
 #, kde-format
 msgctxt ""
 "Displayed in the type column. first comes the name of the enum, then the "
@@ -2096,12 +2096,12 @@ msgctxt ""
 msgid "enum %1 (%2)"
 msgstr "enum %1 (%2)"
 
-#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:77
+#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:79
 #, kde-format
 msgid "0x%1 (no matching flags)"
 msgstr "0x%1 (ne slažu se flagovi)"
 
-#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:107
+#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:109
 #, kde-format
 msgctxt ""
 "Displayed in the type column. first comes the name of the enum, then the "
@@ -2109,7 +2109,7 @@ msgctxt ""
 msgid "flag %1 (%2)"
 msgstr "zastavica %1 (%2)"
 
-#: controllers/view/structures/datatypes/primitive/pointerdatainformation.cpp:118
+#: controllers/view/structures/datatypes/primitive/pointerdatainformation.cpp:119
 #, kde-format
 msgctxt "memory pointer with underlying type"
 msgid "%1 pointer"
@@ -2237,7 +2237,7 @@ msgstr "Latin1 char"
 msgid "Latin1 string"
 msgstr "Latin1 string"
 
-#: controllers/view/structures/datatypes/strings/stringdatainformation.cpp:315
+#: controllers/view/structures/datatypes/strings/stringdatainformation.cpp:317
 #, kde-format
 msgid "End of file reached prematurely"
 msgstr "Prerano dosegnut kraj datoteke"
@@ -2309,7 +2309,7 @@ msgstr "UTF8 char"
 msgid "UTF8 string"
 msgstr "UTF8 string"
 
-#: controllers/view/structures/datatypes/structuredatainformation.cpp:27
+#: controllers/view/structures/datatypes/structuredatainformation.cpp:28
 #: controllers/view/structures/datatypes/taggeduniondatainformation.cpp:40
 #, kde-format
 msgctxt "data type in C/C++, then name"
@@ -2322,14 +2322,14 @@ msgctxt "data type, then name"
 msgid "tagged union %1"
 msgstr "označena unija %1"
 
-#: controllers/view/structures/datatypes/uniondatainformation.cpp:25
+#: controllers/view/structures/datatypes/uniondatainformation.cpp:27
 #, kde-format
 msgctxt "data type in C/C++, then name"
 msgid "union %1"
 msgstr "union %1"
 
-#: controllers/view/structures/parsers/osdparser.cpp:119
-#: controllers/view/structures/parsers/osdparser.cpp:201
+#: controllers/view/structures/parsers/osdparser.cpp:120
+#: controllers/view/structures/parsers/osdparser.cpp:202
 #, fuzzy, kde-format
 msgid "<invalid name>"
 msgstr "&lt;nevažeće ime&gt;"
@@ -2637,32 +2637,32 @@ msgstr "Brojevne vrijednosti znakova"
 msgid "Character value:"
 msgstr "Znakovna vrijednost:"
 
-#: controllers/view/structures/structurestool.cpp:69
+#: controllers/view/structures/structurestool.cpp:71
 #: controllers/view/structures/structurestoolviewfactory.cpp:27
 #, kde-format
 msgctxt "@title:window"
 msgid "Structures"
 msgstr "Strukture"
 
-#: controllers/view/structures/structurestool.cpp:198
+#: controllers/view/structures/structurestool.cpp:200
 #, kde-format
 msgctxt "name of a data structure"
 msgid "Name"
 msgstr "Ime"
 
-#: controllers/view/structures/structurestool.cpp:200
+#: controllers/view/structures/structurestool.cpp:202
 #, kde-format
 msgctxt "type of a data structure"
 msgid "Type"
 msgstr "Tip"
 
-#: controllers/view/structures/structurestool.cpp:202
+#: controllers/view/structures/structurestool.cpp:204
 #, kde-format
 msgctxt "value of a data structure (primitive type)"
 msgid "Value"
 msgstr "Vrijednost"
 
-#: controllers/view/structures/structurestool.cpp:204
+#: controllers/view/structures/structurestool.cpp:206
 #, fuzzy, kde-format
 #| msgid "Size:"
 msgctxt "size of a data structure"
@@ -3425,20 +3425,20 @@ msgctxt "@info:status selection: start offset - end offset (number of bytes)"
 msgid "Selection: %1 - %2 (%3)"
 msgstr "Izbor: %1–%2 (%3)"
 
-#: core/document/bytearraydocument.cpp:48
+#: core/document/bytearraydocument.cpp:50
 #, kde-format
 msgctxt "name of the data type"
 msgid "Byte Array"
 msgstr "Niz bajtova"
 
-#: core/document/bytearraydocumentfactory.cpp:38
+#: core/document/bytearraydocumentfactory.cpp:40
 #, kde-format
 msgctxt "The byte array was new created."
 msgid "New created."
 msgstr "Novostvoren."
 
-#: core/document/bytearraydocumentfactory.cpp:45
-#: core/document/bytearraydocumentfactory.cpp:119
+#: core/document/bytearraydocumentfactory.cpp:47
+#: core/document/bytearraydocumentfactory.cpp:121
 #, kde-format
 msgctxt "numbered title for a created document without a filename"
 msgid "[New Byte Array]"
@@ -3447,25 +3447,25 @@ msgstr[0] "[Novi niz bajtova %1]"
 msgstr[1] "[Novi niz bajtova %1]"
 msgstr[2] "[Novi niz bajtova %1]"
 
-#: core/document/bytearraydocumentfactory.cpp:112
+#: core/document/bytearraydocumentfactory.cpp:114
 #, kde-format
 msgctxt "origin of the byte array"
 msgid "Created from data."
 msgstr "Stvoren iz podataka."
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:53
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:54
 #, kde-format
 msgctxt "destination of the byte array"
 msgid "Loaded from file."
 msgstr "Učitan iz datoteke."
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:60
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:61
 #: core/io/filesystem/bytearrayrawfilereloadthread.cpp:53
 #, kde-format
 msgid "There is not enough free working memory to load this file."
 msgstr "Nema dovoljno slobodne memorije za učitavanje ove datoteke."
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:63
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:64
 #: core/io/filesystem/bytearrayrawfilereloadthread.cpp:56
 #, kde-format
 msgid "Support to load files larger than 2 GiB has not yet been implemented."
