@@ -17,12 +17,7 @@
 // Qt
 #include <QPainter>
 
-static constexpr Okteta::Address DefaultStartOffset = 0;
-static constexpr Okteta::Address DefaultFirstLineOffset = 0;
-static constexpr int DefaultNoOfBytesPerLine =  16;
-static constexpr Okteta::ValueCoding DefaultValueCoding =  Okteta::HexadecimalCoding; // krazy:exclude=staticobjects
-static inline QString DefaultCharCoding() { return {}; } // -> local 8-bit
-
+const QString AbstractByteArrayFrameRenderer::DefaultCharCoding = QString(); // -> local 8-bit
 
 AbstractByteArrayFrameRenderer::AbstractByteArrayFrameRenderer()
     : mLayout(std::make_unique<Okteta::ByteArrayTableLayout>(DefaultNoOfBytesPerLine, DefaultFirstLineOffset, DefaultStartOffset, 0, 0))
@@ -34,7 +29,7 @@ AbstractByteArrayFrameRenderer::AbstractByteArrayFrameRenderer()
     // set codecs
     mValueCodec = Okteta::ValueCodec::createCodec((Okteta::ValueCoding)DefaultValueCoding);
     mValueCoding = DefaultValueCoding;
-    mCharCodec = Okteta::CharCodec::createCodec(DefaultCharCoding());
+    mCharCodec = Okteta::CharCodec::createCodec(DefaultCharCoding);
 }
 
 AbstractByteArrayFrameRenderer::~AbstractByteArrayFrameRenderer() = default;

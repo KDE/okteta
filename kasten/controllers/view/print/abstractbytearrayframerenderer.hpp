@@ -42,7 +42,12 @@ enum LayoutStyle
 class AbstractByteArrayFrameRenderer : public AbstractColumnFrameRenderer
 {
 private:
+    static inline constexpr Okteta::Address DefaultStartOffset = 0;
+    static inline constexpr Okteta::Address DefaultFirstLineOffset = 0;
+    static inline constexpr int DefaultNoOfBytesPerLine = 16;
     static inline constexpr LayoutStyle DefaultResizeStyle = FixedLayoutStyle;
+    static inline constexpr Okteta::ValueCoding DefaultValueCoding = Okteta::HexadecimalCoding;
+    static const QString DefaultCharCoding;
 
     static inline constexpr int InitialHeight = 50;
     static inline constexpr int InitialWidth = 50;
