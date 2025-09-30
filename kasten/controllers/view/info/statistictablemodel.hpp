@@ -30,6 +30,7 @@ private:
     static inline constexpr QChar DefaultSubstituteChar = QLatin1Char('.');
     static inline constexpr QChar DefaultUndefinedChar = QChar(QChar::ReplacementCharacter);
     static inline constexpr Okteta::ValueCoding DefaultValueCoding = Okteta::HexadecimalCoding;
+    static inline constexpr int ByteSetSize = 256;
 
 public:
     enum ColumnIds

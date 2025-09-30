@@ -19,8 +19,6 @@
 
 namespace Kasten {
 
-static constexpr int StatisticsByteSetSize = 256;
-
 StatisticTableModel::StatisticTableModel(int* byteCount, QObject* parent)
     : QAbstractTableModel(parent)
     , mByteCount(byteCount)
@@ -35,7 +33,7 @@ StatisticTableModel::~StatisticTableModel() = default;
 void StatisticTableModel::update(int size)
 {
     mSize = size;
-    Q_EMIT dataChanged(index(0, CountId), index(StatisticsByteSetSize - 1, PercentId));
+    Q_EMIT dataChanged(index(0, CountId), index(ByteSetSize - 1, PercentId));
     Q_EMIT sizeChanged(mSize);
 }
 
@@ -51,7 +49,7 @@ void StatisticTableModel::setSubstituteChar(QChar substituteChar)
 
     mSubstituteChar = substituteChar;
 
-    Q_EMIT dataChanged(index(0, CharacterId), index(StatisticsByteSetSize - 1, CharacterId));
+    Q_EMIT dataChanged(index(0, CharacterId), index(ByteSetSize - 1, CharacterId));
 }
 
 void StatisticTableModel::setUndefinedChar(QChar undefinedChar)
@@ -66,7 +64,7 @@ void StatisticTableModel::setUndefinedChar(QChar undefinedChar)
 
     mUndefinedChar = undefinedChar;
 
-    Q_EMIT dataChanged(index(0, CharacterId), index(StatisticsByteSetSize - 1, CharacterId));
+    Q_EMIT dataChanged(index(0, CharacterId), index(ByteSetSize - 1, CharacterId));
 }
 
 void StatisticTableModel::setValueCoding(int valueCoding)
@@ -80,7 +78,7 @@ void StatisticTableModel::setValueCoding(int valueCoding)
     mValueCodec = Okteta::ValueCodec::createCodec(mValueCoding);
 //     CodedByte.resize( ByteCodec->encodingWidth() );
 
-    Q_EMIT dataChanged(index(0, ValueId), index(StatisticsByteSetSize - 1, ValueId));
+    Q_EMIT dataChanged(index(0, ValueId), index(ByteSetSize - 1, ValueId));
     Q_EMIT headerChanged();
 }
 
@@ -92,12 +90,12 @@ void StatisticTableModel::setCharCodec(const QString& codecName)
 
     mCharCodec = Okteta::CharCodec::createCodec(codecName);
 
-    Q_EMIT dataChanged(index(0, CharacterId), index(StatisticsByteSetSize - 1, CharacterId));
+    Q_EMIT dataChanged(index(0, CharacterId), index(ByteSetSize - 1, CharacterId));
 }
 
 int StatisticTableModel::rowCount(const QModelIndex& parent) const
 {
-    return (!parent.isValid()) ? StatisticsByteSetSize : 0;
+    return (!parent.isValid()) ? ByteSetSize : 0;
 }
 
 int StatisticTableModel::columnCount(const QModelIndex& parent) const
