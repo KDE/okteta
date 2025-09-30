@@ -300,7 +300,7 @@ private:
 
 protected:
     AdditionalData mAdditionalData;
-    DataInformationBase* mParent;
+    DataInformationBase* mParent = nullptr;
     QString mName;
     bool mValidationSuccessful : 1;
     bool mHasBeenValidated : 1;

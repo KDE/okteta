@@ -49,18 +49,6 @@
 
 namespace Okteta {
 
-static constexpr Address DefaultStartOffset = 0;// 5;
-static constexpr Address DefaultFirstLineOffset = 0;
-
-// zooming is done in steps of font size points
-static constexpr int DefaultZoomStep = 1;
-
-static constexpr AbstractByteArrayView::ValueCoding DefaultValueCoding =  AbstractByteArrayView::HexadecimalCoding;
-
-static inline QString DefaultCharCoding() { return {}; } // -> local 8-bit
-
-static constexpr AbstractByteArrayView::LayoutStyle DefaultResizeStyle = AbstractByteArrayView::FixedLayoutStyle;
-
 inline QString octetStreamFormatName() { return QStringLiteral("application/octet-stream"); }
 
 class NullModel : public AbstractByteArrayModel
@@ -121,6 +109,8 @@ void NullModel::setModified(bool modified)
 
 Q_GLOBAL_STATIC(NullModel, nullModel)
 
+const QString AbstractByteArrayViewPrivate::DefaultCharCoding = QString(); // -> local 8-bit
+
 Qt::GestureType touchOnlyTapAndHoldGestureType()
 {
     static Qt::GestureType type =
@@ -154,7 +144,6 @@ AbstractByteArrayViewPrivate::AbstractByteArrayViewPrivate(AbstractByteArrayView
     , mBlinkCursorVisible(false)
     , mCursorVisible(false)
     , m_wasFocussedByMouseClick(false)
-    , mResizeStyle(DefaultResizeStyle)
 {
 }
 
@@ -193,7 +182,7 @@ void AbstractByteArrayViewPrivate::init()
 
     mValueCodec = ValueCodec::createCodec((ValueCoding)DefaultValueCoding);
     mValueCoding = DefaultValueCoding;
-    mCharCodec = CharCodec::createCodec(DefaultCharCoding());
+    mCharCodec = CharCodec::createCodec(DefaultCharCoding);
 
     mWheelController = &mZoomWheelController;
 

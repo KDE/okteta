@@ -10,17 +10,7 @@
 #include "template_bytearraychecksumparameterset.hpp"
 //// ADAPT(end)
 
-//// ADAPT(start)
-//// define the default values for all parameters
-static constexpr int DefaultBitNumber = 1;
-//// ADAPT(end)
-
-Template_ByteArrayChecksumParameterSet::Template_ByteArrayChecksumParameterSet()
-//// ADAPT(start)
-//// set default values to all parameters
-    : mBitNumber(DefaultBitNumber)
-//// ADAPT(end)
-{}
+Template_ByteArrayChecksumParameterSet::Template_ByteArrayChecksumParameterSet() = default;
 
 Template_ByteArrayChecksumParameterSet::~Template_ByteArrayChecksumParameterSet() = default;
 

@@ -13,29 +13,6 @@
 
 namespace Kasten {
 
-class ByteArrayViewProfilePrivate : public QSharedData
-{
-public:
-    ByteArrayViewProfilePrivate();
-
-public:
-    QString mId;
-
-    QString mViewProfileTitle;
-    int mOffsetCoding;
-    QString mCharCodingName;
-    int mValueCoding;
-    bool mOffsetColumnVisible = true;
-    int mVisibleByteArrayCodings;
-    int mNoOfBytesPerLine;
-    int mLayoutStyle;
-    QChar mSubstituteChar;
-    QChar mUndefinedChar;
-    bool mShowsNonprinting;
-    int mNoOfGroupedBytes;
-    int mViewModus = 0;
-};
-
 QString DefaultViewProfileCharCodingName() { return QStringLiteral("ISO-8859-1"); }
 static constexpr bool DefaultViewProfileShowingNonprinting = false;
 static constexpr QChar DefaultViewProfileSubstituteChar =  QLatin1Char('.');
@@ -51,19 +28,30 @@ static constexpr Okteta::AbstractByteArrayView::LayoutStyle DefaultViewProfileRe
 static constexpr Okteta::AbstractByteArrayView::CodingTypes DefaultViewProfileVisibleByteArrayCodings =
     Okteta::AbstractByteArrayView::ValueAndCharCodings;
 
-ByteArrayViewProfilePrivate::ByteArrayViewProfilePrivate()
-    : mOffsetCoding(DefaultViewProfileOffsetCoding)
-    , mCharCodingName(DefaultViewProfileCharCodingName())
-    , mValueCoding(DefaultViewProfileValueCoding)
-    , mVisibleByteArrayCodings(DefaultViewProfileVisibleByteArrayCodings)
-    , mNoOfBytesPerLine(DefaultViewProfileNoOfBytesPerLine)
-    , mLayoutStyle(DefaultViewProfileResizeStyle)
-    , mSubstituteChar(DefaultViewProfileSubstituteChar)
-    , mUndefinedChar(DefaultViewProfileUndefinedChar)
-    , mShowsNonprinting(DefaultViewProfileShowingNonprinting)
-    , mNoOfGroupedBytes(DefaultViewProfileNoOfGroupedBytes)
+class ByteArrayViewProfilePrivate : public QSharedData
 {
-}
+public:
+    ByteArrayViewProfilePrivate();
+
+public:
+    QString mId;
+
+    QString mViewProfileTitle;
+    int mOffsetCoding = DefaultViewProfileOffsetCoding;
+    QString mCharCodingName = DefaultViewProfileCharCodingName();
+    int mValueCoding = DefaultViewProfileValueCoding;
+    bool mOffsetColumnVisible = true;
+    int mVisibleByteArrayCodings = DefaultViewProfileVisibleByteArrayCodings;
+    int mNoOfBytesPerLine = DefaultViewProfileNoOfBytesPerLine;
+    int mLayoutStyle = DefaultViewProfileResizeStyle;
+    QChar mSubstituteChar = DefaultViewProfileSubstituteChar;
+    QChar mUndefinedChar = DefaultViewProfileUndefinedChar;
+    bool mShowsNonprinting = DefaultViewProfileShowingNonprinting;
+    int mNoOfGroupedBytes = DefaultViewProfileNoOfGroupedBytes;
+    int mViewModus = 0;
+};
+
+ByteArrayViewProfilePrivate::ByteArrayViewProfilePrivate() = default;
 
 ByteArrayViewProfile::ByteArrayViewProfile()
     : d(new ByteArrayViewProfilePrivate)

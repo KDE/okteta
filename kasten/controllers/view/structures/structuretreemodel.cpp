@@ -21,9 +21,6 @@ namespace Kasten {
 StructureTreeModel::StructureTreeModel(StructuresTool* tool, QObject* parent)
     : QAbstractItemModel(parent)
     , mTool(tool)
-    , mLastSender(nullptr)
-    , mLastStartIndex(0)
-    , mLastEndIndex(0)
 {
     connect(mTool, &StructuresTool::dataChanged, this, &StructureTreeModel::onToolDataChange);
     connect(mTool, &StructuresTool::dataCleared, this, &StructureTreeModel::onToolDataClear);

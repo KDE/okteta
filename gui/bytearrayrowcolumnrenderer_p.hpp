@@ -259,7 +259,7 @@ private:
     /** */
     const CharCodec* mCharCodec = nullptr;
 
-    AbstractByteArrayView::CodingTypes mVisibleCodings;
+    AbstractByteArrayView::CodingTypes mVisibleCodings = DefaultVisibleCodings;
     /** */
     PixelX mDigitWidth = 0;
     /** */
@@ -267,7 +267,7 @@ private:
     /** */
     PixelY mDigitHeight = 0;
 
-    QFontMetrics mFontMetrics;
+    QFontMetrics mFontMetrics = QFontMetrics(QFont());
 
 private: // individual data
     /** total width of byte display in pixel */
@@ -275,12 +275,12 @@ private: // individual data
     /** width of inserting cursor in pixel */
 //     PixelX mCursorWidth;
     /** size of the line margin */
-    PixelX mByteSpacingWidth;
+    PixelX mByteSpacingWidth = DefaultByteSpacingWidth;
     /** width of spacing in pixel */
-    PixelX mGroupSpacingWidth;
+    PixelX mGroupSpacingWidth = DefaultGroupSpacingWidth;
 
     /** number of grouped bytes */
-    Size mNoOfGroupedBytes;
+    Size mNoOfGroupedBytes = DefaultNoOfGroupedBytes;
 
     /**
      * array with buffered linePositions (relative to column position)
@@ -300,7 +300,7 @@ private: // value specifics
     /** */
     const ValueCodec* mValueCodec = nullptr;
     /** */
-    PixelX mBinaryGapWidth;
+    PixelX mBinaryGapWidth = DefaultBinaryGapWidth;
 
 private: // buffered data
     /** buffer to hold the formatted valueCoding */
@@ -310,11 +310,11 @@ private: // buffered data
 
 private: // char specifics
     /** */
-    bool mShowingNonprinting;
+    bool mShowingNonprinting = DefaultShowingNonprinting;
     /** */
-    QChar mSubstituteChar;
+    QChar mSubstituteChar = DefaultSubstituteChar;
     /** */
-    QChar mUndefinedChar;
+    QChar mUndefinedChar = DefaultUndefinedChar;
 
 private: // buffering rendering data
     LinePositionRange mRenderLinePositions;
@@ -338,15 +338,6 @@ inline ByteArrayRowColumnRendererPrivate::ByteArrayRowColumnRendererPrivate(Byte
     , mLayout(layout)
     , mRanges(ranges)
     , mBookmarks(qobject_cast<Bookmarkable*>(byteArrayModel))
-    , mVisibleCodings(DefaultVisibleCodings)
-    , mFontMetrics(QFont())
-    , mByteSpacingWidth(DefaultByteSpacingWidth)
-    , mGroupSpacingWidth(DefaultGroupSpacingWidth)
-    , mNoOfGroupedBytes(DefaultNoOfGroupedBytes)
-    , mBinaryGapWidth(DefaultBinaryGapWidth)
-    , mShowingNonprinting(DefaultShowingNonprinting)
-    , mSubstituteChar(DefaultSubstituteChar)
-    , mUndefinedChar(DefaultUndefinedChar)
     , q_ptr(q)
 {
 }

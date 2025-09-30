@@ -20,6 +20,12 @@
 class Template_ByteArrayChecksumParameterSet : public AbstractByteArrayChecksumParameterSet
 //// ADAPT(end)
 {
+private:
+//// ADAPT(start)
+//// define the default values for all parameters
+    static inline constexpr int DefaultBitNumber = 1;
+//// ADAPT(end)
+
 public:
     Template_ByteArrayChecksumParameterSet();
 
@@ -40,7 +46,8 @@ public: // setters
     void setBitNumber(int bitNumber);
 
 private: // parameters
-    int mBitNumber;
+//// set default values to all parameters
+    int mBitNumber = DefaultBitNumber;
 //// ADAPT(end)
 };
 

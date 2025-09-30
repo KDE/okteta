@@ -59,7 +59,7 @@ private: // buffered data
     /** buffer to hold the formatted valueCoding */
     mutable QString mDecodedByteText;
     /** calculated: Offset in pixels of the second half of the binary */
-    PixelX mBinaryHalfOffset;
+    PixelX mBinaryHalfOffset = DefaultBinaryGapWidth;
 
 private:
     Q_DECLARE_PUBLIC(ValueByteArrayColumnRenderer)
@@ -72,7 +72,6 @@ inline ValueByteArrayColumnRendererPrivate::ValueByteArrayColumnRendererPrivate(
                                                                                 ByteArrayTableLayout* layout,
                                                                                 ByteArrayTableRanges* ranges)
     : AbstractByteArrayColumnRendererPrivate(q, stylist, byteArrayModel, layout, ranges)
-    , mBinaryGapWidth(DefaultBinaryGapWidth)
 {
 }
 

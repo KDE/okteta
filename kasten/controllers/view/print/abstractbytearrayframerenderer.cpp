@@ -20,20 +20,14 @@
 static constexpr Okteta::Address DefaultStartOffset = 0;
 static constexpr Okteta::Address DefaultFirstLineOffset = 0;
 static constexpr int DefaultNoOfBytesPerLine =  16;
-static constexpr LayoutStyle DefaultResizeStyle = FixedLayoutStyle; // krazy:exclude=staticobjects
 static constexpr Okteta::ValueCoding DefaultValueCoding =  Okteta::HexadecimalCoding; // krazy:exclude=staticobjects
 static inline QString DefaultCharCoding() { return {}; } // -> local 8-bit
 
-static constexpr int BAFInitialHeight = 50;
-static constexpr int BAFInitialWidth = 50;
 
 AbstractByteArrayFrameRenderer::AbstractByteArrayFrameRenderer()
-    : mHeight(BAFInitialHeight)
-    , mWidth(BAFInitialWidth)
-    , mLayout(std::make_unique<Okteta::ByteArrayTableLayout>(DefaultNoOfBytesPerLine, DefaultFirstLineOffset, DefaultStartOffset, 0, 0))
+    : mLayout(std::make_unique<Okteta::ByteArrayTableLayout>(DefaultNoOfBytesPerLine, DefaultFirstLineOffset, DefaultStartOffset, 0, 0))
     , mTableRanges(std::make_unique<Okteta::ByteArrayTableRanges>(mLayout.get()))
     , mStylist(std::make_unique<Okteta::PrintColumnStylist>())
-    , mResizeStyle(DefaultResizeStyle)
 {
     mLayout->setNoOfLinesPerPage(noOfLinesPerFrame());
 

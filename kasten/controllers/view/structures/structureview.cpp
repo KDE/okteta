@@ -49,7 +49,6 @@ StructureView::StructureView(StructuresTool* tool, QWidget* parent)
     : QWidget(parent)
     , mTool(tool)
     , mDelegate(new StructureViewItemDelegate(this))
-    , mStructTreeViewFocusChild(nullptr)
 {
     auto* baseLayout = new QVBoxLayout(this);
     setLayout(baseLayout);

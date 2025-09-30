@@ -26,6 +26,11 @@ class StatisticTableModel : public QAbstractTableModel
 {
     Q_OBJECT
 
+private:
+    static inline constexpr QChar DefaultSubstituteChar = QLatin1Char('.');
+    static inline constexpr QChar DefaultUndefinedChar = QChar(QChar::ReplacementCharacter);
+    static inline constexpr Okteta::ValueCoding DefaultValueCoding = Okteta::HexadecimalCoding;
+
 public:
     enum ColumnIds
     {
@@ -75,11 +80,11 @@ private:
     int mSize = -1;
     int* mByteCount;
 
-    Okteta::ValueCoding mValueCoding;
+    Okteta::ValueCoding mValueCoding = DefaultValueCoding;
     std::unique_ptr<const Okteta::ValueCodec> mValueCodec;
     std::unique_ptr<const Okteta::CharCodec> mCharCodec;
-    QChar mSubstituteChar;
-    QChar mUndefinedChar;
+    QChar mSubstituteChar = DefaultSubstituteChar;
+    QChar mUndefinedChar = DefaultUndefinedChar;
     QFont mFixedFont;
 };
 

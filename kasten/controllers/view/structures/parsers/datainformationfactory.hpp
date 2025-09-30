@@ -31,7 +31,6 @@ struct CommonParsedData : public ParserInfo
 {
     inline explicit CommonParsedData(const ParserInfo& i)
         : ParserInfo(i)
-        , endianness(DataInformation::DataInformationEndianness::EndiannessInherit)
     {}
     CommonParsedData(const CommonParsedData&) = delete;
 
@@ -43,7 +42,7 @@ struct CommonParsedData : public ParserInfo
     QScriptValue validationFunc;
     QScriptValue toStringFunc;
     QString customTypeName;
-    DataInformation::DataInformationEndianness endianness;
+    DataInformation::DataInformationEndianness endianness = DataInformation::DataInformationEndianness::EndiannessInherit;
 };
 
 struct BitfieldParsedData : public ParserInfo
@@ -121,7 +120,6 @@ struct PointerParsedData : public ParserInfo
 {
     inline explicit PointerParsedData(const ParserInfo& i)
         : ParserInfo(i)
-        , pointerScale(1)
     {}
     PointerParsedData(const PointerParsedData&) = delete;
 
@@ -131,7 +129,7 @@ struct PointerParsedData : public ParserInfo
 
     std::unique_ptr<DataInformation> valueType;
     std::unique_ptr<DataInformation> pointerTarget;
-    qint64           pointerScale;
+    qint64           pointerScale = 1;
     QScriptValue     interpretFunc;
 };
 

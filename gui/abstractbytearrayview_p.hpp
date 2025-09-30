@@ -56,6 +56,19 @@ class AbstractByteArrayViewPrivate : public ColumnsViewScrollAreaEngine
     friend class UndoRedoController;
     friend class ValueEditor;
 
+private:
+    static inline constexpr Address DefaultStartOffset = 0;// 5;
+    static inline constexpr Address DefaultFirstLineOffset = 0;
+
+    // zooming is done in steps of font size points
+    static inline constexpr int DefaultZoomStep = 1;
+
+    static inline constexpr AbstractByteArrayView::ValueCoding DefaultValueCoding =  AbstractByteArrayView::HexadecimalCoding;
+
+    static const QString DefaultCharCoding;
+
+    static inline constexpr AbstractByteArrayView::LayoutStyle DefaultResizeStyle = AbstractByteArrayView::FixedLayoutStyle;
+
 public:
     explicit AbstractByteArrayViewPrivate(AbstractByteArrayView* parent);
 
@@ -391,7 +404,7 @@ protected:
     /** */
     std::unique_ptr<const CharCodec> mCharCodec;
     /** style of resizing */
-    AbstractByteArrayView::LayoutStyle mResizeStyle;
+    AbstractByteArrayView::LayoutStyle mResizeStyle = DefaultResizeStyle;
 
 private:
     FontScalingZoomState m_fontScalingZoomState;

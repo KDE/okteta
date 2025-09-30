@@ -41,6 +41,12 @@ enum LayoutStyle
 
 class AbstractByteArrayFrameRenderer : public AbstractColumnFrameRenderer
 {
+private:
+    static inline constexpr LayoutStyle DefaultResizeStyle = FixedLayoutStyle;
+
+    static inline constexpr int InitialHeight = 50;
+    static inline constexpr int InitialWidth = 50;
+
 public:
     enum DataColumnId
     {
@@ -130,8 +136,8 @@ protected:
     virtual int fittingBytesPerLine() const = 0;
 
 protected:
-    int mHeight;
-    int mWidth;
+    int mHeight = InitialHeight;
+    int mWidth = InitialWidth;
     QFont mFont;
 
     Okteta::AbstractByteArrayModel* mByteArrayModel = nullptr;
@@ -153,7 +159,7 @@ protected:
     std::unique_ptr<const Okteta::CharCodec> mCharCodec;
 
 protected: // parameters
-    LayoutStyle mResizeStyle;
+    LayoutStyle mResizeStyle = DefaultResizeStyle;
 };
 
 #endif

@@ -69,9 +69,9 @@ private:
     StructuresTool* const mTool;
 
     // just for checking in debug mode:
-    DataInformation* mLastSender;
-    uint mLastStartIndex;
-    uint mLastEndIndex;
+    DataInformation* mLastSender =  nullptr;
+    uint mLastStartIndex = 0;
+    uint mLastEndIndex = 0;
 };
 
 }

@@ -575,7 +575,6 @@ void OsdChildrenParser::setParent(DataInformation* newParent)
 
 SingleElementOsdChildrenParser::SingleElementOsdChildrenParser(const OsdParserInfo& info, const QDomElement& element)
     : OsdChildrenParser(info, element)
-    , mParsed(false)
 {
     if (mElem.isNull()) {
         info.warn() << "Null Element passed to child parser!";

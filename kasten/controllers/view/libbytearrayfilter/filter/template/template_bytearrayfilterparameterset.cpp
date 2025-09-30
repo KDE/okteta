@@ -10,17 +10,7 @@
 #include "template_bytearrayfilterparameterset.hpp"
 //// ADAPT(end)
 
-//// ADAPT(start)
-//// define the default values for all parameters
-static constexpr unsigned int DefaultLevel = 127;
-//// ADAPT(end)
-
-Template_ByteArrayFilterParameterSet::Template_ByteArrayFilterParameterSet()
-//// ADAPT(start)
-//// set default values to all parameters
-    : mLevel(DefaultLevel)
-//// ADAPT(end)
-{}
+Template_ByteArrayFilterParameterSet::Template_ByteArrayFilterParameterSet() = default;
 
 Template_ByteArrayFilterParameterSet::~Template_ByteArrayFilterParameterSet() = default;
 

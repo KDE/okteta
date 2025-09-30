@@ -72,7 +72,7 @@ private:
     QAction* mScriptConsoleAction;
     QAction* mLockStructureAction;
 
-    QWidget* mStructTreeViewFocusChild;
+    QWidget* mStructTreeViewFocusChild = nullptr;
 };
 
 }

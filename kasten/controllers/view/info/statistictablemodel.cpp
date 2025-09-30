@@ -19,19 +19,13 @@
 
 namespace Kasten {
 
-static constexpr QChar StatisticsDefaultSubstituteChar =  QLatin1Char('.');
-static constexpr QChar StatisticsDefaultUndefinedChar =   QChar(QChar::ReplacementCharacter);
-static constexpr Okteta::ValueCoding StatisticsDefaultValueCoding =  Okteta::HexadecimalCoding;
 static constexpr int StatisticsByteSetSize = 256;
 
 StatisticTableModel::StatisticTableModel(int* byteCount, QObject* parent)
     : QAbstractTableModel(parent)
     , mByteCount(byteCount)
-    , mValueCoding(StatisticsDefaultValueCoding)
-    , mValueCodec(Okteta::ValueCodec::createCodec(StatisticsDefaultValueCoding))
+    , mValueCodec(Okteta::ValueCodec::createCodec(mValueCoding))
     , mCharCodec(Okteta::CharCodec::createCodecForLocale())
-    , mSubstituteChar(StatisticsDefaultSubstituteChar)
-    , mUndefinedChar(StatisticsDefaultUndefinedChar)
     , mFixedFont(QFontDatabase::systemFont(QFontDatabase::FixedFont))
 {
 }
@@ -48,7 +42,7 @@ void StatisticTableModel::update(int size)
 void StatisticTableModel::setSubstituteChar(QChar substituteChar)
 {
     if (substituteChar.isNull()) {
-        substituteChar = StatisticsDefaultSubstituteChar;
+        substituteChar = DefaultSubstituteChar;
     }
 
     if (mSubstituteChar == substituteChar) {
@@ -63,7 +57,7 @@ void StatisticTableModel::setSubstituteChar(QChar substituteChar)
 void StatisticTableModel::setUndefinedChar(QChar undefinedChar)
 {
     if (undefinedChar.isNull()) {
-        undefinedChar = StatisticsDefaultUndefinedChar;
+        undefinedChar = DefaultUndefinedChar;
     }
 
     if (mUndefinedChar == undefinedChar) {

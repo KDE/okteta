@@ -46,11 +46,11 @@ protected: // AbstractByteArrayColumnRendererPrivate API
 
 private:
     /** */
-    QChar mSubstituteChar;
+    QChar mSubstituteChar = DefaultSubstituteChar;
     /** */
-    QChar mUndefinedChar;
+    QChar mUndefinedChar = DefaultUndefinedChar;
     /** */
-    bool mShowingNonprinting;
+    bool mShowingNonprinting = DefaultShowingNonprinting;
 
 private:
     Q_DECLARE_PUBLIC(CharByteArrayColumnRenderer)
@@ -63,9 +63,6 @@ inline CharByteArrayColumnRendererPrivate::CharByteArrayColumnRendererPrivate(Ch
                                                                               ByteArrayTableLayout* layout,
                                                                               ByteArrayTableRanges* ranges)
     : AbstractByteArrayColumnRendererPrivate(q, stylist, byteArrayModel, layout, ranges)
-    , mSubstituteChar(DefaultSubstituteChar)
-    , mUndefinedChar(DefaultUndefinedChar)
-    , mShowingNonprinting(DefaultShowingNonprinting)
 {
 }
 

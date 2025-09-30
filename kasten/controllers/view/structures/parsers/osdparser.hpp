@@ -116,7 +116,7 @@ public:
     bool hasNext() override;
 
 private:
-    bool mParsed;
+    bool mParsed = false;
 };
 
 #endif /* KASTEN_OSDPARSER_HPP */

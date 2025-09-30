@@ -35,7 +35,6 @@ DataInformation::DataInformation(const QString& name, DataInformationBase* paren
 
 DataInformation::DataInformation(const DataInformation& d)
     : mAdditionalData(d.mAdditionalData)
-    , mParent(nullptr)
     , mName(d.mName)
     , mValidationSuccessful(false)
     , mHasBeenValidated(false)

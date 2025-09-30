@@ -28,13 +28,12 @@ public:
 public:
     QString id;
     QString structure;
-    bool isEnabled;
+    bool isEnabled = true;
 };
 
 inline StructureEnabledData::StructureEnabledData(const QString& id, const QString& structure)
     : id(id)
     , structure(structure)
-    , isEnabled(true)
 {
 }
 

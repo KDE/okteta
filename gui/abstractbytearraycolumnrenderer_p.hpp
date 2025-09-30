@@ -203,7 +203,7 @@ protected:
     /** */
     PixelY mDigitBaseLine = 0;
 
-    QFontMetrics mFontMetrics;
+    QFontMetrics mFontMetrics = QFontMetrics(QFont());
 
 protected: // individual data
     /** total width of byte display in pixel */
@@ -211,12 +211,12 @@ protected: // individual data
     /** width of inserting cursor in pixel */
 //     PixelX mCursorWidth;
     /** size of the line margin */
-    PixelX mByteSpacingWidth;
+    PixelX mByteSpacingWidth = DefaultByteSpacingWidth;
     /** width of spacing in pixel */
-    PixelX mGroupSpacingWidth;
+    PixelX mGroupSpacingWidth = DefaultGroupSpacingWidth;
 
     /** number of grouped bytes */
-    int mNoOfGroupedBytes;
+    int mNoOfGroupedBytes = DefaultNoOfGroupedBytes;
 
     /** pointer to array with buffered linePositions (relative to column position)
      * a spacing gets assigned to the left byte -> ...c|c|c |c|c...
@@ -252,10 +252,6 @@ inline AbstractByteArrayColumnRendererPrivate::AbstractByteArrayColumnRendererPr
     , mLayout(layout)
     , mRanges(ranges)
     , mBookmarks(qobject_cast<Bookmarkable*>(byteArrayModel))
-    , mFontMetrics(QFont())
-    , mByteSpacingWidth(DefaultByteSpacingWidth)
-    , mGroupSpacingWidth(DefaultGroupSpacingWidth)
-    , mNoOfGroupedBytes(DefaultNoOfGroupedBytes)
     , q_ptr(q)
 {
 }
