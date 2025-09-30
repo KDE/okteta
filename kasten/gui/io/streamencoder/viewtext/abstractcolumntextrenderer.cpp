@@ -15,7 +15,7 @@ AbstractColumnTextRenderer::~AbstractColumnTextRenderer() = default;
 
 QString AbstractColumnTextRenderer::whiteSpace(unsigned int length)
 {
-    return {length, QLatin1Char(' ')};
+    return {static_cast<int>(length), QLatin1Char(' ')};
 }
 
 int AbstractColumnTextRenderer::noOfSublinesNeeded() const { return DefaultNoOfSublines; }
