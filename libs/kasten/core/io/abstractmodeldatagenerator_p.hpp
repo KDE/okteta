@@ -35,7 +35,7 @@ protected:
 
     const QString mTypeName;
     const QString mMimeType;
-    AbstractModelDataGenerator::Flags mFlags;
+    const AbstractModelDataGenerator::Flags mFlags;
 };
 
 inline AbstractModelDataGeneratorPrivate::AbstractModelDataGeneratorPrivate(AbstractModelDataGenerator* parent,
