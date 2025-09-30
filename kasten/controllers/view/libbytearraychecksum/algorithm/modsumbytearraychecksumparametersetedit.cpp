@@ -45,7 +45,7 @@ bool ModSumByteArrayChecksumParameterSetEdit::isValid() const { return true; }
 
 void ModSumByteArrayChecksumParameterSetEdit::setParameterSet(const AbstractByteArrayChecksumParameterSet* parameterSet)
 {
-    const auto* modSumParameterSet =
+    const auto* const modSumParameterSet =
         static_cast<const ModSumByteArrayChecksumParameterSet*>(parameterSet);
 
     mByteOrderComboBox->setCurrentIndex(modSumParameterSet->endianness());
@@ -53,7 +53,7 @@ void ModSumByteArrayChecksumParameterSetEdit::setParameterSet(const AbstractByte
 
 void ModSumByteArrayChecksumParameterSetEdit::getParameterSet(AbstractByteArrayChecksumParameterSet* parameterSet) const
 {
-    auto* modSumParameterSet =
+    auto* const modSumParameterSet =
         static_cast<ModSumByteArrayChecksumParameterSet*>(parameterSet);
 
     modSumParameterSet->setEndianness(static_cast<QSysInfo::Endian>(mByteOrderComboBox->currentIndex()));

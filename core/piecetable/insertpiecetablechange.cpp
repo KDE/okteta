@@ -31,7 +31,7 @@ bool InsertPieceTableChange::merge(const AbstractPieceTableChange* other)
     bool result = false;
 
     if (other->type() == InsertId) {
-        const auto* otherInsertChange = static_cast<const InsertPieceTableChange*>(other);
+        const auto* const otherInsertChange = static_cast<const InsertPieceTableChange*>(other);
         if (mInsertOffset + mInsertLength == otherInsertChange->mInsertOffset) {
             mInsertLength += otherInsertChange->mInsertLength;
             result = true;

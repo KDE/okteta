@@ -60,7 +60,7 @@ QVector<AbstractView*> TabbedViewsPrivate::viewList() const
     const int count = mTabWidget->count();
     result.reserve(count);
     for (int i = 0; i < count; ++i) {
-        const auto* viewBox = static_cast<const ViewBox*>(mTabWidget->widget(i));
+        const auto* const viewBox = static_cast<const ViewBox*>(mTabWidget->widget(i));
         AbstractView* view = viewBox->view();
         result.append(view);
     }
@@ -74,7 +74,7 @@ int TabbedViewsPrivate::indexOf(AbstractView* view) const
 
     const int tabCount = mTabWidget->count();
     for (int i = 0; i < tabCount; ++i) {
-        const auto* viewBox = static_cast<const ViewBox*>(mTabWidget->widget(i));
+        const auto* const viewBox = static_cast<const ViewBox*>(mTabWidget->widget(i));
         if (view == viewBox->view()) {
             result = i;
             break;
@@ -125,7 +125,7 @@ void TabbedViewsPrivate::removeViews(const QVector<AbstractView*>& views)
 
         index = indexOf(view);
         if (index != -1) {
-            auto* viewBox = static_cast<ViewBox*>(mTabWidget->widget(index));
+            auto* const viewBox = static_cast<ViewBox*>(mTabWidget->widget(index));
 
             mTabWidget->removeTab(index);
             delete viewBox;
@@ -160,7 +160,7 @@ void TabbedViewsPrivate::onCurrentChanged(int index)
 {
     Q_Q(TabbedViews);
 
-    const auto* viewBox = static_cast<const ViewBox*>(mTabWidget->widget(index));
+    const auto* const viewBox = static_cast<const ViewBox*>(mTabWidget->widget(index));
     AbstractView* view = viewBox ? viewBox->view() : nullptr;
 
     if (view == mCurrentView) {
@@ -189,7 +189,7 @@ void TabbedViewsPrivate::onTabCloseRequest(int tabIndex)
     Q_Q(TabbedViews);
 
     const QWidget* widget = mTabWidget->widget(tabIndex);
-    const auto* viewBox = static_cast<const ViewBox*>(widget);
+    const auto* const viewBox = static_cast<const ViewBox*>(widget);
     AbstractView* view = viewBox->view();
 
     const QVector<Kasten::AbstractView*> views { view };
@@ -200,7 +200,7 @@ void TabbedViewsPrivate::onTitleChanged(const QString& newTitle)
 {
     Q_Q(TabbedViews);
 
-    auto* view = qobject_cast<AbstractView*>(q->sender());
+    auto* const view = qobject_cast<AbstractView*>(q->sender());
     if (view) {
         const int index = indexOf(view);
         if (index != -1) {
@@ -213,7 +213,7 @@ void TabbedViewsPrivate::onTitleChanged(const QString& newTitle)
 void TabbedViewsPrivate::onModifiedChanged(AbstractDocument::SyncStates newStates)
 {
     Q_UNUSED(newStates)
-    auto* view = qobject_cast<AbstractView*>(sender());
+    auto* const view = qobject_cast<AbstractView*>(sender());
     if (view) {
         const int index = indexOf(view);
         if (index != -1) {
@@ -232,7 +232,7 @@ void TabbedViewsPrivate::onViewFocusChanged(bool hasFocus)
 {
     Q_Q(TabbedViews);
 
-//     auto* view = qobject_cast<AbstractView*>( q->sender() );
+//     auto* const view = qobject_cast<AbstractView*>( q->sender() );
 // qCDebug(LOG_KASTEN_GUI)<<view<<view->title()<<hasFocus;
 
     Q_EMIT q->focusChanged(hasFocus);
@@ -247,7 +247,7 @@ void TabbedViewsPrivate::onContextMenuRequested(QPoint pos)
     const int tabIndex = tabBar->tabAt(tabBar->mapFrom(mTabWidget.get(), pos));
     if (tabIndex != -1) {
         const QWidget* widget = mTabWidget->widget(tabIndex);
-        const auto* viewBox = static_cast<const ViewBox*>(widget);
+        const auto* const viewBox = static_cast<const ViewBox*>(widget);
         view = viewBox->view();
     }
     Q_EMIT q->contextMenuRequested(view, mTabWidget->mapTo(mViewAreaBox.get(), pos));

@@ -47,7 +47,7 @@ QWidget* UnsignedBitfieldDataInformation::createEditWidget(QWidget* parent) cons
 
 QVariant UnsignedBitfieldDataInformation::dataFromWidget(const QWidget* w) const
 {
-    const auto* spin = qobject_cast<const Okteta::UIntSpinBox*> (w);
+    const auto* const spin = qobject_cast<const Okteta::UIntSpinBox*>(w);
     if (spin) {
         return spin->value();
     }
@@ -56,7 +56,7 @@ QVariant UnsignedBitfieldDataInformation::dataFromWidget(const QWidget* w) const
 
 void UnsignedBitfieldDataInformation::setWidgetData(QWidget* w) const
 {
-    auto* spin = qobject_cast<Okteta::UIntSpinBox*> (w);
+    auto* const spin = qobject_cast<Okteta::UIntSpinBox*>(w);
     if (spin) {
         spin->setValue(mValue.value<quint64>());
     }

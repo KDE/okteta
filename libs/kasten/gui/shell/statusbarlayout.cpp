@@ -123,7 +123,7 @@ void StatusBarLayout::addWidget(QWidget* widget)
 #if 0
 void StatusBarLayout::updateMarginAndSpacing()
 {
-    auto* statusBar = qobject_cast<Statusbar*>(parentWidget());
+    auto* const statusBar = qobject_cast<Statusbar*>(parentWidget());
     if (!statusBar) {
         return;
     }
@@ -202,7 +202,7 @@ void StatusBarLayout::setGeometry(const QRect& _rect)
 
 void StatusBarLayout::updateLayoutStructs() const
 {
-    auto* that = const_cast<StatusBarLayout*>(this);
+    auto* const that = const_cast<StatusBarLayout*>(this);
 
 //     const int margin = this->margin();
     const int spacing = this->spacing();

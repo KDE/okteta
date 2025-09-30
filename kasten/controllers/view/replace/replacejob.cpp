@@ -26,7 +26,7 @@ ReplaceJob::ReplaceJob(ByteArrayView* byteArrayView, Okteta::AbstractByteArrayMo
     , m_byteArrayModel(byteArrayModel)
 {
     qRegisterMetaType<Okteta::AddressRange>("Okteta::AddressRange");
-    auto* replaceUserQueryable = qobject_cast<If::ReplaceUserQueryable*>(m_userQueryAgent);
+    auto* const replaceUserQueryable = qobject_cast<If::ReplaceUserQueryable*>(m_userQueryAgent);
     if (replaceUserQueryable) {
         qRegisterMetaType<Kasten::ReplaceBehaviour>();
         connect(m_userQueryAgent, SIGNAL(queryContinueFinished(bool)),

@@ -83,14 +83,14 @@ bool Template_ByteArrayFilterParameterSetEdit::isValid() const { return mLevelEd
 //// also adapt the passing of the values between the parameter set and the edit fields
 void Template_ByteArrayFilterParameterSetEdit::setValues(const AbstractByteArrayFilterParameterSet* parameterSet)
 {
-    const auto* template_ParameterSet = static_cast<const Template_ByteArrayFilterParameterSet*>(parameterSet);
+    const auto* const template_ParameterSet = static_cast<const Template_ByteArrayFilterParameterSet*>(parameterSet);
 
     mLevelEdit->setValue(template_ParameterSet->level());
 }
 
 void Template_ByteArrayFilterParameterSetEdit::getParameterSet(AbstractByteArrayFilterParameterSet* parameterSet) const
 {
-    auto* template_ParameterSet = static_cast<Template_ByteArrayFilterParameterSet*>(parameterSet);
+    auto* const template_ParameterSet = static_cast<Template_ByteArrayFilterParameterSet*>(parameterSet);
 
     template_ParameterSet->setLevel(mLevelEdit->value());
 }

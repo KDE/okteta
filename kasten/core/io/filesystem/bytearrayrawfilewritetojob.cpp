@@ -26,7 +26,7 @@ ByteArrayRawFileWriteToJob::~ByteArrayRawFileWriteToJob() = default;
 
 void ByteArrayRawFileWriteToJob::startSyncWithRemote()
 {
-    auto* document = qobject_cast<ByteArrayDocument*>(synchronizer()->document());
+    auto* const document = qobject_cast<ByteArrayDocument*>(synchronizer()->document());
     auto writeThread = std::make_unique<ByteArrayRawFileWriteThread>(this, document, file());
     writeThread->start();
     while (!writeThread->wait(100)) {

@@ -57,11 +57,11 @@ QWidget* BoolBitfieldDataInformation::createEditWidget(QWidget* parent) const
 QVariant BoolBitfieldDataInformation::dataFromWidget(const QWidget* w) const
 {
     if (width() == 1) {
-        const auto* box = qobject_cast<const KComboBox*>(w);
+        const auto* const box = qobject_cast<const KComboBox*>(w);
         Q_CHECK_PTR(box);
         return box->currentIndex();
     }
-    const auto* spin = qobject_cast<const Okteta::UIntSpinBox*>(w);
+    const auto* const spin = qobject_cast<const Okteta::UIntSpinBox*>(w);
     Q_CHECK_PTR(spin);
     if (spin) {
         return spin->value();
@@ -72,12 +72,12 @@ QVariant BoolBitfieldDataInformation::dataFromWidget(const QWidget* w) const
 void BoolBitfieldDataInformation::setWidgetData(QWidget* w) const
 {
     if (width() == 1) {
-        auto* box = qobject_cast<KComboBox*>(w);
+        auto* const box = qobject_cast<KComboBox*>(w);
         Q_CHECK_PTR(box);
         box->setCurrentIndex((mValue.value<quint64>() == 0) ? 0 : 1);
         return;
     }
-    auto* spin = qobject_cast<Okteta::UIntSpinBox*> (w);
+    auto* const spin = qobject_cast<Okteta::UIntSpinBox*> (w);
     if (spin) {
         spin->setValue(mValue.value<quint64>());
     }

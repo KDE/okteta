@@ -31,7 +31,7 @@ std::unique_ptr<AbstractModelExporterConfigEditor> ModelEncoderFileSystemExporte
 {
     std::unique_ptr<AbstractModelExporterConfigEditor> result;
 
-    auto* modelEncoderFileSystemExporter = qobject_cast<ModelEncoderFileSystemExporter*>(exporter);
+    auto* const modelEncoderFileSystemExporter = qobject_cast<ModelEncoderFileSystemExporter*>(exporter);
 
     if (modelEncoderFileSystemExporter) {
         auto encoderConfigEditor =

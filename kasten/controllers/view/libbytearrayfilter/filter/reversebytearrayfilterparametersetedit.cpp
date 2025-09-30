@@ -41,14 +41,14 @@ ReverseByteArrayFilterParameterSetEdit::~ReverseByteArrayFilterParameterSetEdit(
 
 void ReverseByteArrayFilterParameterSetEdit::setValues(const AbstractByteArrayFilterParameterSet* parameterSet)
 {
-    const auto* reverseParameterSet = static_cast<const ReverseByteArrayFilterParameterSet*>(parameterSet);
+    const auto* const reverseParameterSet = static_cast<const ReverseByteArrayFilterParameterSet*>(parameterSet);
 
     mInvertsBitsCheckBox->setChecked(reverseParameterSet->invertsBits());
 }
 
 void ReverseByteArrayFilterParameterSetEdit::getParameterSet(AbstractByteArrayFilterParameterSet* parameterSet) const
 {
-    auto* reverseParameterSet = static_cast<ReverseByteArrayFilterParameterSet*>(parameterSet);
+    auto* const reverseParameterSet = static_cast<ReverseByteArrayFilterParameterSet*>(parameterSet);
 
     reverseParameterSet->setInvertsBits(mInvertsBitsCheckBox->isChecked());
 }

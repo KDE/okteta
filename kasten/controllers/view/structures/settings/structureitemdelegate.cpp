@@ -140,12 +140,12 @@ void StructureItemDelegate::updateItemWidgets(const QList<QWidget*> widgets,
     layoutItem(option, index, &checkBoxRect, nullptr, nullptr, &aboutButtonRect, nullptr, LayoutForActualSize);
 
     // check box
-    auto* checkBox = static_cast<QCheckBox*>(widgets[0]);
+    auto* const checkBox = static_cast<QCheckBox*>(widgets[0]);
     checkBox->resize(checkBoxRect.size());
     checkBox->move(checkBoxRect.topLeft());
 
     // about button
-    auto* aboutButton = static_cast<QPushButton *>(widgets[1]);
+    auto* const aboutButton = static_cast<QPushButton *>(widgets[1]);
     aboutButton->resize(aboutButtonRect.size());
     aboutButton->move(aboutButtonRect.topLeft());
 
@@ -258,7 +258,7 @@ void StructureItemDelegate::handleCheckClicked(bool checked)
     if (!index.isValid()) {
         return;
     }
-    auto* model = const_cast<QAbstractItemModel *>(index.model());
+    auto* const model = const_cast<QAbstractItemModel *>(index.model());
 
     model->setData(index, checked, Qt::CheckStateRole);
 }

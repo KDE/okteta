@@ -19,7 +19,7 @@ ByteArraySRecStreamEncoderConfigEditorFactory::~ByteArraySRecStreamEncoderConfig
 std::unique_ptr<AbstractModelStreamEncoderConfigEditor> ByteArraySRecStreamEncoderConfigEditorFactory::tryCreateConfigEditor(AbstractModelStreamEncoder* encoder) const
 {
     std::unique_ptr<AbstractModelStreamEncoderConfigEditor> result;
-    auto* srecStreamEncoder = qobject_cast<ByteArraySRecStreamEncoder*>(encoder);
+    auto* const srecStreamEncoder = qobject_cast<ByteArraySRecStreamEncoder*>(encoder);
 
     if (srecStreamEncoder) {
         result = std::make_unique<ByteArraySRecStreamEncoderConfigEditor>(srecStreamEncoder);

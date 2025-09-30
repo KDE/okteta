@@ -114,7 +114,7 @@ void PODDecoderTool::setTargetModel(AbstractModel* model)
     }
 
     mByteArrayView = byteArrayView;
-    ByteArrayDocument* document =
+    ByteArrayDocument* const document =
         mByteArrayView ? qobject_cast<ByteArrayDocument*>(mByteArrayView->baseModel()) : nullptr;
     mByteArrayModel = document ? document->content() : nullptr;
 
@@ -302,7 +302,7 @@ void PODDecoderTool::setData(const QVariant& data, int podId)
         }
     }
 
-    auto* changesDescribable = qobject_cast<Okteta::ChangesDescribable*>(mByteArrayModel);
+    auto* const changesDescribable = qobject_cast<Okteta::ChangesDescribable*>(mByteArrayModel);
 
     if (changesDescribable) {
         changesDescribable->openGroupedChange(i18nc("@item Edited as datatype", "Edited as %1", typeCodec->name()));

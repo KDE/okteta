@@ -79,7 +79,7 @@ void StringsExtractTool::setTargetModel(AbstractModel* model)
 
     mByteArrayView = byteArrayView;
 
-    ByteArrayDocument* document =
+    ByteArrayDocument* const document =
         mByteArrayView ? qobject_cast<ByteArrayDocument*>(mByteArrayView->baseModel()) : nullptr;
     mByteArrayModel = document ? document->content() : nullptr;
 

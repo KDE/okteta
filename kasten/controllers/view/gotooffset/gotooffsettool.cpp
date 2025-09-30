@@ -67,7 +67,7 @@ void GotoOffsetTool::setTargetModel(AbstractModel* model)
     mByteArrayView = byteArrayView;
 
     // TODO; check if already same document used before
-    ByteArrayDocument* document =
+    ByteArrayDocument* const document =
         mByteArrayView ? qobject_cast<ByteArrayDocument*>(mByteArrayView->baseModel()) : nullptr;
     mByteArrayModel = document ? document->content() : nullptr;
 

@@ -280,7 +280,7 @@ void StructureView::onLockButtonToggled(bool structureLocked)
 
 void StructureView::editData()
 {
-    auto* action = static_cast<QAction*>(sender());
+    auto* const action = static_cast<QAction*>(sender());
     const QModelIndex index = action->data().toModelIndex();
 
     mStructTreeView->setCurrentIndex(index);
@@ -289,7 +289,7 @@ void StructureView::editData()
 
 void StructureView::selectBytesInView()
 {
-    auto* action = static_cast<QAction*>(sender());
+    auto* const action = static_cast<QAction*>(sender());
     const QModelIndex index = action->data().toModelIndex();
 
     mTool->selectBytesInView(index);
@@ -297,7 +297,7 @@ void StructureView::selectBytesInView()
 
 void StructureView::copyToClipboard()
 {
-    auto* action = static_cast<QAction*>(sender());
+    auto* const action = static_cast<QAction*>(sender());
     const QModelIndex index = action->data().toModelIndex();
     QMimeData* mimeData = mStructTreeView->model()->mimeData({index});
 
@@ -306,7 +306,7 @@ void StructureView::copyToClipboard()
 
 void StructureView::copyOffsetToClipboard()
 {
-    auto* action = static_cast<QAction*>(sender());
+    auto* const action = static_cast<QAction*>(sender());
     const QModelIndex index = action->data().toModelIndex();
 
     const auto* data = index.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();

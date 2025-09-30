@@ -26,7 +26,7 @@ std::unique_ptr<AbstractView> ByteArrayViewFactory::createViewFor(AbstractDocume
 {
     std::unique_ptr<ByteArrayView> result;
 
-    auto* document = static_cast<ByteArrayDocument*>(_document);
+    auto* const document = static_cast<ByteArrayDocument*>(_document);
     if (document) {
         auto synchronizer = std::make_unique<ByteArrayViewProfileSynchronizer>(mByteArrayViewProfileManager);
 
@@ -42,7 +42,7 @@ std::unique_ptr<AbstractView> ByteArrayViewFactory::createCopyOfView(AbstractVie
 {
     std::unique_ptr<ByteArrayView> result;
 
-    auto* view = qobject_cast<ByteArrayView*>(_view);
+    auto* const view = qobject_cast<ByteArrayView*>(_view);
     if (view) {
         auto synchronizer = std::make_unique<ByteArrayViewProfileSynchronizer>(mByteArrayViewProfileManager);
 

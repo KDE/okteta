@@ -47,7 +47,7 @@ VersionView::~VersionView() = default;
 
 void VersionView::setModel(AbstractModel* model)
 {
-    If::Versionable* versionControl = model ? qobject_cast<If::Versionable*>(model) : nullptr;
+    If::Versionable* const versionControl = model ? qobject_cast<If::Versionable*>(model) : nullptr;
 
     mVersionTableModel->setModel(model, versionControl);
 

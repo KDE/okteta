@@ -181,7 +181,7 @@ Answer PODTableView::query(int newValueSize, int oldValueSize, int sizeLeft)
 
 void PODTableView::editData()
 {
-    auto* action = static_cast<QAction*>(sender());
+    auto* const action = static_cast<QAction*>(sender());
     const QModelIndex index = action->data().toModelIndex();
 
     mPODTableView->setCurrentIndex(index);
@@ -190,7 +190,7 @@ void PODTableView::editData()
 
 void PODTableView::selectBytesInView()
 {
-    auto* action = static_cast<QAction*>(sender());
+    auto* const action = static_cast<QAction*>(sender());
     const int podId = action->data().toInt();
 
     mTool->selectBytesInView(podId);
@@ -198,7 +198,7 @@ void PODTableView::selectBytesInView()
 
 void PODTableView::copyToClipboard()
 {
-    auto* action = static_cast<QAction*>(sender());
+    auto* const action = static_cast<QAction*>(sender());
     const QModelIndex index = action->data().toModelIndex();
 
     QMimeData* mimeData = mPODTableView->model()->mimeData({index});

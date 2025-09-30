@@ -86,7 +86,7 @@ void ByteArrayRawFileSynchronizerFactoryTest::testLoadFromUrl()
     QVERIFY(loadSuccess);
     auto document = loadJob->releaseDocument();
 
-    auto* byteArrayDocument = qobject_cast<ByteArrayDocument*>(document.get());
+    auto* const byteArrayDocument = qobject_cast<ByteArrayDocument*>(document.get());
 
     QVERIFY(document != nullptr);
     QVERIFY(byteArrayDocument != nullptr);
@@ -117,7 +117,7 @@ void ByteArrayRawFileSynchronizerFactoryTest::testNewSaveAsToUrl()
     const QUrl fileUrl = QUrl::fromLocalFile(mFileSystem->createFilePath(QLatin1String(TestFileName)));
 
     auto document = std::make_unique<Kasten::ByteArrayDocument>(QStringLiteral("New created for test."));
-    auto* byteArray = qobject_cast<Okteta::PieceTableByteArrayModel*>(document->content());
+    auto* const byteArray = qobject_cast<Okteta::PieceTableByteArrayModel*>(document->content());
 
     // fill array
     QByteArray testData(TestDataSize, TestDataChar);

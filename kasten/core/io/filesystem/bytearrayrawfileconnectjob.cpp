@@ -30,7 +30,7 @@ ByteArrayRawFileConnectJob::~ByteArrayRawFileConnectJob() = default;
 
 void ByteArrayRawFileConnectJob::startConnectWithFile()
 {
-    auto* byteArrayDocument = qobject_cast<ByteArrayDocument*>(document());
+    auto* const byteArrayDocument = qobject_cast<ByteArrayDocument*>(document());
     auto writeThread = std::make_unique<ByteArrayRawFileWriteThread>(this, byteArrayDocument, file());
     writeThread->start();
     while (!writeThread->wait(100)) {

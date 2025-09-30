@@ -27,7 +27,7 @@ QGesture *TouchOnlyTapAndHoldGestureRecognizer::create(QObject* target)
 QGestureRecognizer::Result TouchOnlyTapAndHoldGestureRecognizer::recognize(QGesture* state, QObject* object,
                                                                            QEvent* event)
 {
-    auto* tapAndHoldGesture = static_cast<TouchOnlyTapAndHoldGesture *>(state);
+    auto* const tapAndHoldGesture = static_cast<TouchOnlyTapAndHoldGesture *>(state);
 
     if ((object == state) && (event->type() == QEvent::Timer)) {
         tapAndHoldGesture->cancelHoldTimer();
@@ -36,7 +36,7 @@ QGestureRecognizer::Result TouchOnlyTapAndHoldGestureRecognizer::recognize(QGest
 
     switch (event->type()) {
     case QEvent::TouchBegin: {
-        const auto* touchEvent = static_cast<const QTouchEvent*>(event);
+        const auto* const touchEvent = static_cast<const QTouchEvent*>(event);
         const QTouchEvent::TouchPoint touchPoint = touchEvent->touchPoints().at(0);
         const QPointF screenPosition = touchPoint.screenPos();
         const QPointF widgetPosition = touchPoint.pos();
@@ -47,7 +47,7 @@ QGestureRecognizer::Result TouchOnlyTapAndHoldGestureRecognizer::recognize(QGest
     }
     case QEvent::TouchUpdate: {
         if (tapAndHoldGesture->isHoldTimerActive()) {
-            const auto* touchEvent = static_cast<const QTouchEvent*>(event);
+            const auto* const touchEvent = static_cast<const QTouchEvent*>(event);
             if (touchEvent->touchPoints().size() == 1) {
                 const QTouchEvent::TouchPoint touchPoint = touchEvent->touchPoints().at(0);
                 const QPoint delta = touchPoint.pos().toPoint() - touchPoint.startPos().toPoint();
@@ -67,7 +67,7 @@ QGestureRecognizer::Result TouchOnlyTapAndHoldGestureRecognizer::recognize(QGest
 
 void TouchOnlyTapAndHoldGestureRecognizer::reset(QGesture* state)
 {
-    auto* tapAndHoldGesture = static_cast<TouchOnlyTapAndHoldGesture*>(state);
+    auto* const tapAndHoldGesture = static_cast<TouchOnlyTapAndHoldGesture*>(state);
     tapAndHoldGesture->reset();
 
     QGestureRecognizer::reset(state);

@@ -39,7 +39,7 @@ QString AbstractByteArrayStreamEncoder::modelTypeName(AbstractModel* model, cons
 bool AbstractByteArrayStreamEncoder::encodeToStream(QIODevice* device,
                                                     AbstractModel* model, const AbstractModelSelection* selection)
 {
-    const auto* byteArrayView = qobject_cast<const ByteArrayView*>(model);
+    const auto* const byteArrayView = qobject_cast<const ByteArrayView*>(model);
 
     const ByteArrayDocument* byteArrayDocument =
         byteArrayView ? qobject_cast<const ByteArrayDocument*>(byteArrayView->baseModel()) : nullptr;
@@ -49,7 +49,7 @@ bool AbstractByteArrayStreamEncoder::encodeToStream(QIODevice* device,
 
     const Okteta::AbstractByteArrayModel* byteArray = byteArrayDocument->content();
 
-    const ByteArraySelection* byteArraySelection =
+    const ByteArraySelection* const byteArraySelection =
         selection ? static_cast<const ByteArraySelection*>(selection) : nullptr;
 
     const Okteta::AddressRange range = byteArraySelection && byteArraySelection->isValid() ?
@@ -63,7 +63,7 @@ bool AbstractByteArrayStreamEncoder::encodeToStream(QIODevice* device,
 
 QByteArray AbstractByteArrayStreamEncoder::previewData(AbstractModel* model, const AbstractModelSelection* selection)
 {
-    const auto* byteArrayView = qobject_cast<const ByteArrayView*>(model);
+    const auto* const byteArrayView = qobject_cast<const ByteArrayView*>(model);
 
     const ByteArrayDocument* byteArrayDocument =
         byteArrayView ? qobject_cast<const ByteArrayDocument*>(byteArrayView->baseModel()) : nullptr;
@@ -73,7 +73,7 @@ QByteArray AbstractByteArrayStreamEncoder::previewData(AbstractModel* model, con
 
     const Okteta::AbstractByteArrayModel* byteArray = byteArrayDocument->content();
 
-    const ByteArraySelection* byteArraySelection =
+    const ByteArraySelection* const byteArraySelection =
         selection ? static_cast<const ByteArraySelection*>(selection) : nullptr;
 
     Okteta::AddressRange range = byteArraySelection && byteArraySelection->isValid() ?

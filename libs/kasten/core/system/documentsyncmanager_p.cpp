@@ -268,7 +268,7 @@ void DocumentSyncManagerPrivate::save(AbstractDocument* document)
 
 void DocumentSyncManagerPrivate::onDocumentLoadJobResult(KJob* job)
 {
-    auto* loadJob = qobject_cast<Kasten::AbstractLoadJob*>(job);
+    auto* const loadJob = qobject_cast<Kasten::AbstractLoadJob*>(job);
     auto document = loadJob->releaseDocument()
 ;
     if (document) {

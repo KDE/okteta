@@ -29,8 +29,8 @@ TestDocumentFileConnectJob::~TestDocumentFileConnectJob() = default;
 
 void TestDocumentFileConnectJob::startConnectWithFile()
 {
-    auto* testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>(synchronizer());
-    auto* testDocument = qobject_cast<TestDocument*>(document());
+    auto* const testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>(synchronizer());
+    auto* const testDocument = qobject_cast<TestDocument*>(document());
     auto writeThread = std::make_unique<TestDocumentFileWriteThread>(this, testSynchronizer->header(), testDocument, file());
 
     writeThread->start();

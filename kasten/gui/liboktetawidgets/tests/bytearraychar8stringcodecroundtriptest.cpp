@@ -45,7 +45,7 @@ void ByteArrayChar8StringCodecRoundtripTest::testCodecRoundtrip()
     Okteta::ByteArrayChar8StringEncoder encoder;
 
     decoder.setCharCodec(charCodecName);
-    auto* charCodec = decoder.charCodec();
+    const auto* const charCodec = decoder.charCodec();
 
     const QByteArray sequence = createFullByteSequence();
 

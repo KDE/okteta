@@ -86,7 +86,7 @@ inline int TabbedViewsPrivate::viewCount()   const { return mTabWidget->count();
 
 inline AbstractView* TabbedViewsPrivate::viewFocus() const
 {
-    const auto* viewBox = static_cast<const ViewBox*>(mTabWidget->currentWidget());
+    const auto* const viewBox = static_cast<const ViewBox*>(mTabWidget->currentWidget());
     return viewBox ? viewBox->view() : nullptr;
 }
 

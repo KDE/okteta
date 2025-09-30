@@ -126,7 +126,7 @@ OktetaPart::OktetaPart(QObject* parent,
     addController(Kasten::ViewContextMenuControllerFactory());
     addController(Kasten::ViewProfileControllerFactory(mViewProfileManager, widget));
 
-//     Kasten::StatusBar* bottomBar = static_cast<Kasten::StatusBar*>( statusBar() );
+//     Kasten::StatusBar* const bottomBar = static_cast<Kasten::StatusBar*>( statusBar() );
 //     addController(ViewStatusControllerFactory(bottomBar) );
 //     addController(ReadOnlyBarControllerFactory(bottomBar) );
 //     addController(ZoomBarControllerFactory(bottomBar) );
@@ -191,7 +191,7 @@ bool OktetaPart::saveFile()
 
 void OktetaPart::onDocumentLoadJobResult(KJob* job)
 {
-    auto* loadJob = qobject_cast<Kasten::AbstractLoadJob*>(job);
+    auto* const loadJob = qobject_cast<Kasten::AbstractLoadJob*>(job);
     auto document = loadJob->releaseDocument();
 
     if (document) {

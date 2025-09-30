@@ -96,7 +96,7 @@ bool StructUnionScriptClass::additionalPropertyFlags(const DataInformation* data
 
 QScriptValue StructUnionScriptClass::additionalProperty(const DataInformation* data, const QScriptString& name, uint id)
 {
-    const auto* dataW = static_cast<const DataInformationWithChildren*>(data);
+    const auto* const dataW = static_cast<const DataInformationWithChildren*>(data);
     // do a dynamic cast in debug mode to ensure the static cast was valid
     Q_CHECK_PTR(dynamic_cast<const DataInformationWithChildren*>(dataW));
 
@@ -136,7 +136,7 @@ QScriptValue StructUnionScriptClass::additionalProperty(const DataInformation* d
 
 bool StructUnionScriptClass::setAdditionalProperty(DataInformation* data, const QScriptString& name, uint, const QScriptValue& value)
 {
-    auto* dataW = static_cast<DataInformationWithChildren*>(data);
+    auto* const dataW = static_cast<DataInformationWithChildren*>(data);
     // do a dynamic cast in debug mode to ensure the static cast was valid
     Q_CHECK_PTR(dynamic_cast<DataInformationWithChildren*>(dataW));
 
@@ -204,7 +204,7 @@ QScriptValue StructUnionScriptClass::StructUnion_proto_setChildren(QScriptContex
         qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "could not cast data";
         return eng->undefinedValue();
     }
-    auto* dataW = static_cast<DataInformationWithChildren*>(data);
+    auto* const dataW = static_cast<DataInformationWithChildren*>(data);
     // do a dynamic cast in debug mode to ensure the static cast was valid
     Q_CHECK_PTR(dynamic_cast<DataInformationWithChildren*>(dataW));
 

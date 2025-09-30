@@ -55,7 +55,7 @@ void ByteTableTool::setTargetModel(AbstractModel* model)
 
     mByteArrayView = byteArrayView;
 
-    ByteArrayDocument* document =
+    ByteArrayDocument* const document =
         mByteArrayView ? qobject_cast<ByteArrayDocument*>(mByteArrayView->baseModel()) : nullptr;
     mByteArrayModel = document ? document->content() : nullptr;
 
@@ -88,7 +88,7 @@ void ByteTableTool::insert(unsigned char byte, int count)
 {
     const QByteArray data(count, static_cast<char>(byte));
 
-    auto* changesDescribable = qobject_cast<Okteta::ChangesDescribable*>(mByteArrayModel);
+    auto* const changesDescribable = qobject_cast<Okteta::ChangesDescribable*>(mByteArrayModel);
 
     if (changesDescribable) {
         // TODO: how to note the byte? charcoding might change... cmp. below notification

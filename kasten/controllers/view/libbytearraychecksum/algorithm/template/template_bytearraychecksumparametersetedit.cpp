@@ -83,7 +83,7 @@ bool Template_ByteArrayChecksumParameterSetEdit::isValid() const { return mBitNu
 //// also adapt the passing of the values between the parameter set and the edit fields
 void Template_ByteArrayChecksumParameterSetEdit::setParameterSet(const AbstractByteArrayChecksumParameterSet* parameterSet)
 {
-    const auto* template_ParameterSet =
+    const auto* const template_ParameterSet =
         static_cast<const Template_ByteArrayChecksumParameterSet*>(parameterSet);
 
     mBitNumberEdit->setValue(template_ParameterSet->bitNumber());
@@ -91,7 +91,7 @@ void Template_ByteArrayChecksumParameterSetEdit::setParameterSet(const AbstractB
 
 void Template_ByteArrayChecksumParameterSetEdit::getParameterSet(AbstractByteArrayChecksumParameterSet* parameterSet) const
 {
-    auto* template_ParameterSet =
+    auto* const template_ParameterSet =
         static_cast<Template_ByteArrayChecksumParameterSet*>(parameterSet);
 
     template_ParameterSet->setBitNumber(mBitNumberEdit->value());

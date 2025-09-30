@@ -26,7 +26,7 @@ ByteArrayRawFileReloadJob::~ByteArrayRawFileReloadJob() = default;
 
 void ByteArrayRawFileReloadJob::startReadFromFile()
 {
-    auto* document = qobject_cast<ByteArrayDocument*>(synchronizer()->document());
+    auto* const document = qobject_cast<ByteArrayDocument*>(synchronizer()->document());
     auto reloadThread = std::make_unique<ByteArrayRawFileReloadThread>(this, /*document, */ file());
     reloadThread->start();
     while (!reloadThread->wait(100)) {
@@ -36,7 +36,7 @@ void ByteArrayRawFileReloadJob::startReadFromFile()
     bool success = reloadThread->success();
     // TODO: moved this here to avoid marshalling the change signals out of the thread. Good idea?
     if (success) {
-        auto* byteArray = qobject_cast<Okteta::PieceTableByteArrayModel*>(document->content());
+        auto* const byteArray = qobject_cast<Okteta::PieceTableByteArrayModel*>(document->content());
         byteArray->setData(reloadThread->data());
 
 //         ExternalBookmarkStorage().readBookmarks( document, synchronizer()->url() );

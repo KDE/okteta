@@ -128,7 +128,7 @@ void FilterView::addFilters()
 
 void FilterView::getParameterSet(AbstractByteArrayFilterParameterSet* parameterSet) const
 {
-    auto* parametersetEdit =
+    auto* const parametersetEdit =
         qobject_cast<AbstractByteArrayFilterParameterSetEdit*>(mParameterSetEditStack->currentWidget());
     if (parametersetEdit) {
         parametersetEdit->getParameterSet(parameterSet);
@@ -139,7 +139,7 @@ void FilterView::onFilterClicked()
 {
     const int filterId = mTool->filterId();
 
-    auto* parametersetEdit =
+    auto* const parametersetEdit =
         qobject_cast<AbstractByteArrayFilterParameterSetEdit*>(mParameterSetEditStack->currentWidget());
     if (parametersetEdit) {
         parametersetEdit->rememberCurrentSettings();
@@ -162,7 +162,7 @@ void FilterView::onOperationChange(int index)
 
     mParameterSetEditStack->setCurrentIndex(index);
 
-    auto* parametersetEdit =
+    auto* const parametersetEdit =
         qobject_cast<AbstractByteArrayFilterParameterSetEdit*>(mParameterSetEditStack->currentWidget());
     if (parametersetEdit) {
         AbstractByteArrayFilterParameterSet* parameterSet = mTool->parameterSet(index);
@@ -185,7 +185,7 @@ void FilterView::onFilterChanged(int filterId)
 
 void FilterView::onHasWriteableChanged(bool hasWriteable)
 {
-    auto* parametersetEdit =
+    auto* const parametersetEdit =
         qobject_cast<AbstractByteArrayFilterParameterSetEdit*>(mParameterSetEditStack->currentWidget());
     const bool isValid = (parametersetEdit ? parametersetEdit->isValid() : false);
 
@@ -194,7 +194,7 @@ void FilterView::onHasWriteableChanged(bool hasWriteable)
 
 void FilterView::onCharCodecChanged(const QString& charCodecName)
 {
-    auto* parametersetEdit =
+    auto* const parametersetEdit =
         qobject_cast<AbstractByteArrayFilterParameterSetEdit*>(mParameterSetEditStack->currentWidget());
     if (parametersetEdit) {
         parametersetEdit->setCharCodec(charCodecName);

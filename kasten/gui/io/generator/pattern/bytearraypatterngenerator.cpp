@@ -140,7 +140,7 @@ std::unique_ptr<QMimeData> ByteArrayPatternGenerator::generateData()
 
 // TODO: a method to get the description of the change, e.g.
 #if 0
-    auto* changesDescribable = qobject_cast<Okteta::ChangesDescribable*>(mByteArrayModel);
+    auto* const changesDescribable = qobject_cast<Okteta::ChangesDescribable*>(mByteArrayModel);
 
     if (changesDescribable) {
         changesDescribable->openGroupedChange(i18nc("@item", "Pattern Inserted"));

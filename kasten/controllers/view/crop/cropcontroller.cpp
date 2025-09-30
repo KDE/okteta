@@ -54,7 +54,7 @@ void CropController::setTargetModel(AbstractModel* model)
     m_byteArrayView = byteArrayView;
 
     // TODO; check if already same document used before
-    ByteArrayDocument* document =
+    ByteArrayDocument* const document =
         m_byteArrayView ? qobject_cast<ByteArrayDocument*>(m_byteArrayView->baseModel()) : nullptr;
     m_byteArrayModel = document ? document->content() : nullptr;
 
@@ -84,7 +84,7 @@ void CropController::updateActionEnabled()
 
 void CropController::crop()
 {
-    auto* changesDescribable = qobject_cast<Okteta::ChangesDescribable*>(m_byteArrayModel);
+    auto* const changesDescribable = qobject_cast<Okteta::ChangesDescribable*>(m_byteArrayModel);
 
     const Okteta::AddressRange keptSection = m_byteArrayView->selection();
     const Okteta::AddressRange beginSection(0, keptSection.nextBeforeStart());

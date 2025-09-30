@@ -102,7 +102,7 @@ void CreatorController::onNewFromClipboardActionTriggered()
 
 void CreatorController::onNewFromGeneratorActionTriggered()
 {
-    auto* action = static_cast<QAction*>(sender());
+    auto* const action = static_cast<QAction*>(sender());
 
     auto* generator = action->data().value<AbstractModelDataGenerator*>();
 

@@ -28,7 +28,7 @@ void ByteArrayDocumentTest::testCreateNew()
     QVERIFY(document != nullptr);
     QCOMPARE(document->contentFlags(), Kasten::ContentStateNormal);
 
-    auto* byteArray = qobject_cast<Okteta::PieceTableByteArrayModel*>(document->content());
+    auto* const byteArray = qobject_cast<Okteta::PieceTableByteArrayModel*>(document->content());
     QVERIFY(byteArray != nullptr);
     QCOMPARE(byteArray->size(), 0);
     QVERIFY(!byteArray->isModified());

@@ -77,7 +77,7 @@ void TestDocumentFileSynchronizerTest::checkFileContent(const QUrl& fileUrl, con
     QVERIFY(loadSuccess);
     auto document = loadJob->releaseDocument();
 
-    auto* testDocument = qobject_cast<Kasten::TestDocument*>(document.get());
+    auto* const testDocument = qobject_cast<Kasten::TestDocument*>(document.get());
 
     QVERIFY(testDocument != nullptr);
     QCOMPARE(*testDocument->data(), data);
@@ -96,7 +96,7 @@ void TestDocumentFileSynchronizerTest::testLoadSaveFile()
     QVERIFY(loadSuccess);
     auto document = loadJob->releaseDocument();
 
-    auto* testDocument = qobject_cast<Kasten::TestDocument*>(document.get());
+    auto* const testDocument = qobject_cast<Kasten::TestDocument*>(document.get());
     QVERIFY(testDocument != nullptr);
     // change and save
     testDocument->setData(otherData);
@@ -120,7 +120,7 @@ void TestDocumentFileSynchronizerTest::testLoadReloadFile()
     QVERIFY(loadSuccess);
     auto document = loadJob->releaseDocument();
 
-    auto* testDocument = qobject_cast<Kasten::TestDocument*>(document.get());
+    auto* const testDocument = qobject_cast<Kasten::TestDocument*>(document.get());
     QVERIFY(testDocument != nullptr);
 
     // change on disc and reload

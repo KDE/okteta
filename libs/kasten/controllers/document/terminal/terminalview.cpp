@@ -54,12 +54,12 @@ void TerminalView::createTerminalPart()
         terminalWidget->setFocus();
         setFocusProxy(terminalWidget);
 
-        auto* frame = qobject_cast<QFrame*>(terminalWidget);
+        auto* const frame = qobject_cast<QFrame*>(terminalWidget);
         if (frame) {
             frame->setFrameStyle(QFrame::Panel | QFrame::Sunken);
         }
 
-        auto* layout = static_cast<QVBoxLayout*>(this->layout());
+        auto* const layout = static_cast<QVBoxLayout*>(this->layout());
         layout->addWidget(terminalWidget);
         terminalWidget->show();
 

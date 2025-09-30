@@ -151,7 +151,7 @@ Qt::ItemFlags StructureTreeModel::flags(const QModelIndex& index) const
     if (!index.isValid()) {
         return Qt::NoItemFlags;
     }
-    auto* item = static_cast<DataInformation*> (index.internalPointer());
+    auto* const item = static_cast<DataInformation*>(index.internalPointer());
     Qt::ItemFlags flags = item->flags(index.column(), mTool->isFileLoaded());
     if (item->wasAbleToRead()) {
         flags |= Qt::ItemIsDragEnabled;
@@ -209,7 +209,7 @@ QModelIndex StructureTreeModel::index(int row, int column, const QModelIndex& pa
         if (parent.column() != 0) {
             return {};
         }
-        auto* parentItem = static_cast<DataInformation*> (parent.internalPointer());
+        auto* const parentItem = static_cast<DataInformation*>(parent.internalPointer());
         childItem = parentItem->childAt(row);
     }
     if (childItem) {
@@ -225,7 +225,7 @@ QModelIndex StructureTreeModel::parent(const QModelIndex& index) const
         return {};
     }
 
-    auto* childItem = static_cast<DataInformation*> (index.internalPointer());
+    auto* const childItem = static_cast<DataInformation*> (index.internalPointer());
 
     DataInformationBase* parentObj = childItem->parent();
 
@@ -246,7 +246,7 @@ int StructureTreeModel::rowCount(const QModelIndex& parent) const
     if (parent.column() != 0) {
         return 0;
     }
-    auto* parentItem = static_cast<DataInformation*> (parent.internalPointer());
+    auto* const parentItem = static_cast<DataInformation*>(parent.internalPointer());
     if (!parentItem) {
         qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "parentItem is NULL";
         return mTool->childCount();
@@ -259,7 +259,7 @@ bool StructureTreeModel::hasChildren(const QModelIndex& parent) const
     if (!parent.isValid()) {
         return mTool->childCount() > 0;
     }
-    auto* parentItem = static_cast<DataInformation*> (parent.internalPointer());
+    auto* const parentItem = static_cast<DataInformation*>(parent.internalPointer());
     if (!parentItem) {
         return false;
     }

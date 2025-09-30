@@ -84,7 +84,7 @@ T AbstractModel::findBaseModel() const
 {
     auto* model = const_cast<AbstractModel*>(this);
     do {
-        T castedModel = qobject_cast<T>(model);
+        T const castedModel = qobject_cast<T>(model);
         if (castedModel) {
             return castedModel;
         }
@@ -99,7 +99,7 @@ AbstractModel* AbstractModel::findBaseModelWithInterface() const
 {
     auto* model = const_cast<AbstractModel*>(this);
     do {
-        T interface = qobject_cast<T>(model);
+        T const interface = qobject_cast<T>(model);
         if (interface) {
             return model;
         }

@@ -133,7 +133,7 @@ void ChecksumView::addAlgorithms()
 
 void ChecksumView::getParameterSet(AbstractByteArrayChecksumParameterSet* parameterSet) const
 {
-    auto* parametersetEdit =
+    auto* const parametersetEdit =
         qobject_cast<AbstractByteArrayChecksumParameterSetEdit*>(mParameterSetEditStack->currentWidget());
     if (parametersetEdit) {
         parametersetEdit->getParameterSet(parameterSet);
@@ -151,7 +151,7 @@ void ChecksumView::onOperationChange(int index)
     mTool->setAlgorithm(index);
     mParameterSetEditStack->setCurrentIndex(index);
 
-    auto* parametersetEdit =
+    auto* const parametersetEdit =
         qobject_cast<AbstractByteArrayChecksumParameterSetEdit*>(mParameterSetEditStack->currentWidget());
     if (parametersetEdit) {
         AbstractByteArrayChecksumParameterSet* parameterSet = mTool->parameterSet();

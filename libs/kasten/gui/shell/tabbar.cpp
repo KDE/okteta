@@ -98,7 +98,7 @@ bool TabBar::eventFilter(QObject* object, QEvent* event)
         // see "fixme Qt 6: move to mouseDoubleClickEvent(), here for BC reasons." in qtabbar.cpp
         if (event->type() == QEvent::MouseButtonDblClick) {
             // block tabBarDoubleClicked signals with RMB, see https://bugs.kde.org/show_bug.cgi?id=356016
-            auto* mouseEvent = static_cast<const QMouseEvent*>(event);
+            const auto* const mouseEvent = static_cast<const QMouseEvent*>(event);
             if (mouseEvent->button() != Qt::LeftButton) {
                 return true;
             }

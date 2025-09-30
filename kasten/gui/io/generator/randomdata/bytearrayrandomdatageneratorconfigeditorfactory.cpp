@@ -20,7 +20,7 @@ std::unique_ptr<AbstractModelDataGeneratorConfigEditor> ByteArrayRandomDataGener
 {
     std::unique_ptr<AbstractModelDataGeneratorConfigEditor> result;
 
-    auto* randomDataGenerator = qobject_cast<ByteArrayRandomDataGenerator*>(generator);
+    auto* const randomDataGenerator = qobject_cast<ByteArrayRandomDataGenerator*>(generator);
 
     if (randomDataGenerator) {
         result = std::make_unique<ByteArrayRandomDataGeneratorConfigEditor>(randomDataGenerator);

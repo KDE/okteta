@@ -176,7 +176,7 @@ void CharsetConversionTool::setTargetModel(AbstractModel* model)
 
     mByteArrayView = byteArrayView;
 
-    ByteArrayDocument* document =
+    ByteArrayDocument* const document =
         mByteArrayView ? qobject_cast<ByteArrayDocument*>(mByteArrayView->baseModel()) : nullptr;
     mByteArrayModel = document ? document->content() : nullptr;
 
@@ -284,7 +284,7 @@ void CharsetConversionTool::convertChars()
     const bool convertToOther = (mConversionDirection == ConvertTo);
     const Okteta::CharCodec* fromCharCodec = convertToOther ? viewCharCodec.get() : otherCharCodec.get();
     const Okteta::CharCodec* toCharCodec = convertToOther ? otherCharCodec.get() : viewCharCodec.get();
-    auto* charsetConversionJob =
+    auto* const charsetConversionJob =
         new CharsetConversionJob(reinterpret_cast<Okteta::Byte*>(conversionResult.data()),
                                  mByteArrayModel, convertedSection,
                                  fromCharCodec,
@@ -294,7 +294,7 @@ void CharsetConversionTool::convertChars()
     const bool success = charsetConversionJob->exec();
 
     if (success) { // TODO: if nothing needed to be converted, just report and don't add change
-        auto* changesDescribable = qobject_cast<Okteta::ChangesDescribable*>(mByteArrayModel);
+        auto* const changesDescribable = qobject_cast<Okteta::ChangesDescribable*>(mByteArrayModel);
 
         if (changesDescribable) {
             const QString description =

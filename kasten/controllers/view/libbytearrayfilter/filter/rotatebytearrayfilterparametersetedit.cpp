@@ -71,7 +71,7 @@ bool RotateByteArrayFilterParameterSetEdit::isValid() const { return mMoveBitWid
 
 void RotateByteArrayFilterParameterSetEdit::setValues(const AbstractByteArrayFilterParameterSet* parameterSet)
 {
-    const auto* rotateParameterSet = static_cast<const RotateByteArrayFilterParameterSet*>(parameterSet);
+    const auto* const rotateParameterSet = static_cast<const RotateByteArrayFilterParameterSet*>(parameterSet);
 
     mGroupSizeEdit->setValue(rotateParameterSet->groupSize());
     mMoveBitWidthEdit->setValue(rotateParameterSet->moveBitWidth());
@@ -79,7 +79,7 @@ void RotateByteArrayFilterParameterSetEdit::setValues(const AbstractByteArrayFil
 
 void RotateByteArrayFilterParameterSetEdit::getParameterSet(AbstractByteArrayFilterParameterSet* parameterSet) const
 {
-    auto* rotateParameterSet = static_cast<RotateByteArrayFilterParameterSet*>(parameterSet);
+    auto* const rotateParameterSet = static_cast<RotateByteArrayFilterParameterSet*>(parameterSet);
 
     rotateParameterSet->setGroupSize(mGroupSizeEdit->value());
     rotateParameterSet->setMoveBitWidth(mMoveBitWidthEdit->value());

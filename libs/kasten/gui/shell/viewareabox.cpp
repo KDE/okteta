@@ -49,7 +49,7 @@ void ViewAreaBox::setCentralWidget(QWidget* centralWidget)
         return;
     }
 
-    auto* layout = static_cast<QVBoxLayout*>(this->layout());
+    auto* const layout = static_cast<QVBoxLayout*>(this->layout());
     const bool centralWidgetIsFocusProxy =
         mCentralWidget ? (focusProxy() == mCentralWidget) : false;
     // TODO: works if focus is on childwidget?
@@ -79,7 +79,7 @@ void ViewAreaBox::setBottomToolWidget(QWidget* bottomToolWidget)
         return;
     }
 
-    auto* layout = static_cast<QVBoxLayout*>(this->layout());
+    auto* const layout = static_cast<QVBoxLayout*>(this->layout());
 
     if (mToolInlineViewWidget) {
         layout->removeWidget(mToolInlineViewWidget);

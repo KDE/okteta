@@ -68,7 +68,7 @@ int UndoRedoController::addContextMenuActions(QMenu* menu)
         return 0;
     }
 
-    auto* versionable = qobject_cast<Versionable*>(mView->byteArrayModel());
+    auto* const versionable = qobject_cast<Versionable*>(mView->byteArrayModel());
 
     if (!versionable) {
         return 0;
@@ -94,7 +94,7 @@ int UndoRedoController::addContextMenuActions(QMenu* menu)
 
 bool UndoRedoController::undo()
 {
-    auto* versionable = qobject_cast<Okteta::Versionable*>(mView->byteArrayModel());
+    auto* const versionable = qobject_cast<Okteta::Versionable*>(mView->byteArrayModel());
 
     if (!versionable) {
         return false;
@@ -112,7 +112,7 @@ bool UndoRedoController::undo()
 
 bool UndoRedoController::redo()
 {
-    auto* versionable = qobject_cast<Okteta::Versionable*>(mView->byteArrayModel());
+    auto* const versionable = qobject_cast<Okteta::Versionable*>(mView->byteArrayModel());
 
     if (!versionable) {
         return false;

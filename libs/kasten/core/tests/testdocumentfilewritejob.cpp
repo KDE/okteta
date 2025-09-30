@@ -23,8 +23,8 @@ TestDocumentFileWriteJob::~TestDocumentFileWriteJob() = default;
 
 void TestDocumentFileWriteJob::startWriteToFile()
 {
-    auto* testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>(synchronizer());
-    auto* document = qobject_cast<TestDocument*>(synchronizer()->document());
+    auto* const testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>(synchronizer());
+    auto* const document = qobject_cast<TestDocument*>(synchronizer()->document());
 
     auto writeThread = std::make_unique<TestDocumentFileWriteThread>(this, testSynchronizer->header(),  document, file());
     writeThread->start();

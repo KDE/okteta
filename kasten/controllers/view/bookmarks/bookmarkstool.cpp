@@ -74,7 +74,7 @@ void BookmarksTool::setTargetModel(AbstractModel* model)
     mByteArrayView = byteArrayView;
 
     // TODO; check if already same document used before
-    ByteArrayDocument* document =
+    ByteArrayDocument* const document =
         mByteArrayView ? qobject_cast<ByteArrayDocument*>(mByteArrayView->baseModel()) : nullptr;
     mByteArray = document ? document->content() : nullptr;
     mBookmarks = (mByteArray && mByteArrayView) ? qobject_cast<Okteta::Bookmarkable*>(mByteArray) : nullptr;

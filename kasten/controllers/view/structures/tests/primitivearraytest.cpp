@@ -200,9 +200,9 @@ void PrimitiveArrayTest::testReadCustomizedPrimitiveInternal()
     quint8 bitOffs = 0;
     qint64 result = dataInf->readData(endianModel.get(), 0, endianModel->size() * 8, &bitOffs);
     QCOMPARE(Okteta::Size(result), endianModel->size() * 8);
-    T* dataAsT = reinterpret_cast<T*>(endianData.data());
+    T* const dataAsT = reinterpret_cast<T*>(endianData.data());
     QVERIFY(!dataInf->mData->isComplex());
-    auto* arrayData = static_cast<PrimitiveArrayData<primType>*>(dataInf->mData.get());
+    auto* const arrayData = static_cast<PrimitiveArrayData<primType>*>(dataInf->mData.get());
 
     // Verify byteOrder of values. The data is set up without palindromes.
     if (sizeof(T) > 1) {
@@ -241,9 +241,9 @@ void PrimitiveArrayTest::testReadPrimitiveInternal()
     quint8 bitOffs = 0;
     qint64 result = dataInf->readData(model.get(), 0, model->size() * 8, &bitOffs);
     QCOMPARE(Okteta::Size(result), model->size() * 8);
-    T* dataAsT = reinterpret_cast<T*>(data.get());
+    T* const dataAsT = reinterpret_cast<T*>(data.get());
     QVERIFY(!dataInf->mData->isComplex());
-    auto* arrayData = static_cast<PrimitiveArrayData<primType>*>(dataInf->mData.get());
+    auto* const arrayData = static_cast<PrimitiveArrayData<primType>*>(dataInf->mData.get());
     for (uint i = 0; i < dataInf->childCount(); ++i) {
         AllPrimitiveTypes childDataAll = arrayData->valueAt(i);
         T childData = childDataAll.value<T>();

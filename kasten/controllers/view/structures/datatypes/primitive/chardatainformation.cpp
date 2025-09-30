@@ -84,7 +84,7 @@ QWidget* CharDataInformationMethods::staticCreateEditWidget(QWidget* parent)
 QVariant CharDataInformationMethods::staticDataFromWidget(const QWidget* w)
 {
     // TODO fix this code!!
-    const auto* edit = qobject_cast<const Okteta::Char8Editor*> (w);
+    const auto* const edit = qobject_cast<const Okteta::Char8Editor*>(w);
     if (edit) {
         const std::optional<quint8> byte = edit->byte();
         if (byte) {
@@ -96,7 +96,7 @@ QVariant CharDataInformationMethods::staticDataFromWidget(const QWidget* w)
 
 void CharDataInformationMethods::staticSetWidgetData(quint8 value, QWidget* w)
 {
-    auto* edit = qobject_cast<Okteta::Char8Editor*>(w);
+    auto* const edit = qobject_cast<Okteta::Char8Editor*>(w);
     if (edit) {
         edit->setByte(value);
     }

@@ -70,7 +70,7 @@ bool OperandByteArrayFilterParameterSetEdit::isValid() const { return !mOperandE
 
 void OperandByteArrayFilterParameterSetEdit::setValues(const AbstractByteArrayFilterParameterSet* parameterSet)
 {
-    const auto* operandParameterSet = static_cast<const OperandByteArrayFilterParameterSet*>(parameterSet);
+    const auto* const operandParameterSet = static_cast<const OperandByteArrayFilterParameterSet*>(parameterSet);
 
     mOperandEdit->setByteArray( operandParameterSet->operand() );
     mOperandEdit->setFormat(static_cast<Okteta::ByteArrayComboBox::Coding>(operandParameterSet->operandFormat()));
@@ -84,7 +84,7 @@ void OperandByteArrayFilterParameterSetEdit::setCharCodec(const QString& charCod
 
 void OperandByteArrayFilterParameterSetEdit::getParameterSet(AbstractByteArrayFilterParameterSet* parameterSet) const
 {
-    auto* operandParameterSet = static_cast<OperandByteArrayFilterParameterSet*>(parameterSet);
+    auto* const operandParameterSet = static_cast<OperandByteArrayFilterParameterSet*>(parameterSet);
 
     operandParameterSet->setOperand(mOperandEdit->byteArray());
     operandParameterSet->setOperandFormat(static_cast<OperandByteArrayFilterParameterSet::Coding>(mOperandEdit->format()));

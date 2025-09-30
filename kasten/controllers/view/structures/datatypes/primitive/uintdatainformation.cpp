@@ -63,7 +63,7 @@ inline QWidget* UIntDataInformationMethods<T>::staticCreateEditWidget(QWidget* p
 template <typename T>
 inline QVariant UIntDataInformationMethods<T>::staticDataFromWidget(const QWidget* w)
 {
-    const auto* spin = qobject_cast<const Okteta::UIntSpinBox*> (w);
+    const auto* const spin = qobject_cast<const Okteta::UIntSpinBox*>(w);
     Q_CHECK_PTR(spin);
     if (spin) {
         return {spin->value()};
@@ -75,7 +75,7 @@ inline QVariant UIntDataInformationMethods<T>::staticDataFromWidget(const QWidge
 template <typename T>
 inline void UIntDataInformationMethods<T>::staticSetWidgetData(T value, QWidget* w)
 {
-    auto* spin = qobject_cast<Okteta::UIntSpinBox*> (w);
+    auto* const spin = qobject_cast<Okteta::UIntSpinBox*>(w);
     Q_CHECK_PTR(spin);
     if (spin) {
         spin->setValue(value);

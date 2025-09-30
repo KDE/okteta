@@ -32,7 +32,7 @@ ExternalBookmarkStorage::~ExternalBookmarkStorage() = default;
 void ExternalBookmarkStorage::readBookmarks(ByteArrayDocument* document, const QUrl& url)
 {
     Okteta::AbstractByteArrayModel* byteArray = document->content();
-    auto* bookmarkable = qobject_cast<Okteta::Bookmarkable*>(byteArray);
+    auto* const bookmarkable = qobject_cast<Okteta::Bookmarkable*>(byteArray);
 
     bookmarkable->removeAllBookmarks();
 
@@ -71,7 +71,7 @@ void ExternalBookmarkStorage::readBookmarks(ByteArrayDocument* document, const Q
 void ExternalBookmarkStorage::writeBookmarks(ByteArrayDocument* document, const QUrl& url)
 {
     Okteta::AbstractByteArrayModel* byteArray = document->content();
-    auto* bookmarkable = qobject_cast<Okteta::Bookmarkable*>(byteArray);
+    auto* const bookmarkable = qobject_cast<Okteta::Bookmarkable*>(byteArray);
 
     if (!bookmarkable) {
         return;

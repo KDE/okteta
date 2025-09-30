@@ -25,7 +25,7 @@ TestDocumentFileLoadJob::~TestDocumentFileLoadJob() = default;
 
 void TestDocumentFileLoadJob::startLoadFromFile()
 {
-    auto* testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>(synchronizer());
+    auto* const testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>(synchronizer());
 
     auto loadThread = std::make_unique<TestDocumentFileLoadThread>(this, testSynchronizer->header(), file());
     loadThread->start();

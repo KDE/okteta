@@ -45,7 +45,7 @@ bool Crc64ByteArrayChecksumParameterSetEdit::isValid() const { return true; }
 
 void Crc64ByteArrayChecksumParameterSetEdit::setParameterSet(const AbstractByteArrayChecksumParameterSet* parameterSet)
 {
-    const auto* crc64ParameterSet =
+    const auto* const crc64ParameterSet =
         static_cast<const Crc64ByteArrayChecksumParameterSet*>(parameterSet);
 
     mVariantComboBox->setCurrentIndex(static_cast<int>(crc64ParameterSet->crc64Variant()));
@@ -53,7 +53,7 @@ void Crc64ByteArrayChecksumParameterSetEdit::setParameterSet(const AbstractByteA
 
 void Crc64ByteArrayChecksumParameterSetEdit::getParameterSet(AbstractByteArrayChecksumParameterSet* parameterSet) const
 {
-    auto* crc64ParameterSet =
+    auto* const crc64ParameterSet =
         static_cast<Crc64ByteArrayChecksumParameterSet*>(parameterSet);
 
     crc64ParameterSet->setCrc64Variant(static_cast<Crc64Variant>(mVariantComboBox->currentIndex()));

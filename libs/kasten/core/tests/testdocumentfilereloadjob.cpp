@@ -23,8 +23,8 @@ TestDocumentFileReloadJob::~TestDocumentFileReloadJob() = default;
 
 void TestDocumentFileReloadJob::startReadFromFile()
 {
-    auto* testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>(synchronizer());
-    auto* document = qobject_cast<TestDocument*>(synchronizer()->document());
+    auto* const testSynchronizer = qobject_cast<TestDocumentFileSynchronizer*>(synchronizer());
+    auto* const document = qobject_cast<TestDocument*>(synchronizer()->document());
     auto reloadThread = std::make_unique<TestDocumentFileReloadThread>(this, testSynchronizer->header(), /*document, */ file());
     reloadThread->start();
     while (!reloadThread->wait(100)) {

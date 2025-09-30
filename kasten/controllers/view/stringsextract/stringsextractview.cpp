@@ -215,7 +215,7 @@ bool StringsExtractView::eventFilter(QObject* object, QEvent* event)
 {
     if (object == mContainedStringTableView) {
         if (event->type() == QEvent::FocusOut) {
-            auto* focusEvent = static_cast<QFocusEvent*>(event);
+            auto* const focusEvent = static_cast<QFocusEvent*>(event);
             const Qt::FocusReason focusReason = focusEvent->reason();
             if (focusReason != Qt::ActiveWindowFocusReason
                 && focusReason != Qt::PopupFocusReason) {

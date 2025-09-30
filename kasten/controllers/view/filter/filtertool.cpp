@@ -90,7 +90,7 @@ void FilterTool::setTargetModel(AbstractModel* model)
 
     mByteArrayView = byteArrayView;
 
-    ByteArrayDocument* document =
+    ByteArrayDocument* const document =
         mByteArrayView ? qobject_cast<ByteArrayDocument*>(mByteArrayView->baseModel()) : nullptr;
     mByteArrayModel = document ? document->content() : nullptr;
 
@@ -151,13 +151,13 @@ void FilterTool::filter() const
 
     QApplication::setOverrideCursor(Qt::WaitCursor);
 
-    auto* filterJob = new FilterJob(byteArrayFilter.get(), reinterpret_cast<Okteta::Byte*>(filterResult.data()), mByteArrayModel, filteredSection);
+    auto* const filterJob = new FilterJob(byteArrayFilter.get(), reinterpret_cast<Okteta::Byte*>(filterResult.data()), mByteArrayModel, filteredSection);
     const bool success = filterJob->exec();
 
     QApplication::restoreOverrideCursor();
 
     if (success) {
-        auto* changesDescribable = qobject_cast<Okteta::ChangesDescribable*>(mByteArrayModel);
+        auto* const changesDescribable = qobject_cast<Okteta::ChangesDescribable*>(mByteArrayModel);
 
         if (changesDescribable) {
             changesDescribable->openGroupedChange(byteArrayFilter->name());

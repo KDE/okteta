@@ -81,7 +81,7 @@ void ViewAreaContextMenuController::showContextMenu(AbstractGroupedViews* viewAr
     mViewArea = viewArea;
     mView = view;
     mDocument = mView ? mView->findBaseModel<AbstractDocument*>() : nullptr;
-    auto* synchronizer = mDocument ? qobject_cast<AbstractModelFileSystemSynchronizer*>(mDocument->synchronizer()) : nullptr;
+    auto* const synchronizer = mDocument ? qobject_cast<AbstractModelFileSystemSynchronizer*>(mDocument->synchronizer()) : nullptr;
 
     const bool isForView = (mView != nullptr);
     const auto views = mViewArea->viewList();
@@ -100,7 +100,7 @@ void ViewAreaContextMenuController::showContextMenu(AbstractGroupedViews* viewAr
     mCloseAllAction->setEnabled(!views.isEmpty());
 
     QWidget* w = mGuiClient->factory()->container(QStringLiteral("viewAreaContextMenu"), mGuiClient);
-    auto* popup = static_cast<QMenu*>(w);
+    auto* const popup = static_cast<QMenu*>(w);
 
     const auto popupPoint = mMultiViewAreas->widget()->mapToGlobal(pos);
 

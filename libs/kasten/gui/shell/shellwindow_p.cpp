@@ -84,7 +84,7 @@ void ShellWindowPrivate::addTool(std::unique_ptr<AbstractTool>&& tool, std::uniq
 
 void ShellWindowPrivate::showDocument(AbstractDocument* document)
 {
-    auto* currentGroupedViews = static_cast<AbstractGroupedViews*>(mGroupedViews->viewAreaFocus());
+    auto* const currentGroupedViews = static_cast<AbstractGroupedViews*>(mGroupedViews->viewAreaFocus());
     const QVector<AbstractView*> viewList = currentGroupedViews->viewList();
 
     AbstractView* viewOfDocument = nullptr;
@@ -208,7 +208,7 @@ void ShellWindowPrivate::onToolVisibilityChanged(bool isVisible)
 {
     Q_Q(ShellWindow);
 
-    auto* dockWidget = qobject_cast<ToolViewDockWidget*>(q->sender());
+    auto* const dockWidget = qobject_cast<ToolViewDockWidget*>(q->sender());
     if (dockWidget) {
         AbstractView* view = isVisible ? mCurrentView : nullptr;
         dockWidget->toolView()->tool()->setTargetModel(view);

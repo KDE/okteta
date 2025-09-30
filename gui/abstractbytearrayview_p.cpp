@@ -239,14 +239,14 @@ void AbstractByteArrayViewPrivate::setByteArrayModel(AbstractByteArrayModel* byt
     QObject::connect(mByteArrayModel, &AbstractByteArrayModel::contentsChanged,
                      q, [this](const Okteta::ArrayChangeMetricsList& changeList) { onContentsChanged(changeList); });
 
-    auto* bookmarks = qobject_cast<Bookmarkable*>(mByteArrayModel);
+    auto* const bookmarks = qobject_cast<Bookmarkable*>(mByteArrayModel);
     if (bookmarks) {
         QObject::connect(mByteArrayModel, SIGNAL(bookmarksAdded(QVector<Okteta::Bookmark>)),
                          q, SLOT(onBookmarksChange(QVector<Okteta::Bookmark>)));
         QObject::connect(mByteArrayModel, SIGNAL(bookmarksRemoved(QVector<Okteta::Bookmark>)),
                          q, SLOT(onBookmarksChange(QVector<Okteta::Bookmark>)));
     }
-    auto* versionControl = qobject_cast<Versionable*>(mByteArrayModel);
+    auto* const versionControl = qobject_cast<Versionable*>(mByteArrayModel);
     if (versionControl) {
         QObject::connect(mByteArrayModel, SIGNAL(revertedToVersionIndex(int)),
                          q, SLOT(onRevertedToVersionIndex(int)));
@@ -941,7 +941,7 @@ bool AbstractByteArrayViewPrivate::getNextChangedRange(CoordRange* changedRange,
 
 void AbstractByteArrayViewPrivate::adaptController()
 {
-    AbstractController* controller =
+    auto* const controller =
         isEffectiveReadOnly() ?                                 static_cast<AbstractController*>(&mKeyNavigator) :
         activeCoding() == AbstractByteArrayView::CharCodingId ? static_cast<AbstractController*>(&mCharEditor) :
                                                                 static_cast<AbstractController*>(&mValueEditor);
@@ -1164,7 +1164,7 @@ bool AbstractByteArrayViewPrivate::event(QEvent* event)
     //
     switch (event->type()) {
     case QEvent::KeyPress: {
-        auto* keyEvent = static_cast<QKeyEvent*>(event);
+        auto* const keyEvent = static_cast<QKeyEvent*>(event);
         if (keyEvent->key() == Qt::Key_Tab || keyEvent->key() == Qt::Key_Backtab) {
             q->keyPressEvent(keyEvent);
             if (keyEvent->isAccepted()) {
@@ -1182,7 +1182,7 @@ bool AbstractByteArrayViewPrivate::event(QEvent* event)
     case QEvent::MouseButtonPress:
     case QEvent::MouseButtonRelease: {
         // discard any events synthesized from touch input
-        auto* mouseEvent = static_cast<QMouseEvent*>(event);
+        auto* const mouseEvent = static_cast<QMouseEvent*>(event);
         if (mouseEvent->source() == Qt::MouseEventSynthesizedByQt) {
             event->accept();
             return true;
@@ -1213,11 +1213,11 @@ bool AbstractByteArrayViewPrivate::event(QEvent* event)
         break;
     }
     case QEvent::Gesture: {
-        auto* gestureEvent = static_cast<QGestureEvent*>(event);
-        if (auto* tapGesture = static_cast<QTapGesture*>(gestureEvent->gesture(Qt::TapGesture))) {
+        auto* const gestureEvent = static_cast<QGestureEvent*>(event);
+        if (auto* const tapGesture = static_cast<QTapGesture*>(gestureEvent->gesture(Qt::TapGesture))) {
             return mTapNavigator.handleTapGesture(tapGesture);
         }
-        if (auto* tapAndHoldGesture = static_cast<TouchOnlyTapAndHoldGesture*>(gestureEvent->gesture(touchOnlyTapAndHoldGestureType()))) {
+        if (auto* const tapAndHoldGesture = static_cast<TouchOnlyTapAndHoldGesture*>(gestureEvent->gesture(touchOnlyTapAndHoldGestureType()))) {
             if (tapAndHoldGesture->state() == Qt::GestureFinished) {
                 const QPoint viewPortPos = tapAndHoldGesture->position().toPoint();
                 const QPoint pos = viewPortPos + q->viewport()->pos();
@@ -1238,7 +1238,7 @@ bool AbstractByteArrayViewPrivate::event(QEvent* event)
 
                 return result;
             }
-        } else if (auto* pinchGesture = static_cast<QPinchGesture*>(gestureEvent->gesture(Qt::PinchGesture))) {
+        } else if (auto* const pinchGesture = static_cast<QPinchGesture*>(gestureEvent->gesture(Qt::PinchGesture))) {
             return mZoomPinchController.handlePinchGesture(pinchGesture);
         };
         break;
@@ -1258,11 +1258,11 @@ bool AbstractByteArrayViewPrivate::viewportEvent(QEvent* event)
 
     switch (event->type()) {
     case QEvent::ToolTip: {
-        auto* helpEvent = static_cast<QHelpEvent*>(event);
+        auto* const helpEvent = static_cast<QHelpEvent*>(event);
 
         QString toolTip;
 
-        auto* bookmarks = qobject_cast<Bookmarkable*>(mByteArrayModel);
+        auto* const bookmarks = qobject_cast<Bookmarkable*>(mByteArrayModel);
         if (bookmarks) {
             const Address index = indexByPoint(viewportToColumns(helpEvent->pos()));
             if (index != -1) {
@@ -1285,7 +1285,7 @@ bool AbstractByteArrayViewPrivate::viewportEvent(QEvent* event)
     case QEvent::MouseButtonPress:
     case QEvent::MouseButtonRelease: {
         // discard any events synthesized from touch input
-        auto* mouseEvent = static_cast<QMouseEvent*>(event);
+        auto* const mouseEvent = static_cast<QMouseEvent*>(event);
         if (mouseEvent->source() == Qt::MouseEventSynthesizedByQt) {
             event->accept();
             return true;

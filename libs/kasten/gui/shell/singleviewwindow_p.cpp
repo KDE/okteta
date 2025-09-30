@@ -200,7 +200,7 @@ void SingleViewWindowPrivate::onToolVisibilityChanged(bool isVisible)
 {
     Q_Q(SingleViewWindow);
 
-    auto* dockWidget = qobject_cast<ToolViewDockWidget*>(q->sender());
+    auto* const dockWidget = qobject_cast<ToolViewDockWidget*>(q->sender());
     if (dockWidget) {
         AbstractView* view = isVisible ? mView : nullptr;
         dockWidget->toolView()->tool()->setTargetModel(view);

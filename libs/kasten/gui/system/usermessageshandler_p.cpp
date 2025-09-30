@@ -26,7 +26,7 @@ void UserMessagesHandlerPrivate::postErrorReport(std::unique_ptr<UserErrorReport
 {
     AbstractModel* targetModel = errorReport->targetModel();
     AbstractModel* model = targetModel ? targetModel->findBaseModelWithInterface<If::UserErrorReportsInlineable*>() : nullptr;
-    If::UserErrorReportsInlineable* userErrorReportsInlineable = model ? qobject_cast<If::UserErrorReportsInlineable*>(model) : nullptr;
+    If::UserErrorReportsInlineable* const userErrorReportsInlineable = model ? qobject_cast<If::UserErrorReportsInlineable*>(model) : nullptr;
 
     // TODO: is non-view model, search a visible view (with most priority)
     if (userErrorReportsInlineable) {
@@ -46,7 +46,7 @@ void UserMessagesHandlerPrivate::postNotification(std::unique_ptr<UserNotificati
 {
     AbstractModel* targetModel = notification->targetModel();
     AbstractModel* model = targetModel ? targetModel->findBaseModelWithInterface<If::UserNotificationsInlineable*>() : nullptr;
-    If::UserNotificationsInlineable* userNotificationsInlineable = model ? qobject_cast<If::UserNotificationsInlineable*>(model) : nullptr;
+    If::UserNotificationsInlineable* const userNotificationsInlineable = model ? qobject_cast<If::UserNotificationsInlineable*>(model) : nullptr;
 
     // TODO: is non-view model, search a visible view (with most priority)
     if (userNotificationsInlineable) {
@@ -152,7 +152,7 @@ QString UserMessagesHandlerPrivate::executeQuery(std::unique_ptr<UserQuery>&& us
 
 void UserMessagesHandlerPrivate::onErrorReportHidden()
 {
-    auto* model = qobject_cast<AbstractModel*>(sender());
+    auto* const model = qobject_cast<AbstractModel*>(sender());
     const auto it = m_enqueuedErrorReports.find(model);
     if (it == m_enqueuedErrorReports.end()) {
         return;
@@ -171,7 +171,7 @@ void UserMessagesHandlerPrivate::onErrorReportHidden()
 
     // TODO: ideally it is ensured this handler is the only one
     // using the API, to not get in conflict
-    If::UserErrorReportsInlineable* userErrorReportsInlineable =
+    If::UserErrorReportsInlineable* const userErrorReportsInlineable =
         qobject_cast<If::UserErrorReportsInlineable*>(model);
 
     userErrorReportsInlineable->showErrorReport(errorReport.get());

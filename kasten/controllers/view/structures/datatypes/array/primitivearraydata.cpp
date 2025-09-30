@@ -85,7 +85,7 @@ void PrimitiveArrayData<type>::readDataNativeOrder(uint numItems,
     Q_ASSERT(numItems <= length());
     const Okteta::Size numBytes = numItems * sizeof(T);
     Q_ASSERT(input->size() >= numBytes + address);
-    auto* vectorBytes = reinterpret_cast<Okteta::Byte*>(this->mData.data());
+    auto* const vectorBytes = reinterpret_cast<Okteta::Byte*>(this->mData.data());
     if (!isDataEqualNativeOrder(input, address, numBytes, vectorBytes)) {
         mParent->topLevelDataInformation()->setChildDataChanged();
     }
@@ -120,7 +120,7 @@ void PrimitiveArrayData<type>::readDataNonNativeOrder(uint numItems,
     Q_ASSERT(numItems <= length());
     const uint numBytes = numItems * sizeof(T);
     Q_ASSERT(uint(input->size()) >= numBytes + address);
-    auto* vectorBytes = reinterpret_cast<Okteta::Byte*>(this->mData.data());
+    auto* const vectorBytes = reinterpret_cast<Okteta::Byte*>(this->mData.data());
     if (!isDataEqualNonNativeOrder(input, address, numBytes, vectorBytes, sizeof(T))) {
         mParent->topLevelDataInformation()->setChildDataChanged();
     }

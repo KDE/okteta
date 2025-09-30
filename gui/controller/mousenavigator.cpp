@@ -319,7 +319,7 @@ void MouseNavigator::startDrag()
     Qt::DropAction dropAction = drag->exec(request);
 
     if (dropAction == Qt::MoveAction) {
-        auto* targetByteArrayView = qobject_cast<AbstractByteArrayView*>(drag->target());
+        auto* const targetByteArrayView = qobject_cast<AbstractByteArrayView*>(drag->target());
         // Not inside this widget itself?
         if (!targetByteArrayView
             || targetByteArrayView->byteArrayModel() != mView->byteArrayModel()) {

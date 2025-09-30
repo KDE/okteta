@@ -169,67 +169,67 @@ void PODDelegate::setEditorData(QWidget* editor, const QModelIndex& index) const
 
     if (data.canConvert<Okteta::Binary8>()) {
         Okteta::Binary8 binary8 = data.value<Okteta::Binary8>();
-        auto* binary8Editor = qobject_cast<Okteta::Binary8Editor*>(editor);
+        auto* const binary8Editor = qobject_cast<Okteta::Binary8Editor*>(editor);
         binary8Editor->setData(binary8);
     } else if (data.canConvert<Okteta::Octal8>()) {
         Okteta::Octal8 octal8 = data.value<Okteta::Octal8>();
-        auto* octal8Editor = qobject_cast<Okteta::Octal8Editor*>(editor);
+        auto* const octal8Editor = qobject_cast<Okteta::Octal8Editor*>(editor);
         octal8Editor->setData(octal8);
     } else if (data.canConvert<Okteta::Hexadecimal8>()) {
         Okteta::Hexadecimal8 hexadecimal8 = data.value<Okteta::Hexadecimal8>();
-        auto* hexadecimal8Editor = qobject_cast<Okteta::Hexadecimal8Editor*>(editor);
+        auto* const hexadecimal8Editor = qobject_cast<Okteta::Hexadecimal8Editor*>(editor);
         hexadecimal8Editor->setData(hexadecimal8);
     } else if (data.canConvert<Okteta::SInt8>()) {
         Okteta::SInt8 sInt8 = data.value<Okteta::SInt8>();
-        auto* sInt8Editor = qobject_cast<Okteta::SIntSpinBox*>(editor);
+        auto* const sInt8Editor = qobject_cast<Okteta::SIntSpinBox*>(editor);
         sInt8Editor->setValue(sInt8.value);
     } else if (data.canConvert<Okteta::SInt16>()) {
         Okteta::SInt16 sInt16 = data.value<Okteta::SInt16>();
-        auto* sInt16Editor = qobject_cast<Okteta::SIntSpinBox*>(editor);
+        auto* const sInt16Editor = qobject_cast<Okteta::SIntSpinBox*>(editor);
         sInt16Editor->setValue(sInt16.value);
     } else if (data.canConvert<Okteta::SInt32>()) {
         Okteta::SInt32 sInt32 = data.value<Okteta::SInt32>();
-        auto* sInt32Editor = qobject_cast<Okteta::SIntSpinBox*>(editor);
+        auto* const sInt32Editor = qobject_cast<Okteta::SIntSpinBox*>(editor);
         sInt32Editor->setValue(sInt32.value);
     } else if (data.canConvert<Okteta::SInt64>()) {
         Okteta::SInt64 sInt64 = data.value<Okteta::SInt64>();
-        auto* sInt64Editor = qobject_cast<Okteta::SIntSpinBox*>(editor);
+        auto* const sInt64Editor = qobject_cast<Okteta::SIntSpinBox*>(editor);
         sInt64Editor->setValue(sInt64.value);
     } else if (data.canConvert<Okteta::UInt8>()) {
         Okteta::UInt8 uInt8 = data.value<Okteta::UInt8>();
-        auto* uInt8Editor = qobject_cast<Okteta::UIntSpinBox*>(editor);
+        auto* const uInt8Editor = qobject_cast<Okteta::UIntSpinBox*>(editor);
         uInt8Editor->setValue(uInt8.value);
     } else if (data.canConvert<Okteta::UInt16>()) {
         Okteta::UInt16 uInt16 = data.value<Okteta::UInt16>();
-        auto* uInt16Editor = qobject_cast<Okteta::UIntSpinBox*>(editor);
+        auto* const uInt16Editor = qobject_cast<Okteta::UIntSpinBox*>(editor);
         uInt16Editor->setValue(uInt16.value);
     } else if (data.canConvert<Okteta::UInt32>()) {
         Okteta::UInt32 uInt32 = data.value<Okteta::UInt32>();
-        auto* uInt32Editor = qobject_cast<Okteta::UIntSpinBox*>(editor);
+        auto* const uInt32Editor = qobject_cast<Okteta::UIntSpinBox*>(editor);
         uInt32Editor->setValue(uInt32.value);
     } else if (data.canConvert<Okteta::UInt64>()) {
         Okteta::UInt64 uInt64 = data.value<Okteta::UInt64>();
-        auto* uInt64Editor = qobject_cast<Okteta::UIntSpinBox*>(editor);
+        auto* const uInt64Editor = qobject_cast<Okteta::UIntSpinBox*>(editor);
         uInt64Editor->setValue(uInt64.value);
     } else if (data.canConvert<Okteta::Float32>()) {
         Okteta::Float32 float32 = data.value<Okteta::Float32>();
-        auto* float32Editor = qobject_cast<Okteta::Float32Editor*>(editor);
+        auto* const float32Editor = qobject_cast<Okteta::Float32Editor*>(editor);
         float32Editor->setData(float32);
     } else if (data.canConvert<Okteta::Float64>()) {
         Okteta::Float64 float64 = data.value<Okteta::Float64>();
-        auto* float64Editor = qobject_cast<Okteta::Float64Editor*>(editor);
+        auto* const float64Editor = qobject_cast<Okteta::Float64Editor*>(editor);
         float64Editor->setData(float64);
     } else if (data.canConvert<Okteta::Char8>()) {
         Okteta::Char8 char8 = data.value<Okteta::Char8>();
-        auto* char8Editor = qobject_cast<Okteta::Char8Editor*>(editor);
+        auto* const char8Editor = qobject_cast<Okteta::Char8Editor*>(editor);
         char8Editor->setData(char8);
     } else if (data.canConvert<Okteta::Utf8>()) {
         Okteta::Utf8 utf8 = data.value<Okteta::Utf8>();
-        auto* utf8Editor = qobject_cast<Okteta::Utf8Editor*>(editor);
+        auto* const utf8Editor = qobject_cast<Okteta::Utf8Editor*>(editor);
         utf8Editor->setData(utf8);
     } else if (data.canConvert<Okteta::Utf16>()) {
         Okteta::Utf16 utf16 = data.value<Okteta::Utf16>();
-        auto* utf16Editor = qobject_cast<Okteta::Utf16Editor*>(editor);
+        auto* const utf16Editor = qobject_cast<Okteta::Utf16Editor*>(editor);
         utf16Editor->setData(utf16);
     } else {
         QStyledItemDelegate::setEditorData(editor, index);
@@ -245,52 +245,52 @@ void PODDelegate::setModelData(QWidget* editor, QAbstractItemModel* model, const
     QVariant data = index.data(Qt::EditRole);
 
     if (data.canConvert<Okteta::Binary8>()) {
-        auto* binary8Editor = qobject_cast<Okteta::Binary8Editor*>(editor);
+        auto* const binary8Editor = qobject_cast<Okteta::Binary8Editor*>(editor);
         model->setData(index, QVariant::fromValue(binary8Editor->data()));
     } else if (data.canConvert<Okteta::Octal8>()) {
-        auto* octal8Editor = qobject_cast<Okteta::Octal8Editor*>(editor);
+        auto* const octal8Editor = qobject_cast<Okteta::Octal8Editor*>(editor);
         model->setData(index, QVariant::fromValue(octal8Editor->data()));
     } else if (data.canConvert<Okteta::Hexadecimal8>()) {
-        auto* hexadecimal8Editor = qobject_cast<Okteta::Hexadecimal8Editor*>(editor);
+        auto* const hexadecimal8Editor = qobject_cast<Okteta::Hexadecimal8Editor*>(editor);
         model->setData(index, QVariant::fromValue(hexadecimal8Editor->data()));
     } else if (data.canConvert<Okteta::SInt8>()) {
-        auto* sintEditor = qobject_cast<Okteta::SIntSpinBox*>(editor);
+        auto* const sintEditor = qobject_cast<Okteta::SIntSpinBox*>(editor);
         model->setData(index, QVariant::fromValue(Okteta::SInt8(sintEditor->value())));
     } else if (data.canConvert<Okteta::SInt16>()) {
-        auto* sintEditor = qobject_cast<Okteta::SIntSpinBox*>(editor);
+        auto* const sintEditor = qobject_cast<Okteta::SIntSpinBox*>(editor);
         model->setData(index, QVariant::fromValue(Okteta::SInt16(sintEditor->value())));
     } else if (data.canConvert<Okteta::SInt32>()) {
-        auto* sintEditor = qobject_cast<Okteta::SIntSpinBox*>(editor);
+        auto* const sintEditor = qobject_cast<Okteta::SIntSpinBox*>(editor);
         model->setData(index, QVariant::fromValue(Okteta::SInt32(sintEditor->value())));
     } else if (data.canConvert<Okteta::SInt64>()) {
-        auto* sintEditor = qobject_cast<Okteta::SIntSpinBox*>(editor);
+        auto* const sintEditor = qobject_cast<Okteta::SIntSpinBox*>(editor);
         model->setData(index, QVariant::fromValue(Okteta::SInt64(sintEditor->value())));
     } else if (data.canConvert<Okteta::UInt8>()) {
-        auto* uintEditor = qobject_cast<Okteta::UIntSpinBox*>(editor);
+        auto* const uintEditor = qobject_cast<Okteta::UIntSpinBox*>(editor);
         model->setData(index, QVariant::fromValue(Okteta::UInt8(uintEditor->value())));
     } else if (data.canConvert<Okteta::UInt16>()) {
-        auto* uintEditor = qobject_cast<Okteta::UIntSpinBox*>(editor);
+        auto* const uintEditor = qobject_cast<Okteta::UIntSpinBox*>(editor);
         model->setData(index, QVariant::fromValue(Okteta::UInt16(uintEditor->value())));
     } else if (data.canConvert<Okteta::UInt32>()) {
-        auto* uintEditor = qobject_cast<Okteta::UIntSpinBox*>(editor);
+        auto* const uintEditor = qobject_cast<Okteta::UIntSpinBox*>(editor);
         model->setData(index, QVariant::fromValue(Okteta::UInt32(uintEditor->value())));
     } else if (data.canConvert<Okteta::UInt64>()) {
-        auto* uintEditor = qobject_cast<Okteta::UIntSpinBox*>(editor);
+        auto* const uintEditor = qobject_cast<Okteta::UIntSpinBox*>(editor);
         model->setData(index, QVariant::fromValue(Okteta::UInt64(uintEditor->value())));
     } else if (data.canConvert<Okteta::Float32>()) {
-        auto* float32Editor = qobject_cast<Okteta::Float32Editor*>(editor);
+        auto* const float32Editor = qobject_cast<Okteta::Float32Editor*>(editor);
         model->setData(index, QVariant::fromValue(float32Editor->data()));
     } else if (data.canConvert<Okteta::Float64>()) {
-        auto* float64Editor = qobject_cast<Okteta::Float64Editor*>(editor);
+        auto* const float64Editor = qobject_cast<Okteta::Float64Editor*>(editor);
         model->setData(index, QVariant::fromValue(float64Editor->data()));
     } else if (data.canConvert<Okteta::Char8>()) {
-        auto* char8Editor = qobject_cast<Okteta::Char8Editor*>(editor);
+        auto* const char8Editor = qobject_cast<Okteta::Char8Editor*>(editor);
         model->setData(index, QVariant::fromValue(char8Editor->data()));
     } else if (data.canConvert<Okteta::Utf8>()) {
-        auto* utf8Editor = qobject_cast<Okteta::Utf8Editor*>(editor);
+        auto* const utf8Editor = qobject_cast<Okteta::Utf8Editor*>(editor);
         model->setData(index, QVariant::fromValue(utf8Editor->data()));
     } else if (data.canConvert<Okteta::Utf16>()) {
-        auto* utf16Editor = qobject_cast<Okteta::Utf16Editor*>(editor);
+        auto* const utf16Editor = qobject_cast<Okteta::Utf16Editor*>(editor);
         model->setData(index, QVariant::fromValue(utf16Editor->data()));
     } else {
         QStyledItemDelegate::setModelData(editor, model, index);
@@ -304,7 +304,7 @@ void PODDelegate::setModelData(QWidget* editor, QAbstractItemModel* model, const
 
 void PODDelegate::onEditorDone()
 {
-    QWidget* editor = qobject_cast<QWidget*>(sender());
+    auto* const editor = qobject_cast<QWidget*>(sender());
     mEditor = nullptr;
     Q_EMIT commitData(editor);
     Q_EMIT closeEditor(editor);

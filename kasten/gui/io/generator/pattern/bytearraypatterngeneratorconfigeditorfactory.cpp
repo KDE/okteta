@@ -20,7 +20,7 @@ std::unique_ptr<AbstractModelDataGeneratorConfigEditor> ByteArrayPatternGenerato
 {
     std::unique_ptr<AbstractModelDataGeneratorConfigEditor> result;
 
-    auto* patternGenerator = qobject_cast<ByteArrayPatternGenerator*>(generator);
+    auto* const patternGenerator = qobject_cast<ByteArrayPatternGenerator*>(generator);
 
     if (patternGenerator) {
         result = std::make_unique<ByteArrayPatternGeneratorConfigEditor>(patternGenerator);

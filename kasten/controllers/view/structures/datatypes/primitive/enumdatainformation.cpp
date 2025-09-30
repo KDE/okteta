@@ -56,14 +56,14 @@ QWidget* EnumDataInformation::createEditWidget(QWidget* parent) const
 
 QVariant EnumDataInformation::dataFromWidget(const QWidget* w) const
 {
-    const auto* box = qobject_cast<const KComboBox*>(w);
+    const auto* const box = qobject_cast<const KComboBox*>(w);
     Q_CHECK_PTR(box);
     return box->currentData();
 }
 
 void EnumDataInformation::setWidgetData(QWidget* w) const
 {
-    auto* box = qobject_cast<KComboBox*>(w);
+    auto* const box = qobject_cast<KComboBox*>(w);
     Q_CHECK_PTR(box);
     const int dataIndex = box->findData(mValue->valueToQVariant());
     if (dataIndex != -1) {

@@ -19,7 +19,7 @@ ByteArrayBase32StreamEncoderConfigEditorFactory::~ByteArrayBase32StreamEncoderCo
 std::unique_ptr<AbstractModelStreamEncoderConfigEditor> ByteArrayBase32StreamEncoderConfigEditorFactory::tryCreateConfigEditor(AbstractModelStreamEncoder* encoder) const
 {
     std::unique_ptr<AbstractModelStreamEncoderConfigEditor> result;
-    auto* base32StreamEncoder = qobject_cast<ByteArrayBase32StreamEncoder*>(encoder);
+    auto* const base32StreamEncoder = qobject_cast<ByteArrayBase32StreamEncoder*>(encoder);
 
     if (base32StreamEncoder) {
         result = std::make_unique<ByteArrayBase32StreamEncoderConfigEditor>(base32StreamEncoder);

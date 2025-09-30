@@ -19,7 +19,7 @@ ByteArrayXxencodingStreamEncoderConfigEditorFactory::~ByteArrayXxencodingStreamE
 std::unique_ptr<AbstractModelStreamEncoderConfigEditor> ByteArrayXxencodingStreamEncoderConfigEditorFactory::tryCreateConfigEditor(AbstractModelStreamEncoder* encoder) const
 {
     std::unique_ptr<AbstractModelStreamEncoderConfigEditor> result;
-    auto* xxencodingStreamEncoder = qobject_cast<ByteArrayXxencodingStreamEncoder*>(encoder);
+    auto* const xxencodingStreamEncoder = qobject_cast<ByteArrayXxencodingStreamEncoder*>(encoder);
 
     if (xxencodingStreamEncoder) {
         result = std::make_unique<ByteArrayXxencodingStreamEncoderConfigEditor>(xxencodingStreamEncoder);

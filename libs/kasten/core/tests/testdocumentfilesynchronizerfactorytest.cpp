@@ -76,7 +76,7 @@ void TestDocumentFileSynchronizerFactoryTest::checkFileContent(const QUrl& fileU
     QVERIFY(loadSuccess);
     auto document = loadJob->releaseDocument();
 
-    auto* testDocument = qobject_cast<Kasten::TestDocument*>(document.get());
+    auto* const testDocument = qobject_cast<Kasten::TestDocument*>(document.get());
 
     QVERIFY(testDocument != nullptr);
     QCOMPARE(*testDocument->data(), data);
@@ -103,7 +103,7 @@ void TestDocumentFileSynchronizerFactoryTest::testLoadFromFile()
     QVERIFY(loadSuccess);
     auto document = loadJob->releaseDocument();
 
-    auto* testDocument = qobject_cast<Kasten::TestDocument*>(document.get());
+    auto* const testDocument = qobject_cast<Kasten::TestDocument*>(document.get());
 
     QVERIFY(document != nullptr);
     QVERIFY(testDocument != nullptr);
@@ -151,7 +151,7 @@ void TestDocumentFileSynchronizerFactoryTest::testLoadSaveFile()
     Kasten::TestDocumentFileSynchronizerFactory* factory = new Kasten::TestDocumentFileSynchronizerFactory();
     AbstractDocument* document = factory->loadNewDocument(fileUrl);
 
-    auto* testDocument = qobject_cast<Kasten::TestDocument*>(document);
+    auto* const testDocument = qobject_cast<Kasten::TestDocument*>(document);
     QVERIFY(testDocument != 0);
     // change and save
     testDocument->setData(otherData);
@@ -173,7 +173,7 @@ void TestDocumentFileSynchronizerFactoryTest::testLoadReloadFile()
     Kasten::TestDocumentFileSynchronizerFactory* factory = new Kasten::TestDocumentFileSynchronizerFactory();
     AbstractDocument* document = factory->loadNewDocument(fileUrl);
 
-    auto* testDocument = qobject_cast<Kasten::TestDocument*>(document);
+    auto* const testDocument = qobject_cast<Kasten::TestDocument*>(document);
     QVERIFY(testDocument != 0);
 
     // change on disc and reload

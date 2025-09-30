@@ -19,7 +19,7 @@ ByteArrayDeflateStreamCompressorConfigEditorFactory::~ByteArrayDeflateStreamComp
 std::unique_ptr<AbstractModelStreamEncoderConfigEditor> ByteArrayDeflateStreamCompressorConfigEditorFactory::tryCreateConfigEditor(AbstractModelStreamEncoder* encoder) const
 {
     std::unique_ptr<AbstractModelStreamEncoderConfigEditor> result;
-    auto* srecStreamCompressor = qobject_cast<ByteArrayDeflateStreamCompressor*>(encoder);
+    auto* const srecStreamCompressor = qobject_cast<ByteArrayDeflateStreamCompressor*>(encoder);
 
     if (srecStreamCompressor) {
         result = std::make_unique<ByteArrayDeflateStreamCompressorConfigEditor>(srecStreamCompressor);
