@@ -50,7 +50,7 @@ public:
     void onFileDeleted(const QString& fileName);
     void onOnlineStateChanged(bool isOnline);
 
-protected:
+private:
     QDateTime mFileDateTime;
     RemoteSyncState mRemoteState = RemoteUnknown;
     std::unique_ptr<QNetworkConfigurationManager> mNetworkConfigurationManager;

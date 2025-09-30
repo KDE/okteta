@@ -42,11 +42,14 @@ protected:
 protected: // slots
     void syncWithRemote();
 
-protected:
+private:
     AbstractModelFileSystemSynchronizer* const mSynchronizer;
+
     const QUrl mUrl;
     const AbstractModelSynchronizer::ConnectOption mOption;
+
     std::unique_ptr<QFile> mFile;
+
     QString mWorkFilePath;
     QString mTempFilePath;
 

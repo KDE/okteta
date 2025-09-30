@@ -45,10 +45,13 @@ public:
 public: // slots
     void load();
 
-protected:
+private:
     std::unique_ptr<AbstractModelFileSystemSynchronizer> mSynchronizer;
+
     const QUrl mUrl;
+
     std::unique_ptr<QFile> mFile;
+
     QString mWorkFilePath;
     QString mTempFilePath;
 

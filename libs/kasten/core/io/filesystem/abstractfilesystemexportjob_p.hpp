@@ -43,11 +43,14 @@ public:
 public: // slot
     void exportToFile();
 
-protected:
+private:
     AbstractModel* const mModel;
     const AbstractModelSelection* const mSelection;
+
     const QUrl mUrl;
+
     std::unique_ptr<QFile> mFile;
+
     QString mWorkFilePath;
 
 private:

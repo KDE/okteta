@@ -40,9 +40,11 @@ public:
 public: // slots
     void syncToRemote();
 
-protected:
+private:
     AbstractModelFileSystemSynchronizer* const mSynchronizer;
+
     std::unique_ptr<QFile> mFile;
+
     QString mWorkFilePath;
 
 private:

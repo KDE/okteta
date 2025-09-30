@@ -33,6 +33,7 @@ public:
 protected:
     AbstractModelExporter* const q_ptr;
 
+private:
     const QString mRemoteTypeName;
     const QString mRemoteMimeType;
 };

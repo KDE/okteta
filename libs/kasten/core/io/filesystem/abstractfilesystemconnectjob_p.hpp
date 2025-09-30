@@ -47,12 +47,15 @@ public:
 public:
     void connectWithFile();
 
-protected:
+private:
     std::unique_ptr<AbstractModelFileSystemSynchronizer> mSynchronizer;
     AbstractDocument* const mDocument;
+
     const QUrl mUrl;
     const AbstractModelSynchronizer::ConnectOption mOption;
+
     std::unique_ptr<QFile> mFile ;
+
     QString mWorkFilePath;
     QString mTempFilePath;
 
