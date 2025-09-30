@@ -38,7 +38,7 @@ KConfigGroup::readEntry(const char *key,
 {
     const QString entry = readEntry(key, QString());
 
-    auto it = std::find(codingConfigValueList.cbegin(), codingConfigValueList.cend(), entry);
+    const auto it = std::find(codingConfigValueList.cbegin(), codingConfigValueList.cend(), entry);
     if (it == codingConfigValueList.cend()) {
         return defaultValue;
     }

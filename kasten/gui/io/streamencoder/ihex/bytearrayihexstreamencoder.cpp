@@ -35,9 +35,9 @@ inline Kasten::IHexStreamEncoderSettings::AddressSizeId KConfigGroup::readEntry(
 {
     const QString entry = readEntry(key, QString());
 
-    auto it = std::find(Kasten::IHexStreamEncoderSettings::addressSizeConfigValueList.cbegin(),
-                        Kasten::IHexStreamEncoderSettings::addressSizeConfigValueList.cend(),
-                        entry);
+    const auto it = std::find(Kasten::IHexStreamEncoderSettings::addressSizeConfigValueList.cbegin(),
+                              Kasten::IHexStreamEncoderSettings::addressSizeConfigValueList.cend(),
+                              entry);
     if (it == Kasten::IHexStreamEncoderSettings::addressSizeConfigValueList.cend()) {
         return defaultValue;
     }

@@ -31,9 +31,9 @@ inline Kasten::GZipStreamCompressorSettings::StrategyId KConfigGroup::readEntry(
 {
     const QString entry = readEntry(key, QString());
 
-    auto it = std::find(Kasten::GZipStreamCompressorSettings::strategyConfigValueList.cbegin(),
-                        Kasten::GZipStreamCompressorSettings::strategyConfigValueList.cend(),
-                        entry);
+    const auto it = std::find(Kasten::GZipStreamCompressorSettings::strategyConfigValueList.cbegin(),
+                              Kasten::GZipStreamCompressorSettings::strategyConfigValueList.cend(),
+                              entry);
     if (it == Kasten::GZipStreamCompressorSettings::strategyConfigValueList.cend()) {
         return defaultValue;
     }

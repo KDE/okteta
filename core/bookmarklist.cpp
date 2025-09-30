@@ -162,7 +162,7 @@ QVector<Okteta::Bookmark> BookmarkList::list() const
 const Bookmark& BookmarkList::bookmark(Address offset) const
 {
     const ConstIterator endIt = end();
-    auto it = std::find_if(begin(), endIt, [offset](const Bookmark& bookmark) {
+    const auto it = std::find_if(begin(), endIt, [offset](const Bookmark& bookmark) {
         return (bookmark.offset() == offset);
     });
     if (it != endIt) {

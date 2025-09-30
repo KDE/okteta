@@ -35,9 +35,9 @@ inline Kasten::SRecStreamEncoderSettings::AddressSizeId KConfigGroup::readEntry(
 {
     const QString entry = readEntry(key, QString());
 
-    auto it = std::find(Kasten::SRecStreamEncoderSettings::addressSizeConfigValueList.cbegin(),
-                        Kasten::SRecStreamEncoderSettings::addressSizeConfigValueList.cend(),
-                        entry);
+    const auto it = std::find(Kasten::SRecStreamEncoderSettings::addressSizeConfigValueList.cbegin(),
+                              Kasten::SRecStreamEncoderSettings::addressSizeConfigValueList.cend(),
+                              entry);
     if (it == Kasten::SRecStreamEncoderSettings::addressSizeConfigValueList.cend()) {
         return defaultValue;
     }

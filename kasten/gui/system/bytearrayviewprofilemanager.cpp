@@ -453,8 +453,8 @@ ByteArrayViewProfileManager::onViewProfilesFolderChanged(const QString& viewProf
         }
 
         if (isKnown) {
-            auto it = std::find_if(mViewProfiles.begin(), mViewProfiles.end(),
-                                   [&viewProfileId](const ByteArrayViewProfile& existingProfile) {
+            const auto it = std::find_if(mViewProfiles.begin(), mViewProfiles.end(),
+                                         [&viewProfileId](const ByteArrayViewProfile& existingProfile) {
                 return (existingProfile.id() == viewProfileId);
             });
             if (it != mViewProfiles.end()) {

@@ -280,7 +280,7 @@ DataTypeDisplayStringifierManager::~DataTypeDisplayStringifierManager() = defaul
 
 AbstractDataTypeDisplayStringifier* DataTypeDisplayStringifierManager::stringifier(int metaTypeId) const
 {
-    auto it = m_stringifiers.find(metaTypeId);
+    const auto it = m_stringifiers.find(metaTypeId);
 
     return (it != m_stringifiers.cend()) ? it->second.get() : nullptr;
 }

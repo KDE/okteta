@@ -34,7 +34,7 @@ KConfigGroup::readEntry(const char *key,
 {
     const QString entry = readEntry(key, QString());
 
-    auto it = std::find(encodingTypeConfigValueList.cbegin(), encodingTypeConfigValueList.cend(), entry);
+    const auto it = std::find(encodingTypeConfigValueList.cbegin(), encodingTypeConfigValueList.cend(), entry);
     if (it == encodingTypeConfigValueList.cend()) {
         return defaultValue;
     }

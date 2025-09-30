@@ -145,7 +145,7 @@ QString UserMessagesHandlerPrivate::executeQuery(std::unique_ptr<UserQuery>&& us
                                                       nullptr,
                                                       messageBoxOptions);
 
-    auto it = buttonTable.find(static_cast<QDialogButtonBox::StandardButton>(result));
+    const auto it = buttonTable.find(static_cast<QDialogButtonBox::StandardButton>(result));
 
     return (it != buttonTable.cend()) ? it->second->id() : QString();
 }
@@ -153,7 +153,7 @@ QString UserMessagesHandlerPrivate::executeQuery(std::unique_ptr<UserQuery>&& us
 void UserMessagesHandlerPrivate::onErrorReportHidden()
 {
     auto* model = qobject_cast<AbstractModel*>(sender());
-    auto it = m_enqueuedErrorReports.find(model);
+    const auto it = m_enqueuedErrorReports.find(model);
     if (it == m_enqueuedErrorReports.end()) {
         return;
     }

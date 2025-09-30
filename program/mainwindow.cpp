@@ -337,7 +337,7 @@ void OktetaMainWindow::onCloseRequest(const QVector<Kasten::AbstractView*>& view
     const QVector<AbstractView*> allViews = viewManager()->views();
     for (AbstractView* view : allViews) {
         auto* document = view->findBaseModel<AbstractDocument*>();
-        auto it = viewsToClosePerDocument.find(document);
+        const auto it = viewsToClosePerDocument.find(document);
 
         if (it != viewsToClosePerDocument.end()) {
             const std::vector<AbstractView*>& viewsOfDocument = it->second;

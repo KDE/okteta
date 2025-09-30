@@ -37,9 +37,9 @@ inline Kasten::CharsStreamEncoderSettings::EncodeMode KConfigGroup::readEntry(co
 {
     const QString entry = readEntry(key, QString());
 
-    auto it = std::find(Kasten::CharsStreamEncoderSettings::encodeModeConfigValueList.cbegin(),
-                        Kasten::CharsStreamEncoderSettings::encodeModeConfigValueList.cend(),
-                        entry);
+    const auto it = std::find(Kasten::CharsStreamEncoderSettings::encodeModeConfigValueList.cbegin(),
+                              Kasten::CharsStreamEncoderSettings::encodeModeConfigValueList.cend(),
+                              entry);
     if (it == Kasten::CharsStreamEncoderSettings::encodeModeConfigValueList.cend()) {
         return defaultValue;
     }
@@ -69,9 +69,9 @@ inline Kasten::CharsStreamEncoderSettings::EscapedValueCoding KConfigGroup::read
 {
     const QString entry = readEntry(key, QString());
 
-    auto it = std::find(Kasten::CharsStreamEncoderSettings::escapedValueCodingConfigValueList.cbegin(),
-                        Kasten::CharsStreamEncoderSettings::escapedValueCodingConfigValueList.cend(),
-                        entry);
+    const auto it = std::find(Kasten::CharsStreamEncoderSettings::escapedValueCodingConfigValueList.cbegin(),
+                              Kasten::CharsStreamEncoderSettings::escapedValueCodingConfigValueList.cend(),
+                              entry);
     if (it == Kasten::CharsStreamEncoderSettings::escapedValueCodingConfigValueList.cend()) {
         return defaultValue;
     }

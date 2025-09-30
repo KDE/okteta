@@ -41,7 +41,7 @@ inline Kasten::SourceCodeStreamEncoderSettings::PrimitiveDataType KConfigGroup::
 {
     const QString entry = readEntry(key, QString());
 
-    auto it = std::find(primitiveDataTypeConfigValueList.cbegin(), primitiveDataTypeConfigValueList.cend(), entry);
+    const auto it = std::find(primitiveDataTypeConfigValueList.cbegin(), primitiveDataTypeConfigValueList.cend(), entry);
     if (it == primitiveDataTypeConfigValueList.cend()) {
         return defaultValue;
     }

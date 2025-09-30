@@ -44,7 +44,7 @@ QVector<AbstractView*> ViewManagerPrivate::views() const
 
 AbstractView* ViewManagerPrivate::viewByWidget(QWidget* widget) const
 {
-    auto it = std::find_if(mViewList.constBegin(), mViewList.constEnd(), [widget](AbstractView* view) {
+    const auto it = std::find_if(mViewList.constBegin(), mViewList.constEnd(), [widget](AbstractView* view) {
         return (view->widget() == widget);
     });
 

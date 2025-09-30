@@ -92,7 +92,7 @@ QLayoutItem* StatusBarLayout::takeAt(int index)
         return nullptr;
     }
 
-    auto it = mWidgetList.begin() + index;
+    const auto it = mWidgetList.begin() + index;
     QWidgetItem* item = *it;
     mWidgetList.erase(it);
 

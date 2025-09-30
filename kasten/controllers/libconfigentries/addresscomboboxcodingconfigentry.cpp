@@ -27,7 +27,7 @@ KConfigGroup::readEntry(const char *key,
 {
     const QString entry = readEntry(key, QString());
 
-    auto it = std::find(addressCodingConfigValueList.cbegin(), addressCodingConfigValueList.cend(), entry);
+    const auto it = std::find(addressCodingConfigValueList.cbegin(), addressCodingConfigValueList.cend(), entry);
     if (it == addressCodingConfigValueList.cend()) {
         return defaultValue;
     }

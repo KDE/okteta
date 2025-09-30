@@ -329,7 +329,7 @@ inline void ColumnsViewScrollAreaEngine::addColumn(std::unique_ptr<AbstractColum
 
 inline void ColumnsViewScrollAreaEngine::removeColumn(AbstractColumnRenderer* columnRenderer)
 {
-    auto it = std::find_if(columns.begin(), columns.end(), [columnRenderer](const auto& column){
+    const auto it = std::find_if(columns.begin(), columns.end(), [columnRenderer](const auto& column){
         return (column.get() == columnRenderer);
     });
     if (it == columns.end()) {

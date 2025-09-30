@@ -125,7 +125,7 @@ void AbstractColumnFrameRenderer::addColumn(std::unique_ptr<Okteta::AbstractColu
 
 void AbstractColumnFrameRenderer::removeColumn(Okteta::AbstractColumnRenderer* columnRenderer)
 {
-    auto it = std::find_if(d->mColumns.begin(), d->mColumns.end(), [columnRenderer](const auto& column) {
+    const auto it = std::find_if(d->mColumns.begin(), d->mColumns.end(), [columnRenderer](const auto& column) {
         return column.get() == columnRenderer;
     });
     if (it == d->mColumns.end()) {

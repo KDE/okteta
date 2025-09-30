@@ -177,7 +177,7 @@ void TopLevelDataInformation::lockPositionToOffset(Okteta::Address offset, const
         mLogger->error() << "Attempting to lock at max address value, this is forbidden.";
         return;
     }
-    auto it = mLockedPositions.find(model);
+    const auto it = mLockedPositions.find(model);
     if (it != mLockedPositions.end()) {
         it->second = offset;
     } else {

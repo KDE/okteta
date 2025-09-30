@@ -29,7 +29,7 @@ KConfigGroup::readEntry(const char *key,
 {
     const QString entry = readEntry(key, QString());
 
-    auto it = std::find(byteArrayCodingConfigValueList.cbegin(), byteArrayCodingConfigValueList.cend(), entry);
+    const auto it = std::find(byteArrayCodingConfigValueList.cbegin(), byteArrayCodingConfigValueList.cend(), entry);
     if (it == byteArrayCodingConfigValueList.cend()) {
         return defaultValue;
     }

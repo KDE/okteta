@@ -136,7 +136,7 @@ void MultiViewAreasPrivate::onViewsRemoved()
             baseOfBaseSplitter->setSizes(baseOfBaseSplitterSizes);
         }
 
-        auto it = std::find_if(mViewAreaList.begin(), mViewAreaList.end(), [viewArea](const auto& area){
+        const auto it = std::find_if(mViewAreaList.begin(), mViewAreaList.end(), [viewArea](const auto& area){
             return (area.get() == viewArea);
         });
         if (it != mViewAreaList.end()) {

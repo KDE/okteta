@@ -31,9 +31,9 @@ inline Kasten::DeflateStreamCompressorSettings::StrategyId KConfigGroup::readEnt
 {
     const QString entry = readEntry(key, QString());
 
-    auto it = std::find(Kasten::DeflateStreamCompressorSettings::strategyConfigValueList.cbegin(),
-                        Kasten::DeflateStreamCompressorSettings::strategyConfigValueList.cend(),
-                        entry);
+    const auto it = std::find(Kasten::DeflateStreamCompressorSettings::strategyConfigValueList.cbegin(),
+                              Kasten::DeflateStreamCompressorSettings::strategyConfigValueList.cend(),
+                              entry);
     if (it == Kasten::DeflateStreamCompressorSettings::strategyConfigValueList.cend()) {
         return defaultValue;
     }
@@ -63,9 +63,9 @@ inline Kasten::DeflateStreamCompressorSettings::FormatId KConfigGroup::readEntry
 {
     const QString entry = readEntry(key, QString());
 
-    auto it = std::find(Kasten::DeflateStreamCompressorSettings::formatConfigValueList.cbegin(),
-                        Kasten::DeflateStreamCompressorSettings::formatConfigValueList.cend(),
-                        entry);
+    const auto it = std::find(Kasten::DeflateStreamCompressorSettings::formatConfigValueList.cbegin(),
+                              Kasten::DeflateStreamCompressorSettings::formatConfigValueList.cend(),
+                              entry);
     if (it == Kasten::DeflateStreamCompressorSettings::formatConfigValueList.cend()) {
         return defaultValue;
     }

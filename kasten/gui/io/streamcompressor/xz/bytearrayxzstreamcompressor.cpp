@@ -28,9 +28,9 @@ inline Kasten::XzStreamCompressorSettings::CompressionPresetLevelVariantId KConf
 {
     const QString entry = readEntry(key, QString());
 
-    auto it = std::find(Kasten::XzStreamCompressorSettings::compressionPresetLevelVariantConfigValueList.cbegin(),
-                        Kasten::XzStreamCompressorSettings::compressionPresetLevelVariantConfigValueList.cend(),
-                        entry);
+    const auto it = std::find(Kasten::XzStreamCompressorSettings::compressionPresetLevelVariantConfigValueList.cbegin(),
+                              Kasten::XzStreamCompressorSettings::compressionPresetLevelVariantConfigValueList.cend(),
+                              entry);
     if (it == Kasten::XzStreamCompressorSettings::compressionPresetLevelVariantConfigValueList.cend()) {
         return defaultValue;
     }
@@ -62,9 +62,9 @@ inline Kasten::XzStreamCompressorSettings::IntegrityCheckId KConfigGroup::readEn
 {
     const QString entry = readEntry(key, QString());
 
-    auto it = std::find(Kasten::XzStreamCompressorSettings::integrityCheckConfigValueList.cbegin(),
-                        Kasten::XzStreamCompressorSettings::integrityCheckConfigValueList.cend(),
-                        entry);
+    const auto it = std::find(Kasten::XzStreamCompressorSettings::integrityCheckConfigValueList.cbegin(),
+                              Kasten::XzStreamCompressorSettings::integrityCheckConfigValueList.cend(),
+                              entry);
     if (it == Kasten::XzStreamCompressorSettings::integrityCheckConfigValueList.cend()) {
         return defaultValue;
     }

@@ -201,7 +201,7 @@ inline void MultiViewAreasPrivate::setViewAreaFocus(AbstractViewArea* _viewArea)
         return;
     }
 
-    auto it = std::find_if(mViewAreaList.cbegin(), mViewAreaList.cend(), [viewArea](const auto& area){
+    const auto it = std::find_if(mViewAreaList.cbegin(), mViewAreaList.cend(), [viewArea](const auto& area){
         return (area.get() == viewArea);
     });
     if (it != mViewAreaList.cend()) {
