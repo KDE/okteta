@@ -23,17 +23,20 @@ ReplacePrompt::ReplacePrompt(QWidget* parent)
 
     // dialog buttons
     auto* const dialogButtonBox = new QDialogButtonBox;
-    QPushButton* button = dialogButtonBox->addButton(i18nc("@action:button", "Replace &All"),
-                                                     QDialogButtonBox::ApplyRole);
-    connect(button, &QAbstractButton::clicked, this, &ReplacePrompt::onReplaceAllButton);
-    button = dialogButtonBox->addButton(i18nc("@action:button", "&Skip"),
-                                        QDialogButtonBox::ApplyRole);
-    connect(button, &QAbstractButton::clicked, this, &ReplacePrompt::onSkipButton);
+    QPushButton* const replaceAllButton = dialogButtonBox->addButton(i18nc("@action:button", "Replace &All"),
+                                                                     QDialogButtonBox::ApplyRole);
+    connect(replaceAllButton, &QAbstractButton::clicked, this, &ReplacePrompt::onReplaceAllButton);
+
+    QPushButton* const skipButton = dialogButtonBox->addButton(i18nc("@action:button", "&Skip"),
+                                                               QDialogButtonBox::ApplyRole);
+    connect(skipButton, &QAbstractButton::clicked, this, &ReplacePrompt::onSkipButton);
+
     QPushButton* const replaceButton = dialogButtonBox->addButton(i18nc("@action:button", "Replace"),
                                                                   QDialogButtonBox::ApplyRole);
     connect(replaceButton, &QAbstractButton::clicked, this, &ReplacePrompt::onReplaceButton);
-    button = dialogButtonBox->addButton(QDialogButtonBox::Close);
-    connect(button, &QAbstractButton::clicked, this, &ReplacePrompt::onCloseButton);
+
+    auto* const closeButton = dialogButtonBox->addButton(QDialogButtonBox::Close);
+    connect(closeButton, &QAbstractButton::clicked, this, &ReplacePrompt::onCloseButton);
 
     // main layout
     auto* const layout = new QVBoxLayout;
