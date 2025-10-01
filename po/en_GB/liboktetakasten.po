@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-30 02:13+0000\n"
+"POT-Creation-Date: 2025-10-01 02:07+0000\n"
 "PO-Revision-Date: 2024-11-01 14:15+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -253,7 +253,7 @@ msgstr ""
 
 #: controllers/view/bookmarks/bookmarksview.cpp:142
 #: controllers/view/stringsextract/stringsextractview.cpp:191
-#: controllers/view/structures/structureview.cpp:382
+#: controllers/view/structures/structureview.cpp:381
 #, fuzzy, kde-format
 #| msgctxt "@title:column offset of the bookmark"
 #| msgid "Offset"
@@ -263,7 +263,7 @@ msgstr "Offset"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:144
 #: controllers/view/stringsextract/stringsextractview.cpp:193
-#: controllers/view/structures/structureview.cpp:384
+#: controllers/view/structures/structureview.cpp:383
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Copies the selected strings to the clipboard."
@@ -272,77 +272,77 @@ msgid "Copies the offset to the clipboard."
 msgstr "Copies the selected strings to the clipboard."
 
 #: controllers/view/bytetable/bytetablemodel.cpp:137
-#: controllers/view/info/statistictablemodel.cpp:168
+#: controllers/view/info/statistictablemodel.cpp:160
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Character not defined."
 msgstr "Character not defined."
 
 #: controllers/view/bytetable/bytetablemodel.cpp:155
-#: controllers/view/info/statistictablemodel.cpp:214
+#: controllers/view/info/statistictablemodel.cpp:206
 #, kde-format
 msgctxt "@title:column short for Decimal"
 msgid "Dec"
 msgstr "Dec"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:156
-#: controllers/view/info/statistictablemodel.cpp:213
+#: controllers/view/info/statistictablemodel.cpp:205
 #, kde-format
 msgctxt "@title:column short for Hexadecimal"
 msgid "Hex"
 msgstr "Hex"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:157
-#: controllers/view/info/statistictablemodel.cpp:215
+#: controllers/view/info/statistictablemodel.cpp:207
 #, kde-format
 msgctxt "@title:column short for Octal"
 msgid "Oct"
 msgstr "Oct"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:158
-#: controllers/view/info/statistictablemodel.cpp:216
+#: controllers/view/info/statistictablemodel.cpp:208
 #, kde-format
 msgctxt "@title:column short for Binary"
 msgid "Bin"
 msgstr "Bin"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:159
-#: controllers/view/info/statistictablemodel.cpp:218
+#: controllers/view/info/statistictablemodel.cpp:210
 #, kde-format
 msgctxt "@title:column short for Character"
 msgid "Char"
 msgstr "Char"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:165
-#: controllers/view/info/statistictablemodel.cpp:229
+#: controllers/view/info/statistictablemodel.cpp:221
 #, kde-format
 msgctxt "@info:tooltip column contains the value in decimal format"
 msgid "Decimal"
 msgstr "Decimal"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:167
-#: controllers/view/info/statistictablemodel.cpp:227
+#: controllers/view/info/statistictablemodel.cpp:219
 #, kde-format
 msgctxt "@info:tooltip column contains the value in hexadecimal format"
 msgid "Hexadecimal"
 msgstr "Hexadecimal"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:169
-#: controllers/view/info/statistictablemodel.cpp:231
+#: controllers/view/info/statistictablemodel.cpp:223
 #, kde-format
 msgctxt "@info:tooltip column contains the value in octal format"
 msgid "Octal"
 msgstr "Octal"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:171
-#: controllers/view/info/statistictablemodel.cpp:233
+#: controllers/view/info/statistictablemodel.cpp:225
 #, kde-format
 msgctxt "@info:tooltip column contains the value in binary format"
 msgid "Binary"
 msgstr "Binary"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:173
-#: controllers/view/info/statistictablemodel.cpp:237
+#: controllers/view/info/statistictablemodel.cpp:229
 #, kde-format
 msgctxt "@info:tooltip column contains the character with the value"
 msgid "Character"
@@ -850,8 +850,8 @@ msgstr ""
 "selected in the list are copied to the clipboard."
 
 #: controllers/view/info/infoview.cpp:192
-#: controllers/view/structures/datatypes/datainformation.cpp:59
-#: controllers/view/structures/datatypes/datainformation.cpp:62
+#: controllers/view/structures/datatypes/datainformation.cpp:58
+#: controllers/view/structures/datatypes/datainformation.cpp:61
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:236
 #, kde-format
 msgid "1 byte"
@@ -859,13 +859,13 @@ msgid_plural "%1 bytes"
 msgstr[0] "1 byte"
 msgstr[1] "%1 bytes"
 
-#: controllers/view/info/statistictablemodel.cpp:219
+#: controllers/view/info/statistictablemodel.cpp:211
 #, kde-format
 msgctxt "@title:column count of characters"
 msgid "Count"
 msgstr "Count"
 
-#: controllers/view/info/statistictablemodel.cpp:220
+#: controllers/view/info/statistictablemodel.cpp:212
 #, kde-format
 msgctxt "@title:column Percent of byte in total"
 msgid "Percent"
@@ -1496,14 +1496,14 @@ msgstr ""
 ">Overwrite the following bytes or insert new ones as needed?"
 
 #: controllers/view/poddecoder/podtableview.cpp:257
-#: controllers/view/structures/structureview.cpp:368
+#: controllers/view/structures/structureview.cpp:367
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit"
 msgstr "Edit"
 
 #: controllers/view/poddecoder/podtableview.cpp:270
-#: controllers/view/structures/structureview.cpp:391
+#: controllers/view/structures/structureview.cpp:390
 #, fuzzy, kde-format
 #| msgctxt "@title:window of the tool to select a range"
 #| msgid "Select"
@@ -1912,46 +1912,46 @@ msgctxt "type name, then array length"
 msgid "%1[%2]"
 msgstr "%1[%2]"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:63
+#: controllers/view/structures/datatypes/datainformation.cpp:62
 #, kde-format
 msgid "1 bit"
 msgid_plural "%1 bits"
 msgstr[0] "1 bit"
 msgstr[1] "%1 bits"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:64
+#: controllers/view/structures/datatypes/datainformation.cpp:63
 #, kde-format
 msgctxt "number of bytes, then number of bits"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:204
+#: controllers/view/structures/datatypes/datainformation.cpp:203
 #, kde-format
 msgctxt "invalid value (End of file reached)"
 msgid "<EOF reached>"
 msgstr "<EOF reached>"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:233
+#: controllers/view/structures/datatypes/datainformation.cpp:232
 #, kde-format
 msgid "Name:"
 msgstr "Name:"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:234
+#: controllers/view/structures/datatypes/datainformation.cpp:233
 #, kde-format
 msgid "Type:"
 msgstr "Type:"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:235
+#: controllers/view/structures/datatypes/datainformation.cpp:234
 #, kde-format
 msgid "Value:"
 msgstr "Value:"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:236
+#: controllers/view/structures/datatypes/datainformation.cpp:235
 #, kde-format
 msgid "Size:"
 msgstr "Size:"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:242
+#: controllers/view/structures/datatypes/datainformation.cpp:241
 #, kde-format
 msgctxt "size (elements)"
 msgid "%2 (%1 child)"
@@ -1959,14 +1959,14 @@ msgid_plural "%2 (%1 children)"
 msgstr[0] "%2 (%1 child)"
 msgstr[1] "%2 (%1 children)"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:267
+#: controllers/view/structures/datatypes/datainformation.cpp:266
 #: controllers/view/structures/datatypes/datainformationwithchildren.cpp:208
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed."
 msgstr "Validation failed."
 
-#: controllers/view/structures/datatypes/datainformation.cpp:270
+#: controllers/view/structures/datatypes/datainformation.cpp:269
 #: controllers/view/structures/datatypes/datainformationwithchildren.cpp:211
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
@@ -2609,69 +2609,69 @@ msgctxt "size of a data structure"
 msgid "Size"
 msgstr "Size"
 
-#: controllers/view/structures/structureview.cpp:87
+#: controllers/view/structures/structureview.cpp:86
 #, kde-format
 msgctxt "@info"
 msgid "No structure definitions"
 msgstr "No structure definitions"
 
-#: controllers/view/structures/structureview.cpp:107
+#: controllers/view/structures/structureview.cpp:106
 #, kde-format
 msgctxt "@action:button"
 msgid "Validate"
 msgstr "Validate"
 
-#: controllers/view/structures/structureview.cpp:109
+#: controllers/view/structures/structureview.cpp:108
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Validate all structures."
 msgstr "Validate all structures."
 
-#: controllers/view/structures/structureview.cpp:131
+#: controllers/view/structures/structureview.cpp:130
 #, kde-format
 msgctxt "@action:button"
 msgid "Script console"
 msgstr "Script console"
 
-#: controllers/view/structures/structureview.cpp:133
+#: controllers/view/structures/structureview.cpp:132
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open script console."
 msgstr "Open script console."
 
-#: controllers/view/structures/structureview.cpp:137
+#: controllers/view/structures/structureview.cpp:136
 #, kde-format
 msgctxt "@action:button"
 msgid "Settings"
 msgstr "Settings"
 
-#: controllers/view/structures/structureview.cpp:139
+#: controllers/view/structures/structureview.cpp:138
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open settings."
 msgstr "Open settings."
 
-#: controllers/view/structures/structureview.cpp:170
+#: controllers/view/structures/structureview.cpp:169
 #, fuzzy, kde-format
 #| msgid "Value Display"
 msgctxt "@title:tab"
 msgid "Value Display"
 msgstr "Value Display"
 
-#: controllers/view/structures/structureview.cpp:182
+#: controllers/view/structures/structureview.cpp:181
 #, fuzzy, kde-format
 #| msgid "Structures management"
 msgctxt "@title:tab"
 msgid "Structures management"
 msgstr "Structures management"
 
-#: controllers/view/structures/structureview.cpp:269
+#: controllers/view/structures/structureview.cpp:268
 #, kde-format
 msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Unlock"
 msgstr "Unlock"
 
-#: controllers/view/structures/structureview.cpp:271
+#: controllers/view/structures/structureview.cpp:270
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -2681,19 +2681,19 @@ msgstr ""
 "Unlock selected structure, i.e. the starting offset is always set to the "
 "current cursor position."
 
-#: controllers/view/structures/structureview.cpp:276
+#: controllers/view/structures/structureview.cpp:275
 #, kde-format
 msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Lock"
 msgstr "Lock"
 
-#: controllers/view/structures/structureview.cpp:278
+#: controllers/view/structures/structureview.cpp:277
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Lock selected structure to current offset."
 msgstr "Lock selected structure to current offset."
 
-#: controllers/view/structures/structureview.cpp:325
+#: controllers/view/structures/structureview.cpp:324
 #, kde-format
 msgctxt "@title:window"
 msgid "Structures Script Console"
