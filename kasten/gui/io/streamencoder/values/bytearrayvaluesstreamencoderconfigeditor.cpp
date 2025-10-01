@@ -23,7 +23,7 @@ ByteArrayValuesStreamEncoderConfigEditor::ByteArrayValuesStreamEncoderConfigEdit
 {
     mSettings = mEncoder->settings();
 
-    auto* pageLayout = new QFormLayout(this);   // unknown rows
+    auto* const pageLayout = new QFormLayout(this);   // unknown rows
     pageLayout->setContentsMargins(0, 0, 0, 0);
 
 #if 0

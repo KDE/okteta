@@ -70,17 +70,17 @@ QWidget* PODDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem& 
 
     QVariant data = index.data(Qt::EditRole);
     if (data.canConvert<Okteta::Binary8>()) {
-        auto* editor = new Okteta::Binary8Editor(parent);
+        auto* const editor = new Okteta::Binary8Editor(parent);
         connect(editor, &Okteta::Binary8Editor::editingFinished,
                 this, &PODDelegate::onEditorDone);
         result = editor;
     } else if (data.canConvert<Okteta::Octal8>()) {
-        auto* editor = new Okteta::Octal8Editor(parent);
+        auto* const editor = new Okteta::Octal8Editor(parent);
         connect(editor, &Okteta::Octal8Editor::editingFinished,
                 this, &PODDelegate::onEditorDone);
         result = editor;
     } else if (data.canConvert<Okteta::Hexadecimal8>()) {
-        auto* editor = new Okteta::Hexadecimal8Editor(parent);
+        auto* const editor = new Okteta::Hexadecimal8Editor(parent);
         connect(editor, &Okteta::Hexadecimal8Editor::editingFinished,
                 this, &PODDelegate::onEditorDone);
         result = editor;
@@ -129,27 +129,27 @@ QWidget* PODDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem& 
                 this, &PODDelegate::onEditorDone);
         result = editor;
     } else if (data.canConvert<Okteta::Float32>()) {
-        auto* editor = new Okteta::Float32Editor(parent);
+        auto* const editor = new Okteta::Float32Editor(parent);
         connect(editor, &Okteta::Float32Editor::editingFinished,
                 this, &PODDelegate::onEditorDone);
         result = editor;
     } else if (data.canConvert<Okteta::Float64>()) {
-        auto* editor = new Okteta::Float64Editor(parent);
+        auto* const editor = new Okteta::Float64Editor(parent);
         connect(editor, &Okteta::Float64Editor::editingFinished,
                 this, &PODDelegate::onEditorDone);
         result = editor;
     } else if (data.canConvert<Okteta::Char8>()) {
-        auto* editor = new Okteta::Char8Editor(mTool->charCodec(), parent);
+        auto* const editor = new Okteta::Char8Editor(mTool->charCodec(), parent);
         connect(editor, &Okteta::Char8Editor::editingFinished,
                 this, &PODDelegate::onEditorDone);
         result = editor;
     } else if (data.canConvert<Okteta::Utf8>()) {
-        auto* editor = new Okteta::Utf8Editor(parent);
+        auto* const editor = new Okteta::Utf8Editor(parent);
         connect(editor, &Okteta::Utf8Editor::editingFinished,
                 this, &PODDelegate::onEditorDone);
         result = editor;
     } else if (data.canConvert<Okteta::Utf16>()) {
-        auto* editor = new Okteta::Utf16Editor(parent);
+        auto* const editor = new Okteta::Utf16Editor(parent);
         connect(editor, &Okteta::Utf16Editor::editingFinished,
                 this, &PODDelegate::onEditorDone);
         result = editor;

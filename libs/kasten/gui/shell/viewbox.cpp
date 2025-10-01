@@ -20,7 +20,7 @@ ViewBox::ViewBox(AbstractView* view, QWidget* parent)
     QWidget* widget = view->widget();
     setFocusProxy(widget);
 
-    auto* layout = new QVBoxLayout(this);
+    auto* const layout = new QVBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(0);
     layout->addWidget(widget);

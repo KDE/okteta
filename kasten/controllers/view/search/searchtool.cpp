@@ -161,7 +161,7 @@ void SearchTool::doSearch(FindDirection direction)
                                     ((direction == FindForward) ? mByteArrayModel->size() - 1 : 0) :
                                     ((direction == FindForward) ? mSearchLastIndex : mSearchFirstIndex);
 
-            auto* searchJob =
+            auto* const searchJob =
                 new ByteArraySearchJob(mByteArrayModel, mSearchData, startIndex, endIndex, mCaseSensitivity, mByteArrayView->charCodingName());
             const Okteta::AddressRange matchRange = searchJob->exec();
 

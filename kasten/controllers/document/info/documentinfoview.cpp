@@ -31,7 +31,7 @@ DocumentInfoView::DocumentInfoView(DocumentInfoTool* tool, QWidget* parent)
     : QWidget(parent)
     , mTool(tool)
 {
-    auto* baseLayout = new QVBoxLayout(this);
+    auto* const baseLayout = new QVBoxLayout(this);
 
     // icon
     mIconLabel = new QLabel(this);
@@ -53,11 +53,11 @@ DocumentInfoView::DocumentInfoView(DocumentInfoTool* tool, QWidget* parent)
     baseLayout->addWidget(mDocumentTitleLabel);
 
     // separator
-    auto* separator = new KSeparator(Qt::Horizontal, this);
+    auto* const separator = new KSeparator(Qt::Horizontal, this);
     baseLayout->addWidget(separator);
 
     // property grid
-    auto* propertyGrid = new QFormLayout(); // unknown rows
+    auto* const propertyGrid = new QFormLayout(); // unknown rows
 
     // type property
     mMimeTypeLabel = new QLabel(QString(), this);

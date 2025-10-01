@@ -41,9 +41,9 @@ ReplaceDialog::ReplaceDialog(ReplaceTool* tool, QWidget* parent)
     setupFindBox();
 
     // replace term
-    auto* ReplaceBox = new QGroupBox(i18nc("@title:group", "Replace With"));
+    auto* const ReplaceBox = new QGroupBox(i18nc("@title:group", "Replace With"));
 
-    auto* ReplaceBoxLayout = new QVBoxLayout;
+    auto* const ReplaceBoxLayout = new QVBoxLayout;
 
     ReplaceDataEdit = new Okteta::ByteArrayComboBox(ReplaceBox);
     const QString toolTip =

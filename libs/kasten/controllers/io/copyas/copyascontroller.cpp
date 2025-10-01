@@ -85,13 +85,13 @@ void CopyAsController::updateActions()
     if (hasEncoders) {
         for (auto* encoder : encoderList) {
             const QString title = encoder->remoteTypeName();
-            auto* action = new QAction(title, mCopyAsSelectAction);
+            auto* const action = new QAction(title, mCopyAsSelectAction);
 
             action->setData(QVariant::fromValue(encoder));
             mCopyAsSelectAction->addAction(action);
         }
     } else {
-        auto* noneAction = new QAction(i18nc("@item There are no encoders.", "Not available."), mCopyAsSelectAction);
+        auto* const noneAction = new QAction(i18nc("@item There are no encoders.", "Not available."), mCopyAsSelectAction);
         noneAction->setEnabled(false);
         mCopyAsSelectAction->addAction(noneAction);
     }
@@ -109,8 +109,8 @@ void CopyAsController::onActionTriggered(QAction* action)
     auto configEditor = mModelCodecViewManager->createConfigEditor(encoder);
 
     if (configEditor) {
-        auto* dialog = new CopyAsDialog(encoder->remoteTypeName(), std::move(configEditor), encoder,
-                                        QApplication::activeWindow());
+        auto* const dialog = new CopyAsDialog(encoder->remoteTypeName(), std::move(configEditor), encoder,
+                                              QApplication::activeWindow());
         dialog->setData(mModel, selection);
         connect(dialog, &CopyAsDialog::copyAccepted, this, &CopyAsController::triggerExecution);
         dialog->open();

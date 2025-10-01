@@ -94,7 +94,7 @@ void PrimitiveArrayTest::initTestCase()
         data[i] = static_cast<Okteta::Byte>(randomGenerator->bounded(256));
     }
 
-    auto* copy = new Okteta::Byte[SIZE];
+    auto* const copy = new Okteta::Byte[SIZE];
     memcpy(copy, data.data(), SIZE);
     model = std::make_unique<Okteta::ByteArrayModel>(copy, SIZE);
     model->setAutoDelete(true);
@@ -105,7 +105,7 @@ void PrimitiveArrayTest::initTestCase()
         endianData[i] = i;
     }
 
-    auto* endianCopy = new Okteta::Byte[SIZE];
+    auto* const endianCopy = new Okteta::Byte[SIZE];
     memcpy(endianCopy, endianData.data(), ENDIAN_SIZE);
     endianModel = std::make_unique<Okteta::ByteArrayModel>(endianCopy, ENDIAN_SIZE);
     endianModel->setAutoDelete(true);

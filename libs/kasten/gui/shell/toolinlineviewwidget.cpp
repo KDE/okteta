@@ -18,11 +18,11 @@ ToolInlineViewWidget::ToolInlineViewWidget(QWidget* viewWidget, QWidget* parent)
     : QWidget(parent)
     , mViewWidget(viewWidget)
 {
-    auto* layout = new QHBoxLayout(this);
+    auto* const layout = new QHBoxLayout(this);
     layout->addWidget(mViewWidget, 10);
 
     // TODO: use style buttons instead, like QDockWidget
-    auto* closeButton = new QToolButton(this);
+    auto* const closeButton = new QToolButton(this);
     closeButton->setAutoRaise(true);
     closeButton->setIcon(style()->standardIcon(QStyle::SP_DialogCloseButton));
     connect(closeButton, &QAbstractButton::clicked, this, &ToolInlineViewWidget::done);

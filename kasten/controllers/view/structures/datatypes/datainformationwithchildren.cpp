@@ -55,7 +55,7 @@ bool DataInformationWithChildren::setData(const QVariant&, Okteta::AbstractByteA
 QWidget* DataInformationWithChildren::createEditWidget(QWidget* parent) const
 {
     Q_ASSERT(false);
-    auto* editWidget = new QLineEdit(parent);
+    auto* const editWidget = new QLineEdit(parent);
     editWidget->setClearButtonEnabled(true);
     return editWidget;
 }

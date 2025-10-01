@@ -18,7 +18,7 @@ LabelledToolBarWidget::LabelledToolBarWidget(QLabel* label,
                                              QWidget* parent)
     : QWidget(parent)
 {
-    auto* layout = new QHBoxLayout();
+    auto* const layout = new QHBoxLayout();
     layout->setContentsMargins(0, 0, 0, 0);
 
     label->setBuddy(widget);

@@ -61,7 +61,7 @@ void ShellWindowPrivate::addTool(std::unique_ptr<AbstractTool>&& tool, std::uniq
 {
     Q_Q(ShellWindow);
 
-    auto* dockWidget = new ToolViewDockWidget(std::move(toolView), q);
+    auto* const dockWidget = new ToolViewDockWidget(std::move(toolView), q);
     // TODO: where to set the initial area?
     q->addDockWidget(Qt::RightDockWidgetArea, dockWidget);
     // For now hide initially, to avoid triggering bug 462703

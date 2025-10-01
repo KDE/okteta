@@ -28,7 +28,7 @@ StructuresManagerView::StructuresManagerView(Kasten::StructuresTool* tool, QWidg
     : QWidget(parent)
     , mTool(tool)
 {
-    auto* pageLayout = new QVBoxLayout();
+    auto* const pageLayout = new QVBoxLayout();
     pageLayout->setContentsMargins(0, 0, 0, 0);
     setLayout(pageLayout);
 
@@ -39,7 +39,7 @@ StructuresManagerView::StructuresManagerView(Kasten::StructuresTool* tool, QWidg
     pageLayout->addWidget(mStructuresSelector);
 
     // buttons
-    auto* buttonsLayout = new QHBoxLayout();
+    auto* const buttonsLayout = new QHBoxLayout();
 
     mGetNewStructuresButton = new KNSWidgets::Button(i18nc("@action:button", "Get New Structures…"),
                                                      QStringLiteral("okteta-structures.knsrc"), this);
@@ -91,9 +91,9 @@ void StructuresManagerView::setValues(const QStringList& values)
 
 void StructuresManagerView::advancedSelection()
 {
-    auto* dialog = new StructuresSelectionDialog(mTool->manager()->structureDefs(),
-                                                 mStructuresSelector->enabledList(),
-                                                 this);
+    auto* const dialog = new StructuresSelectionDialog(mTool->manager()->structureDefs(),
+                                                       mStructuresSelector->enabledList(),
+                                                       this);
     connect(dialog, &StructuresSelectionDialog::structuresAccepted,
             this, &StructuresManagerView::setEnabledStructures);
     dialog->open();

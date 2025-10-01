@@ -19,7 +19,7 @@ const char ReverseByteArrayFilterParameterSetEdit::Id[] = "Reverse";
 ReverseByteArrayFilterParameterSetEdit::ReverseByteArrayFilterParameterSetEdit(QWidget* parent)
     : AbstractByteArrayFilterParameterSetEdit(parent)
 {
-    auto* baseLayout = new QFormLayout(this);
+    auto* const baseLayout = new QFormLayout(this);
     baseLayout->setContentsMargins(0, 0, 0, 0);
 
     const QString invertsBitsLabelText =

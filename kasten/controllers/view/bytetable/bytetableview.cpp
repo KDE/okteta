@@ -35,7 +35,7 @@ ByteTableView::ByteTableView(ByteTableTool* tool, QWidget* parent)
     : AbstractToolWidget(parent)
     , mTool(tool)
 {
-    auto* baseLayout = new QVBoxLayout(this);
+    auto* const baseLayout = new QVBoxLayout(this);
     baseLayout->setContentsMargins(0, 0, 0, 0);
     baseLayout->setSpacing(0);
 
@@ -62,18 +62,18 @@ ByteTableView::ByteTableView(ByteTableTool* tool, QWidget* parent)
 
     baseLayout->addWidget(mByteTableView, 10);
 
-    auto* insertToolBar = new QToolBar(this);
+    auto* const insertToolBar = new QToolBar(this);
     insertToolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
 
-    auto* stretcher = new QWidget(this);
+    auto* const stretcher = new QWidget(this);
     stretcher->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     insertToolBar->addWidget(stretcher);
 
-    auto* label = new QLabel(i18nc("@label:spinbox number of bytes to insert", "Number (bytes):"), this);
+    auto* const label = new QLabel(i18nc("@label:spinbox number of bytes to insert", "Number (bytes):"), this);
 
     mInsertCountEdit = new QSpinBox(this);
     mInsertCountEdit->setRange(1, std::numeric_limits<int>::max());
-    auto* labelledInsertCountEdit = new LabelledToolBarWidget(label, mInsertCountEdit, this);
+    auto* const labelledInsertCountEdit = new LabelledToolBarWidget(label, mInsertCountEdit, this);
     insertToolBar->addWidget(labelledInsertCountEdit);
     const QString insertCountToolTip =
         i18nc("@info:tooltip",

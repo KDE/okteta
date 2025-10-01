@@ -46,15 +46,15 @@ StringsExtractView::StringsExtractView(StringsExtractTool* tool,
     , mTool(tool)
     , m_userMessagesHandler(userMessagseHandler)
 {
-    auto* baseLayout = new QVBoxLayout(this);
+    auto* const baseLayout = new QVBoxLayout(this);
     baseLayout->setContentsMargins(0, 0, 0, 0);
     baseLayout->setSpacing(0);
 
     // update
-    auto* updateToolBar = new QToolBar(this);
+    auto* const updateToolBar = new QToolBar(this);
     updateToolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
 
-    auto* stretcher = new QWidget(this);
+    auto* const stretcher = new QWidget(this);
     stretcher->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     updateToolBar->addWidget(stretcher);
 
@@ -66,7 +66,7 @@ StringsExtractView::StringsExtractView(StringsExtractTool* tool,
     mMinLengthSpinBox->setMinimum(MinimumStringLength);
     connect(mMinLengthSpinBox, qOverload<int>(&QSpinBox::valueChanged),
             mTool, &StringsExtractTool::setMinLength);
-    auto* labelledMinLengthSpinBox = new LabelledToolBarWidget(label, mMinLengthSpinBox, this);
+    auto* const labelledMinLengthSpinBox = new LabelledToolBarWidget(label, mMinLengthSpinBox, this);
     updateToolBar->addWidget(labelledMinLengthSpinBox);
 
     mUpdateAction =
@@ -85,15 +85,15 @@ StringsExtractView::StringsExtractView(StringsExtractTool* tool,
     baseLayout->addWidget(updateToolBar);
 
     // filter
-    auto* filterToolBar = new QToolBar(this);
+    auto* const filterToolBar = new QToolBar(this);
 
     label = new QLabel(i18nc("@label:lineedit filter term for displayed strings", "Filter:"), this);
 
-    auto* mFilterEdit = new QLineEdit(this);
+    auto* const mFilterEdit = new QLineEdit(this);
     mFilterEdit->setClearButtonEnabled(true);
     mFilterEdit->setPlaceholderText(i18nc("@info:placeholder", "Enter a term to limit the list."));
     mFilterEdit->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-    auto* labelledFilterEdit = new LabelledToolBarWidget(label, mFilterEdit, this);
+    auto* const labelledFilterEdit = new LabelledToolBarWidget(label, mFilterEdit, this);
     filterToolBar->addWidget(labelledFilterEdit);
 
     baseLayout->addWidget(filterToolBar);
@@ -149,14 +149,14 @@ StringsExtractView::StringsExtractView(StringsExtractTool* tool,
     m_emptyListOverlayLabel->setAlignment(Qt::AlignCenter);
     m_emptyListOverlayLabel->setVisible(mTool->containedStringList()->isEmpty());
     m_emptyListOverlayLabel->setContextMenuPolicy(Qt::NoContextMenu);
-    auto* centeringLayout = new QVBoxLayout(stringTableViewViewPort);
+    auto* const centeringLayout = new QVBoxLayout(stringTableViewViewPort);
     centeringLayout->addWidget(m_emptyListOverlayLabel);
     centeringLayout->setAlignment(m_emptyListOverlayLabel, Qt::AlignCenter);
 
     baseLayout->addWidget(mContainedStringTableView, 10);
 
     // actions
-    auto* actionsToolBar = new QToolBar(this);
+    auto* const actionsToolBar = new QToolBar(this);
     actionsToolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
 
     mCopyAction = new QAction(QIcon::fromTheme(QStringLiteral("edit-copy")),
@@ -170,7 +170,7 @@ StringsExtractView::StringsExtractView(StringsExtractTool* tool,
             this, &StringsExtractView::onCopyButtonClicked);
     actionsToolBar->addAction(mCopyAction);
 
-    auto* actionsStretcher = new QWidget(this);
+    auto* const actionsStretcher = new QWidget(this);
     actionsStretcher->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     actionsToolBar->addWidget(actionsStretcher);
 
@@ -235,7 +235,7 @@ void StringsExtractView::onCustomContextMenuRequested(QPoint pos)
         return;
     }
 
-    auto* menu = new QMenu(this);
+    auto* const menu = new QMenu(this);
     menu->setAttribute(Qt::WA_DeleteOnClose);
 
     menu->addAction(mGotoAction);

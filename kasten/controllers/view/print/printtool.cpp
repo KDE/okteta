@@ -266,14 +266,14 @@ void PrintTool::storeConfig(const QPrinter* printer)
 
 void PrintTool::print()
 {
-    auto* printer = new QPrinter;
+    auto* const printer = new QPrinter;
 
     loadConfig(printer);
 
 //     LayoutDialogPage* layoutPage = new LayoutDialogPage();
 //     QList<QWidget*> customDialogPages;
 //     customDialogPages << layoutPage;
-    auto* printDialog = new PrintDialog(printer, QApplication::activeWindow());
+    auto* const printDialog = new PrintDialog(printer, QApplication::activeWindow());
     // Disable PrintPageRange, this tells Qt we can't do client-side page selection,
     // so it will try do server-side page selection if supported
     printDialog->setOption(QPrintDialog::PrintPageRange, false);
@@ -286,11 +286,11 @@ void PrintTool::print()
 
 void PrintTool::printPreview()
 {
-    auto* printer = new QPrinter;
+    auto* const printer = new QPrinter;
 
     loadConfig(printer);
 
-    auto* previewDialog = new PrintPreviewDialog(printer, QApplication::activeWindow());
+    auto* const previewDialog = new PrintPreviewDialog(printer, QApplication::activeWindow());
 
     connect(previewDialog, &QPrintPreviewDialog::paintRequested,
             this, &PrintTool::triggerPrintPreview);
@@ -409,7 +409,7 @@ bool PrintTool::doPrint(QPrinter* printer)
 
     storeConfig(printer);
 
-    auto* printJob = new PrintJob(&framesPrinter, 0, framesCount - 1, printer);
+    auto* const printJob = new PrintJob(&framesPrinter, 0, framesCount - 1, printer);
     const bool success = printJob->exec();
 
     QApplication::restoreOverrideCursor();

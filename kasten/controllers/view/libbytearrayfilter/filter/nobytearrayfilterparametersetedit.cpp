@@ -17,10 +17,10 @@ const char NoByteArrayFilterParameterSetEdit::Id[] = "None";
 NoByteArrayFilterParameterSetEdit::NoByteArrayFilterParameterSetEdit(QWidget* parent)
     : AbstractByteArrayFilterParameterSetEdit(parent)
 {
-    auto* baseLayout = new QVBoxLayout(this);
+    auto* const baseLayout = new QVBoxLayout(this);
     baseLayout->setContentsMargins(0, 0, 0, 0);
 
-    auto* label = new QLabel(i18nc("@info", "No parameters"), this);
+    auto* const label = new QLabel(i18nc("@info", "No parameters"), this);
     label->setEnabled(false);
     baseLayout->addWidget(label, 0, Qt::AlignCenter);
 }

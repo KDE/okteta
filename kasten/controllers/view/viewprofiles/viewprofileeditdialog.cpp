@@ -25,12 +25,12 @@ ViewProfileEditDialog::ViewProfileEditDialog(QWidget* parent)
     mViewProfileEdit = new ViewProfileEdit(this);
 
     // dialog buttons
-    auto* dialogButtonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
+    auto* const dialogButtonBox = new QDialogButtonBox(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
     connect(dialogButtonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
     connect(dialogButtonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
     // main layout
-    auto* layout = new QVBoxLayout;
+    auto* const layout = new QVBoxLayout;
     layout->addWidget(mViewProfileEdit);
     layout->addStretch();
     layout->addWidget(dialogButtonBox);

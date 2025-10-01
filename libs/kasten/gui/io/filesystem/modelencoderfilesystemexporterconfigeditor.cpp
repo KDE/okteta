@@ -20,7 +20,7 @@ ModelEncoderFileSystemExporterConfigEditor::ModelEncoderFileSystemExporterConfig
 {
     mEncoderConfigEditor->setParent(this);
 
-    auto* layout = new QHBoxLayout(this);
+    auto* const layout = new QHBoxLayout(this);
     layout->setSpacing(0);
     layout->addWidget(mEncoderConfigEditor);
 }

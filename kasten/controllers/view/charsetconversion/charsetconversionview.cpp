@@ -39,12 +39,12 @@ CharsetConversionView::CharsetConversionView(CharsetConversionTool* tool,
     , mTool(tool)
     , m_userMessagesHandler(userMessagseHandler)
 {
-    auto* baseLayout = new QVBoxLayout(this);
+    auto* const baseLayout = new QVBoxLayout(this);
     baseLayout->setContentsMargins(0, 0, 0, 0);
     baseLayout->setSpacing(0);
 
     // source/target charset
-    auto* directionCharsetToolBar = new QToolBar(this);
+    auto* const directionCharsetToolBar = new QToolBar(this);
 
     mDirectionComboBox = new KComboBox(this);
     const QStringList directionList {
@@ -92,9 +92,9 @@ CharsetConversionView::CharsetConversionView(CharsetConversionTool* tool,
     baseLayout->addWidget(directionCharsetToolBar);
 
     // settings
-    auto* settingsBox = new QGroupBox(this);
+    auto* const settingsBox = new QGroupBox(this);
 
-    auto* settingsLayout = new QFormLayout();
+    auto* const settingsLayout = new QFormLayout();
 
     const QString substituteMissingCharLabelText =
         i18nc("@option:check substitute bytes whose char is not part of the target charset",
@@ -158,10 +158,10 @@ CharsetConversionView::CharsetConversionView(CharsetConversionTool* tool,
     baseLayout->addWidget(settingsBox);
 
     // action
-    auto* actionToolBar = new QToolBar(this);
+    auto* const actionToolBar = new QToolBar(this);
     actionToolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
 
-    auto* stretcher = new QWidget(this);
+    auto* const stretcher = new QWidget(this);
     stretcher->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     actionToolBar->addWidget(stretcher);
 

@@ -36,14 +36,14 @@ static constexpr int DefaultZoomSliderZoomInLevelsSize = 50;
 ZoomSlider::ZoomSlider(QWidget* parent)
     : QWidget(parent)
 {
-    auto* zoomNormalButton = new QToolButton(this);
+    auto* const zoomNormalButton = new QToolButton(this);
     m_zoomNormalAction = KStandardAction::actualSize(this, &ZoomSlider::zoomNormal, this);
     m_zoomNormalAction->setShortcut(QKeySequence()); // unset shortcut, here no integration into main menu
     m_zoomNormalAction->setEnabled(false);
     zoomNormalButton->setDefaultAction(m_zoomNormalAction);
     zoomNormalButton->setAutoRaise(true);
 
-    auto* zoomOutButton = new QToolButton(this);
+    auto* const zoomOutButton = new QToolButton(this);
     m_zoomOutAction = KStandardAction::zoomOut(this, &ZoomSlider::zoomOut, this);
     m_zoomOutAction->setShortcut(QKeySequence()); // unset shortcut, here no integration into main menu
     m_zoomOutAction->setEnabled(false);
@@ -56,14 +56,14 @@ ZoomSlider::ZoomSlider(QWidget* parent)
     mSlider->setPageStep(5);   // mZoomControl->zoomLevelPageStep()?
     mSlider->setEnabled(false);
 
-    auto* zoomInButton = new QToolButton(this);
+    auto* const zoomInButton = new QToolButton(this);
     m_zoomInAction = KStandardAction::zoomIn(this, &ZoomSlider::zoomIn,  this);
     m_zoomInAction->setShortcut(QKeySequence()); // unset shortcut, here no integration into main menu
     m_zoomInAction->setEnabled(false);
     zoomInButton->setDefaultAction(m_zoomInAction);
     zoomInButton->setAutoRaise(true);
 
-    auto* layout = new QHBoxLayout(this);
+    auto* const layout = new QHBoxLayout(this);
     layout->setSpacing(0);
     layout->setContentsMargins(0, 0, 0, 0);
     layout->addWidget(zoomNormalButton);

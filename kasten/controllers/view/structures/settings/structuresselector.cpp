@@ -21,7 +21,7 @@
 StructuresSelector::StructuresSelector(QWidget* parent)
     : QWidget(parent)
 {
-    auto* layout = new QVBoxLayout(this);
+    auto* const layout = new QVBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
 
     // data models

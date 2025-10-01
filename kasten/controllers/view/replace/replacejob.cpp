@@ -97,8 +97,8 @@ void ReplaceJob::searchNextPosition()
 
     const Okteta::Address endIndex = isForward ? m_currentReplaceRangeEndIndex : m_currentReplaceRangeStartIndex;
 
-    auto* searchJob = new ByteArraySearchJob(m_byteArrayModel, m_searchData, m_currentIndex, endIndex,
-                                             m_caseSensitivity, m_byteArrayView->charCodingName());
+    auto* const searchJob = new ByteArraySearchJob(m_byteArrayModel, m_searchData, m_currentIndex, endIndex,
+                                                   m_caseSensitivity, m_byteArrayView->charCodingName());
     // Qt::QueuedConnection to ensure passing the event loop, so we do not recursively fill the callstack
     // as any async calls (query user, search) could fire signal while being invoked
     // TODO: optimize for non-user-querying with loop variant

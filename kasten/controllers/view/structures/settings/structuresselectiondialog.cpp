@@ -25,11 +25,11 @@ StructuresSelectionDialog::StructuresSelectionDialog(const std::map<QString, std
 
     setWindowTitle(i18nc("@title:window", "Advanced Structures Selection"));
 
-    auto* layout = new QVBoxLayout;
+    auto* const layout = new QVBoxLayout;
 
     m_structureAddRemoveWidget = new StructureAddRemoveWidget(structureDefs, enabledList, this);
 
-    auto* dialogButtonBox = new QDialogButtonBox;
+    auto* const dialogButtonBox = new QDialogButtonBox;
     dialogButtonBox->addButton(QDialogButtonBox::Ok);
     connect(dialogButtonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
     dialogButtonBox->addButton(QDialogButtonBox::Cancel);

@@ -55,7 +55,7 @@ QString UIntDataInformationMethods<T>::staticValueString(T value, int base)
 template <typename T>
 inline QWidget* UIntDataInformationMethods<T>::staticCreateEditWidget(QWidget* parent)
 {
-    auto* ret = new Okteta::UIntSpinBox(parent, Kasten::StructureViewPreferences::unsignedDisplayBase());
+    auto* const ret = new Okteta::UIntSpinBox(parent, Kasten::StructureViewPreferences::unsignedDisplayBase());
     ret->setMaximum(std::numeric_limits<T>::max());
     return ret;
 }

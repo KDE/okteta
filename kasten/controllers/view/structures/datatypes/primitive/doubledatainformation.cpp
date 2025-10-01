@@ -19,7 +19,7 @@
 
 QWidget* DoubleDataInformationMethods::staticCreateEditWidget(QWidget* parent)
 {
-    auto* ret = new Okteta::Float64Editor(parent);
+    auto* const ret = new Okteta::Float64Editor(parent);
     return ret;
 }
 

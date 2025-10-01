@@ -34,7 +34,7 @@ void ByteArrayComboBoxPrivate::init()
 {
     Q_Q(ByteArrayComboBox);
 
-    auto* baseLayout = new QHBoxLayout(q);
+    auto* const baseLayout = new QHBoxLayout(q);
     baseLayout->setContentsMargins(0, 0, 0, 0);
     baseLayout->setSpacing(0);
 

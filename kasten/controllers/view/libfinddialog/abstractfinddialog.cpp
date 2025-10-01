@@ -23,12 +23,12 @@ AbstractFindDialog::AbstractFindDialog(QWidget* parent)
     : QDialog(parent)
 {
     // main widget
-    auto* mainWidget = new QWidget;
+    auto* const mainWidget = new QWidget;
     MainWidgetLayout = new QVBoxLayout(mainWidget);
     MainWidgetLayout->setContentsMargins(0, 0, 0, 0);
 
     // dialog buttons
-    auto* dialogButtonBox = new QDialogButtonBox;
+    auto* const dialogButtonBox = new QDialogButtonBox;
     FindButton = new QPushButton;
     dialogButtonBox->addButton(FindButton, QDialogButtonBox::AcceptRole);
     connect(dialogButtonBox, &QDialogButtonBox::accepted, this, &AbstractFindDialog::forwardFindButtonClicked);
@@ -36,7 +36,7 @@ AbstractFindDialog::AbstractFindDialog(QWidget* parent)
     connect(dialogButtonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
     // main layout
-    auto* layout = new QVBoxLayout;
+    auto* const layout = new QVBoxLayout;
     layout->addWidget(mainWidget);
     layout->addStretch();
     layout->addWidget(dialogButtonBox);
@@ -66,10 +66,10 @@ void AbstractFindDialog::setFindButtonEnabled(bool enabled)
 void AbstractFindDialog::setupFindBox()
 {
     // find term
-    auto* findBox = new QGroupBox(i18nc("@title:window", "Find"));
+    auto* const findBox = new QGroupBox(i18nc("@title:window", "Find"));
     MainWidgetLayout->addWidget(findBox);
 
-    auto* findBoxLayout = new QVBoxLayout;
+    auto* const findBoxLayout = new QVBoxLayout;
 
     SearchDataEdit = new Okteta::ByteArrayComboBox(findBox);
     connect(SearchDataEdit, &Okteta::ByteArrayComboBox::byteArrayChanged,
@@ -96,10 +96,10 @@ void AbstractFindDialog::setupOperationBox(QGroupBox* operationBox)
 void AbstractFindDialog::setupCheckBoxes(QCheckBox* optionCheckBox)
 {
     // options
-    auto* optionsBox = new QGroupBox(i18nc("@title:group", "Options"));
+    auto* const optionsBox = new QGroupBox(i18nc("@title:group", "Options"));
     MainWidgetLayout->addWidget(optionsBox);
 
-    auto* optionsBoxLayout = new QGridLayout(optionsBox);
+    auto* const optionsBoxLayout = new QGridLayout(optionsBox);
 
     CaseSensitiveCheckBox = new QCheckBox(i18nc("@option:check", "C&ase sensitive"), optionsBox);
     CaseSensitiveCheckBox->setWhatsThis(i18nc("@info:whatsthis", "Perform a case sensitive search: "

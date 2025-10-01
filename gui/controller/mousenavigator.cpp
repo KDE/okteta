@@ -312,7 +312,7 @@ void MouseNavigator::startDrag()
     }
 
     // QDrag instance owned by Qt, gets deleted internally by deleteLater after exec() call
-    auto* drag = new QDrag(mView->q_func());
+    auto* const drag = new QDrag(mView->q_func());
     drag->setMimeData(dragData.release());
 
     Qt::DropActions request = (mView->isEffectiveReadOnly() || mView->isOverwriteMode()) ? Qt::CopyAction : Qt::CopyAction | Qt::MoveAction;

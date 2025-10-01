@@ -19,7 +19,7 @@ const char Crc64ByteArrayChecksumParameterSetEdit::Id[] = "Crc64";
 Crc64ByteArrayChecksumParameterSetEdit::Crc64ByteArrayChecksumParameterSetEdit(QWidget* parent)
     : AbstractByteArrayChecksumParameterSetEdit(parent)
 {
-    auto* baseLayout = new QFormLayout(this);
+    auto* const baseLayout = new QFormLayout(this);
     baseLayout->setContentsMargins(0, 0, 0, 0);
 
     mVariantComboBox = new KComboBox(this);

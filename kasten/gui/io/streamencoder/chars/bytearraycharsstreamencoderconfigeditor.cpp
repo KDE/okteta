@@ -23,7 +23,7 @@ ByteArrayCharsStreamEncoderConfigEditor::ByteArrayCharsStreamEncoderConfigEditor
 {
     m_settings = m_encoder->settings();
 
-    auto* pageLayout = new QFormLayout(this);   // unknown rows
+    auto* const pageLayout = new QFormLayout(this);   // unknown rows
     pageLayout->setContentsMargins(0, 0, 0, 0);
 
     // m_escapeNonprintableSelect mode

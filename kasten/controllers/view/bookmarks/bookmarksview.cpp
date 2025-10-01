@@ -36,7 +36,7 @@ BookmarksView::BookmarksView(BookmarksTool* tool, QWidget* parent)
     connect(mBookmarkListModel, &BookmarkListModel::modelReset,
             this, &BookmarksView::onBookmarkSelectionChanged);
 
-    auto* baseLayout = new QVBoxLayout(this);
+    auto* const baseLayout = new QVBoxLayout(this);
     baseLayout->setContentsMargins(0, 0, 0, 0);
     baseLayout->setSpacing(0);
 
@@ -69,7 +69,7 @@ BookmarksView::BookmarksView(BookmarksTool* tool, QWidget* parent)
     m_emptyListOverlayLabel->setAlignment(Qt::AlignCenter);
     m_emptyListOverlayLabel->setVisible(mTool->isBookmarkListEmpty());
     m_emptyListOverlayLabel->setContextMenuPolicy(Qt::NoContextMenu);
-    auto* centeringLayout = new QVBoxLayout(bookmarkListViewViewPort);
+    auto* const centeringLayout = new QVBoxLayout(bookmarkListViewViewPort);
     centeringLayout->addWidget(m_emptyListOverlayLabel);
     centeringLayout->setAlignment(m_emptyListOverlayLabel, Qt::AlignCenter);
     connect(mTool, &BookmarksTool::hasBookmarksChanged,
@@ -82,7 +82,7 @@ BookmarksView::BookmarksView(BookmarksTool* tool, QWidget* parent)
     baseLayout->addWidget(mBookmarkListView, 10);
 
     // actions TODO: make this view work like the filebrowser, with actions on top?
-    auto* actionsToolBar = new QToolBar(this);
+    auto* const actionsToolBar = new QToolBar(this);
 
     mCreateBookmarkAction = new QAction(QIcon::fromTheme(QStringLiteral("bookmark-new")),
                                         i18nc("@action", "Create New"), this);
@@ -109,7 +109,7 @@ BookmarksView::BookmarksView(BookmarksTool* tool, QWidget* parent)
             this, &BookmarksView::onDeleteBookmarkButtonClicked);
     actionsToolBar->addAction(mDeleteBookmarksAction);
 
-    auto* stretcher = new QWidget(this);
+    auto* const stretcher = new QWidget(this);
     stretcher->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     actionsToolBar->addWidget(stretcher);
 
@@ -165,7 +165,7 @@ void BookmarksView::onBookmarkDoubleClicked(const QModelIndex& index)
 
 void BookmarksView::onCustomContextMenuRequested(QPoint pos)
 {
-    auto* menu = new QMenu(this);
+    auto* const menu = new QMenu(this);
     menu->setAttribute(Qt::WA_DeleteOnClose);
 
     const QModelIndex index = mBookmarkListView->indexAt(pos);

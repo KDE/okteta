@@ -197,7 +197,7 @@ void TestDocumentFileSynchronizerFactoryTest::testConnectToFile()
     const QString filePath2 = mFileSystem->createFilePath(QLatin1String(TestFileName2));
     const QUrl fileUrl2 = QUrl::fromLocalFile(QString(filePath2));
 
-    auto* testDocument = new Kasten::TestDocument();
+    auto* const testDocument = new Kasten::TestDocument();
     auto document = std::unique_ptr<Kasten::AbstractDocument>(testDocument);
     testDocument->setData(otherData);
 

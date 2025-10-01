@@ -43,12 +43,12 @@ QWidget* BoolBitfieldDataInformation::createEditWidget(QWidget* parent) const
 {
     if (width() == 1) {
         // just a simple combobox
-        auto* box = new KComboBox(false, parent);
+        auto* const box = new KComboBox(false, parent);
         box->addItem(i18nc("boolean value", "false"));
         box->addItem(i18nc("boolean value", "true"));
         return box;
     }
-    auto* ret = new Okteta::UIntSpinBox(parent);
+    auto* const ret = new Okteta::UIntSpinBox(parent);
     ret->setBase(Kasten::StructureViewPreferences::unsignedDisplayBase());
     ret->setMaximum(mask());
     return ret;

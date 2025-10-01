@@ -172,7 +172,7 @@ void BookmarksController::updateBookmarks()
             // = KStringHandler::rsqueeze( view->title(), MaxEntryLength );
             ++b;
         }
-        auto* action = new QAction(title, mBookmarksActionGroup);
+        auto* const action = new QAction(title, mBookmarksActionGroup);
 
         action->setData(bookmark.offset());
         mBookmarksActionGroup->addAction(action);

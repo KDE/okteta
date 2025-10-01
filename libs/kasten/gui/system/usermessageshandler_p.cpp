@@ -80,11 +80,11 @@ void UserMessagesHandlerPrivate::enqueueErrorReport(AbstractModel* model,
 
 QString UserMessagesHandlerPrivate::executeQuery(std::unique_ptr<UserQuery>&& userQuery)
 {
-    auto* dialog = new QDialog(m_widget);
+    auto* const dialog = new QDialog(m_widget);
     dialog->setWindowTitle(userQuery->title());
     dialog->setModal(true);
 
-    auto* buttonBox = new QDialogButtonBox(dialog);
+    auto* const buttonBox = new QDialogButtonBox(dialog);
 
     UserResponseOption* primaryResponseOption = nullptr;
     UserResponseOption* secondaryResponseOption = nullptr;

@@ -53,7 +53,7 @@ void LoaderController::setTargetModel(AbstractModel* model)
 
 void LoaderController::load()
 {
-    auto* dialog = new QFileDialog(QApplication::activeWindow());
+    auto* const dialog = new QFileDialog(QApplication::activeWindow());
     dialog->setAttribute(Qt::WA_DeleteOnClose, true);
     dialog->setFileMode(QFileDialog::ExistingFiles);
     dialog->setMimeTypeFilters(mDocumentStrategy->supportedRemoteTypes());

@@ -204,7 +204,7 @@ void ViewConfigController::setOffsetCoding(int offsetCoding)
 
 void ViewConfigController::showBytesPerLineDialog()
 {
-    auto* dialog = new BytesPerLineDialog(QApplication::activeWindow());
+    auto* const dialog = new BytesPerLineDialog(QApplication::activeWindow());
     dialog->setBytesPerLine(mByteArrayView->noOfBytesPerLine());
     connect(dialog, &BytesPerLineDialog::bytesPerLineAccepted,
             this, &ViewConfigController::setBytesPerLine);
@@ -221,7 +221,7 @@ void ViewConfigController::setBytesPerLine(int bytesPerLine)
 
 void ViewConfigController::showBytesPerGroupDialog()
 {
-    auto* dialog = new BytesPerGroupDialog(QApplication::activeWindow());
+    auto* const dialog = new BytesPerGroupDialog(QApplication::activeWindow());
     dialog->setGroupedBytesCount(mByteArrayView->noOfGroupedBytes());
     connect(dialog, &BytesPerGroupDialog::bytesPerGroupAccepted,
             this, &ViewConfigController::setBytesPerGroup);

@@ -21,7 +21,7 @@ const char RotateByteArrayFilterParameterSetEdit::Id[] = "Rotate";
 RotateByteArrayFilterParameterSetEdit::RotateByteArrayFilterParameterSetEdit(QWidget* parent)
     : AbstractByteArrayFilterParameterSetEdit(parent)
 {
-    auto* baseLayout = new QFormLayout(this);
+    auto* const baseLayout = new QFormLayout(this);
     baseLayout->setContentsMargins(0, 0, 0, 0);
 
     mGroupSizeEdit = new QSpinBox(this);

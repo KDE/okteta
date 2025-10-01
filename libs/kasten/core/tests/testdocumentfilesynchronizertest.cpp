@@ -71,7 +71,7 @@ void TestDocumentFileSynchronizerTest::checkFileContent(const QUrl& fileUrl, con
                                                         const QByteArray& header)
 {
     auto synchronizer = std::make_unique<Kasten::TestDocumentFileSynchronizer>(header);
-    auto* loadJob = new Kasten::TestDocumentFileLoadJob(std::move(synchronizer), fileUrl);
+    auto* const loadJob = new Kasten::TestDocumentFileLoadJob(std::move(synchronizer), fileUrl);
 
     const bool loadSuccess = loadJob->exec();
     QVERIFY(loadSuccess);
@@ -91,7 +91,7 @@ void TestDocumentFileSynchronizerTest::testLoadSaveFile()
     const QUrl fileUrl = QUrl::fromLocalFile(mFileSystem->createFilePath(QLatin1String(TestFileName1)));
 
     auto synchronizer = std::make_unique<Kasten::TestDocumentFileSynchronizer>();
-    auto* loadJob = new Kasten::TestDocumentFileLoadJob(std::move(synchronizer), fileUrl);
+    auto* const loadJob = new Kasten::TestDocumentFileLoadJob(std::move(synchronizer), fileUrl);
     const bool loadSuccess = loadJob->exec();
     QVERIFY(loadSuccess);
     auto document = loadJob->releaseDocument();
@@ -115,7 +115,7 @@ void TestDocumentFileSynchronizerTest::testLoadReloadFile()
     const QUrl fileUrl = QUrl::fromLocalFile(QString(filePath));
 
     auto synchronizer = std::make_unique<Kasten::TestDocumentFileSynchronizer>();
-    auto* loadJob = new Kasten::TestDocumentFileLoadJob(std::move(synchronizer), fileUrl);
+    auto* const loadJob = new Kasten::TestDocumentFileLoadJob(std::move(synchronizer), fileUrl);
     const bool loadSuccess = loadJob->exec();
     QVERIFY(loadSuccess);
     auto document = loadJob->releaseDocument();
@@ -143,7 +143,7 @@ void TestDocumentFileSynchronizerTest::testChangeFile()
 
     // load from 1
     auto synchronizer = std::make_unique<Kasten::TestDocumentFileSynchronizer>();
-    auto* loadJob = new Kasten::TestDocumentFileLoadJob(std::move(synchronizer), fileUrl1);
+    auto* const loadJob = new Kasten::TestDocumentFileLoadJob(std::move(synchronizer), fileUrl1);
     const bool loadSuccess = loadJob->exec();
     QVERIFY(loadSuccess);
     auto document = loadJob->releaseDocument();
@@ -168,7 +168,7 @@ void TestDocumentFileSynchronizerTest::testHeader()
 // TODO: failing calls in AbstractDocumentFileSystemSynchronizer trigger GUI here, so far it worked ;)
 #if 0
     // try to load false header
-    auto* synchronizer = new Kasten::TestDocumentFileSynchronizer(fileUrl, header);
+    auto* const synchronizer = new Kasten::TestDocumentFileSynchronizer(fileUrl, header);
     Kasten::AbstractDocument* document = synchronizer->document();
     QVERIFY(document == 0);
     delete synchronizer;

@@ -25,7 +25,7 @@ TerminalView::TerminalView(TerminalTool* tool, QWidget* parent)
     : QWidget(parent)
     , mTool(tool)
 {
-    auto* layout = new QVBoxLayout(this);
+    auto* const layout = new QVBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
 
     connect(mTool, &TerminalTool::currentUrlChanged, this, &TerminalView::onCurrentUrlChanged);

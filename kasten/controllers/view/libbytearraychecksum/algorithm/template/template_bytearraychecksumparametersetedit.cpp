@@ -38,7 +38,7 @@ Template_ByteArrayChecksumParameterSetEdit::Template_ByteArrayChecksumParameterS
 //// setup the widget with all edit fields needed for the parameter set
 //// if there can be invalid states connect the change signals of the edit fields to some slots
 //// where you check if the validity changed
-    auto* baseLayout = new QFormLayout(this);
+    auto* const baseLayout = new QFormLayout(this);
     // margin is provided by the container for this widget
     baseLayout->setContentsMargins(0, 0, 0, 0);
 

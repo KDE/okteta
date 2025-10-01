@@ -40,10 +40,10 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(const std::map<QString, std::
                                                    QWidget* parent)
     : QWidget(parent)
 {
-    auto* baseLayout = new QHBoxLayout();
+    auto* const baseLayout = new QHBoxLayout();
     baseLayout->setContentsMargins(0, 0, 0, 0);
 
-    auto* tree1Layout = new QVBoxLayout();
+    auto* const tree1Layout = new QVBoxLayout();
     mTree1Label = new QLabel(i18nc("@info:label", "Installed structures:"), this);
     tree1Layout->addWidget(mTree1Label);
     mTreeAvailable = new QTreeWidget(this);
@@ -53,7 +53,7 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(const std::map<QString, std::
     mTreeAvailable->setColumnHidden(1, true);
     tree1Layout->addWidget(mTreeAvailable);
 
-    auto* tree2Layout = new QVBoxLayout();
+    auto* const tree2Layout = new QVBoxLayout();
     mTree2Label = new QLabel(i18nc("@info:label", "Used structures:"), this);
     tree2Layout->addWidget(mTree2Label);
     mTreeSelected = new QTreeWidget(this);
@@ -63,7 +63,7 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(const std::map<QString, std::
     mTreeSelected->setColumnHidden(1, true);
     tree2Layout->addWidget(mTreeSelected);
 
-    auto* leftRightLayout = new QVBoxLayout();
+    auto* const leftRightLayout = new QVBoxLayout();
     leftRightLayout->addStretch();
     mRightButton = new QPushButton(QIcon::fromTheme(QStringLiteral("arrow-right")), QString(), this);
     leftRightLayout->addWidget(mRightButton);
@@ -71,7 +71,7 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(const std::map<QString, std::
     leftRightLayout->addWidget(mLeftButton);
     leftRightLayout->addStretch();
 
-    auto* upDownLayout = new QVBoxLayout();
+    auto* const upDownLayout = new QVBoxLayout();
     upDownLayout->addStretch();
     mUpButton = new QPushButton(QIcon::fromTheme(QStringLiteral("arrow-up")), QString(), this);
     upDownLayout->addWidget(mUpButton);
@@ -144,10 +144,10 @@ void StructureAddRemoveWidget::buildAvailableList(const std::map<QString, std::u
         if (!enabledList.isEnabled(id)) {
            continue;
         }
-        auto* item = new QTreeWidgetItem(mTreeAvailable, QStringList { def->metaData().id(), id });
+        auto* const item = new QTreeWidgetItem(mTreeAvailable, QStringList { def->metaData().id(), id });
         const auto structureNames = def->structureNames();
         for (const QString& name : structureNames) {
-            auto* subItem = new QTreeWidgetItem(item, QStringList { name, id });
+            auto* const subItem = new QTreeWidgetItem(item, QStringList { name, id });
             item->addChild(subItem);
         }
 
@@ -161,7 +161,7 @@ void StructureAddRemoveWidget::buildAvailableList(const std::map<QString, std::u
 void StructureAddRemoveWidget::appendEnabledStructureItem(const QString& id, const QString& structure,
                                                           bool isOnlyOne)
 {
-    auto* item = new QTreeWidgetItem(mTreeSelected, QStringList { structure, id });
+    auto* const item = new QTreeWidgetItem(mTreeSelected, QStringList { structure, id });
     item->setData(OnlyOneRowColumn, ::OnlyOneRole, isOnlyOne);
     mTreeSelected->addTopLevelItem(item);
 }

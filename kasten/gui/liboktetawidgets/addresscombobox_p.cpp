@@ -37,7 +37,7 @@ void AddressComboBoxPrivate::init()
 {
     Q_Q(AddressComboBox);
 
-    auto* baseLayout = new QHBoxLayout(q);
+    auto* const baseLayout = new QHBoxLayout(q);
     baseLayout->setContentsMargins(0, 0, 0, 0);
     baseLayout->setSpacing(0);
 

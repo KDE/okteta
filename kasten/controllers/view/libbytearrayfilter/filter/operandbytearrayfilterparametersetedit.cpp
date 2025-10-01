@@ -21,7 +21,7 @@ const char OperandByteArrayFilterParameterSetEdit::Id[] = "Operand";
 OperandByteArrayFilterParameterSetEdit::OperandByteArrayFilterParameterSetEdit(QWidget* parent)
     : AbstractByteArrayFilterParameterSetEdit(parent)
 {
-    auto* baseLayout = new QFormLayout(this);
+    auto* const baseLayout = new QFormLayout(this);
     baseLayout->setContentsMargins(0, 0, 0, 0);
 
     const QString operandLabelText =

@@ -24,7 +24,7 @@ ByteArrayGZipStreamCompressorConfigEditor::ByteArrayGZipStreamCompressorConfigEd
 {
     m_settings = m_encoder->settings();
 
-    auto* pageLayout = new QFormLayout(this);
+    auto* const pageLayout = new QFormLayout(this);
     pageLayout->setContentsMargins(0, 0, 0, 0);
 
     // compression level
@@ -64,7 +64,7 @@ ByteArrayGZipStreamCompressorConfigEditor::ByteArrayGZipStreamCompressorConfigEd
     // file name
     const QString fileNameLabel = i18nc("@label:textbox", "File name:");
 
-    auto* iso8859_1StringValidator = new Okteta::Iso8859_1StringValidator(this);
+    auto* const iso8859_1StringValidator = new Okteta::Iso8859_1StringValidator(this);
     m_fileNameEdit = new QLineEdit(this);
     m_fileNameEdit->setClearButtonEnabled(true);
     m_fileNameEdit->setText(m_settings.fileName);

@@ -34,18 +34,18 @@ FilterView::FilterView(FilterTool* tool, QWidget* parent)
     : AbstractToolWidget(parent)
     , mTool(tool)
 {
-    auto* baseLayout = new QVBoxLayout(this);
+    auto* const baseLayout = new QVBoxLayout(this);
     baseLayout->setContentsMargins(0, 0, 0, 0);
     baseLayout->setSpacing(0);
 
     // filter selection
-    auto* filterSelectionToolBar = new QToolBar(this);
-    auto* label = new QLabel(i18nc("@label:listbox operation to use by the filter", "Operation:"), this);
+    auto* const filterSelectionToolBar = new QToolBar(this);
+    auto* const label = new QLabel(i18nc("@label:listbox operation to use by the filter", "Operation:"), this);
     mOperationComboBox = new KComboBox(this);
     connect(mOperationComboBox, qOverload<int>(&KComboBox::activated),
             mTool, &FilterTool::setFilter);
 
-    auto* labelledAlgorithmComboBox = new LabelledToolBarWidget(label, mOperationComboBox, this);
+    auto* const labelledAlgorithmComboBox = new LabelledToolBarWidget(label, mOperationComboBox, this);
     const QString operationToolTip =
         i18nc("@info:tooltip", "The operation to use for the filter.");
     label->setToolTip(operationToolTip);
@@ -59,10 +59,10 @@ FilterView::FilterView(FilterTool* tool, QWidget* parent)
     filterSelectionToolBar->addWidget(labelledAlgorithmComboBox);
     baseLayout->addWidget(filterSelectionToolBar);
 
-    auto* parameterSetBox = new QGroupBox(this);
+    auto* const parameterSetBox = new QGroupBox(this);
     baseLayout->addWidget(parameterSetBox);
 
-    auto* parameterSetLayout = new QVBoxLayout;
+    auto* const parameterSetLayout = new QVBoxLayout;
 
     parameterSetBox->setLayout(parameterSetLayout);
 
@@ -71,10 +71,10 @@ FilterView::FilterView(FilterTool* tool, QWidget* parent)
     parameterSetLayout->addWidget(mParameterSetEditStack);
 
     // filter button
-    auto* actionToolBar = new QToolBar(this);
+    auto* const actionToolBar = new QToolBar(this);
     actionToolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
 
-    auto* stretcher = new QWidget(this);
+    auto* const stretcher = new QWidget(this);
     stretcher->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     actionToolBar->addWidget(stretcher);
 

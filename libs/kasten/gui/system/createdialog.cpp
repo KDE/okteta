@@ -33,15 +33,15 @@ CreateDialog::CreateDialog(std::unique_ptr<AbstractModelDataGeneratorConfigEdito
     setWindowTitle(i18nc("@title:window", "Create"));
 
     // editor
-    auto* editorLabel = new QLabel(mConfigEditor->name());
+    auto* const editorLabel = new QLabel(mConfigEditor->name());
     QFont font = editorLabel->font();
     font.setBold(true);
     editorLabel->setFont(font);
 
     // dialog buttons
-    auto* dialogButtonBox = new QDialogButtonBox;
-    auto* createButton = new QPushButton(QIcon::fromTheme(QStringLiteral("document-new")),
-                                         i18nc("@action:button create the new document", "&Create"));
+    auto* const dialogButtonBox = new QDialogButtonBox;
+    auto* const createButton = new QPushButton(QIcon::fromTheme(QStringLiteral("document-new")),
+                                               i18nc("@action:button create the new document", "&Create"));
     createButton->setToolTip(i18nc("@info:tooltip",
                                    "Create a new document with the generated data."));
     createButton->setWhatsThis(xi18nc("@info:whatsthis",
@@ -59,7 +59,7 @@ CreateDialog::CreateDialog(std::unique_ptr<AbstractModelDataGeneratorConfigEdito
             createButton, &QWidget::setEnabled);
 
     // main layout
-    auto* layout = new QVBoxLayout;
+    auto* const layout = new QVBoxLayout;
     layout->addWidget(editorLabel);
     layout->addWidget(mConfigEditor);
     layout->addStretch();

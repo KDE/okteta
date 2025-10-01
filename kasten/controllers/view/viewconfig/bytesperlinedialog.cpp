@@ -23,7 +23,7 @@ BytesPerLineDialog::BytesPerLineDialog(QWidget* parent)
 {
     setAttribute(Qt::WA_DeleteOnClose, true);
 
-    auto* pageLayout = new QFormLayout();
+    auto* const pageLayout = new QFormLayout();
 
     mBytesPerLineEdit = new QSpinBox(this);
     mBytesPerLineEdit->setRange(1, std::numeric_limits<int>::max());
@@ -32,12 +32,12 @@ BytesPerLineDialog::BytesPerLineDialog(QWidget* parent)
               "Bytes per Line:");
     pageLayout->addRow(bytesPerLineLabel, mBytesPerLineEdit);
 
-    auto* dialogButtonBox = new QDialogButtonBox;
+    auto* const dialogButtonBox = new QDialogButtonBox;
     dialogButtonBox->setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
     connect(dialogButtonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
     connect(dialogButtonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
-    auto* layout = new QVBoxLayout;
+    auto* const layout = new QVBoxLayout;
 
     layout->addLayout(pageLayout);
     layout->addWidget(dialogButtonBox);

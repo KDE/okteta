@@ -20,7 +20,7 @@ Float32Editor::Float32Editor(QWidget* parent)
     const float floatHighest = std::numeric_limits<float>::max();
     const float floatLowest = std::numeric_limits<float>::lowest();
 
-    auto* validator = new QDoubleValidator(this);
+    auto* const validator = new QDoubleValidator(this);
     validator->setLocale(QLocale::c()); // for consistency with other podtable editors
     validator->setNotation(QDoubleValidator::ScientificNotation);
     validator->setRange(floatLowest, floatHighest, 1000); // 1000 also being default in Qt5

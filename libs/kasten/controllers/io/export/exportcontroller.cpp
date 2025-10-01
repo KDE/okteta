@@ -81,13 +81,13 @@ void ExportController::updateActions()
     if (hasExporters) {
         for (auto* exporter : exporterList) {
             const QString title = exporter->remoteTypeName();
-            auto* action = new QAction(title, mExportSelectAction);
+            auto* const action = new QAction(title, mExportSelectAction);
 
             action->setData(QVariant::fromValue(exporter));
             mExportSelectAction->addAction(action);
         }
     } else {
-        auto* noneAction = new QAction(i18nc("@item There are no exporters.", "Not available."), mExportSelectAction);
+        auto* const noneAction = new QAction(i18nc("@item There are no exporters.", "Not available."), mExportSelectAction);
         noneAction->setEnabled(false);
         mExportSelectAction->addAction(noneAction);
     }
@@ -104,8 +104,8 @@ void ExportController::onActionTriggered(QAction* action)
     auto configEditor = mModelCodecViewManager->createConfigEditor(exporter);
 
     if (configEditor) {
-        auto* dialog = new ExportDialog(exporter->remoteTypeName(), std::move(configEditor), exporter,
-                                        QApplication::activeWindow());
+        auto* const dialog = new ExportDialog(exporter->remoteTypeName(), std::move(configEditor), exporter,
+                                              QApplication::activeWindow());
         dialog->setData(mModel, selection);
         connect(dialog, &ExportDialog::exportAccepted, this, &ExportController::triggerExecution);
         dialog->open();

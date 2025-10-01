@@ -1061,7 +1061,7 @@ QMenu* AbstractByteArrayViewPrivate::createStandardContextMenu(QPoint position)
 
     Q_Q(AbstractByteArrayView);
 
-    auto* menu = new QMenu(q);
+    auto* const menu = new QMenu(q);
 
     if (mUndoRedoController.addContextMenuActions(menu) > 0) {
         menu->addSeparator();

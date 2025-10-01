@@ -35,14 +35,14 @@ InfoView::InfoView(InfoTool* tool, QWidget* parent)
     : QWidget(parent)
     , mTool(tool)
 {
-    auto* baseLayout = new QVBoxLayout(this);
+    auto* const baseLayout = new QVBoxLayout(this);
     baseLayout->setContentsMargins(0, 0, 0, 0);
     baseLayout->setSpacing(0);
 
-    auto* buildToolBar = new QToolBar(this);
+    auto* const buildToolBar = new QToolBar(this);
     buildToolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
 
-    auto* label = new QLabel(i18nc("@label size of selected bytes", "Size:"), this);
+    auto* const label = new QLabel(i18nc("@label size of selected bytes", "Size:"), this);
 
     mSizeLabel = new QLabel(this);
     const QString sizeToolTip =
@@ -50,12 +50,12 @@ InfoView::InfoView(InfoTool* tool, QWidget* parent)
               "The number of the bytes the statistic was built for.");
     label->setToolTip(sizeToolTip);
     mSizeLabel->setToolTip(sizeToolTip);
-    auto* labelledSizeLabel = new LabelledToolBarWidget(label, mSizeLabel, this);
+    auto* const labelledSizeLabel = new LabelledToolBarWidget(label, mSizeLabel, this);
     buildToolBar->addWidget(labelledSizeLabel);
     connect(mTool->statisticTableModel(), &StatisticTableModel::sizeChanged,
             this, &InfoView::setByteArraySize);
 
-    auto* stretcher = new QWidget(this);
+    auto* const stretcher = new QWidget(this);
     stretcher->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     buildToolBar->addWidget(stretcher);
 
@@ -96,9 +96,9 @@ InfoView::InfoView(InfoTool* tool, QWidget* parent)
     QHeaderView* header = mStatisticTableView->header();
     header->setSectionResizeMode(QHeaderView::Interactive);
     header->setStretchLastSection(false);
-    auto* displayModel = new StatisticDisplayModel(mStatisticTableView, this);
+    auto* const displayModel = new StatisticDisplayModel(mStatisticTableView, this);
     displayModel->setSourceModel(mTool->statisticTableModel());
-    auto* proxyModel = new QSortFilterProxyModel(this);
+    auto* const proxyModel = new QSortFilterProxyModel(this);
     proxyModel->setDynamicSortFilter(true);
     proxyModel->setSortRole(StatisticTableModel::SortRole);
     proxyModel->setSourceModel(displayModel);
@@ -113,7 +113,7 @@ InfoView::InfoView(InfoTool* tool, QWidget* parent)
     baseLayout->addWidget(mStatisticTableView, 10);
 
     // actions
-    auto* actionsToolBar = new QToolBar(this);
+    auto* const actionsToolBar = new QToolBar(this);
     actionsToolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
 
     mCopyAction = new QAction(QIcon::fromTheme(QStringLiteral("edit-copy")),
@@ -128,7 +128,7 @@ InfoView::InfoView(InfoTool* tool, QWidget* parent)
 
     actionsToolBar->addAction(mCopyAction);
 
-    auto* actionsStretcher = new QWidget(this);
+    auto* const actionsStretcher = new QWidget(this);
     actionsStretcher->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     actionsToolBar->addWidget(actionsStretcher);
 
@@ -202,7 +202,7 @@ void InfoView::onCustomContextMenuRequested(QPoint pos)
         return;
     }
 
-    auto* menu = new QMenu(this);
+    auto* const menu = new QMenu(this);
     menu->setAttribute(Qt::WA_DeleteOnClose);
 
     menu->addAction(mCopyAction);

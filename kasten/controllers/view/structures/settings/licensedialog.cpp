@@ -26,19 +26,19 @@ LicenseDialog::LicenseDialog(const KAboutLicense& license, QWidget* parent)
     setAttribute(Qt::WA_DeleteOnClose);
     setWindowTitle(i18nc("@title:window", "License Agreement"));
 
-    auto* mainLayout = new QVBoxLayout(this);
+    auto* const mainLayout = new QVBoxLayout(this);
 
     const QFont font = QFontDatabase::systemFont(QFontDatabase::FixedFont);
 
     const QString licenseText = license.text();
 
-    auto* licenseBrowser = new QTextBrowser(this);
+    auto* const licenseBrowser = new QTextBrowser(this);
     licenseBrowser->setFont(font);
     licenseBrowser->setLineWrapMode(QTextEdit::NoWrap);
     licenseBrowser->setText(licenseText);
     mainLayout->addWidget(licenseBrowser);
 
-    auto* buttonBox = new QDialogButtonBox(this);
+    auto* const buttonBox = new QDialogButtonBox(this);
     buttonBox->setStandardButtons(QDialogButtonBox::Close);
     connect(buttonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
     connect(buttonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);

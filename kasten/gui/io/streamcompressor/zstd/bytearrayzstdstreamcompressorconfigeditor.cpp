@@ -21,7 +21,7 @@ ByteArrayZStdStreamCompressorConfigEditor::ByteArrayZStdStreamCompressorConfigEd
 {
     m_settings = m_encoder->settings();
 
-    auto* pageLayout = new QFormLayout(this);
+    auto* const pageLayout = new QFormLayout(this);
     pageLayout->setContentsMargins(0, 0, 0, 0);
 
     // compression level

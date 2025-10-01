@@ -77,8 +77,8 @@ OktetaPart::OktetaPart(QObject* parent,
 {
     setMetaData(metaData);
 
-    auto* widget = new QWidget();
-    auto* layout = new QVBoxLayout(widget);
+    auto* const widget = new QWidget();
+    auto* const layout = new QVBoxLayout(widget);
     layout->setContentsMargins(0, 0, 0, 0);
 
     setWidget(widget);

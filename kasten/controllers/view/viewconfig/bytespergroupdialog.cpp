@@ -23,7 +23,7 @@ BytesPerGroupDialog::BytesPerGroupDialog(QWidget* parent)
 {
     setAttribute(Qt::WA_DeleteOnClose, true);
 
-    auto* pageLayout = new QFormLayout();
+    auto* const pageLayout = new QFormLayout();
 
     mGroupedBytesCountEdit = new QSpinBox(this);
     mGroupedBytesCountEdit->setRange(0, std::numeric_limits<int>::max());
@@ -35,12 +35,12 @@ BytesPerGroupDialog::BytesPerGroupDialog(QWidget* parent)
               "Bytes per Group:");
     pageLayout->addRow(groupedBytesCountLabel, mGroupedBytesCountEdit);
 
-    auto* dialogButtonBox = new QDialogButtonBox;
+    auto* const dialogButtonBox = new QDialogButtonBox;
     dialogButtonBox->setStandardButtons(QDialogButtonBox::Ok | QDialogButtonBox::Cancel);
     connect(dialogButtonBox, &QDialogButtonBox::accepted, this, &QDialog::accept);
     connect(dialogButtonBox, &QDialogButtonBox::rejected, this, &QDialog::reject);
 
-    auto* layout = new QVBoxLayout;
+    auto* const layout = new QVBoxLayout;
 
     layout->addLayout(pageLayout);
     layout->addWidget(dialogButtonBox);

@@ -40,7 +40,7 @@ QVariant SignedBitfieldDataInformation::valueToQVariant(AllPrimitiveTypes value)
 
 QWidget* SignedBitfieldDataInformation::createEditWidget(QWidget* parent) const
 {
-    auto* ret = new Okteta::SIntSpinBox(parent);
+    auto* const ret = new Okteta::SIntSpinBox(parent);
     ret->setBase(Kasten::StructureViewPreferences::signedDisplayBase());
     ret->setRange(~mask(), mask() >> 1); // mask is unsigned, so shift will do the right thing
     return ret;

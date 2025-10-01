@@ -37,12 +37,12 @@ ExportDialog::ExportDialog(const QString& remoteTypeName,
 
     setWindowTitle(i18nc("@title:window", "Export"));
 
-    auto* splitter = new QSplitter(this);
+    auto* const splitter = new QSplitter(this);
 
     // config editor
-    auto* editorPage = new QWidget(splitter);
-    auto* editorPageLayout = new QVBoxLayout(editorPage);
-    auto* editorLabel = new QLabel(remoteTypeName);
+    auto* const editorPage = new QWidget(splitter);
+    auto* const editorPageLayout = new QVBoxLayout(editorPage);
+    auto* const editorLabel = new QLabel(remoteTypeName);
     QFont font = editorLabel->font();
     font.setBold(true);
     editorLabel->setFont(font);
@@ -57,18 +57,18 @@ ExportDialog::ExportDialog(const QString& remoteTypeName,
     mPreviewView = mConfigEditor->createPreviewView();
 
     if (mPreviewView) {
-        auto* previewBox = new QGroupBox(i18nc("@title:group", "Preview"), this);
+        auto* const previewBox = new QGroupBox(i18nc("@title:group", "Preview"), this);
         splitter->addWidget(previewBox);
 
-        auto* previewBoxLayout = new QHBoxLayout(previewBox);
+        auto* const previewBoxLayout = new QHBoxLayout(previewBox);
 
         previewBoxLayout->addWidget(mPreviewView->widget());
     }
 
     // dialog buttons
-    auto* dialogButtonBox = new QDialogButtonBox;
-    auto* exportButton = new QPushButton(QIcon::fromTheme(QStringLiteral("document-export")),
-                                         i18nc("@action:button", "&Export to File…"));
+    auto* const dialogButtonBox = new QDialogButtonBox;
+    auto* const exportButton = new QPushButton(QIcon::fromTheme(QStringLiteral("document-export")),
+                                               i18nc("@action:button", "&Export to File…"));
     exportButton->setToolTip(i18nc("@info:tooltip",
                                    "Export the selected data to a file."));
     exportButton->setWhatsThis(xi18nc("@info:whatsthis",
@@ -86,7 +86,7 @@ ExportDialog::ExportDialog(const QString& remoteTypeName,
             exportButton, &QWidget::setEnabled);
 
     // main layout
-    auto* layout = new QVBoxLayout;
+    auto* const layout = new QVBoxLayout;
     layout->addWidget(splitter, 1);
     layout->addWidget(dialogButtonBox);
 

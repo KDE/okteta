@@ -32,14 +32,14 @@ InsertDialog::InsertDialog(std::unique_ptr<AbstractModelDataGeneratorConfigEdito
     setWindowTitle(i18nc("@title:window", "Insert"));
 
     // editor
-    auto* editorLabel = new QLabel(mConfigEditor->name());
+    auto* const editorLabel = new QLabel(mConfigEditor->name());
     QFont font = editorLabel->font();
     font.setBold(true);
     editorLabel->setFont(font);
 
     // dialog buttons
-    auto* dialogButtonBox = new QDialogButtonBox;
-    auto* insertButton = new QPushButton(i18nc("@action:button", "&Insert"));
+    auto* const dialogButtonBox = new QDialogButtonBox;
+    auto* const insertButton = new QPushButton(i18nc("@action:button", "&Insert"));
     insertButton->setToolTip(i18nc("@info:tooltip",
                                    "Insert the generated data into the document."));
     insertButton->setWhatsThis(xi18nc("@info:whatsthis",
@@ -57,7 +57,7 @@ InsertDialog::InsertDialog(std::unique_ptr<AbstractModelDataGeneratorConfigEdito
             insertButton, &QWidget::setEnabled);
 
     // main layout
-    auto* layout = new QVBoxLayout;
+    auto* const layout = new QVBoxLayout;
     layout->addWidget(editorLabel);
     layout->addWidget(mConfigEditor);
     layout->addStretch();

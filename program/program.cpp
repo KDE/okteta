@@ -124,7 +124,7 @@ int OktetaProgram::execute()
     mViewManager->codecViewManager()->setStreamEncoderConfigEditorFactories(std::move(encoderConfigEditorFactoryList));
     mViewManager->codecViewManager()->setDataGeneratorConfigEditorFactories(std::move(generatorConfigEditorFactoryList));
 
-    auto* mainWindow = new OktetaMainWindow(this);
+    auto* const mainWindow = new OktetaMainWindow(this);
     m_userMessagesHandler->setWidget(mainWindow);
 
     // started by session management?

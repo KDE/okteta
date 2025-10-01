@@ -56,7 +56,7 @@ void MultiDocumentStrategyPrivate::createNewWithGenerator(AbstractModelDataGener
     auto configEditor = mViewManager->codecViewManager()->createConfigEditor(generator);
 
     if (configEditor) {
-        auto* dialog = new CreateDialog(std::move(configEditor), generator, QApplication::activeWindow());
+        auto* const dialog = new CreateDialog(std::move(configEditor), generator, QApplication::activeWindow());
 //         dialog->setData( mModel, selection ); TODO
         QObject::connect(dialog, &CreateDialog::createAccepted, q, [this](AbstractModelDataGenerator* generator) {
             triggerGeneration(generator);

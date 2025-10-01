@@ -19,7 +19,7 @@ const char ModSumByteArrayChecksumParameterSetEdit::Id[] = "ModSum";
 ModSumByteArrayChecksumParameterSetEdit::ModSumByteArrayChecksumParameterSetEdit(QWidget* parent)
     : AbstractByteArrayChecksumParameterSetEdit(parent)
 {
-    auto* baseLayout = new QFormLayout(this);
+    auto* const baseLayout = new QFormLayout(this);
     baseLayout->setContentsMargins(0, 0, 0, 0);
 
     mByteOrderComboBox = new KComboBox(this);

@@ -20,7 +20,7 @@ namespace Kasten {
 
 UiColorSchemeController::UiColorSchemeController(KXmlGuiWindow* window)
 {
-    auto* manager = new KColorSchemeManager(this);
+    auto* const manager = new KColorSchemeManager(this);
 
 #if KCONFIGWIDGETS_VERSION >= QT_VERSION_CHECK(5, 107, 0)
     KActionMenu* selectionMenu = KColorSchemeMenu::createMenu(manager, this);

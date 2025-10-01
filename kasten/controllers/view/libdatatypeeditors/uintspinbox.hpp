@@ -131,21 +131,21 @@ inline UIntSpinBox* UIntSpinBox::createUInt64Spinbox(QWidget* parent)
 
 inline UIntSpinBox* UIntSpinBox::createUInt32Spinbox(QWidget* parent)
 {
-    auto* ret = new UIntSpinBox(parent);
+    auto* const ret = new UIntSpinBox(parent);
     ret->setMaximum(std::numeric_limits<quint32>::max());
     return ret;
 }
 
 inline UIntSpinBox* UIntSpinBox::createUInt16Spinbox(QWidget* parent)
 {
-    auto* ret = new UIntSpinBox(parent);
+    auto* const ret = new UIntSpinBox(parent);
     ret->setMaximum(std::numeric_limits<quint16>::max());
     return ret;
 }
 
 inline UIntSpinBox* UIntSpinBox::createUInt8Spinbox(QWidget* parent)
 {
-    auto* ret = new UIntSpinBox(parent);
+    auto* const ret = new UIntSpinBox(parent);
     ret->setMaximum(std::numeric_limits<quint8>::max());
     return ret;
 }

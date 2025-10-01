@@ -103,11 +103,11 @@ QList<QWidget*> StructureItemDelegate::createItemWidgets(const QModelIndex& inde
 {
     Q_UNUSED(index)
 
-    auto* enabledCheckBox = new QCheckBox;
+    auto* const enabledCheckBox = new QCheckBox;
     connect(enabledCheckBox, &QAbstractButton::clicked,
             this, &StructureItemDelegate::handleCheckClicked);
 
-    auto* aboutButton = new QPushButton;
+    auto* const aboutButton = new QPushButton;
     aboutButton->setIcon(QIcon::fromTheme(QStringLiteral("dialog-information")));
     aboutButton->setToolTip(i18nc("@info:tooltip", "About"));
     connect(aboutButton, &QAbstractButton::clicked,
@@ -247,7 +247,7 @@ void StructureItemDelegate::handleAboutClicked()
     const StructureMetaData metaData =
         index.data(StructuresSelectionModel::MetaDataRole).value<StructureMetaData>();
 
-    auto* aboutDialog = new AboutStructureDialog(metaData, itemView());
+    auto* const aboutDialog = new AboutStructureDialog(metaData, itemView());
     aboutDialog->show();
 }
 

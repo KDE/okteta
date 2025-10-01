@@ -22,13 +22,13 @@ ByteArrayBZip2StreamCompressorConfigEditor::ByteArrayBZip2StreamCompressorConfig
 {
     m_settings = m_encoder->settings();
 
-    auto* pageLayout = new QFormLayout(this);
+    auto* const pageLayout = new QFormLayout(this);
     pageLayout->setContentsMargins(0, 0, 0, 0);
 
     // block size
     const QString blockSizeLabel = i18nc("@label:spinbox bzip2 ", "Block size:");
 
-    auto* blockSizeSelectLayout = new QHBoxLayout;
+    auto* const blockSizeSelectLayout = new QHBoxLayout;
     blockSizeSelectLayout->setContentsMargins(0, 0, 0, 0);
     m_blockSizeSelect = new QSlider(this);
     m_blockSizeSelect->setOrientation(Qt::Horizontal);
@@ -41,7 +41,7 @@ ByteArrayBZip2StreamCompressorConfigEditor::ByteArrayBZip2StreamCompressorConfig
             this, &ByteArrayBZip2StreamCompressorConfigEditor::onSettingsChanged);
     blockSizeSelectLayout->addWidget(m_blockSizeSelect);
 
-    auto* blockSizeValueLabel = new QLabel(this);
+    auto* const blockSizeValueLabel = new QLabel(this);
     blockSizeValueLabel->setTextInteractionFlags(Qt::TextSelectableByMouse|Qt::TextSelectableByKeyboard);
     auto updateValueLabel = [blockSizeValueLabel](int value) {
         blockSizeValueLabel->setText(i18n("%1 kB", value * 100));

@@ -27,7 +27,7 @@ CreatorController::CreatorController(ModelCodecManager* modelCodecManager,
 {
     KActionCollection* actionCollection = guiClient->actionCollection();
 
-    auto* newMenuAction =
+    auto* const newMenuAction =
         new KActionMenu(QIcon::fromTheme(QStringLiteral("document-new")),
                         i18nc("@title:menu create new byte arrays from different sources",
                               "New"),
@@ -37,7 +37,7 @@ CreatorController::CreatorController(ModelCodecManager* modelCodecManager,
     connect(newMenuAction, &QAction::triggered,
             this, &CreatorController::onNewActionTriggered);
 
-    auto* newEmptyDocumentAction =
+    auto* const newEmptyDocumentAction =
         new QAction(QIcon::fromTheme(QStringLiteral("document-new")), i18nc("@item:inmenu create a new empty document", "Empty"), this);
 //     newEmptyDocumentAction->setToolTip( factory-toolTip() );
 //         i18nc( "@info:tooltip", "Create an empty document" ) );
@@ -48,7 +48,7 @@ CreatorController::CreatorController(ModelCodecManager* modelCodecManager,
     connect(newEmptyDocumentAction, &QAction::triggered,
             this, &CreatorController::onNewActionTriggered);
 
-    auto* newFromClipboardDocumentAction =
+    auto* const newFromClipboardDocumentAction =
         new QAction(QIcon::fromTheme(QStringLiteral("edit-paste")), i18nc("@item:inmenu create a new document from data in the clipboard", "From Clipboard"), this);
     connect(newFromClipboardDocumentAction, &QAction::triggered,
             this, &CreatorController::onNewFromClipboardActionTriggered);
@@ -71,7 +71,7 @@ CreatorController::CreatorController(ModelCodecManager* modelCodecManager,
             const QString title = generator->typeName();
             const QString iconName = QStringLiteral("document-new");  // generator->iconName();
 
-            auto* action = new QAction(QIcon::fromTheme(iconName), title, this);
+            auto* const action = new QAction(QIcon::fromTheme(iconName), title, this);
             action->setData(QVariant::fromValue(generator));
             connect(action, &QAction::triggered,
                     this, &CreatorController::onNewFromGeneratorActionTriggered);

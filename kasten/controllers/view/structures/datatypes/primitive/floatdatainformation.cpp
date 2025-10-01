@@ -19,7 +19,7 @@
 
 QWidget* FloatDataInformationMethods::staticCreateEditWidget(QWidget* parent)
 {
-    auto* ret = new Okteta::Float32Editor(parent);
+    auto* const ret = new Okteta::Float32Editor(parent);
     return ret;
 }
 

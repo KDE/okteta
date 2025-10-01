@@ -40,7 +40,7 @@ void ViewProfilesManageController::setTargetModel(AbstractModel* model)
 
 void ViewProfilesManageController::manageProfiles()
 {
-    auto* dialog = new ViewProfilesManageDialog(mViewProfileManager, mParentWidget);
+    auto* const dialog = new ViewProfilesManageDialog(mViewProfileManager, mParentWidget);
     dialog->open();
 }
 

@@ -128,7 +128,7 @@ void ChecksumTool::calculateChecksum()
 
     QApplication::setOverrideCursor(Qt::WaitCursor);
 
-    auto* checksumCalculateJob =
+    auto* const checksumCalculateJob =
         new ChecksumCalculateJob(&mCheckSum, mAlgorithmList[mAlgorithmId].get(), mByteArrayModel, mByteArrayView->selection());
     checksumCalculateJob->exec();
 

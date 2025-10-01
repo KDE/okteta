@@ -68,7 +68,7 @@ QScriptValue SIntDataInformationMethods<qint64>::asScriptValue(qint64 value, QSc
 template <typename T>
 inline QWidget* SIntDataInformationMethods<T>::staticCreateEditWidget(QWidget* parent)
 {
-    auto* ret = new Okteta::SIntSpinBox(parent, Kasten::StructureViewPreferences::signedDisplayBase());
+    auto* const ret = new Okteta::SIntSpinBox(parent, Kasten::StructureViewPreferences::signedDisplayBase());
     ret->setRange(std::numeric_limits<T>::min(), std::numeric_limits<T>::max());
     return ret;
 }

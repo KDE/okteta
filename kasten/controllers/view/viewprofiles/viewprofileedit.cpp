@@ -40,11 +40,11 @@ byteArrayCodingsFlagsFromListIndex(int listIndex)
 ViewProfileEdit::ViewProfileEdit(QWidget* parent)
     : QWidget(parent)
 {
-    auto* layout = new QVBoxLayout(this);
+    auto* const layout = new QVBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
 
     // title
-    auto* titleFormLayout = new QFormLayout;
+    auto* const titleFormLayout = new QFormLayout;
     // char for non-printable bytes
     mTitleEdit = new QLineEdit(this);
     mTitleEdit->setClearButtonEnabled(true);
@@ -53,9 +53,9 @@ ViewProfileEdit::ViewProfileEdit(QWidget* parent)
     titleFormLayout->addRow(i18nc("@label:textbox", "Title:"), mTitleEdit);
 
     // display settings
-    auto* displayBox = new QGroupBox(this);
+    auto* const displayBox = new QGroupBox(this);
     displayBox->setTitle(i18nc("@title:group", "Display"));
-    auto* displayBoxFormLayout = new QFormLayout(displayBox);
+    auto* const displayBoxFormLayout = new QFormLayout(displayBox);
     // line offset shown
     mLineOffsetShownCheckBox = new QCheckBox(displayBox);
     displayBoxFormLayout->addRow(i18nc("@option:check", "Show line offset:"), mLineOffsetShownCheckBox);
@@ -90,9 +90,9 @@ ViewProfileEdit::ViewProfileEdit(QWidget* parent)
     displayBoxFormLayout->addRow(displayModeLabel, mDisplayModeComboBox);
 
     // layout settings
-    auto* layoutBox = new QGroupBox(this);
+    auto* const layoutBox = new QGroupBox(this);
     layoutBox->setTitle(i18nc("@title:group", "Layout"));
-    auto* layoutBoxFormLayout = new QFormLayout(layoutBox);
+    auto* const layoutBoxFormLayout = new QFormLayout(layoutBox);
     // line break
     mLineBreakComboBox = new KComboBox(layoutBox);
     const QStringList lineBreakList {
@@ -125,9 +125,9 @@ ViewProfileEdit::ViewProfileEdit(QWidget* parent)
     layoutBoxFormLayout->addRow(bytesPerLineLabel, mBytesPerLineEdit);
 
     // value settings
-    auto* valuesBox = new QGroupBox(this);
+    auto* const valuesBox = new QGroupBox(this);
     valuesBox->setTitle(i18nc("@title:group", "Values"));
-    auto* valuesBoxFormLayout = new QFormLayout(valuesBox);
+    auto* const valuesBoxFormLayout = new QFormLayout(valuesBox);
     // coding
     mValueCodingComboBox = new KComboBox(valuesBox);
     const QStringList valueCodingList {
@@ -144,9 +144,9 @@ ViewProfileEdit::ViewProfileEdit(QWidget* parent)
     valuesBoxFormLayout->addRow(i18nc("@label:listbox", "Coding:"), mValueCodingComboBox);
 
     // char settings
-    auto* charsBox = new QGroupBox(this);
+    auto* const charsBox = new QGroupBox(this);
     charsBox->setTitle(i18nc("@title:group", "Chars"));
-    auto* charsBoxFormLayout = new QFormLayout(charsBox);
+    auto* const charsBoxFormLayout = new QFormLayout(charsBox);
     // coding
     mCharCodingComboBox = new KComboBox(charsBox);
     mCharCodingComboBox->addItems(Okteta::CharCodec::codecNames());

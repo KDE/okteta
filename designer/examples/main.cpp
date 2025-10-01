@@ -78,7 +78,7 @@ int main(int argc, char* argv[])
 {
     QApplication programCore(argc, argv);
 
-    auto* widget = new Widget;
+    auto* const widget = new Widget;
     widget->show();
 
     return QApplication::exec();

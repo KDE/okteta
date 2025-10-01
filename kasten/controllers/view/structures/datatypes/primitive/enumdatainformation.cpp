@@ -34,7 +34,7 @@ EnumDataInformation::~EnumDataInformation() = default;
 
 QWidget* EnumDataInformation::createEditWidget(QWidget* parent) const
 {
-    auto* box = new KComboBox(false, parent);
+    auto* const box = new KComboBox(false, parent);
 
     const QMap<AllPrimitiveTypes, QString>& enumValues = mEnum->values();
 

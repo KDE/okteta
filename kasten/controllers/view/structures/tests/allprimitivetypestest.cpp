@@ -42,7 +42,7 @@ static constexpr Okteta::Byte data[9] =
 
 inline void AllPrimitiveTypesTest::initTestCase()
 {
-    auto* copy = new Okteta::Byte[sizeof(data)];
+    auto* const copy = new Okteta::Byte[sizeof(data)];
     memcpy(copy, data, sizeof(data));
     model = std::make_unique<Okteta::ByteArrayModel>(copy, sizeof(data));
     model->setAutoDelete(true);

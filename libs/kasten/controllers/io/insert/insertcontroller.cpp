@@ -84,13 +84,13 @@ void InsertController::updateActions()
     if (hasGenerators) {
         for (AbstractModelDataGenerator* generator : generatorList) {
             const QString title = generator->typeName();
-            auto* action = new QAction(title, mInsertSelectAction);
+            auto* const action = new QAction(title, mInsertSelectAction);
 
             action->setData(QVariant::fromValue(generator));
             mInsertSelectAction->addAction(action);
         }
     } else {
-        auto* noneAction = new QAction(i18nc("@item There are no generators.", "Not available."), mInsertSelectAction);
+        auto* const noneAction = new QAction(i18nc("@item There are no generators.", "Not available."), mInsertSelectAction);
         noneAction->setEnabled(false);
         mInsertSelectAction->addAction(noneAction);
     }
@@ -107,7 +107,7 @@ void InsertController::onActionTriggered(QAction* action)
     auto configEditor = mModelCodecViewManager->createConfigEditor(generator);
 
     if (configEditor) {
-        auto* dialog = new InsertDialog(std::move(configEditor), generator, QApplication::activeWindow());
+        auto* const dialog = new InsertDialog(std::move(configEditor), generator, QApplication::activeWindow());
 //         dialog->setData( mModel, selection ); TODO
         connect(dialog, &InsertDialog::insertAccepted, this, &InsertController::triggerExecution);
         dialog->open();

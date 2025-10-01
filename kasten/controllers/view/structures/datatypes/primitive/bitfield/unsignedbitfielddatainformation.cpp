@@ -39,7 +39,7 @@ QVariant UnsignedBitfieldDataInformation::valueToQVariant(AllPrimitiveTypes valu
 
 QWidget* UnsignedBitfieldDataInformation::createEditWidget(QWidget* parent) const
 {
-    auto* ret = new Okteta::UIntSpinBox(parent);
+    auto* const ret = new Okteta::UIntSpinBox(parent);
     ret->setBase(Kasten::StructureViewPreferences::unsignedDisplayBase());
     ret->setMaximum(mask());
     return ret;

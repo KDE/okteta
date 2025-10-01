@@ -76,7 +76,7 @@ QString CharDataInformationMethods::staticValueString(quint8 value)
 QWidget* CharDataInformationMethods::staticCreateEditWidget(QWidget* parent)
 {
     auto charCodec = Okteta::CharCodec::createCodec(QStringLiteral("US-ASCII"));
-    auto* editWidget = new Okteta::Char8Editor(charCodec.get(), parent);
+    auto* const editWidget = new Okteta::Char8Editor(charCodec.get(), parent);
     new CodecOwner(std::move(charCodec), editWidget);
     return editWidget;
 }

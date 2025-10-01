@@ -18,7 +18,7 @@ namespace Kasten {
 TabWidget::TabWidget(QWidget* parent)
     : QTabWidget(parent)
 {
-    auto* tabBar = new TabBar(this);
+    auto* const tabBar = new TabBar(this);
     setTabBar(tabBar);
     // slightly fragile as the relative pos of the event is not adapted, but currently not used anyway
     connect(tabBar, &TabBar::testCanDecode,

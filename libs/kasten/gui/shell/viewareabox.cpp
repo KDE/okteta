@@ -20,7 +20,7 @@ ViewAreaBox::ViewAreaBox(QWidget* centralWidget, QWidget* parent)
 {
     setFocusProxy(mCentralWidget);
 
-    auto* layout = new QVBoxLayout(this);
+    auto* const layout = new QVBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
     layout->setSpacing(0);
     if (mCentralWidget) {

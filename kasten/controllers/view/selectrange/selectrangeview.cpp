@@ -45,15 +45,15 @@ SelectRangeView::SelectRangeView(SelectRangeTool* tool, QWidget* parent)
     : AbstractToolWidget(parent)
     , mTool(tool)
 {
-    auto* baseLayout = new QHBoxLayout(this);
+    auto* const baseLayout = new QHBoxLayout(this);
     baseLayout->setContentsMargins(0, 0, 0, 0);
 
     // offsets
-    auto* offsetLayout = new QVBoxLayout();
+    auto* const offsetLayout = new QVBoxLayout();
     offsetLayout->setContentsMargins(0, 0, 0, 0);
 
     // start offset
-    auto* startOffsetLayout = new QHBoxLayout();
+    auto* const startOffsetLayout = new QHBoxLayout();
     startOffsetLayout->setContentsMargins(0, 0, 0, 0);
 
     auto* label = new QLabel(i18nc("@label:listbox", "Start offset:"), this);
@@ -73,7 +73,7 @@ SelectRangeView::SelectRangeView(SelectRangeTool* tool, QWidget* parent)
     offsetLayout->addLayout(startOffsetLayout);
 
     // end offset
-    auto* endOffsetLayout = new QHBoxLayout();
+    auto* const endOffsetLayout = new QHBoxLayout();
     endOffsetLayout->setContentsMargins(0, 0, 0, 0);
 
     label = new QLabel(i18nc("@label:listbox", "End offset:"), this);
@@ -93,7 +93,7 @@ SelectRangeView::SelectRangeView(SelectRangeTool* tool, QWidget* parent)
     baseLayout->addLayout(offsetLayout);
 
     // options
-    auto* optionsLayout = new QVBoxLayout();
+    auto* const optionsLayout = new QVBoxLayout();
     optionsLayout->setContentsMargins(0, 0, 0, 0);
 
     mBackwardsCheckBox = new QCheckBox(i18nc("@option:check", "&Backwards"), this);

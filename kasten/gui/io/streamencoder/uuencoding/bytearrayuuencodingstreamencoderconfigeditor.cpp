@@ -23,7 +23,7 @@ ByteArrayUuencodingStreamEncoderConfigEditor::ByteArrayUuencodingStreamEncoderCo
 {
     mSettings = mEncoder->settings();
 
-    auto* pageLayout = new QFormLayout(this);
+    auto* const pageLayout = new QFormLayout(this);
     pageLayout->setContentsMargins(0, 0, 0, 0);
 
     // internal file name

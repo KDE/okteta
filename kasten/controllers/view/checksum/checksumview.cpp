@@ -35,18 +35,18 @@ ChecksumView::ChecksumView(ChecksumTool* tool, QWidget* parent)
     : AbstractToolWidget(parent)
     , mTool(tool)
 {
-    auto* baseLayout = new QVBoxLayout(this);
+    auto* const baseLayout = new QVBoxLayout(this);
     baseLayout->setContentsMargins(0, 0, 0, 0);
     baseLayout->setSpacing(0);
 
     // algorithm
-    auto* algorithmToolBar = new QToolBar(this);
-    auto* label = new QLabel(i18nc("@label:listbox algorithm to use for the checksum", "Algorithm:"), this);
+    auto* const algorithmToolBar = new QToolBar(this);
+    auto* const label = new QLabel(i18nc("@label:listbox algorithm to use for the checksum", "Algorithm:"), this);
     mAlgorithmComboBox = new KComboBox(this);
     connect(mAlgorithmComboBox, qOverload<int>(&KComboBox::activated),
             mTool, &ChecksumTool::setAlgorithm);
 
-    auto* labelledAlgorithmComboBox = new LabelledToolBarWidget(label, mAlgorithmComboBox, this);
+    auto* const labelledAlgorithmComboBox = new LabelledToolBarWidget(label, mAlgorithmComboBox, this);
     const QString algorithmWhatsThis =
         i18nc("@info:whatsthis", "Select the algorithm to use for the checksum.");
     label->setWhatsThis(algorithmWhatsThis);
@@ -57,19 +57,19 @@ ChecksumView::ChecksumView(ChecksumTool* tool, QWidget* parent)
     baseLayout->addWidget(algorithmToolBar);
 
     // parameter
-    auto* parameterSetBox = new QGroupBox(this);
+    auto* const parameterSetBox = new QGroupBox(this);
     baseLayout->addWidget(parameterSetBox);
 
-    auto* parameterSetLayout = new QVBoxLayout(parameterSetBox);
+    auto* const parameterSetLayout = new QVBoxLayout(parameterSetBox);
 
     mParameterSetEditStack = new QStackedWidget(parameterSetBox);
     parameterSetLayout->addWidget(mParameterSetEditStack);
 
     // calculate
-    auto* actionToolBar = new QToolBar(this);
+    auto* const actionToolBar = new QToolBar(this);
     actionToolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
 
-    auto* stretcher = new QWidget(this);
+    auto* const stretcher = new QWidget(this);
     stretcher->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     actionToolBar->addWidget(stretcher);
 

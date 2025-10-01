@@ -123,7 +123,7 @@ void SingleViewWindowPrivate::addTool(std::unique_ptr<AbstractTool>&& tool, std:
 {
     Q_Q(SingleViewWindow);
 
-    auto* dockWidget = new ToolViewDockWidget(std::move(toolView), q);
+    auto* const dockWidget = new ToolViewDockWidget(std::move(toolView), q);
     // TODO: where to set the initial area?
     q->addDockWidget(Qt::RightDockWidgetArea, dockWidget);
     // For now hide initially, to avoid triggering bug 462703

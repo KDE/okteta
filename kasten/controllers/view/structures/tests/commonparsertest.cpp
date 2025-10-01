@@ -122,7 +122,7 @@ void CommonParserTest::testIntFromScriptValue_data()
     QTest::addColumn<bool>("okay");
     QTest::addColumn<int>("value");
 
-    auto* engine = new QScriptEngine(this);
+    auto* const engine = new QScriptEngine(this);
     QTest::newRow("invalid script value") << QScriptValue() << false;
     QTest::newRow("boolean true") << QScriptValue(true) << false;
     QTest::newRow("boolean false") << QScriptValue(false) << false;
@@ -188,7 +188,7 @@ void CommonParserTest::testUIntFromScriptValue_data()
     QTest::addColumn<bool>("okay");
     QTest::addColumn<uint>("value");
 
-    auto* engine = new QScriptEngine(this);
+    auto* const engine = new QScriptEngine(this);
     QTest::newRow("invalid script value") << QScriptValue() << false;
     QTest::newRow("boolean true") << QScriptValue(true) << false;
     QTest::newRow("boolean false") << QScriptValue(false) << false;

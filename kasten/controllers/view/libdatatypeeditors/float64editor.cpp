@@ -15,7 +15,7 @@ namespace Okteta {
 Float64Editor::Float64Editor(QWidget* parent)
     : QLineEdit(parent)
 {
-    auto* validator = new QDoubleValidator(this);
+    auto* const validator = new QDoubleValidator(this);
     validator->setLocale(QLocale::c()); // for consistency with other podtable editors
     validator->setNotation(QDoubleValidator::ScientificNotation);
 

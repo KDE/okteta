@@ -97,7 +97,7 @@ void TabbedViewsPrivate::addViews(const QVector<AbstractView*>& views)
         QObject::connect(view, &AbstractModel::titleChanged,
                          q, [this](const QString& title) { onTitleChanged(title); });
 
-        auto* viewBox = new ViewBox(view, mTabWidget.get());
+        auto* const viewBox = new ViewBox(view, mTabWidget.get());
         mTabWidget->insertTab(insertIndex, viewBox, view->title());
         ++insertIndex;
     }

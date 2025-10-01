@@ -45,7 +45,7 @@ PODTableView::PODTableView(PODDecoderTool* tool, AbstractUserMessagesHandler* us
     , mTool(tool)
     , m_userMessagesHandler(userMessagesHandler)
 {
-    auto* baseLayout = new QVBoxLayout(this);
+    auto* const baseLayout = new QVBoxLayout(this);
     baseLayout->setContentsMargins(0, 0, 0, 0);
     baseLayout->setSpacing(0);
 
@@ -69,7 +69,7 @@ PODTableView::PODTableView(PODDecoderTool* tool, AbstractUserMessagesHandler* us
     QHeaderView* header = mPODTableView->header();
     header->setSectionResizeMode(QHeaderView::Interactive);
     header->setStretchLastSection(false);
-    auto* displayModel = new PODDisplayModel(mPODTableView, mTool, this);
+    auto* const displayModel = new PODDisplayModel(mPODTableView, mTool, this);
     displayModel->setSourceModel(mPODTableModel);
     mPODTableView->setModel(displayModel);
     connect(mPODTableView->selectionModel(),
@@ -81,7 +81,7 @@ PODTableView::PODTableView(PODDecoderTool* tool, AbstractUserMessagesHandler* us
     baseLayout->addWidget(mPODTableView, 10);
 
     // settings
-    auto* settingsToolBar = new LabelledWidgetsToolBar(this);
+    auto* const settingsToolBar = new LabelledWidgetsToolBar(this);
 
     mByteOrderSelection = new KComboBox(this);
     mByteOrderSelection->addItem(i18nc("@item:inlistbox", "Big-endian"));     // add first for index
@@ -95,13 +95,13 @@ PODTableView::PODTableView(PODDecoderTool* tool, AbstractUserMessagesHandler* us
     mByteOrderSelection->setToolTip(byteOrderToolTip);
     settingsToolBar->addWidget(mByteOrderSelection);
 
-    auto* unsignedAsHexLabel = new QLabel(i18nc("@option:check", "Unsigned as hexadecimal:"), this);
+    auto* const unsignedAsHexLabel = new QLabel(i18nc("@option:check", "Unsigned as hexadecimal:"), this);
 
     mUnsignedAsHexCheck = new QCheckBox(this);
     mUnsignedAsHexCheck->setChecked(mTool->isUnsignedAsHex());
     connect(mUnsignedAsHexCheck, &QCheckBox::toggled,
             mTool, &PODDecoderTool::setUnsignedAsHex);
-    auto* labelledUnsignedAsHexCheck = new LabelledToolBarWidget(unsignedAsHexLabel, mUnsignedAsHexCheck, this);
+    auto* const labelledUnsignedAsHexCheck = new LabelledToolBarWidget(unsignedAsHexLabel, mUnsignedAsHexCheck, this);
     const QString unsignedAsHexToolTip =
         i18nc("@info:tooltip",
               "Sets whether the values of the unsigned integer types are shown as hexadecimal instead of as decimal.");
@@ -250,11 +250,11 @@ void PODTableView::onCustomContextMenuRequested(QPoint pos)
         return;
     }
 
-    auto* menu = new QMenu(this);
+    auto* const menu = new QMenu(this);
     menu->setAttribute(Qt::WA_DeleteOnClose);
 
-    auto* editAction = new QAction(QIcon::fromTheme(QStringLiteral("document-edit")),
-                                   i18nc("@action:inmenu", "Edit"), menu);
+    auto* const editAction = new QAction(QIcon::fromTheme(QStringLiteral("document-edit")),
+                                         i18nc("@action:inmenu", "Edit"), menu);
     connect(editAction, &QAction::triggered,
             this, &PODTableView::editData);
     editAction->setData(index.siblingAtColumn(PODTableModel::ValueId));
@@ -266,8 +266,8 @@ void PODTableView::onCustomContextMenuRequested(QPoint pos)
     copyAction->setData(index);
     menu->addAction(copyAction);
 
-    auto* selectAction = new QAction(QIcon::fromTheme(QStringLiteral("select-rectangular")),
-                                     i18nc("@action:inmenu", "Select"), menu);
+    auto* const selectAction = new QAction(QIcon::fromTheme(QStringLiteral("select-rectangular")),
+                                           i18nc("@action:inmenu", "Select"), menu);
     connect(selectAction, &QAction::triggered,
             this, &PODTableView::selectBytesInView);
     selectAction->setData(podId);

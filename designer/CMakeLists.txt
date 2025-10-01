@@ -2,7 +2,7 @@ include(ECMAddQtDesignerPlugin)
 
 set(ByteArrayRowView_CREATE_WIDGET_CODE
 "
-    auto* widget = new Okteta::ByteArrayRowView(parent);
+    auto* const widget = new Okteta::ByteArrayRowView(parent);
     widget->setByteArrayModel(createFillerByteArrayModel(widget));
     return widget;
 ")
@@ -15,7 +15,7 @@ ecm_qtdesignerplugin_widget(ByteArrayRowView
 
 set(ByteArrayColumnView_CREATE_WIDGET_CODE
 "
-    auto* widget = new Okteta::ByteArrayColumnView(parent);
+    auto* const widget = new Okteta::ByteArrayColumnView(parent);
     widget->setByteArrayModel(createFillerByteArrayModel(widget));
     return widget;
 ")

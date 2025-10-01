@@ -26,7 +26,7 @@ DocumentsView::DocumentsView(DocumentsTool* tool, QWidget* parent)
 {
     mDocumentListModel = new DocumentListModel(mTool, this);
 
-    auto* baseLayout = new QVBoxLayout(this);
+    auto* const baseLayout = new QVBoxLayout(this);
     baseLayout->setContentsMargins(0, 0, 0, 0);
     baseLayout->setSpacing(0);
 
@@ -52,7 +52,7 @@ DocumentsView::DocumentsView(DocumentsTool* tool, QWidget* parent)
     m_emptyListOverlayLabel->setWordWrap(true);
     m_emptyListOverlayLabel->setAlignment(Qt::AlignCenter);
     m_emptyListOverlayLabel->setVisible(mTool->isDocumentListEmpty());
-    auto* centeringLayout = new QVBoxLayout(documentListViewViewPort);
+    auto* const centeringLayout = new QVBoxLayout(documentListViewViewPort);
     centeringLayout->addWidget(m_emptyListOverlayLabel);
     centeringLayout->setAlignment(m_emptyListOverlayLabel, Qt::AlignCenter);
     connect(mTool, &DocumentsTool::documentsAdded,

@@ -50,7 +50,7 @@ StructureView::StructureView(StructuresTool* tool, QWidget* parent)
     , mTool(tool)
     , mDelegate(new StructureViewItemDelegate(this))
 {
-    auto* baseLayout = new QVBoxLayout(this);
+    auto* const baseLayout = new QVBoxLayout(this);
     setLayout(baseLayout);
     baseLayout->setContentsMargins(0, 0, 0, 0);
     baseLayout->setSpacing(0);
@@ -89,7 +89,7 @@ StructureView::StructureView(StructuresTool* tool, QWidget* parent)
     m_emptyListOverlayLabel->setWordWrap(true);
     m_emptyListOverlayLabel->setAlignment(Qt::AlignCenter);
     m_emptyListOverlayLabel->setVisible(mTool->isStructureListEmpty());
-    auto* centeringLayout = new QVBoxLayout(structListViewViewPort);
+    auto* const centeringLayout = new QVBoxLayout(structListViewViewPort);
     centeringLayout->addWidget(m_emptyListOverlayLabel);
     centeringLayout->setAlignment(m_emptyListOverlayLabel, Qt::AlignCenter);
     connect(mTool, &StructuresTool::isStructureListEmptyChanged,
@@ -98,7 +98,7 @@ StructureView::StructureView(StructuresTool* tool, QWidget* parent)
     baseLayout->addWidget(mStructTreeView, 10);
 
     // settings
-    auto* actionsToolBar = new QToolBar(this);
+    auto* const actionsToolBar = new QToolBar(this);
     actionsToolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
 
     QIcon validateIcon = QIcon::fromTheme(QStringLiteral("document-sign"));
@@ -121,7 +121,7 @@ StructureView::StructureView(StructuresTool* tool, QWidget* parent)
     onLockButtonToggled(false);
     connect(mLockStructureAction, &QAction::toggled, this, &StructureView::onLockButtonToggled);
 
-    auto* stretcher = new QWidget(this);
+    auto* const stretcher = new QWidget(this);
     stretcher->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     actionsToolBar->addWidget(stretcher);
 
@@ -162,20 +162,20 @@ void StructureView::openSettingsDlg()
     }
 
     // KConfigDialog didn't find an instance of this dialog, so lets create it :
-    auto* dialog = new KConfigDialog(this, QStringLiteral("Structures Tool Settings"),
-                                     StructureViewPreferences::self());
+    auto* const dialog = new KConfigDialog(this, QStringLiteral("Structures Tool Settings"),
+                                           StructureViewPreferences::self());
 
-    auto* displaySettings = new StructureViewSettingsWidget();
+    auto* const displaySettings = new StructureViewSettingsWidget();
     KPageWidgetItem* displ = dialog->addPage(displaySettings, i18nc("@title:tab", "Value Display"),
                                              QStringLiteral("configure"));
 
     // cannot use StructuresManagerView directly as page even if the only element
     // because KConfigDialogManager only scans the children of the page for kcfg_ elements
-    auto* structSelectionPage = new QWidget();
-    auto* hbox = new QHBoxLayout();
+    auto* const structSelectionPage = new QWidget();
+    auto* const hbox = new QHBoxLayout();
     hbox->setContentsMargins(0, 0, 0, 0);
     structSelectionPage->setLayout(hbox);
-    auto* structureSettings = new StructuresManagerView(mTool, this);
+    auto* const structureSettings = new StructuresManagerView(mTool, this);
     structureSettings->setObjectName(QStringLiteral("kcfg_LoadedStructures"));
     hbox->addWidget(structureSettings);
     dialog->addPage(structSelectionPage, i18nc("@title:tab", "Structures management"),
@@ -320,10 +320,10 @@ void StructureView::copyOffsetToClipboard()
 
 void StructureView::openScriptConsole()
 {
-    auto* dialog = new QDialog(this);
+    auto* const dialog = new QDialog(this);
     dialog->setWindowTitle(i18nc("@title:window", "Structures Script Console"));
-    auto* layout = new QVBoxLayout;
-    auto* dialogButtonBox = new QDialogButtonBox;
+    auto* const layout = new QVBoxLayout;
+    auto* const dialogButtonBox = new QDialogButtonBox;
     QPushButton* closeButton = dialogButtonBox->addButton(QDialogButtonBox::Close);
     connect(closeButton, &QPushButton::clicked, dialog, &QDialog::accept);
     layout->addWidget(new ScriptLoggerView(mTool->allData()));
@@ -357,14 +357,14 @@ void StructureView::onCustomContextMenuRequested(QPoint pos)
         return;
     }
 
-    auto* menu = new QMenu(this);
+    auto* const menu = new QMenu(this);
     menu->setAttribute(Qt::WA_DeleteOnClose);
 
     if (data->wasAbleToRead()) {
         const QModelIndex valueIndex = index.siblingAtColumn(DataInformation::ColumnValue);
         if (valueIndex.flags() & Qt::ItemIsEditable) {
-            auto* editAction = new QAction(QIcon::fromTheme(QStringLiteral("document-edit")),
-                                           i18nc("@action:inmenu", "Edit"), menu);
+            auto* const editAction = new QAction(QIcon::fromTheme(QStringLiteral("document-edit")),
+                                                 i18nc("@action:inmenu", "Edit"), menu);
             connect(editAction, &QAction::triggered,
                     this, &StructureView::editData);
             editAction->setData(valueIndex);
@@ -377,8 +377,8 @@ void StructureView::onCustomContextMenuRequested(QPoint pos)
         copyAction->setData(index);
         menu->addAction(copyAction);
 
-        auto* copyOffsetAction = new QAction(QIcon::fromTheme(QStringLiteral("edit-copy")),
-                                             i18nc("@action", "Copy Offset"), this);
+        auto* const copyOffsetAction = new QAction(QIcon::fromTheme(QStringLiteral("edit-copy")),
+                                                   i18nc("@action", "Copy Offset"), this);
         copyOffsetAction->setToolTip(i18nc("@info:tooltip",
                                             "Copies the offset to the clipboard."));
         connect(copyOffsetAction, &QAction::triggered,
@@ -386,8 +386,8 @@ void StructureView::onCustomContextMenuRequested(QPoint pos)
         copyOffsetAction->setData(index);
         menu->addAction(copyOffsetAction);
 
-        auto* selectAction = new QAction(QIcon::fromTheme(QStringLiteral("select-rectangular")),
-                                         i18nc("@action:inmenu", "Select"), menu);
+        auto* const selectAction = new QAction(QIcon::fromTheme(QStringLiteral("select-rectangular")),
+                                               i18nc("@action:inmenu", "Select"), menu);
         connect(selectAction, &QAction::triggered,
                 this, &StructureView::selectBytesInView);
         selectAction->setData(index);
