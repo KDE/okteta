@@ -58,15 +58,15 @@ StringsExtractView::StringsExtractView(StringsExtractTool* tool,
     stretcher->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     updateToolBar->addWidget(stretcher);
 
-    auto* label = new QLabel(i18nc("@label:spinbox minimum length for consecutive chars to be seen as a string",
-                                   "Minimum length:"), this);
+    auto* const minLengthLabel = new QLabel(i18nc("@label:spinbox minimum length for consecutive chars to be seen as a string",
+                                                  "Minimum length:"), this);
 
     mMinLengthSpinBox = new QSpinBox(this);
     mMinLengthSpinBox->setValue(mTool->minLength());
     mMinLengthSpinBox->setMinimum(MinimumStringLength);
     connect(mMinLengthSpinBox, qOverload<int>(&QSpinBox::valueChanged),
             mTool, &StringsExtractTool::setMinLength);
-    auto* const labelledMinLengthSpinBox = new LabelledToolBarWidget(label, mMinLengthSpinBox, this);
+    auto* const labelledMinLengthSpinBox = new LabelledToolBarWidget(minLengthLabel, mMinLengthSpinBox, this);
     updateToolBar->addWidget(labelledMinLengthSpinBox);
 
     mUpdateAction =
@@ -87,13 +87,13 @@ StringsExtractView::StringsExtractView(StringsExtractTool* tool,
     // filter
     auto* const filterToolBar = new QToolBar(this);
 
-    label = new QLabel(i18nc("@label:lineedit filter term for displayed strings", "Filter:"), this);
+    auto* const filterLabel = new QLabel(i18nc("@label:lineedit filter term for displayed strings", "Filter:"), this);
 
     auto* const mFilterEdit = new QLineEdit(this);
     mFilterEdit->setClearButtonEnabled(true);
     mFilterEdit->setPlaceholderText(i18nc("@info:placeholder", "Enter a term to limit the list."));
     mFilterEdit->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
-    auto* const labelledFilterEdit = new LabelledToolBarWidget(label, mFilterEdit, this);
+    auto* const labelledFilterEdit = new LabelledToolBarWidget(filterLabel, mFilterEdit, this);
     filterToolBar->addWidget(labelledFilterEdit);
 
     baseLayout->addWidget(filterToolBar);

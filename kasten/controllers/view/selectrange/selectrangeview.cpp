@@ -56,17 +56,17 @@ SelectRangeView::SelectRangeView(SelectRangeTool* tool, QWidget* parent)
     auto* const startOffsetLayout = new QHBoxLayout();
     startOffsetLayout->setContentsMargins(0, 0, 0, 0);
 
-    auto* label = new QLabel(i18nc("@label:listbox", "Start offset:"), this);
+    auto* const startOffsetLabel = new QLabel(i18nc("@label:listbox", "Start offset:"), this);
     mStartEdit = new Okteta::AddressComboBox(this);
     connect(mStartEdit, &Okteta::AddressComboBox::addressChanged,
             mTool, &SelectRangeTool::setTargetStart);
-    label->setBuddy(mStartEdit);
+    startOffsetLabel->setBuddy(mStartEdit);
     const QString startInputWhatsThis =
         i18nc("@info:whatsthis", "Enter an offset to go to, or select a previous offset from the list.");
-    label->setWhatsThis(startInputWhatsThis);
+    startOffsetLabel->setWhatsThis(startInputWhatsThis);
     mStartEdit->setWhatsThis(startInputWhatsThis);
 
-    startOffsetLayout->addWidget(label);
+    startOffsetLayout->addWidget(startOffsetLabel);
     startOffsetLayout->addWidget(mStartEdit);
     setFocusProxy(mStartEdit);   // TODO: see how KDialog does it, e.g. see if there is already a focuswidget as child
 
@@ -76,17 +76,17 @@ SelectRangeView::SelectRangeView(SelectRangeTool* tool, QWidget* parent)
     auto* const endOffsetLayout = new QHBoxLayout();
     endOffsetLayout->setContentsMargins(0, 0, 0, 0);
 
-    label = new QLabel(i18nc("@label:listbox", "End offset:"), this);
+    auto* const endOffsetLabel = new QLabel(i18nc("@label:listbox", "End offset:"), this);
     mEndEdit = new Okteta::AddressComboBox(this);
     connect(mEndEdit, &Okteta::AddressComboBox::addressChanged,
             mTool, &SelectRangeTool::setTargetEnd);
-    label->setBuddy(mEndEdit);
+    endOffsetLabel->setBuddy(mEndEdit);
     const QString endInputWhatsThis =
         i18nc("@info:whatsthis", "Enter an offset to go to, or select a previous offset from the list.");
-    label->setWhatsThis(endInputWhatsThis);
+    endOffsetLabel->setWhatsThis(endInputWhatsThis);
     mEndEdit->setWhatsThis(endInputWhatsThis);
 
-    endOffsetLayout->addWidget(label);
+    endOffsetLayout->addWidget(endOffsetLabel);
     endOffsetLayout->addWidget(mEndEdit);
 
     offsetLayout->addLayout(endOffsetLayout);
