@@ -61,7 +61,7 @@ void SingleDocumentStrategyPrivate::createNew()
 void SingleDocumentStrategyPrivate::createNewFromClipboard()
 {
     if (mDocumentManager->isEmpty()) {
-        const QMimeData* mimeData =
+        const QMimeData* const mimeData =
             QApplication::clipboard()->mimeData(QClipboard::Clipboard);
 
         mDocumentManager->createManager()->createNewFromData(mimeData, true);

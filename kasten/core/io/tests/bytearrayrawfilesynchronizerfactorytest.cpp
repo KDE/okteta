@@ -81,7 +81,7 @@ void ByteArrayRawFileSynchronizerFactoryTest::testLoadFromUrl()
     const QUrl fileUrl = QUrl::fromLocalFile(mFileSystem->createFilePath(QLatin1String(TestFileName)));
 
     auto factory = std::make_unique<ByteArrayRawFileSynchronizerFactory>();
-    auto* loadJob = factory->startLoad(fileUrl);
+    auto* const loadJob = factory->startLoad(fileUrl);
     const bool loadSuccess = loadJob->exec();
     QVERIFY(loadSuccess);
     auto document = loadJob->releaseDocument();
@@ -104,7 +104,7 @@ void ByteArrayRawFileSynchronizerFactoryTest::testLoadFromNotExistingUrl()
     const QUrl fileUrl = QUrl(QLatin1String(NotExistingUrl));
 
     auto factory = std::make_unique<ByteArrayRawFileSynchronizerFactory>();
-    auto* loadJob = factory->startLoad(fileUrl);
+    auto* const loadJob = factory->startLoad(fileUrl);
     const bool loadSuccess = loadJob->exec();
     QVERIFY(!loadSuccess);
     auto document = loadJob->releaseDocument();

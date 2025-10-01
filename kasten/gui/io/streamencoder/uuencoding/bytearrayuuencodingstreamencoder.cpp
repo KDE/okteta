@@ -141,7 +141,7 @@ bool ByteArrayUuencodingStreamEncoder::encodeDataToStream(QIODevice* device,
     int inputGroupsPerLine = 0;
     unsigned char bitsFromLastByte;
 
-    const UumapEncodeData* encodeData =
+    const UumapEncodeData* const encodeData =
         (mSettings.encodingType == UuencodingStreamEncoderSettings::EncodingType::Historical) ?
             &historicalUumapEncodeData :
         /* else */

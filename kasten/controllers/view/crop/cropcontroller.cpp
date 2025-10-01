@@ -25,7 +25,7 @@ namespace Kasten {
 // TODO: look into making in generic, remove everything but selected
 CropController::CropController(KXMLGUIClient* guiClient)
 {
-    KActionCollection* actionCollection = guiClient->actionCollection();
+    KActionCollection* const actionCollection = guiClient->actionCollection();
 
     m_cropAction = new QAction(QIcon::fromTheme(QStringLiteral("transform-crop")),
                                i18nc("@action:inmenu", "Crop"), this);

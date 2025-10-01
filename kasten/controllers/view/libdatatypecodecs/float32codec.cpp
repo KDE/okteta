@@ -23,7 +23,7 @@ Float32Codec::~Float32Codec() = default;
 
 QVariant Float32Codec::value(const PODData& data, int* byteCount) const
 {
-    const float* pointer = (float*)data.pointer(4);
+    const float* const pointer = (float*)data.pointer(4);
 
     *byteCount = pointer ? 4 : 0;
     return pointer ? QVariant::fromValue<Float32>(Float32(*pointer)) : QVariant();

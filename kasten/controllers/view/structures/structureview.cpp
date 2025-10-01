@@ -75,13 +75,13 @@ StructureView::StructureView(StructuresTool* tool, QWidget* parent)
     mStructTreeView->setSortingEnabled(false);
     mStructTreeView->setContextMenuPolicy(Qt::CustomContextMenu);
     mStructTreeView->installEventFilter(this);
-    QHeaderView* header = mStructTreeView->header();
+    QHeaderView* const header = mStructTreeView->header();
     header->setSectionResizeMode(QHeaderView::Interactive);
     connect(mStructTreeView, &QWidget::customContextMenuRequested,
             this, &StructureView::onCustomContextMenuRequested);
 
     // TODO. share code for all these empty-list placeholders
-    auto* structListViewViewPort = mStructTreeView->viewport();
+    QWidget* const structListViewViewPort = mStructTreeView->viewport();
     m_emptyListOverlayLabel = new QLabel(structListViewViewPort);
     m_emptyListOverlayLabel->setText(i18nc("@info", "No structure definitions"));
     m_emptyListOverlayLabel->setAttribute(Qt::WA_TransparentForMouseEvents);
@@ -166,8 +166,8 @@ void StructureView::openSettingsDlg()
                                            StructureViewPreferences::self());
 
     auto* const displaySettings = new StructureViewSettingsWidget();
-    KPageWidgetItem* displ = dialog->addPage(displaySettings, i18nc("@title:tab", "Value Display"),
-                                             QStringLiteral("configure"));
+    KPageWidgetItem* const displ = dialog->addPage(displaySettings, i18nc("@title:tab", "Value Display"),
+                                                   QStringLiteral("configure"));
 
     // cannot use StructuresManagerView directly as page even if the only element
     // because KConfigDialogManager only scans the children of the page for kcfg_ elements
@@ -201,7 +201,7 @@ bool StructureView::eventFilter(QObject* object, QEvent* event)
                 mTool->unmark();
             }
         } else if (event->type() == QEvent::FocusOut) {
-            QWidget* treeViewFocusWidget = mStructTreeView->focusWidget();
+            QWidget* const treeViewFocusWidget = mStructTreeView->focusWidget();
             const bool subChildHasFocus = (treeViewFocusWidget != mStructTreeView);
             if (subChildHasFocus) {
                 mStructTreeViewFocusChild = treeViewFocusWidget;
@@ -299,7 +299,7 @@ void StructureView::copyToClipboard()
 {
     auto* const action = static_cast<QAction*>(sender());
     const QModelIndex index = action->data().toModelIndex();
-    QMimeData* mimeData = mStructTreeView->model()->mimeData({index});
+    QMimeData* const mimeData = mStructTreeView->model()->mimeData({index});
 
     QApplication::clipboard()->setMimeData(mimeData);
 }
@@ -309,7 +309,7 @@ void StructureView::copyOffsetToClipboard()
     auto* const action = static_cast<QAction*>(sender());
     const QModelIndex index = action->data().toModelIndex();
 
-    const auto* data = index.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
+    const auto* const data = index.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
     if (!data) {
         return;
     }
@@ -324,7 +324,7 @@ void StructureView::openScriptConsole()
     dialog->setWindowTitle(i18nc("@title:window", "Structures Script Console"));
     auto* const layout = new QVBoxLayout;
     auto* const dialogButtonBox = new QDialogButtonBox;
-    QPushButton* closeButton = dialogButtonBox->addButton(QDialogButtonBox::Close);
+    QPushButton* const closeButton = dialogButtonBox->addButton(QDialogButtonBox::Close);
     connect(closeButton, &QPushButton::clicked, dialog, &QDialog::accept);
     layout->addWidget(new ScriptLoggerView(mTool->allData()));
     layout->addWidget(dialogButtonBox);
@@ -346,7 +346,7 @@ void StructureView::onCustomContextMenuRequested(QPoint pos)
     if (!index.isValid()) {
         return;
     }
-    const auto* data = index.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
+    const auto* const data = index.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
     if (!data) {
         return;
     }
@@ -372,7 +372,7 @@ void StructureView::onCustomContextMenuRequested(QPoint pos)
         }
 
         // TODO: split into explicit "Copy As Data" and "Copy As Text"
-        auto* copyAction =  KStandardAction::copy(this, &StructureView::copyToClipboard,  menu);
+        QAction* const copyAction = KStandardAction::copy(this, &StructureView::copyToClipboard,  menu);
         copyAction->setShortcut(QKeySequence());
         copyAction->setData(index);
         menu->addAction(copyAction);

@@ -50,7 +50,7 @@ void XzCompressionStream::setLzmaError(const KLocalizedString& errorMessage, ::l
 
 bool XzCompressionStream::compress(CompressMode compressMode)
 {
-    AbstractByteArrayOutput* byteArrayOutput = this->byteArrayOutput();
+    AbstractByteArrayOutput* const byteArrayOutput = this->byteArrayOutput();
 
     ::lzma_ret codeResult;
     const ::lzma_action codeAction = (compressMode == FinalCompress) ? ::LZMA_FINISH : ::LZMA_RUN;

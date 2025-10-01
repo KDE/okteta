@@ -23,7 +23,7 @@ void ColumnsViewScrollAreaEngine::init()
 {
     Q_Q(QAbstractScrollArea);
 
-    QWidget* viewport = q->viewport();
+    QWidget* const viewport = q->viewport();
     viewport->setAttribute(Qt::WA_StaticContents);
     viewport->setBackgroundRole(QPalette::Base);
     q->horizontalScrollBar()->setSingleStep(DefaultSingleStep);

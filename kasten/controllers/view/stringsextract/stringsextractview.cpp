@@ -127,7 +127,7 @@ StringsExtractView::StringsExtractView(StringsExtractTool* tool,
     mContainedStringTableView->setSortingEnabled(true);
     mContainedStringTableView->setContextMenuPolicy(Qt::CustomContextMenu);
     mContainedStringTableView->installEventFilter(this);
-    QHeaderView* header = mContainedStringTableView->header();
+    QHeaderView* const header = mContainedStringTableView->header();
     header->setSectionResizeMode(QHeaderView::Interactive);
     mContainedStringTableView->setModel(mSortFilterProxyModel);
     mContainedStringTableView->sortByColumn(ContainedStringTableModel::OffsetColumnId, Qt::AscendingOrder);
@@ -140,7 +140,7 @@ StringsExtractView::StringsExtractView(StringsExtractTool* tool,
             this, &StringsExtractView::onCustomContextMenuRequested);
 
     // TODO. share code for all these empty-list placeholders
-    auto* stringTableViewViewPort = mContainedStringTableView->viewport();
+    QWidget* const stringTableViewViewPort = mContainedStringTableView->viewport();
     m_emptyListOverlayLabel = new QLabel(stringTableViewViewPort);
     m_emptyListOverlayLabel->setText(i18nc("@info", "No strings"));
     m_emptyListOverlayLabel->setAttribute(Qt::WA_TransparentForMouseEvents);
@@ -283,10 +283,10 @@ void StringsExtractView::onGotoButtonClicked()
 
 void StringsExtractView::onCopyButtonClicked()
 {
-    const QItemSelectionModel* selectionModel = mContainedStringTableView->selectionModel();
+    const QItemSelectionModel* const selectionModel = mContainedStringTableView->selectionModel();
 
     const QModelIndexList selectedIndexes = selectionModel->selectedIndexes();
-    QMimeData* mimeData = mContainedStringTableView->model()->mimeData(selectedIndexes);
+    QMimeData* const mimeData = mContainedStringTableView->model()->mimeData(selectedIndexes);
 
     QApplication::clipboard()->setMimeData(mimeData);
 }
@@ -312,7 +312,7 @@ void StringsExtractView::onSelectStringTriggered()
 
 void StringsExtractView::onStringSelectionChanged()
 {
-    const QItemSelectionModel* selectionModel = mContainedStringTableView->selectionModel();
+    const QItemSelectionModel* const selectionModel = mContainedStringTableView->selectionModel();
 
     // TODO: selectionModel->selectedIndexes() is a expensive operation,
     // but with Qt 4.4.3 hasSelection() has the flaw to return true with a current index

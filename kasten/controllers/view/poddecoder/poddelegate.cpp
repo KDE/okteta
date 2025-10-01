@@ -85,45 +85,45 @@ QWidget* PODDelegate::createEditor(QWidget* parent, const QStyleOptionViewItem& 
                 this, &PODDelegate::onEditorDone);
         result = editor;
     } else if (data.canConvert<Okteta::SInt8>()) {
-        Okteta::SIntSpinBox* editor = Okteta::SIntSpinBox::createSInt8Spinbox(parent);
+        Okteta::SIntSpinBox* const editor = Okteta::SIntSpinBox::createSInt8Spinbox(parent);
         connect(editor, &Okteta::SIntSpinBox::editingFinished,
                 this, &PODDelegate::onEditorDone);
         result = editor;
     } else if (data.canConvert<Okteta::SInt16>()) {
-        Okteta::SIntSpinBox* editor = Okteta::SIntSpinBox::createSInt16Spinbox(parent);
+        Okteta::SIntSpinBox* const editor = Okteta::SIntSpinBox::createSInt16Spinbox(parent);
         connect(editor, &Okteta::SIntSpinBox::editingFinished,
                 this, &PODDelegate::onEditorDone);
         result = editor;
     } else if (data.canConvert<Okteta::SInt32>()) {
-        Okteta::SIntSpinBox* editor = Okteta::SIntSpinBox::createSInt32Spinbox(parent);
+        Okteta::SIntSpinBox* const editor = Okteta::SIntSpinBox::createSInt32Spinbox(parent);
         connect(editor, &Okteta::SIntSpinBox::editingFinished,
                 this, &PODDelegate::onEditorDone);
         result = editor;
     } else if (data.canConvert<Okteta::SInt64>()) {
-        Okteta::SIntSpinBox* editor = Okteta::SIntSpinBox::createSInt64Spinbox(parent);
+        Okteta::SIntSpinBox* const editor = Okteta::SIntSpinBox::createSInt64Spinbox(parent);
         connect(editor, &Okteta::SIntSpinBox::editingFinished,
                 this, &PODDelegate::onEditorDone);
         result = editor;
     } else if (data.canConvert<Okteta::UInt8>()) {
-        Okteta::UIntSpinBox* editor = Okteta::UIntSpinBox::createUInt8Spinbox(parent);
+        Okteta::UIntSpinBox* const editor = Okteta::UIntSpinBox::createUInt8Spinbox(parent);
         editor->setBase(mTool->isUnsignedAsHex() ? 16 : 10);
         connect(editor, &Okteta::UIntSpinBox::editingFinished,
                 this, &PODDelegate::onEditorDone);
         result = editor;
     } else if (data.canConvert<Okteta::UInt16>()) {
-        Okteta::UIntSpinBox* editor = Okteta::UIntSpinBox::createUInt16Spinbox(parent);
+        Okteta::UIntSpinBox* const editor = Okteta::UIntSpinBox::createUInt16Spinbox(parent);
         editor->setBase(mTool->isUnsignedAsHex() ? 16 : 10);
         connect(editor, &Okteta::UIntSpinBox::editingFinished,
                 this, &PODDelegate::onEditorDone);
         result = editor;
     } else if (data.canConvert<Okteta::UInt32>()) {
-        Okteta::UIntSpinBox* editor = Okteta::UIntSpinBox::createUInt32Spinbox(parent);
+        Okteta::UIntSpinBox* const editor = Okteta::UIntSpinBox::createUInt32Spinbox(parent);
         editor->setBase(mTool->isUnsignedAsHex() ? 16 : 10);
         connect(editor, &Okteta::UIntSpinBox::editingFinished,
                 this, &PODDelegate::onEditorDone);
         result = editor;
     } else if (data.canConvert<Okteta::UInt64>()) {
-        Okteta::UIntSpinBox* editor = Okteta::UIntSpinBox::createUInt64Spinbox(parent);
+        Okteta::UIntSpinBox* const editor = Okteta::UIntSpinBox::createUInt64Spinbox(parent);
         editor->setBase(mTool->isUnsignedAsHex() ? 16 : 10);
         connect(editor, &Okteta::UIntSpinBox::editingFinished,
                 this, &PODDelegate::onEditorDone);

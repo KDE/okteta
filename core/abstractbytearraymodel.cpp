@@ -139,7 +139,7 @@ static QByteArray toLower(const QByteArray& _pattern, const CharCodec* charCodec
     QByteArray result(_pattern);
 
     const int patternLength = result.size();
-    char* pattern = result.data();
+    char* const pattern = result.data();
     for (int i = 0; i < patternLength; ++i) {
         const Character decodedChar = charCodec->decode(pattern[i]);
 

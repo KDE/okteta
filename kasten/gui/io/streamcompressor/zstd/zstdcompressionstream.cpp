@@ -69,7 +69,7 @@ void ZStdCompressionStream::setZStdError(const KLocalizedString& errorMessage, s
 
 bool ZStdCompressionStream::compress(CompressMode compressMode)
 {
-    AbstractByteArrayOutput* byteArrayOutput = this->byteArrayOutput();
+    AbstractByteArrayOutput* const byteArrayOutput = this->byteArrayOutput();
 
     const bool isFinishing = (compressMode == FinalCompress);
     const ::ZSTD_EndDirective endDirective = isFinishing ? ::ZSTD_e_end : ::ZSTD_e_continue;

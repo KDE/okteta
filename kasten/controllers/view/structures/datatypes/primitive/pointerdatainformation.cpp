@@ -104,7 +104,7 @@ void PointerDataInformation::delayedReadData(const Okteta::AbstractByteArrayMode
         return;
     }
     // update the child now
-    DataInformation* oldTarget = mPointerTarget.get();
+    DataInformation* const oldTarget = mPointerTarget.get();
     topLevelDataInformation()->scriptHandler()->updateDataInformation(mPointerTarget.get());
     // Let the child do the work (maybe different than before now)
     if (mPointerTarget.get() != oldTarget) {
@@ -175,7 +175,7 @@ quint64 PointerDataInformation::interpret(Okteta::Address start) const
     }
 
     Q_ASSERT(interpretFunc.isFunction());
-    ScriptHandler* handler = topLevelDataInformation()->scriptHandler();
+    ScriptHandler* const handler = topLevelDataInformation()->scriptHandler();
     QScriptValue result = handler->callFunction(interpretFunc,
                                                 const_cast<DataInformation*>(asDataInformation()),
                                                 ScriptHandlerInfo::Mode::InterpretingPointer);

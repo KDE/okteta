@@ -49,7 +49,7 @@ void TerminalView::createTerminalPart()
         connect(mTerminalPart, &QObject::destroyed,
                 this, &TerminalView::onTerminalPartDestroyed);
 
-        QWidget* terminalWidget = mTerminalPart->widget();
+        QWidget* const terminalWidget = mTerminalPart->widget();
         terminalWidget->setFocusPolicy(Qt::WheelFocus);
         terminalWidget->setFocus();
         setFocusProxy(terminalWidget);

@@ -44,7 +44,7 @@ void MultiDocumentStrategyPrivate::init()
 
 void MultiDocumentStrategyPrivate::createNewFromClipboard()
 {
-    const QMimeData* mimeData = QApplication::clipboard()->mimeData(QClipboard::Clipboard);
+    const QMimeData* const mimeData = QApplication::clipboard()->mimeData(QClipboard::Clipboard);
 
     mDocumentManager->createManager()->createNewFromData(mimeData, true);
 }

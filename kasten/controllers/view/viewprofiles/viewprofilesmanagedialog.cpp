@@ -140,7 +140,7 @@ ViewProfilesManageDialog::~ViewProfilesManageDialog() = default;
 void
 ViewProfilesManageDialog::onViewProfileSelectionChanged()
 {
-    const QItemSelectionModel* selectionModel = mViewProfileTableView->selectionModel();
+    const QItemSelectionModel* const selectionModel = mViewProfileTableView->selectionModel();
     const QModelIndexList selectedIndexes = selectionModel->selectedIndexes();
     const bool hasSelection = (!selectedIndexes.isEmpty());
 

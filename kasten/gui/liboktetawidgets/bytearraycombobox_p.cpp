@@ -51,7 +51,7 @@ void ByteArrayComboBoxPrivate::init()
     q->setFocusProxy(mValueComboBox);
     QObject::connect(mValueComboBox->lineEdit(), &QLineEdit::textEdited,
                      q, [this](const QString& text) { onValueEdited(text); });
-    QAbstractItemView* formatComboBoxListView = mFormatComboBox->view();
+    QAbstractItemView* const formatComboBoxListView = mFormatComboBox->view();
     QObject::connect(formatComboBoxListView, &QAbstractItemView::activated,
                      mValueComboBox, qOverload<>(&KComboBox::setFocus));
     // TODO: is a workaround for Qt 4.5.1 which doesn't emit activated() for mouse clicks

@@ -104,7 +104,7 @@ QVariant StructureTreeModel::data(const QModelIndex& index, int role) const
     if (role == DataInformationRole) {
         // Using ArrayDataInformation::childAt() needed with DataInformationWithDummyChildren for updated dummy
         if (item->parent()->isArray()) {
-            ArrayDataInformation* array = item->parent()->asArray();
+            ArrayDataInformation* const array = item->parent()->asArray();
             item = array->childAt(index.row());
         }
         return QVariant::fromValue(item);
@@ -122,7 +122,7 @@ QVariant StructureTreeModel::data(const QModelIndex& index, int role) const
         return {};
     }
     if (item->parent()->isArray()) {
-        ArrayDataInformation* array = item->parent()->asArray();
+        ArrayDataInformation* const array = item->parent()->asArray();
         return array->childData(index.row(), column, role);
     }
     return item->data(column, role);
@@ -135,7 +135,7 @@ bool StructureTreeModel::setData(const QModelIndex& index, const QVariant& value
         return false;
     }
 
-    auto* item = index.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
+    auto* const item = index.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
     if (!item) {
         qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "item == NULL";
         return false;
@@ -168,7 +168,7 @@ QMimeData* StructureTreeModel::mimeData(const QModelIndexList& indexes) const
 
     const QModelIndex index = indexes.first();
 
-    auto* item = index.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
+    auto* const item = index.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
 
     auto mimeData = std::make_unique<QMimeData>();
 
@@ -227,14 +227,14 @@ QModelIndex StructureTreeModel::parent(const QModelIndex& index) const
 
     auto* const childItem = static_cast<DataInformation*> (index.internalPointer());
 
-    DataInformationBase* parentObj = childItem->parent();
+    DataInformationBase* const parentObj = childItem->parent();
 
     if (!parentObj || parentObj->isTopLevel()) {
         return {};
     }
 
     // not null, not topleveldatainformation-> must be datainformation
-    DataInformation* parent = parentObj->asDataInformation();
+    DataInformation* const parent = parentObj->asDataInformation();
     return createIndex(parent->row(), 0, parent);
 }
 

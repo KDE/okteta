@@ -61,7 +61,7 @@ QVector<AbstractView*> TabbedViewsPrivate::viewList() const
     result.reserve(count);
     for (int i = 0; i < count; ++i) {
         const auto* const viewBox = static_cast<const ViewBox*>(mTabWidget->widget(i));
-        AbstractView* view = viewBox->view();
+        AbstractView* const view = viewBox->view();
         result.append(view);
     }
 
@@ -147,7 +147,7 @@ void TabbedViewsPrivate::setCurrentToolInlineView(AbstractToolInlineView* view)
 {
     if (mCurrentToolInlineView != view) {
         mCurrentToolInlineView = view;
-        QWidget* toolInlineViewWidget = mCurrentToolInlineView ? mCurrentToolInlineView->widget() : nullptr;
+        QWidget* const toolInlineViewWidget = mCurrentToolInlineView ? mCurrentToolInlineView->widget() : nullptr;
         mViewAreaBox->setBottomToolWidget(toolInlineViewWidget);
     }
 
@@ -161,7 +161,7 @@ void TabbedViewsPrivate::onCurrentChanged(int index)
     Q_Q(TabbedViews);
 
     const auto* const viewBox = static_cast<const ViewBox*>(mTabWidget->widget(index));
-    AbstractView* view = viewBox ? viewBox->view() : nullptr;
+    AbstractView* const view = viewBox ? viewBox->view() : nullptr;
 
     if (view == mCurrentView) {
         return;
@@ -188,9 +188,9 @@ void TabbedViewsPrivate::onTabCloseRequest(int tabIndex)
 {
     Q_Q(TabbedViews);
 
-    const QWidget* widget = mTabWidget->widget(tabIndex);
+    const QWidget* const widget = mTabWidget->widget(tabIndex);
     const auto* const viewBox = static_cast<const ViewBox*>(widget);
-    AbstractView* view = viewBox->view();
+    AbstractView* const view = viewBox->view();
 
     const QVector<Kasten::AbstractView*> views { view };
     Q_EMIT q->closeRequest(views);
@@ -243,10 +243,10 @@ void TabbedViewsPrivate::onContextMenuRequested(QPoint pos)
     Q_Q(TabbedViews);
 
     AbstractView* view = nullptr;
-    QTabBar* tabBar = mTabWidget->tabBar();
+    QTabBar* const tabBar = mTabWidget->tabBar();
     const int tabIndex = tabBar->tabAt(tabBar->mapFrom(mTabWidget.get(), pos));
     if (tabIndex != -1) {
-        const QWidget* widget = mTabWidget->widget(tabIndex);
+        const QWidget* const widget = mTabWidget->widget(tabIndex);
         const auto* const viewBox = static_cast<const ViewBox*>(widget);
         view = viewBox->view();
     }
@@ -257,7 +257,7 @@ void TabbedViewsPrivate::onMouseMiddleClick()
 {
     Q_Q(TabbedViews);
 
-    const QMimeData* mimeData = QApplication::clipboard()->mimeData(QClipboard::Selection);
+    const QMimeData* const mimeData = QApplication::clipboard()->mimeData(QClipboard::Selection);
 
     Q_EMIT q->dataDropped(mimeData);
 }
@@ -273,7 +273,7 @@ void TabbedViewsPrivate::onDragMoveEvent(const QDragMoveEvent* event, bool& acce
 {
     Q_Q(TabbedViews);
 
-    const QMimeData* mimeData = event->mimeData();
+    const QMimeData* const mimeData = event->mimeData();
 
     Q_EMIT q->dataOffered(mimeData, accepted);
 }
@@ -282,7 +282,7 @@ void TabbedViewsPrivate::onDropEvent(QDropEvent* event)
 {
     Q_Q(TabbedViews);
 
-    const QMimeData* mimeData = event->mimeData();
+    const QMimeData* const mimeData = event->mimeData();
 
     Q_EMIT q->dataDropped(mimeData);
 }

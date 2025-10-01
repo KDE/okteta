@@ -63,7 +63,7 @@ bool DocumentSyncManagerPrivate::hasSynchronizerForLocal(const QString& workDocu
 
 QUrl DocumentSyncManagerPrivate::urlOf(AbstractDocument* document) const
 {
-    AbstractModelSynchronizer* synchronizer = document->synchronizer();
+    AbstractModelSynchronizer* const synchronizer = document->synchronizer();
 
     return synchronizer ? synchronizer->url() : QUrl();
 }
@@ -86,7 +86,7 @@ void DocumentSyncManagerPrivate::load(const QUrl& url)
         }
     }
 
-    AbstractLoadJob* loadJob = mSynchronizerFactory->startLoad(url);
+    AbstractLoadJob* const loadJob = mSynchronizerFactory->startLoad(url);
     QObject::connect(loadJob, &KJob::result,
                      q, [this](KJob* job) { onDocumentLoadJobResult(job); });
 
@@ -103,7 +103,7 @@ bool DocumentSyncManagerPrivate::setSynchronizer(AbstractDocument* document)
 
     bool storingDone = false;
 
-    AbstractModelSynchronizer* currentSynchronizer = document->synchronizer();
+    AbstractModelSynchronizer* const currentSynchronizer = document->synchronizer();
     // TODO: warn if there were updates in the second before saveAs was activated
 //     if( currentSynchronizer )
 //         currentSynchronizer->pauseSynchronization(); also unpause below
@@ -134,7 +134,7 @@ bool DocumentSyncManagerPrivate::setSynchronizer(AbstractDocument* document)
                                   || (newUrl != currentSynchronizer->url());
 
             if (isNewUrl) {
-                KIO::StatJob* statJob = KIO::stat(newUrl);
+                KIO::StatJob* const statJob = KIO::stat(newUrl);
                 statJob->setSide(KIO::StatJob::DestinationSide);
                 KJobWidgets::setWindow(statJob, /*mWidget*/ nullptr);
 
@@ -160,14 +160,14 @@ bool DocumentSyncManagerPrivate::setSynchronizer(AbstractDocument* document)
                 // switch url and synchronizer
                 if (currentSynchronizer && true) {// TODO: same remote mimetype
                     // TODO: overwrite for now
-                    AbstractSyncWithRemoteJob* syncJob = currentSynchronizer->startSyncWithRemote(newUrl,
-                                                                                                  AbstractModelSynchronizer::ReplaceRemote);
+                    AbstractSyncWithRemoteJob* const syncJob =
+                        currentSynchronizer->startSyncWithRemote(newUrl, AbstractModelSynchronizer::ReplaceRemote);
                     const bool syncSucceeded = JobManager::executeJob(syncJob);
 //                     currentSynchronizer->unpauseSynchronization(); also pause above
                     storingDone = syncSucceeded;
                 } else {
                     // TODO: is overwrite for now, is this useful?
-                    AbstractConnectJob* connectJob =
+                    AbstractConnectJob* const connectJob =
                         mSynchronizerFactory->startConnect(document, newUrl,
                                                            AbstractModelSynchronizer::ReplaceRemote);
                     const bool connectSucceeded = JobManager::executeJob(connectJob);
@@ -189,7 +189,7 @@ bool DocumentSyncManagerPrivate::setSynchronizer(AbstractDocument* document)
                 // By e.g. warning that we might be overwriting something?
                 // synchTo might be the intention, after all the user wanted a new storage
                 //
-                AbstractSyncToRemoteJob* syncJob = document->synchronizer()->startSyncToRemote();
+                AbstractSyncToRemoteJob* const syncJob = document->synchronizer()->startSyncToRemote();
                 const bool syncFailed = JobManager::executeJob(syncJob);
 
                 storingDone = !syncFailed;
@@ -207,7 +207,7 @@ bool DocumentSyncManagerPrivate::canClose(AbstractDocument* document)
     bool canClose = true;
 
     if (document->contentFlags() & ContentHasUnstoredChanges) {
-        AbstractModelSynchronizer* synchronizer = document->synchronizer();
+        AbstractModelSynchronizer* const synchronizer = document->synchronizer();
         const bool couldSynchronize = hasSynchronizerForLocal(document->mimeType());
 
         const QString processTitle = i18nc("@title:window", "Close");
@@ -219,7 +219,7 @@ bool DocumentSyncManagerPrivate::canClose(AbstractDocument* document)
 
             if (answer == Save) {
                 if (synchronizer) {
-                    AbstractSyncToRemoteJob* syncJob = synchronizer->startSyncToRemote();
+                    AbstractSyncToRemoteJob* const syncJob = synchronizer->startSyncToRemote();
                     const bool isSynced = JobManager::executeJob(syncJob);
 
                     canClose = isSynced;
@@ -242,7 +242,7 @@ bool DocumentSyncManagerPrivate::canClose(AbstractDocument* document)
 
 void DocumentSyncManagerPrivate::reload(AbstractDocument* document)
 {
-    AbstractModelSynchronizer* synchronizer = document->synchronizer();
+    AbstractModelSynchronizer* const synchronizer = document->synchronizer();
 
     if (synchronizer->localSyncState() == LocalHasChanges) {
         const QString processTitle = i18nc("@title:window", "Reload");
@@ -255,14 +255,14 @@ void DocumentSyncManagerPrivate::reload(AbstractDocument* document)
         }
     }
 
-    AbstractSyncFromRemoteJob* syncJob = synchronizer->startSyncFromRemote();
+    AbstractSyncFromRemoteJob* const syncJob = synchronizer->startSyncFromRemote();
     std::ignore = JobManager::executeJob(syncJob);
 }
 
 void DocumentSyncManagerPrivate::save(AbstractDocument* document)
 {
-    AbstractModelSynchronizer* synchronizer = document->synchronizer();
-    AbstractSyncToRemoteJob* syncJob = synchronizer->startSyncToRemote();
+    AbstractModelSynchronizer* const synchronizer = document->synchronizer();
+    AbstractSyncToRemoteJob* const syncJob = synchronizer->startSyncToRemote();
     std::ignore = JobManager::executeJob(syncJob);
 }
 

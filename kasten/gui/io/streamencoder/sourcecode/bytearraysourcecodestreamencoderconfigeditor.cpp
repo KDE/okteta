@@ -57,7 +57,7 @@ ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderCo
               "Data type:");
 
     mDataTypeSelect = new KComboBox(this);
-    const char* const* dataTypeNames = mEncoder->dataTypeNames();
+    const char* const* const dataTypeNames = mEncoder->dataTypeNames();
     const int dataTypesCount = mEncoder->dataTypesCount();
     QStringList dataTypeNameStrings;
     dataTypeNameStrings.reserve(dataTypesCount);

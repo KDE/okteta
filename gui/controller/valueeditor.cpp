@@ -39,7 +39,7 @@ void ValueEditor::startEdit(const QString& description)
 {
     Q_ASSERT(!mInEditMode);
 
-    Okteta::AbstractByteArrayModel* byteArrayModel = mView->byteArrayModel();
+    Okteta::AbstractByteArrayModel* const byteArrayModel = mView->byteArrayModel();
     auto* const changesDescribable = qobject_cast<Okteta::ChangesDescribable*>(byteArrayModel);
 
     if (changesDescribable) {
@@ -59,7 +59,7 @@ void ValueEditor::cancelEdit(bool undoChanges)
     mInEditMode = false;
 
     if (undoChanges) {
-        Okteta::AbstractByteArrayModel* byteArrayModel = mView->byteArrayModel();
+        Okteta::AbstractByteArrayModel* const byteArrayModel = mView->byteArrayModel();
         auto* const changesDescribable = qobject_cast<Okteta::ChangesDescribable*>(byteArrayModel);
 
         // TODO: if !changesDescribable the changes need to be undone, too
@@ -77,7 +77,7 @@ void ValueEditor::finishEdit()
 
     mInEditMode = false;
 
-    Okteta::AbstractByteArrayModel* byteArrayModel = mView->byteArrayModel();
+    Okteta::AbstractByteArrayModel* const byteArrayModel = mView->byteArrayModel();
     auto* const changesDescribable = qobject_cast<Okteta::ChangesDescribable*>(byteArrayModel);
 
     if (changesDescribable) {
@@ -219,7 +219,7 @@ bool ValueEditor::handleKeyPress(QKeyEvent* keyEvent)
 
                 const int input = enteredChar.toLatin1();
 
-                const Okteta::ValueCodec* valueCodec = mView->valueCodec();
+                const Okteta::ValueCodec* const valueCodec = mView->valueCodec();
                 if (mInEditMode) {
                     if (mInsertedDigitsCount < valueCodec->encodingWidth()) {
                         doValueEditAction(ValueAppend, input);
@@ -262,7 +262,7 @@ bool ValueEditor::handleKeyPress(QKeyEvent* keyEvent)
 
 void ValueEditor::doValueEditAction(ValueEditAction Action, int input)
 {
-    const Okteta::ValueCodec* valueCodec = mView->valueCodec();
+    const Okteta::ValueCodec* const valueCodec = mView->valueCodec();
     ByteArrayTableCursor* const tableCursor = mView->tableCursor();
 
     // we are not yet in edit mode?

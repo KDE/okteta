@@ -26,11 +26,11 @@ QWidget* StructureViewItemDelegate::createEditor(QWidget* parent, const QStyleOp
     if (!index.isValid()) {
         return nullptr;
     }
-    auto* data = index.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
+    auto* const data = index.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
     if (!data) {
         return nullptr;
     }
-    QWidget* ret = data->createEditWidget(parent);
+    QWidget* const ret = data->createEditWidget(parent);
     ret->setFocusPolicy(Qt::WheelFocus);
     return ret;
 }
@@ -41,7 +41,7 @@ void StructureViewItemDelegate::setModelData(QWidget* editor, QAbstractItemModel
     if (!index.isValid()) {
         return;
     }
-    auto* data = index.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
+    auto* const data = index.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
     if (!data) {
         return;
     }
@@ -58,7 +58,7 @@ void StructureViewItemDelegate::setEditorData(QWidget* editor, const QModelIndex
     if (!index.isValid()) {
         return;
     }
-    auto* data = index.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
+    auto* const data = index.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
     if (!data) {
         return;
     }

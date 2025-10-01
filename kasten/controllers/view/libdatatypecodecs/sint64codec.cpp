@@ -23,7 +23,7 @@ SInt64Codec::~SInt64Codec() = default;
 
 QVariant SInt64Codec::value(const PODData& data, int* byteCount) const
 {
-    const qint64* pointer = (qint64*)data.pointer(8);
+    const qint64* const pointer = (qint64*)data.pointer(8);
 
     *byteCount = pointer ? 8 : 0;
     return pointer ? QVariant::fromValue<SInt64>(SInt64(*pointer)) : QVariant();

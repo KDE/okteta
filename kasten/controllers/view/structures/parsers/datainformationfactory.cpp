@@ -128,7 +128,7 @@ QString generateLengthFunction(DataInformation* current, DataInformation* last, 
         return {};
     }
     for (int i = current->childCount() - 1; i >= 0; --i) {
-        DataInformation* child = current->childAt(i);
+        DataInformation* const child = current->childAt(i);
         if (child == last) {
             return {}; // don't go down again after going up one level
 
@@ -153,12 +153,12 @@ QString generateLengthFunction(DataInformation* current, DataInformation* last, 
     }
 
     // now check parents
-    DataInformationBase* nextBase = current->parent();
+    DataInformationBase* const nextBase = current->parent();
     if (!nextBase) {
         return {};
     }
 
-    DataInformation* next = nextBase->asDataInformation();
+    DataInformation* const next = nextBase->asDataInformation();
     if (next == last) {
         return {}; // we moved one level down previously, don't move up again
     }

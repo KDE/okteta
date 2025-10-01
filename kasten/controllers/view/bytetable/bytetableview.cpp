@@ -53,7 +53,7 @@ ByteTableView::ByteTableView(ByteTableTool* tool, QWidget* parent)
     mByteTableView->setUniformRowHeights(true);
     mByteTableView->setAllColumnsShowFocus(true);
     mByteTableView->setSortingEnabled(false);
-    QHeaderView* header = mByteTableView->header();
+    QHeaderView* const header = mByteTableView->header();
     header->setSectionResizeMode(QHeaderView::Interactive);
     header->setStretchLastSection(false);
     mByteTableView->setModel(mTool->byteTableModel());
@@ -129,7 +129,7 @@ ByteTableView::~ByteTableView()
 {
     QList<int> columnsWidth;
     columnsWidth.reserve(ByteTableModel::NoOfIds);
-    const QHeaderView* header = mByteTableView->header();
+    const QHeaderView* const header = mByteTableView->header();
     for (int i = 0; i < ByteTableModel::NoOfIds; ++i) {
         columnsWidth.append(header->sectionSize(i));
     }
@@ -143,7 +143,7 @@ ByteTableView::~ByteTableView()
 
 void ByteTableView::resizeColumnsWidth()
 {
-    QHeaderView* header = mByteTableView->header();
+    QHeaderView* const header = mByteTableView->header();
     for (int i = 0; i < ByteTableModel::NoOfIds; ++i) {
         if (i == ByteTableModel::CharacterId) {
             mByteTableView->resizeColumnToContents(i);

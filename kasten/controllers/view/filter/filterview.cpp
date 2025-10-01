@@ -96,7 +96,7 @@ FilterView::FilterView(FilterTool* tool, QWidget* parent)
     baseLayout->addStretch(10);
 
     // automatically set focus to the parameters if a operation has been selected
-    QAbstractItemView* operationComboBoxListView = mOperationComboBox->view();
+    QAbstractItemView* const operationComboBoxListView = mOperationComboBox->view();
     QObject::connect(operationComboBoxListView, &QAbstractItemView::activated,
                      mParameterSetEditStack, qOverload<>(&QStackedWidget::setFocus));
     // TODO: is a workaround for Qt 4.5.1 which doesn't emit activated() for mouse clicks
@@ -116,7 +116,7 @@ void FilterView::addFilters()
     for (const auto& filter : filterList) {
         mOperationComboBox->addItem(filter->name());
 
-        const char* parameterSetId = filter->parameterSet()->id();
+        const char* const parameterSetId = filter->parameterSet()->id();
         std::unique_ptr<AbstractByteArrayFilterParameterSetEdit> parameterEdit =
             ByteArrayFilterParameterSetEditFactory::createEdit(parameterSetId);
 
@@ -145,7 +145,7 @@ void FilterView::onFilterClicked()
         parametersetEdit->rememberCurrentSettings();
     }
 
-    AbstractByteArrayFilterParameterSet* parameterSet = mTool->parameterSet(filterId);
+    AbstractByteArrayFilterParameterSet* const parameterSet = mTool->parameterSet(filterId);
     if (parameterSet) {
         getParameterSet(parameterSet);
     }
@@ -155,7 +155,7 @@ void FilterView::onFilterClicked()
 
 void FilterView::onOperationChange(int index)
 {
-    QWidget* oldWidget = mParameterSetEditStack->currentWidget();
+    QWidget* const oldWidget = mParameterSetEditStack->currentWidget();
     if (oldWidget) {
         oldWidget->disconnect(this);
     }
@@ -165,7 +165,7 @@ void FilterView::onOperationChange(int index)
     auto* const parametersetEdit =
         qobject_cast<AbstractByteArrayFilterParameterSetEdit*>(mParameterSetEditStack->currentWidget());
     if (parametersetEdit) {
-        AbstractByteArrayFilterParameterSet* parameterSet = mTool->parameterSet(index);
+        const AbstractByteArrayFilterParameterSet* const parameterSet = mTool->parameterSet(index);
         if (parameterSet) {
             parametersetEdit->setValues(parameterSet);
         }
@@ -204,7 +204,7 @@ void FilterView::onCharCodecChanged(const QString& charCodecName)
 void FilterView::onValuesChanged()
 {
     const int filterId = mOperationComboBox->currentIndex();
-    AbstractByteArrayFilterParameterSet* parameterSet = mTool->parameterSet(filterId);
+    AbstractByteArrayFilterParameterSet* const parameterSet = mTool->parameterSet(filterId);
     if (!parameterSet) {
         return;
     }

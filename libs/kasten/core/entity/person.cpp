@@ -26,7 +26,7 @@ static int currentEgoDataIndex = 0;
 
 Person Person::createEgo()
 {
-    const EgoDataStruct* currentEgoData = &EgoData[currentEgoDataIndex];
+    const EgoDataStruct* const currentEgoData = &EgoData[currentEgoDataIndex];
     const Person result(QLatin1String(currentEgoData->name),
                         QIcon::fromTheme(QLatin1String(currentEgoData->faceIconName)));
 //     if( currentEgoDataIndex < lastEgoDataIndex )

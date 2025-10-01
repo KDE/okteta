@@ -18,7 +18,7 @@ TestDocumentFileWriteThread::~TestDocumentFileWriteThread() = default;
 
 void TestDocumentFileWriteThread::run()
 {
-    const QByteArray* byteArray = mDocument->data();
+    const QByteArray* const byteArray = mDocument->data();
 
     QDataStream outStream(mFile);
     outStream.writeRawData(mHeader.data(), mHeader.size());

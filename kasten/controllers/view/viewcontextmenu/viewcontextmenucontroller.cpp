@@ -42,7 +42,7 @@ void ViewContextMenuController::setTargetModel(AbstractModel* model)
 
 void ViewContextMenuController::showContextMenu(QPoint pos)
 {
-    QWidget* w = mGuiClient->factory()->container(QStringLiteral("viewContextMenu"), mGuiClient);
+    QWidget* const w = mGuiClient->factory()->container(QStringLiteral("viewContextMenu"), mGuiClient);
     auto* const popup = static_cast<QMenu*>(w);
 
     const auto popupPoint = mByteArrayView->widget()->mapToGlobal(pos);

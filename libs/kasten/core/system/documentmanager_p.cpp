@@ -42,7 +42,7 @@ void DocumentManagerPrivate::addDocument(std::unique_ptr<AbstractDocument>&& doc
 
     // TODO: check for double insert
     document->setId(QString::number(++lastDocumentId));
-    auto* rawDocument = document.release();
+    auto* const rawDocument = document.release();
     mList.append(rawDocument);
     // TODO: only emit if document was not included before
     const QVector<AbstractDocument*> addedDocuments { rawDocument };

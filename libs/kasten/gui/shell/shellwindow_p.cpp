@@ -159,11 +159,11 @@ void ShellWindowPrivate::onViewFocusChanged(AbstractView* view)
 
     updateControllers(view);
 
-    AbstractDocument* oldDocument = mCurrentDocument;
+    AbstractDocument* const oldDocument = mCurrentDocument;
     mCurrentDocument = view ? view->findBaseModel<AbstractDocument*>() : nullptr;
     const bool isNewDocument = (mCurrentDocument != oldDocument);
 
-    AbstractModelSynchronizer* oldSynchronizer = mCurrentSynchronizer;
+    AbstractModelSynchronizer* const oldSynchronizer = mCurrentSynchronizer;
     mCurrentSynchronizer = mCurrentDocument ? mCurrentDocument->synchronizer() : nullptr;
     const bool isNewSynchronizer = (mCurrentSynchronizer != oldSynchronizer);
 
@@ -210,7 +210,7 @@ void ShellWindowPrivate::onToolVisibilityChanged(bool isVisible)
 
     auto* const dockWidget = qobject_cast<ToolViewDockWidget*>(q->sender());
     if (dockWidget) {
-        AbstractView* view = isVisible ? mCurrentView : nullptr;
+        AbstractView* const view = isVisible ? mCurrentView : nullptr;
         dockWidget->toolView()->tool()->setTargetModel(view);
     }
 }

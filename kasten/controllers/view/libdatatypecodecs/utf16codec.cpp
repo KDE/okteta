@@ -22,7 +22,7 @@ namespace Okteta {
 Utf16Codec::Utf16Codec()
     : AbstractTypeCodec(i18nc("@label:textbox", "UTF-16"))
 {
-    auto* utf16Codec = QTextCodec::codecForName("UTF-16");
+    auto* const utf16Codec = QTextCodec::codecForName("UTF-16");
     mUtf16Encoder.reset(utf16Codec->makeEncoder(QTextCodec::IgnoreHeader));
     mUtf16Decoder.reset(utf16Codec->makeDecoder(QTextCodec::IgnoreHeader));
 }
@@ -31,7 +31,7 @@ Utf16Codec::~Utf16Codec() = default;
 
 QVariant Utf16Codec::value(const PODData& data, int* byteCount) const
 {
-    const char* pointer = (char*)data.pointer(2);
+    const char* const pointer = (char*)data.pointer(2);
 
     if (pointer) {
         const QString utf16 = mUtf16Decoder->toUnicode(pointer, 2);

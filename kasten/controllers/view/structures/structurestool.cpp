@@ -151,7 +151,7 @@ bool StructuresTool::setData(const QVariant& value, int role, DataInformation* i
     }
     Q_CHECK_PTR(item);
 
-    TopLevelDataInformation* topLevel = item->topLevelDataInformation();
+    TopLevelDataInformation* const topLevel = item->topLevelDataInformation();
     const Okteta::Address structureStart = startAddress(topLevel);
     // block immediate data updating
     mWritingData = true;
@@ -271,7 +271,7 @@ void StructuresTool::setEnabledStructuresInView()
             const QString structureId = match.captured(1);
             const QString name = match.captured(2);
             // qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "structureId=" << path << " structureName=" << name;
-            StructureDefinitionFile* def = mManager->definition(structureId);
+            StructureDefinitionFile* const def = mManager->definition(structureId);
             if (!def) {
                 continue;
             }
@@ -355,7 +355,7 @@ void StructuresTool::selectBytesInView(const QModelIndex& idx)
     if (!mByteArrayModel || !mByteArrayView || !idx.isValid()) {
         return;
     }
-    const auto* data = idx.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
+    const auto* const data = idx.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
     if (!data) {
         return;
     }
@@ -369,7 +369,7 @@ void StructuresTool::mark(const QModelIndex& idx)
     if (!mByteArrayModel || !mByteArrayView || !idx.isValid()) {
         return;
     }
-    const auto* data = idx.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
+    const auto* const data = idx.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
     if (!data) {
         return;
     }
@@ -417,11 +417,11 @@ void StructuresTool::lockStructure(const QModelIndex& idx)
     if (!mByteArrayModel || !idx.isValid()) {
         return;
     }
-    auto* data = idx.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
+    auto* const data = idx.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
     if (!data) {
         return;
     }
-    TopLevelDataInformation* top = data->topLevelDataInformation();
+    TopLevelDataInformation* const top = data->topLevelDataInformation();
     Q_ASSERT(top);
     if (top) {
         top->lockPositionToOffset(mCursorIndex, mByteArrayModel);
@@ -433,11 +433,11 @@ void StructuresTool::unlockStructure(const QModelIndex& idx)
     if (!mByteArrayModel || !idx.isValid()) {
         return;
     }
-    auto* data = idx.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
+    auto* const data = idx.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
     if (!data) {
         return;
     }
-    TopLevelDataInformation* top = data->topLevelDataInformation();
+    TopLevelDataInformation* const top = data->topLevelDataInformation();
     Q_CHECK_PTR(top);
 
     const bool wasMarked = mIsStructureMarked;
@@ -457,11 +457,11 @@ bool StructuresTool::isStructureLocked(const QModelIndex& idx) const
     if (!mByteArrayModel || !idx.isValid()) {
         return false;
     }
-    auto* data = idx.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
+    auto* const data = idx.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
     if (!data) {
         return false;
     }
-    TopLevelDataInformation* top = data->topLevelDataInformation();
+    TopLevelDataInformation* const top = data->topLevelDataInformation();
     Q_ASSERT(top);
     if (top) {
         return top->isLockedFor(mByteArrayModel);

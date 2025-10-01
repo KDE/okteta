@@ -25,7 +25,7 @@ CreatorController::CreatorController(ModelCodecManager* modelCodecManager,
     : mModelCodecManager(modelCodecManager)
     , mDocumentStrategy(documentStrategy)
 {
-    KActionCollection* actionCollection = guiClient->actionCollection();
+    KActionCollection* const actionCollection = guiClient->actionCollection();
 
     auto* const newMenuAction =
         new KActionMenu(QIcon::fromTheme(QStringLiteral("document-new")),
@@ -104,7 +104,7 @@ void CreatorController::onNewFromGeneratorActionTriggered()
 {
     auto* const action = static_cast<QAction*>(sender());
 
-    auto* generator = action->data().value<AbstractModelDataGenerator*>();
+    auto* const generator = action->data().value<AbstractModelDataGenerator*>();
 
     mDocumentStrategy->createNewWithGenerator(generator);
 }

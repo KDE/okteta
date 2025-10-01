@@ -57,7 +57,7 @@ void ViewListMenuController::updateActions()
     if (hasViews) {
         // TODO: sortieren nach namen und erste 10 mit Zahl, siehe unten
         for (int v = 0; v < views.size(); ++v) {
-            AbstractView* view = views.at(v);
+            AbstractView* const view = views.at(v);
             const QString title = KStringHandler::rsqueeze(view->title(), MaxEntryLength);
             auto* const action = new QAction(v < 9 ? QStringLiteral("&%1 %2").arg(v + 1).arg(title) : title, mWindowsActionGroup);
             //         action->setCheckable( true );
@@ -78,7 +78,7 @@ void ViewListMenuController::updateActions()
 
 void ViewListMenuController::onActionTriggered(QAction* action)
 {
-    auto* view = action->data().value<AbstractView*>();
+    auto* const view = action->data().value<AbstractView*>();
     mGroupedViews->setViewFocus(view);
 }
 

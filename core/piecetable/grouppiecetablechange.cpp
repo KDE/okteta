@@ -64,7 +64,7 @@ bool GroupPieceTableChange::appendChange(std::unique_ptr<AbstractPieceTableChang
         }
         do
         {
-            AbstractPieceTableChange* droppedChange = mChangeStack.pop();
+            AbstractPieceTableChange* const droppedChange = mChangeStack.pop();
             delete droppedChange;
         }
         while (mAppliedChangesCount < mChangeStack.size());

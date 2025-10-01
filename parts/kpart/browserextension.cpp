@@ -45,7 +45,7 @@ void OktetaBrowserExtension::copy()
 
 void OktetaBrowserExtension::print()
 {
-    QAction* printAction = mPart->actionCollection()->action(QStringLiteral("file_print"));
+    QAction* const printAction = mPart->actionCollection()->action(QStringLiteral("file_print"));
     if (printAction) {
         printAction->trigger();
     }
@@ -60,8 +60,8 @@ void OktetaBrowserExtension::saveState(QDataStream& stream)
 {
     KParts::BrowserExtension::saveState(stream);
 
-    Kasten::ByteArrayView* view = mPart->byteArrayView();
-    Kasten::ByteArrayViewProfileSynchronizer* viewProfileSynchronizer = view->synchronizer();
+    Kasten::ByteArrayView* const view = mPart->byteArrayView();
+    Kasten::ByteArrayViewProfileSynchronizer* const viewProfileSynchronizer = view->synchronizer();
 
     const QString viewProfileId = viewProfileSynchronizer ? viewProfileSynchronizer->viewProfileId() : QString();
 
@@ -137,9 +137,9 @@ void OktetaBrowserExtension::restoreState(QDataStream& stream)
         >> viewProfileId
     ;
 
-    Kasten::ByteArrayView* view = mPart->byteArrayView();
+    Kasten::ByteArrayView* const view = mPart->byteArrayView();
 
-    Kasten::ByteArrayViewProfileSynchronizer* viewProfileSynchronizer = view->synchronizer();
+    Kasten::ByteArrayViewProfileSynchronizer* const viewProfileSynchronizer = view->synchronizer();
     if (viewProfileSynchronizer) {
         viewProfileSynchronizer->setViewProfileId(viewProfileId);
     }

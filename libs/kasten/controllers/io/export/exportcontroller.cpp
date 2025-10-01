@@ -73,13 +73,13 @@ void ExportController::updateActions()
 {
     mExportSelectAction->removeAllActions();
 
-    const AbstractModelSelection* selection = mSelectionControl ? mSelectionControl->modelSelection() : nullptr;
+    const AbstractModelSelection* const selection = mSelectionControl ? mSelectionControl->modelSelection() : nullptr;
 
     auto exporterList = mModelCodecManager->exporters(mModel, selection);
     const bool hasExporters = (!exporterList.empty());
 
     if (hasExporters) {
-        for (auto* exporter : exporterList) {
+        for (auto* const exporter : exporterList) {
             const QString title = exporter->remoteTypeName();
             auto* const action = new QAction(title, mExportSelectAction);
 
@@ -97,9 +97,9 @@ void ExportController::updateActions()
 
 void ExportController::onActionTriggered(QAction* action)
 {
-    auto* exporter = action->data().value<AbstractModelExporter*>();
+    auto* const exporter = action->data().value<AbstractModelExporter*>();
 
-    const AbstractModelSelection* selection = mSelectionControl ? mSelectionControl->modelSelection() : nullptr;
+    const AbstractModelSelection* const selection = mSelectionControl ? mSelectionControl->modelSelection() : nullptr;
 
     auto configEditor = mModelCodecViewManager->createConfigEditor(exporter);
 

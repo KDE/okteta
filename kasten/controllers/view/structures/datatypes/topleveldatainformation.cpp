@@ -86,7 +86,7 @@ void TopLevelDataInformation::read(const Okteta::AbstractByteArrayModel* input, 
     quint8 bitOffset = 0;
     mData->beginRead(); // before reading set wasAbleToRead to false
     mData->resetValidationState(); // reading new data -> validation state is old
-    const DataInformation* oldData = mData.get();
+    const DataInformation* const oldData = mData.get();
     mScriptHandler->updateDataInformation(mData.get()); // unlikely that this is useful, but maybe someone needs it
     if (mData.get() != oldData) {
         mLogger->info() << "Main element was replaced!";

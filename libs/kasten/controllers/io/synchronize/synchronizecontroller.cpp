@@ -23,7 +23,7 @@ namespace Kasten {
 SynchronizeController::SynchronizeController(DocumentSyncManager* syncManager, KXMLGUIClient* guiClient)
     : mSyncManager(syncManager)
 {
-    KActionCollection* actionCollection = guiClient->actionCollection();
+    KActionCollection* const actionCollection = guiClient->actionCollection();
 
     mSaveAction = KStandardAction::save(this, &SynchronizeController::save, this);
     mSaveAction->setEnabled(false);

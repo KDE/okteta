@@ -140,9 +140,9 @@ template <typename T> void castChecker(bool isValid, DataInformationBase* data, 
     }
 }
 #define CAST_CHECKER(isValid, value, func, type) do { \
-        const DataInformationBase* constData = data; \
-        const type* constVal = constData->func(); \
-        type* nonConstVal = data->func(); \
+        const DataInformationBase* const constData = data; \
+        const type* const constVal = constData->func(); \
+        type* const nonConstVal = data->func(); \
         castChecker(isValid, value, constVal, nonConstVal); \
     } while (0)
 
@@ -225,7 +225,7 @@ void BasicDataInformationTest::basicTest(DataInformationBase* data, const Expect
 
     CAST_CHECKER(false, data, asDummy, DummyDataInformation);
 
-    DataInformation* dataInf = data->asDataInformation();
+    DataInformation* const dataInf = data->asDataInformation();
     QVERIFY(dataInf);
 
     QCOMPARE(dataInf->size(), expected.size);

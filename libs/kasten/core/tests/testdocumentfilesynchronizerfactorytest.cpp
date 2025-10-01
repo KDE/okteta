@@ -71,7 +71,7 @@ void TestDocumentFileSynchronizerFactoryTest::checkFileContent(const QUrl& fileU
                                                                const QByteArray& header)
 {
     auto factory = std::make_unique<Kasten::TestDocumentFileSynchronizerFactory>(header);
-    auto* loadJob = factory->startLoad(fileUrl);
+    auto* const loadJob = factory->startLoad(fileUrl);
     const bool loadSuccess = loadJob->exec();
     QVERIFY(loadSuccess);
     auto document = loadJob->releaseDocument();
@@ -98,7 +98,7 @@ void TestDocumentFileSynchronizerFactoryTest::testLoadFromFile()
 
     auto facrory = std::make_unique<Kasten::TestDocumentFileSynchronizerFactory>();
 
-    auto* loadJob = facrory->startLoad(fileUrl);
+    auto* const loadJob = facrory->startLoad(fileUrl);
     const bool loadSuccess = loadJob->exec();
     QVERIFY(loadSuccess);
     auto document = loadJob->releaseDocument();
@@ -120,7 +120,7 @@ void TestDocumentFileSynchronizerFactoryTest::testLoadFromNotExistingUrl()
 
     auto facrory = std::make_unique<Kasten::TestDocumentFileSynchronizerFactory>();
 
-    auto* loadJob = facrory->startLoad(fileUrl);
+    auto* const loadJob = facrory->startLoad(fileUrl);
     const bool loadSuccess = loadJob->exec();
     QVERIFY(!loadSuccess);
     auto document = loadJob->releaseDocument();
@@ -134,7 +134,7 @@ void TestDocumentFileSynchronizerFactoryTest::testLoadFromNotExistingFile()
 
     auto facrory = std::make_unique<Kasten::TestDocumentFileSynchronizerFactory>();
 
-    auto* loadJob = facrory->startLoad(fileUrl);
+    auto* const loadJob = facrory->startLoad(fileUrl);
     const bool loadSuccess = loadJob->exec();
     QVERIFY(!loadSuccess);
     auto document = loadJob->releaseDocument();
@@ -204,12 +204,12 @@ void TestDocumentFileSynchronizerFactoryTest::testConnectToFile()
     auto facrory = std::make_unique<Kasten::TestDocumentFileSynchronizerFactory>();
 
     // file 1
-    auto connectJob1 = facrory->startConnect(document.get(), fileUrl1, Kasten::TestDocumentFileSynchronizer::ReplaceRemote);
+    auto* const connectJob1 = facrory->startConnect(document.get(), fileUrl1, Kasten::TestDocumentFileSynchronizer::ReplaceRemote);
     const bool connectSuccess1 = connectJob1->exec();
     QVERIFY(connectSuccess1);
 
     // file 2
-    auto connectJob2 = facrory->startConnect(document.get(), fileUrl2, Kasten::TestDocumentFileSynchronizer::ReplaceRemote);
+    auto* const connectJob2 = facrory->startConnect(document.get(), fileUrl2, Kasten::TestDocumentFileSynchronizer::ReplaceRemote);
     const bool connectSuccess2 = connectJob2->exec();
     QVERIFY(connectSuccess2);
 

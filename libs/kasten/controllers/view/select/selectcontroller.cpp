@@ -25,7 +25,7 @@ SelectController::SelectController(KXMLGUIClient* guiClient)
     mDeselectAction =  KStandardAction::deselect( this, &SelectController::unselect,  this);
     mDeselectAction->setEnabled(false);
 
-    KActionCollection* actionCollection = guiClient->actionCollection();
+    KActionCollection* const actionCollection = guiClient->actionCollection();
     actionCollection->addAction(mSelectAllAction->objectName(), mSelectAllAction);
     actionCollection->addAction(mDeselectAction->objectName(), mDeselectAction);
 }

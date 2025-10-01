@@ -298,9 +298,9 @@ void KeyNavigator::moveCursor(MoveAction action, SelectAction selectAction)
 
 int KeyNavigator::addContextMenuActions(QMenu* menu)
 {
-    QAction* selectAllAction = menu->addAction(QIcon::fromTheme(QStringLiteral("edit-select-all")),
-                                               i18nc("@action:inmenu", "Select &All") + QLatin1Char('\t') + QKeySequence(QKeySequence::SelectAll).toString(QKeySequence::NativeText),
-                                               mView->q_func(), [this] { selectAll(); });
+    QAction* const selectAllAction = menu->addAction(QIcon::fromTheme(QStringLiteral("edit-select-all")),
+                                                     i18nc("@action:inmenu", "Select &All") + QLatin1Char('\t') + QKeySequence(QKeySequence::SelectAll).toString(QKeySequence::NativeText),
+                                                     mView->q_func(), [this] { selectAll(); });
     selectAllAction->setEnabled(mView->byteArrayModel()->size() > 0);
 
     selectAllAction->setObjectName(QStringLiteral("select-all"));

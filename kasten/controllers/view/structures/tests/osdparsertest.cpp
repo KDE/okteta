@@ -66,9 +66,9 @@ void OsdParserTest::testPrimitive()
     std::vector<std::unique_ptr<TopLevelDataInformation>> tds = parser.parseStructures();
     QCOMPARE(tds.size(), 1);
     const auto& td = tds.front();
-    DataInformation* data = td->actualDataInformation();
+    DataInformation* const data = td->actualDataInformation();
     QCOMPARE(data->name(), QStringLiteral("foo"));
-    PrimitiveDataInformation* prim = data->asPrimitive();
+    PrimitiveDataInformation* const prim = data->asPrimitive();
     QVERIFY(prim);
     QCOMPARE(prim->type(), type);
 
@@ -77,9 +77,9 @@ void OsdParserTest::testPrimitive()
     std::vector<std::unique_ptr<TopLevelDataInformation>> tds2 = parser2.parseStructures();
     QCOMPARE(tds2.size(), 1);
     const auto& td2 = tds2.front();
-    DataInformation* data2 = td2->actualDataInformation();
+    DataInformation* const data2 = td2->actualDataInformation();
     QCOMPARE(data2->name(), QStringLiteral("foo"));
-    PrimitiveDataInformation* prim2 = data2->asPrimitive();
+    PrimitiveDataInformation* const prim2 = data2->asPrimitive();
     QVERIFY(prim2);
     QCOMPARE(prim2->type(), type);
 }

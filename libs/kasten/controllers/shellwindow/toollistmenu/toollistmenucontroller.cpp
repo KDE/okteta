@@ -43,7 +43,7 @@ void ToolListMenuController::updateActions()
 
     mToolActionList.reserve(dockWidgets.size());
     for (const ToolViewDockWidget* dockWidget : dockWidgets) {
-        QAction* action = dockWidget->toggleViewAction();
+        QAction* const action = dockWidget->toggleViewAction();
         action->setText(dockWidget->windowTitle());
 //         action->setText( mToolView->title() );
         mToolActionList.append(action);

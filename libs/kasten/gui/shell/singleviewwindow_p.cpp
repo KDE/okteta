@@ -69,11 +69,11 @@ void SingleViewWindowPrivate::setView(AbstractView* view)
         }
     }
 
-    AbstractDocument* oldDocument = mDocument;
+    AbstractDocument* const oldDocument = mDocument;
     mDocument = view ? view->findBaseModel<AbstractDocument*>() : nullptr;
     const bool isNewDocument = (mDocument != oldDocument);
 
-    AbstractModelSynchronizer* oldSynchronizer = mSynchronizer;
+    AbstractModelSynchronizer* const oldSynchronizer = mSynchronizer;
     mSynchronizer = mDocument ? mDocument->synchronizer() : nullptr;
     const bool isNewSynchronizer = (mSynchronizer != oldSynchronizer);
 
@@ -149,8 +149,8 @@ void SingleViewWindowPrivate::onTitleChanged(const QString& newTitle)
     Q_Q(SingleViewWindow);
 
     if (mView) {
-        auto* document = mView->findBaseModel<AbstractDocument*>();
-        AbstractModelSynchronizer* synchronizer = document->synchronizer();
+        auto* const document = mView->findBaseModel<AbstractDocument*>();
+        AbstractModelSynchronizer* const synchronizer = document->synchronizer();
         const bool hasChanges =
             synchronizer ? (synchronizer->localSyncState() == LocalHasChanges) :
             document ?     document->contentFlags().testFlag(ContentHasUnstoredChanges) :
@@ -202,7 +202,7 @@ void SingleViewWindowPrivate::onToolVisibilityChanged(bool isVisible)
 
     auto* const dockWidget = qobject_cast<ToolViewDockWidget*>(q->sender());
     if (dockWidget) {
-        AbstractView* view = isVisible ? mView : nullptr;
+        AbstractView* const view = isVisible ? mView : nullptr;
         dockWidget->toolView()->tool()->setTargetModel(view);
     }
 }

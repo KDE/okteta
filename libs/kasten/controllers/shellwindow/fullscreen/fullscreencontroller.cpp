@@ -17,8 +17,8 @@ namespace Kasten {
 FullScreenController::FullScreenController(KXmlGuiWindow* window)
     : mMainWindow(window)
 {
-    auto* fullScreenAction = KStandardAction::fullScreen(this, &FullScreenController::switchFullScreen,
-                                                         window, this);
+    QAction* const fullScreenAction = KStandardAction::fullScreen(this, &FullScreenController::switchFullScreen,
+                                                                  window, this);
 
     mMainWindow->actionCollection()->addAction(fullScreenAction->objectName(), fullScreenAction);
 }

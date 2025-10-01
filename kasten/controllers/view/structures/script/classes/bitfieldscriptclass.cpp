@@ -23,7 +23,7 @@ BitfieldScriptClass::~BitfieldScriptClass() = default;
 
 QScriptValue BitfieldScriptClass::additionalProperty(const DataInformation* data, const QScriptString& name, uint id)
 {
-    const AbstractBitfieldDataInformation* pData = data->asBitfield();
+    const AbstractBitfieldDataInformation* const pData = data->asBitfield();
     if (name == s_width) {
         return pData->width();
     }
@@ -56,7 +56,7 @@ bool BitfieldScriptClass::setAdditionalProperty(DataInformation* data, const QSc
                                                                  QStringLiteral("bitfield.width must be between 1 and 64! Given: %1").arg(width));
             return true;
         }
-        AbstractBitfieldDataInformation* pData = data->asBitfield();
+        AbstractBitfieldDataInformation* const pData = data->asBitfield();
         pData->setWidth(width);
         return true;
     }

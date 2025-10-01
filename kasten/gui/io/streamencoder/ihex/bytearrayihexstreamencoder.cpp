@@ -189,7 +189,7 @@ bool ByteArrayIHexStreamEncoder::encodeDataToStream(QIODevice* device,
     const int lastLinePosition = layout.lastLinePosition(startCoord.line());
     const int dataPerLineCount = qMin(byteArrayView->noOfBytesPerLine(), maxDataPerLineCount);
     unsigned char line[maxLineLength];
-    unsigned char* lineData = &line[dataLineOffset];
+    unsigned char* const lineData = &line[dataLineOffset];
     Okteta::Address lineOffset = range.start();
     const int firstDataEnd = lastLinePosition - startCoord.pos() + 1;
     int nextUpperAddressChangeDataEnd = 0x10000 - (range.start() & 0xFFFF);

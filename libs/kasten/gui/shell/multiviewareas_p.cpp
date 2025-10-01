@@ -32,7 +32,7 @@ TabbedViews* MultiViewAreasPrivate::createViewArea(QSplitter* splitter)
 
     const auto& managedviewArea = mViewAreaList.emplace_back(std::make_unique<TabbedViews>());
 
-    auto* viewArea = managedviewArea.get();
+    auto* const viewArea = managedviewArea.get();
 
     QObject::connect(viewArea, &AbstractViewArea::focusChanged,
                      q, [this](bool hasFocus) { onViewAreaFocusChanged(hasFocus); });
@@ -72,7 +72,7 @@ AbstractViewArea* MultiViewAreasPrivate::splitViewArea(AbstractViewArea* _viewAr
     Q_Q(MultiViewAreas);
 
     auto* const firstViewArea = static_cast<TabbedViews*>(_viewArea);
-    QWidget* firstViewAreaWidget = firstViewArea->widget();
+    QWidget* const firstViewAreaWidget = firstViewArea->widget();
     auto* const baseSplitter = static_cast<QSplitter*>(firstViewAreaWidget->parentWidget());
 
     QSplitter* splitter;
@@ -89,7 +89,7 @@ AbstractViewArea* MultiViewAreasPrivate::splitViewArea(AbstractViewArea* _viewAr
 
     splitter->setOrientation(orientation == Qt::Horizontal ? Qt::Vertical : Qt::Horizontal);
 
-    TabbedViews* secondViewArea = createViewArea(splitter);
+    TabbedViews* const secondViewArea = createViewArea(splitter);
 
     // set to equal sizes
     QList<int> splitterSizes = splitter->sizes();
@@ -117,7 +117,7 @@ void MultiViewAreasPrivate::onViewsRemoved()
     auto* const viewArea = qobject_cast<TabbedViews*>(q->sender());
 
     if (viewArea->viewCount() == 0) {
-        QWidget* viewAreaWidget = viewArea->widget();
+        QWidget* const viewAreaWidget = viewArea->widget();
         auto* const baseSplitter = static_cast<QSplitter*>(viewAreaWidget->parentWidget());
 
         const int index = baseSplitter->indexOf(viewAreaWidget);
@@ -204,7 +204,7 @@ void MultiViewAreasPrivate::onContextMenuRequested(AbstractView* view, QPoint po
 
     auto* const viewArea = qobject_cast<TabbedViews*>(q->sender());
 
-    auto* viewAreaWidget = viewArea->widget();
+    auto* const viewAreaWidget = viewArea->widget();
     Q_EMIT q->contextMenuRequested(viewArea, view, viewAreaWidget->mapTo(mMainSplitter.get(), pos));
 }
 

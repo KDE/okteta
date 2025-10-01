@@ -101,7 +101,7 @@ ChecksumView::ChecksumView(ChecksumTool* tool, QWidget* parent)
     connect(mTool, &ChecksumTool::isApplyableChanged, this, &ChecksumView::onApplyableChanged);
 
     // automatically set focus to the parameters if a operation has been selected
-    QAbstractItemView* algorithmComboBoxListView = mAlgorithmComboBox->view();
+    QAbstractItemView* const algorithmComboBoxListView = mAlgorithmComboBox->view();
     QObject::connect(algorithmComboBoxListView, &QAbstractItemView::activated,
                      mParameterSetEditStack, qOverload<>(&QStackedWidget::setFocus));
     // TODO: is a workaround for Qt 4.5.1 which doesn't emit activated() for mouse clicks
@@ -142,7 +142,7 @@ void ChecksumView::getParameterSet(AbstractByteArrayChecksumParameterSet* parame
 
 void ChecksumView::onOperationChange(int index)
 {
-    QWidget* oldWidget = mParameterSetEditStack->currentWidget();
+    QWidget* const oldWidget = mParameterSetEditStack->currentWidget();
     if (oldWidget) {
         oldWidget->disconnect(this);
         oldWidget->disconnect(mTool);
@@ -154,7 +154,7 @@ void ChecksumView::onOperationChange(int index)
     auto* const parametersetEdit =
         qobject_cast<AbstractByteArrayChecksumParameterSetEdit*>(mParameterSetEditStack->currentWidget());
     if (parametersetEdit) {
-        AbstractByteArrayChecksumParameterSet* parameterSet = mTool->parameterSet();
+        const AbstractByteArrayChecksumParameterSet* const parameterSet = mTool->parameterSet();
         if (parameterSet) {
             parametersetEdit->setParameterSet(parameterSet);
         }
@@ -185,7 +185,7 @@ void ChecksumView::onApplyableChanged(bool isApplyable)
 
 void ChecksumView::onValuesChanged()
 {
-    AbstractByteArrayChecksumParameterSet* parameterSet = mTool->parameterSet();
+    AbstractByteArrayChecksumParameterSet* const parameterSet = mTool->parameterSet();
     if (parameterSet) {
         getParameterSet(parameterSet);
     }

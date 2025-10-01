@@ -66,7 +66,7 @@ PODTableView::PODTableView(PODDecoderTool* tool, AbstractUserMessagesHandler* us
     mPODTableView->setContextMenuPolicy(Qt::CustomContextMenu);
     mPODDelegate = new PODDelegate(mTool, this);
     mPODTableView->setItemDelegate(mPODDelegate);
-    QHeaderView* header = mPODTableView->header();
+    QHeaderView* const header = mPODTableView->header();
     header->setSectionResizeMode(QHeaderView::Interactive);
     header->setStretchLastSection(false);
     auto* const displayModel = new PODDisplayModel(mPODTableView, mTool, this);
@@ -201,7 +201,7 @@ void PODTableView::copyToClipboard()
     auto* const action = static_cast<QAction*>(sender());
     const QModelIndex index = action->data().toModelIndex();
 
-    QMimeData* mimeData = mPODTableView->model()->mimeData({index});
+    QMimeData* const mimeData = mPODTableView->model()->mimeData({index});
 
     QApplication::clipboard()->setMimeData(mimeData);
 }
@@ -216,7 +216,7 @@ bool PODTableView::eventFilter(QObject* object, QEvent* event)
                 mTool->markPOD(podId);
             }
         } else if (event->type() == QEvent::FocusOut) {
-            QWidget* tableViewFocusWidget = mPODTableView->focusWidget();
+            QWidget* const tableViewFocusWidget = mPODTableView->focusWidget();
             const bool subChildHasFocus = (tableViewFocusWidget != mPODTableView);
             if (subChildHasFocus) {
                 mPODTableViewFocusChild = tableViewFocusWidget;
@@ -261,7 +261,7 @@ void PODTableView::onCustomContextMenuRequested(QPoint pos)
     menu->addAction(editAction);
 
     // TODO: split into explicit "Copy As Data" and "Copy As Text"
-    auto* copyAction =  KStandardAction::copy(this, &PODTableView::copyToClipboard,  menu);
+    QAction* const copyAction = KStandardAction::copy(this, &PODTableView::copyToClipboard,  menu);
     copyAction->setShortcut(QKeySequence());
     copyAction->setData(index);
     menu->addAction(copyAction);

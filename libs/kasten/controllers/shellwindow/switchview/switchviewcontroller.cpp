@@ -22,7 +22,7 @@ SwitchViewController::SwitchViewController(AbstractGroupedViews* groupedViews, K
 
     mBackwardAction = KStandardAction::back(this, &SwitchViewController::backward, this);
 
-    KActionCollection* actionCollection = guiClient->actionCollection();
+    KActionCollection* const actionCollection = guiClient->actionCollection();
     actionCollection->addAction(QStringLiteral("window_next"), mForwardAction);
     actionCollection->addAction(QStringLiteral("window_previous"), mBackwardAction);
 
@@ -51,7 +51,7 @@ void SwitchViewController::updateActions()
         hasNext = false;
         hasPrevious = false;
     } else {
-        AbstractView* focussedView = mGroupedViews->viewFocus();
+        AbstractView* const focussedView = mGroupedViews->viewFocus();
         const int indexOfFocussedView = viewList.indexOf(focussedView);
 
         hasNext = (indexOfFocussedView + 1 < viewList.size());
@@ -65,18 +65,18 @@ void SwitchViewController::updateActions()
 void SwitchViewController::forward()
 {
     const QVector<AbstractView*> viewList = mGroupedViews->viewList();
-    AbstractView* focussedView = mGroupedViews->viewFocus();
+    AbstractView* const focussedView = mGroupedViews->viewFocus();
     const int indexOfFocussedView = viewList.indexOf(focussedView);
-    AbstractView* nextView = viewList.at(indexOfFocussedView + 1);
+    AbstractView* const nextView = viewList.at(indexOfFocussedView + 1);
     mGroupedViews->setViewFocus(nextView);
 }
 
 void SwitchViewController::backward()
 {
     const QVector<AbstractView*> viewList = mGroupedViews->viewList();
-    AbstractView* focussedView = mGroupedViews->viewFocus();
+    AbstractView* const focussedView = mGroupedViews->viewFocus();
     const int indexOfFocussedView = viewList.indexOf(focussedView);
-    AbstractView* previousView = viewList.at(indexOfFocussedView - 1);
+    AbstractView* const previousView = viewList.at(indexOfFocussedView - 1);
     mGroupedViews->setViewFocus(previousView);
 }
 

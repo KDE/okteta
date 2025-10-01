@@ -18,7 +18,7 @@ namespace Kasten {
 
 OverwriteModeController::OverwriteModeController(KXMLGUIClient* guiClient)
 {
-    KActionCollection* actionCollection = guiClient->actionCollection();
+    KActionCollection* const actionCollection = guiClient->actionCollection();
 
     mSetOverWriteAction = new KToggleAction(i18nc("@option:check set the view into overwrite mode",
                                                   "Overwr&ite Mode"), this);

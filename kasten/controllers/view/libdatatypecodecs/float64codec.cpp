@@ -23,7 +23,7 @@ Float64Codec::~Float64Codec() = default;
 
 QVariant Float64Codec::value(const PODData& data, int* byteCount) const
 {
-    const double* pointer = (double*)data.pointer(8);
+    const double* const pointer = (double*)data.pointer(8);
 
     *byteCount = pointer ? 8 : 0;
     return pointer ? QVariant::fromValue<Float64>(Float64(*pointer)) : QVariant();

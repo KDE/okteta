@@ -47,7 +47,7 @@ qint64 UnionDataInformation::readData(const Okteta::AbstractByteArrayModel* inpu
                                       Okteta::Address address, BitCount64 bitsRemaining, quint8* bitOffset)
 {
     Q_ASSERT(mHasBeenUpdated); // update must have been called prior to reading
-    TopLevelDataInformation* top = topLevelDataInformation();
+    TopLevelDataInformation* const top = topLevelDataInformation();
     Q_CHECK_PTR(top);
 
     qint64 readBits = 0;
@@ -55,10 +55,10 @@ qint64 UnionDataInformation::readData(const Okteta::AbstractByteArrayModel* inpu
     quint8 bitOffsetAfterUnion = originalBitOffset;
     bool reachedEOF = false;
     for (std::size_t i = 0; i < mChildren.size(); ++i) {
-        DataInformation* next = mChildren[i].get();
+        DataInformation* const next = mChildren[i].get();
         // first of all update the structure:
         top->scriptHandler()->updateDataInformation(next);
-        DataInformation* newNext = mChildren[i].get();
+        DataInformation* const newNext = mChildren[i].get();
         if (next != newNext) {
             logInfo() << "Child at index " << i << " was replaced.";
             top->setChildDataChanged();

@@ -23,7 +23,7 @@ UInt16Codec::~UInt16Codec() = default;
 
 QVariant UInt16Codec::value(const PODData& data, int* byteCount) const
 {
-    const quint16* pointer = (quint16*)data.pointer(2);
+    const quint16* const pointer = (quint16*)data.pointer(2);
 
     *byteCount = pointer ? 2 : 0;
     return pointer ? QVariant::fromValue<UInt16>(UInt16(*pointer)) : QVariant();

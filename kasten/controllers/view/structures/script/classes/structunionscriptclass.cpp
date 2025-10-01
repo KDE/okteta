@@ -83,7 +83,7 @@ bool StructUnionScriptClass::additionalPropertyFlags(const DataInformation* data
     QString objName = name.toString();
     uint count = data->childCount();
     for (uint i = 0; i < count; ++i) {
-        DataInformation* child = data->childAt(i);
+        DataInformation* const child = data->childAt(i);
         Q_CHECK_PTR(child);
         if (objName == child->name()) {
             *flags |= QScriptValue::ReadOnly;
@@ -125,7 +125,7 @@ QScriptValue StructUnionScriptClass::additionalProperty(const DataInformation* d
     QString objName = name.toString();
     uint count = data->childCount();
     for (uint i = 0; i < count; ++i) {
-        DataInformation* child = data->childAt(i);
+        DataInformation* const child = data->childAt(i);
         Q_CHECK_PTR(child);
         if (objName == child->name()) {
             return child->toScriptValue(engine(), handlerInfo());
@@ -155,7 +155,7 @@ QScriptValue StructUnionScriptClass::prototype() const
 
 QScriptValue StructUnionScriptClass::StructUnion_proto_toString(QScriptContext* ctx, QScriptEngine* eng)
 {
-    DataInformation* data = toDataInformation(ctx->thisObject());
+    DataInformation* const data = toDataInformation(ctx->thisObject());
     if (!data) {
         qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "could not cast data";
         return eng->undefinedValue();
@@ -176,7 +176,7 @@ QScriptValue StructUnionScriptClass::StructUnion_proto_child(QScriptContext* ctx
                                       QStringLiteral("(struct/union).child(name) argument has to be a string"));
         return QScriptValue::UndefinedValue;
     }
-    DataInformation* data = toDataInformation(ctx->thisObject());
+    DataInformation* const data = toDataInformation(ctx->thisObject());
     if (!data) {
         qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "could not cast data";
         return eng->undefinedValue();
@@ -184,7 +184,7 @@ QScriptValue StructUnionScriptClass::StructUnion_proto_child(QScriptContext* ctx
     uint count = data->childCount();
     QString name = arg.toString();
     for (uint i = 0; i < count; i++) {
-        DataInformation* child = data->childAt(i);
+        DataInformation* const child = data->childAt(i);
         if (child->name() == name) {
             return child->toScriptValue(eng, data->topLevelDataInformation()->scriptHandler()->handlerInfo());
         }
@@ -199,7 +199,7 @@ QScriptValue StructUnionScriptClass::StructUnion_proto_setChildren(QScriptContex
         return ctx->throwError(QScriptContext::RangeError,
                                QStringLiteral("(struct/union).child(children) needs one argument"));
     }
-    DataInformation* data = toDataInformation(ctx->thisObject());
+    DataInformation* const data = toDataInformation(ctx->thisObject());
     if (!data) {
         qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "could not cast data";
         return eng->undefinedValue();

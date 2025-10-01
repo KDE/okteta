@@ -23,9 +23,9 @@ UiColorSchemeController::UiColorSchemeController(KXmlGuiWindow* window)
     auto* const manager = new KColorSchemeManager(this);
 
 #if KCONFIGWIDGETS_VERSION >= QT_VERSION_CHECK(5, 107, 0)
-    KActionMenu* selectionMenu = KColorSchemeMenu::createMenu(manager, this);
+    KActionMenu* const selectionMenu = KColorSchemeMenu::createMenu(manager, this);
 #else
-    KActionMenu* selectionMenu = manager->createSchemeSelectionMenu(this);
+    KActionMenu* const selectionMenu = manager->createSchemeSelectionMenu(this);
 #endif
 
     window->actionCollection()->addAction(QStringLiteral("settings_uicolorscheme"), selectionMenu);

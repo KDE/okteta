@@ -93,7 +93,7 @@ unsigned long PODData::bitValue(int noOfBitsToRead) const
 
 bool PODData::updateRawData(int size)
 {
-    const Byte* oldCurrentOriginalData = mCurrentOriginalData;
+    const Byte* const oldCurrentOriginalData = mCurrentOriginalData;
 
     if (size > 0) {
         if (mByteOrder != QSysInfo::ByteOrder) {
@@ -119,8 +119,8 @@ void PODData::getPointers(const void** P8Bit, const void** P16Bit, const void** 
     constexpr int MachineOffsets[4] = { 0, 0, 0, 0 };
     constexpr int ReversedOffsets[4] = { 7, 6, 4, 0 };
 
-    const int* offsets = (mByteOrder == QSysInfo::ByteOrder) ? MachineOffsets : ReversedOffsets;
-    const Byte* data = mByteOrderSetAligned64Bit.mBytes;
+    const int* const offsets = (mByteOrder == QSysInfo::ByteOrder) ? MachineOffsets : ReversedOffsets;
+    const Byte* const data = mByteOrderSetAligned64Bit.mBytes;
 
     *P8Bit =  (mCurrentSize >= 1) ? data + offsets[0] : nullptr;
     *P16Bit = (mCurrentSize >= 2) ? data + offsets[1] : nullptr;
@@ -135,7 +135,7 @@ const void* PODData::pointer(int byteCount) const
     }
 
     const int offset = (mByteOrder == QSysInfo::ByteOrder) ? 0 : 8 - byteCount;
-    const Byte* data = mByteOrderSetAligned64Bit.mBytes;
+    const Byte* const data = mByteOrderSetAligned64Bit.mBytes;
 
     return (byteCount > 0) ? data + offset : nullptr;
 }

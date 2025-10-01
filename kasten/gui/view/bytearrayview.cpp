@@ -94,7 +94,7 @@ ByteArrayView::~ByteArrayView() = default;
 
 void ByteArrayView::init()
 {
-    Okteta::AbstractByteArrayModel* content = mDocument->content();
+    Okteta::AbstractByteArrayModel* const content = mDocument->content();
     mWidget = std::make_unique<Okteta::ByteArrayJanusView>();
     mWidget->setByteArrayModel(content);
 

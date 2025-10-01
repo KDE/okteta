@@ -37,7 +37,7 @@ void SingleViewAreaPrivate::setCurrentToolInlineView(AbstractToolInlineView* vie
 {
     if (mCurrentToolInlineView != view) {
         mCurrentToolInlineView = view;
-        QWidget* toolInlineViewWidget = mCurrentToolInlineView ? mCurrentToolInlineView->widget() : nullptr;
+        QWidget* const toolInlineViewWidget = mCurrentToolInlineView ? mCurrentToolInlineView->widget() : nullptr;
         mViewAreaBox->setBottomToolWidget(toolInlineViewWidget);
     }
 

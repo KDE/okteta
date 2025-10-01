@@ -80,7 +80,7 @@ BitCount64 DataInformation::positionInFile(Okteta::Address start) const
         return start * 8; // this is the root of the structure
 
     }
-    const DataInformation* par = mParent->asDataInformation();
+    const DataInformation* const par = mParent->asDataInformation();
     return par->childPosition(this, start);
 }
 
@@ -277,7 +277,7 @@ DataInformation* DataInformation::child(const QString& name) const
 {
     int size = childCount();
     for (int i = 0; i < size; ++i) {
-        DataInformation* child = childAt(i);
+        DataInformation* const child = childAt(i);
         if (child->name() == name) {
             return child;
         }
@@ -308,7 +308,7 @@ int DataInformation::row() const
 
 QString DataInformation::fullObjectPath() const
 {
-    DataInformationBase* par = parent();
+    DataInformationBase* const par = parent();
     if (!par || par->isTopLevel()) {
         return name();
     }

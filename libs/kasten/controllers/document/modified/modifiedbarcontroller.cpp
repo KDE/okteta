@@ -98,7 +98,7 @@ void ModifiedBarController::onSynchronizerChanged(AbstractModelSynchronizer* new
         mSynchronizer->disconnect(this);
     }
 
-    AbstractModelSynchronizer* oldSynchronizer = mSynchronizer;
+    AbstractModelSynchronizer* const oldSynchronizer = mSynchronizer;
     mSynchronizer = newSynchronizer;
 
     LocalSyncState localState;

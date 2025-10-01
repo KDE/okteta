@@ -81,7 +81,7 @@ QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& o
 {
     const ScriptHandlerInfo::Mode mode = mHandlerInfo->mode();
     Q_ASSERT(mode != ScriptHandlerInfo::Mode::None);
-    DataInformation* data = toDataInformation(object);
+    DataInformation* const data = toDataInformation(object);
     if (!data) {
         mHandlerInfo->logger()->error() << "could not cast data from" << object.data().toString();
         std::ignore = engine()->currentContext()->throwError(QScriptContext::ReferenceError,
@@ -117,7 +117,7 @@ QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& o
 QScriptValue DefaultScriptClass::property(const QScriptValue& object, const QScriptString& name, uint id)
 {
     Q_ASSERT(mHandlerInfo->mode() != ScriptHandlerInfo::Mode::None);
-    DataInformation* data = toDataInformation(object);
+    DataInformation* const data = toDataInformation(object);
     if (!data) {
         mHandlerInfo->logger()->error() << "could not cast data from" << object.data().toString();
         return engine()->currentContext()->throwError(QScriptContext::ReferenceError,
@@ -172,7 +172,7 @@ QScriptValue DefaultScriptClass::property(const QScriptValue& object, const QScr
 
 void DefaultScriptClass::setDataType(const QScriptValue& value, DataInformation* data)
 {
-    DataInformation* thisObj = toDataInformation(engine()->currentContext()->thisObject());
+    DataInformation* const thisObj = toDataInformation(engine()->currentContext()->thisObject());
     Q_CHECK_PTR(thisObj);
     const bool isThisObj = thisObj == data;
     // this object always has mHasBeenUpdated set just before calling updateFunc, so in that case it is okay
@@ -190,9 +190,9 @@ void DefaultScriptClass::setDataType(const QScriptValue& value, DataInformation*
     }
 
     DataInformation* const rawNewType = newType.get();
-    DataInformationBase* parent = data->parent();
+    DataInformationBase* const parent = data->parent();
     Q_CHECK_PTR(parent);
-    TopLevelDataInformation* top = data->topLevelDataInformation();
+    TopLevelDataInformation* const top = data->topLevelDataInformation();
     Q_CHECK_PTR(top);
     // only if parent is toplevel, struct or union, can we replace
     bool replaced = false;
@@ -201,7 +201,7 @@ void DefaultScriptClass::setDataType(const QScriptValue& value, DataInformation*
         parent->asTopLevel()->setActualDataInformation(std::move(newType));
         replaced = true;
     } else if (parent->isStruct()) {
-        StructureDataInformation* stru = parent->asStruct();
+        StructureDataInformation* const stru = parent->asStruct();
         int index = stru->indexOf(data);
         Q_ASSERT(index != -1);
         Q_ASSERT(uint(index) < stru->childCount());
@@ -210,7 +210,7 @@ void DefaultScriptClass::setDataType(const QScriptValue& value, DataInformation*
             stru->logError() << "failed to replace child at index" << index;
         }
     } else if (parent->isUnion()) {
-        UnionDataInformation* un = parent->asUnion();
+        UnionDataInformation* const un = parent->asUnion();
         int index = un->indexOf(data);
         Q_ASSERT(index != -1);
         Q_ASSERT(uint(index) < un->childCount());
@@ -239,7 +239,7 @@ void DefaultScriptClass::setProperty(QScriptValue& object, const QScriptString& 
 {
     const ScriptHandlerInfo::Mode mode = mHandlerInfo->mode();
     Q_ASSERT(mode != ScriptHandlerInfo::Mode::None);
-    DataInformation* data = toDataInformation(object);
+    DataInformation* const data = toDataInformation(object);
     if (!data) {
         mHandlerInfo->logger()->error() << "could not cast data from" << object.data().toString();
         std::ignore = engine()->currentContext()->throwError(QScriptContext::ReferenceError,
@@ -302,7 +302,7 @@ QScriptValue::PropertyFlags DefaultScriptClass::propertyFlags(const QScriptValue
     QScriptValue::PropertyFlags result;
     const ScriptHandlerInfo::Mode mode = mHandlerInfo->mode();
     Q_ASSERT(mode != ScriptHandlerInfo::Mode::None);
-    DataInformation* data = toDataInformation(object);
+    DataInformation* const data = toDataInformation(object);
     if (!data) {
         mHandlerInfo->logger()->error() << "could not cast data from" << object.data().toString();
         std::ignore = engine()->currentContext()->throwError(QScriptContext::ReferenceError,
@@ -337,7 +337,7 @@ QScriptValue DefaultScriptClass::prototype() const
 
 QScriptValue DefaultScriptClass::Default_proto_toString(QScriptContext* ctx, QScriptEngine* eng)
 {
-    DataInformation* data = toDataInformation(ctx->thisObject());
+    DataInformation* const data = toDataInformation(ctx->thisObject());
     if (!data) {
         qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "could not cast data";
         return eng->undefinedValue();
@@ -354,7 +354,7 @@ DefaultscriptClassIterator::DefaultscriptClassIterator(const QScriptValue& objec
     : QScriptClassPropertyIterator(object)
     , mClass(cls)
 {
-    DataInformation* data = DefaultScriptClass::toDataInformation(object);
+    DataInformation* const data = DefaultScriptClass::toDataInformation(object);
     Q_CHECK_PTR(data);
     mData = data;
 }
@@ -382,7 +382,7 @@ QScriptString DefaultscriptClassIterator::name() const
     }
     int index = mCurrent - mClass->mIterableProperties.size();
     Q_ASSERT(index >= 0);
-    DataInformation* child = mData->childAt(index);
+    DataInformation* const child = mData->childAt(index);
     return mClass->engine()->toStringHandle(child->name());
 }
 

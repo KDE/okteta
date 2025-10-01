@@ -23,7 +23,7 @@ Octal8Codec::~Octal8Codec() = default;
 
 QVariant Octal8Codec::value(const PODData& data, int* byteCount) const
 {
-    const unsigned char* pointer = (unsigned char*)data.pointer(1);
+    const unsigned char* const pointer = (unsigned char*)data.pointer(1);
 
     *byteCount = pointer ? 1 : 0;
     return pointer ? QVariant::fromValue<Octal8>(Octal8(*pointer)) : QVariant();

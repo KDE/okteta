@@ -23,7 +23,7 @@ EnumScriptClass::~EnumScriptClass() = default;
 QScriptValue EnumScriptClass::additionalProperty(const DataInformation* data, const QScriptString& name, uint id)
 {
     if (name == s_values) {
-        const EnumDataInformation* pData = data->asEnum();
+        const EnumDataInformation* const pData = data->asEnum();
         QScriptValue ret = engine()->newObject();
         QMapIterator<AllPrimitiveTypes, QString> it(pData->enumValues()->values());
         while (it.hasNext()) {
@@ -50,7 +50,7 @@ bool EnumScriptClass::queryAdditionalProperty(const DataInformation* data, const
 bool EnumScriptClass::setAdditionalProperty(DataInformation* data, const QScriptString& name, uint id, const QScriptValue& value)
 {
     if (name == s_values) {
-        EnumDataInformation* pData = data->asEnum();
+        EnumDataInformation* const pData = data->asEnum();
         QMap<AllPrimitiveTypes, QString> newValues = EnumDefinition::parseEnumValues(value,
                                                                                      LoggerWithContext(pData->logger(), pData->fullObjectPath()), pData->type());
         if (newValues.isEmpty()) {

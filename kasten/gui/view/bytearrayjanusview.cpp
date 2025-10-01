@@ -34,7 +34,7 @@ void ByteArrayJanusView::setViewModus(int viewModus)
         return;
     }
 
-    AbstractByteArrayView* newView = (viewModus == ColumnViewId) ?
+    auto* const newView = (viewModus == ColumnViewId) ?
                                      (AbstractByteArrayView*)new ByteArrayColumnView(this) :
                                      (AbstractByteArrayView*)new ByteArrayRowView(this);
 

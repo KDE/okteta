@@ -24,7 +24,7 @@ namespace Kasten {
 GotoOffsetController::GotoOffsetController(If::ToolInlineViewable* toolInlineViewable, KXMLGUIClient* guiClient)
     : mToolInlineViewable(toolInlineViewable)
 {
-    KActionCollection* actionCollection = guiClient->actionCollection();
+    KActionCollection* const actionCollection = guiClient->actionCollection();
 
     mGotoOffsetAction = new QAction(QIcon::fromTheme(QStringLiteral("go-jump")),
                                     i18nc("@action:inmenu", "&Go to Offset…"), this);

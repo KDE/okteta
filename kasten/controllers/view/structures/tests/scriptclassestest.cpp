@@ -338,7 +338,7 @@ void ScriptClassesTest::testReplaceObject()
     QScriptValue structUpdate = eng->evaluate(QStringLiteral(
                                                   "(function() { this.first.datatype = int32(); this.first.name = \"changed\"; })"));
     QVERIFY(structUpdate.isFunction());
-    StructureDataInformation* structData = main->childAt(0)->asStruct();
+    StructureDataInformation* const structData = main->childAt(0)->asStruct();
     QVERIFY(structData);
     structData->setUpdateFunc(structUpdate);
     QCOMPARE(structData->name(), QStringLiteral("innerStruct"));
@@ -347,13 +347,13 @@ void ScriptClassesTest::testReplaceObject()
     // access it again after changing to ensure it was set properly
     QScriptValue arrayUpdate = eng->evaluate(QStringLiteral(
                                                  "(function() { this.datatype = float(); this.name = \"changedToFloat\"; })"));
-    ArrayDataInformation* arrayData = main->childAt(1)->asArray();
+    ArrayDataInformation* const arrayData = main->childAt(1)->asArray();
     arrayData->setUpdateFunc(arrayUpdate);
 
     QVERIFY(arrayData);
     QScriptValue pointerTargetUpdate = eng->evaluate(QStringLiteral(
                                                          "(function() { this.datatype = array(int8(), 5); this.parent.name = \"changedToArrayPointer\"; })"));
-    PointerDataInformation* ptrData = main->childAt(2)->asPointer();
+    PointerDataInformation* const ptrData = main->childAt(2)->asPointer();
     QVERIFY(ptrData);
     ptrData->pointerTarget()->setUpdateFunc(pointerTargetUpdate);
 
@@ -409,7 +409,7 @@ void ScriptClassesTest::testSafePrimitiveArrayReference()
     QVERIFY(arrayData->arrayType()->isPrimitive());
     QVERIFY(arrayData->length() > 2);
     arrayDataTop->logger()->setLogToStdOut(true);
-    QScriptEngine* eng = arrayDataTop->scriptEngine();
+    QScriptEngine* const eng = arrayDataTop->scriptEngine();
     std::ignore = eng->pushContext();
     eng->currentContext()->activationObject().setProperty(QStringLiteral("myArray"),
                                                           arrayData->toScriptValue(arrayDataTop.get()));

@@ -128,8 +128,8 @@ std::unique_ptr<QMimeData> ByteArrayPatternGenerator::generateData()
 
     QByteArray insertData(insertDataSize, '\0');
 
-    char* rawInsertData = insertData.data();
-    const char* rawPatternData = mSettings.pattern.constData();
+    char* const rawInsertData = insertData.data();
+    const char* const rawPatternData = mSettings.pattern.constData();
 
     for (int i = 0; i < insertDataSize; i += patternSize) {
         memcpy(&rawInsertData[i], rawPatternData, patternSize);

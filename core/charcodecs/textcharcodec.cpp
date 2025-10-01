@@ -113,7 +113,7 @@ const QStringList &TextCharCodec::codecNames()
 
         for( QStringList::ConstIterator it = CharSets.begin(); it != CharSets.end(); ++it ) {
             bool Found = true;
-            QTextCodec* Codec = KCharsets::charsets()->codecForName( *it, Found );
+            QTextCodec* const Codec = KCharsets::charsets()->codecForName( *it, Found );
             if( Found && is8Bit(Codec) )
                 CodecNames.append( QString::fromLatin1(Codec->name()) );
         }
@@ -156,7 +156,7 @@ std::unique_ptr<TextCharCodec> TextCharCodec::createLocalCodec()
 std::unique_ptr<TextCharCodec> TextCharCodec::createCodec(const QString& codecName)
 {
     bool isOk = false;
-    QTextCodec* codec = QTextCodec::codecForName(codecName.toLatin1());
+    QTextCodec* const codec = QTextCodec::codecForName(codecName.toLatin1());
     if (codec) {
         isOk = is8Bit(codec);
     }
@@ -173,7 +173,7 @@ const QStringList& TextCharCodec::codecNames()
     // first call?
     if (textCodecNames.isEmpty()) {
         for (const auto& encodingData : encodingDataList) {
-            QTextCodec* codec = QTextCodec::codecForName((encodingData.name));
+            QTextCodec* const codec = QTextCodec::codecForName((encodingData.name));
             if (codec) {
                 textCodecNames.append(QString::fromLatin1(codec->name()));
             }

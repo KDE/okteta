@@ -50,7 +50,7 @@ void AbstractFileSystemExportJobPrivate::completeExport(bool success)
 
     if (success) {
         if (!mUrl.isLocalFile()) {
-            KIO::FileCopyJob* fileCopyJob =
+            KIO::FileCopyJob* const fileCopyJob =
                 KIO::file_copy(QUrl::fromLocalFile(mWorkFilePath), mUrl, -1, KIO::Overwrite);
             KJobWidgets::setWindow(fileCopyJob, /*mWidget*/ nullptr);
 

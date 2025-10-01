@@ -16,7 +16,7 @@ namespace Kasten {
 QuitController::QuitController(KXmlGuiWindow* window)
     : mMainWindow(window)
 {
-    auto* quitAction = KStandardAction::quit(this, &QuitController::quit, this);
+    QAction* const quitAction = KStandardAction::quit(this, &QuitController::quit, this);
 
     mMainWindow->actionCollection()->addAction(quitAction->objectName(), quitAction);
 }

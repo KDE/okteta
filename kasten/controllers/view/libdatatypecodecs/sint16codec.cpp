@@ -23,7 +23,7 @@ SInt16Codec::~SInt16Codec() = default;
 
 QVariant SInt16Codec::value(const PODData& data, int* byteCount) const
 {
-    const qint16* pointer = (qint16*)data.pointer(2);
+    const qint16* const pointer = (qint16*)data.pointer(2);
 
     *byteCount = pointer ? 2 : 0;
     return pointer ? QVariant::fromValue<SInt16>(SInt16(*pointer)) : QVariant();

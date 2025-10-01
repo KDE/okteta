@@ -57,11 +57,11 @@ void ViewManagerPrivate::createCopyOfView(AbstractView* view, Qt::Alignment alig
 
     auto viewCopy = mFactory->createCopyOfView(view, alignment);
     if (!viewCopy) {
-        auto* documentOfView = view->findBaseModel<AbstractDocument*>();
+        auto* const documentOfView = view->findBaseModel<AbstractDocument*>();
         viewCopy = std::make_unique<DummyView>(documentOfView);
     }
 
-    auto* rawViewCopy = viewCopy.release();
+    auto* const rawViewCopy = viewCopy.release();
 
     mViewList.append(rawViewCopy);
 
@@ -83,7 +83,7 @@ void ViewManagerPrivate::createViewsFor(const QVector<Kasten::AbstractDocument*>
             view = std::make_unique<DummyView>(document);
         }
 
-        auto* rawView = view.release();
+        auto* const rawView = view.release();
         mViewList.append(rawView);
         openedViews.append(rawView);
     }
@@ -102,8 +102,8 @@ void ViewManagerPrivate::removeViewsFor(const QVector<Kasten::AbstractDocument*>
     QMutableVectorIterator<AbstractView*> it(mViewList);
     for (AbstractDocument* document : documents) {
         while (it.hasNext()) {
-            AbstractView* view = it.next();
-            auto* documentOfView = view->findBaseModel<AbstractDocument*>();
+            AbstractView* const view = it.next();
+            auto* const documentOfView = view->findBaseModel<AbstractDocument*>();
             if (documentOfView == document) {
                 it.remove();
                 closedViews.append(view);

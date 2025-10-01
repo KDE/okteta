@@ -86,7 +86,7 @@ OktetaPart::OktetaPart(QObject* parent,
     setXMLFile(QLatin1String(UIFileName[modus]));
 
     mSingleViewArea = std::make_unique<Kasten::SingleViewArea>();
-    QWidget* areaWidget = mSingleViewArea->widget();
+    QWidget* const areaWidget = mSingleViewArea->widget();
     layout->addWidget(areaWidget);
     layout->parentWidget()->setFocusProxy(areaWidget);
 
@@ -170,7 +170,7 @@ bool OktetaPart::openFile()
 {
     const auto synchronizerFactory = std::make_unique<Kasten::ByteArrayRawFileSynchronizerFactory>();
 
-    Kasten::AbstractLoadJob* loadJob = synchronizerFactory->startLoad(QUrl::fromLocalFile(localFilePath()));
+    Kasten::AbstractLoadJob* const loadJob = synchronizerFactory->startLoad(QUrl::fromLocalFile(localFilePath()));
     connect(loadJob, &KJob::result,
             this, &OktetaPart::onDocumentLoadJobResult);
     const bool loadSuccess = Kasten::JobManager::executeJob(loadJob);
@@ -180,9 +180,9 @@ bool OktetaPart::openFile()
 
 bool OktetaPart::saveFile()
 {
-    Kasten::AbstractModelSynchronizer* synchronizer = mDocument->synchronizer();
+    Kasten::AbstractModelSynchronizer* const synchronizer = mDocument->synchronizer();
 
-    Kasten::AbstractSyncWithRemoteJob* syncJob =
+    Kasten::AbstractSyncWithRemoteJob* const syncJob =
         synchronizer->startSyncWithRemote(QUrl::fromLocalFile(localFilePath()), Kasten::AbstractModelSynchronizer::ReplaceRemote);
     const bool syncSucceeded = Kasten::JobManager::executeJob(syncJob);
 

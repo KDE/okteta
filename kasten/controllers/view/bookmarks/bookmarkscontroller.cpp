@@ -41,7 +41,7 @@ static constexpr char BookmarkListActionListId[] = "bookmark_list";
 BookmarksController::BookmarksController(KXMLGUIClient* guiClient)
     : mGuiClient(guiClient)
 {
-    KActionCollection* actionCollection = mGuiClient->actionCollection();
+    KActionCollection* const actionCollection = mGuiClient->actionCollection();
 
     mCreateAction = KStandardAction::addBookmark(this, &BookmarksController::createBookmark, this);
     mCreateAction->setEnabled(false);
@@ -248,7 +248,7 @@ void BookmarksController::createBookmark()
         bookmarkName = i18nc("default name of a bookmark", "Bookmark");  // %1").arg( 0 ) ); // TODO: use counter like with new file, globally
 
     }
-    auto* bookmarkEditPopup = new BookmarkEditPopup(mByteArrayView->widget());
+    auto* const bookmarkEditPopup = new BookmarkEditPopup(mByteArrayView->widget());
     QPoint popupPoint = mByteArrayView->cursorRect().topLeft();
 //     popupPoint.ry() += mSlider->height() / 2;
     popupPoint = mByteArrayView->widget()->mapToGlobal(popupPoint);

@@ -93,7 +93,7 @@ InfoView::InfoView(InfoTool* tool, QWidget* parent)
     mStatisticTableView->setDragDropMode(QAbstractItemView::DragOnly);
     mStatisticTableView->setSortingEnabled(true);
     mStatisticTableView->setContextMenuPolicy(Qt::CustomContextMenu);
-    QHeaderView* header = mStatisticTableView->header();
+    QHeaderView* const header = mStatisticTableView->header();
     header->setSectionResizeMode(QHeaderView::Interactive);
     header->setStretchLastSection(false);
     auto* const displayModel = new StatisticDisplayModel(mStatisticTableView, this);
@@ -159,7 +159,7 @@ InfoView::~InfoView()
 {
     QList<int> columnsWidth;
     columnsWidth.reserve(StatisticTableModel::NoOfIds);
-    const QHeaderView* header = mStatisticTableView->header();
+    const QHeaderView* const header = mStatisticTableView->header();
     for (int i = 0; i < StatisticTableModel::NoOfIds; ++i) {
         columnsWidth.append(header->sectionSize(i));
     }
@@ -212,17 +212,17 @@ void InfoView::onCustomContextMenuRequested(QPoint pos)
 
 void InfoView::onCopyButtonClicked()
 {
-    const QItemSelectionModel* selectionModel = mStatisticTableView->selectionModel();
+    const QItemSelectionModel* const selectionModel = mStatisticTableView->selectionModel();
 
     const QModelIndexList selectedIndexes = selectionModel->selectedIndexes();
-    QMimeData* mimeData = mStatisticTableView->model()->mimeData(selectedIndexes);
+    QMimeData* const mimeData = mStatisticTableView->model()->mimeData(selectedIndexes);
 
     QApplication::clipboard()->setMimeData(mimeData);
 }
 
 void InfoView::onTableSelectionChanged()
 {
-    const QItemSelectionModel* selectionModel = mStatisticTableView->selectionModel();
+    const QItemSelectionModel* const selectionModel = mStatisticTableView->selectionModel();
 
     // TODO: selectionModel->selectedIndexes() is a expensive operation,
     // but with Qt 4.4.3 hasSelection() has the flaw to return true with a current index

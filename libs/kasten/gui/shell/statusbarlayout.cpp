@@ -93,7 +93,7 @@ QLayoutItem* StatusBarLayout::takeAt(int index)
     }
 
     const auto it = mWidgetList.begin() + index;
-    QWidgetItem* item = *it;
+    QWidgetItem* const item = *it;
     mWidgetList.erase(it);
 
     // TODO: any need to delete or reparent the widget?
@@ -128,7 +128,7 @@ void StatusBarLayout::updateMarginAndSpacing()
         return;
     }
 
-    QStyle* style = statusBar->style();
+    QStyle* const style = statusBar->style();
     QStyleOptionToolBar opt;
     statusBar->initStyleOption(&opt);
     setMargin(style->pixelMetric(QStyle::PM_ToolBarItemMargin, &opt, statusBar)
@@ -158,7 +158,7 @@ void StatusBarLayout::setGeometry(const QRect& _rect)
     int i;
     for (i = 0; i < static_cast<int>(mWidgetList.size()); ++i) {
         QWidgetItem* const item = mWidgetList[i];
-        QWidget* widget = item->widget();
+        QWidget* const widget = item->widget();
 
         // TODO: is there really no way to get to the geometry data if a widget is hidden?
         if (widget->isHidden()) {
@@ -192,7 +192,7 @@ void StatusBarLayout::setGeometry(const QRect& _rect)
     // hide the rest if needed
     for (; i < static_cast<int>(mWidgetList.size()); ++i) {
         QWidgetItem* const item = mWidgetList[i];
-        QWidget* widget = item->widget();
+        QWidget* const widget = item->widget();
 
         if (!widget->isHidden()) {
             widget->hide();

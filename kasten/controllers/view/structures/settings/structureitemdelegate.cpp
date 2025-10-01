@@ -54,8 +54,8 @@ void StructureItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem&
     painter->save();
 
     // draw background
-    const QWidget* widget = option.widget;
-    QStyle* style = widget ? widget->style() : QApplication::style();
+    const QWidget* const widget = option.widget;
+    QStyle* const style = widget ? widget->style() : QApplication::style();
     style->drawPrimitive(QStyle::PE_PanelItemViewItem, &option, painter, widget);
 
     // draw icon
@@ -166,8 +166,8 @@ void StructureItemDelegate::layoutItem(const QStyleOptionViewItem& option,
                                        int* focusFrameHMarginToUpdate,
                                        LayoutMode layoutMode) const
 {
-    const QWidget* widget = option.widget;
-    QStyle* style = widget ? widget->style() : QApplication::style();
+    const QWidget* const widget = option.widget;
+    QStyle* const style = widget ? widget->style() : QApplication::style();
     // "+ 1" as used in QItemDelegate
     const int focusFrameHMargin = style->pixelMetric(QStyle::PM_FocusFrameHMargin, &option, widget) + 1;
     if (focusFrameHMarginToUpdate) {

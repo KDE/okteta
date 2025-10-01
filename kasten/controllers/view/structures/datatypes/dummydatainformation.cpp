@@ -17,7 +17,7 @@ DummyDataInformation::DummyDataInformation(DataInformationBase* parent, const QS
 
 DataInformationWithDummyChildren* DummyDataInformation::parentHelper() const
 {
-    DataInformationWithDummyChildren* parent = mParent->asDataInformationWithDummyChildren();
+    DataInformationWithDummyChildren* const parent = mParent->asDataInformationWithDummyChildren();
     Q_CHECK_PTR(parent);
     return parent;
 }

@@ -34,7 +34,7 @@ ViewAreaSplitController::ViewAreaSplitController(ViewManager* viewManager, Abstr
                 SLOT(onViewAreasChanged()));
     }
 
-    KActionCollection* actionCollection = guiClient->actionCollection();
+    KActionCollection* const actionCollection = guiClient->actionCollection();
 
     mSplitVerticallyAction = new QAction(QIcon::fromTheme(QStringLiteral("view-split-left-right")),
                                          i18nc("@action:inmenu", "Split Vertically"), this);
@@ -91,7 +91,7 @@ void ViewAreaSplitController::close()
 
 void ViewAreaSplitController::splitViewArea(Qt::Orientation orientation)
 {
-    AbstractView* currentView = mCurrentViewArea->viewFocus();
+    AbstractView* const currentView = mCurrentViewArea->viewFocus();
 
     std::ignore = mViewAreaSplitable->splitViewArea(mCurrentViewArea, orientation);
 

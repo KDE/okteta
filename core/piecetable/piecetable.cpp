@@ -373,7 +373,7 @@ Piece PieceTable::replaceOne(Address dataOffset, Address storageOffset, int stor
 
     AddressRange dataRange(0, -1);
     while (it.hasNext()) {
-        Piece* piece = &it.peekNext();
+        Piece* const piece = &it.peekNext();
         dataRange.setEndByWidth(piece->width());
         if (dataRange.includes(dataOffset)) {
             replacedStorageId = piece->storageId();

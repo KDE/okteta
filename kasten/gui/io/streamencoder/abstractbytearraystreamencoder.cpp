@@ -41,13 +41,13 @@ bool AbstractByteArrayStreamEncoder::encodeToStream(QIODevice* device,
 {
     const auto* const byteArrayView = qobject_cast<const ByteArrayView*>(model);
 
-    const ByteArrayDocument* byteArrayDocument =
+    const ByteArrayDocument* const byteArrayDocument =
         byteArrayView ? qobject_cast<const ByteArrayDocument*>(byteArrayView->baseModel()) : nullptr;
     if (!byteArrayDocument) {
         return false;
     }
 
-    const Okteta::AbstractByteArrayModel* byteArray = byteArrayDocument->content();
+    const Okteta::AbstractByteArrayModel* const byteArray = byteArrayDocument->content();
 
     const ByteArraySelection* const byteArraySelection =
         selection ? static_cast<const ByteArraySelection*>(selection) : nullptr;
@@ -65,13 +65,13 @@ QByteArray AbstractByteArrayStreamEncoder::previewData(AbstractModel* model, con
 {
     const auto* const byteArrayView = qobject_cast<const ByteArrayView*>(model);
 
-    const ByteArrayDocument* byteArrayDocument =
+    const ByteArrayDocument* const byteArrayDocument =
         byteArrayView ? qobject_cast<const ByteArrayDocument*>(byteArrayView->baseModel()) : nullptr;
     if (!byteArrayDocument) {
         return {};
     }
 
-    const Okteta::AbstractByteArrayModel* byteArray = byteArrayDocument->content();
+    const Okteta::AbstractByteArrayModel* const byteArray = byteArrayDocument->content();
 
     const ByteArraySelection* const byteArraySelection =
         selection ? static_cast<const ByteArraySelection*>(selection) : nullptr;

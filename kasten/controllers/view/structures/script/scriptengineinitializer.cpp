@@ -356,7 +356,7 @@ QScriptValue importScriptFunc(QScriptContext* ctx, QScriptEngine* eng)
     QString code = s.readAll();
     file.close();
     // now push context so that we don't conflict with the current execution
-    QScriptContext* newCtx = eng->pushContext();
+    QScriptContext* const newCtx = eng->pushContext();
     QScriptValue result = eng->evaluate(code);
     if (result.isError()) {
         result = QScriptValue(QLatin1String("importScript(): failed due to exception: ") + result.toString());

@@ -89,7 +89,7 @@ void PrimitiveArrayTest::initTestCase()
         data[20 + i] = signallingFloat.allBytes[i];
     }
 
-    auto* randomGenerator = QRandomGenerator::global();
+    auto* const randomGenerator = QRandomGenerator::global();
     for (uint i = 24; i < SIZE; ++i) {
         data[i] = static_cast<Okteta::Byte>(randomGenerator->bounded(256));
     }

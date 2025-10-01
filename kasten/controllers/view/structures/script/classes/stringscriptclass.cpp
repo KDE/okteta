@@ -73,7 +73,7 @@ bool StringScriptClass::additionalPropertyFlags(const DataInformation* data, con
 
 QScriptValue StringScriptClass::additionalProperty(const DataInformation* data, const QScriptString& name, uint id)
 {
-    const StringDataInformation* sData = data->asString();
+    const StringDataInformation* const sData = data->asString();
 
     if (id != 0) {
         quint32 pos = id - 1;
@@ -107,7 +107,7 @@ QScriptValue StringScriptClass::additionalProperty(const DataInformation* data, 
 
 bool StringScriptClass::setAdditionalProperty(DataInformation* data, const QScriptString& name, uint, const QScriptValue& value)
 {
-    StringDataInformation* sData = data->asString();
+    StringDataInformation* const sData = data->asString();
 
     if (name == s_maxCharCount) {
         if (value.isNull()) {
@@ -183,7 +183,7 @@ QScriptValue StringScriptClass::prototype() const
 
 QScriptValue StringScriptClass::String_proto_toString(QScriptContext* ctx, QScriptEngine* eng)
 {
-    DataInformation* data = toDataInformation(ctx->thisObject().data());
+    DataInformation* const data = toDataInformation(ctx->thisObject().data());
     if (!data) {
         qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "could not cast data";
         return eng->undefinedValue();

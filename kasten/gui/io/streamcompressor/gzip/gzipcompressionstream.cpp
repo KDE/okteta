@@ -56,7 +56,7 @@ void GZipCompressionStream::setZlibError(const KLocalizedString& errorMessage, i
 
 bool GZipCompressionStream::compress(CompressMode compressMode)
 {
-    AbstractByteArrayOutput* byteArrayOutput = this->byteArrayOutput();
+    AbstractByteArrayOutput* const byteArrayOutput = this->byteArrayOutput();
 
     int deflateResult;
     const int flush = (compressMode == FinalCompress) ? Z_FINISH : Z_NO_FLUSH;

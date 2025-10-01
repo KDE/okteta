@@ -48,7 +48,7 @@ QVariant DocumentListModel::data(const QModelIndex& index, int role) const
 
     if (role == Qt::DisplayRole) {
         const int documentIndex = index.row();
-        const AbstractDocument* document = mDocumentsTool->documents().at(documentIndex);
+        const AbstractDocument* const document = mDocumentsTool->documents().at(documentIndex);
 
         const int tableColumn = index.column();
         switch (tableColumn)
@@ -61,8 +61,8 @@ QVariant DocumentListModel::data(const QModelIndex& index, int role) const
         }
     } else if (role == Qt::DecorationRole) {
         const int documentIndex = index.row();
-        const AbstractDocument* document = mDocumentsTool->documents().at(documentIndex);
-        const AbstractModelSynchronizer* synchronizer = document ? document->synchronizer() : nullptr;
+        const AbstractDocument* const document = mDocumentsTool->documents().at(documentIndex);
+        const AbstractModelSynchronizer* const synchronizer = document ? document->synchronizer() : nullptr;
 
         const int tableColumn = index.column();
         switch (tableColumn)
@@ -146,7 +146,7 @@ void DocumentListModel::onDocumentsAdded(const QVector<Kasten::AbstractDocument*
     for (AbstractDocument* document : documents) {
         connect(document, &AbstractDocument::synchronizerChanged,
                 this, &DocumentListModel::onSynchronizerChanged);
-        AbstractModelSynchronizer* synchronizer = document->synchronizer();
+        AbstractModelSynchronizer* const synchronizer = document->synchronizer();
         if (synchronizer) {
             connect(synchronizer, &AbstractModelSynchronizer::localSyncStateChanged,
                     this, &DocumentListModel::onSyncStatesChanged);

@@ -25,7 +25,7 @@ namespace Kasten {
 SelectRangeController::SelectRangeController(If::ToolInlineViewable* toolInlineViewable, KXMLGUIClient* guiClient)
     : mToolInlineViewable(toolInlineViewable)
 {
-    KActionCollection* actionCollection = guiClient->actionCollection();
+    KActionCollection* const actionCollection = guiClient->actionCollection();
 
     mSelectAction = new QAction(QIcon::fromTheme(QStringLiteral("select-rectangular")),
                                 i18nc("@action:inmenu", "&Select Range…"), this);

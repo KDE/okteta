@@ -122,7 +122,7 @@ QStringList StructureAddRemoveWidget::values() const
     const int topLevelItemCount = mTreeSelected->topLevelItemCount();
     enabledStructures.reserve(topLevelItemCount);
     for (int i = 0; i < topLevelItemCount; ++i) {
-        QTreeWidgetItem* item = mTreeSelected->topLevelItem(i);
+        QTreeWidgetItem* const item = mTreeSelected->topLevelItem(i);
         const bool isOnlyOne = item->data(OnlyOneRowColumn, ::OnlyOneRole).toBool();
         const QString id = item->text(1);
         const QString structure = isOnlyOne ? QStringLiteral("*") : item->text(0);

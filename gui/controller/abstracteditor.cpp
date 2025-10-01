@@ -113,7 +113,7 @@ bool AbstractEditor::handleKeyPress(QKeyEvent* keyEvent)
 
 void AbstractEditor::doEditAction(EditAction action)
 {
-    Okteta::AbstractByteArrayModel* byteArrayModel = mView->byteArrayModel();
+    Okteta::AbstractByteArrayModel* const byteArrayModel = mView->byteArrayModel();
     ByteArrayTableCursor* const tableCursor = mView->tableCursor();
 
     switch (action)

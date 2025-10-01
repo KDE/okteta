@@ -26,7 +26,7 @@ namespace Kasten {
 
 ViewConfigController::ViewConfigController(KXMLGUIClient* guiClient)
 {
-    KActionCollection* actionCollection = guiClient->actionCollection();
+    KActionCollection* const actionCollection = guiClient->actionCollection();
 
     // Offset coding
     mOffsetCodingAction = new KSelectAction(i18nc("@title:menu", "&Offset Coding"), this);

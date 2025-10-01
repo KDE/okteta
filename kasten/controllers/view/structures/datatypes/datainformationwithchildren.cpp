@@ -97,8 +97,8 @@ void DataInformationWithChildren::calculateValidationState()
         bool hasValidatedChildren = false;
         bool allChildrenValid = true;
         for (uint i = 0; i < childCount(); ++i) {
-            DataInformation* child = childAt(i);
-            DataInformationWithChildren* childWithChildren = child->asDataInformationWithChildren();
+            DataInformation* const child = childAt(i);
+            DataInformationWithChildren* const childWithChildren = child->asDataInformationWithChildren();
             if (childWithChildren) {
                 childWithChildren->calculateValidationState();
             }

@@ -102,7 +102,7 @@ void InsertController::updateActions()
 
 void InsertController::onActionTriggered(QAction* action)
 {
-    auto* generator = action->data().value<AbstractModelDataGenerator*>();
+    auto* const generator = action->data().value<AbstractModelDataGenerator*>();
 
     auto configEditor = mModelCodecViewManager->createConfigEditor(generator);
 

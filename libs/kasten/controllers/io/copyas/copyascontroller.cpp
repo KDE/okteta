@@ -77,13 +77,13 @@ void CopyAsController::updateActions()
 {
     mCopyAsSelectAction->removeAllActions();
 
-    const AbstractModelSelection* selection = mSelectionControl ? mSelectionControl->modelSelection() : nullptr;
+    const AbstractModelSelection* const selection = mSelectionControl ? mSelectionControl->modelSelection() : nullptr;
 
     const auto encoderList = mModelCodecManager->streamEncoders(mModel, selection);
     const bool hasEncoders = (!encoderList.empty());
 
     if (hasEncoders) {
-        for (auto* encoder : encoderList) {
+        for (auto* const encoder : encoderList) {
             const QString title = encoder->remoteTypeName();
             auto* const action = new QAction(title, mCopyAsSelectAction);
 
@@ -102,9 +102,9 @@ void CopyAsController::updateActions()
 
 void CopyAsController::onActionTriggered(QAction* action)
 {
-    auto* encoder = action->data().value<AbstractModelStreamEncoder*>();
+    auto* const encoder = action->data().value<AbstractModelStreamEncoder*>();
 
-    const AbstractModelSelection* selection = mSelectionControl->modelSelection();
+    const AbstractModelSelection* const selection = mSelectionControl->modelSelection();
 
     auto configEditor = mModelCodecViewManager->createConfigEditor(encoder);
 

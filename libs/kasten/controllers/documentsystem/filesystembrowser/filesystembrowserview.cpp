@@ -70,15 +70,15 @@ void FileSystemBrowserView::init()
     };
 
     for (const KDirOperator::Action toolbarAction : toolbarActions) {
-        QAction* action = mDirOperator->action(toolbarAction);
+        QAction* const action = mDirOperator->action(toolbarAction);
         if (action) {
             mToolbar->addAction(action);
         }
     }
 
     mActionCollection = new KActionCollection(this);
-    QAction* syncDirAction = mActionCollection->addAction(QStringLiteral("sync_dir"),
-                                                          this, &FileSystemBrowserView::syncCurrentDocumentDirectory);
+    QAction* const syncDirAction = mActionCollection->addAction(QStringLiteral("sync_dir"),
+                                                                this, &FileSystemBrowserView::syncCurrentDocumentDirectory);
     syncDirAction->setIcon(QIcon::fromTheme(QStringLiteral("go-parent-folder")));
     syncDirAction->setText(i18nc("@action:intoolbar", "Folder of Current Document"));
     connect(mTool, &FileSystemBrowserTool::hasCurrentUrlChanged, syncDirAction, &QAction::setEnabled);

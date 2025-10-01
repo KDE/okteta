@@ -23,7 +23,7 @@ UInt8Codec::~UInt8Codec() = default;
 
 QVariant UInt8Codec::value(const PODData& data, int* byteCount) const
 {
-    const quint8* pointer = (quint8*)data.pointer(1);
+    const quint8* const pointer = (quint8*)data.pointer(1);
 
     *byteCount = pointer ? 1 : 0;
     return pointer ? QVariant::fromValue<UInt8>(UInt8(*pointer)) : QVariant();

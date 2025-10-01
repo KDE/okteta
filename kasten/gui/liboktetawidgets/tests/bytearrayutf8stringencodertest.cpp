@@ -49,7 +49,7 @@ void ByteArrayUtf8StringEncoderTest::testEncode()
     QFETCH(const QByteArray, data);
     QFETCH(const QString, expectedEncodeResult);
 
-    QTextCodec* codec = QTextCodec::codecForName("UTF-8");
+    QTextCodec* const codec = QTextCodec::codecForName("UTF-8");
 
     QVERIFY(codec != nullptr);
 

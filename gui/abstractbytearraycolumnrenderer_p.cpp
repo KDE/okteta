@@ -729,7 +729,7 @@ void AbstractByteArrayColumnRendererPrivate::renderCursor(QPainter* painter, Add
 bool AbstractByteArrayColumnRendererPrivate::getNextSelectedAddressRange(AddressRange* _selection, unsigned int* _flag,
                                                                          const AddressRange& range) const
 {
-    const AddressRange* overlappingSelectedSection = mRanges->firstOverlappingSelection(range);
+    const AddressRange* const overlappingSelectedSection = mRanges->firstOverlappingSelection(range);
     if (!overlappingSelectedSection) {
         return false;
     }
@@ -757,7 +757,7 @@ bool AbstractByteArrayColumnRendererPrivate::getNextSelectedAddressRange(Address
 bool AbstractByteArrayColumnRendererPrivate::getNextMarkedAddressRange(AddressRange* _markedSection, unsigned int* _flag,
                                                                        const AddressRange& range) const
 {
-    const AddressRange* overlappingMarkedSection = mRanges->overlappingMarking(range);
+    const AddressRange* const overlappingMarkedSection = mRanges->overlappingMarking(range);
     if (!overlappingMarkedSection) {
         return false;
     }

@@ -54,11 +54,11 @@ void DocumentManagerTest::testConstructor()
 void DocumentManagerTest::testAddRemove()
 {
     auto doc1 = std::make_unique<Kasten::TestDocument>();
-    auto* rawDoc1 = doc1.get();
+    auto* const rawDoc1 = doc1.get();
     auto doc2 = std::make_unique<Kasten::TestDocument>();
-    auto* rawDoc2 = doc2.get();
+    auto* const rawDoc2 = doc2.get();
     auto doc3 = std::make_unique<Kasten::TestDocument>();
-    auto* rawDoc3 = doc3.get();
+    auto* const rawDoc3 = doc3.get();
 
     auto documentManager = std::make_unique<Kasten::DocumentManager>();
     auto addedSpy = std::make_unique<QSignalSpy>(documentManager.get(), SIGNAL(added(QVector<Kasten::AbstractDocument*>)));
@@ -84,7 +84,7 @@ void DocumentManagerTest::testAddRemove()
 void DocumentManagerTest::testCanClose()
 {
     auto doc = std::make_unique<Kasten::TestDocument>();
-    auto* rawDoc = doc.get();
+    auto* const rawDoc = doc.get();
 
     auto documentManager = std::make_unique<Kasten::DocumentManager>();
     documentManager->addDocument(std::move(doc));

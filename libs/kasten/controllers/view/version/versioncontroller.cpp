@@ -25,7 +25,7 @@ static constexpr int MaxMenuEntries = 10;
 
 VersionController::VersionController(KXMLGUIClient* guiClient)
 {
-    KActionCollection* actionCollection = guiClient->actionCollection();
+    KActionCollection* const actionCollection = guiClient->actionCollection();
 
     mSetToOlderVersionAction = new KToolBarPopupAction(QIcon::fromTheme(QStringLiteral("edit-undo")), i18nc("@action:inmenu", "Undo"), this);
     mSetToOlderVersionAction->setEnabled(false);
@@ -60,14 +60,14 @@ void VersionController::setTargetModel(AbstractModel* model)
 
     if (mModel) {
         mModel->disconnect(this);
-        AbstractModel* versionedModel = mModel->findBaseModelWithInterface<If::Versionable*>();
+        AbstractModel* const versionedModel = mModel->findBaseModelWithInterface<If::Versionable*>();
         if (versionedModel) {
             versionedModel->disconnect(this);
         }
     }
 
     mModel = model;
-    AbstractModel* versionedModel = mModel ? mModel->findBaseModelWithInterface<If::Versionable*>() : nullptr;
+    AbstractModel* const versionedModel = mModel ? mModel->findBaseModelWithInterface<If::Versionable*>() : nullptr;
     mVersionControl = versionedModel ? qobject_cast<If::Versionable*>(versionedModel) : nullptr;
 
     if (mVersionControl) {
@@ -118,7 +118,7 @@ void VersionController::onSetToNewerVersionTriggered()
 
 void VersionController::onOlderVersionMenuAboutToShow()
 {
-    QMenu* menu = mSetToOlderVersionAction->menu();
+    QMenu* const menu = mSetToOlderVersionAction->menu();
     menu->clear();
 
     int menuEntries = 0;
@@ -131,14 +131,14 @@ void VersionController::onOlderVersionMenuAboutToShow()
 
         const QString actionText = i18nc("@action Undo: [change]", "Undo: %1", changeComment);
 
-        QAction* action = menu->addAction(actionText);
+        QAction* const action = menu->addAction(actionText);
         action->setData(versionIndex - 1);
     }
 }
 
 void VersionController::onNewerVersionMenuAboutToShow()
 {
-    QMenu* menu = mSetToNewerVersionAction->menu();
+    QMenu* const menu = mSetToNewerVersionAction->menu();
     menu->clear();
 
     int menuEntries = 0;
@@ -151,7 +151,7 @@ void VersionController::onNewerVersionMenuAboutToShow()
 
         const QString actionText = i18nc("@action Redo: [change]", "Redo: %1", changeComment);
 
-        QAction* action = menu->addAction(actionText);
+        QAction* const action = menu->addAction(actionText);
         action->setData(versionIndex);
     }
 }

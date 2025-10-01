@@ -450,7 +450,7 @@ void ByteArrayColumnViewPrivate::setVisibleCodings(int newColumns)
 
     // active column not visible anymore?
     if (!mActiveColumn->isVisible()) {
-        AbstractByteArrayColumnRenderer* h = mActiveColumn;
+        AbstractByteArrayColumnRenderer* const h = mActiveColumn;
         mActiveColumn = mInactiveColumn;
         mInactiveColumn = h;
         adaptController();
@@ -511,7 +511,7 @@ void ByteArrayColumnViewPrivate::placeCursor(QPoint point)
 
 Address ByteArrayColumnViewPrivate::indexByPoint(QPoint point) const
 {
-    const AbstractByteArrayColumnRenderer* column =
+    const AbstractByteArrayColumnRenderer* const column =
         (mCharColumn->isVisible() && point.x() >= mCharColumn->x()) ?
         (AbstractByteArrayColumnRenderer*)mCharColumn : (AbstractByteArrayColumnRenderer*)mValueColumn;
 

@@ -29,8 +29,8 @@ ReplacePrompt::ReplacePrompt(QWidget* parent)
     button = dialogButtonBox->addButton(i18nc("@action:button", "&Skip"),
                                         QDialogButtonBox::ApplyRole);
     connect(button, &QAbstractButton::clicked, this, &ReplacePrompt::onSkipButton);
-    QPushButton* replaceButton = dialogButtonBox->addButton(i18nc("@action:button", "Replace"),
-                                                            QDialogButtonBox::ApplyRole);
+    QPushButton* const replaceButton = dialogButtonBox->addButton(i18nc("@action:button", "Replace"),
+                                                                  QDialogButtonBox::ApplyRole);
     connect(replaceButton, &QAbstractButton::clicked, this, &ReplacePrompt::onReplaceButton);
     button = dialogButtonBox->addButton(QDialogButtonBox::Close);
     connect(button, &QAbstractButton::clicked, this, &ReplacePrompt::onCloseButton);

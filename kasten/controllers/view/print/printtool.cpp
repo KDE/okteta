@@ -400,7 +400,7 @@ bool PrintTool::doPrint(QPrinter* printer)
     framesPrinter.addFrameRenderer(std::move(footerFrameRenderer));
 
     info.setNoOfPages(framesCount);
-    AbstractModelSynchronizer* synchronizer = mDocument->synchronizer();
+    AbstractModelSynchronizer* const synchronizer = mDocument->synchronizer();
     if (synchronizer) {
         info.setUrl(synchronizer->url());
     }

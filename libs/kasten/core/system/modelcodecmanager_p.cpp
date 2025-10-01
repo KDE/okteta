@@ -147,7 +147,7 @@ void ModelCodecManagerPrivate::exportDocument(AbstractModelExporter* exporter,
         if (!exportUrls.isEmpty()) {
             const QUrl& exportUrl = exportUrls.at(0);
 
-            KIO::StatJob* statJob = KIO::stat(exportUrl);
+            KIO::StatJob* const statJob = KIO::stat(exportUrl);
             statJob->setSide(KIO::StatJob::DestinationSide);
             KJobWidgets::setWindow(statJob, /*mWidget*/ nullptr);
 
@@ -168,7 +168,7 @@ void ModelCodecManagerPrivate::exportDocument(AbstractModelExporter* exporter,
                 }
             }
 
-            AbstractExportJob* exportJob = exporter->startExport(model, selection, exportUrl);
+            AbstractExportJob* const exportJob = exporter->startExport(model, selection, exportUrl);
             exportDone = JobManager::executeJob(exportJob);
 
 //                 if( exportDone )

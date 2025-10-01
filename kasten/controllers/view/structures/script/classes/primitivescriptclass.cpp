@@ -91,14 +91,14 @@ bool PrimitiveScriptClass::additionalPropertyFlags(const DataInformation*, const
 
 QScriptValue PrimitiveScriptClass::additionalProperty(const DataInformation* data, const QScriptString& name, uint)
 {
-    const PrimitiveDataInformation* pData = data->asPrimitive();
+    const PrimitiveDataInformation* const pData = data->asPrimitive();
 
     if (name == s_value) {
         if (pData->wasAbleToRead()) {
             return pData->valueAsQScriptValue();
         }
         QScriptValue callee = engine()->currentContext()->thisObject();
-        DataInformation* cause = toDataInformation(callee);
+        DataInformation* const cause = toDataInformation(callee);
         if (cause) {
             pData->logError() << "Attempting to read from uninitialized value. Callee was " << cause->fullObjectPath();
         } else {
@@ -176,7 +176,7 @@ QScriptValue PrimitiveScriptClass::prototype() const
 
 QScriptValue PrimitiveScriptClass::Primitive_proto_toString(QScriptContext* ctx, QScriptEngine* eng)
 {
-    DataInformation* data = toDataInformation(ctx->thisObject());
+    DataInformation* const data = toDataInformation(ctx->thisObject());
     if (!data) {
         qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "could not cast data";
         return eng->undefinedValue();

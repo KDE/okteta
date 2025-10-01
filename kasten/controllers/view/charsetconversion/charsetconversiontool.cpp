@@ -282,8 +282,8 @@ void CharsetConversionTool::convertChars()
     std::unique_ptr<const Okteta::CharCodec> otherCharCodec(
         Okteta::CharCodec::createCodec(mOtherCharCodecName));
     const bool convertToOther = (mConversionDirection == ConvertTo);
-    const Okteta::CharCodec* fromCharCodec = convertToOther ? viewCharCodec.get() : otherCharCodec.get();
-    const Okteta::CharCodec* toCharCodec = convertToOther ? otherCharCodec.get() : viewCharCodec.get();
+    const Okteta::CharCodec* const fromCharCodec = convertToOther ? viewCharCodec.get() : otherCharCodec.get();
+    const Okteta::CharCodec* const toCharCodec = convertToOther ? otherCharCodec.get() : viewCharCodec.get();
     auto* const charsetConversionJob =
         new CharsetConversionJob(reinterpret_cast<Okteta::Byte*>(conversionResult.data()),
                                  mByteArrayModel, convertedSection,

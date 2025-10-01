@@ -23,7 +23,7 @@ UInt64Codec::~UInt64Codec() = default;
 
 QVariant UInt64Codec::value(const PODData& data, int* byteCount) const
 {
-    const quint64* pointer = (quint64*)data.pointer(8);
+    const quint64* const pointer = (quint64*)data.pointer(8);
 
     *byteCount = pointer ? 8 : 0;
     return pointer ? QVariant::fromValue<UInt64>(UInt64(*pointer)) : QVariant();

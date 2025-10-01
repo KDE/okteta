@@ -23,7 +23,7 @@ SInt32Codec::~SInt32Codec() = default;
 
 QVariant SInt32Codec::value(const PODData& data, int* byteCount) const
 {
-    const qint32* pointer = (qint32*)data.pointer(4);
+    const qint32* const pointer = (qint32*)data.pointer(4);
 
     *byteCount = pointer ? 4 : 0;
     return pointer ? QVariant::fromValue<SInt32>(SInt32(*pointer)) : QVariant();

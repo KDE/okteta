@@ -70,7 +70,7 @@ std::unique_ptr<QMimeData> ByteArrayRandomDataGenerator::generateData()
     const int insertDataSize = mSettings.size;
     QByteArray insertData(insertDataSize, '\0');
 
-    auto* randomGenerator = QRandomGenerator::global();
+    auto* const randomGenerator = QRandomGenerator::global();
     for (int i = 0; i < insertDataSize; ++i) {
         insertData[i] = static_cast<char>(randomGenerator->bounded(256));
     }

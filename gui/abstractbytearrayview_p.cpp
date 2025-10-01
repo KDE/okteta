@@ -203,7 +203,7 @@ void AbstractByteArrayViewPrivate::init()
     // So we implicitly generate one with QScroller::grabGesture(widget) and the pick it as current active
     // by QScroller::scroller(widget)
     QScroller::grabGesture(q->viewport(), QScroller::TouchGesture);
-    QScroller* scroller = QScroller::scroller(q->viewport());
+    QScroller* const scroller = QScroller::scroller(q->viewport());
     QScrollerProperties scrollerProperties = scroller->scrollerProperties();
     scrollerProperties.setScrollMetric(QScrollerProperties::HorizontalOvershootPolicy, QScrollerProperties::OvershootAlwaysOff);
     scrollerProperties.setScrollMetric(QScrollerProperties::VerticalOvershootPolicy, QScrollerProperties::OvershootAlwaysOff);
@@ -805,7 +805,7 @@ void AbstractByteArrayViewPrivate::pasteFromClipboard(QClipboard::Mode mode)
         return;
     }
 
-    const QMimeData* data = QApplication::clipboard()->mimeData(mode);
+    const QMimeData* const data = QApplication::clipboard()->mimeData(mode);
     insertBytesFromMimeData(data);
 }
 
@@ -1387,7 +1387,7 @@ void AbstractByteArrayViewPrivate::dropEvent(QDropEvent* dropEvent)
 
 void AbstractByteArrayViewPrivate::contextMenuEvent(QContextMenuEvent* contextMenuEvent)
 {
-    QMenu* menu = createStandardContextMenu(contextMenuEvent->pos());
+    QMenu* const menu = createStandardContextMenu(contextMenuEvent->pos());
     menu->setAttribute(Qt::WA_DeleteOnClose);
 
     menu->popup(contextMenuEvent->globalPos());

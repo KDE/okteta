@@ -116,7 +116,7 @@ void Dropper::handleInternalDrag(QDropEvent* dropEvent, AbstractByteArrayViewPri
     AddressRange selection = sourceByteArrayView->tableRanges()->removeSelection();
 
     ByteArrayTableCursor* const tableCursor = mByteArrayView->tableCursor();
-    AbstractByteArrayModel* byteArrayModel = mByteArrayView->byteArrayModel();
+    AbstractByteArrayModel* const byteArrayModel = mByteArrayView->byteArrayModel();
 
     Address insertIndex = tableCursor->realIndex();
 

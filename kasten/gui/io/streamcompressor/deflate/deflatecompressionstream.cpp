@@ -54,7 +54,7 @@ void DeflateCompressionStream::setZlibError(const KLocalizedString& errorMessage
 
 bool DeflateCompressionStream::compress(CompressMode compressMode)
 {
-    AbstractByteArrayOutput* byteArrayOutput = this->byteArrayOutput();
+    AbstractByteArrayOutput* const byteArrayOutput = this->byteArrayOutput();
 
     int deflateResult;
     const int flush = (compressMode == FinalCompress) ? Z_FINISH : Z_NO_FLUSH;

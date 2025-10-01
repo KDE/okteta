@@ -42,7 +42,7 @@ ArrayDataInformation::ArrayDataInformation(const ArrayDataInformation& d)
     , mData(nullptr)
 {
     uint length = d.mData->length();
-    DataInformation* childType = d.mData->childType();
+    DataInformation* const childType = d.mData->childType();
     mData = AbstractArrayData::newArrayData(length, childType->clone(), this);
 }
 
@@ -72,7 +72,7 @@ void ArrayDataInformation::setArrayType(std::unique_ptr<DataInformation>&& newCh
     }
     newChildType->setParent(this);
     uint len = mData->length();
-    TopLevelDataInformation* topLevel = topLevelDataInformation();
+    TopLevelDataInformation* const topLevel = topLevelDataInformation();
     if (len > 0) {
         // first create with length of 0, then change length to actual length (to ensure model is correct)
         topLevel->_childCountAboutToChange(this, len, 0);

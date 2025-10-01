@@ -65,7 +65,7 @@ void AbstractFileSystemSyncToRemoteJobPrivate::completeWrite(bool success)
         const bool isLocalFile = url.isLocalFile();
 
         if (!isLocalFile) {
-            KIO::FileCopyJob* fileCopyJob =
+            KIO::FileCopyJob* const fileCopyJob =
                 KIO::file_copy(QUrl::fromLocalFile(mWorkFilePath), url, -1, KIO::Overwrite);
             KJobWidgets::setWindow(fileCopyJob, /*mWidget*/ nullptr);
 

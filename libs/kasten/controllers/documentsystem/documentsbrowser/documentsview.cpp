@@ -44,7 +44,7 @@ DocumentsView::DocumentsView(DocumentsTool* tool, QWidget* parent)
     }
 
     // TODO. share code for all these empty-list placeholders
-    auto* documentListViewViewPort = mDocumentListView->viewport();
+    auto* const documentListViewViewPort = mDocumentListView->viewport();
     m_emptyListOverlayLabel = new QLabel(documentListViewViewPort);
     m_emptyListOverlayLabel->setText(i18nc("@info", "No documents"));
     m_emptyListOverlayLabel->setAttribute(Qt::WA_TransparentForMouseEvents);
@@ -74,7 +74,7 @@ void DocumentsView::updateEmptyListOverlayLabel()
 void DocumentsView::onDocumentActivated(const QModelIndex& index)
 {
     const int documentIndex = index.row();
-    AbstractDocument* document = mTool->documents().at(documentIndex);
+    AbstractDocument* const document = mTool->documents().at(documentIndex);
 
     if (document) {
         mTool->setFocussedDocument(document);

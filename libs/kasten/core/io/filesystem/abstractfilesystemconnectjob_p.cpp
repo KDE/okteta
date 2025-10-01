@@ -58,7 +58,7 @@ void AbstractFileSystemConnectJobPrivate::connectWithFile()
             if (!isWorkFileOk) {
                 q->setErrorText(tmpFile.errorString());
             } else {
-                KIO::FileCopyJob* fileCopyJob =
+                KIO::FileCopyJob* const fileCopyJob =
                     KIO::file_copy(mUrl, QUrl::fromLocalFile(mWorkFilePath), -1, KIO::Overwrite);
                 KJobWidgets::setWindow(fileCopyJob, /*mWidget*/ nullptr);
 
@@ -100,7 +100,7 @@ void AbstractFileSystemConnectJobPrivate::complete(bool success)
         mSynchronizer->setUrl(mUrl);
 
         if (!mUrl.isLocalFile()) {
-            KIO::FileCopyJob* fileCopyJob =
+            KIO::FileCopyJob* const fileCopyJob =
                 KIO::file_copy(QUrl::fromLocalFile(mWorkFilePath), mUrl, -1, KIO::Overwrite);
             KJobWidgets::setWindow(fileCopyJob, /*mWidget*/ nullptr);
 

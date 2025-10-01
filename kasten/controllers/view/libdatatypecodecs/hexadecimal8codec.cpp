@@ -23,7 +23,7 @@ Hexadecimal8Codec::~Hexadecimal8Codec() = default;
 
 QVariant Hexadecimal8Codec::value(const PODData& data, int* byteCount) const
 {
-    const unsigned char* pointer = (unsigned char*)data.pointer(1);
+    const unsigned char* const pointer = (unsigned char*)data.pointer(1);
 
     *byteCount = pointer ? 1 : 0;
     return pointer ? QVariant::fromValue<Hexadecimal8>(Hexadecimal8(*pointer)) : QVariant();

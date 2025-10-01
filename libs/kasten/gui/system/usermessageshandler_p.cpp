@@ -24,8 +24,8 @@ namespace Kasten {
 
 void UserMessagesHandlerPrivate::postErrorReport(std::unique_ptr<UserErrorReport>&& errorReport)
 {
-    AbstractModel* targetModel = errorReport->targetModel();
-    AbstractModel* model = targetModel ? targetModel->findBaseModelWithInterface<If::UserErrorReportsInlineable*>() : nullptr;
+    AbstractModel* const targetModel = errorReport->targetModel();
+    AbstractModel* const model = targetModel ? targetModel->findBaseModelWithInterface<If::UserErrorReportsInlineable*>() : nullptr;
     If::UserErrorReportsInlineable* const userErrorReportsInlineable = model ? qobject_cast<If::UserErrorReportsInlineable*>(model) : nullptr;
 
     // TODO: is non-view model, search a visible view (with most priority)
@@ -44,8 +44,8 @@ void UserMessagesHandlerPrivate::postErrorReport(std::unique_ptr<UserErrorReport
 
 void UserMessagesHandlerPrivate::postNotification(std::unique_ptr<UserNotification>&& notification)
 {
-    AbstractModel* targetModel = notification->targetModel();
-    AbstractModel* model = targetModel ? targetModel->findBaseModelWithInterface<If::UserNotificationsInlineable*>() : nullptr;
+    AbstractModel* const targetModel = notification->targetModel();
+    AbstractModel* const model = targetModel ? targetModel->findBaseModelWithInterface<If::UserNotificationsInlineable*>() : nullptr;
     If::UserNotificationsInlineable* const userNotificationsInlineable = model ? qobject_cast<If::UserNotificationsInlineable*>(model) : nullptr;
 
     // TODO: is non-view model, search a visible view (with most priority)
@@ -113,14 +113,14 @@ QString UserMessagesHandlerPrivate::executeQuery(std::unique_ptr<UserQuery>&& us
     } else if (cancelResponseOption) {
         buttonTable.emplace(QDialogButtonBox::No, cancelResponseOption);
     }
-    UserResponseOption* lastResponse = cancelResponseOption ? cancelResponseOption : secondaryResponseOption;
+    UserResponseOption* const lastResponse = cancelResponseOption ? cancelResponseOption : secondaryResponseOption;
     const bool isNonPrimaryDefault = (lastResponse && lastResponse->hints().testFlag(UserResponseDefaultHint));
 
     for (const auto& buttonData : buttonTable) {
         const QDialogButtonBox::StandardButton standardButton = buttonData.first;
         UserResponseOption* const responseOption = buttonData.second;
 
-        QPushButton* button = buttonBox->addButton(standardButton);
+        QPushButton* const button = buttonBox->addButton(standardButton);
 
         const KGuiItem guiItem = responseOption->guiItem();
         KGuiItem::assign(button, guiItem);

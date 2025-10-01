@@ -68,7 +68,7 @@ bool ArrayScriptClass::additionalPropertyFlags(const DataInformation* data, cons
 
 QScriptValue ArrayScriptClass::additionalProperty(const DataInformation* data, const QScriptString& name, uint id)
 {
-    const ArrayDataInformation* aData = data->asArray();
+    const ArrayDataInformation* const aData = data->asArray();
     if (id != 0) {
         quint32 pos = id - 1;
         if (pos >= data->childCount()) {
@@ -96,7 +96,7 @@ QScriptValue ArrayScriptClass::additionalProperty(const DataInformation* data, c
 
 bool ArrayScriptClass::setAdditionalProperty(DataInformation* data, const QScriptString& name, uint, const QScriptValue& value)
 {
-    ArrayDataInformation* aData = data->asArray();
+    ArrayDataInformation* const aData = data->asArray();
     if (name == s_length) {
         if (value.isFunction()) {
             aData->setLengthFunction(value);
@@ -135,7 +135,7 @@ QScriptValue ArrayScriptClass::prototype() const
 
 QScriptValue ArrayScriptClass::Array_proto_toString(QScriptContext* ctx, QScriptEngine* eng)
 {
-    DataInformation* data = toDataInformation(ctx->thisObject());
+    DataInformation* const data = toDataInformation(ctx->thisObject());
     if (!data) {
         qCWarning(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "could not cast data";
         return eng->undefinedValue();

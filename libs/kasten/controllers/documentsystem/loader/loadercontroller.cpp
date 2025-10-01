@@ -27,7 +27,7 @@ LoaderController::LoaderController(AbstractDocumentStrategy* documentStrategy,
                                    KXMLGUIClient* guiClient)
     : mDocumentStrategy(documentStrategy)
 {
-    auto* openAction = KStandardAction::open(this, &LoaderController::load, this);
+    QAction* const openAction = KStandardAction::open(this, &LoaderController::load, this);
     mOpenRecentAction = KStandardAction::openRecent(this, &LoaderController::loadRecent, this);
 
     KActionCollection* const actionCollection = guiClient->actionCollection();

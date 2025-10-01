@@ -30,7 +30,7 @@ ViewAreaContextMenuController::ViewAreaContextMenuController(MultiViewAreas* mul
     , mMultiViewAreas(multiViewAreas)
     , mSyncManager(syncManager)
 {
-    KActionCollection* actionCollection = guiClient->actionCollection();
+    KActionCollection* const actionCollection = guiClient->actionCollection();
 
     mReloadAction = new QAction(QIcon::fromTheme(QStringLiteral("view-refresh")),
                                 i18nc("@action:inmenu", "Reloa&d"), this);
@@ -99,7 +99,7 @@ void ViewAreaContextMenuController::showContextMenu(AbstractGroupedViews* viewAr
     mCloseAllOtherAction->setEnabled(isForView && views.size() > 1);
     mCloseAllAction->setEnabled(!views.isEmpty());
 
-    QWidget* w = mGuiClient->factory()->container(QStringLiteral("viewAreaContextMenu"), mGuiClient);
+    QWidget* const w = mGuiClient->factory()->container(QStringLiteral("viewAreaContextMenu"), mGuiClient);
     auto* const popup = static_cast<QMenu*>(w);
 
     const auto popupPoint = mMultiViewAreas->widget()->mapToGlobal(pos);

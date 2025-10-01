@@ -207,8 +207,8 @@ void ScriptValueConverterTest::testPrimitives()
                                                                            logger.get());
     QVERIFY(data1);
     QVERIFY(data2);
-    PrimitiveDataInformation* p1 = data1->asPrimitive();
-    PrimitiveDataInformation* p2 = data2->asPrimitive();
+    PrimitiveDataInformation* const p1 = data1->asPrimitive();
+    PrimitiveDataInformation* const p2 = data2->asPrimitive();
     QVERIFY(p1);
     QVERIFY(p2);
     QCOMPARE(p1->type(), type);
@@ -218,7 +218,7 @@ void ScriptValueConverterTest::testPrimitives()
     }
     std::unique_ptr<DataInformation> data3 = convert(QStringLiteral("\"%1\"").arg(typeString));
     QVERIFY(data3);
-    PrimitiveDataInformation* p3 = data3->asPrimitive();
+    PrimitiveDataInformation* const p3 = data3->asPrimitive();
     QVERIFY(p3);
     QCOMPARE(p3->type(), type);
 }
@@ -244,7 +244,7 @@ void ScriptValueConverterTest::testParseEnum()
         QVERIFY(!data);
         return;
     }
-    EnumDataInformation* e = data->asEnum();
+    EnumDataInformation* const e = data->asEnum();
     QVERIFY(e);
 
     QMap<AllPrimitiveTypes, QString> enumVals = e->enumValues()->values();

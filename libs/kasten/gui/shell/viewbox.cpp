@@ -17,7 +17,7 @@ ViewBox::ViewBox(AbstractView* view, QWidget* parent)
     : QWidget(parent)
     , mView(view)
 {
-    QWidget* widget = view->widget();
+    QWidget* const widget = view->widget();
     setFocusProxy(widget);
 
     auto* const layout = new QVBoxLayout(this);

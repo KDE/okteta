@@ -329,14 +329,14 @@ void OktetaMainWindow::onCloseRequest(const QVector<Kasten::AbstractView*>& view
     // group views per document
     std::unordered_map<AbstractDocument*, std::vector<AbstractView*>> viewsToClosePerDocument;
     for (AbstractView* view : views) {
-        auto* document = view->findBaseModel<AbstractDocument*>();
+        auto* const document = view->findBaseModel<AbstractDocument*>();
         viewsToClosePerDocument[document].emplace_back(view);
     }
 
     // find documents which lose all views
     const QVector<AbstractView*> allViews = viewManager()->views();
     for (AbstractView* view : allViews) {
-        auto* document = view->findBaseModel<AbstractDocument*>();
+        auto* const document = view->findBaseModel<AbstractDocument*>();
         const auto it = viewsToClosePerDocument.find(document);
 
         if (it != viewsToClosePerDocument.end()) {

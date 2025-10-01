@@ -60,7 +60,7 @@ BookmarksView::BookmarksView(BookmarksTool* tool, QWidget* parent)
             this, &BookmarksView::onCustomContextMenuRequested);
 
     // TODO. share code for all these empty-list placeholders
-    auto* bookmarkListViewViewPort = mBookmarkListView->viewport();
+    QWidget* const bookmarkListViewViewPort = mBookmarkListView->viewport();
     m_emptyListOverlayLabel = new QLabel(bookmarkListViewViewPort);
     m_emptyListOverlayLabel->setText(i18nc("@info", "No bookmarks"));
     m_emptyListOverlayLabel->setAttribute(Qt::WA_TransparentForMouseEvents);
@@ -187,7 +187,7 @@ void BookmarksView::onCustomContextMenuRequested(QPoint pos)
 
 void BookmarksView::onBookmarkSelectionChanged()
 {
-    const QItemSelectionModel* selectionModel = mBookmarkListView->selectionModel();
+    const QItemSelectionModel* const selectionModel = mBookmarkListView->selectionModel();
 
     // TODO: selectionModel->selectedIndexes() is a expensive operation,
     // but with Qt 4.4.3 hasSelection() has the flaw to return true with a current index
