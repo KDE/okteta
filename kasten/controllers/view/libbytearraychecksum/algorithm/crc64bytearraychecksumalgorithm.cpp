@@ -36,9 +36,9 @@ static const Crc64AlgorithmSpec algorithms[] = {
 
 static void fillTable(quint64 poly, quint64 *table)
 {
-    for (size_t i = 0; i < 256; i++) {
+    for (size_t i = 0; i < 256; ++i) {
         quint64 crc = 0;
-        for (size_t j = 0; j < 8; j++) {
+        for (size_t j = 0; j < 8; ++j) {
             bool b = (i >> (7U - j)) & 0x01U;
             if (((crc >> 63U) != 0) != b) {
                 crc = (crc << 1U) ^ poly;
@@ -53,7 +53,7 @@ static void fillTable(quint64 poly, quint64 *table)
 static quint64 reflect64(quint64 x)
 {
     quint64 y = 0;
-    for (size_t i = 0; i < 64; i++) {
+    for (size_t i = 0; i < 64; ++i) {
         if ((x >> i) & 0x01U) {
             y |= 0x01LLU << (63 - i);
         }
@@ -66,7 +66,7 @@ static uchar reflect8(uchar x)
 {
     uchar y = 0;
 
-    for (size_t i = 0; i < 8; i++) {
+    for (size_t i = 0; i < 8; ++i) {
         if ((x >> i) & 0x01U) {
             y |= 0x01U << (7 - i);
         }

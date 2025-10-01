@@ -85,7 +85,7 @@ inline quint64 AbstractBitfieldDataInformation::mask() const
     /* same as:
      *
      * quint64 ret = 0;
-     * for (int i = 0; i < width(); i++)
+     * for (int i = 0; i < width(); ++i)
      *     ret |= 1 << i;
      * return ret;
      */

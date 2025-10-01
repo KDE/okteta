@@ -216,7 +216,7 @@ void AllPrimitiveTypes::writeDataBigEndian(quint8 bitCount,
         const quint8 lastByteAddedVal = newValue._ubyte.value << (8 - missingBits);
         const quint8 lastByteWithValAdded = lastByteMasked | lastByteAddedVal;
         out->setByte(lastAddress, lastByteWithValAdded);
-        for (int currAddress = lastAddress - 1; currAddress >= address; currAddress--) {
+        for (int currAddress = lastAddress - 1; currAddress >= address; --currAddress) {
             const quint8 currentByte = out->byte(currAddress);
             if (currAddress == address) {
                 // last byte to read
@@ -242,7 +242,7 @@ void AllPrimitiveTypes::readFullBytes(quint8 byteCount, const Okteta::AbstractBy
 {
     Q_ASSERT(byteCount <= 8);
     // always use unsigned value
-    for (int i = 0; i < byteCount; i++) {
+    for (int i = 0; i < byteCount; ++i) {
         int index = (byteOrder == QSysInfo::LittleEndian) ? i : ((byteCount - 1) - i);
         Okteta::Byte readByte = input->byte(address + i);
         allBytes[index] = readByte;

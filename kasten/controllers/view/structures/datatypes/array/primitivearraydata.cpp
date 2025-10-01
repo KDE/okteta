@@ -103,7 +103,7 @@ bool isDataEqualNonNativeOrder(const Okteta::AbstractByteArrayModel* byteArrayMo
 {
     for (int itemOffs = 0; itemOffs < size; itemOffs += typeSize) {
         // the compiler should unroll this loop
-        for (int byte = 0; byte < typeSize; byte++) {
+        for (int byte = 0; byte < typeSize; ++byte) {
             if (byteArrayModel->byte(address + itemOffs + (typeSize - byte - 1)) != data[itemOffs + byte]) {
                 return false;
             }
@@ -126,7 +126,7 @@ void PrimitiveArrayData<type>::readDataNonNativeOrder(uint numItems,
     }
     for (uint itemOffs = 0; itemOffs < numBytes; itemOffs += sizeof(T)) {
         // the compiler should unroll this loop
-        for (uint byte = 0; byte < sizeof(T); byte++) {
+        for (uint byte = 0; byte < sizeof(T); ++byte) {
             vectorBytes[itemOffs + byte] = input->byte(address + itemOffs + (sizeof(T) - byte - 1));
         }
     }

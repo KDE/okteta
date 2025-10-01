@@ -183,7 +183,7 @@ QScriptValue StructUnionScriptClass::StructUnion_proto_child(QScriptContext* ctx
     }
     uint count = data->childCount();
     QString name = arg.toString();
-    for (uint i = 0; i < count; i++) {
+    for (uint i = 0; i < count; ++i) {
         DataInformation* const child = data->childAt(i);
         if (child->name() == name) {
             return child->toScriptValue(eng, data->topLevelDataInformation()->scriptHandler()->handlerInfo());
