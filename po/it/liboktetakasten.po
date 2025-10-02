@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-01 02:07+0000\n"
+"POT-Creation-Date: 2025-10-02 02:00+0000\n"
 "PO-Revision-Date: 2025-08-31 16:15+0200\n"
 "Last-Translator: Luigi Toscano <luigi.toscano@tiscali.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -1626,13 +1626,13 @@ msgctxt "@action:button"
 msgid "Replace &All"
 msgstr "Sostituisci &tutto"
 
-#: controllers/view/replace/replaceprompt.cpp:29
+#: controllers/view/replace/replaceprompt.cpp:30
 #, kde-format
 msgctxt "@action:button"
 msgid "&Skip"
 msgstr "&Salta"
 
-#: controllers/view/replace/replaceprompt.cpp:32
+#: controllers/view/replace/replaceprompt.cpp:34
 #, kde-format
 msgctxt "@action:button"
 msgid "Replace"

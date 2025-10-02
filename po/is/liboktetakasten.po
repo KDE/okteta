@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-01 02:07+0000\n"
+"POT-Creation-Date: 2025-10-02 02:00+0000\n"
 "PO-Revision-Date: 2009-06-13 16:12+0000\n"
 "Last-Translator: Sveinn í Felli <sveinki@nett.is>\n"
 "Language-Team: Icelandic <kde-isl@molar.is>\n"
@@ -1559,13 +1559,13 @@ msgctxt "@action:button"
 msgid "Replace &All"
 msgstr "Skipta út ö&llu"
 
-#: controllers/view/replace/replaceprompt.cpp:29
+#: controllers/view/replace/replaceprompt.cpp:30
 #, fuzzy, kde-format
 msgctxt "@action:button"
 msgid "&Skip"
 msgstr "&Sleppa"
 
-#: controllers/view/replace/replaceprompt.cpp:32
+#: controllers/view/replace/replaceprompt.cpp:34
 #, fuzzy, kde-format
 msgctxt "@action:button"
 msgid "Replace"

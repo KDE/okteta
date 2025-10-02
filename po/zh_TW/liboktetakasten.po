@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-01 02:07+0000\n"
+"POT-Creation-Date: 2025-10-02 02:00+0000\n"
 "PO-Revision-Date: 2025-07-03 23:46+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -1574,13 +1574,13 @@ msgctxt "@action:button"
 msgid "Replace &All"
 msgstr "全部取代(&A)"
 
-#: controllers/view/replace/replaceprompt.cpp:29
+#: controllers/view/replace/replaceprompt.cpp:30
 #, kde-format
 msgctxt "@action:button"
 msgid "&Skip"
 msgstr "忽略(&S)"
 
-#: controllers/view/replace/replaceprompt.cpp:32
+#: controllers/view/replace/replaceprompt.cpp:34
 #, kde-format
 msgctxt "@action:button"
 msgid "Replace"
