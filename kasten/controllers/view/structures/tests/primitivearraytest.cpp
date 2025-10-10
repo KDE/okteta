@@ -114,7 +114,7 @@ void PrimitiveArrayTest::initTestCase()
         endianData[i] = i;
     }
 
-    auto* endianCopy = new Okteta::Byte[SIZE];
+    auto* endianCopy = new Okteta::Byte[ENDIAN_SIZE];
     memcpy(endianCopy, endianData.data(), ENDIAN_SIZE);
     endianModel.reset(new Okteta::ByteArrayModel(endianCopy, ENDIAN_SIZE));
     endianModel->setAutoDelete(true);
