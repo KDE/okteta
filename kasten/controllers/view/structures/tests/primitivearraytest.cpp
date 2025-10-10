@@ -105,7 +105,7 @@ void PrimitiveArrayTest::initTestCase()
         endianData[i] = i;
     }
 
-    auto* const endianCopy = new Okteta::Byte[SIZE];
+    auto* const endianCopy = new Okteta::Byte[ENDIAN_SIZE];
     memcpy(endianCopy, endianData.data(), ENDIAN_SIZE);
     endianModel = std::make_unique<Okteta::ByteArrayModel>(endianCopy, ENDIAN_SIZE);
     endianModel->setAutoDelete(true);
