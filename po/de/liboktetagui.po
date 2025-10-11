@@ -1,5 +1,5 @@
-# Panagiotis Papadopoulos <pano_90@gmx.net>, 2010.
-# Burkhard Lück <lueck@hube-lueck.de>, 2019.
+# SPDX-FileCopyrightText: 2010 Panagiotis Papadopoulos <pano_90@gmx.net>
+# SPDX-FileCopyrightText: 2019 Burkhard Lück <lueck@hube-lueck.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: liboktetagui\n"
