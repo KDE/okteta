@@ -1,9 +1,9 @@
-# Gregor Zumstein <zumstein@ssd.ethz.ch>, 2005.
-# Gregor Zumstein <gz@orchester-bremgarten.ch>, 2007.
-# Thomas Reitelbach <tr@erdfunkstelle.de>, 2007, 2008.
-# Burkhard Lück <lueck@hube-lueck.de>, 2009, 2014, 2019, 2020, 2021.
-# Johannes Obermayr <johannesobermayr@gmx.de>, 2009.
-# Frederik Schwarzer <schwarzer@kde.org>, 2010.
+# SPDX-FileCopyrightText: 2005 Gregor Zumstein <zumstein@ssd.ethz.ch>
+# SPDX-FileCopyrightText: 2007 Gregor Zumstein <gz@orchester-bremgarten.ch>
+# SPDX-FileCopyrightText: 2007, 2008 Thomas Reitelbach <tr@erdfunkstelle.de>
+# SPDX-FileCopyrightText: 2009, 2014, 2019, 2020, 2021 Burkhard Lück <lueck@hube-lueck.de>
+# SPDX-FileCopyrightText: 2009 Johannes Obermayr <johannesobermayr@gmx.de>
+# SPDX-FileCopyrightText: 2010 Frederik Schwarzer <schwarzer@kde.org>
 msgid ""
 msgstr ""
 "Project-Id-Version: oktetapart\n"
