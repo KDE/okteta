@@ -42,8 +42,7 @@ bool StructuresSelectionSortFilterProxyModel::filterAcceptsRow(int sourceRow, co
         return false;
     }
 
-    const StructureMetaData metaData =
-        index.data(StructuresSelectionModel::MetaDataRole).value<StructureMetaData>();
+    const auto metaData = index.data(StructuresSelectionModel::MetaDataRole).value<StructureMetaData>();
 
     if (metaData.name().contains(m_filterString, Qt::CaseInsensitive)) {
         return true;

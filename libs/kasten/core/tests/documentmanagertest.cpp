@@ -23,8 +23,7 @@ void DocumentManagerTest::checkAdded(QSignalSpy* changedSpy, Kasten::AbstractDoc
     QCOMPARE(changedSpy->size(), 1);
     const QList<QVariant> arguments = changedSpy->takeFirst();
     QCOMPARE(arguments.size(), 1);
-    const QVector<Kasten::AbstractDocument*> documents =
-        arguments.at(0).value<QVector<Kasten::AbstractDocument*>>();
+    const auto documents = arguments.at(0).value<QVector<Kasten::AbstractDocument*>>();
     QCOMPARE(documents.size(), 1);
     QCOMPARE(documents.at(0), document);
 }
@@ -35,8 +34,7 @@ void DocumentManagerTest::checkRemoving(QSignalSpy* changedSpy, Kasten::Abstract
     QCOMPARE(changedSpy->size(), 1);
     const QList<QVariant> arguments = changedSpy->takeFirst();
     QCOMPARE(arguments.size(), 1);
-    const QVector<Kasten::AbstractDocument*> documents =
-        arguments.at(0).value<QVector<Kasten::AbstractDocument*>>();
+    const auto documents = arguments.at(0).value<QVector<Kasten::AbstractDocument*>>();
     QCOMPARE(documents.size(), 1);
     QCOMPARE(documents.at(0), document);
 }

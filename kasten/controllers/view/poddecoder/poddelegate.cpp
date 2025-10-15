@@ -168,67 +168,67 @@ void PODDelegate::setEditorData(QWidget* editor, const QModelIndex& index) const
     QVariant data = index.data(Qt::EditRole);
 
     if (data.canConvert<Okteta::Binary8>()) {
-        Okteta::Binary8 binary8 = data.value<Okteta::Binary8>();
+        const auto binary8 = data.value<Okteta::Binary8>();
         auto* const binary8Editor = qobject_cast<Okteta::Binary8Editor*>(editor);
         binary8Editor->setData(binary8);
     } else if (data.canConvert<Okteta::Octal8>()) {
-        Okteta::Octal8 octal8 = data.value<Okteta::Octal8>();
+        const auto octal8 = data.value<Okteta::Octal8>();
         auto* const octal8Editor = qobject_cast<Okteta::Octal8Editor*>(editor);
         octal8Editor->setData(octal8);
     } else if (data.canConvert<Okteta::Hexadecimal8>()) {
-        Okteta::Hexadecimal8 hexadecimal8 = data.value<Okteta::Hexadecimal8>();
+        const auto hexadecimal8 = data.value<Okteta::Hexadecimal8>();
         auto* const hexadecimal8Editor = qobject_cast<Okteta::Hexadecimal8Editor*>(editor);
         hexadecimal8Editor->setData(hexadecimal8);
     } else if (data.canConvert<Okteta::SInt8>()) {
-        Okteta::SInt8 sInt8 = data.value<Okteta::SInt8>();
+        const auto sInt8 = data.value<Okteta::SInt8>();
         auto* const sInt8Editor = qobject_cast<Okteta::SIntSpinBox*>(editor);
         sInt8Editor->setValue(sInt8.value);
     } else if (data.canConvert<Okteta::SInt16>()) {
-        Okteta::SInt16 sInt16 = data.value<Okteta::SInt16>();
+        const auto sInt16 = data.value<Okteta::SInt16>();
         auto* const sInt16Editor = qobject_cast<Okteta::SIntSpinBox*>(editor);
         sInt16Editor->setValue(sInt16.value);
     } else if (data.canConvert<Okteta::SInt32>()) {
-        Okteta::SInt32 sInt32 = data.value<Okteta::SInt32>();
+        const auto sInt32 = data.value<Okteta::SInt32>();
         auto* const sInt32Editor = qobject_cast<Okteta::SIntSpinBox*>(editor);
         sInt32Editor->setValue(sInt32.value);
     } else if (data.canConvert<Okteta::SInt64>()) {
-        Okteta::SInt64 sInt64 = data.value<Okteta::SInt64>();
+        const auto sInt64 = data.value<Okteta::SInt64>();
         auto* const sInt64Editor = qobject_cast<Okteta::SIntSpinBox*>(editor);
         sInt64Editor->setValue(sInt64.value);
     } else if (data.canConvert<Okteta::UInt8>()) {
-        Okteta::UInt8 uInt8 = data.value<Okteta::UInt8>();
+        const auto uInt8 = data.value<Okteta::UInt8>();
         auto* const uInt8Editor = qobject_cast<Okteta::UIntSpinBox*>(editor);
         uInt8Editor->setValue(uInt8.value);
     } else if (data.canConvert<Okteta::UInt16>()) {
-        Okteta::UInt16 uInt16 = data.value<Okteta::UInt16>();
+        const auto uInt16 = data.value<Okteta::UInt16>();
         auto* const uInt16Editor = qobject_cast<Okteta::UIntSpinBox*>(editor);
         uInt16Editor->setValue(uInt16.value);
     } else if (data.canConvert<Okteta::UInt32>()) {
-        Okteta::UInt32 uInt32 = data.value<Okteta::UInt32>();
+        const auto uInt32 = data.value<Okteta::UInt32>();
         auto* const uInt32Editor = qobject_cast<Okteta::UIntSpinBox*>(editor);
         uInt32Editor->setValue(uInt32.value);
     } else if (data.canConvert<Okteta::UInt64>()) {
-        Okteta::UInt64 uInt64 = data.value<Okteta::UInt64>();
+        const auto uInt64 = data.value<Okteta::UInt64>();
         auto* const uInt64Editor = qobject_cast<Okteta::UIntSpinBox*>(editor);
         uInt64Editor->setValue(uInt64.value);
     } else if (data.canConvert<Okteta::Float32>()) {
-        Okteta::Float32 float32 = data.value<Okteta::Float32>();
+        const auto float32 = data.value<Okteta::Float32>();
         auto* const float32Editor = qobject_cast<Okteta::Float32Editor*>(editor);
         float32Editor->setData(float32);
     } else if (data.canConvert<Okteta::Float64>()) {
-        Okteta::Float64 float64 = data.value<Okteta::Float64>();
+        const auto float64 = data.value<Okteta::Float64>();
         auto* const float64Editor = qobject_cast<Okteta::Float64Editor*>(editor);
         float64Editor->setData(float64);
     } else if (data.canConvert<Okteta::Char8>()) {
-        Okteta::Char8 char8 = data.value<Okteta::Char8>();
+        const auto char8 = data.value<Okteta::Char8>();
         auto* const char8Editor = qobject_cast<Okteta::Char8Editor*>(editor);
         char8Editor->setData(char8);
     } else if (data.canConvert<Okteta::Utf8>()) {
-        Okteta::Utf8 utf8 = data.value<Okteta::Utf8>();
+        const auto utf8 = data.value<Okteta::Utf8>();
         auto* const utf8Editor = qobject_cast<Okteta::Utf8Editor*>(editor);
         utf8Editor->setData(utf8);
     } else if (data.canConvert<Okteta::Utf16>()) {
-        Okteta::Utf16 utf16 = data.value<Okteta::Utf16>();
+        const auto utf16 = data.value<Okteta::Utf16>();
         auto* const utf16Editor = qobject_cast<Okteta::Utf16Editor*>(editor);
         utf16Editor->setData(utf16);
     } else {

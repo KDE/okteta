@@ -41,7 +41,7 @@ public:
         Q_UNUSED(locale)
         Q_UNUSED(asHex)
 
-        const Okteta::Binary8 binary8 = data.value<Okteta::Binary8>();
+        const auto binary8 = data.value<Okteta::Binary8>();
         return binary8.toString();
     }
 };
@@ -55,7 +55,7 @@ public:
         Q_UNUSED(locale)
         Q_UNUSED(asHex)
 
-        const Okteta::Octal8 octal8 = data.value<Okteta::Octal8>();
+        const auto octal8 = data.value<Okteta::Octal8>();
         return octal8.toString();
     }
 };
@@ -69,7 +69,7 @@ public:
         Q_UNUSED(locale)
         Q_UNUSED(asHex)
 
-        const Okteta::Hexadecimal8 hexadecimal8 = data.value<Okteta::Hexadecimal8>();
+        const auto hexadecimal8 = data.value<Okteta::Hexadecimal8>();
         return hexadecimal8.toString();
     }
 };
@@ -82,7 +82,7 @@ public:
     {
         Q_UNUSED(asHex)
 
-        const Okteta::SInt8 sInt8 = data.value<Okteta::SInt8>();
+        const auto sInt8 = data.value<Okteta::SInt8>();
         return sInt8.toString(locale);
     }
 };
@@ -95,7 +95,7 @@ public:
     {
         Q_UNUSED(asHex)
 
-        const Okteta::SInt16 sInt16 = data.value<Okteta::SInt16>();
+        const auto sInt16 = data.value<Okteta::SInt16>();
         return sInt16.toString(locale);
     }
 };
@@ -108,7 +108,7 @@ public:
     {
         Q_UNUSED(asHex)
 
-        const Okteta::SInt32 sInt32 = data.value<Okteta::SInt32>();
+        const auto sInt32 = data.value<Okteta::SInt32>();
         return sInt32.toString(locale);
     }
 };
@@ -121,7 +121,7 @@ public:
     {
         Q_UNUSED(asHex)
 
-        const Okteta::SInt64 sInt64 = data.value<Okteta::SInt64>();
+        const auto sInt64 = data.value<Okteta::SInt64>();
         return sInt64.toString(locale);
     }
 };
@@ -132,7 +132,7 @@ public:
     [[nodiscard]]
     QString displayText(const QVariant& data, const QLocale& locale, bool asHex) const override
     {
-        const Okteta::UInt8 uInt8 = data.value<Okteta::UInt8>();
+        const auto uInt8 = data.value<Okteta::UInt8>();
         return uInt8.toString(asHex, locale);
     }
 };
@@ -143,7 +143,7 @@ public:
     [[nodiscard]]
     QString displayText(const QVariant& data, const QLocale& locale, bool asHex) const override
     {
-        const Okteta::UInt16 uInt16 = data.value<Okteta::UInt16>();
+        const auto uInt16 = data.value<Okteta::UInt16>();
         return uInt16.toString(asHex, locale);
     }
 };
@@ -154,7 +154,7 @@ public:
     [[nodiscard]]
     QString displayText(const QVariant& data, const QLocale& locale, bool asHex) const override
     {
-        const Okteta::UInt32 uInt32 = data.value<Okteta::UInt32>();
+        const auto uInt32 = data.value<Okteta::UInt32>();
         return uInt32.toString(asHex, locale);
     }
 };
@@ -165,7 +165,7 @@ public:
     [[nodiscard]]
     QString displayText(const QVariant& data, const QLocale& locale, bool asHex) const override
     {
-        const Okteta::UInt64 uInt64 = data.value<Okteta::UInt64>();
+        const auto uInt64 = data.value<Okteta::UInt64>();
         return uInt64.toString(asHex, locale);
     }
 };
@@ -178,7 +178,7 @@ public:
     {
         Q_UNUSED(asHex)
 
-        const Okteta::Float32 float32 = data.value<Okteta::Float32>();
+        const auto float32 = data.value<Okteta::Float32>();
         return float32.toString(locale);
     }
 };
@@ -191,7 +191,7 @@ public:
     {
         Q_UNUSED(asHex)
 
-        const Okteta::Float64 float64 = data.value<Okteta::Float64>();
+        const auto float64 = data.value<Okteta::Float64>();
         return float64.toString(locale);
     }
 };
@@ -205,7 +205,7 @@ public:
         Q_UNUSED(locale)
         Q_UNUSED(asHex)
 
-        const Okteta::Char8 char8 = data.value<Okteta::Char8>();
+        const auto char8 = data.value<Okteta::Char8>();
         return char8.toString();
     }
 };
@@ -219,7 +219,7 @@ public:
         Q_UNUSED(locale)
         Q_UNUSED(asHex)
 
-        const Okteta::Utf8 utf8 = data.value<Okteta::Utf8>();
+        const auto utf8 = data.value<Okteta::Utf8>();
         return utf8.toString();
     }
 };
@@ -233,7 +233,7 @@ public:
         Q_UNUSED(locale)
         Q_UNUSED(asHex)
 
-        const Okteta::Utf16 utf16 = data.value<Okteta::Utf16>();
+        const auto utf16 = data.value<Okteta::Utf16>();
         return utf16.toString();
     }
 };

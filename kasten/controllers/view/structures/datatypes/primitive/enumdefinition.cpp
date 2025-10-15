@@ -130,7 +130,7 @@ QPair<AllPrimitiveTypes, QString> EnumDefinition::convertToEnumEntry(const QStri
             return {};
         }
     }
-    quint64 asUnsigned = intValue.value<quint64>();
+    const auto asUnsigned = intValue.value<quint64>();
     if (asUnsigned > maxValue) {
         QString errMessage = QStringLiteral(
             "Enumerator %1: %2 is larger than the maximum possible for type %3 (%4)");
@@ -139,7 +139,7 @@ QPair<AllPrimitiveTypes, QString> EnumDefinition::convertToEnumEntry(const QStri
         logger.warn() << errMessage;
         return {};
     }
-    qint64 asSigned = intValue.value<qint64>();
+    const auto asSigned = intValue.value<qint64>();
     if (minValue != 0 && asSigned < minValue) {
         QString errMessage = QStringLiteral(
             "Enumerator %1: %2 is smaller than the minimum possible for type %3 (%4)");

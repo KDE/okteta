@@ -246,8 +246,8 @@ void PrimitiveArrayTest::testReadPrimitiveInternal()
     auto* const arrayData = static_cast<PrimitiveArrayData<primType>*>(dataInf->mData.get());
     for (uint i = 0; i < dataInf->childCount(); ++i) {
         AllPrimitiveTypes childDataAll = arrayData->valueAt(i);
-        T childData = childDataAll.value<T>();
-        T expected = dataAsT[i];
+        const auto childData = childDataAll.value<T>();
+        const auto expected = dataAsT[i];
         // TODO comparison for float and double: nan != nan
         if (!compareItems<T>(childData, expected, i)) {
             QByteArray desc = "i=" + QByteArray::number(i) + ", model[i]="

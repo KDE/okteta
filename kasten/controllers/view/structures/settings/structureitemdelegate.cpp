@@ -244,8 +244,7 @@ void StructureItemDelegate::handleAboutClicked()
         return;
     }
 
-    const StructureMetaData metaData =
-        index.data(StructuresSelectionModel::MetaDataRole).value<StructureMetaData>();
+    const auto metaData = index.data(StructuresSelectionModel::MetaDataRole).value<StructureMetaData>();
 
     auto* const aboutDialog = new AboutStructureDialog(metaData, itemView());
     aboutDialog->show();
