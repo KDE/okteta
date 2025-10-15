@@ -110,7 +110,7 @@ void ByteArrayGZipStreamCompressor::setSettings(const GZipStreamCompressorSettin
 int zlibStrategy(GZipStreamCompressorSettings::StrategyId strategyId)
 {
     int listIndex = static_cast<int>(strategyId);
-    if ((listIndex < 0) || (listIndex > GZipStreamCompressorSettings::StrategyCount)) {
+    if ((listIndex < 0) || (listIndex >= GZipStreamCompressorSettings::StrategyCount)) {
         listIndex = 0;
     }
     static const std::array<int, GZipStreamCompressorSettings::StrategyCount> zLibByIdTable = {
