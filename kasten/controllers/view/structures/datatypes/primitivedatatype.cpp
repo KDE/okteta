@@ -33,23 +33,23 @@ static constexpr const KLazyLocalizedString longTypeNames[static_cast<int>(Primi
     kli18nc("data type", "bitfield"),
 };
 
-static constexpr const char* typeNames[static_cast<int>(PrimitiveDataType::END) + 1] = {
-    "bool8",
-    "int8",
-    "uint8",
-    "char",
-    "bool16",
-    "int16",
-    "uint16",
-    "bool32",
-    "int32",
-    "uint32",
-    "bool64",
-    "int64",
-    "uint64",
-    "float",
-    "double",
-    "bitfield",
+static const QString typeNames[static_cast<int>(PrimitiveDataType::END) + 1] = {
+    QStringLiteral("bool8"),
+    QStringLiteral("int8"),
+    QStringLiteral("uint8"),
+    QStringLiteral("char"),
+    QStringLiteral("bool16"),
+    QStringLiteral("int16"),
+    QStringLiteral("uint16"),
+    QStringLiteral("bool32"),
+    QStringLiteral("int32"),
+    QStringLiteral("uint32"),
+    QStringLiteral("bool64"),
+    QStringLiteral("int64"),
+    QStringLiteral("uint64"),
+    QStringLiteral("float"),
+    QStringLiteral("double"),
+    QStringLiteral("bitfield"),
 };
 
 QString PrimitiveType::typeName(PrimitiveDataType type)
@@ -64,7 +64,7 @@ QString PrimitiveType::typeName(PrimitiveDataType type)
 QString PrimitiveType::standardTypeName(PrimitiveDataType type)
 {
     if (type >= PrimitiveDataType::START && type <= PrimitiveDataType::END) {
-        return QLatin1String(typeNames[static_cast<int>(type)]);
+        return typeNames[static_cast<int>(type)];
     }
 
     return QStringLiteral("invalid");
