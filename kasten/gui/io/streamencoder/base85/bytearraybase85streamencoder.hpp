@@ -19,8 +19,6 @@ class ByteArrayBase85StreamEncoder : public AbstractByteArrayStreamEncoder
     Q_OBJECT
 
 public:
-    static constexpr int inputGroupLength = 4;
-
     static constexpr int outputLineLength = 72;
     static constexpr int maxOutputBytesPerLine = outputLineLength;
 
