@@ -245,7 +245,8 @@ void ViewStatusController::onSelectedDataChanged(const Kasten::AbstractModelSele
 
 void ViewStatusController::onOffsetCodingChanged(int offsetCoding)
 {
-    mPrintFunction = Okteta::OffsetFormat::printFunction((Okteta::OffsetFormat::Format)offsetCoding);
+    const auto offsetFormat = static_cast<Okteta::OffsetFormat::Format>(offsetCoding);
+    mPrintFunction = Okteta::OffsetFormat::printFunction(offsetFormat);
     fixWidths(offsetCoding);
 
     // trigger updates of offset printing labels

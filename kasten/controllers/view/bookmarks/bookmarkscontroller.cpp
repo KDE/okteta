@@ -153,8 +153,8 @@ void BookmarksController::updateBookmarks()
     }
 
     const Okteta::Address startOffset = mByteArrayView->startOffset();
-    Okteta::OffsetFormat::print printFunction =
-        Okteta::OffsetFormat::printFunction((Okteta::OffsetFormat::Format)mByteArrayView->offsetCoding());
+    const auto offsetFormat = static_cast<Okteta::OffsetFormat::Format>(mByteArrayView->offsetCoding());
+    const Okteta::OffsetFormat::print printFunction = Okteta::OffsetFormat::printFunction(offsetFormat);
 
     char codedOffset[Okteta::OffsetFormat::MaxFormatWidth + 1];
 

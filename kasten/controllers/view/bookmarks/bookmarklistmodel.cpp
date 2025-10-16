@@ -22,7 +22,8 @@ BookmarkListModel::BookmarkListModel(BookmarksTool* tool, QObject* parent)
     , mTool(tool)
     , mFixedFont(QFontDatabase::systemFont(QFontDatabase::FixedFont))
 {
-    mPrintFunction = Okteta::OffsetFormat::printFunction((Okteta::OffsetFormat::Format)tool->offsetCoding());
+    const auto offsetFormat = static_cast<Okteta::OffsetFormat::Format>(tool->offsetCoding());
+    mPrintFunction = Okteta::OffsetFormat::printFunction(offsetFormat);
 
     connect(mTool, &BookmarksTool::hasBookmarksChanged,
             this, &BookmarkListModel::onHasBookmarksChanged);
@@ -214,7 +215,8 @@ void BookmarkListModel::onBookmarksChanged(const QVector<int>& bookmarkIndizes)
 
 void BookmarkListModel::onOffsetCodingChanged(int offsetCoding)
 {
-    mPrintFunction = Okteta::OffsetFormat::printFunction((Okteta::OffsetFormat::Format)offsetCoding);
+    const auto offsetFormat = static_cast<Okteta::OffsetFormat::Format>(offsetCoding);
+    mPrintFunction = Okteta::OffsetFormat::printFunction(offsetFormat);
     beginResetModel();
     endResetModel();
 }
