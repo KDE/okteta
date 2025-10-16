@@ -46,7 +46,7 @@ public:
     QString id() const;
 
 Q_SIGNALS: // TODO: add check for signal to tests
-    void calculatedBytes(int bytes) const;
+    void calculatedBytes(Okteta::Size bytes) const;
 
 private:
     QScopedPointer<class AbstractByteArrayChecksumAlgorithmPrivate> const d;
