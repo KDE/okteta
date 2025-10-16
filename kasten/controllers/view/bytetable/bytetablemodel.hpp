@@ -54,7 +54,7 @@ public:
     const QFont &fixedFont() const;
 
 private:
-    static constexpr int NofOfValueCodings = 4;
+    static constexpr std::size_t NofOfValueCodings = 4;
 
 private:
     Okteta::ValueCodec* mValueCodec[NofOfValueCodings];

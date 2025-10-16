@@ -21,8 +21,8 @@
 #include <algorithm>
 #include <iterator>
 
-static constexpr int encodingTypeCount =
-    static_cast<int>(Kasten::Base32StreamEncoderSettings::EncodingType::_Count);
+static constexpr auto encodingTypeCount =
+    static_cast<std::size_t>(Kasten::Base32StreamEncoderSettings::EncodingType::_Count);
 static const std::array<QString, encodingTypeCount> encodingTypeConfigValueList = {
     QStringLiteral("Classic"),
     QStringLiteral("base32hex"),

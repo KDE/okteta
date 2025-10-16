@@ -21,8 +21,8 @@
 #include <iterator>
 
 // TODO: deduplicate with kasten/controllers/libconfigentries/
-static constexpr int codingCount =
-    static_cast<int>(Kasten::ByteArrayPatternGeneratorSettings::_CodingCount);
+static constexpr auto codingCount =
+    static_cast<std::size_t>(Kasten::ByteArrayPatternGeneratorSettings::_CodingCount);
 static const std::array<QString, codingCount> codingConfigValueList = {
     QStringLiteral("Hexadecimal"),
     QStringLiteral("Decimal"),

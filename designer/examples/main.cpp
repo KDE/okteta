@@ -40,7 +40,7 @@ static constexpr char exampleInitialData[] =
     "\xE0\xE1\xE2\xE3\xE4\xE5\xE6\xE7\xE8\xE9\xEA\xEB\xEC\xED\xEE\xEF"
     "\xF0\xF1\xF2\xF3\xF4\xF5\xF6\xF7\xF8\xF9\xFA\xFB\xFC\xFD\xFE\xFF";
 
-static constexpr int exampleInitialDataSize = sizeof(exampleInitialData) / sizeof(exampleInitialData[0]);
+static constexpr std::size_t exampleInitialDataSize = sizeof(exampleInitialData) / sizeof(exampleInitialData[0]);
 
 class Widget : public QWidget
 {
