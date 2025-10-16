@@ -150,7 +150,7 @@ bool ByteArrayUuencodingStreamEncoder::encodeDataToStream(QIODevice* device,
     // header
     textStream << encodeData->header << " 644 " << mSettings.fileName.toLatin1();
 
-    const int firstLineLength = qMin(range.width(), uuInputLineLength);
+    const int firstLineLength = qMin(range.width(), inputLineLength);
     if (firstLineLength > 0) {
         textStream << '\n';
         if (encodeData->hasLength) {
@@ -186,7 +186,7 @@ bool ByteArrayUuencodingStreamEncoder::encodeDataToStream(QIODevice* device,
             ++inputGroupsPerLine;
             if (inputGroupsPerLine >= maxInputGroupsPerLine && i < range.end()) {
                 const int remainsCount = range.end() - i;
-                const int nextLineLength = qMin(remainsCount, uuInputLineLength);
+                const int nextLineLength = qMin(remainsCount, inputLineLength);
                 textStream << '\n';
                 if (encodeData->hasLength) {
                     textStream << encodeData->mapByte(nextLineLength);

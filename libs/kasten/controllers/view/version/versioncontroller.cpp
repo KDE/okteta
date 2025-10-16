@@ -21,7 +21,7 @@
 
 namespace Kasten {
 
-static constexpr int MaxMenuEntries = 10;
+static constexpr unsigned int MaxMenuEntries = 10;
 
 VersionController::VersionController(KXMLGUIClient* guiClient)
 {
@@ -121,7 +121,7 @@ void VersionController::onOlderVersionMenuAboutToShow()
     QMenu* const menu = mSetToOlderVersionAction->menu();
     menu->clear();
 
-    int menuEntries = 0;
+    unsigned int menuEntries = 0;
     for (int versionIndex = mVersionControl->versionIndex();
          versionIndex > 0 && menuEntries < MaxMenuEntries;
          --versionIndex, ++menuEntries) {
@@ -141,7 +141,7 @@ void VersionController::onNewerVersionMenuAboutToShow()
     QMenu* const menu = mSetToNewerVersionAction->menu();
     menu->clear();
 
-    int menuEntries = 0;
+    unsigned int menuEntries = 0;
     for (int versionIndex = mVersionControl->versionIndex() + 1;
          versionIndex < mVersionControl->versionCount() && menuEntries < MaxMenuEntries;
          ++versionIndex, ++menuEntries) {

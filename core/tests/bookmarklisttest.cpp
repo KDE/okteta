@@ -16,14 +16,14 @@
 
 using namespace Okteta;
 
-static constexpr int Offset1 = 7;
-static constexpr int Offset2 = 23;
-static constexpr int Offset3 = 45;
-static constexpr int Offset4 = 67;
-static constexpr int Distance12 = Offset2 - Offset1;
-static constexpr int Distance23 = Offset3 - Offset2;
-static constexpr int Distance34 = Offset4 - Offset3;
-static constexpr int Distance13 = Distance12 + Distance23;
+static constexpr Address Offset1 = 7;
+static constexpr Address Offset2 = 23;
+static constexpr Address Offset3 = 45;
+static constexpr Address Offset4 = 67;
+static constexpr Size Distance12 = Offset2 - Offset1;
+static constexpr Size Distance23 = Offset3 - Offset2;
+static constexpr Size Distance34 = Offset4 - Offset3;
+static constexpr Size Distance13 = Distance12 + Distance23;
 
 void BookmarkListTest::testSimpleConstructor()
 {
@@ -131,7 +131,7 @@ void BookmarkListTest::testAdjustToReplaced()
     BookmarkList bookmarkList;
 
     // replace after last -> no changes
-    constexpr int behindOffset3 = Offset3 + 1;
+    constexpr Address behindOffset3 = Offset3 + 1;
     bookmarkList.addBookmark(bookmark1);
     bookmarkList.addBookmark(bookmark2);
     bookmarkList.addBookmark(bookmark3);
@@ -154,8 +154,8 @@ void BookmarkListTest::testAdjustToReplaced()
     QVERIFY(!adjusted);
 
     // replace after 1 and before 3 with same length
-    constexpr int replaceLength = Distance13 - 1;
-    constexpr int behindOffset1 = Offset1 + 1;
+    constexpr Size replaceLength = Distance13 - 1;
+    constexpr Address behindOffset1 = Offset1 + 1;
     bookmarkList.clear();
     bookmarkList.addBookmark(bookmark1);
     bookmarkList.addBookmark(bookmark2);
@@ -168,7 +168,7 @@ void BookmarkListTest::testAdjustToReplaced()
     QVERIFY(!bookmarkList.isEmpty());
 
     // replace after 1 and before 3 with longer length
-    constexpr int longer = 5;
+    constexpr Size longer = 5;
     bookmarkList.clear();
     bookmarkList.addBookmark(bookmark1);
     bookmarkList.addBookmark(bookmark2);
@@ -181,7 +181,7 @@ void BookmarkListTest::testAdjustToReplaced()
     QVERIFY(!bookmarkList.isEmpty());
 
     // replace after 1 and before 3 with shorter length
-    constexpr int shorter = 5;
+    constexpr Size shorter = 5;
     bookmarkList.clear();
     bookmarkList.addBookmark(bookmark1);
     bookmarkList.addBookmark(bookmark2);
@@ -205,9 +205,9 @@ void BookmarkListTest::testAdjustToSwapped()
     BookmarkList bookmarkList;
 
     // move all between 1 and 3 right before 4
-    constexpr int secondLength = Distance34;
-    constexpr int firstLength = Distance13 - 1;
-    constexpr int behindOffset1 = Offset1 + 1;
+    constexpr Size secondLength = Distance34;
+    constexpr Size firstLength = Distance13 - 1;
+    constexpr Address behindOffset1 = Offset1 + 1;
     bookmarkList.addBookmark(bookmark1);
     bookmarkList.addBookmark(bookmark2);
     bookmarkList.addBookmark(bookmark3_1);
@@ -215,14 +215,14 @@ void BookmarkListTest::testAdjustToSwapped()
     bookmarkList.addBookmark(bookmark4);
     bool adjusted = bookmarkList.adjustToSwapped(behindOffset1, Offset3, secondLength);
 
-    QVector<int> newOffsets;
+    QVector<Address> newOffsets;
     newOffsets << bookmark1.offset() << bookmark3.offset() - firstLength << bookmark2.offset() + secondLength
                << bookmark3_1.offset() + secondLength << bookmark4.offset();
 
     QVERIFY(adjusted);
     QVERIFY(!bookmarkList.isEmpty());
     QCOMPARE(bookmarkList.size(), 5);
-    QVector<int>::ConstIterator oit = newOffsets.constBegin();
+    QVector<Address>::ConstIterator oit = newOffsets.constBegin();
     for (const Bookmark& bookmark : std::as_const(bookmarkList)) {
         QCOMPARE(bookmark.offset(), *oit++);
     }

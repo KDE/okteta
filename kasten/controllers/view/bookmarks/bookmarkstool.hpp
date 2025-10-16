@@ -11,6 +11,7 @@
 #include <Kasten/AbstractTool>
 // Okteta core
 #include <Okteta/Address>
+#include <Okteta/Size>
 
 namespace Okteta {
 class Bookmarkable;
@@ -28,7 +29,7 @@ class BookmarksTool : public AbstractTool
     Q_OBJECT
 
 private:
-    static constexpr int MaxBookmarkNameSize = 40;
+    static constexpr Okteta::Size MaxBookmarkNameSize = 40;
 
 public:
     BookmarksTool();

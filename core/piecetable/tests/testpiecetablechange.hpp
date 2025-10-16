@@ -20,8 +20,8 @@ class TestPieceTableChange : public AbstractPieceTableChange
 public:
     explicit
     TestPieceTableChange(int typeId = -1, const QString& description = QString(),
-                         int position = 0, int storagePosition = 0, int storageId = Piece::ChangeStorage,
-                         int replacedStoragePosition = 0, int replacedStorageId = Piece::ChangeStorage);
+                         Address position = 0, Address storagePosition = 0, int storageId = Piece::ChangeStorage,
+                         Address replacedStoragePosition = 0, int replacedStorageId = Piece::ChangeStorage);
 
     ~TestPieceTableChange() override;
 
@@ -44,17 +44,17 @@ public: // AbstractPieceTableChange API
 private:
     int mTypeId;
     QString mDescription;
-    int mPosition;
-    int mStoragePosition;
+    Address mPosition;
+    Address mStoragePosition;
     int mStorageId;
 
-    int mReplacedStoragePosition;
+    Address mReplacedStoragePosition;
     int mReplacedStorageId;
 };
 
 inline TestPieceTableChange::TestPieceTableChange(int typeId, const QString& description,
-                                                  int position, int storagePosition, int storageId,
-                                                  int replacedStoragePosition, int replacedStorageId)
+                                                  Address position, Address storagePosition, int storageId,
+                                                  Address replacedStoragePosition, int replacedStorageId)
     : mTypeId(typeId)
     , mDescription(description)
     , mPosition(position)

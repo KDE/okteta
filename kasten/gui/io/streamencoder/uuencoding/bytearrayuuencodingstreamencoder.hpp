@@ -66,10 +66,10 @@ public:
     };
 
 private:
-    static inline constexpr int defaultUuInputLineLength = 45;
-    static inline constexpr int uuInputLineLength = defaultUuInputLineLength;
-    static inline constexpr int uuInputGroupLength = 3;
-    static inline constexpr int maxInputGroupsPerLine = uuInputLineLength / uuInputGroupLength;
+    static inline constexpr int defaultInputLineLength = 45;
+    static inline constexpr int inputLineLength = defaultInputLineLength;
+    static inline constexpr int inputGroupLength = 3;
+    static inline constexpr int maxInputGroupsPerLine = inputLineLength / inputGroupLength;
 
     static inline constexpr char ConfigGroupId[] = "ByteArrayUuencodingStreamEncoder";
 

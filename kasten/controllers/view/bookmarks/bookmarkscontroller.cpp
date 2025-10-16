@@ -158,9 +158,9 @@ void BookmarksController::updateBookmarks()
 
     char codedOffset[Okteta::OffsetFormat::MaxFormatWidth + 1];
 
-    constexpr int firstWithNumericShortCut = 1;
-    constexpr int lastWithNumericShortCut = 9;
-    int b = firstWithNumericShortCut;
+    constexpr unsigned int firstWithNumericShortCut = 1;
+    constexpr unsigned int lastWithNumericShortCut = 9;
+    unsigned int b = firstWithNumericShortCut;
 
     Okteta::BookmarksConstIterator bit = mBookmarks->createBookmarksConstIterator();
     while (bit.hasNext()) {

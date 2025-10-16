@@ -12,7 +12,7 @@
 #include <iterator>
 
 // Matching Kasten::ByteArrayCoding
-static constexpr int ByteArrayCodingCount = 6;
+static constexpr std::size_t ByteArrayCodingCount = 6;
 static const std::array<QString, ByteArrayCodingCount> byteArrayCodingConfigValueList = {
     QStringLiteral("Hexadecimal"),
     QStringLiteral("Decimal"),

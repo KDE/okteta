@@ -56,10 +56,10 @@ public:
         Third
     };
 private:
-    static inline constexpr int defaultxxInputLineLength = 45;
-    static inline constexpr int xxInputLineLength = defaultxxInputLineLength;
-    static inline constexpr int xxInputGroupLength = 3;
-    static inline constexpr int maxXxInputGroupsPerLine = xxInputLineLength / xxInputGroupLength;
+    static inline constexpr int defaultInputLineLength = 45;
+    static inline constexpr int inputLineLength = defaultInputLineLength;
+    static inline constexpr int inputGroupLength = 3;
+    static inline constexpr int maxInputGroupsPerLine = inputLineLength / inputGroupLength;
 
     static inline constexpr char ConfigGroupId[] = "ByteArrayXxencodingStreamEncoder";
 

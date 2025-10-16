@@ -12,7 +12,7 @@
 #include <iterator>
 
 // Matching Okteta::AddressComboBox::Coding
-static constexpr int AddressCcodingCount = 4;
+static constexpr std::size_t AddressCcodingCount = 4;
 static const std::array<QString, AddressCcodingCount> addressCodingConfigValueList = {
     QStringLiteral("Hexadecimal"),
     QStringLiteral("Decimal"),

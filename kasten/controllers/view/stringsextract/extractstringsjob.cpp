@@ -15,7 +15,7 @@
 
 namespace Kasten {
 
-static constexpr int ExtractStringBlockSize = 100000;
+static constexpr Okteta::Size ExtractStringBlockSize = 100000;
 
 void ExtractStringsJob::exec()
 {

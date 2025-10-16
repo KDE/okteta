@@ -66,8 +66,6 @@ public:
     };
 
 private:
-    static inline constexpr int inputGroupLength = 5;
-
     static inline constexpr int outputLineLength = 76;
     static inline constexpr int outputGroupLength = 8;
     static inline constexpr int maxOutputGroupsPerLine = outputLineLength / outputGroupLength;

@@ -36,7 +36,7 @@ ByteTableModel::ByteTableModel(QObject* parent)
         Okteta::OctalCoding,
         Okteta::BinaryCoding
     };
-    for (int i = 0; i < NofOfValueCodings; ++i) {
+    for (std::size_t i = 0; i < NofOfValueCodings; ++i) {
         mValueCodec[i] = Okteta::ValueCodec::createCodec(CodingIds[i]);
     }
 }

@@ -31,7 +31,7 @@ public:
         _Count,
     };
 
-    static inline constexpr int AddressSizeCount = static_cast<int>(AddressSizeId::_Count);
+    static inline constexpr auto AddressSizeCount = static_cast<std::size_t>(AddressSizeId::_Count);
     static const std::array<QString, AddressSizeCount> addressSizeConfigValueList;
 
 private:

@@ -15,7 +15,7 @@
 
 namespace Kasten {
 
-static constexpr int CharsetConversionBlockSize = 100000;
+static constexpr Okteta::Size CharsetConversionBlockSize = 100000;
 
 bool CharsetConversionJob::exec()
 {

@@ -19,8 +19,8 @@
 #include <algorithm>
 #include <iterator>
 
-static constexpr int primitiveDataTypeCount =
-    static_cast<int>(Kasten::SourceCodeStreamEncoderSettings::PrimitiveDataType::_Count);
+static constexpr auto primitiveDataTypeCount =
+    static_cast<std::size_t>(Kasten::SourceCodeStreamEncoderSettings::PrimitiveDataType::_Count);
 static const std::array<QString, primitiveDataTypeCount> primitiveDataTypeConfigValueList = {
     QStringLiteral("Char"),
     QStringLiteral("UnsignedChar"),
@@ -63,7 +63,7 @@ namespace Kasten {
 
 const QString SourceCodeStreamEncoderSettings::DefaultVariableName = QStringLiteral("array");
 
-static constexpr int NoOfPrimitiveDataTypes = 10;
+static constexpr std::size_t NoOfPrimitiveDataTypes = 10;
 
 static constexpr  const char* PrimitiveDataTypeName[NoOfPrimitiveDataTypes] = {
     "char",

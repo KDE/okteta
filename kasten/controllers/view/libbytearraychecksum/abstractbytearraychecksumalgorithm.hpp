@@ -26,7 +26,7 @@ class AbstractByteArrayChecksumAlgorithm : public QObject
     Q_OBJECT
 
 protected:
-    static constexpr int CalculatedByteCountSignalLimit = 10000;
+    static constexpr Okteta::Size CalculatedByteCountSignalLimit = 10000;
 
 protected:
     explicit AbstractByteArrayChecksumAlgorithm(const QString& name, const QString& id);
@@ -50,7 +50,7 @@ public:
     QString id() const;
 
 Q_SIGNALS: // TODO: add check for signal to tests
-    void calculatedBytes(int bytes) const;
+    void calculatedBytes(Okteta::Size bytes) const;
 
 private:
     const std::unique_ptr<class AbstractByteArrayChecksumAlgorithmPrivate> d;

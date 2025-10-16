@@ -27,7 +27,7 @@ class AbstractByteArrayFilter : public QObject
     Q_OBJECT
 
 protected:
-    static constexpr int FilteredByteCountSignalLimit = 10000;
+    static constexpr Okteta::Size FilteredByteCountSignalLimit = 10000;
 
 protected:
     explicit AbstractByteArrayFilter(const QString& name, const QString& id);
@@ -51,7 +51,7 @@ public:
     QString id() const;
 
 Q_SIGNALS: // TODO: add check for signal to tests
-    void filteredBytes(int bytes) const;
+    void filteredBytes(Okteta::Size bytes) const;
 
 private:
     const std::unique_ptr<class AbstractByteArrayFilterPrivate> d;

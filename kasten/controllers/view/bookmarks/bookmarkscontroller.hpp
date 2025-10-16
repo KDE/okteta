@@ -11,6 +11,7 @@
 #include <Kasten/AbstractXmlGuiController>
 // Okteta core
 #include <Okteta/Address>
+#include <Okteta/Size>
 
 template <class T> class QVector;
 
@@ -33,7 +34,7 @@ class BookmarksController : public AbstractXmlGuiController
 
 private:
     static constexpr int MaxEntryLength = 150;
-    static constexpr int MaxBookmarkNameSize = 40;
+    static constexpr Okteta::Size MaxBookmarkNameSize = 40;
 
 public:
     explicit BookmarksController(KXMLGUIClient* guiClient);

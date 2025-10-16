@@ -13,9 +13,9 @@
 // Qt
 #include <QTest>
 
-static constexpr int TestOffset = 30;
-static constexpr int StorageOffset = 20;
-static constexpr int ReplacedStorageOffset = 53;
+static constexpr KPieceTable::Address TestOffset = 30;
+static constexpr KPieceTable::Address StorageOffset = 20;
+static constexpr KPieceTable::Address ReplacedStorageOffset = 53;
 
 namespace KPieceTable {
 
