@@ -223,7 +223,7 @@ bool MouseNavigator::handleMouseDoubleClickEvent(QMouseEvent* mouseEvent)
             mView->selectWord(index);
 
             // as we already have a double-click maybe it is a triple-click
-            m_tripleClickTimer->start(qApp->doubleClickInterval());
+            m_tripleClickTimer->start(QApplication::doubleClickInterval());
             mDoubleClickPoint = mouseEvent->globalPos();
         }
         //  else
