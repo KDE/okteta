@@ -28,7 +28,7 @@
 // Std
 #include <utility>
 
-const QString StringDataInformation::encodingNames[static_cast<int>(StringDataInformation::StringType::EBCDIC)+2] = {
+const std::array<QString, StringDataInformation::EncodingTypeCount> StringDataInformation::encodingNames = {
     QStringLiteral("<invalid>"), // -1
     QStringLiteral("ascii"),
     QStringLiteral("latin1"),

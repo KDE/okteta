@@ -13,6 +13,7 @@
 #include <datainformation.hpp>
 #include <dummydatainformation.hpp>
 // Std
+#include <array>
 #include <memory>
 
 class StringDataInformation : public DataInformationWithDummyChildren
@@ -32,6 +33,8 @@ public:
         UTF32_BE,
         EBCDIC
     };
+
+    static inline constexpr auto EncodingTypeCount = static_cast<std::size_t>(StringDataInformation::StringType::EBCDIC) + 2;
 
 public:
     StringDataInformation(const QString& name, StringType encoding, DataInformationBase* parent = nullptr);
@@ -137,7 +140,7 @@ private:
     std::unique_ptr<StringData> mData;
     StringType mEncoding = StringType::InvalidEncoding;
 
-    static const QString encodingNames[static_cast<int>(StringDataInformation::StringType::EBCDIC)+2];
+    static const std::array<QString, EncodingTypeCount> encodingNames;
 };
 
 inline StringDataInformation::StringType StringDataInformation::encoding() const
@@ -146,7 +149,8 @@ inline StringDataInformation::StringType StringDataInformation::encoding() const
 }
 inline QString StringDataInformation::encodingName() const
 {
-    return encodingNames[static_cast<int>(mEncoding)+1];
+    const auto index = static_cast<std::size_t>(mEncoding) + 1;
+    return encodingNames[index];
 }
 
 inline uint StringDataInformation::maxByteCount() const
