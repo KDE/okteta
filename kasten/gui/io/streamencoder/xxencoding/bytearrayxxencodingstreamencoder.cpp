@@ -23,8 +23,8 @@ namespace Kasten {
 constexpr char ByteArrayXxencodingStreamEncoder::ConfigGroupId[];
 constexpr char XxencodingStreamEncoderSettings::FileNameConfigKey[];
 
-constexpr int ByteArrayXxencodingStreamEncoder::xxInputLineLength;
-constexpr int ByteArrayXxencodingStreamEncoder::maxXxInputGroupsPerLine;
+constexpr int ByteArrayXxencodingStreamEncoder::inputLineLength;
+constexpr int ByteArrayXxencodingStreamEncoder::maxInputGroupsPerLine;
 
 const QString XxencodingStreamEncoderSettings::DefaultFileName;
 
@@ -110,7 +110,7 @@ bool ByteArrayXxencodingStreamEncoder::encodeDataToStream(QIODevice* device,
     // header
     textStream << header << " 644 " << mSettings.fileName.toLatin1();
 
-    const int firstLineLength = qMin(range.width(), xxInputLineLength);
+    const int firstLineLength = qMin(range.width(), inputLineLength);
     if (firstLineLength > 0) {
         textStream << '\n';
         textStream << xxmapByte(firstLineLength);
@@ -142,9 +142,9 @@ bool ByteArrayXxencodingStreamEncoder::encodeDataToStream(QIODevice* device,
             textStream << xxmapByte(byte & 0x3F);
             inputByteIndex = InputByteIndex::First;
             ++inputGroupsPerLine;
-            if (inputGroupsPerLine >= maxXxInputGroupsPerLine && i < range.end()) {
+            if (inputGroupsPerLine >= maxInputGroupsPerLine && i < range.end()) {
                 const int remainsCount = range.end() - i;
-                const int nextLineLength = qMin(remainsCount, xxInputLineLength);
+                const int nextLineLength = qMin(remainsCount, inputLineLength);
                 textStream << '\n';
                 textStream << xxmapByte(nextLineLength);
                 inputGroupsPerLine = 0;
