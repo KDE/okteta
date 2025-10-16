@@ -15,10 +15,14 @@
 #include <KMessageWidget>
 // Qt
 #include <QIcon>
+// Std
+#include <chrono>
+
+using namespace std::chrono_literals;
 
 namespace Kasten {
 
-static constexpr int DefaultMessageAutoHideTimeout = 6 * 1000;
+static constexpr auto DefaultMessageAutoHideTimeout = 6s;
 
 UserMessagesOverlayedWidget::UserMessagesOverlayedWidget(QWidget* parent)
     : QWidget(parent)

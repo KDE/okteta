@@ -22,10 +22,14 @@
 // Qt
 #include <QUrl>
 #include <QMimeDatabase>
+// Std
+#include <chrono>
+
+using namespace std::chrono_literals;
 
 namespace Kasten {
 
-static constexpr int mimeTypeUpdateTimeInterval = 500; // msec
+static constexpr auto mimeTypeUpdateTimeInterval = 500ms;
 
 DocumentInfoTool::DocumentInfoTool(DocumentSyncManager* syncManager)
     : mDocumentSyncManager(syncManager)

@@ -20,9 +20,14 @@
 #include <QMimeData>
 #include <QMouseEvent>
 #include <QDrag>
+// Std
+#include <chrono>
+
+using namespace std::chrono_literals;
 
 namespace Okteta {
-static constexpr int DefaultScrollTimerPeriod = 100;
+
+static constexpr auto DefaultScrollTimerPeriod = 100ms;
 
 MouseNavigator::MouseNavigator(AbstractByteArrayViewPrivate* view, AbstractMouseController* parent)
     : AbstractMouseController(view, parent)
