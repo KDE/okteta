@@ -40,7 +40,7 @@ void RevertablePieceTableTest::testInit()
 
     pieceTable.init(BaseSize);
     int storageId;
-    int storageOffset;
+    Address storageOffset;
 
     QCOMPARE(pieceTable.size(), BaseSize);
     QCOMPARE(pieceTable.changesCount(), 0);
@@ -84,7 +84,7 @@ void RevertablePieceTableTest::testInsert()
     RevertablePieceTable pieceTable;
 
     int storageId;
-    int storageOffset;
+    Address storageOffset;
     bool result;
 
     // inserting to empty
@@ -216,7 +216,7 @@ void RevertablePieceTableTest::testInsert()
     // TODO: do this also in forward sequences
     pieceTable.init(BaseSize);   // 0
     const int Mid = BaseSize / 2;
-    int changeStarts[13];
+    Address changeStarts[13];
     pieceTable.insert(BaseSize, BaseSize, &storageOffset);   // 1
     changeStarts[1] = storageOffset;
     pieceTable.insert(BaseSize + BaseSize, BaseSize, &storageOffset); // 2
@@ -252,7 +252,7 @@ void RevertablePieceTableTest::testInsert()
 
     // all borders
     // 12: begin
-    int byteArrayOffset = 0;
+    Address byteArrayOffset = 0;
     result = pieceTable.getStorageData(&storageId, &storageOffset, byteArrayOffset);
     QVERIFY(result);
     QCOMPARE(storageOffset, changeStarts[12]);
@@ -449,9 +449,9 @@ void RevertablePieceTableTest::testRemove()
 {
     RevertablePieceTable pieceTable;
 
-    int changeStarts[6];
+    Address changeStarts[6];
     int storageId;
-    int storageOffset;
+    Address storageOffset;
     bool result;
 
     // removing at begin
@@ -531,8 +531,8 @@ void RevertablePieceTableTest::testRemove()
     // removing a lot:
     const int pieceCount = 5;
     const int mid = (pieceCount + 1) / 2;
-    const int midPieceOffset = BaseSize * (mid - 1);
-    const int fullSize = pieceCount * BaseSize;
+    const Address midPieceOffset = BaseSize * (mid - 1);
+    const Size fullSize = pieceCount * BaseSize;
     // for this five equally sized pieces are inserted, reverse to offset in ChangeStore
     for (int i = 0; i < pieceCount; ++i) {
         changeStarts[pieceCount - i] = BaseSize * i;
@@ -848,7 +848,7 @@ void RevertablePieceTableTest::testSwap()
     RevertablePieceTable pieceTable;
 
     int storageId;
-    int storageOffset;
+    Address storageOffset;
     bool result;
 
     // moving end at begin
@@ -955,7 +955,7 @@ void RevertablePieceTableTest::testSwap()
 
     // moving mid at mid
     pieceTable.init(BaseSize);
-    int mid = (End + Start) / 2;
+    const Address mid = (End + Start) / 2;
     pieceTable.swap(Start, AddressRange::fromWidth(mid, End - mid + 1));
 
     QCOMPARE(pieceTable.size(), BaseSize);
