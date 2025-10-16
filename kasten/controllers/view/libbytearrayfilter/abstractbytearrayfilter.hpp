@@ -27,7 +27,7 @@ class AbstractByteArrayFilter : public QObject
     Q_OBJECT
 
 protected:
-    static constexpr int FilteredByteCountSignalLimit = 10000;
+    static constexpr Okteta::Size FilteredByteCountSignalLimit = 10000;
 
 protected:
     explicit AbstractByteArrayFilter(const QString& name, const QString& id);

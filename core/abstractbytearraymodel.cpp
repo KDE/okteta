@@ -15,7 +15,7 @@
 
 namespace Okteta {
 
-static constexpr int SearchedByteCountSignalLimit = 10000;
+static constexpr Size SearchedByteCountSignalLimit = 10000;
 
 AbstractByteArrayModel::AbstractByteArrayModel(AbstractByteArrayModelPrivate* dd, QObject* parent)
     : QObject(parent)

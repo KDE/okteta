@@ -15,7 +15,7 @@
 
 namespace Kasten {
 
-static constexpr int StatisticBlockSize = 100000;
+static constexpr Okteta::Size StatisticBlockSize = 100000;
 
 int CreateStatisticJob::exec()
 {
