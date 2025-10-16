@@ -13,8 +13,12 @@
 #include <KLocalizedString>
 // Qt
 #include <QDebug>
+// Std
+#include <array>
 
-static constexpr const KLazyLocalizedString longTypeNames[static_cast<int>(PrimitiveDataType::END) + 1] = {
+static constexpr auto PrimitiveDataTypeCount = static_cast<std::size_t>(PrimitiveDataType::END) + 1;
+
+static const std::array<KLazyLocalizedString, PrimitiveDataTypeCount> longTypeNames = {
     kli18nc("data type", "bool (1 byte)"),
     kli18nc("data type", "signed byte"),
     kli18nc("data type", "unsigned byte"),
@@ -33,7 +37,7 @@ static constexpr const KLazyLocalizedString longTypeNames[static_cast<int>(Primi
     kli18nc("data type", "bitfield"),
 };
 
-static const QString typeNames[static_cast<int>(PrimitiveDataType::END) + 1] = {
+static const std::array<QString, PrimitiveDataTypeCount> typeNames = {
     QStringLiteral("bool8"),
     QStringLiteral("int8"),
     QStringLiteral("uint8"),
@@ -64,7 +68,8 @@ QString PrimitiveType::typeName(PrimitiveDataType type)
 QString PrimitiveType::standardTypeName(PrimitiveDataType type)
 {
     if (type >= PrimitiveDataType::START && type <= PrimitiveDataType::END) {
-        return typeNames[static_cast<int>(type)];
+        const auto index = static_cast<std::size_t>(type);
+        return typeNames[index];
     }
 
     return QStringLiteral("invalid");
@@ -73,7 +78,8 @@ QString PrimitiveType::standardTypeName(PrimitiveDataType type)
 QString PrimitiveType::longTypeName(PrimitiveDataType type)
 {
     if (type >= PrimitiveDataType::START && type <= PrimitiveDataType::END) {
-        return longTypeNames[static_cast<int>(type)].toString();
+        const auto index = static_cast<std::size_t>(type);
+        return longTypeNames[index].toString();
     }
 
     return i18n("invalid type");
