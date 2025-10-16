@@ -135,8 +135,8 @@ void ByteArrayXzStreamCompressor::setSettings(const XzStreamCompressorSettings& 
 
 ::lzma_check lzmaCheck(XzStreamCompressorSettings::IntegrityCheckId integrityCheckId)
 {
-    int listIndex = static_cast<int>(integrityCheckId);
-    if ((listIndex < 0) || (listIndex >= XzStreamCompressorSettings::IntegrityCheckCount)) {
+    auto listIndex = static_cast<std::size_t>(integrityCheckId);
+    if (listIndex >= XzStreamCompressorSettings::IntegrityCheckCount) {
         listIndex = 0;
     }
     static const std::array<::lzma_check, XzStreamCompressorSettings::IntegrityCheckCount> lzmaByIdTable = {

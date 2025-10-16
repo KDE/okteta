@@ -31,7 +31,7 @@ public:
         _Count,
     };
 
-    static inline constexpr int StrategyCount = static_cast<int>(StrategyId::_Count);
+    static inline constexpr auto StrategyCount = static_cast<std::size_t>(StrategyId::_Count);
     static const std::array<QString, StrategyCount> strategyConfigValueList;
 
 private:

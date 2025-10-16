@@ -22,7 +22,7 @@ class PrintInfo;
 class HeaderFooterFrameRenderer : public AbstractFrameRenderer
 {
 private:
-    static constexpr int HorizontalPositionsSize = 3;
+    static constexpr std::size_t HorizontalPositionsSize = 3;
 
 public:
     enum BoxStyle

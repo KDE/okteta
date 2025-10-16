@@ -24,7 +24,7 @@ public:
         _Count,
     };
 
-    static inline constexpr int CompressionPresetLevelVariantCount = static_cast<int>(CompressionPresetLevelVariantId::_Count);
+    static inline constexpr auto CompressionPresetLevelVariantCount = static_cast<std::size_t>(CompressionPresetLevelVariantId::_Count);
     static const std::array<QString, CompressionPresetLevelVariantCount> compressionPresetLevelVariantConfigValueList;
 
     enum class IntegrityCheckId
@@ -36,7 +36,7 @@ public:
         _Count,
     };
 
-    static inline constexpr int IntegrityCheckCount = static_cast<int>(IntegrityCheckId::_Count);
+    static inline constexpr auto IntegrityCheckCount = static_cast<std::size_t>(IntegrityCheckId::_Count);
     static const std::array<QString, IntegrityCheckCount> integrityCheckConfigValueList;
 
 private:

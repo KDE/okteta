@@ -136,8 +136,8 @@ void ByteArrayDeflateStreamCompressor::setSettings(const DeflateStreamCompressor
 
 int zlibStrategy(DeflateStreamCompressorSettings::StrategyId strategyId)
 {
-    int listIndex = static_cast<int>(strategyId);
-    if ((listIndex < 0) || (listIndex >= DeflateStreamCompressorSettings::StrategyCount)) {
+    auto listIndex = static_cast<std::size_t>(strategyId);
+    if (listIndex >= DeflateStreamCompressorSettings::StrategyCount) {
         listIndex = 0;
     }
     static const std::array<int, DeflateStreamCompressorSettings::StrategyCount> zLibByIdTable = {

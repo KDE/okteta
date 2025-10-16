@@ -27,7 +27,7 @@ public:
         _Count,
     };
 
-    static inline constexpr int StrategyCount = static_cast<int>(StrategyId::_Count);
+    static inline constexpr auto StrategyCount = static_cast<std::size_t>(StrategyId::_Count);
     static const std::array<QString, StrategyCount> strategyConfigValueList;
 
     enum class FormatId
@@ -37,7 +37,7 @@ public:
         _Count,
     };
 
-    static inline constexpr int FormatCount = static_cast<int>(FormatId::_Count);
+    static inline constexpr auto FormatCount = static_cast<std::size_t>(FormatId::_Count);
     static const std::array<QString, FormatCount> formatConfigValueList;
 
 private:

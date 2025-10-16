@@ -28,7 +28,7 @@ public:
         _Count,
     };
 
-    static inline constexpr int EncodeModeCount = static_cast<int>(EncodeMode::_Count);
+    static inline constexpr auto EncodeModeCount = static_cast<std::size_t>(EncodeMode::_Count);
     static const std::array<QString, EncodeModeCount> encodeModeConfigValueList;
 
     /// Beware, not compatible with other enums
@@ -39,7 +39,7 @@ public:
         _Count,
     };
 
-    static inline constexpr int EscapedValueCodingCount = static_cast<int>(EscapedValueCoding::_Count);
+    static inline constexpr auto EscapedValueCodingCount = static_cast<std::size_t>(EscapedValueCoding::_Count);
     static const std::array<QString, EscapedValueCodingCount> escapedValueCodingConfigValueList;
 
 private:

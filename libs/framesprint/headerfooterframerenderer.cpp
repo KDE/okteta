@@ -98,7 +98,7 @@ void HeaderFooterFrameRenderer::prepare()
     const int sizeOfTag = 2;
     QRegularExpression tagsPattern(QStringLiteral("%([dDhyYuUfFP])"));
 
-    for (int i = 0; i < HorizontalPositionsSize; ++i) {
+    for (std::size_t i = 0; i < HorizontalPositionsSize; ++i) {
         QString text = mOriginalTextList.at(i);
         int pos = 0;
         while (true) {
@@ -134,7 +134,7 @@ void HeaderFooterFrameRenderer::renderFrame(QPainter* painter, int frameIndex)
 //         margin += mLineWidth;
     const int rightEnd = mWidth - (margin * 2);
 
-    for (int i = 0; i < HorizontalPositionsSize; ++i) {
+    for (std::size_t i = 0; i < HorizontalPositionsSize; ++i) {
         QString text = mGloballyReplacedTextList[i];
         // substitute locally
         const QString pageNumberTag = QStringLiteral("%p");
