@@ -9,6 +9,8 @@
 
 // lib
 #include "oktetagui_export.hpp"
+// Std
+#include <array>
 
 namespace Okteta {
 
@@ -28,6 +30,7 @@ public:
         Decimal,
         Octal,
     };
+    static constexpr auto FormatCount = static_cast<std::size_t>(Octal) + 1;
     /** */
     static constexpr int MaxFormatWidth = 11;
 
@@ -56,9 +59,9 @@ public:
 
 private:
     /** */
-    static const unsigned int CodingWidth[3]; // TODO: would sizeof(Coding} work?
+    static const std::array<unsigned int, FormatCount> CodingWidth;
     /** */
-    static const print PrintFunction[3];
+    static const std::array<print, FormatCount> PrintFunction;
 };
 
 inline unsigned int OffsetFormat::codingWidth(int i)

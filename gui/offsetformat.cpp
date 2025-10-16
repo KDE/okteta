@@ -11,9 +11,13 @@
 
 namespace Okteta {
 
-const unsigned int OffsetFormat::CodingWidth[3] = { 9, 10, 11 };
+const std::array<unsigned int, OffsetFormat::FormatCount> OffsetFormat::CodingWidth = {
+    9,
+    10,
+    11,
+};
 
-const OffsetFormat::print OffsetFormat::PrintFunction[3] = {
+const std::array<OffsetFormat::print, OffsetFormat::FormatCount> OffsetFormat::PrintFunction = {
     OffsetFormat::printHexadecimalOffset,
     OffsetFormat::printDecimalOffset,
     OffsetFormat::printOctalOffset,
