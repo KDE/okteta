@@ -19,7 +19,7 @@ namespace Kasten {
 class OffsetColumnHtmlRenderer : public AbstractColumnHtmlRenderer
 {
 public:
-    OffsetColumnHtmlRenderer(int offsetFormat, int firstLineOffset, int delta, bool columnMode);
+    OffsetColumnHtmlRenderer(Okteta::OffsetFormat::Format offsetFormat, int firstLineOffset, int delta, bool columnMode);
     ~OffsetColumnHtmlRenderer() override;
 
 public: // AbstractColumnHtmlRenderer API

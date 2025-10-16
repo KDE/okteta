@@ -73,8 +73,9 @@ bool ByteArrayViewTextStreamEncoder::encodeDataToStream(QIODevice* device,
     std::vector<std::unique_ptr<AbstractColumnTextRenderer>> columnTextRendererList;
 
     if (byteArrayView->offsetColumnVisible()) {
+        const auto offsetFormat = static_cast<Okteta::OffsetFormat::Format>(byteArrayView->offsetCoding());
         columnTextRendererList.emplace_back(
-            std::make_unique<OffsetColumnTextRenderer>(byteArrayView->offsetCoding(), mSettings.firstLineOffset, mSettings.delta));
+            std::make_unique<OffsetColumnTextRenderer>(offsetFormat, mSettings.firstLineOffset, mSettings.delta));
         columnTextRendererList.emplace_back(std::make_unique<BorderColumnTextRenderer>());
     }
 

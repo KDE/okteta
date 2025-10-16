@@ -12,7 +12,7 @@
 
 namespace Kasten {
 
-OffsetColumnTextRenderer::OffsetColumnTextRenderer(int offsetFormat, int firstLineOffset, int delta)
+OffsetColumnTextRenderer::OffsetColumnTextRenderer(Okteta::OffsetFormat::Format offsetFormat, int firstLineOffset, int delta)
     : mFirstLineOffset(firstLineOffset)
     , mDelta(delta)
     , printFunction(Okteta::OffsetFormat::printFunction(offsetFormat))

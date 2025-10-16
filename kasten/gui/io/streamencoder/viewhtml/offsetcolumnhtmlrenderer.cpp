@@ -11,7 +11,7 @@
 
 namespace Kasten {
 
-OffsetColumnHtmlRenderer::OffsetColumnHtmlRenderer(int offsetFormat, int firstLineOffset, int delta, bool columnMode)
+OffsetColumnHtmlRenderer::OffsetColumnHtmlRenderer(Okteta::OffsetFormat::Format offsetFormat, int firstLineOffset, int delta, bool columnMode)
     : mFirstLineOffset(firstLineOffset)
     , mDelta(delta)
     , printFunction(Okteta::OffsetFormat::printFunction(offsetFormat))
