@@ -46,10 +46,10 @@ public:
 public:
     /** */
     [[nodiscard]]
-    static unsigned int codingWidth(int i);
+    static unsigned int codingWidth(Format format);
     /** */
     [[nodiscard]]
-    static print printFunction(int i);
+    static print printFunction(Format format);
 
 public:
     static void printHexadecimalOffset(char* Buffer, unsigned int Offset);
@@ -64,11 +64,17 @@ private:
     static const std::array<print, FormatCount> PrintFunction;
 };
 
-inline unsigned int OffsetFormat::codingWidth(int i)
-{ return CodingWidth[i]; }
+inline unsigned int OffsetFormat::codingWidth(Format format)
+{
+    const auto index = static_cast<std::size_t>(format);
+    return CodingWidth[index];
+}
 
-inline OffsetFormat::print OffsetFormat::printFunction(int i)
-{ return PrintFunction[i]; }
+inline OffsetFormat::print OffsetFormat::printFunction(Format format)
+{
+    const auto index = static_cast<std::size_t>(format);
+    return PrintFunction[index];
+}
 
 }
 
