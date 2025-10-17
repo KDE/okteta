@@ -87,7 +87,7 @@ public:
     void setSettings(const SourceCodeStreamEncoderSettings& settings);
 
 public:
-    const char* const* dataTypeNames() const;
+    const QString* dataTypeNames() const;
     int dataTypesCount() const;
 
 protected: // AbstractByteArrayStreamEncoder API
