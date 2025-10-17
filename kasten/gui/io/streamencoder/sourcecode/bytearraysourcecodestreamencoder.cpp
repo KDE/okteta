@@ -63,7 +63,7 @@ namespace Kasten {
 
 const QString SourceCodeStreamEncoderSettings::DefaultVariableName = QStringLiteral("array");
 
-static const QString PrimitiveDataTypeName[primitiveDataTypeCount] = {
+static const std::array<QString, primitiveDataTypeCount> PrimitiveDataTypeName = {
     QStringLiteral("char"),
     QStringLiteral("unsigned char"),
     QStringLiteral("int16_t"),
@@ -76,7 +76,7 @@ static const QString PrimitiveDataTypeName[primitiveDataTypeCount] = {
     QStringLiteral("double"),
 };
 
-static constexpr int SizeOfPrimitiveDataType[primitiveDataTypeCount] =
+static constexpr std::array<int, primitiveDataTypeCount> SizeOfPrimitiveDataType =
 {
     sizeof(char),
     sizeof(unsigned char),
@@ -129,7 +129,7 @@ ByteArraySourceCodeStreamEncoder::ByteArraySourceCodeStreamEncoder()
 
 ByteArraySourceCodeStreamEncoder::~ByteArraySourceCodeStreamEncoder() = default;
 
-const QString* ByteArraySourceCodeStreamEncoder::dataTypeNames() const { return PrimitiveDataTypeName; }
+const QString* ByteArraySourceCodeStreamEncoder::dataTypeNames() const { return PrimitiveDataTypeName.data(); }
 int ByteArraySourceCodeStreamEncoder::dataTypesCount() const { return primitiveDataTypeCount; }
 
 void ByteArraySourceCodeStreamEncoder::setSettings(const SourceCodeStreamEncoderSettings& settings)
