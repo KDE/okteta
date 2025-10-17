@@ -63,22 +63,20 @@ namespace Kasten {
 
 const QString SourceCodeStreamEncoderSettings::DefaultVariableName = QStringLiteral("array");
 
-static constexpr std::size_t NoOfPrimitiveDataTypes = 10;
-
-static constexpr  const char* PrimitiveDataTypeName[NoOfPrimitiveDataTypes] = {
-    "char",
-    "unsigned char",
-    "int16_t",
-    "uint16_t",
-    "int32_t",
-    "uint32_t",
-    "int64_t",
-    "uint64_t",
-    "float",
-    "double"
+static const QString PrimitiveDataTypeName[primitiveDataTypeCount] = {
+    QStringLiteral("char"),
+    QStringLiteral("unsigned char"),
+    QStringLiteral("int16_t"),
+    QStringLiteral("uint16_t"),
+    QStringLiteral("int32_t"),
+    QStringLiteral("uint32_t"),
+    QStringLiteral("int64_t"),
+    QStringLiteral("uint64_t"),
+    QStringLiteral("float"),
+    QStringLiteral("double"),
 };
 
-static constexpr int SizeOfPrimitiveDataType[NoOfPrimitiveDataTypes] =
+static constexpr int SizeOfPrimitiveDataType[primitiveDataTypeCount] =
 {
     sizeof(char),
     sizeof(unsigned char),
@@ -131,8 +129,8 @@ ByteArraySourceCodeStreamEncoder::ByteArraySourceCodeStreamEncoder()
 
 ByteArraySourceCodeStreamEncoder::~ByteArraySourceCodeStreamEncoder() = default;
 
-const char* const* ByteArraySourceCodeStreamEncoder::dataTypeNames() const { return PrimitiveDataTypeName; }
-int ByteArraySourceCodeStreamEncoder::dataTypesCount() const { return NoOfPrimitiveDataTypes; }
+const QString* ByteArraySourceCodeStreamEncoder::dataTypeNames() const { return PrimitiveDataTypeName; }
+int ByteArraySourceCodeStreamEncoder::dataTypesCount() const { return primitiveDataTypeCount; }
 
 void ByteArraySourceCodeStreamEncoder::setSettings(const SourceCodeStreamEncoderSettings& settings)
 {
@@ -164,7 +162,8 @@ bool ByteArraySourceCodeStreamEncoder::encodeDataToStream(QIODevice* device,
     const int dataTypeSize = SizeOfPrimitiveDataType[static_cast<int>(mSettings.dataType)];
     const int sizeOfArray = (size + dataTypeSize - 1) / dataTypeSize;
 
-    textStream << "const " << QLatin1String(PrimitiveDataTypeName[static_cast<int>(mSettings.dataType)]) << ' '
+    const auto dataTypeIndex = static_cast<std::size_t>(mSettings.dataType);
+    textStream << "const " << PrimitiveDataTypeName[dataTypeIndex] << ' '
                << mSettings.variableName << '[' << sizeOfArray << "] =" << Qt::endl
                << '{' << Qt::endl;
 

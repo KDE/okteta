@@ -90,7 +90,7 @@ public:
 
 public:
     [[nodiscard]]
-    const char* const* dataTypeNames() const;
+    const QString* dataTypeNames() const;
     [[nodiscard]]
     int dataTypesCount() const;
 

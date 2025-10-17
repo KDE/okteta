@@ -57,12 +57,12 @@ ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderCo
               "Data type:");
 
     mDataTypeSelect = new KComboBox(this);
-    const char* const* const dataTypeNames = mEncoder->dataTypeNames();
+    const QString* const dataTypeNames = mEncoder->dataTypeNames();
     const int dataTypesCount = mEncoder->dataTypesCount();
     QStringList dataTypeNameStrings;
     dataTypeNameStrings.reserve(dataTypesCount);
     for (int i = 0; i < dataTypesCount; ++i) {
-        dataTypeNameStrings << QLatin1String(dataTypeNames[i]);
+        dataTypeNameStrings << dataTypeNames[i];
     }
 
     mDataTypeSelect->addItems(dataTypeNameStrings);
