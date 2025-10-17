@@ -55,13 +55,14 @@
 #include <QVBoxLayout>
 #include <QUrl>
 // Std
+#include <array>
 #include <utility>
 
-static constexpr const char* UIFileName[] =
+static const std::array<QString, OktetaPart::ModusCount> UIFileName =
 {
-    "oktetapartreadonlyui.rc",
-    "oktetapartbrowserui.rc",
-    "oktetapartreadwriteui.rc"
+    QStringLiteral("oktetapartreadonlyui.rc"),
+    QStringLiteral("oktetapartbrowserui.rc"),
+    QStringLiteral("oktetapartreadwriteui.rc"),
 };
 
 OktetaPart::OktetaPart(QObject* parent,
@@ -83,7 +84,7 @@ OktetaPart::OktetaPart(QObject* parent,
 
     setWidget(widget);
 
-    setXMLFile(QLatin1String(UIFileName[modus]));
+    setXMLFile(UIFileName[modus]);
 
     mSingleViewArea = std::make_unique<Kasten::SingleViewArea>();
     QWidget* const areaWidget = mSingleViewArea->widget();

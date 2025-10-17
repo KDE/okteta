@@ -41,8 +41,10 @@ public:
     {
         ReadOnly = 0,
         BrowserView = 1,
-        ReadWrite = 2
+        ReadWrite = 2,
+        _ModusCount,
     };
+    static inline constexpr auto ModusCount = static_cast<std::size_t>(_ModusCount);
 
 public:
     OktetaPart(QObject* parent,
