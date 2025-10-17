@@ -19,7 +19,7 @@ set(ByteArrayColumnView_CREATE_WIDGET_CODE
     widget->setByteArrayModel(createFillerByteArrayModel(widget));
     return widget;
 ")
-ecm_qtdesignerplugin_widget(Okteta::ByteArrayColumnView
+ecm_qtdesignerplugin_widget(ByteArrayColumnView
     TOOLTIP "Column oriented Viewer/Editor for Byte Arrays"
     WHATSTHIS "A widget to show and edit byte arrays provided by subclasses of Okteta::AbstractByteArrayModel"
     CREATE_WIDGET_CODE_FROM_VARIABLE ByteArrayColumnView_CREATE_WIDGET_CODE
@@ -30,7 +30,7 @@ ecm_add_qtdesignerplugin(oktetadesignerplugin
     OUTPUT_NAME oktetawidgets
     WIDGETS
         ByteArrayRowView
-        Okteta::ByteArrayColumnView
+        ByteArrayColumnView
     DEFAULT_GROUP "Okteta"
     DEFAULT_HEADER_EXTENSION "hpp"
     INCLUDE_FILES "\"fillerbytearraymodel.hpp\""
