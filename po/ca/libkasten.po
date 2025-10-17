@@ -2,8 +2,8 @@
 # Copyright (C) 2008-2018 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2 or later.
 #
-# Josep M. Ferrer <txemaq@gmail.com>, 2008, 2009, 2010, 2018.
-# Joan Maspons <joanmaspons@gmail.com>, 2009.
+# SPDX-FileCopyrightText: 2008, 2009, 2010, 2018 Josep M. Ferrer <txemaq@gmail.com>
+# SPDX-FileCopyrightText: 2009 Joan Maspons <joanmaspons@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
