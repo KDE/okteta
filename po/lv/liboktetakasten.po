@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-02 02:00+0000\n"
+"POT-Creation-Date: 2025-10-17 02:33+0000\n"
 "PO-Revision-Date: 2010-01-09 18:03+0200\n"
 "Last-Translator: Viesturs Zarins <viesturs.zarins@mii.lu.lv>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -28,7 +28,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "viesturs.zarins@mii.lu.lv"
 
-#: controllers/document/info/documentinfotool.cpp:43
+#: controllers/document/info/documentinfotool.cpp:47
 #: controllers/document/info/documentinfotoolviewfactory.cpp:22
 #, kde-format
 msgctxt "@title:window"
@@ -98,13 +98,13 @@ msgctxt "@option:check"
 msgid "Overwrite only"
 msgstr "Tikai pārrakstīt"
 
-#: controllers/view/bookmarks/bookmarklistmodel.cpp:143
+#: controllers/view/bookmarks/bookmarklistmodel.cpp:144
 #, kde-format
 msgctxt "@title:column offset of the bookmark"
 msgid "Offset"
 msgstr "Nobīde"
 
-#: controllers/view/bookmarks/bookmarklistmodel.cpp:144
+#: controllers/view/bookmarks/bookmarklistmodel.cpp:145
 #, kde-format
 msgctxt "@title:column title of the bookmark"
 msgid "Title"
@@ -2126,7 +2126,7 @@ msgctxt "memory pointer with underlying type"
 msgid "%1 pointer"
 msgstr ""
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:18
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:22
 #, fuzzy
 #| msgctxt "Data type"
 #| msgid "bool (1 byte)"
@@ -2134,7 +2134,7 @@ msgctxt "data type"
 msgid "bool (1 byte)"
 msgstr "bool (1 baits)"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:19
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:23
 #, fuzzy
 #| msgctxt "Data type"
 #| msgid "unsigned byte"
@@ -2142,7 +2142,7 @@ msgctxt "data type"
 msgid "signed byte"
 msgstr "unsigned byte"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:20
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:24
 #, fuzzy
 #| msgctxt "Data type"
 #| msgid "unsigned byte"
@@ -2150,7 +2150,7 @@ msgctxt "data type"
 msgid "unsigned byte"
 msgstr "unsigned byte"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:21
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:25
 #, fuzzy
 #| msgctxt "Data type"
 #| msgid "char"
@@ -2158,7 +2158,7 @@ msgctxt "data type"
 msgid "char"
 msgstr "char"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:22
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:26
 #, fuzzy
 #| msgctxt "Data type"
 #| msgid "bool (2 bytes)"
@@ -2166,7 +2166,7 @@ msgctxt "data type"
 msgid "bool (2 bytes)"
 msgstr "bool (2 baiti)"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:23
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:27
 #, fuzzy
 #| msgctxt "Data type"
 #| msgid "unsigned short"
@@ -2174,7 +2174,7 @@ msgctxt "data type"
 msgid "signed short"
 msgstr "unsigned short"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:24
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:28
 #, fuzzy
 #| msgctxt "Data type"
 #| msgid "unsigned short"
@@ -2182,7 +2182,7 @@ msgctxt "data type"
 msgid "unsigned short"
 msgstr "unsigned short"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:25
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:29
 #, fuzzy
 #| msgctxt "Data type"
 #| msgid "bool (4 bytes)"
@@ -2190,7 +2190,7 @@ msgctxt "data type"
 msgid "bool (4 bytes)"
 msgstr "bool (4 baiti)"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:26
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:30
 #, fuzzy
 #| msgctxt "Data type"
 #| msgid "unsigned int"
@@ -2198,7 +2198,7 @@ msgctxt "data type"
 msgid "signed int"
 msgstr "unsigned int"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:27
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:31
 #, fuzzy
 #| msgctxt "Data type"
 #| msgid "unsigned int"
@@ -2206,7 +2206,7 @@ msgctxt "data type"
 msgid "unsigned int"
 msgstr "unsigned int"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:28
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:32
 #, fuzzy
 #| msgctxt "Data type"
 #| msgid "bool (8 bytes)"
@@ -2214,7 +2214,7 @@ msgctxt "data type"
 msgid "bool (8 bytes)"
 msgstr "bool (8 baiti)"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:29
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:33
 #, fuzzy
 #| msgctxt "Data type"
 #| msgid "unsigned long"
@@ -2222,7 +2222,7 @@ msgctxt "data type"
 msgid "signed long"
 msgstr "unsigned long"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:30
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:34
 #, fuzzy
 #| msgctxt "Data type"
 #| msgid "unsigned long"
@@ -2230,7 +2230,7 @@ msgctxt "data type"
 msgid "unsigned long"
 msgstr "unsigned long"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:31
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:35
 #, fuzzy
 #| msgctxt "Data type"
 #| msgid "float"
@@ -2238,7 +2238,7 @@ msgctxt "data type"
 msgid "float"
 msgstr "float"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:32
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:36
 #, fuzzy
 #| msgctxt "Data type"
 #| msgid "double"
@@ -2246,7 +2246,7 @@ msgctxt "data type"
 msgid "double"
 msgstr "double"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:33
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:37
 #, fuzzy
 #| msgctxt "Data type"
 #| msgid "unsigned byte"
@@ -2254,7 +2254,7 @@ msgctxt "data type"
 msgid "bitfield"
 msgstr "unsigned byte"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:79
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:85
 #, fuzzy, kde-format
 #| msgid "<invalid name>"
 msgid "invalid type"

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-02 02:00+0000\n"
+"POT-Creation-Date: 2025-10-17 02:33+0000\n"
 "PO-Revision-Date: 2012-12-22 11:55+0200\n"
 "Last-Translator: Sergiu Bivol <sergiu@cip.md>\n"
 "Language-Team: Romanian <kde-i18n-ro@kde.org>\n"
@@ -31,7 +31,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "sergiu@ase.md"
 
-#: controllers/document/info/documentinfotool.cpp:43
+#: controllers/document/info/documentinfotool.cpp:47
 #: controllers/document/info/documentinfotoolviewfactory.cpp:22
 #, kde-format
 msgctxt "@title:window"
@@ -101,7 +101,7 @@ msgctxt "@option:check"
 msgid "Overwrite only"
 msgstr "Regim de suprascriere"
 
-#: controllers/view/bookmarks/bookmarklistmodel.cpp:143
+#: controllers/view/bookmarks/bookmarklistmodel.cpp:144
 #, fuzzy, kde-format
 #| msgctxt "@title:column offset of the extracted string"
 #| msgid "Offset"
@@ -109,7 +109,7 @@ msgctxt "@title:column offset of the bookmark"
 msgid "Offset"
 msgstr "Deplasare"
 
-#: controllers/view/bookmarks/bookmarklistmodel.cpp:144
+#: controllers/view/bookmarks/bookmarklistmodel.cpp:145
 #, fuzzy, kde-format
 #| msgctxt "@title:column description of the change"
 #| msgid "Title"
@@ -2127,7 +2127,7 @@ msgctxt "memory pointer with underlying type"
 msgid "%1 pointer"
 msgstr ""
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:18
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:22
 #, fuzzy
 #| msgid "1 byte"
 #| msgid_plural "%1 bytes"
@@ -2135,7 +2135,7 @@ msgctxt "data type"
 msgid "bool (1 byte)"
 msgstr "1 octet"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:19
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:23
 #, fuzzy
 #| msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
 #| msgid "Binary"
@@ -2143,7 +2143,7 @@ msgctxt "data type"
 msgid "signed byte"
 msgstr "Binară"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:20
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:24
 #, fuzzy
 #| msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
 #| msgid "Binary"
@@ -2151,7 +2151,7 @@ msgctxt "data type"
 msgid "unsigned byte"
 msgstr "Binară"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:21
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:25
 #, fuzzy
 #| msgctxt "@title:column short for Character"
 #| msgid "Char"
@@ -2159,7 +2159,7 @@ msgctxt "data type"
 msgid "char"
 msgstr "Car"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:22
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:26
 #, fuzzy
 #| msgid "1 byte"
 #| msgid_plural "%1 bytes"
@@ -2167,7 +2167,7 @@ msgctxt "data type"
 msgid "bool (2 bytes)"
 msgstr "1 octet"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:23
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:27
 #, fuzzy
 #| msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
 #| msgid "Binary"
@@ -2175,7 +2175,7 @@ msgctxt "data type"
 msgid "signed short"
 msgstr "Binară"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:24
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:28
 #, fuzzy
 #| msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
 #| msgid "Binary"
@@ -2183,7 +2183,7 @@ msgctxt "data type"
 msgid "unsigned short"
 msgstr "Binară"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:25
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:29
 #, fuzzy
 #| msgid "1 byte"
 #| msgid_plural "%1 bytes"
@@ -2191,7 +2191,7 @@ msgctxt "data type"
 msgid "bool (4 bytes)"
 msgstr "1 octet"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:26
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:30
 #, fuzzy
 #| msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
 #| msgid "Binary"
@@ -2199,7 +2199,7 @@ msgctxt "data type"
 msgid "signed int"
 msgstr "Binară"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:27
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:31
 #, fuzzy
 #| msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
 #| msgid "Binary"
@@ -2207,7 +2207,7 @@ msgctxt "data type"
 msgid "unsigned int"
 msgstr "Binară"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:28
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:32
 #, fuzzy
 #| msgid "1 byte"
 #| msgid_plural "%1 bytes"
@@ -2215,7 +2215,7 @@ msgctxt "data type"
 msgid "bool (8 bytes)"
 msgstr "1 octet"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:29
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:33
 #, fuzzy
 #| msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
 #| msgid "Binary"
@@ -2223,7 +2223,7 @@ msgctxt "data type"
 msgid "signed long"
 msgstr "Binară"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:30
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:34
 #, fuzzy
 #| msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
 #| msgid "Binary"
@@ -2231,17 +2231,17 @@ msgctxt "data type"
 msgid "unsigned long"
 msgstr "Binară"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:31
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:35
 msgctxt "data type"
 msgid "float"
 msgstr ""
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:32
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:36
 msgctxt "data type"
 msgid "double"
 msgstr ""
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:33
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:37
 #, fuzzy
 #| msgctxt "@item:inmenu encoding of the bytes as values in the binary format"
 #| msgid "Binary"
@@ -2249,7 +2249,7 @@ msgctxt "data type"
 msgid "bitfield"
 msgstr "Binară"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:79
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:85
 #, kde-format
 msgid "invalid type"
 msgstr ""

@@ -2,15 +2,15 @@
 # Copyright (C) 2008-2025 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2 or later.
 #
-# Joan Maspons <joanmaspons@gmail.com>, 2009.
-# Manuel Tortosa <manutortosa@chakra-project.org>, 2010, 2011, 2012.
-# Antoni Bella Pérez <antonibella5@yahoo.com>, 2012, 2014, 2015, 2016, 2020, 2022.
+# SPDX-FileCopyrightText: 2009 Joan Maspons <joanmaspons@gmail.com>
+# SPDX-FileCopyrightText: 2010, 2011, 2012 Manuel Tortosa <manutortosa@chakra-project.org>
+# SPDX-FileCopyrightText: 2012, 2014, 2015, 2016, 2020, 2022 Antoni Bella Pérez <antonibella5@yahoo.com>
 # SPDX-FileCopyrightText: 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025 Josep M. Ferrer <txemaq@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-02 02:00+0000\n"
+"POT-Creation-Date: 2025-10-17 02:33+0000\n"
 "PO-Revision-Date: 2025-08-31 12:42+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -32,7 +32,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "txemaq@gmail.com"
 
-#: controllers/document/info/documentinfotool.cpp:43
+#: controllers/document/info/documentinfotool.cpp:47
 #: controllers/document/info/documentinfotoolviewfactory.cpp:22
 #, kde-format
 msgctxt "@title:window"
@@ -93,13 +93,13 @@ msgctxt "@option:check"
 msgid "Overwrite only"
 msgstr "Només sobreescriu"
 
-#: controllers/view/bookmarks/bookmarklistmodel.cpp:143
+#: controllers/view/bookmarks/bookmarklistmodel.cpp:144
 #, kde-format
 msgctxt "@title:column offset of the bookmark"
 msgid "Offset"
 msgstr "Desplaçament"
 
-#: controllers/view/bookmarks/bookmarklistmodel.cpp:144
+#: controllers/view/bookmarks/bookmarklistmodel.cpp:145
 #, kde-format
 msgctxt "@title:column title of the bookmark"
 msgid "Title"
@@ -2051,87 +2051,87 @@ msgctxt "memory pointer with underlying type"
 msgid "%1 pointer"
 msgstr "Apuntador %1"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:18
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:22
 msgctxt "data type"
 msgid "bool (1 byte)"
 msgstr "booleà (1 byte)"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:19
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:23
 msgctxt "data type"
 msgid "signed byte"
 msgstr "byte amb signe"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:20
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:24
 msgctxt "data type"
 msgid "unsigned byte"
 msgstr "byte sense signe"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:21
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:25
 msgctxt "data type"
 msgid "char"
 msgstr "caràcter"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:22
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:26
 msgctxt "data type"
 msgid "bool (2 bytes)"
 msgstr "booleà (2 bytes)"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:23
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:27
 msgctxt "data type"
 msgid "signed short"
 msgstr "«short» amb signe"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:24
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:28
 msgctxt "data type"
 msgid "unsigned short"
 msgstr "«short» sense signe"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:25
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:29
 msgctxt "data type"
 msgid "bool (4 bytes)"
 msgstr "booleà (4 bytes)"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:26
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:30
 msgctxt "data type"
 msgid "signed int"
 msgstr "enter amb signe"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:27
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:31
 msgctxt "data type"
 msgid "unsigned int"
 msgstr "enter sense signe"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:28
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:32
 msgctxt "data type"
 msgid "bool (8 bytes)"
 msgstr "booleà (8 bytes)"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:29
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:33
 msgctxt "data type"
 msgid "signed long"
 msgstr "«long» amb signe"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:30
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:34
 msgctxt "data type"
 msgid "unsigned long"
 msgstr "«long» sense signe"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:31
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:35
 msgctxt "data type"
 msgid "float"
 msgstr "flotant"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:32
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:36
 msgctxt "data type"
 msgid "double"
 msgstr "doble"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:33
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:37
 msgctxt "data type"
 msgid "bitfield"
 msgstr "camp de bits"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:79
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:85
 #, kde-format
 msgid "invalid type"
 msgstr "tipus no vàlid"

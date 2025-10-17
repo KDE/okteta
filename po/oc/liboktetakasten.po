@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-02 02:00+0000\n"
+"POT-Creation-Date: 2025-10-17 02:33+0000\n"
 "PO-Revision-Date: 2008-08-05 22:28+0200\n"
 "Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
 "Language-Team: Occitan (lengadocian) <ubuntu-l10n-oci@lists.ubuntu.com>\n"
@@ -28,7 +28,7 @@ msgctxt "EMAIL OF TRANSLATORS"
 msgid "Your emails"
 msgstr "yannig@marchegay.org"
 
-#: controllers/document/info/documentinfotool.cpp:43
+#: controllers/document/info/documentinfotool.cpp:47
 #: controllers/document/info/documentinfotoolviewfactory.cpp:22
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
@@ -95,13 +95,13 @@ msgctxt "@option:check"
 msgid "Overwrite only"
 msgstr "Inserir"
 
-#: controllers/view/bookmarks/bookmarklistmodel.cpp:143
+#: controllers/view/bookmarks/bookmarklistmodel.cpp:144
 #, kde-format
 msgctxt "@title:column offset of the bookmark"
 msgid "Offset"
 msgstr ""
 
-#: controllers/view/bookmarks/bookmarklistmodel.cpp:144
+#: controllers/view/bookmarks/bookmarklistmodel.cpp:145
 #, kde-format
 msgctxt "@title:column title of the bookmark"
 msgid "Title"
@@ -2075,38 +2075,9 @@ msgctxt "memory pointer with underlying type"
 msgid "%1 pointer"
 msgstr ""
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:18
-msgctxt "data type"
-msgid "bool (1 byte)"
-msgstr ""
-
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:19
-#, fuzzy
-#| msgctxt "@label:textbox encoding of the bytes as value in the binary format"
-#| msgid "Binary:"
-msgctxt "data type"
-msgid "signed byte"
-msgstr "Binari :"
-
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:20
-#, fuzzy
-#| msgctxt "@label:textbox encoding of the bytes as value in the binary format"
-#| msgid "Binary:"
-msgctxt "data type"
-msgid "unsigned byte"
-msgstr "Binari :"
-
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:21
-#, fuzzy
-#| msgctxt "@title:column description of the change"
-#| msgid "Changes"
-msgctxt "data type"
-msgid "char"
-msgstr "Modificacions"
-
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:22
 msgctxt "data type"
-msgid "bool (2 bytes)"
+msgid "bool (1 byte)"
 msgstr ""
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:23
@@ -2114,7 +2085,7 @@ msgstr ""
 #| msgctxt "@label:textbox encoding of the bytes as value in the binary format"
 #| msgid "Binary:"
 msgctxt "data type"
-msgid "signed short"
+msgid "signed byte"
 msgstr "Binari :"
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:24
@@ -2122,15 +2093,44 @@ msgstr "Binari :"
 #| msgctxt "@label:textbox encoding of the bytes as value in the binary format"
 #| msgid "Binary:"
 msgctxt "data type"
-msgid "unsigned short"
+msgid "unsigned byte"
 msgstr "Binari :"
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:25
+#, fuzzy
+#| msgctxt "@title:column description of the change"
+#| msgid "Changes"
+msgctxt "data type"
+msgid "char"
+msgstr "Modificacions"
+
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:26
+msgctxt "data type"
+msgid "bool (2 bytes)"
+msgstr ""
+
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:27
+#, fuzzy
+#| msgctxt "@label:textbox encoding of the bytes as value in the binary format"
+#| msgid "Binary:"
+msgctxt "data type"
+msgid "signed short"
+msgstr "Binari :"
+
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:28
+#, fuzzy
+#| msgctxt "@label:textbox encoding of the bytes as value in the binary format"
+#| msgid "Binary:"
+msgctxt "data type"
+msgid "unsigned short"
+msgstr "Binari :"
+
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:29
 msgctxt "data type"
 msgid "bool (4 bytes)"
 msgstr ""
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:26
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:30
 #, fuzzy
 #| msgctxt "@label:textbox encoding of the bytes as value in the binary format"
 #| msgid "Binary:"
@@ -2138,7 +2138,7 @@ msgctxt "data type"
 msgid "signed int"
 msgstr "Binari :"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:27
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:31
 #, fuzzy
 #| msgctxt "@label:textbox encoding of the bytes as value in the binary format"
 #| msgid "Binary:"
@@ -2146,35 +2146,9 @@ msgctxt "data type"
 msgid "unsigned int"
 msgstr "Binari :"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:28
-msgctxt "data type"
-msgid "bool (8 bytes)"
-msgstr ""
-
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:29
-#, fuzzy
-#| msgctxt "@label:textbox encoding of the bytes as value in the binary format"
-#| msgid "Binary:"
-msgctxt "data type"
-msgid "signed long"
-msgstr "Binari :"
-
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:30
-#, fuzzy
-#| msgctxt "@label:textbox encoding of the bytes as value in the binary format"
-#| msgid "Binary:"
-msgctxt "data type"
-msgid "unsigned long"
-msgstr "Binari :"
-
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:31
-msgctxt "data type"
-msgid "float"
-msgstr ""
-
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:32
 msgctxt "data type"
-msgid "double"
+msgid "bool (8 bytes)"
 msgstr ""
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:33
@@ -2182,10 +2156,36 @@ msgstr ""
 #| msgctxt "@label:textbox encoding of the bytes as value in the binary format"
 #| msgid "Binary:"
 msgctxt "data type"
+msgid "signed long"
+msgstr "Binari :"
+
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:34
+#, fuzzy
+#| msgctxt "@label:textbox encoding of the bytes as value in the binary format"
+#| msgid "Binary:"
+msgctxt "data type"
+msgid "unsigned long"
+msgstr "Binari :"
+
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:35
+msgctxt "data type"
+msgid "float"
+msgstr ""
+
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:36
+msgctxt "data type"
+msgid "double"
+msgstr ""
+
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:37
+#, fuzzy
+#| msgctxt "@label:textbox encoding of the bytes as value in the binary format"
+#| msgid "Binary:"
+msgctxt "data type"
 msgid "bitfield"
 msgstr "Binari :"
 
-#: controllers/view/structures/datatypes/primitivedatatype.cpp:79
+#: controllers/view/structures/datatypes/primitivedatatype.cpp:85
 #, kde-format
 msgid "invalid type"
 msgstr ""
