@@ -77,9 +77,7 @@ constexpr bool SourceCodeStreamEncoderSettings::DefaultUnsignedAsHexadecimal;
 
 const QString SourceCodeStreamEncoderSettings::DefaultVariableName = QStringLiteral("array");
 
-static constexpr std::size_t NoOfPrimitiveDataTypes = 10;
-
-static const QString PrimitiveDataTypeName[NoOfPrimitiveDataTypes] = {
+static const QString PrimitiveDataTypeName[primitiveDataTypeCount] = {
     QStringLiteral("char"),
     QStringLiteral("unsigned char"),
     QStringLiteral("int16_t"),
@@ -92,7 +90,7 @@ static const QString PrimitiveDataTypeName[NoOfPrimitiveDataTypes] = {
     QStringLiteral("double"),
 };
 
-static constexpr int SizeOfPrimitiveDataType[NoOfPrimitiveDataTypes] =
+static constexpr int SizeOfPrimitiveDataType[primitiveDataTypeCount] =
 {
     sizeof(char),
     sizeof(unsigned char),
@@ -153,7 +151,7 @@ ByteArraySourceCodeStreamEncoder::ByteArraySourceCodeStreamEncoder()
 ByteArraySourceCodeStreamEncoder::~ByteArraySourceCodeStreamEncoder() = default;
 
 const QString* ByteArraySourceCodeStreamEncoder::dataTypeNames() const { return PrimitiveDataTypeName; }
-int ByteArraySourceCodeStreamEncoder::dataTypesCount() const { return NoOfPrimitiveDataTypes; }
+int ByteArraySourceCodeStreamEncoder::dataTypesCount() const { return primitiveDataTypeCount; }
 
 void ByteArraySourceCodeStreamEncoder::setSettings(const SourceCodeStreamEncoderSettings& settings)
 {
