@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: khexedit\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-09-22 03:32+0000\n"
+"POT-Creation-Date: 2025-10-18 04:34+0000\n"
 "PO-Revision-Date: 2022-10-12 16:05+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -3317,7 +3317,7 @@ msgctxt "@item:inmenu address size"
 msgid "8-bit"
 msgstr "8 бит"
 
-#: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoder.cpp:147
+#: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoder.cpp:145
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "C Array"
