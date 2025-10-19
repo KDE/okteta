@@ -31,9 +31,9 @@ static constexpr char xxencodeMap[64] = {
 };
 static constexpr const char* paddingData[2] = {"++", "+"};
 
-static inline constexpr char xxmapByte(char byte) { return xxencodeMap[static_cast<int>(byte)]; }
+static constexpr char xxmapByte(char byte) { return xxencodeMap[static_cast<int>(byte)]; }
 
-static inline constexpr const char* xxpadding(ByteArrayXxencodingStreamEncoder::InputByteIndex index)
+static constexpr const char* xxpadding(ByteArrayXxencodingStreamEncoder::InputByteIndex index)
 {
     return paddingData[static_cast<int>(index) - 1];
 }

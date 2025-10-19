@@ -47,7 +47,7 @@ namespace Kasten {
 
 const QString UuencodingStreamEncoderSettings::DefaultFileName = QStringLiteral("okteta-export");
 
-static inline constexpr char uumapByteHistorical(char byte) { return (byte > 0) ? (byte + 32) : '`'; }
+static constexpr char uumapByteHistorical(char byte) { return (byte > 0) ? (byte + 32) : '`'; }
 static inline char uumapByteBase64(char byte)     { return base64EncodeMap[(int)byte]; }
 
 struct UumapEncodeData

@@ -37,17 +37,17 @@ private:
 };
 
 
-inline constexpr Character::Character(QChar qchar)
+constexpr Character::Character(QChar qchar)
     : QChar(qchar)
     , mIsUndefined(false)
 {}
 
-inline constexpr Character::Character(QChar qchar, bool isUndefined)
+constexpr Character::Character(QChar qchar, bool isUndefined)
     : QChar(qchar)
     , mIsUndefined(isUndefined)
 {}
 
-inline constexpr bool Character::isUndefined() const { return mIsUndefined; }
+constexpr bool Character::isUndefined() const { return mIsUndefined; }
 
 }
 

@@ -84,11 +84,11 @@ static constexpr const char* base32PaddingData[4] =
     "="
 };
 
-static inline constexpr const char* base32Padding(ByteArrayBase32StreamEncoder::InputByteIndex index)
+static constexpr const char* base32Padding(ByteArrayBase32StreamEncoder::InputByteIndex index)
 {
     return base32PaddingData[static_cast<int>(index) - 1];
 }
-static inline constexpr const char* noPadding(ByteArrayBase32StreamEncoder::InputByteIndex /*index*/)
+static constexpr const char* noPadding(ByteArrayBase32StreamEncoder::InputByteIndex /*index*/)
 {
     return "";
 }

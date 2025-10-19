@@ -105,25 +105,25 @@ private:
     };
 };
 
-inline constexpr ArrayChangeMetrics ArrayChangeMetrics::asReplacement(Address offset, Size removeLength, Size insertLength)
+constexpr ArrayChangeMetrics ArrayChangeMetrics::asReplacement(Address offset, Size removeLength, Size insertLength)
 {
     return {Replacement, offset, removeLength, insertLength};
 }
 
-inline constexpr ArrayChangeMetrics ArrayChangeMetrics::asSwapping(Address firstOffset, Address secondOffset, Size secondLength)
+constexpr ArrayChangeMetrics ArrayChangeMetrics::asSwapping(Address firstOffset, Address secondOffset, Size secondLength)
 {
     return
         Q_ASSERT(firstOffset < secondOffset),
         ArrayChangeMetrics{Swapping, firstOffset, secondOffset, secondLength};
 }
 
-inline constexpr ArrayChangeMetrics::ArrayChangeMetrics(Type type, Address offset, qint32 secondArgument, qint32 thirdArgument)
+constexpr ArrayChangeMetrics::ArrayChangeMetrics(Type type, Address offset, qint32 secondArgument, qint32 thirdArgument)
     : mType(type)
     , mOffset(offset)
     , mSecondArgument(secondArgument)
     , mThirdArgument(thirdArgument)
 {}
-inline constexpr bool ArrayChangeMetrics::operator==(const ArrayChangeMetrics& other) const
+constexpr bool ArrayChangeMetrics::operator==(const ArrayChangeMetrics& other) const
 {
     return mType == other.mType
            && mOffset == other.mOffset
@@ -143,16 +143,16 @@ inline void ArrayChangeMetrics::revert()
     }
 }
 
-inline constexpr bool ArrayChangeMetrics::isValid()        const { return mOffset != InvalidAddress; }
-inline constexpr int ArrayChangeMetrics::type()            const { return mType; }
-inline constexpr Address ArrayChangeMetrics::offset()      const { return mOffset; }
-inline constexpr Size ArrayChangeMetrics::removeLength()   const { return mRemoveLength; }
-inline constexpr Size ArrayChangeMetrics::insertLength()   const { return mInsertLength; }
-inline constexpr Size ArrayChangeMetrics::lengthChange()   const { return mInsertLength - mRemoveLength; }
-inline constexpr Address ArrayChangeMetrics::secondStart() const { return mSecondStart; }
-inline constexpr Address ArrayChangeMetrics::secondEnd()   const { return mSecondStart + mSecondLength - 1; }
-inline constexpr Size ArrayChangeMetrics::firstLength()    const { return mSecondStart - mOffset; }
-inline constexpr Size ArrayChangeMetrics::secondLength()   const { return mSecondLength; }
+constexpr bool ArrayChangeMetrics::isValid()        const { return mOffset != InvalidAddress; }
+constexpr int ArrayChangeMetrics::type()            const { return mType; }
+constexpr Address ArrayChangeMetrics::offset()      const { return mOffset; }
+constexpr Size ArrayChangeMetrics::removeLength()   const { return mRemoveLength; }
+constexpr Size ArrayChangeMetrics::insertLength()   const { return mInsertLength; }
+constexpr Size ArrayChangeMetrics::lengthChange()   const { return mInsertLength - mRemoveLength; }
+constexpr Address ArrayChangeMetrics::secondStart() const { return mSecondStart; }
+constexpr Address ArrayChangeMetrics::secondEnd()   const { return mSecondStart + mSecondLength - 1; }
+constexpr Size ArrayChangeMetrics::firstLength()    const { return mSecondStart - mOffset; }
+constexpr Size ArrayChangeMetrics::secondLength()   const { return mSecondLength; }
 
 QDataStream& operator<<(QDataStream& outStream, const ArrayChangeMetrics& metrics);
 QDataStream& operator>>(QDataStream& inStream, ArrayChangeMetrics& metrics);
