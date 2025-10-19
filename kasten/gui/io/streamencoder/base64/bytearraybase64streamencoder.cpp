@@ -32,7 +32,7 @@ static constexpr const char* base64PaddingData[2] = {
     "==",
     "="
 };
-static inline constexpr const char* base64Padding(ByteArrayBase64StreamEncoder::InputByteIndex index)
+static constexpr const char* base64Padding(ByteArrayBase64StreamEncoder::InputByteIndex index)
 {
     return base64PaddingData[static_cast<int>(index) - 1];
 }

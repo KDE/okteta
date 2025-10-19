@@ -65,7 +65,7 @@ constexpr char SRecStreamEncoderSettings::AddressSizeConfigKey[];
 
 constexpr SRecStreamEncoderSettings::AddressSizeId SRecStreamEncoderSettings::DefaultAddressSize;
 
-static inline constexpr
+static constexpr
 int addressSize(SRecStreamEncoderSettings::AddressSizeId id)
 {
     return 4 - static_cast<int>(id);

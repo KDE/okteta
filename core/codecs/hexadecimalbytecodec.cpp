@@ -76,17 +76,17 @@ void HexadecimalByteCodec::encodeShort(QString* digits, unsigned int pos, Byte b
     (*digits)[pos] = mDigits[byte & 0x0F];
 }
 
-static inline constexpr bool isValidBigDigit(unsigned char digit)
+static constexpr bool isValidBigDigit(unsigned char digit)
 {
     return ('A' <= digit && digit <= 'F');
 }
 
-static inline constexpr bool isValidSmallDigit(unsigned char digit)
+static constexpr bool isValidSmallDigit(unsigned char digit)
 {
     return ('a' <= digit && digit <= 'f');
 }
 
-static inline constexpr bool isValidDecimalDigit(unsigned char digit)
+static constexpr bool isValidDecimalDigit(unsigned char digit)
 {
     return ('0' <= digit && digit <= '9');
 }

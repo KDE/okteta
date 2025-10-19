@@ -167,7 +167,7 @@ private: // member variables
     Line mLine = 0;
 };
 
-inline constexpr Coord::Coord(LinePosition pos, Line line)
+constexpr Coord::Coord(LinePosition pos, Line line)
     : mPos(pos)
     , mLine(line)
 {}
@@ -179,21 +179,21 @@ inline Coord Coord::fromIndex(Address index, LinePositionSize lineWidth)
     return Coord(pos, line);
 }
 
-inline constexpr bool Coord::operator==(const Coord& other) const { return mPos == other.mPos && mLine == other.mLine; }
-inline constexpr bool Coord::operator!=(const Coord& other) const { return !(*this == other); }
+constexpr bool Coord::operator==(const Coord& other) const { return mPos == other.mPos && mLine == other.mLine; }
+constexpr bool Coord::operator!=(const Coord& other) const { return !(*this == other); }
 
-inline constexpr bool Coord::operator<(const Coord& other) const
+constexpr bool Coord::operator<(const Coord& other) const
 { return mLine < other.mLine || (mLine == other.mLine && mPos < other.mPos); }
-inline constexpr bool Coord::operator<=(const Coord& other) const
+constexpr bool Coord::operator<=(const Coord& other) const
 { return mLine < other.mLine || (mLine == other.mLine && mPos <= other.mPos); }
-inline constexpr bool Coord::operator>(const Coord& other) const
+constexpr bool Coord::operator>(const Coord& other) const
 { return mLine > other.mLine || (mLine == other.mLine && mPos > other.mPos); }
-inline constexpr bool Coord::operator>=(const Coord& other) const
+constexpr bool Coord::operator>=(const Coord& other) const
 { return mLine > other.mLine || (mLine == other.mLine && mPos >= other.mPos); }
 
-inline constexpr LinePosition Coord::pos() const { return mPos; }
-inline constexpr Line Coord::line()        const { return mLine; }
-inline constexpr bool Coord::isValid()      const { return mLine >= 0 && mPos >= 0; }
+constexpr LinePosition Coord::pos() const { return mPos; }
+constexpr Line Coord::line()        const { return mLine; }
+constexpr bool Coord::isValid()     const { return mLine >= 0 && mPos >= 0; }
 
 inline void Coord::setByIndexNWidth(Address index, LinePositionSize lineWidth)
 {
@@ -260,28 +260,28 @@ inline void Coord::goDown()         { ++mLine; }
 inline void Coord::goUp(LineSize lines)    { mLine -= lines; }
 inline void Coord::goDown(LineSize lines)  { mLine += lines; }
 
-inline constexpr Address Coord::indexByLineWidth(LinePositionSize lineWidth) const
+constexpr Address Coord::indexByLineWidth(LinePositionSize lineWidth) const
 {
     return mLine * lineWidth + mPos;
 }
 
-inline constexpr bool Coord::isPriorInLineThan(const Coord& other) const
+constexpr bool Coord::isPriorInLineThan(const Coord& other) const
 {
     return mLine == other.mLine && mPos < other.mPos;
 }
 
-inline constexpr bool Coord::isLaterInLineThan(const Coord& other) const
+constexpr bool Coord::isLaterInLineThan(const Coord& other) const
 {
     return mLine == other.mLine && mPos > other.mPos;
 }
 
-inline constexpr bool Coord::isBelow(Line line) const { return mLine > line; }
-inline constexpr bool Coord::isAbove(Line line) const { return mLine < line; }
+constexpr bool Coord::isBelow(Line line) const { return mLine > line; }
+constexpr bool Coord::isAbove(Line line) const { return mLine < line; }
 
-inline constexpr bool Coord::isBehindLineStart()           const { return mPos > 0; }
-inline constexpr bool Coord::isBeforeLineEnd(LinePosition maxPos) const { return mPos < maxPos; }
+constexpr bool Coord::isBehindLineStart()           const { return mPos > 0; }
+constexpr bool Coord::isBeforeLineEnd(LinePosition maxPos) const { return mPos < maxPos; }
 
-inline constexpr bool Coord::isAtStart()                   const { return mPos == 0 && mLine == 0; }
+constexpr bool Coord::isAtStart()                   const { return mPos == 0 && mLine == 0; }
 
 inline Coord operator+(const Coord& other, LinePosition pos)
 {
