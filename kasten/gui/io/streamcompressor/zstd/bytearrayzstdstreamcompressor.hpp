@@ -17,13 +17,13 @@ namespace Kasten {
 class ZStdStreamCompressorSettings
 {
 private:
-    static inline constexpr char CompressionLevelConfigKey[] = "CompressionLevel";
-    static inline constexpr char WriteFrameContentSizeConfigKey[] = "WriteFrameContentSize";
-    static inline constexpr char WriteFrameChecksumConfigKey[] = "WriteFrameChecksum";
+    static constexpr char CompressionLevelConfigKey[] = "CompressionLevel";
+    static constexpr char WriteFrameContentSizeConfigKey[] = "WriteFrameContentSize";
+    static constexpr char WriteFrameChecksumConfigKey[] = "WriteFrameChecksum";
 
-    static inline constexpr int DefaultCompressionLevel = 0;
-    static inline constexpr bool DefaultWriteFrameContentSize = true;
-    static inline constexpr bool DefaultWriteFrameChecksum = false;
+    static constexpr int DefaultCompressionLevel = 0;
+    static constexpr bool DefaultWriteFrameContentSize = true;
+    static constexpr bool DefaultWriteFrameChecksum = false;
 
 public:
     ZStdStreamCompressorSettings();
@@ -53,7 +53,7 @@ class ByteArrayZStdStreamCompressor : public AbstractByteArrayStreamCompressor
     Q_OBJECT
 
 private:
-    static inline constexpr char ConfigGroupId[] = "ByteArrayZStdStreamCompressor";
+    static constexpr char ConfigGroupId[] = "ByteArrayZStdStreamCompressor";
 
 public:
     ByteArrayZStdStreamCompressor();

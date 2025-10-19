@@ -21,9 +21,9 @@ namespace Kasten {
 class ValuesStreamEncoderSettings
 {
 private:
-    static inline constexpr char PrefixConfigKey[] = "Prefix";
-    static inline constexpr char PostfixConfigKey[] = "Postfix";
-    static inline constexpr char SeparatorConfigKey[] = "Separator";
+    static constexpr char PrefixConfigKey[] = "Prefix";
+    static constexpr char PostfixConfigKey[] = "Postfix";
+    static constexpr char SeparatorConfigKey[] = "Separator";
 
     static const QString DefaultPrefix;
     static const QString DefaultPostfix;
@@ -59,7 +59,7 @@ class ByteArrayValuesStreamEncoder : public AbstractByteArrayStreamEncoder
     Q_OBJECT
 
 private:
-    static inline constexpr char ConfigGroupId[] = "ByteArrayValuesStreamEncoder";
+    static constexpr char ConfigGroupId[] = "ByteArrayValuesStreamEncoder";
 
 public:
     ByteArrayValuesStreamEncoder();

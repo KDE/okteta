@@ -24,7 +24,7 @@ public:
         _Count,
     };
 
-    static inline constexpr auto CompressionPresetLevelVariantCount = static_cast<std::size_t>(CompressionPresetLevelVariantId::_Count);
+    static constexpr auto CompressionPresetLevelVariantCount = static_cast<std::size_t>(CompressionPresetLevelVariantId::_Count);
     static const std::array<QString, CompressionPresetLevelVariantCount> compressionPresetLevelVariantConfigValueList;
 
     enum class IntegrityCheckId
@@ -36,17 +36,17 @@ public:
         _Count,
     };
 
-    static inline constexpr auto IntegrityCheckCount = static_cast<std::size_t>(IntegrityCheckId::_Count);
+    static constexpr auto IntegrityCheckCount = static_cast<std::size_t>(IntegrityCheckId::_Count);
     static const std::array<QString, IntegrityCheckCount> integrityCheckConfigValueList;
 
 private:
-    static inline constexpr char CompressionPresetLevelConfigKey[] = "CompressionPresetLevel";
-    static inline constexpr char CompressionPresetLevelVariantConfigKey[] = "CompressionPresetLevelVariant";
-    static inline constexpr char IntegrityCheckConfigKey[] = "IntegrityCheck";
+    static constexpr char CompressionPresetLevelConfigKey[] = "CompressionPresetLevel";
+    static constexpr char CompressionPresetLevelVariantConfigKey[] = "CompressionPresetLevelVariant";
+    static constexpr char IntegrityCheckConfigKey[] = "IntegrityCheck";
 
-    static inline constexpr int DefaultCompressionPresetLevel = 6;
-    static inline constexpr CompressionPresetLevelVariantId DefaultCompressionPresetLevelVariant = CompressionPresetLevelVariantId::Normal;
-    static inline constexpr IntegrityCheckId DefaultIntegrityCheck = IntegrityCheckId::Crc64;
+    static constexpr int DefaultCompressionPresetLevel = 6;
+    static constexpr CompressionPresetLevelVariantId DefaultCompressionPresetLevelVariant = CompressionPresetLevelVariantId::Normal;
+    static constexpr IntegrityCheckId DefaultIntegrityCheck = IntegrityCheckId::Crc64;
 
 public:
     XzStreamCompressorSettings();
@@ -76,7 +76,7 @@ class ByteArrayXzStreamCompressor : public AbstractByteArrayStreamCompressor
     Q_OBJECT
 
 private:
-    static inline constexpr char ConfigGroupId[] = "ByteArrayXzStreamCompressor";
+    static constexpr char ConfigGroupId[] = "ByteArrayXzStreamCompressor";
 
 public:
     ByteArrayXzStreamCompressor();

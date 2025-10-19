@@ -26,9 +26,9 @@ public:
     };
 
 private:
-    static inline constexpr EncodingType DefaultEncodingType = EncodingType::Classic;
+    static constexpr EncodingType DefaultEncodingType = EncodingType::Classic;
 
-    static inline constexpr char EncodingTypeConfigKey[] = "EncodingType";
+    static constexpr char EncodingTypeConfigKey[] = "EncodingType";
 
 public:
     Base32StreamEncoderSettings();
@@ -66,11 +66,11 @@ public:
     };
 
 private:
-    static inline constexpr int outputLineLength = 76;
-    static inline constexpr int outputGroupLength = 8;
-    static inline constexpr int maxOutputGroupsPerLine = outputLineLength / outputGroupLength;
+    static constexpr int outputLineLength = 76;
+    static constexpr int outputGroupLength = 8;
+    static constexpr int maxOutputGroupsPerLine = outputLineLength / outputGroupLength;
 
-    static inline constexpr char ConfigGroupId[] = "ByteArrayBase32StreamEncoder";
+    static constexpr char ConfigGroupId[] = "ByteArrayBase32StreamEncoder";
 
 public:
     ByteArrayBase32StreamEncoder();

@@ -34,7 +34,7 @@ public:
         EBCDIC
     };
 
-    static inline constexpr auto EncodingTypeCount = static_cast<std::size_t>(StringDataInformation::StringType::EBCDIC) + 2;
+    static constexpr auto EncodingTypeCount = static_cast<std::size_t>(StringDataInformation::StringType::EBCDIC) + 2;
 
 public:
     StringDataInformation(const QString& name, StringType encoding, DataInformationBase* parent = nullptr);

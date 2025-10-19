@@ -44,7 +44,7 @@ public:
         ReadWrite = 2,
         _ModusCount,
     };
-    static inline constexpr auto ModusCount = static_cast<std::size_t>(_ModusCount);
+    static constexpr auto ModusCount = static_cast<std::size_t>(_ModusCount);
 
 public:
     OktetaPart(QObject* parent,

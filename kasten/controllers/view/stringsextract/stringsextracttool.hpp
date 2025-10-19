@@ -31,10 +31,10 @@ class StringsExtractTool : public AbstractTool
     Q_OBJECT
 
 private:
-    static inline constexpr int DefaultMinLength = 3;
+    static constexpr int DefaultMinLength = 3;
 
-    static inline constexpr char ConfigGroupId[] = "StringsExtractTool";
-    static inline constexpr char MinimumLengthConfigKey[] = "MinimumLength";
+    static constexpr char ConfigGroupId[] = "StringsExtractTool";
+    static constexpr char MinimumLengthConfigKey[] = "MinimumLength";
 
 public:
     StringsExtractTool();

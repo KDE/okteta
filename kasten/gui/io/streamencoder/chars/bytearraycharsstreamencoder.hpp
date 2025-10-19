@@ -28,7 +28,7 @@ public:
         _Count,
     };
 
-    static inline constexpr auto EncodeModeCount = static_cast<std::size_t>(EncodeMode::_Count);
+    static constexpr auto EncodeModeCount = static_cast<std::size_t>(EncodeMode::_Count);
     static const std::array<QString, EncodeModeCount> encodeModeConfigValueList;
 
     /// Beware, not compatible with other enums
@@ -39,15 +39,15 @@ public:
         _Count,
     };
 
-    static inline constexpr auto EscapedValueCodingCount = static_cast<std::size_t>(EscapedValueCoding::_Count);
+    static constexpr auto EscapedValueCodingCount = static_cast<std::size_t>(EscapedValueCoding::_Count);
     static const std::array<QString, EscapedValueCodingCount> escapedValueCodingConfigValueList;
 
 private:
-    static inline constexpr char EncodeModeConfigKey[] = "EncodeMode";
-    static inline constexpr char EscapedValueCodingConfigKey[] = "EscapedValueCoding";
+    static constexpr char EncodeModeConfigKey[] = "EncodeMode";
+    static constexpr char EscapedValueCodingConfigKey[] = "EscapedValueCoding";
 
-    static inline constexpr EncodeMode DefaultEncodeMode = EncodeMode::Substitute;
-    static inline constexpr EscapedValueCoding DefaultEscapedValueCoding = EscapedValueCoding::Hexadecimal;
+    static constexpr EncodeMode DefaultEncodeMode = EncodeMode::Substitute;
+    static constexpr EscapedValueCoding DefaultEscapedValueCoding = EscapedValueCoding::Hexadecimal;
 
 public:
     CharsStreamEncoderSettings();
@@ -80,7 +80,7 @@ class ByteArrayCharsStreamEncoder : public AbstractByteArrayStreamEncoder
     Q_OBJECT
 
 private:
-    static inline constexpr char ConfigGroupId[] = "ByteArrayCharsStreamEncoder";
+    static constexpr char ConfigGroupId[] = "ByteArrayCharsStreamEncoder";
 
 public:
     ByteArrayCharsStreamEncoder();

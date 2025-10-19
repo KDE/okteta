@@ -23,7 +23,7 @@ class Template_ByteArrayChecksumParameterSet : public AbstractByteArrayChecksumP
 private:
 //// ADAPT(start)
 //// define the default values for all parameters
-    static inline constexpr int DefaultBitNumber = 1;
+    static constexpr int DefaultBitNumber = 1;
 //// ADAPT(end)
 
 public:

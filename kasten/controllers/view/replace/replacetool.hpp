@@ -31,13 +31,13 @@ class ReplaceTool : public AbstractTool
     Q_OBJECT
 
 private:
-    static inline constexpr char ConfigGroupId[] = "ReplaceTool";
+    static constexpr char ConfigGroupId[] = "ReplaceTool";
 
-    static inline constexpr char CaseSensitivityConfigKey[] = "CaseSensitivity";
-    static inline constexpr char PromptConfigKey[] = "Prompt";
+    static constexpr char CaseSensitivityConfigKey[] = "CaseSensitivity";
+    static constexpr char PromptConfigKey[] = "Prompt";
 
-    static inline constexpr Qt::CaseSensitivity DefaultCaseSensitivity = Qt::CaseInsensitive;
-    static inline constexpr bool DefaultDoPrompt = false;
+    static constexpr Qt::CaseSensitivity DefaultCaseSensitivity = Qt::CaseInsensitive;
+    static constexpr bool DefaultDoPrompt = false;
 
 public:
     ReplaceTool();

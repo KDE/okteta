@@ -15,9 +15,9 @@ class KConfigGroup;
 class ReverseByteArrayFilterParameterSet : public AbstractByteArrayFilterParameterSet
 {
 private:
-    static inline constexpr bool DefaultInvertsBits = false;
+    static constexpr bool DefaultInvertsBits = false;
 
-    static inline constexpr char InvertsBitsConfigKey[] = "InvertsBits";
+    static constexpr char InvertsBitsConfigKey[] = "InvertsBits";
 
 public:
     ReverseByteArrayFilterParameterSet();

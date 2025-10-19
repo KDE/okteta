@@ -15,11 +15,11 @@ class KConfigGroup;
 class RotateByteArrayFilterParameterSet : public AbstractByteArrayFilterParameterSet
 {
 private:
-    static inline constexpr int DefaultGroupSize = 1;
-    static inline constexpr int DefaultMoveBitWidth = 0;
+    static constexpr int DefaultGroupSize = 1;
+    static constexpr int DefaultMoveBitWidth = 0;
 
-    static inline constexpr char GroupSizeConfigKey[] = "GroupSize";
-    static inline constexpr char MoveBitWidthConfigKey[] = "MoveBitWidth";
+    static constexpr char GroupSizeConfigKey[] = "GroupSize";
+    static constexpr char MoveBitWidthConfigKey[] = "MoveBitWidth";
 
 public:
     RotateByteArrayFilterParameterSet();

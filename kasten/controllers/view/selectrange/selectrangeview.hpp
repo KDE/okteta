@@ -33,17 +33,17 @@ public:
     };
 
 private:
-    static inline constexpr Okteta::AddressComboBox::Coding DefaultStartOffsetCoding = Okteta::AddressComboBox::HexadecimalCoding;
-    static inline constexpr Okteta::AddressComboBox::Coding DefaultEndOffsetCoding = Okteta::AddressComboBox::HexadecimalCoding;
-    static inline constexpr bool DefaultRelativeToEnd = false;
-    static inline constexpr SelectDirection DefaultDirection = SelectForward;
+    static constexpr Okteta::AddressComboBox::Coding DefaultStartOffsetCoding = Okteta::AddressComboBox::HexadecimalCoding;
+    static constexpr Okteta::AddressComboBox::Coding DefaultEndOffsetCoding = Okteta::AddressComboBox::HexadecimalCoding;
+    static constexpr bool DefaultRelativeToEnd = false;
+    static constexpr SelectDirection DefaultDirection = SelectForward;
 
-    static inline constexpr char ConfigGroupId[] = "SelectRangeTool";
+    static constexpr char ConfigGroupId[] = "SelectRangeTool";
 
-    static inline constexpr char StartOffsetCodingConfigKey[] = "StartOffsetCoding";
-    static inline constexpr char EndOffsetCodingConfigKey[] = "EndOffsetCoding";
-    static inline constexpr char RelativeToEndConfigKey[] = "RelativeToEnd";
-    static inline constexpr char DirectionConfigKey[] = "Direction";
+    static constexpr char StartOffsetCodingConfigKey[] = "StartOffsetCoding";
+    static constexpr char EndOffsetCodingConfigKey[] = "EndOffsetCoding";
+    static constexpr char RelativeToEndConfigKey[] = "RelativeToEnd";
+    static constexpr char DirectionConfigKey[] = "Direction";
 
 public:
     explicit SelectRangeView(SelectRangeTool* tool, QWidget* parent = nullptr);

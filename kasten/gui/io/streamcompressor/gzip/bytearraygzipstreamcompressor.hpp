@@ -31,17 +31,17 @@ public:
         _Count,
     };
 
-    static inline constexpr auto StrategyCount = static_cast<std::size_t>(StrategyId::_Count);
+    static constexpr auto StrategyCount = static_cast<std::size_t>(StrategyId::_Count);
     static const std::array<QString, StrategyCount> strategyConfigValueList;
 
 private:
-    static inline constexpr char CompressionLevelConfigKey[] = "CompressionLevel";
-    static inline constexpr char StrategyConfigKey[] = "Strategy";
-    static inline constexpr char FileNameConfigKey[] = "FileName";
-    static inline constexpr char CommentConfigKey[] = "Comment";
+    static constexpr char CompressionLevelConfigKey[] = "CompressionLevel";
+    static constexpr char StrategyConfigKey[] = "Strategy";
+    static constexpr char FileNameConfigKey[] = "FileName";
+    static constexpr char CommentConfigKey[] = "Comment";
 
-    static inline constexpr int DefaultCompressionLevel = -1;
-    static inline constexpr StrategyId DefaultStrategy = StrategyId::Default;
+    static constexpr int DefaultCompressionLevel = -1;
+    static constexpr StrategyId DefaultStrategy = StrategyId::Default;
     static const QString DefaultFileName;
     static const QString DefaultComment;
 
@@ -74,7 +74,7 @@ class ByteArrayGZipStreamCompressor : public AbstractByteArrayStreamCompressor
     Q_OBJECT
 
 private:
-    static inline constexpr char ConfigGroupId[] = "ByteArrayGZipStreamCompressor";
+    static constexpr char ConfigGroupId[] = "ByteArrayGZipStreamCompressor";
 
 public:
     ByteArrayGZipStreamCompressor();

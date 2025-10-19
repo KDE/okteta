@@ -32,17 +32,17 @@ public:
     };
 
 private:
-    static inline constexpr char ConfigGroupId[] = "GotoOffsetTool";
+    static constexpr char ConfigGroupId[] = "GotoOffsetTool";
 
-    static inline constexpr char OffsetCodingConfigKey[] = "OffsetCoding";
-    static inline constexpr char FromCursorConfigKey[] = "FromCursor";
-    static inline constexpr char ExtendSelectionConfigKey[] = "ExtendSelection";
-    static inline constexpr char DirectionConfigKey[] = "Direction";
+    static constexpr char OffsetCodingConfigKey[] = "OffsetCoding";
+    static constexpr char FromCursorConfigKey[] = "FromCursor";
+    static constexpr char ExtendSelectionConfigKey[] = "ExtendSelection";
+    static constexpr char DirectionConfigKey[] = "Direction";
 
-    static inline constexpr bool DefaultFromCursor = false;
-    static inline constexpr bool DefaultExtendSelection = false;
-    static inline constexpr GotoDirection DefaultDirection = GotoForward;
-    static inline constexpr Okteta::AddressComboBox::Coding DefaultOffsetCoding = Okteta::AddressComboBox::HexadecimalCoding;
+    static constexpr bool DefaultFromCursor = false;
+    static constexpr bool DefaultExtendSelection = false;
+    static constexpr GotoDirection DefaultDirection = GotoForward;
+    static constexpr Okteta::AddressComboBox::Coding DefaultOffsetCoding = Okteta::AddressComboBox::HexadecimalCoding;
 
 public:
     explicit GotoOffsetView(GotoOffsetTool* tool, QWidget* parent = nullptr);

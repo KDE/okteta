@@ -26,9 +26,9 @@ public:
     };
 
 private:
-    static inline constexpr char FileNameConfigKey[] = "FileName";
-    static inline constexpr char EncodingTypeConfigKey[] = "EncodingType";
-    static inline constexpr EncodingType DefaultEncodingType = EncodingType::Base64;
+    static constexpr char FileNameConfigKey[] = "FileName";
+    static constexpr char EncodingTypeConfigKey[] = "EncodingType";
+    static constexpr EncodingType DefaultEncodingType = EncodingType::Base64;
     static const QString DefaultFileName;
 
 public:
@@ -66,12 +66,12 @@ public:
     };
 
 private:
-    static inline constexpr int defaultInputLineLength = 45;
-    static inline constexpr int inputLineLength = defaultInputLineLength;
-    static inline constexpr int inputGroupLength = 3;
-    static inline constexpr int maxInputGroupsPerLine = inputLineLength / inputGroupLength;
+    static constexpr int defaultInputLineLength = 45;
+    static constexpr int inputLineLength = defaultInputLineLength;
+    static constexpr int inputGroupLength = 3;
+    static constexpr int maxInputGroupsPerLine = inputLineLength / inputGroupLength;
 
-    static inline constexpr char ConfigGroupId[] = "ByteArrayUuencodingStreamEncoder";
+    static constexpr char ConfigGroupId[] = "ByteArrayUuencodingStreamEncoder";
 
 public:
     ByteArrayUuencodingStreamEncoder();

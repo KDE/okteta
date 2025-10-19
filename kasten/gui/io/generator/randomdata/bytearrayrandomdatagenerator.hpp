@@ -17,9 +17,9 @@ namespace Kasten {
 class ByteArrayRandomDataGeneratorSettings
 {
 private:
-    static inline constexpr int DefaultSize = 256;
+    static constexpr int DefaultSize = 256;
 
-    static inline constexpr char SizeConfigKey[] = "Size";
+    static constexpr char SizeConfigKey[] = "Size";
 
 public:
     ByteArrayRandomDataGeneratorSettings();
@@ -47,7 +47,7 @@ class ByteArrayRandomDataGenerator : public AbstractModelDataGenerator
     Q_OBJECT
 
 private:
-    static inline constexpr char ConfigGroupId[] = "ByteArrayRandomDataGenerator";
+    static constexpr char ConfigGroupId[] = "ByteArrayRandomDataGenerator";
 
 public:
     ByteArrayRandomDataGenerator();

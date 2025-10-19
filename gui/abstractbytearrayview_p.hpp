@@ -57,17 +57,17 @@ class AbstractByteArrayViewPrivate : public ColumnsViewScrollAreaEngine
     friend class ValueEditor;
 
 private:
-    static inline constexpr Address DefaultStartOffset = 0;// 5;
-    static inline constexpr Address DefaultFirstLineOffset = 0;
+    static constexpr Address DefaultStartOffset = 0;// 5;
+    static constexpr Address DefaultFirstLineOffset = 0;
 
     // zooming is done in steps of font size points
-    static inline constexpr int DefaultZoomStep = 1;
+    static constexpr int DefaultZoomStep = 1;
 
-    static inline constexpr AbstractByteArrayView::ValueCoding DefaultValueCoding =  AbstractByteArrayView::HexadecimalCoding;
+    static constexpr AbstractByteArrayView::ValueCoding DefaultValueCoding =  AbstractByteArrayView::HexadecimalCoding;
 
     static const QString DefaultCharCoding;
 
-    static inline constexpr AbstractByteArrayView::LayoutStyle DefaultResizeStyle = AbstractByteArrayView::FixedLayoutStyle;
+    static constexpr AbstractByteArrayView::LayoutStyle DefaultResizeStyle = AbstractByteArrayView::FixedLayoutStyle;
 
 public:
     explicit AbstractByteArrayViewPrivate(AbstractByteArrayView* parent);

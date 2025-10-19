@@ -27,7 +27,7 @@ public:
         _Count,
     };
 
-    static inline constexpr auto StrategyCount = static_cast<std::size_t>(StrategyId::_Count);
+    static constexpr auto StrategyCount = static_cast<std::size_t>(StrategyId::_Count);
     static const std::array<QString, StrategyCount> strategyConfigValueList;
 
     enum class FormatId
@@ -37,17 +37,17 @@ public:
         _Count,
     };
 
-    static inline constexpr auto FormatCount = static_cast<std::size_t>(FormatId::_Count);
+    static constexpr auto FormatCount = static_cast<std::size_t>(FormatId::_Count);
     static const std::array<QString, FormatCount> formatConfigValueList;
 
 private:
-    static inline constexpr char CompressionLevelConfigKey[] = "CompressionLevel";
-    static inline constexpr char StrategyConfigKey[] = "Strategy";
-    static inline constexpr char FormatConfigKey[] = "Format";
+    static constexpr char CompressionLevelConfigKey[] = "CompressionLevel";
+    static constexpr char StrategyConfigKey[] = "Strategy";
+    static constexpr char FormatConfigKey[] = "Format";
 
-    static inline constexpr int DefaultCompressionLevel = -1;
-    static inline constexpr StrategyId DefaultStrategy = StrategyId::Default;
-    static inline constexpr FormatId DefaultFormat = FormatId::Full;
+    static constexpr int DefaultCompressionLevel = -1;
+    static constexpr StrategyId DefaultStrategy = StrategyId::Default;
+    static constexpr FormatId DefaultFormat = FormatId::Full;
 
 public:
     DeflateStreamCompressorSettings();
@@ -77,7 +77,7 @@ class ByteArrayDeflateStreamCompressor : public AbstractByteArrayStreamCompresso
     Q_OBJECT
 
 private:
-    static inline constexpr char ConfigGroupId[] = "ByteArrayDeflateStreamCompressor";
+    static constexpr char ConfigGroupId[] = "ByteArrayDeflateStreamCompressor";
 
 public:
     ByteArrayDeflateStreamCompressor();

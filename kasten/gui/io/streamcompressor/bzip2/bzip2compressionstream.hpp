@@ -22,7 +22,7 @@ namespace Kasten {
 class BZip2CompressionStream : public AbstractCompressionStream
 {
 private:
-    static inline constexpr std::size_t OutputBufferSize = 16 * 1024;
+    static constexpr std::size_t OutputBufferSize = 16 * 1024;
 
 public:
     explicit BZip2CompressionStream(AbstractByteArrayOutput* byteArrayOutput,

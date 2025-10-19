@@ -31,13 +31,13 @@ public:
         _Count,
     };
 
-    static inline constexpr auto AddressSizeCount = static_cast<std::size_t>(AddressSizeId::_Count);
+    static constexpr auto AddressSizeCount = static_cast<std::size_t>(AddressSizeId::_Count);
     static const std::array<QString, AddressSizeCount> addressSizeConfigValueList;
 
 private:
-    static inline constexpr char AddressSizeConfigKey[] = "AddressSize";
+    static constexpr char AddressSizeConfigKey[] = "AddressSize";
 
-    static inline constexpr AddressSizeId DefaultAddressSize = AddressSizeId::Bits32;
+    static constexpr AddressSizeId DefaultAddressSize = AddressSizeId::Bits32;
 
 public:
     IHexStreamEncoderSettings();
@@ -65,24 +65,24 @@ class ByteArrayIHexStreamEncoder : public AbstractByteArrayStreamEncoder
     Q_OBJECT
 
 private:
-    static inline constexpr char ConfigGroupId[] = "ByteArrayIntelHexStreamEncoder";
+    static constexpr char ConfigGroupId[] = "ByteArrayIntelHexStreamEncoder";
 
-    static inline constexpr unsigned char dataRecordCode = 0x0;
-    static inline constexpr unsigned char endOfFileRecordCode = 0x1;
-    static inline constexpr unsigned char extendedSegmentAddressRecordCode = 0x2;
-    static inline constexpr unsigned char startSegmentAddressRecordCode = 0x3;
-    static inline constexpr unsigned char extendedLinearAddressRecordCode = 0x4;
-    static inline constexpr unsigned char startLinearAddressRecordCode = 0x5;
+    static constexpr unsigned char dataRecordCode = 0x0;
+    static constexpr unsigned char endOfFileRecordCode = 0x1;
+    static constexpr unsigned char extendedSegmentAddressRecordCode = 0x2;
+    static constexpr unsigned char startSegmentAddressRecordCode = 0x3;
+    static constexpr unsigned char extendedLinearAddressRecordCode = 0x4;
+    static constexpr unsigned char startLinearAddressRecordCode = 0x5;
 
-    static inline constexpr char startCode = ':';
+    static constexpr char startCode = ':';
 
-    static inline constexpr int byteCountLineOffset = 0;
-    static inline constexpr int byteCountLineSize = 1;
-    static inline constexpr int addressLineOffset = byteCountLineOffset + byteCountLineSize;
-    static inline constexpr int addressLineSize = 2;
-    static inline constexpr int recordTypeLineOffset = addressLineOffset + addressLineSize;
-    static inline constexpr int recordTypeLineSize = 1;
-    static inline constexpr int dataLineOffset = recordTypeLineOffset + recordTypeLineSize;
+    static constexpr int byteCountLineOffset = 0;
+    static constexpr int byteCountLineSize = 1;
+    static constexpr int addressLineOffset = byteCountLineOffset + byteCountLineSize;
+    static constexpr int addressLineSize = 2;
+    static constexpr int recordTypeLineOffset = addressLineOffset + addressLineSize;
+    static constexpr int recordTypeLineSize = 1;
+    static constexpr int dataLineOffset = recordTypeLineOffset + recordTypeLineSize;
     static const char hexDigits[16];
 
 private:

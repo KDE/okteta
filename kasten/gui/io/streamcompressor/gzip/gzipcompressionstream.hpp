@@ -22,7 +22,7 @@ namespace Kasten {
 class GZipCompressionStream : public AbstractCompressionStream
 {
 private:
-    static inline constexpr std::size_t OutputBufferSize = 16 * 1024;
+    static constexpr std::size_t OutputBufferSize = 16 * 1024;
 
 public:
     explicit GZipCompressionStream(AbstractByteArrayOutput* byteArrayOutput,

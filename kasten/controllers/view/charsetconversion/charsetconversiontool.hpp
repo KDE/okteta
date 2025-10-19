@@ -49,17 +49,17 @@ public:
     };
 
 private:
-    static inline constexpr char ConfigGroupId[] = "CharsetConversionTool";
-    static inline constexpr char OtherCharCodecNameConfigKey[] = "OtherCharCodecName";
-    static inline constexpr char ConversionDirectionConfigKey[] = "ConversionDirection";
-    static inline constexpr char SubstituteMissingCharsConfigKey[] = "SubstituteMissingChars";
-    static inline constexpr char SubstituteByteConfigKey[] = "SubstituteByte";
-    static inline constexpr char SubstituteByteCodingConfigKey[] = "SubstituteByteCoding";
+    static constexpr char ConfigGroupId[] = "CharsetConversionTool";
+    static constexpr char OtherCharCodecNameConfigKey[] = "OtherCharCodecName";
+    static constexpr char ConversionDirectionConfigKey[] = "ConversionDirection";
+    static constexpr char SubstituteMissingCharsConfigKey[] = "SubstituteMissingChars";
+    static constexpr char SubstituteByteConfigKey[] = "SubstituteByte";
+    static constexpr char SubstituteByteCodingConfigKey[] = "SubstituteByteCoding";
 
-    static inline constexpr bool DefaultSubstituteMissingChars = false;
-    static inline constexpr Okteta::Byte DefaultSubstituteByte = 0;
-    static inline constexpr ConversionDirection DefaultConversionDirection = ConvertFrom;
-    static inline constexpr Coding DefaultSubstituteByteCoding = HexadecimalCoding;
+    static constexpr bool DefaultSubstituteMissingChars = false;
+    static constexpr Okteta::Byte DefaultSubstituteByte = 0;
+    static constexpr ConversionDirection DefaultConversionDirection = ConvertFrom;
+    static constexpr Coding DefaultSubstituteByteCoding = HexadecimalCoding;
 
 public:
     CharsetConversionTool();

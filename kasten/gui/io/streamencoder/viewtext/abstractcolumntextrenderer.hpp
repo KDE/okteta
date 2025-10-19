@@ -19,7 +19,7 @@ namespace Kasten {
 class AbstractColumnTextRenderer
 {
 private:
-    static inline constexpr int DefaultNoOfSublines = 1;
+    static constexpr int DefaultNoOfSublines = 1;
 
 protected:
     [[nodiscard]]

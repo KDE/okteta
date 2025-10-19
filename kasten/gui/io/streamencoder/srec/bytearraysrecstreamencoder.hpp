@@ -31,13 +31,13 @@ public:
         _Count,
     };
 
-    static inline constexpr auto AddressSizeCount = static_cast<std::size_t>(AddressSizeId::_Count);
+    static constexpr auto AddressSizeCount = static_cast<std::size_t>(AddressSizeId::_Count);
     static const std::array<QString, AddressSizeCount> addressSizeConfigValueList;
 
 private:
-    static inline constexpr AddressSizeId DefaultAddressSize = AddressSizeId::FourBytes;
+    static constexpr AddressSizeId DefaultAddressSize = AddressSizeId::FourBytes;
 
-    static inline constexpr char AddressSizeConfigKey[] = "AddressSize";
+    static constexpr char AddressSizeConfigKey[] = "AddressSize";
 
 public:
     SRecStreamEncoderSettings();
@@ -77,15 +77,15 @@ private:
         EndOfBlock2B = 9
     };
 
-    static inline constexpr char startCode = 'S';
+    static constexpr char startCode = 'S';
 
-    static inline constexpr int byteCountLineOffset = 0;
-    static inline constexpr int byteCountLineSize = 1;
-    static inline constexpr int addressLineOffset = byteCountLineOffset + byteCountLineSize;
+    static constexpr int byteCountLineOffset = 0;
+    static constexpr int byteCountLineSize = 1;
+    static constexpr int addressLineOffset = byteCountLineOffset + byteCountLineSize;
 
     static const char hexDigits[16];
 
-    static inline constexpr char ConfigGroupId[] = "ByteArraySRecordStreamEncoder";
+    static constexpr char ConfigGroupId[] = "ByteArraySRecordStreamEncoder";
 
 private:
     [[nodiscard]]

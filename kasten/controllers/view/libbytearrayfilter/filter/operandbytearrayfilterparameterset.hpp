@@ -31,14 +31,14 @@ public:
     };
 
 private:
-    static inline constexpr OperandByteArrayFilterParameterSet::Coding DefaultOperandFormat = OperandByteArrayFilterParameterSet::HexadecimalCoding;
-    static inline constexpr bool DefaultAlignAtEnd = false;
+    static constexpr OperandByteArrayFilterParameterSet::Coding DefaultOperandFormat = OperandByteArrayFilterParameterSet::HexadecimalCoding;
+    static constexpr bool DefaultAlignAtEnd = false;
 
     static const QByteArray DefaultOperand;
 
-    static inline constexpr char OperandConfigKey[] = "Operand";
-    static inline constexpr char ByteOrderConfigKey[] = "OperandFormat";
-    static inline constexpr char AlignAtEndConfigKey[] = "AlignAtEnd";
+    static constexpr char OperandConfigKey[] = "Operand";
+    static constexpr char ByteOrderConfigKey[] = "OperandFormat";
+    static constexpr char AlignAtEndConfigKey[] = "AlignAtEnd";
 
 public:
     OperandByteArrayFilterParameterSet();

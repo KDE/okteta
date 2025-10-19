@@ -27,10 +27,10 @@ class StatisticTableModel : public QAbstractTableModel
     Q_OBJECT
 
 private:
-    static inline constexpr QChar DefaultSubstituteChar = QLatin1Char('.');
-    static inline constexpr QChar DefaultUndefinedChar = QChar(QChar::ReplacementCharacter);
-    static inline constexpr Okteta::ValueCoding DefaultValueCoding = Okteta::HexadecimalCoding;
-    static inline constexpr int ByteSetSize = 256;
+    static constexpr QChar DefaultSubstituteChar = QLatin1Char('.');
+    static constexpr QChar DefaultUndefinedChar = QChar(QChar::ReplacementCharacter);
+    static constexpr Okteta::ValueCoding DefaultValueCoding = Okteta::HexadecimalCoding;
+    static constexpr int ByteSetSize = 256;
 
 public:
     enum ColumnIds

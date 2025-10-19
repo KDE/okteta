@@ -21,7 +21,7 @@ class XxencodingStreamEncoderSettings
 private:
     static const QString DefaultFileName;
 
-    static inline constexpr char FileNameConfigKey[] = "FileName";
+    static constexpr char FileNameConfigKey[] = "FileName";
 
 public:
     XxencodingStreamEncoderSettings();
@@ -56,12 +56,12 @@ public:
         Third
     };
 private:
-    static inline constexpr int defaultInputLineLength = 45;
-    static inline constexpr int inputLineLength = defaultInputLineLength;
-    static inline constexpr int inputGroupLength = 3;
-    static inline constexpr int maxInputGroupsPerLine = inputLineLength / inputGroupLength;
+    static constexpr int defaultInputLineLength = 45;
+    static constexpr int inputLineLength = defaultInputLineLength;
+    static constexpr int inputGroupLength = 3;
+    static constexpr int maxInputGroupsPerLine = inputLineLength / inputGroupLength;
 
-    static inline constexpr char ConfigGroupId[] = "ByteArrayXxencodingStreamEncoder";
+    static constexpr char ConfigGroupId[] = "ByteArrayXxencodingStreamEncoder";
 
 public:
     ByteArrayXxencodingStreamEncoder();

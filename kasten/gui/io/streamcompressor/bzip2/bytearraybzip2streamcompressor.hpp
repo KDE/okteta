@@ -17,9 +17,9 @@ namespace Kasten {
 class BZip2StreamCompressorSettings
 {
 private:
-    static inline constexpr char BlockSizeConfigKey[] = "BlockSize";
+    static constexpr char BlockSizeConfigKey[] = "BlockSize";
 
-    static inline constexpr int DefaultBlockSize = 5;
+    static constexpr int DefaultBlockSize = 5;
 
 public:
     BZip2StreamCompressorSettings();
@@ -48,7 +48,7 @@ class ByteArrayBZip2StreamCompressor : public AbstractByteArrayStreamCompressor
     Q_OBJECT
 
 private:
-    static inline constexpr char ConfigGroupId[] = "ByteArrayBZip2StreamCompressor";
+    static constexpr char ConfigGroupId[] = "ByteArrayBZip2StreamCompressor";
 
 public:
     ByteArrayBZip2StreamCompressor();

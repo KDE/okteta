@@ -21,7 +21,7 @@ namespace Kasten {
 class DeflateCompressionStream : public AbstractCompressionStream
 {
 private:
-    static inline constexpr std::size_t OutputBufferSize = 16 * 1024;
+    static constexpr std::size_t OutputBufferSize = 16 * 1024;
 
 public:
     explicit DeflateCompressionStream(AbstractByteArrayOutput* byteArrayOutput,

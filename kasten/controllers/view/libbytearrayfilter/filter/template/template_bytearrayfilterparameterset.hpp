@@ -23,7 +23,7 @@ class Template_ByteArrayFilterParameterSet : public AbstractByteArrayFilterParam
 private:
 //// ADAPT(start)
 //// define the default values for all parameters
-    static inline constexpr unsigned int DefaultLevel = 127;
+    static constexpr unsigned int DefaultLevel = 127;
 //// ADAPT(end)
 
 public:
