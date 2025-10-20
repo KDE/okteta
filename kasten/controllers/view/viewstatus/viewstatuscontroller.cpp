@@ -18,6 +18,8 @@
 #include <KLocalizedString>
 // Qt
 #include <QLabel>
+// Std
+#include <array>
 
 // TODO: make status bar capable to hide entries if size is too small, use prioritization
 
@@ -82,10 +84,15 @@ void ViewStatusController::fixWidths(Okteta::OffsetFormat::Format offsetCoding)
     auto sizeEstimationDummyLabel = std::make_unique<QLabel>(mStatusBar);
 
     // mOffsetLabel
-    constexpr int hexDigitsCount = 16;
-    constexpr int decimalDigitsCount = 10;
-    constexpr int octalDigitsCount = 8;
-    constexpr int firstLetterIndex = 10;
+    constexpr std::size_t hexDigitsCount = 16;
+    constexpr std::size_t decimalDigitsCount = 10;
+    constexpr std::size_t octalDigitsCount = 8;
+    constexpr std::size_t firstLetterIndex = 10;
+    constexpr std::array<std::size_t, Okteta::OffsetFormat::FormatCount> formatDigitsCount = {
+        hexDigitsCount,
+        decimalDigitsCount,
+        octalDigitsCount
+    };
     constexpr char digits[hexDigitsCount] = {
         '0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
         'A', 'B', 'C', 'D', 'E', 'F'
@@ -94,11 +101,9 @@ void ViewStatusController::fixWidths(Okteta::OffsetFormat::Format offsetCoding)
     int largestOffsetWidth = 0;
     int largestSelectionWidth = 0;
     int widestDigitIndex = 0;
-    const int digitsCount =
-        (offsetCoding == Okteta::OffsetFormat::Hexadecimal) ? hexDigitsCount :
-        (offsetCoding == Okteta::OffsetFormat::Decimal) ? decimalDigitsCount :
-        octalDigitsCount;
-    for (int i = 0; i < digitsCount; ++i) {
+    const auto offsetCodingIndex = static_cast<std::size_t>(offsetCoding);
+    const std::size_t digitsCount = formatDigitsCount[offsetCodingIndex];
+    for (std::size_t i = 0; i < digitsCount; ++i) {
         QString offset;
         if (offsetCoding == Okteta::OffsetFormat::Hexadecimal) {
             offset = QString(9, QLatin1Char(digits[i]));
