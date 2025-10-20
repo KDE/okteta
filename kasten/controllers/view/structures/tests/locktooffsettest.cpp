@@ -13,6 +13,7 @@
 // Qt
 #include <QTest>
 // Std
+#include <array>
 #include <limits>
 #include <utility>
 
@@ -34,7 +35,7 @@ private:
     Okteta::ByteArrayModel* model2;
 };
 
-const unsigned char testData[128] =
+const std::array<unsigned char, 128> testData =
 {
     0x17, 0xa7, 0x0b, 0xa7, 0x8d, 0x96, 0x15, 0x9e,
     0xc0, 0x75, 0x02, 0x5b, 0xfe, 0xa4, 0xf5, 0x44,
@@ -54,7 +55,7 @@ const unsigned char testData[128] =
     0xf2, 0x5c, 0x89, 0x26, 0xa0, 0x0c, 0xd4, 0xd1
 };
 
-const unsigned char testData2[128] =
+const std::array<unsigned char, 128> testData2 =
 {
     0x4c, 0x4a, 0x64, 0x02, 0x98, 0x65, 0xb8, 0x56,
     0x94, 0x57, 0xd8, 0x4b, 0x02, 0x12, 0xc3, 0x65,
@@ -76,9 +77,9 @@ const unsigned char testData2[128] =
 
 void LockToOffsetTest::initTestCase()
 {
-    model = new Okteta::ByteArrayModel(testData, sizeof(testData));
+    model = new Okteta::ByteArrayModel(testData.data(), testData.size());
     model->setAutoDelete(false);
-    model2 = new Okteta::ByteArrayModel(testData2, sizeof(testData2));
+    model2 = new Okteta::ByteArrayModel(testData2.data(), testData2.size());
     model2->setAutoDelete(false);
 }
 
