@@ -42,9 +42,11 @@ struct ExpectedResults
         columnFlags[DataInformation::ColumnName] = Qt::ItemIsSelectable | Qt::ItemIsEnabled;
         columnFlags[DataInformation::ColumnType] = Qt::ItemIsSelectable | Qt::ItemIsEnabled;
         columnFlags[DataInformation::ColumnValue] = Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+        columnFlags[DataInformation::ColumnSize] = Qt::ItemIsSelectable | Qt::ItemIsEnabled;
         noFileColumnFlags[DataInformation::ColumnName] = Qt::ItemIsSelectable | Qt::ItemIsEnabled;
         noFileColumnFlags[DataInformation::ColumnType] = Qt::ItemIsSelectable | Qt::ItemIsEnabled;
         noFileColumnFlags[DataInformation::ColumnValue] = Qt::ItemIsSelectable | Qt::ItemIsEnabled;
+        noFileColumnFlags[DataInformation::ColumnSize] = Qt::ItemIsSelectable | Qt::ItemIsEnabled;
     }
     DataInformationBase* parent = nullptr;
     BitCount32 size = 0;
@@ -243,10 +245,12 @@ void BasicDataInformationTest::basicTest(DataInformationBase* data, const Expect
     QCOMPARE(dataInf->flags(DataInformation::ColumnName, true), expected.columnFlags[DataInformation::ColumnName]);
     QCOMPARE(dataInf->flags(DataInformation::ColumnType, true), expected.columnFlags[DataInformation::ColumnType]);
     QCOMPARE(dataInf->flags(DataInformation::ColumnValue, true), expected.columnFlags[DataInformation::ColumnValue]);
+    QCOMPARE(dataInf->flags(DataInformation::ColumnSize, true), expected.columnFlags[DataInformation::ColumnSize]);
 
     QCOMPARE(dataInf->flags(DataInformation::ColumnName, false), expected.noFileColumnFlags[DataInformation::ColumnName]);
     QCOMPARE(dataInf->flags(DataInformation::ColumnType, false), expected.noFileColumnFlags[DataInformation::ColumnType]);
     QCOMPARE(dataInf->flags(DataInformation::ColumnValue, false), expected.noFileColumnFlags[DataInformation::ColumnValue]);
+    QCOMPARE(dataInf->flags(DataInformation::ColumnSize, false), expected.noFileColumnFlags[DataInformation::ColumnSize]);
 }
 
 void BasicDataInformationTest::initTestCase()
