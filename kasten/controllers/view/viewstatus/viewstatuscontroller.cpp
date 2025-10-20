@@ -77,7 +77,7 @@ ViewStatusController::ViewStatusController(StatusBar* statusBar)
 
 // the letter C can be very wide, that is why with proportional fonts there seems too much space used, but isn't
 // see https://frinring.wordpress.com/2008/10/14/better-width-with-open-sources/
-void ViewStatusController::fixWidths(int offsetCoding)
+void ViewStatusController::fixWidths(Okteta::OffsetFormat::Format offsetCoding)
 {
     auto sizeEstimationDummyLabel = std::make_unique<QLabel>(mStatusBar);
 
@@ -247,7 +247,7 @@ void ViewStatusController::onOffsetCodingChanged(int offsetCoding)
 {
     const auto offsetFormat = static_cast<Okteta::OffsetFormat::Format>(offsetCoding);
     mPrintFunction = Okteta::OffsetFormat::printFunction(offsetFormat);
-    fixWidths(offsetCoding);
+    fixWidths(offsetFormat);
 
     // trigger updates of offset printing labels
     onCursorPositionChanged(mByteArrayView->cursorPosition());

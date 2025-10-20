@@ -36,7 +36,7 @@ public: // AbstractXmlGuiController API
     void setTargetModel(AbstractModel* model) override;
 
 private:
-    void fixWidths(int offsetCoding);
+    void fixWidths(Okteta::OffsetFormat::Format offsetCoding);
     void clearDisplay();
 
 private Q_SLOTS:
