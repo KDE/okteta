@@ -11,6 +11,7 @@
 // Qt
 #include <QTest>
 // Std
+#include <array>
 #include <memory>
 
 class AllPrimitiveTypesTest : public QObject
@@ -37,16 +38,16 @@ private:
     std::unique_ptr<Okteta::ByteArrayModel> model;
 };
 
-static constexpr Okteta::Byte data[9] =
+static constexpr std::array<Okteta::Byte, 9> data =
 { 0x12, 0x34, 0x56, 0x78, 0x9a, 0xbc, 0xde, 0xf0, 0x00 };
 
 inline void AllPrimitiveTypesTest::initTestCase()
 {
-    auto* const copy = new Okteta::Byte[sizeof(data)];
-    memcpy(copy, data, sizeof(data));
-    model = std::make_unique<Okteta::ByteArrayModel>(copy, sizeof(data));
+    auto* const copy = new Okteta::Byte[data.size()];
+    memcpy(copy, data.data(), data.size());
+    model = std::make_unique<Okteta::ByteArrayModel>(copy, data.size());
     model->setAutoDelete(true);
-    QCOMPARE(model->size(), Okteta::Size(sizeof(data)));
+    QCOMPARE(model->size(), static_cast<Okteta::Size>(data.size()));
 }
 
 void AllPrimitiveTypesTest::testValuesMatch()
