@@ -17,6 +17,7 @@
 // Qt
 #include <QTest>
 // Std
+#include <array>
 #include <memory>
 #include <utility>
 
@@ -38,15 +39,15 @@ private:
  *  00010010 00110100 01010110 01111000
  *  10011010 10111100 11011110 11110000
  */
-static constexpr Okteta::Byte testData[8] = {
+static constexpr std::array<Okteta::Byte, 8> testData = {
     0x12, 0x34, 0x56, 0x78, 0x9a, 0xbc, 0xde, 0xf0
 };
 
 void UnionDataInformationTest::initTestCase()
 {
-    model = std::make_unique<Okteta::ByteArrayModel>(testData, sizeof(testData));
+    model = std::make_unique<Okteta::ByteArrayModel>(testData.data(), testData.size());
     model->setAutoDelete(false);
-    QCOMPARE(model->size(), Okteta::Size(8));
+    QCOMPARE(model->size(), static_cast<Okteta::Size>(testData.size()));
 }
 
 void UnionDataInformationTest::testSize()
