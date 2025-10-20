@@ -9,6 +9,8 @@
 
 // lib
 #include <charcodec.hpp>
+// Std
+#include <array>
 
 namespace Okteta {
 
@@ -43,6 +45,10 @@ public:
     static std::unique_ptr<EBCDIC1047CharCodec> create();
     [[nodiscard]]
     static const QString& codecName();
+
+private:
+    static const std::array<unsigned short, 256> UnicodeChars;
+    static const std::array<Byte, 256> EBCDICChars;
 };
 
 inline EBCDIC1047CharCodec::EBCDIC1047CharCodec(EBCDIC1047CharCodec::ConstructorTag) {}
