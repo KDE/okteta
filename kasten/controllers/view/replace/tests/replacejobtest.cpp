@@ -159,7 +159,7 @@ void ReplaceJobTest::testReplace_data()
         QTest::newRow(QString(data.name+QLatin1String("-backward-fromend")).toLatin1().constData())
             << data.originalData << data.searchData
             << data.replaceData << data.expectedData << data.expectedReplacementCount
-            << Okteta::Address(data.originalData.length()) << true << QVector<Kasten::ReplaceBehaviour>();
+            << static_cast<Okteta::Address>(data.originalData.length()) << true << QVector<Kasten::ReplaceBehaviour>();
         QTest::newRow(QString(data.name+QLatin1String("-forward-frommiddle")).toLatin1().constData())
             << data.originalData << data.searchData
             << data.replaceData << data.expectedData << data.expectedReplacementCount

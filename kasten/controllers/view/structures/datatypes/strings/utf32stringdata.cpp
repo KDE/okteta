@@ -149,7 +149,7 @@ qint64 Utf32StringData::read(const Okteta::AbstractByteArrayModel* input, Okteta
         }
         if (mMode & ByteCount) {
             // divide by four in case someone set length to an odd number of bytes
-            if ((addr - address) / 4 >= Okteta::Address(mLength.maxBytes / 4)) {
+            if ((addr - address) / 4 >= static_cast<Okteta::Address>(mLength.maxBytes / 4)) {
                 terminate = true;
             }
         }

@@ -131,7 +131,7 @@ qint64 Utf16StringData::read(const Okteta::AbstractByteArrayModel* input, Okteta
         }
         // high surrogate -> if is followed by low surrogate we have a 4 bit char
         if (QChar::isHighSurrogate(val)) {
-            if (remaining < 32 || ((mMode & ByteCount) && (addr + 2 - address) / 2 >= Okteta::Address(mLength.maxBytes / 2))) {
+            if (remaining < 32 || ((mMode & ByteCount) && (addr + 2 - address) / 2 >= static_cast<Okteta::Address>(mLength.maxBytes / 2))) {
                 codePoint = val;
                 mEofReached = true;
                 terminate = true;
@@ -174,7 +174,7 @@ qint64 Utf16StringData::read(const Okteta::AbstractByteArrayModel* input, Okteta
         }
         if (mMode & ByteCount) {
             // divide by two in case someone set length to an odd number of bytes
-            if ((addr - address) / 2 >= Okteta::Address(mLength.maxBytes / 2)) {
+            if ((addr - address) / 2 >= static_cast<Okteta::Address>(mLength.maxBytes / 2)) {
                 terminate = true;
             }
         }

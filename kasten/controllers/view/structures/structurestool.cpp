@@ -160,7 +160,7 @@ bool StructuresTool::setData(const QVariant& value, int role, DataInformation* i
     BitCount64 position = item->positionInFile(structureStart);
     const quint64 remainingBits = qMax(mByteArrayModel->size() * 8 - qint64(position), qint64(0));
     quint8 bitOffs = position % 8;
-    ret = item->setData(value, mByteArrayModel, Okteta::Address(position / 8), remainingBits, bitOffs);
+    ret = item->setData(value, mByteArrayModel, static_cast<Okteta::Address>(position / 8), remainingBits, bitOffs);
 
     // unblock updating and catch up
     mWritingData = false;
@@ -321,7 +321,7 @@ QString StructuresTool::dataAddressAsString(const DataInformation* data) const
 {
     Q_CHECK_PTR(data->topLevelDataInformation());
     const Okteta::Address baseAddress = startAddress(data->topLevelDataInformation());
-    const Okteta::Address dataOffset = Okteta::Address(data->positionInFile(baseAddress) / 8);
+    const auto dataOffset = static_cast<Okteta::Address>(data->positionInFile(baseAddress) / 8);
 
     const auto codingId = static_cast<Okteta::OffsetFormat::Format>(mByteArrayView->offsetCoding());
 
@@ -346,7 +346,7 @@ Okteta::AddressRange StructuresTool::dataRange(const DataInformation* data) cons
     int length = data->size() / 8;
     const int maxLen = mByteArrayModel->size() - baseAddress;
     length = qMin(length, maxLen);
-    const Okteta::Address startOffset = Okteta::Address(data->positionInFile(baseAddress) / 8);
+    const auto startOffset = static_cast<Okteta::Address>(data->positionInFile(baseAddress) / 8);
     return Okteta::AddressRange::fromWidth(startOffset, length);
 }
 
