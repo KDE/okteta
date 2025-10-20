@@ -21,6 +21,7 @@
 // Qt
 #include <QTest>
 // Std
+#include <array>
 #include <memory>
 #include <vector>
 #include <utility>
@@ -38,15 +39,19 @@ struct ExpectedResults
         , isString(false)
         , isDummy(false)
         , hasChildren(false)
+        , columnFlags{
+            Qt::ItemIsSelectable | Qt::ItemIsEnabled,
+            Qt::ItemIsSelectable | Qt::ItemIsEnabled,
+            Qt::ItemIsSelectable | Qt::ItemIsEnabled,
+            Qt::ItemIsSelectable | Qt::ItemIsEnabled,
+        },
+        noFileColumnFlags{
+            Qt::ItemIsSelectable | Qt::ItemIsEnabled,
+            Qt::ItemIsSelectable | Qt::ItemIsEnabled,
+            Qt::ItemIsSelectable | Qt::ItemIsEnabled,
+            Qt::ItemIsSelectable | Qt::ItemIsEnabled,
+        }
     {
-        columnFlags[DataInformation::ColumnName] = Qt::ItemIsSelectable | Qt::ItemIsEnabled;
-        columnFlags[DataInformation::ColumnType] = Qt::ItemIsSelectable | Qt::ItemIsEnabled;
-        columnFlags[DataInformation::ColumnValue] = Qt::ItemIsSelectable | Qt::ItemIsEnabled;
-        columnFlags[DataInformation::ColumnSize] = Qt::ItemIsSelectable | Qt::ItemIsEnabled;
-        noFileColumnFlags[DataInformation::ColumnName] = Qt::ItemIsSelectable | Qt::ItemIsEnabled;
-        noFileColumnFlags[DataInformation::ColumnType] = Qt::ItemIsSelectable | Qt::ItemIsEnabled;
-        noFileColumnFlags[DataInformation::ColumnValue] = Qt::ItemIsSelectable | Qt::ItemIsEnabled;
-        noFileColumnFlags[DataInformation::ColumnSize] = Qt::ItemIsSelectable | Qt::ItemIsEnabled;
     }
     DataInformationBase* parent = nullptr;
     BitCount32 size = 0;
@@ -60,8 +65,8 @@ struct ExpectedResults
     bool isString : 1;
     bool isDummy : 1;
     bool hasChildren : 1;
-    Qt::ItemFlags columnFlags[DataInformation::COLUMN_COUNT];
-    Qt::ItemFlags noFileColumnFlags[DataInformation::COLUMN_COUNT];
+    std::array<Qt::ItemFlags, DataInformation::COLUMN_COUNT> columnFlags;
+    std::array<Qt::ItemFlags, DataInformation::COLUMN_COUNT> noFileColumnFlags;
 };
 
 class BasicDataInformationTest : public QObject
