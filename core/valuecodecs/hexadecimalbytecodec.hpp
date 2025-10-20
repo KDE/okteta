@@ -9,6 +9,10 @@
 
 // lib
 #include <valuecodec.hpp>
+// Qt
+#include <QChar>
+// Std
+#include <array>
 
 class QChar;
 
@@ -43,6 +47,12 @@ public: // ValueCodec API
     bool isValidDigit(unsigned char digit) const override;
     [[nodiscard]]
     bool turnToValue(unsigned char* digit) const override;
+
+private:
+    using DigitsTable = std::array<QChar, 16>;
+
+    static const DigitsTable upperCaseDigits;
+    static const DigitsTable lowerCaseDigits;
 
 private:
     const QChar* mDigits;

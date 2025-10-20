@@ -11,7 +11,7 @@
 
 namespace Okteta {
 
-static constexpr QChar upperCaseDigits[16] =
+const HexadecimalByteCodec::DigitsTable HexadecimalByteCodec::upperCaseDigits =
 {   // '0',        '1',           '2',           '3',
     QChar(0x0030), QChar(0x0031), QChar(0x0032), QChar(0x0033),
     // '4',        '5',           '6',           '7',
@@ -21,7 +21,8 @@ static constexpr QChar upperCaseDigits[16] =
     // 'C',        'D',           'E',           'F'
     QChar(0x0043), QChar(0x0044), QChar(0x0045), QChar(0x0046),
 };
-static constexpr QChar lowerCaseDigits[16] =
+
+const HexadecimalByteCodec::DigitsTable HexadecimalByteCodec::lowerCaseDigits =
 {   // '0',        '1',           '2',           '3',
     QChar(0x0030), QChar(0x0031), QChar(0x0032), QChar(0x0033),
     // '4',        '5',           '6',           '7',
@@ -34,13 +35,13 @@ static constexpr QChar lowerCaseDigits[16] =
 static constexpr Byte hexadecimalDigitsFilledLimit = 16;
 
 HexadecimalByteCodec::HexadecimalByteCodec(bool useLowerCaseDigits)
-    : mDigits(useLowerCaseDigits ? lowerCaseDigits : upperCaseDigits)
+    : mDigits(useLowerCaseDigits ? lowerCaseDigits.data() : upperCaseDigits.data())
 {
 }
 
 bool HexadecimalByteCodec::setLowerCaseDigits(bool useLowerCaseDigits)
 {
-    const QChar* const digits = useLowerCaseDigits ? lowerCaseDigits : upperCaseDigits;
+    const QChar* const digits = useLowerCaseDigits ? lowerCaseDigits.data() : upperCaseDigits.data();
 
     if (digits == mDigits) {
         return false;
@@ -50,7 +51,7 @@ bool HexadecimalByteCodec::setLowerCaseDigits(bool useLowerCaseDigits)
     return true;
 }
 
-bool HexadecimalByteCodec::isLowerCaseDigits() const { return mDigits == lowerCaseDigits; }
+bool HexadecimalByteCodec::isLowerCaseDigits() const { return mDigits == lowerCaseDigits.data(); }
 
 unsigned int HexadecimalByteCodec::encodingWidth() const { return 2; }
 Byte HexadecimalByteCodec::digitsFilledLimit() const { return hexadecimalDigitsFilledLimit; }
