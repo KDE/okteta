@@ -64,9 +64,9 @@ public:
     void saveConfig(KConfigGroup& configGroup) const;
 
 private:
-    QByteArray mOperand;
-    Coding mOperandFormat = HexadecimalCoding;
-    bool mAlignAtEnd = false;
+    QByteArray mOperand = DefaultOperand;
+    Coding mOperandFormat = DefaultOperandFormat;
+    bool mAlignAtEnd = DefaultAlignAtEnd;
 };
 
 #endif

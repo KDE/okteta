@@ -13,16 +13,12 @@
 //// ADAPT(end)
 
 //// ADAPT(start)
-//// define the default values for all parameters
-static constexpr unsigned int DefaultLevel = 127;
+//// define the default value static members
+// C++11 needs a definition for static constexpr members
+constexpr unsigned int Template_ByteArrayFilterParameterSet::DefaultLevel;
 //// ADAPT(end)
 
-Template_ByteArrayFilterParameterSet::Template_ByteArrayFilterParameterSet()
-//// ADAPT(start)
-//// set default values to all parameters
-    : mLevel(DefaultLevel)
-//// ADAPT(end)
-{}
+Template_ByteArrayFilterParameterSet::Template_ByteArrayFilterParameterSet() = default;
 
 Template_ByteArrayFilterParameterSet::~Template_ByteArrayFilterParameterSet() = default;
 

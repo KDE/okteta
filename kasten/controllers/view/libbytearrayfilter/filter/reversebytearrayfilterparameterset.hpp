@@ -39,7 +39,7 @@ public:
     void saveConfig(KConfigGroup& configGroup) const;
 
 private:
-    bool mInvertsBits = false;
+    bool mInvertsBits = DefaultInvertsBits;
 };
 
 #endif
