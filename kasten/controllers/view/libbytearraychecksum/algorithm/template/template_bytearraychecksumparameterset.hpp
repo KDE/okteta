@@ -22,6 +22,12 @@
 class Template_ByteArrayChecksumParameterSet : public AbstractByteArrayChecksumParameterSet
 //// ADAPT(end)
 {
+private:
+//// ADAPT(start)
+//// define the default values for all parameters
+    static constexpr int DefaultBitNumber = 1;
+//// ADAPT(end)
+
 public:
     Template_ByteArrayChecksumParameterSet();
 
@@ -31,7 +37,7 @@ public: // AbstractByteArrayChecksumParameterSet API
     const char* id() const override;
 
 //// ADAPT(start)
-//// declare the parameters and the corresponding getters and setters
+//// declare the parameters, incl. their default values, and the corresponding getters and setters
 
 public: // getters
     int bitNumber() const;
@@ -40,7 +46,7 @@ public: // setters
     void setBitNumber(int bitNumber);
 
 private: // parameters
-    int mBitNumber;
+    int mBitNumber = DefaultBitNumber;
 //// ADAPT(end)
 };
 

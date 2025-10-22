@@ -13,10 +13,10 @@
 // KF
 #include <KConfigGroup>
 
+// C++11 needs a definition for static constexpr members
+constexpr char ModSumByteArrayChecksumParameterSet::ByteOrderConfigKey[];
 
-static constexpr QSysInfo::Endian DefaultByteOrder = QSysInfo::ByteOrder;
-
-static constexpr char ByteOrderConfigKey[] = "ByteOrder";
+constexpr QSysInfo::Endian ModSumByteArrayChecksumParameterSet::DefaultByteOrder;
 
 ModSumByteArrayChecksumParameterSet::ModSumByteArrayChecksumParameterSet() = default;
 

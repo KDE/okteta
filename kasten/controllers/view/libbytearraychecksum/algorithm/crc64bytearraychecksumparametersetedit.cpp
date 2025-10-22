@@ -51,7 +51,7 @@ void Crc64ByteArrayChecksumParameterSetEdit::setParameterSet(const AbstractByteA
     const auto* crc64ParameterSet =
         static_cast<const Crc64ByteArrayChecksumParameterSet*>(parameterSet);
 
-    mVariantComboBox->setCurrentIndex(static_cast<int>(crc64ParameterSet->crc64Variant()));
+    mVariantComboBox->setCurrentIndex(static_cast<int>(crc64ParameterSet->variant()));
 }
 
 void Crc64ByteArrayChecksumParameterSetEdit::getParameterSet(AbstractByteArrayChecksumParameterSet* parameterSet) const
@@ -59,7 +59,7 @@ void Crc64ByteArrayChecksumParameterSetEdit::getParameterSet(AbstractByteArrayCh
     auto* crc64ParameterSet =
         static_cast<Crc64ByteArrayChecksumParameterSet*>(parameterSet);
 
-    crc64ParameterSet->setCrc64Variant(static_cast<Crc64Variant>(mVariantComboBox->currentIndex()));
+    crc64ParameterSet->setVariant(static_cast<Crc64ByteArrayChecksumParameterSet::Variant>(mVariantComboBox->currentIndex()));
 }
 
 #include "moc_crc64bytearraychecksumparametersetedit.cpp"

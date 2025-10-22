@@ -12,29 +12,32 @@
 // KF
 #include <KConfigGroup>
 
-static constexpr Crc64Variant DefaultCrc64Variant = Crc64Variant::ECMA182;
-
-static constexpr char VariantConfigKey[] = "Variant";
-
 template <>
-inline Crc64Variant KConfigGroup::readEntry(const char *key, const Crc64Variant &defaultValue) const
+inline Crc64ByteArrayChecksumParameterSet::Variant KConfigGroup::readEntry(const char *key,
+                                                                           const Crc64ByteArrayChecksumParameterSet::Variant &defaultValue) const
 {
     const QString entry = readEntry(key, QString());
-    const Crc64Variant variant =
-        (entry == QLatin1String("ECMA182")) ? Crc64Variant::ECMA182 :
-        (entry == QLatin1String("ISO3309")) ? Crc64Variant::ISO3309 :
+    const Crc64ByteArrayChecksumParameterSet::Variant variant =
+        (entry == QLatin1String("ECMA182")) ? Crc64ByteArrayChecksumParameterSet::Variant::ECMA182 :
+        (entry == QLatin1String("ISO3309")) ? Crc64ByteArrayChecksumParameterSet::Variant::ISO3309 :
         /* else */                            defaultValue;
     return variant;
 }
 
 template <>
-inline void KConfigGroup::writeEntry(const char *key, const Crc64Variant &value,
+inline void KConfigGroup::writeEntry(const char *key, const Crc64ByteArrayChecksumParameterSet::Variant &value,
                                      KConfigBase::WriteConfigFlags flags)
 {
     const QString valueString =
-        (value == Crc64Variant::ECMA182) ? QLatin1String("ECMA182") : QLatin1String("ISO3309");
+        (value == Crc64ByteArrayChecksumParameterSet::Variant::ECMA182) ? QLatin1String("ECMA182") : QLatin1String("ISO3309");
     writeEntry(key, valueString, flags);
 }
+
+// C++11 needs a definition for static constexpr members
+constexpr char Crc64ByteArrayChecksumParameterSet::VariantConfigKey[];
+
+constexpr Crc64ByteArrayChecksumParameterSet::Variant Crc64ByteArrayChecksumParameterSet::DefaultVariant;
+
 
 Crc64ByteArrayChecksumParameterSet::Crc64ByteArrayChecksumParameterSet() = default;
 
@@ -42,13 +45,13 @@ Crc64ByteArrayChecksumParameterSet::~Crc64ByteArrayChecksumParameterSet() = defa
 
 const char* Crc64ByteArrayChecksumParameterSet::id() const { return "Crc64"; }
 
-Crc64Variant Crc64ByteArrayChecksumParameterSet::crc64Variant() const { return mVariant; }
+Crc64ByteArrayChecksumParameterSet::Variant Crc64ByteArrayChecksumParameterSet::variant() const { return mVariant; }
 
-void Crc64ByteArrayChecksumParameterSet::setCrc64Variant(Crc64Variant variant) { mVariant = variant; }
+void Crc64ByteArrayChecksumParameterSet::setVariant(Variant variant) { mVariant = variant; }
 
 void Crc64ByteArrayChecksumParameterSet::loadConfig(const KConfigGroup& configGroup)
 {
-    mVariant = configGroup.readEntry(VariantConfigKey, DefaultCrc64Variant);
+    mVariant = configGroup.readEntry(VariantConfigKey, DefaultVariant);
 }
 
 void Crc64ByteArrayChecksumParameterSet::saveConfig(KConfigGroup& configGroup) const

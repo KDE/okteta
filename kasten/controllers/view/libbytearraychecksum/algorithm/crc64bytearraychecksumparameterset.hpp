@@ -14,14 +14,22 @@
 
 class KConfigGroup;
 
-enum class Crc64Variant
-{
-    ECMA182 = 0,
-    ISO3309 = 1,
-};
-
 class Crc64ByteArrayChecksumParameterSet : public AbstractByteArrayChecksumParameterSet
 {
+public:
+    enum class Variant
+    {
+        ECMA182 = 0,
+        ISO3309 = 1,
+        _Count,
+    };
+    static constexpr auto VariantCount = static_cast<std::size_t>(Variant::_Count);
+
+private:
+    static constexpr Variant DefaultVariant = Variant::ECMA182;
+
+    static constexpr char VariantConfigKey[] = "Variant";
+
 public:
     Crc64ByteArrayChecksumParameterSet();
     ~Crc64ByteArrayChecksumParameterSet() override;
@@ -30,17 +38,17 @@ public: // AbstractByteArrayChecksumParameterSet API
     const char* id() const override;
 
 public:
-    void setCrc64Variant(Crc64Variant variant);
+    void setVariant(Variant variant);
 
 public:
-    Crc64Variant crc64Variant() const;
+    Variant variant() const;
 
 public:
     void loadConfig(const KConfigGroup& configGroup);
     void saveConfig(KConfigGroup& configGroup) const;
 
 private:
-    Crc64Variant mVariant = Crc64Variant::ECMA182;
+    Variant mVariant = DefaultVariant;
 };
 
 #endif

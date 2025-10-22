@@ -26,7 +26,7 @@ struct Crc64AlgorithmSpec
     bool outputReflected;
 };
 
-static const Crc64AlgorithmSpec algorithms[] = {
+static const Crc64AlgorithmSpec algorithms[Crc64ByteArrayChecksumParameterSet::VariantCount] = {
     // ECMA-182
     { 0x42F0E1EBA9EA3693, 0x0, 0x0, false, false },
 
@@ -106,7 +106,7 @@ void Crc64ByteArrayChecksumAlgorithm::saveConfig(KConfigGroup& configGroup) cons
 bool Crc64ByteArrayChecksumAlgorithm::calculateChecksum(QString* result,
                                                         const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const
 {
-    const Crc64AlgorithmSpec *spec = &algorithms[static_cast<size_t>(mParameterSet.crc64Variant())];
+    const Crc64AlgorithmSpec *spec = &algorithms[static_cast<size_t>(mParameterSet.variant())];
 
     quint64 lookupTable[256];
     fillTable(spec->polynomial, lookupTable);
