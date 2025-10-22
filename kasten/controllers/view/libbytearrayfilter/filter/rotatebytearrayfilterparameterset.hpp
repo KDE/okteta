@@ -44,8 +44,8 @@ public:
     void saveConfig(KConfigGroup& configGroup) const;
 
 private:
-    int mGroupSize = 1;
-    int mMoveBitWidth = 0;
+    int mGroupSize = DefaultGroupSize;
+    int mMoveBitWidth = DefaultMoveBitWidth;
 };
 
 #endif

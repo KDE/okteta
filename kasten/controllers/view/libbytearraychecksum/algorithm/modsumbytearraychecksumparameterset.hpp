@@ -16,6 +16,11 @@ class KConfigGroup;
 
 class ModSumByteArrayChecksumParameterSet : public AbstractByteArrayChecksumParameterSet
 {
+private:
+    static constexpr QSysInfo::Endian DefaultByteOrder = QSysInfo::ByteOrder;
+
+    static constexpr char ByteOrderConfigKey[] = "ByteOrder";
+
 public:
     ModSumByteArrayChecksumParameterSet();
     ~ModSumByteArrayChecksumParameterSet() override;
@@ -36,7 +41,7 @@ public:
     void saveConfig(KConfigGroup& configGroup) const;
 
 private:
-    QSysInfo::Endian mEndianness = QSysInfo::ByteOrder;
+    QSysInfo::Endian mEndianness = DefaultByteOrder;
 };
 
 #endif

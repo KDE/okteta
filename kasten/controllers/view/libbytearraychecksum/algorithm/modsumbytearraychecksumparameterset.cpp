@@ -11,11 +11,6 @@
 // KF
 #include <KConfigGroup>
 
-
-static constexpr QSysInfo::Endian DefaultByteOrder = QSysInfo::ByteOrder;
-
-static constexpr char ByteOrderConfigKey[] = "ByteOrder";
-
 ModSumByteArrayChecksumParameterSet::ModSumByteArrayChecksumParameterSet() = default;
 
 ModSumByteArrayChecksumParameterSet::~ModSumByteArrayChecksumParameterSet() = default;

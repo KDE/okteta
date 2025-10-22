@@ -36,7 +36,7 @@ public: // AbstractByteArrayChecksumParameterSet API
     const char* id() const override;
 
 //// ADAPT(start)
-//// declare the parameters and the corresponding getters and setters
+//// declare the parameters, incl. their default values, and the corresponding getters and setters
 
 public: // getters
     [[nodiscard]]
@@ -46,7 +46,6 @@ public: // setters
     void setBitNumber(int bitNumber);
 
 private: // parameters
-//// set default values to all parameters
     int mBitNumber = DefaultBitNumber;
 //// ADAPT(end)
 };
