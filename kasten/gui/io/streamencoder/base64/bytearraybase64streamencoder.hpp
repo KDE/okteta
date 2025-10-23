@@ -11,7 +11,7 @@
 #include "abstractbytearraystreamencoder.hpp"
 
 namespace Kasten {
-extern const char base64EncodeMap[64];
+extern const std::array<char, 64> base64EncodeMap;
 
 class ByteArrayBase64StreamEncoder : public AbstractByteArrayStreamEncoder
 {

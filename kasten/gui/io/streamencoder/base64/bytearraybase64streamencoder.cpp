@@ -15,7 +15,7 @@
 
 namespace Kasten {
 
-const char base64EncodeMap[64] = {
+const std::array<char, 64> base64EncodeMap = {
     'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
     'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
     'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
@@ -26,13 +26,15 @@ const char base64EncodeMap[64] = {
     '4', '5', '6', '7', '8', '9', '+', '/'
 };
 
-static constexpr const char* base64PaddingData[2] = {
+constexpr std::array<const char*, 2> base64PaddingData = {
     "==",
     "="
 };
+
 static constexpr const char* base64Padding(ByteArrayBase64StreamEncoder::InputByteIndex index)
 {
-    return base64PaddingData[static_cast<int>(index) - 1];
+    const auto dataIndex = static_cast<std::size_t>(index) - 1;
+    return base64PaddingData[dataIndex];
 }
 
 ByteArrayBase64StreamEncoder::ByteArrayBase64StreamEncoder()
