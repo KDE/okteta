@@ -20,10 +20,7 @@
 // Qt
 #include <QScriptEngine>
 // Std
-#include <limits>
 #include <utility>
-
-const Okteta::Address TopLevelDataInformation::INVALID_OFFSET = std::numeric_limits<Okteta::Address>::max();
 
 TopLevelDataInformation::TopLevelDataInformation(std::unique_ptr<DataInformation>&& data,
                                                  std::unique_ptr<ScriptLogger>&& logger,

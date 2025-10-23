@@ -20,6 +20,7 @@
 #include <QVector>
 #include <QScriptEngine>
 // Std
+#include <limits>
 #include <memory>
 #include <unordered_map>
 
@@ -41,7 +42,8 @@ class TopLevelDataInformation : public QObject
 public:
     using Ptr = QSharedPointer<TopLevelDataInformation>;
     using List = QVector<Ptr>;
-    static const Okteta::Address INVALID_OFFSET;
+
+    static constexpr Okteta::Address INVALID_OFFSET = std::numeric_limits<Okteta::Address>::max();
 
 public:
     /** create a new TopLevelDataInformation wrapping @p data
