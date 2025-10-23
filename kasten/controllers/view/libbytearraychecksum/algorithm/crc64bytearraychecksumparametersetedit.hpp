@@ -17,7 +17,7 @@ class Crc64ByteArrayChecksumParameterSetEdit : public AbstractByteArrayChecksumP
     Q_OBJECT
 
 public:
-    static const char Id[];
+    static constexpr char Id[] = "Crc64";
 
 public:
     explicit Crc64ByteArrayChecksumParameterSetEdit(QWidget* parent = nullptr);

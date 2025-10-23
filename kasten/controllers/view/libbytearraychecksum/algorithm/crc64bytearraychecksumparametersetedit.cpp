@@ -14,8 +14,6 @@
 // Qt
 #include <QFormLayout>
 
-const char Crc64ByteArrayChecksumParameterSetEdit::Id[] = "Crc64";
-
 Crc64ByteArrayChecksumParameterSetEdit::Crc64ByteArrayChecksumParameterSetEdit(QWidget* parent)
     : AbstractByteArrayChecksumParameterSetEdit(parent)
 {

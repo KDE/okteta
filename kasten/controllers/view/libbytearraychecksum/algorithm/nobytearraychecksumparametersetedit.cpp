@@ -12,8 +12,6 @@
 #include <QLabel>
 #include <QVBoxLayout>
 
-const char NoByteArrayChecksumParameterSetEdit::Id[] = "None";
-
 NoByteArrayChecksumParameterSetEdit::NoByteArrayChecksumParameterSetEdit(QWidget* parent)
     : AbstractByteArrayChecksumParameterSetEdit(parent)
 {

@@ -25,12 +25,6 @@
 #include <QFormLayout>
 //// ADAPT(end)
 
-//// ADAPT(start)
-//// rename "Template_ParameterSetId" to the id of your parameterset,
-//// e.g. "MyParameterSet"
-const char Template_ByteArrayChecksumParameterSetEdit::Id[] = "Template_ParameterSetId";
-//// ADAPT(end)
-
 Template_ByteArrayChecksumParameterSetEdit::Template_ByteArrayChecksumParameterSetEdit(QWidget* parent)
     : AbstractByteArrayChecksumParameterSetEdit(parent)
 {

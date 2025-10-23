@@ -15,7 +15,7 @@ class NoByteArrayChecksumParameterSetEdit : public AbstractByteArrayChecksumPara
     Q_OBJECT
 
 public:
-    static const char Id[];
+    static constexpr char Id[] = "None";
 
 public:
     explicit NoByteArrayChecksumParameterSetEdit(QWidget* parent = nullptr);
