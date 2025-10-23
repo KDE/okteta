@@ -83,7 +83,7 @@ private:
     static constexpr int byteCountLineSize = 1;
     static constexpr int addressLineOffset = byteCountLineOffset + byteCountLineSize;
 
-    static const char hexDigits[16];
+    static const std::array<char, 16> hexDigits;
 
     static constexpr char ConfigGroupId[] = "ByteArraySRecordStreamEncoder";
 
@@ -132,7 +132,10 @@ inline SRecStreamEncoderSettings ByteArraySRecStreamEncoder::settings() const { 
 inline char ByteArraySRecStreamEncoder::charOfRecordType(RecordType type)
 { return static_cast<char>('0' + static_cast<int>(type)); }
 inline char ByteArraySRecStreamEncoder::hexValueOfNibble(int nibble)
-{ return hexDigits[nibble & 0xF]; }
+{
+    const auto index = static_cast<std::size_t>(nibble & 0xF);
+    return hexDigits[index];
+}
 
 inline void ByteArraySRecStreamEncoder::writeBigEndian(unsigned char* line,
                                                        quint32 value, int byteSize)

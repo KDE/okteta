@@ -81,7 +81,7 @@ void SRecStreamEncoderSettings::saveConfig(KConfigGroup& configGroup) const
 }
 
 
-const char ByteArraySRecStreamEncoder::hexDigits[16] = {
+const std::array<char, 16> ByteArraySRecStreamEncoder::hexDigits = {
     '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
 };
 
