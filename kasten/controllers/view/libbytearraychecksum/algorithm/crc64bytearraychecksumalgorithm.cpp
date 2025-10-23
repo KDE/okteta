@@ -36,21 +36,37 @@ static const std::array<Crc64AlgorithmSpec, Crc64ByteArrayChecksumParameterSet::
     // Add more algorithms here
 }};
 
-static void fillTable(quint64 poly, quint64 *table)
+
+class Crc64LookupTable
+{
+public:
+    explicit Crc64LookupTable(quint64 poly);
+
+public:
+    const quint64& operator[](std::size_t i) const;
+
+private:
+    std::array<quint64, 256> m_table;
+};
+
+Crc64LookupTable::Crc64LookupTable(quint64 poly)
 {
     for (std::size_t i = 0; i < 256; ++i) {
         quint64 crc = 0;
         for (std::size_t j = 0; j < 8; ++j) {
-            bool b = (i >> (7U - j)) & 0x01U;
+            const bool b = (i >> (7U - j)) & 0x01U;
             if (((crc >> 63U) != 0) != b) {
                 crc = (crc << 1U) ^ poly;
             } else {
                 crc = (crc << 1U);
             }
         }
-        table[i] = crc;
+        m_table[i] = crc;
     }
 }
+
+inline const quint64& Crc64LookupTable::operator[](std::size_t i) const { return m_table[i]; }
+
 
 Crc64ByteArrayChecksumAlgorithm::Crc64ByteArrayChecksumAlgorithm()
     : AbstractByteArrayChecksumAlgorithm(
@@ -109,8 +125,7 @@ bool Crc64ByteArrayChecksumAlgorithm::calculateChecksum(QString* result,
     const auto algorithmIndex = static_cast<std::size_t>(mParameterSet.variant());
     const Crc64AlgorithmSpec* const spec = &algorithms[algorithmIndex];
 
-    quint64 lookupTable[256];
-    fillTable(spec->polynomial, lookupTable);
+    const Crc64LookupTable lookupTable(spec->polynomial);
 
     quint64 crcBits = spec->initialValue;
     Okteta::Address nextBlockEnd = range.start() + CalculatedByteCountSignalLimit;
