@@ -14,12 +14,14 @@
 #include <KLocalizedString>
 // Qt
 #include <QTextStream>
+// Std
+#include <array>
 
 namespace Kasten {
 
 const QString XxencodingStreamEncoderSettings::DefaultFileName;
 
-static constexpr char xxencodeMap[64] = {
+static constexpr std::array<char, 64> xxencodeMap = {
     '+', '-', '0', '1', '2', '3', '4', '5',
     '6', '7', '8', '9', 'A', 'B', 'C', 'D',
     'E', 'F', 'G', 'H', 'I', 'J', 'K', 'L',
@@ -29,13 +31,21 @@ static constexpr char xxencodeMap[64] = {
     'k', 'l', 'm', 'n', 'o', 'p', 'q', 'r',
     's', 't', 'u', 'v', 'w', 'x', 'y', 'z'
 };
-static constexpr const char* paddingData[2] = {"++", "+"};
+static constexpr std::array<const char*, 2> paddingData = {
+    "++",
+    "+",
+};
 
-static constexpr char xxmapByte(char byte) { return xxencodeMap[static_cast<int>(byte)]; }
+static constexpr char xxmapByte(char byte)
+{
+    const auto index = static_cast<std::size_t>(byte);
+    return xxencodeMap[index];
+}
 
 static constexpr const char* xxpadding(ByteArrayXxencodingStreamEncoder::InputByteIndex index)
 {
-    return paddingData[static_cast<int>(index) - 1];
+    const auto dataIndex = static_cast<std::size_t>(index) - 1;
+    return paddingData[dataIndex];
 }
 
 XxencodingStreamEncoderSettings::XxencodingStreamEncoderSettings() = default;
