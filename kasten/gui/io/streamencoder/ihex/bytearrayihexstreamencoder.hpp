@@ -83,7 +83,7 @@ private:
     static constexpr int recordTypeLineOffset = addressLineOffset + addressLineSize;
     static constexpr int recordTypeLineSize = 1;
     static constexpr int dataLineOffset = recordTypeLineOffset + recordTypeLineSize;
-    static const char hexDigits[16];
+    static const std::array<char, 16> hexDigits;
 
 private:
     [[nodiscard]]
@@ -121,7 +121,10 @@ private:
 inline IHexStreamEncoderSettings ByteArrayIHexStreamEncoder::settings() const { return mSettings; }
 
 inline char ByteArrayIHexStreamEncoder::hexValueOfNibble(int nibble)
-{ return hexDigits[nibble & 0xF]; }
+{
+    const auto index = static_cast<std::size_t>(nibble & 0xF);
+    return hexDigits[index];
+}
 
 inline void ByteArrayIHexStreamEncoder::writeBigEndian(unsigned char* line, quint32 value, int byteSize)
 {

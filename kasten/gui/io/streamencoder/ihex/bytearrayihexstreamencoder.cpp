@@ -57,7 +57,7 @@ inline void KConfigGroup::writeEntry(const char *key,
 
 namespace Kasten {
 
-const char ByteArrayIHexStreamEncoder::hexDigits[16] = {
+const std::array<char, 16> ByteArrayIHexStreamEncoder::hexDigits = {
     '0', '1', '2', '3', '4', '5', '6', '7', '8', '9', 'A', 'B', 'C', 'D', 'E', 'F'
 };
 
