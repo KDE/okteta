@@ -12,6 +12,8 @@
 // KF
 #include <KConfigGroup>
 #include <KLocalizedString>
+// Std
+#include <array>
 
 static constexpr char Crc64ChecksumConfigGroupId[] = "CRC64";
 
@@ -24,7 +26,7 @@ struct Crc64AlgorithmSpec
     bool outputReflected;
 };
 
-static const Crc64AlgorithmSpec algorithms[Crc64ByteArrayChecksumParameterSet::VariantCount] = {
+static const std::array<Crc64AlgorithmSpec, Crc64ByteArrayChecksumParameterSet::VariantCount> algorithms = {{
     // ECMA-182
     { 0x42F0E1EBA9EA3693, 0x0, 0x0, false, false },
 
@@ -32,7 +34,7 @@ static const Crc64AlgorithmSpec algorithms[Crc64ByteArrayChecksumParameterSet::V
     { 0x000000000000001B, 0xFFFFFFFFFFFFFFFFLLU,0xFFFFFFFFFFFFFFFFLLU, true, true}
 
     // Add more algorithms here
-};
+}};
 
 static void fillTable(quint64 poly, quint64 *table)
 {
