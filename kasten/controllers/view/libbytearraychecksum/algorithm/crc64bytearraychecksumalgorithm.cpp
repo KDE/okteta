@@ -52,7 +52,16 @@ static void fillTable(quint64 poly, quint64 *table)
     }
 }
 
-static quint64 reflect64(quint64 x)
+Crc64ByteArrayChecksumAlgorithm::Crc64ByteArrayChecksumAlgorithm()
+    : AbstractByteArrayChecksumAlgorithm(
+          i18nc("name of the checksum algorithm, Cyclic Redundancy Check 64", "CRC-64"),
+          QStringLiteral("CRC64")
+      )
+{}
+
+Crc64ByteArrayChecksumAlgorithm::~Crc64ByteArrayChecksumAlgorithm() = default;
+
+inline quint64 Crc64ByteArrayChecksumAlgorithm::reflect64(quint64 x)
 {
     quint64 y = 0;
     for (std::size_t i = 0; i < 64; ++i) {
@@ -64,7 +73,7 @@ static quint64 reflect64(quint64 x)
     return y;
 }
 
-static uchar reflect8(uchar x)
+inline uchar Crc64ByteArrayChecksumAlgorithm::reflect8(uchar x)
 {
     uchar y = 0;
 
@@ -76,15 +85,6 @@ static uchar reflect8(uchar x)
 
     return y;
 }
-
-Crc64ByteArrayChecksumAlgorithm::Crc64ByteArrayChecksumAlgorithm()
-    : AbstractByteArrayChecksumAlgorithm(
-          i18nc("name of the checksum algorithm, Cyclic Redundancy Check 64", "CRC-64"),
-          QStringLiteral("CRC64")
-      )
-{}
-
-Crc64ByteArrayChecksumAlgorithm::~Crc64ByteArrayChecksumAlgorithm() = default;
 
 AbstractByteArrayChecksumParameterSet*
 Crc64ByteArrayChecksumAlgorithm::parameterSet() { return &mParameterSet; }

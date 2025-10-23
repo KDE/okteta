@@ -29,6 +29,10 @@ public: // AbstractByteArrayChecksumAlgorithm API
     void saveConfig(KConfigGroup& configGroup) const override;
 
 private:
+    static quint64 reflect64(quint64 x);
+    static uchar reflect8(uchar x);
+
+private:
     Crc64ByteArrayChecksumParameterSet mParameterSet;
 };
 
