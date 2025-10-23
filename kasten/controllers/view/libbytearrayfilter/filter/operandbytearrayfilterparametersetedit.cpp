@@ -16,8 +16,6 @@
 #include <QCheckBox>
 #include <QFormLayout>
 
-const char OperandByteArrayFilterParameterSetEdit::Id[] = "Operand";
-
 OperandByteArrayFilterParameterSetEdit::OperandByteArrayFilterParameterSetEdit(QWidget* parent)
     : AbstractByteArrayFilterParameterSetEdit(parent)
 {

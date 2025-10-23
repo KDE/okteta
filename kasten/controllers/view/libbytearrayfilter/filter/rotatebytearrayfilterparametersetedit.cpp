@@ -16,8 +16,6 @@
 // Std
 #include <limits>
 
-const char RotateByteArrayFilterParameterSetEdit::Id[] = "Rotate";
-
 RotateByteArrayFilterParameterSetEdit::RotateByteArrayFilterParameterSetEdit(QWidget* parent)
     : AbstractByteArrayFilterParameterSetEdit(parent)
 {

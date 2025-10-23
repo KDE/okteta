@@ -25,12 +25,6 @@
 #include <QFormLayout>
 //// ADAPT(end)
 
-//// ADAPT(start)
-//// rename "Template_ParameterSetId" to the id of your parameterset,
-//// e.g. "MyParameterSet"
-const char Template_ByteArrayFilterParameterSetEdit::Id[] = "Template_ParameterSetId";
-//// ADAPT(end)
-
 Template_ByteArrayFilterParameterSetEdit::Template_ByteArrayFilterParameterSetEdit(QWidget* parent)
     : AbstractByteArrayFilterParameterSetEdit(parent)
 {

@@ -12,8 +12,6 @@
 #include <QLabel>
 #include <QVBoxLayout>
 
-const char NoByteArrayFilterParameterSetEdit::Id[] = "None";
-
 NoByteArrayFilterParameterSetEdit::NoByteArrayFilterParameterSetEdit(QWidget* parent)
     : AbstractByteArrayFilterParameterSetEdit(parent)
 {

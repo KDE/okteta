@@ -20,7 +20,7 @@ class OperandByteArrayFilterParameterSetEdit : public AbstractByteArrayFilterPar
     Q_OBJECT
 
 public:
-    static const char Id[];
+    static constexpr char Id[] = "Operand";
 
 public:
     explicit OperandByteArrayFilterParameterSetEdit(QWidget* parent = nullptr);

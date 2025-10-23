@@ -14,8 +14,6 @@
 #include <QCheckBox>
 #include <QFormLayout>
 
-const char ReverseByteArrayFilterParameterSetEdit::Id[] = "Reverse";
-
 ReverseByteArrayFilterParameterSetEdit::ReverseByteArrayFilterParameterSetEdit(QWidget* parent)
     : AbstractByteArrayFilterParameterSetEdit(parent)
 {

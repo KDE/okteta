@@ -28,7 +28,11 @@ class Template_ByteArrayFilterParameterSetEdit : public AbstractByteArrayFilterP
     Q_OBJECT
 
 public:
-    static const char Id[];
+//// ADAPT(start)
+//// rename "Template_ParameterSetId" to the id of your parameterset,
+//// e.g. "MyParameterSet"
+    static constexpr char Id[] = "Template_ParameterSetId";
+//// ADAPT(end)
 
 public:
     explicit Template_ByteArrayFilterParameterSetEdit(QWidget* parent = nullptr);

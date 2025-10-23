@@ -17,7 +17,7 @@ class RotateByteArrayFilterParameterSetEdit : public AbstractByteArrayFilterPara
     Q_OBJECT
 
 public:
-    static const char Id[];
+    static constexpr char Id[] = "Rotate";
 
 public:
     explicit RotateByteArrayFilterParameterSetEdit(QWidget* parent = nullptr);
