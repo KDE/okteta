@@ -48,40 +48,47 @@ namespace Kasten {
 const QString UuencodingStreamEncoderSettings::DefaultFileName = QStringLiteral("okteta-export");
 
 static constexpr char uumapByteHistorical(char byte) { return (byte > 0) ? (byte + 32) : '`'; }
-static inline char uumapByteBase64(char byte)     { return base64EncodeMap[(int)byte]; }
+
+static inline char uumapByteBase64(char byte)
+{
+    const auto index = static_cast<std::size_t>(byte);
+    return base64EncodeMap[index];
+}
 
 struct UumapEncodeData
 {
     char (* mapByte)(char);
     const char* header;
     const char* footer;
-    const char* paddingData[2];
+    std::array<const char*, 2> paddingData;
     bool hasLength;
 
     [[nodiscard]]
-    inline const char* padding(ByteArrayUuencodingStreamEncoder::InputByteIndex index) const
+    constexpr const char* padding(ByteArrayUuencodingStreamEncoder::InputByteIndex index) const
     {
-        return paddingData[static_cast<int>(index) - 1];
+        const auto dataIndex = static_cast<std::size_t>(index) - 1;
+        return paddingData[dataIndex];
     }
 };
 
-static constexpr UumapEncodeData historicalUumapEncodeData =
+static constexpr std::array<UumapEncodeData, UuencodingStreamEncoderSettings::EncodingTypeCount> uumapEncodeData = {{
+// historical
 {
     &uumapByteHistorical,
     "begin",
     "\n`\nend\n",
     {"``", "`"},
     true
-};
-
-static constexpr UumapEncodeData base64UumapEncodeData =
+},
+// base64
 {
     &uumapByteBase64,
     "begin-base64",
     "\n====\n",
     {"==", "="},
     false
-};
+},
+}};
 
 UuencodingStreamEncoderSettings::UuencodingStreamEncoderSettings() = default;
 
@@ -141,11 +148,8 @@ bool ByteArrayUuencodingStreamEncoder::encodeDataToStream(QIODevice* device,
     int inputGroupsPerLine = 0;
     unsigned char bitsFromLastByte;
 
-    const UumapEncodeData* const encodeData =
-        (mSettings.encodingType == UuencodingStreamEncoderSettings::EncodingType::Historical) ?
-            &historicalUumapEncodeData :
-        /* else */
-            &base64UumapEncodeData;
+    const auto typeIndex = static_cast<std::size_t>(mSettings.encodingType);
+    const UumapEncodeData* const encodeData = &uumapEncodeData[typeIndex];
 
     // header
     textStream << encodeData->header << " 644 " << mSettings.fileName.toLatin1();

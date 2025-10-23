@@ -22,8 +22,10 @@ public:
     enum class EncodingType
     {
         Historical = 0,
-        Base64 = 1
+        Base64 = 1,
+        _Count,
     };
+    static constexpr auto EncodingTypeCount = static_cast<std::size_t>(EncodingType::_Count);
 
 private:
     static constexpr char FileNameConfigKey[] = "FileName";
