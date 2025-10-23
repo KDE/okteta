@@ -54,21 +54,24 @@ inline void KConfigGroup::writeEntry(const char *key,
 
 namespace Kasten {
 
-static constexpr char base32ClassicEncodeMap[32] =
+using EncodeMap = std::array<char, 32>;
+using PaddingFunction = const char* (*)(ByteArrayBase32StreamEncoder::InputByteIndex);
+
+static constexpr EncodeMap base32ClassicEncodeMap =
 {
     'A', 'B', 'C', 'D', 'E', 'F', 'G', 'H',
     'I', 'J', 'K', 'L', 'M', 'N', 'O', 'P',
     'Q', 'R', 'S', 'T', 'U', 'V', 'W', 'X',
     'Y', 'Z', '2', '3', '4', '5', '6', '7'
 };
-static constexpr char base32HexEncodeMap[32] =
+static constexpr EncodeMap base32HexEncodeMap =
 {
     '0', '1', '2', '3', '4', '5', '6', '7',
     '8', '9', 'A', 'B', 'C', 'D', 'E', 'F',
     'G', 'H', 'I', 'J', 'K', 'L', 'M', 'N',
     'O', 'P', 'Q', 'R', 'S', 'T', 'U', 'V'
 };
-static constexpr char base32ZHexEncodeMap[32] =
+static constexpr EncodeMap base32ZHexEncodeMap =
 {
     'y', 'b', 'n', 'd', 'r', 'f', 'g', '8',
     'e', 'j', 'k', 'm', 'c', 'p', 'q', 'x',
@@ -76,7 +79,7 @@ static constexpr char base32ZHexEncodeMap[32] =
     'a', '3', '4', '5', 'h', '7', '6', '9'
 };
 
-static constexpr const char* base32PaddingData[4] =
+static constexpr std::array<const char*, 4> base32PaddingData =
 {
     "======",
     "====",
@@ -86,7 +89,8 @@ static constexpr const char* base32PaddingData[4] =
 
 static constexpr const char* base32Padding(ByteArrayBase32StreamEncoder::InputByteIndex index)
 {
-    return base32PaddingData[static_cast<int>(index) - 1];
+    const auto dataIndex = static_cast<std::size_t>(index) - 1;
+    return base32PaddingData[dataIndex];
 }
 static constexpr const char* noPadding(ByteArrayBase32StreamEncoder::InputByteIndex /*index*/)
 {
@@ -95,17 +99,16 @@ static constexpr const char* noPadding(ByteArrayBase32StreamEncoder::InputByteIn
 
 struct Base32EncodingData
 {
-    const char* const encodeMap;
-    const char* (* padding)(ByteArrayBase32StreamEncoder::InputByteIndex);
+    EncodeMap encodeMap;
+    PaddingFunction padding;
 };
 
-static constexpr Base32EncodingData
-    base32EncodingData[3] =
-{
+static constexpr std::array<Base32EncodingData, encodingTypeCount> base32EncodingData =
+{{
     {base32ClassicEncodeMap, &base32Padding},
     {base32HexEncodeMap, &base32Padding},
     {base32ZHexEncodeMap, &noPadding}
-};
+}};
 
 Base32StreamEncoderSettings::Base32StreamEncoderSettings() = default;
 
@@ -160,9 +163,10 @@ bool ByteArrayBase32StreamEncoder::encodeDataToStream(QIODevice* device,
     QTextStream textStream(device);
 
     // prepare
-    const auto& encodingTypeData = base32EncodingData[static_cast<int>(mSettings.encodingType)];
-    const char* const base32EncodeMap = encodingTypeData.encodeMap;
-    const char* (* base32Padding)(InputByteIndex) = encodingTypeData.padding;
+    const auto encodingDataIndex = static_cast<std::size_t>(mSettings.encodingType);
+    const auto& encodingTypeData = base32EncodingData[encodingDataIndex];
+    const EncodeMap& base32EncodeMap = encodingTypeData.encodeMap;
+    const PaddingFunction base32Padding = encodingTypeData.padding;
 
     InputByteIndex inputByteIndex = InputByteIndex::First;
     int outputGroupsPerLine = 0;
