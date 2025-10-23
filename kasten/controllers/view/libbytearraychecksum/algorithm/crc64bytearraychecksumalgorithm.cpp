@@ -38,9 +38,9 @@ static const std::array<Crc64AlgorithmSpec, Crc64ByteArrayChecksumParameterSet::
 
 static void fillTable(quint64 poly, quint64 *table)
 {
-    for (size_t i = 0; i < 256; ++i) {
+    for (std::size_t i = 0; i < 256; ++i) {
         quint64 crc = 0;
-        for (size_t j = 0; j < 8; ++j) {
+        for (std::size_t j = 0; j < 8; ++j) {
             bool b = (i >> (7U - j)) & 0x01U;
             if (((crc >> 63U) != 0) != b) {
                 crc = (crc << 1U) ^ poly;
@@ -55,7 +55,7 @@ static void fillTable(quint64 poly, quint64 *table)
 static quint64 reflect64(quint64 x)
 {
     quint64 y = 0;
-    for (size_t i = 0; i < 64; ++i) {
+    for (std::size_t i = 0; i < 64; ++i) {
         if ((x >> i) & 0x01U) {
             y |= 0x01LLU << (63 - i);
         }
@@ -68,7 +68,7 @@ static uchar reflect8(uchar x)
 {
     uchar y = 0;
 
-    for (size_t i = 0; i < 8; ++i) {
+    for (std::size_t i = 0; i < 8; ++i) {
         if ((x >> i) & 0x01U) {
             y |= 0x01U << (7 - i);
         }
@@ -106,7 +106,8 @@ void Crc64ByteArrayChecksumAlgorithm::saveConfig(KConfigGroup& configGroup) cons
 bool Crc64ByteArrayChecksumAlgorithm::calculateChecksum(QString* result,
                                                         const Okteta::AbstractByteArrayModel* model, const Okteta::AddressRange& range) const
 {
-    const Crc64AlgorithmSpec *spec = &algorithms[static_cast<size_t>(mParameterSet.variant())];
+    const auto algorithmIndex = static_cast<std::size_t>(mParameterSet.variant());
+    const Crc64AlgorithmSpec* const spec = &algorithms[algorithmIndex];
 
     quint64 lookupTable[256];
     fillTable(spec->polynomial, lookupTable);
