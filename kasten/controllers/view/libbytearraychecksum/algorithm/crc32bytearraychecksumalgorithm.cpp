@@ -10,6 +10,8 @@
 #include <Okteta/AbstractByteArrayModel>
 // KF
 #include <KLocalizedString>
+// Std
+#include <array>
 
 class Crc32LookupTable
 {
@@ -23,7 +25,7 @@ private:
     static quint32 reverseBits(quint32 bits, char bitCount);
 
 private:
-    quint32 mTable[256];
+    std::array<quint32, 256> mTable;
 };
 
 Crc32LookupTable::Crc32LookupTable()
@@ -31,9 +33,9 @@ Crc32LookupTable::Crc32LookupTable()
     quint32 polynomial = 0x04c11db7;
 
     // 256 values representing ASCII character codes.
-    for (int i = 0; i < 256; ++i) {
+    for (std::size_t i = 0; i < 256; ++i) {
         int value = reverseBits(i, 8) << 24;
-        for (int j = 0; j < 8; ++j) {
+        for (std::size_t j = 0; j < 8; ++j) {
             const bool hasMsb = (value & (1 << 31));
             value <<= 1;
             if (hasMsb) {
