@@ -17,7 +17,7 @@ OffsetColumnHtmlRenderer::OffsetColumnHtmlRenderer(Okteta::OffsetFormat::Format 
     , printFunction(Okteta::OffsetFormat::printFunction(offsetFormat))
     , mCodingWidth(Okteta::OffsetFormat::codingWidth(offsetFormat))
     , mColumnMode(columnMode)
-    , mEncodedOffsetBuffer(new char[mCodingWidth + 1])
+    , mEncodedOffsetBuffer(new char[mCodingWidth + 1]) // no make_unique, no need for initialization
 {
 }
 

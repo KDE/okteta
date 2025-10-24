@@ -17,7 +17,7 @@ OffsetColumnTextRenderer::OffsetColumnTextRenderer(Okteta::OffsetFormat::Format 
     , mDelta(delta)
     , printFunction(Okteta::OffsetFormat::printFunction(offsetFormat))
     , mCodingWidth(Okteta::OffsetFormat::codingWidth(offsetFormat))
-    , mEncodedOffsetBuffer(new char[mCodingWidth + 1])
+    , mEncodedOffsetBuffer(new char[mCodingWidth + 1]) // no make_unique, no need for initialization
 {
 }
 

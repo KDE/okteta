@@ -32,7 +32,7 @@ ByteArrayRowsColumnTextRenderer::ByteArrayRowsColumnTextRenderer(const Okteta::A
     , mSubstituteChar(substituteChar)
     , mUndefinedChar(undefinedChar)
     , mOffset(offset)
-    , mLinePositions(new int[mNoOfBytesPerLine])
+    , mLinePositions(new int[mNoOfBytesPerLine]) // no make_unique, no need for initialization
 {
     const int encodingWidth = (mVisibleCodings & 1) ? mValueCodec->encodingWidth() : 1;
     setWidths(encodingWidth, byteSpacingWidth, noOfGroupedBytes);

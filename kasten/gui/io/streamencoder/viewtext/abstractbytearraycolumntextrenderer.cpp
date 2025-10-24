@@ -14,7 +14,7 @@ AbstractByteArrayColumnTextRenderer::AbstractByteArrayColumnTextRenderer(const O
     , mCoordRange(coordRange)
     , mNoOfBytesPerLine(noOfBytesPerLine)
     , mOffset(offset)
-    , mLinePositions(new int[mNoOfBytesPerLine])
+    , mLinePositions(new int[mNoOfBytesPerLine]) // no make_unique, no need for initialization
 {
 }
 
