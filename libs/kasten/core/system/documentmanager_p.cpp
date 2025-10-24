@@ -8,8 +8,6 @@
 
 // lib
 #include <abstractdocument.hpp>
-// Qt
-#include <QMutableVectorIterator>
 // Std
 #include <utility>
 
@@ -53,13 +51,10 @@ void DocumentManagerPrivate::closeDocument(AbstractDocument* document)
 {
     Q_Q(DocumentManager);
 
-    QMutableVectorIterator<AbstractDocument*> iterator(mList);
+    // TODO: first check if unsaved and ask, only then close
+    const bool isRemoved = mList.removeOne(document);;
 
-    if (iterator.findNext(document)) {
-        // TODO: first check if unsaved and ask, only then close
-
-        iterator.remove();
-
+    if (isRemoved) {
         const QVector<AbstractDocument*> closedDocuments { document };
         Q_EMIT q->closing(closedDocuments);
 
