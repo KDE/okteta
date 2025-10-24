@@ -52,9 +52,9 @@ private Q_SLOTS:
     void testReadBool64();
 
 private:
-    QScopedArrayPointer<Okteta::Byte> data;
+    std::unique_ptr<Okteta::Byte[]> data;
     std::unique_ptr<Okteta::ByteArrayModel> model;
-    QScopedArrayPointer<Okteta::Byte> endianData;
+    std::unique_ptr<Okteta::Byte[]> endianData;
     std::unique_ptr<Okteta::ByteArrayModel> endianModel;
 };
 
@@ -73,7 +73,7 @@ static constexpr uint ENDIAN_SIZE = 16;
 
 void PrimitiveArrayTest::initTestCase()
 {
-    data.reset(new Okteta::Byte[SIZE]);
+    data = std::unique_ptr<Okteta::Byte[]>(new Okteta::Byte[SIZE]);
     // ensure that we have at least one NaN (quiet + signalling)
     AllPrimitiveTypes quietDouble(std::numeric_limits<double>::quiet_NaN());
     AllPrimitiveTypes signallingDouble(std::numeric_limits<double>::signaling_NaN());
@@ -95,18 +95,18 @@ void PrimitiveArrayTest::initTestCase()
     }
 
     auto* const copy = new Okteta::Byte[SIZE];
-    memcpy(copy, data.data(), SIZE);
+    memcpy(copy, data.get(), SIZE);
     model = std::make_unique<Okteta::ByteArrayModel>(copy, SIZE);
     model->setAutoDelete(true);
     QCOMPARE(model->size(), Okteta::Size(SIZE));
 
-    endianData.reset(new Okteta::Byte[ENDIAN_SIZE]);
+    endianData = std::unique_ptr<Okteta::Byte[]>(new Okteta::Byte[ENDIAN_SIZE]);
     for (uint i = 0; i < ENDIAN_SIZE; ++i) {
         endianData[i] = i;
     }
 
     auto* const endianCopy = new Okteta::Byte[ENDIAN_SIZE];
-    memcpy(endianCopy, endianData.data(), ENDIAN_SIZE);
+    memcpy(endianCopy, endianData.get(), ENDIAN_SIZE);
     endianModel = std::make_unique<Okteta::ByteArrayModel>(endianCopy, ENDIAN_SIZE);
     endianModel->setAutoDelete(true);
     QCOMPARE(endianModel->size(), Okteta::Size(ENDIAN_SIZE));
@@ -200,7 +200,7 @@ void PrimitiveArrayTest::testReadCustomizedPrimitiveInternal()
     quint8 bitOffs = 0;
     qint64 result = dataInf->readData(endianModel.get(), 0, endianModel->size() * 8, &bitOffs);
     QCOMPARE(Okteta::Size(result), endianModel->size() * 8);
-    T* const dataAsT = reinterpret_cast<T*>(endianData.data());
+    T* const dataAsT = reinterpret_cast<T*>(endianData.get());
     QVERIFY(!dataInf->mData->isComplex());
     auto* const arrayData = static_cast<PrimitiveArrayData<primType>*>(dataInf->mData.get());
 
