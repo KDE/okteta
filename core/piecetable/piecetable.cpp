@@ -8,8 +8,6 @@
 
 // lib
 #include <logging.hpp>
-// Qt
-#include <QMutableLinkedListIterator>
 
 namespace KPieceTable {
 
@@ -55,19 +53,20 @@ bool PieceTable::getStorageData(int* storageId, Address* storageOffset, Address 
 void PieceTable::insert(Address insertDataOffset, Size insertLength, Address storageOffset)
 {
     const int storageId = Piece::ChangeStorage;
-    QMutableLinkedListIterator<Piece> it(mList);
+    auto it = mList.begin();
 
     const Piece insertPiece(storageOffset, insertLength, storageId);
 
     // TODO: use width or offset from current and next?
     AddressRange dataRange(0, -1);
-    while (it.hasNext()) {
-        Piece& piece = it.peekNext();
+    while (it != mList.end()) {
+        Piece& piece = *it;
         dataRange.setEndByWidth(piece.width());
 
         // piece starts at offset?
         if (dataRange.start() == insertDataOffset) {
-            it.insert(insertPiece);
+            it = mList.insert(it, insertPiece);
+            ++it;
             break;
         }
         if (dataRange.nextBehindEnd() == insertDataOffset) {
@@ -75,18 +74,20 @@ void PieceTable::insert(Address insertDataOffset, Size insertLength, Address sto
                 break;
             }
         }
-        it.next();
+        ++it;
         if (dataRange.includes(insertDataOffset)) {
             const Piece secondPiece = piece.splitAtLocal(dataRange.localIndex(insertDataOffset));
-            it.insert(insertPiece);
-            it.insert(secondPiece);
+            it = mList.insert(it, insertPiece);
+            ++it;
+            it = mList.insert(it, secondPiece);
+            ++it;
             break;
         }
 
         dataRange.setStart(dataRange.nextBehindEnd());
     }
-    if (!it.hasNext() && (dataRange.start() == insertDataOffset)) {
-        it.insert(insertPiece);
+    if ((it == mList.end()) && (dataRange.start() == insertDataOffset)) {
+        mList.insert(it, insertPiece);
     }
 
     mSize += insertLength;
@@ -99,24 +100,24 @@ void PieceTable::insert(Address insertDataOffset, const PieceList& insertPieceLi
     }
 
     bool isInserted = false;
-    QMutableLinkedListIterator<Piece> it(mList);
+    auto it = mList.begin();
 
     // TODO: use width or offset from current and next?
     AddressRange dataRange(0, -1);
-    while (it.hasNext()) {
-        Piece& piece = it.peekNext();
+    while (it != mList.end()) {
+        Piece& piece = *it;
         dataRange.setEndByWidth(piece.width());
 
         // piece starts at offset?
         if (dataRange.start() == insertDataOffset) {
             int i = 0;
-            if (it.hasPrevious()) {
-                Piece& previousPiece = it.peekPrevious();
+            if (it != mList.begin()) {
+                Piece& previousPiece = *(it - 1);
                 if (previousPiece.append(insertPieceList.at(0))) {
                     if (insertPieceList.size() == 1) {
                         if (previousPiece.append(piece)) {
-                            it.next();
-                            it.remove();
+                            ++it;
+                            mList.erase(it);
                         }
                         isInserted = true;
                         break;
@@ -127,24 +128,26 @@ void PieceTable::insert(Address insertDataOffset, const PieceList& insertPieceLi
 
             const int lastIndex = insertPieceList.size() - 1;
             for (; i < lastIndex; ++i) {
-                it.insert(insertPieceList.at(i));
+                it = mList.insert(it, insertPieceList.at(i));
+                ++it;
             }
 
             const Piece& lastInsertPiece = insertPieceList.at(lastIndex);
             if (!piece.prepend(lastInsertPiece)) {
-                it.insert(lastInsertPiece);
+                mList.insert(it, lastInsertPiece);
             }
             isInserted = true;
             break;
         }
-        it.next();
+        ++it;
         if (dataRange.includes(insertDataOffset)) {
             const Piece secondPiece = piece.splitAtLocal(dataRange.localIndex(insertDataOffset));
             for (int i = 0; i < insertPieceList.size(); ++i) {
-                it.insert(insertPieceList.at(i));
+                it = mList.insert(it, insertPieceList.at(i));
+                ++it;
             }
 
-            it.insert(secondPiece);
+            mList.insert(it, secondPiece);
             isInserted = true;
             break;
         }
@@ -153,14 +156,15 @@ void PieceTable::insert(Address insertDataOffset, const PieceList& insertPieceLi
     }
     if (!isInserted && (dataRange.start() == insertDataOffset)) {
         int i = 0;
-        if (it.hasPrevious()) {
-            Piece& previousPiece = it.peekPrevious();
+        if (it != mList.begin()) {
+            Piece& previousPiece = *(it - 1);
             if (previousPiece.append(insertPieceList.at(0))) {
                 ++i;
             }
         }
         for (; i < insertPieceList.size(); ++i) {
-            it.insert(insertPieceList.at(i));
+            it = mList.insert(it, insertPieceList.at(i));
+            ++it;
         }
     }
 
@@ -369,11 +373,11 @@ Piece PieceTable::replaceOne(Address dataOffset, Address storageOffset, int stor
     int replacedStorageId = Piece::OriginalStorage;
     Address replacedStorageOffset = -1;
 
-    QMutableLinkedListIterator<Piece> it(mList);
+    auto it = mList.begin();
 
     AddressRange dataRange(0, -1);
-    while (it.hasNext()) {
-        Piece* const piece = &it.peekNext();
+    while (it != mList.end()) {
+        Piece* const piece = &(*it);
         dataRange.setEndByWidth(piece->width());
         if (dataRange.includes(dataOffset)) {
             replacedStorageId = piece->storageId();
@@ -386,26 +390,27 @@ Piece PieceTable::replaceOne(Address dataOffset, Address storageOffset, int stor
                     piece->set(storageOffset, storageOffset);
                     piece->setStorageId(storageId);
                 } else {
-                    it.insert(replacePiece);
+                    mList.insert(it, replacePiece);
                     piece->moveStartBy(1);
                 }
             } else if (dataRange.end() == dataOffset) {
                 replacedStorageOffset = piece->end();
                 piece->moveEndBy(-1);
-                it.next();
-                it.insert(replacePiece);
+                ++it;
+                mList.insert(it, replacePiece);
             } else {
                 const Address localIndex = dataRange.localIndex(dataOffset);
                 replacedStorageOffset = piece->start() + localIndex;
 
                 const Piece secondPiece = piece->removeLocal(AddressRange::fromWidth(localIndex, 1));
-                it.next();
-                it.insert(replacePiece);
-                it.insert(secondPiece);
+                ++it;
+                it = mList.insert(it, replacePiece);
+                ++it;
+                mList.insert(it, secondPiece);
             }
             break;
         }
-        it.next();
+        ++it;
         dataRange.setStart(dataRange.nextBehindEnd());
     }
     return {replacedStorageOffset, 1, replacedStorageId};
