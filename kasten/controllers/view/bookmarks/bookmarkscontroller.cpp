@@ -234,6 +234,12 @@ void BookmarksController::onCursorPositionChanged(Okteta::Address newPosition)
     mGotoPreviousBookmarkAction->setEnabled(hasPrevious);
 }
 
+void BookmarksController::activateCursorPosition(Okteta::Address position)
+{
+    mByteArrayView->setCursorPosition(position);
+    mByteArrayView->widget()->setFocus();
+}
+
 void BookmarksController::createBookmark()
 {
     const Okteta::Address cursorPosition = mByteArrayView->cursorPosition();
@@ -246,8 +252,11 @@ void BookmarksController::createBookmark()
 
     if (bookmarkName.isEmpty()) {
         bookmarkName = i18nc("default name of a bookmark", "Bookmark");  // %1").arg( 0 ) ); // TODO: use counter like with new file, globally
-
     }
+
+    // ensure popup is relative to focussed view, so by default after the popup will switch to the latter
+    mByteArrayView->widget()->setFocus();
+
     auto* const bookmarkEditPopup = new BookmarkEditPopup(mByteArrayView->widget());
     QPoint popupPoint = mByteArrayView->cursorRect().topLeft();
 //     popupPoint.ry() += mSlider->height() / 2;
@@ -290,7 +299,7 @@ void BookmarksController::gotoNextBookmark()
     const bool hasNext = bookmarksIterator.findNextFrom(positionAfter);
     if (hasNext) {
         const Okteta::Address newPosition = bookmarksIterator.next().offset();
-        mByteArrayView->setCursorPosition(newPosition);
+        activateCursorPosition(newPosition);
     }
 }
 
@@ -302,14 +311,14 @@ void BookmarksController::gotoPreviousBookmark()
     const bool hasPrevious = bookmarksIterator.findPreviousFrom(positionBefore);
     if (hasPrevious) {
         const Okteta::Address newPosition = bookmarksIterator.previous().offset();
-        mByteArrayView->setCursorPosition(newPosition);
+        activateCursorPosition(newPosition);
     }
 }
 
 void BookmarksController::onBookmarkTriggered(QAction* action)
 {
-    const Okteta::Address newPosition = action->data().toInt();
-    mByteArrayView->setCursorPosition(newPosition);
+    const auto newPosition = action->data().value<Okteta::Address>();
+    activateCursorPosition(newPosition);
 }
 
 }
