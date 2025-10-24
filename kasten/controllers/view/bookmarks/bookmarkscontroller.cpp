@@ -309,7 +309,7 @@ void BookmarksController::gotoPreviousBookmark()
 
 void BookmarksController::onBookmarkTriggered(QAction* action)
 {
-    const Okteta::Address newPosition = action->data().toInt();
+    const auto newPosition = action->data().value<Okteta::Address>();
     mByteArrayView->setCursorPosition(newPosition);
 }
 
