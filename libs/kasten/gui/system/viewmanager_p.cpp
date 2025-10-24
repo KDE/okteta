@@ -10,8 +10,6 @@
 #include "abstractviewfactory.hpp"
 #include "dummyview.hpp"
 #include <logging.hpp>
-// Qt
-#include <QMutableVectorIterator>
 // Std
 #include <utility>
 
@@ -99,17 +97,18 @@ void ViewManagerPrivate::removeViewsFor(const QVector<Kasten::AbstractDocument*>
 
     QVector<Kasten::AbstractView*> closedViews;
 
-    QMutableVectorIterator<AbstractView*> it(mViewList);
     for (AbstractDocument* document : documents) {
-        while (it.hasNext()) {
-            AbstractView* const view = it.next();
+        auto it = mViewList.begin();
+        while (it != mViewList.end()) {
+            AbstractView* const view = *it;
             auto* const documentOfView = view->findBaseModel<AbstractDocument*>();
             if (documentOfView == document) {
-                it.remove();
                 closedViews.append(view);
+                it = mViewList.erase(it);
+            } else {
+                ++it;
             }
         }
-        it.toFront();
     }
 
     Q_EMIT q->closing(closedViews);
