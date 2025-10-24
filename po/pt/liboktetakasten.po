@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-21 01:59+0000\n"
+"POT-Creation-Date: 2025-10-24 02:00+0000\n"
 "PO-Revision-Date: 2023-06-14 12:13+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: pt <kde-i18n-pt@kde.org>\n"
@@ -884,37 +884,37 @@ msgctxt "name of the checksum algorithm"
 msgid "Adler-32"
 msgstr "Adler-32"
 
-#: controllers/view/libbytearraychecksum/algorithm/crc32bytearraychecksumalgorithm.cpp:65
+#: controllers/view/libbytearraychecksum/algorithm/crc32bytearraychecksumalgorithm.cpp:67
 #, kde-format
 msgctxt "name of the checksum algorithm, Cyclic Redundancy Check 32"
 msgid "CRC-32"
 msgstr "CRC-32"
 
-#: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumalgorithm.cpp:80
+#: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumalgorithm.cpp:73
 #, kde-format
 msgctxt "name of the checksum algorithm, Cyclic Redundancy Check 64"
 msgid "CRC-64"
 msgstr "CRC-64"
 
-#: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:26
+#: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:24
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "ECMA-182"
 msgstr "ECMA-182"
 
-#: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:27
+#: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:25
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "ISO 3309"
 msgstr "ISO 3309"
 
-#: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:33
+#: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:31
 #, kde-format
 msgctxt "@label:listbox variant used to select the CRC-64 variant"
 msgid "CRC-64 variant:"
 msgstr "Variante do CRC-64:"
 
-#: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:36
+#: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:34
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "CRC-64 variant used by calculation."
@@ -944,36 +944,36 @@ msgctxt "name of the checksum algorithm"
 msgid "Modular sum 8-bit"
 msgstr "Soma com módulo a 8 'bits'"
 
-#: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:26
+#: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:24
 #: controllers/view/poddecoder/podtableview.cpp:87
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Big-endian"
 msgstr "'Byte' mais significativo"
 
-#: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:27
+#: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:25
 #: controllers/view/poddecoder/podtableview.cpp:88
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Little-endian"
 msgstr "'Byte' menos significativo"
 
-#: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:33
+#: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:31
 #, kde-format
 msgctxt ""
 "@label:listbox byte order to use for decoding the bytes into integer values"
 msgid "Byte Order:"
 msgstr "Ordem dos 'Bytes':"
 
-#: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:36
+#: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:34
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte order to use for decoding the bytes into integer values."
 msgstr ""
 "A ordem dos 'bytes' a usar na descodificação dos mesmos em valores inteiros."
 
-#: controllers/view/libbytearraychecksum/algorithm/nobytearraychecksumparametersetedit.cpp:23
-#: controllers/view/libbytearrayfilter/filter/nobytearrayfilterparametersetedit.cpp:23
+#: controllers/view/libbytearraychecksum/algorithm/nobytearraychecksumparametersetedit.cpp:21
+#: controllers/view/libbytearrayfilter/filter/nobytearrayfilterparametersetedit.cpp:21
 #, fuzzy, kde-format
 #| msgctxt "@title:group"
 #| msgid "Parameters"
@@ -1093,31 +1093,31 @@ msgctxt ""
 msgid "INVERT data"
 msgstr "INVERTER os dados"
 
-#: controllers/view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp:29
+#: controllers/view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp:27
 #, kde-format
 msgctxt "@label:textbox operand to the arithmetic filter function"
 msgid "Operand:"
 msgstr "Operando:"
 
-#: controllers/view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp:39
+#: controllers/view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp:37
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The operand to do the operation with."
 msgstr "O operando com o qual efectuar a operação."
 
-#: controllers/view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp:42
+#: controllers/view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp:40
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Enter an operand, or select a previous operand from the list."
 msgstr "Indique um operando, ou seleccione um anterior da lista."
 
-#: controllers/view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp:50
+#: controllers/view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp:48
 #, kde-format
 msgctxt "@option:check"
 msgid "Align at end:"
 msgstr "Alinhar ao fim:"
 
-#: controllers/view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp:57
+#: controllers/view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp:55
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1127,7 +1127,7 @@ msgstr ""
 "Se estiver definido, a operação será alinhada ao fim dos dados, em vez do "
 "início."
 
-#: controllers/view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp:60
+#: controllers/view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp:58
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "If set, the operation will be aligned to the end of the data."
@@ -1147,13 +1147,13 @@ msgctxt ""
 msgid "REVERSE data"
 msgstr "INVERTER A ORDEM dos dados"
 
-#: controllers/view/libbytearrayfilter/filter/reversebytearrayfilterparametersetedit.cpp:27
+#: controllers/view/libbytearrayfilter/filter/reversebytearrayfilterparametersetedit.cpp:25
 #, kde-format
 msgctxt "@option:check"
 msgid "Reverse also bits:"
 msgstr "Inverter também os 'bits':"
 
-#: controllers/view/libbytearrayfilter/filter/reversebytearrayfilterparametersetedit.cpp:34
+#: controllers/view/libbytearrayfilter/filter/reversebytearrayfilterparametersetedit.cpp:32
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "If set, the bits are arranged in reverse order as well."
@@ -1167,31 +1167,31 @@ msgctxt ""
 msgid "ROTATE data"
 msgstr "RODAR os dados"
 
-#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp:34
+#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp:32
 #, kde-format
 msgctxt "@label:spinbox number of bytes the movement is done within"
 msgid "&Group size (bytes):"
 msgstr "Tamanho do &grupo ('bytes'):"
 
-#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp:37
+#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp:35
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The number of bytes within which each movement is made."
 msgstr "O número de 'bytes' dentro do qual é feito cada movimento."
 
-#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp:41
+#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp:39
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Control the number of bytes within which each movement is made."
 msgstr "Controla o número de 'bytes' dentro dos quais é feito cada movimento."
 
-#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp:55
+#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp:53
 #, kde-format
 msgctxt "@label:spinbox width (in number of bits) the bits are moved"
 msgid "S&hift width (bits):"
 msgstr "Taman&ho do deslocamento ('bits'):"
 
-#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp:58
+#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp:56
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1201,7 +1201,7 @@ msgstr ""
 "A dimensão do deslocamento. Os números positivos movem os 'bits' para a "
 "direita, enquanto os negativos movem para a esquerda."
 
-#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp:62
+#: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp:60
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -3812,7 +3812,7 @@ msgstr ""
 msgid "Internal zstd error when compressing: %1"
 msgstr ""
 
-#: gui/io/streamencoder/base32/bytearraybase32streamencoder.cpp:129
+#: gui/io/streamencoder/base32/bytearraybase32streamencoder.cpp:132
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "Base32"
@@ -3844,7 +3844,7 @@ msgctxt "@item:inmenu Doing the base32 using the z-base-32 encoding"
 msgid "z-base-32"
 msgstr "z-base-32"
 
-#: gui/io/streamencoder/base64/bytearraybase64streamencoder.cpp:39
+#: gui/io/streamencoder/base64/bytearraybase64streamencoder.cpp:41
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "Base64"
@@ -3990,7 +3990,7 @@ msgctxt "@item:inmenu address size"
 msgid "24-bit"
 msgstr "24 bits"
 
-#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoder.cpp:107
+#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoder.cpp:114
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "Uuencoding"
@@ -4062,7 +4062,7 @@ msgctxt "name of the encoding target"
 msgid "View in Plain Text"
 msgstr "Ver em Texto Simples"
 
-#: gui/io/streamencoder/xxencoding/bytearrayxxencodingstreamencoder.cpp:60
+#: gui/io/streamencoder/xxencoding/bytearrayxxencodingstreamencoder.cpp:70
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "Xxencoding"
