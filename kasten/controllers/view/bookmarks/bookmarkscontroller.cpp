@@ -235,6 +235,12 @@ void BookmarksController::onCursorPositionChanged(Okteta::Address newPosition)
     mGotoPreviousBookmarkAction->setEnabled(hasPrevious);
 }
 
+void BookmarksController::activateCursorPosition(Okteta::Address position)
+{
+    mByteArrayView->setCursorPosition(position);
+    mByteArrayView->widget()->setFocus();
+}
+
 void BookmarksController::createBookmark()
 {
     const Okteta::Address cursorPosition = mByteArrayView->cursorPosition();
@@ -291,7 +297,7 @@ void BookmarksController::gotoNextBookmark()
     const bool hasNext = bookmarksIterator.findNextFrom(positionAfter);
     if (hasNext) {
         const Okteta::Address newPosition = bookmarksIterator.next().offset();
-        mByteArrayView->setCursorPosition(newPosition);
+        activateCursorPosition(newPosition);
     }
 }
 
@@ -303,14 +309,14 @@ void BookmarksController::gotoPreviousBookmark()
     const bool hasPrevious = bookmarksIterator.findPreviousFrom(positionBefore);
     if (hasPrevious) {
         const Okteta::Address newPosition = bookmarksIterator.previous().offset();
-        mByteArrayView->setCursorPosition(newPosition);
+        activateCursorPosition(newPosition);
     }
 }
 
 void BookmarksController::onBookmarkTriggered(QAction* action)
 {
     const auto newPosition = action->data().value<Okteta::Address>();
-    mByteArrayView->setCursorPosition(newPosition);
+    activateCursorPosition(newPosition);
 }
 
 }

@@ -64,6 +64,9 @@ private Q_SLOTS:
     void onCursorPositionChanged(Okteta::Address newPosition);
 
 private:
+    void activateCursorPosition(Okteta::Address position);
+
+private:
     KXMLGUIClient* mGuiClient;
 
     ByteArrayView* mByteArrayView = nullptr;
