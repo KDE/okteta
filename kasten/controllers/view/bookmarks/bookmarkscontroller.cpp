@@ -253,8 +253,11 @@ void BookmarksController::createBookmark()
 
     if (bookmarkName.isEmpty()) {
         bookmarkName = i18nc("default name of a bookmark", "Bookmark");  // %1").arg( 0 ) ); // TODO: use counter like with new file, globally
-
     }
+
+    // ensure popup is relative to focussed view, so by default after the popup will switch to the latter
+    mByteArrayView->widget()->setFocus();
+
     auto* bookmarkEditPopup = new BookmarkEditPopup(mByteArrayView->widget());
     QPoint popupPoint = mByteArrayView->cursorRect().topLeft();
 //     popupPoint.ry() += mSlider->height() / 2;
