@@ -9,11 +9,9 @@
 
 // lib
 #include "bookmarksconstiteratoradapter.hpp"
-// Qt
-#include <QLinkedListIterator>
+#include "bookmarklist.hpp"
 
 namespace Okteta {
-class BookmarkList;
 
 class BookmarkListConstIteratorAdapter : public BookmarksConstIteratorAdapter
 {
@@ -47,7 +45,8 @@ public: // BookmarksConstIteratorAdapter API
     void toFront() override;
 
 private:
-    QLinkedListIterator<Bookmark> mIterator;
+    const BookmarkList& m_list;
+    BookmarkList::ConstIterator m_iterator;
 };
 
 }

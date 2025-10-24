@@ -6,33 +6,64 @@
 
 #include "bookmarklistconstiteratoradapter.hpp"
 
-// lib
-#include "bookmarklist.hpp"
-
 namespace Okteta {
 
 BookmarkListConstIteratorAdapter::BookmarkListConstIteratorAdapter(const BookmarkList& list)
-    : mIterator(list)
+    : m_list(list)
+    , m_iterator(m_list.begin())
 {
 }
 
 BookmarkListConstIteratorAdapter::~BookmarkListConstIteratorAdapter() = default;
 
-bool BookmarkListConstIteratorAdapter::hasNext() const { return mIterator.hasNext(); }
-bool BookmarkListConstIteratorAdapter::hasPrevious() const { return mIterator.hasPrevious(); }
-const Bookmark& BookmarkListConstIteratorAdapter::peekNext() const { return mIterator.peekNext(); }
-const Bookmark& BookmarkListConstIteratorAdapter::peekPrevious() const { return mIterator.peekPrevious(); }
+bool BookmarkListConstIteratorAdapter::hasNext() const
+{
+    return m_iterator != m_list.end();
+}
 
-bool BookmarkListConstIteratorAdapter::findNext(const Bookmark& bookmark)     { return mIterator.findNext(bookmark); }
-bool BookmarkListConstIteratorAdapter::findPrevious(const Bookmark& bookmark) { return mIterator.findPrevious(bookmark); }
+bool BookmarkListConstIteratorAdapter::hasPrevious() const
+{
+    return m_iterator != m_list.begin();
+}
+
+const Bookmark& BookmarkListConstIteratorAdapter::peekNext() const
+{
+    return *m_iterator;
+}
+
+const Bookmark& BookmarkListConstIteratorAdapter::peekPrevious() const
+{
+    BookmarkList::ConstIterator p = m_iterator;
+    return *(--p);
+}
+
+bool BookmarkListConstIteratorAdapter::findNext(const Bookmark& bookmark)
+{
+    while (m_iterator != m_list.end()) {
+        if (*(m_iterator++) == bookmark) {
+            return true;
+        }
+    }
+    return false;
+}
+
+bool BookmarkListConstIteratorAdapter::findPrevious(const Bookmark& bookmark)
+{
+    while (m_iterator != m_list.begin()) {
+        if (*(--m_iterator) == bookmark) {
+            return true;
+        }
+    }
+    return false;
+}
 
 bool BookmarkListConstIteratorAdapter::findNextFrom(Address offset)
 {
     bool result = false;
 
-    mIterator.toFront();
-    while (mIterator.hasNext()) {
-        if (offset <= mIterator.peekNext().offset()) {
+    toFront();
+    while (hasNext()) {
+        if (offset <= peekNext().offset()) {
             result = true;
             break;
         }
@@ -46,9 +77,9 @@ bool BookmarkListConstIteratorAdapter::findPreviousFrom(Address offset)
 {
     bool result = false;
 
-    mIterator.toBack();
-    while (mIterator.hasPrevious()) {
-        if (mIterator.peekPrevious().offset() <= offset) {
+    toBack();
+    while (hasPrevious()) {
+        if (peekPrevious().offset() <= offset) {
             result = true;
             break;
         }
@@ -58,10 +89,24 @@ bool BookmarkListConstIteratorAdapter::findPreviousFrom(Address offset)
     return result;
 }
 
-const Bookmark& BookmarkListConstIteratorAdapter::next()     { return mIterator.next(); }
-const Bookmark& BookmarkListConstIteratorAdapter::previous() { return mIterator.previous(); }
+const Bookmark& BookmarkListConstIteratorAdapter::next()
+{
+    return *(m_iterator++);
+}
 
-void BookmarkListConstIteratorAdapter::toBack()  { mIterator.toBack(); }
-void BookmarkListConstIteratorAdapter::toFront() { mIterator.toFront(); }
+const Bookmark& BookmarkListConstIteratorAdapter::previous()
+{
+    return *(--m_iterator);
+}
+
+void BookmarkListConstIteratorAdapter::toBack()
+{
+    m_iterator = m_list.end();
+}
+
+void BookmarkListConstIteratorAdapter::toFront()
+{
+    m_iterator = m_list.begin();
+}
 
 }
