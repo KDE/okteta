@@ -16,6 +16,7 @@ namespace Okteta {
 
 class Bookmark;
 
+// TODO: iterator should instead clone specialization when being copied
 class BookmarksConstIteratorAdapter : public QSharedData
 {
 protected:
