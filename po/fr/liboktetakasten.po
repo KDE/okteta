@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-18 04:34+0000\n"
+"POT-Creation-Date: 2025-10-25 03:32+0000\n"
 "PO-Revision-Date: 2025-05-25 11:31+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -126,7 +126,7 @@ msgctxt "@item description of bookmark"
 msgid "%1: %2"
 msgstr "%1 : %2"
 
-#: controllers/view/bookmarks/bookmarkscontroller.cpp:249
+#: controllers/view/bookmarks/bookmarkscontroller.cpp:255
 #: controllers/view/bookmarks/bookmarkstool.cpp:130
 #, kde-format
 msgctxt "default name of a bookmark"

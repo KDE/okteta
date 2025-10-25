@@ -41,7 +41,7 @@ msgstr "Hex-Editor"
 #: about.cpp:21
 #, kde-format
 msgid "2006-%1 Friedrich W. H. Kossebau"
-msgstr "Copyright © 2006–%1 Friedrich W. H. Kossebau"
+msgstr "2006–%1 Friedrich W. H. Kossebau"
 
 #: about.cpp:22
 #, kde-format
