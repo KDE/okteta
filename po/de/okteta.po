@@ -41,11 +41,10 @@ msgid "Hex editor"
 msgstr "Hex-Editor"
 
 #: about.cpp:19
-#, fuzzy, kde-format
-#| msgid "2006-%1 Friedrich W. H. Kossebau"
+#, kde-format
 msgctxt "@info"
 msgid "2006-%1 Friedrich W. H. Kossebau"
-msgstr "Copyright © 2006–%1 Friedrich W. H. Kossebau"
+msgstr "2006–%1 Friedrich W. H. Kossebau"
 
 #: about.cpp:20
 #, fuzzy, kde-format
