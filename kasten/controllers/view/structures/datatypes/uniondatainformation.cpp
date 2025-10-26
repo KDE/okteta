@@ -11,6 +11,7 @@
 // KF
 #include <KLocalizedString>
 // Std
+#include <algorithm>
 #include <utility>
 
 UnionDataInformation::UnionDataInformation(const QString& name,
@@ -37,7 +38,7 @@ BitCount32 UnionDataInformation::size() const
     // since this is a union return size of biggest element
     BitCount32 size = 0;
     for (const auto& child : mChildren) {
-        size = qMax(size, child->size());
+        size = std::max(size, child->size());
     }
 
     return size;

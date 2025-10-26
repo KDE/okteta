@@ -7,6 +7,9 @@
 #include "togglebutton_p.hpp"
 #include "togglebutton.hpp"
 
+// Std
+#include <algorithm>
+
 namespace Kasten {
 
 ToggleButtonPrivate::ToggleButtonPrivate(ToggleButton* parent) : p(parent)
@@ -35,7 +38,7 @@ void ToggleButtonPrivate::setOtherState(const QIcon& icon, const QString& text, 
 
         // TODO: this breaks on new font (size) or style change
         // better would be to reimplement sizeHint()
-        p->setFixedWidth(qMax(currentTextWidth, otherTextWidth));
+        p->setFixedWidth(std::max(currentTextWidth, otherTextWidth));
     }
 }
 

@@ -20,7 +20,8 @@
 #include <QStyle>
 #include <QPainter>
 #include <QFont>
-
+// Std
+#include <algorithm>
 
 static QFont nameFont(const QFont& font)
 {
@@ -95,7 +96,7 @@ QSize StructureItemDelegate::sizeHint(const QStyleOptionViewItem& option, const 
     layoutItem(option, index, &checkBoxRect, &iconRect, &textRect, &aboutButtonRect, &focusFrameHMargin, LayoutForSizeHint);
 
     const int width = checkBoxRect.width() + iconRect.width() + textRect.width() + aboutButtonRect.width() + 8 * focusFrameHMargin;
-    const int height = qMax(checkBoxRect.height(), qMax(iconRect.height(), qMax(textRect.height(), aboutButtonRect.height()))) + 2 * focusFrameHMargin;
+    const int height = std::max(checkBoxRect.height(), std::max(iconRect.height(), std::max(textRect.height(), aboutButtonRect.height()))) + 2 * focusFrameHMargin;
     return {width, height};
 }
 
@@ -220,7 +221,7 @@ void StructureItemDelegate::layoutItem(const QStyleOptionViewItem& option,
             const QFontMetrics nameFontMetrics(nameFont);
             const QString name = index.model()->data(index, Qt::DisplayRole).toString();
             const QString comment = index.model()->data(index, StructuresSelectionModel::CommentRole).toString();
-            const int contentWidthHint = qMax(nameFontMetrics.boundingRect(name).width(), option.fontMetrics.boundingRect(comment).width());
+            const int contentWidthHint = std::max(nameFontMetrics.boundingRect(name).width(), option.fontMetrics.boundingRect(comment).width());
             const int contentHeightHint = nameFontMetrics.height() + option.fontMetrics.height();
             *textRectToUpdate = QRect(0, 0, contentWidthHint, contentHeightHint);
         } else {

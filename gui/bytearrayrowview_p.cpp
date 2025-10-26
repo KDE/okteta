@@ -570,7 +570,7 @@ void ByteArrayRowViewPrivate::createCursorPixmaps()
     PixelX cursorW;
     const int insertCursorWidth = q->style()->pixelMetric(QStyle::PM_TextCursorWidth);
     if (isCursorBehind()) {
-        cursorX = qMax(0, byteWidth - insertCursorWidth);
+        cursorX = std::max(byteWidth - insertCursorWidth, 0);
         cursorW = insertCursorWidth;
     } else {
         cursorX = 0;

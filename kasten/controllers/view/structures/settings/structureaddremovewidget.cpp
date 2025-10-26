@@ -196,7 +196,7 @@ void StructureAddRemoveWidget::moveUp()
     int firstIndex = -1;
     for (QTreeWidgetItem* item : selected) {
         int idx = mTreeSelected->indexOfTopLevelItem(item);
-        int newIdx = qMax(0, idx - 1);
+        const int newIdx = std::max(idx - 1, 0);
         mTreeSelected->insertTopLevelItem(newIdx,
                                           mTreeSelected->takeTopLevelItem(idx));
         // only first index

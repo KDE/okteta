@@ -12,6 +12,8 @@
 #include <QWidgetItem>
 #include <QWidget>
 #include <QStyle>
+// Std
+#include <algorithm>
 
 namespace Kasten {
 
@@ -215,7 +217,7 @@ void StatusBarLayout::updateLayoutStructs() const
             const QSize itemSizeHint = item->sizeHint();
 
             sizeHint.rwidth() += (visibleCount == 0 ? 0 : spacing) + itemSizeHint.width();
-            sizeHint.rheight() = qMax(sizeHint.height(), itemSizeHint.height());
+            sizeHint.rheight() = std::max(sizeHint.height(), itemSizeHint.height());
             ++visibleCount;
         }
     }

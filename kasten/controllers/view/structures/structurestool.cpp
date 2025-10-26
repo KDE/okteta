@@ -159,7 +159,7 @@ bool StructuresTool::setData(const QVariant& value, int role, DataInformation* i
 
     bool ret = false;
     BitCount64 position = item->positionInFile(structureStart);
-    const quint64 remainingBits = qMax(mByteArrayModel->size() * 8 - qint64(position), qint64(0));
+    const quint64 remainingBits = std::max(mByteArrayModel->size() * 8 - qint64(position), qint64(0));
     quint8 bitOffs = position % 8;
     ret = item->setData(value, mByteArrayModel, static_cast<Okteta::Address>(position / 8), remainingBits, bitOffs);
 
