@@ -15,10 +15,20 @@
 #include <QSharedData>
 #include <QSharedDataPointer>
 #include <QString>
-#include <QPair>
 
 class QScriptValue;
 struct LoggerWithContext;
+
+struct EnumEntry
+{
+    AllPrimitiveTypes value;
+    QString name;
+
+    bool isEmpty() const
+    {
+        return (value == AllPrimitiveTypes()) && name.isEmpty();
+    }
+};
 
 class EnumDefinition : public QSharedData
 {
@@ -47,8 +57,8 @@ public:
     static QMap<AllPrimitiveTypes, QString> parseEnumValues(const QScriptValue& val,
                                                             const LoggerWithContext& logger, PrimitiveDataType type = PrimitiveDataType::UInt64);
     /** @return a pair containing the converted value. A default constructed pair means error! */
-    static QPair<AllPrimitiveTypes, QString> convertToEnumEntry(const QString& name, const QVariant& value,
-                                                                const LoggerWithContext& logger, PrimitiveDataType type);
+    static EnumEntry convertToEnumEntry(const QString& name, const QVariant& value,
+                                        const LoggerWithContext& logger, PrimitiveDataType type);
 
 protected:
     const QString mName;

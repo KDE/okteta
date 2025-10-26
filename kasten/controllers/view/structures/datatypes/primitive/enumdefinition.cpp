@@ -23,7 +23,7 @@ QMap<AllPrimitiveTypes, QString> EnumDefinition::parseEnumValues(const QScriptVa
     while (it.hasNext()) {
         it.next();
         QScriptValue val = it.value();
-        QPair<AllPrimitiveTypes, QString> conv;
+        EnumEntry conv;
         if (val.isNumber()) {
             double num = val.toNumber();
             conv = convertToEnumEntry(it.name(), num, logger, type);
@@ -31,16 +31,16 @@ QMap<AllPrimitiveTypes, QString> EnumDefinition::parseEnumValues(const QScriptVa
             QString numStr = val.toString();
             conv = convertToEnumEntry(it.name(), numStr, logger, type);
         }
-        if (conv == QPair<AllPrimitiveTypes, QString>()) {
+        if (conv.isEmpty()) {
             continue;
         }
-        enumValues.insert(conv.first, conv.second);
+        enumValues.insert(conv.value, conv.name);
     }
     return enumValues;
 }
 
-QPair<AllPrimitiveTypes, QString> EnumDefinition::convertToEnumEntry(const QString& name,
-                                                                     const QVariant& value, const LoggerWithContext& logger, PrimitiveDataType type)
+EnumEntry EnumDefinition::convertToEnumEntry(const QString& name, const QVariant& value,
+                                             const LoggerWithContext& logger, PrimitiveDataType type)
 {
     Q_ASSERT(!name.isEmpty());
     // name must not be empty, else default constructed return would be valid!

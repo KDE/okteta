@@ -220,12 +220,11 @@ QVector<EnumDefinition::Ptr> OsdParser::parseEnums(const QDomElement& rootElem, 
                 continue;
             }
             QString value = readProperty(child, PROPERTY_VALUE());
-            QPair<AllPrimitiveTypes, QString> converted =
-                EnumDefinition::convertToEnumEntry(name, value, lwc, type);
-            if (converted == QPair<AllPrimitiveTypes, QString>()) {
+            const EnumEntry converted = EnumDefinition::convertToEnumEntry(name, value, lwc, type);
+            if (converted.isEmpty()) {
                 continue;
             }
-            defs.insert(converted.first, converted.second);
+            defs.insert(converted.value, converted.name);
         }
 
         // now add this enum to the list of enums
