@@ -6,6 +6,9 @@
 
 #include "bytearrayutf8stringvalidator.hpp"
 
+// Std
+#include <algorithm>
+
 namespace Okteta {
 
 ByteArrayUtf8StringValidator::ByteArrayUtf8StringValidator() = default;
@@ -53,7 +56,7 @@ QByteArray ByteArrayUtf8StringValidator::toByteArray(const QString& string) cons
 
 QString ByteArrayUtf8StringValidator::toString(const QByteArray& byteArray) const
 {
-    const int byteArraySize = qMin(byteArray.size(), maxLength());
+    const int byteArraySize = std::min(byteArray.size(), maxLength());
 
     QString result = m_encoder.encodeAsString(byteArray.constData(), byteArraySize, m_decoder.textCodec());
 

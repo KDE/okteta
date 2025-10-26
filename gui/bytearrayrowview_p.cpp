@@ -20,6 +20,7 @@
 #include <QPainter>
 #include <QScrollBar>
 // Std
+#include <algorithm>
 #include <utility>
 #include <vector>
 
@@ -256,7 +257,7 @@ QSize ByteArrayRowViewPrivate::minimumSizeHint() const
         lineHeight()
         + noOfLines() > 1 ? q->style()->pixelMetric(QStyle::PM_ScrollBarExtent) : 0;
 
-    return {qMin(minWidth, 100), qMin(minHeight, 100)};
+    return {std::min(minWidth, 100), std::min(minHeight, 100)};
 }
 
 int ByteArrayRowViewPrivate::fittingBytesPerLine() const

@@ -11,6 +11,7 @@
 // Qt
 #include <QString>
 // Std
+#include <algorithm>
 #include <limits>
 
 namespace Okteta {
@@ -164,7 +165,7 @@ ByteArrayChar8StringDecoder::CodeState ByteArrayChar8StringDecoder::doDecode(QBy
                 // try to process next 2 positions as digit values
                 // if incomplete, still use lower digit or value 0 with none
                 constexpr int maxDigitSize = 2;
-                const int potentialDigitSize = qMin(maxDigitSize, stringSize - pos - 1);
+                const int potentialDigitSize = std::min(maxDigitSize, stringSize - pos - 1);
                 const int valuePos = pos + 1;
                 int value = 0;
                 int digitPos = 0;
@@ -203,7 +204,7 @@ ByteArrayChar8StringDecoder::CodeState ByteArrayChar8StringDecoder::doDecode(QBy
                 if (digitValue > 3) {
                     maxDigitSize = 2;
                 }
-                const int potentialDigitSize = qMin(maxDigitSize, stringSize - pos);
+                const int potentialDigitSize = std::min(maxDigitSize, stringSize - pos);
                 digitPos = 1;
                 for (; digitPos < potentialDigitSize; ++digitPos) {
                     const QChar digitCharacter = string.at(valuePos + digitPos);

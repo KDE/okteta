@@ -10,6 +10,8 @@
 // lib
 #include <primitivedatainformation.hpp>
 #include <allprimitivetypes.hpp>
+// Std
+#include <algorithm>
 
 class AbstractBitfieldDataInformation : public PrimitiveDataInformation
 {
@@ -103,7 +105,7 @@ inline BitCount32 AbstractBitfieldDataInformation::width() const
 inline void AbstractBitfieldDataInformation::setWidth(BitCount32 newWidth)
 {
     Q_ASSERT(newWidth > 0 && newWidth <= 64);
-    mWidth = qMin(newWidth, BitCount32(64U)); // maximum width is 64 bits
+    mWidth = std::min(newWidth, BitCount32(64U)); // maximum width is 64 bits
 }
 
 #endif /* KASTEN_ABSTRACTBITFIELDDATAINFORMATION_HPP */

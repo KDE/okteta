@@ -29,6 +29,7 @@
 #include <QRegularExpression>
 #include <QByteArray>
 // Std
+#include <algorithm>
 #include <utility>
 
 namespace Kasten {
@@ -345,7 +346,7 @@ Okteta::AddressRange StructuresTool::dataRange(const DataInformation* data) cons
     // FIXME support range of partial bytes
     int length = data->size() / 8;
     const int maxLen = mByteArrayModel->size() - baseAddress;
-    length = qMin(length, maxLen);
+    length = std::min(length, maxLen);
     const auto startOffset = static_cast<Okteta::Address>(data->positionInFile(baseAddress) / 8);
     return Okteta::AddressRange::fromWidth(startOffset, length);
 }

@@ -40,6 +40,7 @@
 #include <QScriptEngine>
 #include <QScriptContext>
 // Std
+#include <algorithm>
 #include <memory>
 #include <vector>
 #include <utility>
@@ -272,7 +273,7 @@ void ScriptClassesTest::checkProperties(const std::vector<PropertyPair>& expecte
     data->topLevelDataInformation()->scriptHandler()->handlerInfo()->setMode(ScriptHandlerInfo::Mode::None);
     std::sort(foundProperties.begin(), foundProperties.end());
     if (foundProperties.size() != expected.size()) {
-        for (std::size_t i = 0; i < qMin(foundProperties.size(), expected.size()); ++i) {
+        for (std::size_t i = 0; i < std::min(foundProperties.size(), expected.size()); ++i) {
             if (foundProperties.at(i) != expected.at(i)) {
                 qWarning() << tag << ":" << foundProperties.at(i) << ", but expected:" << expected.at(i);
             }

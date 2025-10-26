@@ -12,11 +12,13 @@
 #include <scripthandlerinfo.hpp>
 // KF
 #include <KLocalizedString>
+// Std
+#include <algorithm>
 
 AbstractBitfieldDataInformation::AbstractBitfieldDataInformation(const QString& name, BitCount32 width,
                                                                  DataInformation* parent)
     : PrimitiveDataInformation(name, parent)
-    , mWidth(qMin(width, 64U))
+    , mWidth(std::min(width, 64U))
 {
     Q_ASSERT(width <= 64);
 }

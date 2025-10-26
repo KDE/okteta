@@ -10,6 +10,8 @@
 #include <QByteArray>
 #include <QString>
 #include <QTextCodec>
+// Std
+#include <algorithm>
 
 namespace Okteta {
 
@@ -42,7 +44,7 @@ QString ByteArrayUtf8StringEncoder::encodeAsString(const char* byteArrayData, in
     const QChar replacementChar(QChar::ReplacementCharacter);
     result.reserve(byteArraySize); // TODO: or prepare for worse-case and then shrink afterwards?
     for (int i = 0; i < byteArraySize;) {
-        const int maxUtf8DataSize = qMin(4, byteArraySize - i);
+        const int maxUtf8DataSize = std::min(4, byteArraySize - i);
         const char* const data = byteArrayData + i;
         int byteUsed = 0;
         QString utf8;

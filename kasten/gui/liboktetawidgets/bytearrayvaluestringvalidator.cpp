@@ -8,6 +8,8 @@
 
 // Okteta core
 #include <Okteta/ValueCodec>
+// Std
+#include <algorithm>
 
 namespace Okteta {
 
@@ -97,7 +99,7 @@ QString ByteArrayValueStringValidator::toString(const QByteArray& byteArray) con
 {
     QString result;
 
-    const int byteArraySize = qMin(byteArray.size(), maxLength());
+    const int byteArraySize = std::min(byteArray.size(), maxLength());
     const int encodingWidth = m_valueCodec->encodingWidth();
     result.resize(byteArraySize * encodingWidth);
     int r = 0;

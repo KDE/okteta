@@ -22,6 +22,7 @@
 #include <QTreeWidgetItem>
 #include <QRegularExpression>
 // Std
+#include <algorithm>
 #include <utility>
 
 using namespace Kasten;
@@ -214,7 +215,7 @@ void StructureAddRemoveWidget::moveDown()
     int maxItmCount = mTreeSelected->topLevelItemCount();
     for (QTreeWidgetItem* item : selected) {
         int idx = mTreeSelected->indexOfTopLevelItem(item);
-        int newIdx = qMin(idx + 1, maxItmCount - 1);
+        const int newIdx = std::min(idx + 1, maxItmCount - 1);
         mTreeSelected->insertTopLevelItem(newIdx,
                                           mTreeSelected->takeTopLevelItem(idx));
         // only first index

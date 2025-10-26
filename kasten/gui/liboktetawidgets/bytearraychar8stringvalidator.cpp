@@ -10,6 +10,8 @@
 #include "bytearraychar8stringdecoder.hpp"
 // Okteta core
 #include <Okteta/CharCodec>
+// Std
+#include <algorithm>
 
 namespace Okteta {
 
@@ -63,7 +65,7 @@ QByteArray ByteArrayChar8StringValidator::toByteArray(const QString& string) con
 
 QString ByteArrayChar8StringValidator::toString(const QByteArray& byteArray) const
 {
-    const int byteArraySize = qMin(byteArray.size(), maxLength());
+    const int byteArraySize = std::min(byteArray.size(), maxLength());
 
     QString result = m_encoder.encodeAsString(byteArray.constData(), byteArraySize, m_decoder.charCodec());
 

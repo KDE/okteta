@@ -187,15 +187,15 @@ bool ByteArrayIHexStreamEncoder::encodeDataToStream(QIODevice* device,
 
     const Okteta::Coord startCoord = layout.coordOfIndex(range.start());
     const int lastLinePosition = layout.lastLinePosition(startCoord.line());
-    const int dataPerLineCount = qMin(byteArrayView->noOfBytesPerLine(), maxDataPerLineCount);
+    const int dataPerLineCount = std::min(byteArrayView->noOfBytesPerLine(), maxDataPerLineCount);
     unsigned char line[maxLineLength];
     unsigned char* const lineData = &line[dataLineOffset];
     Okteta::Address lineOffset = range.start();
     const int firstDataEnd = lastLinePosition - startCoord.pos() + 1;
     int nextUpperAddressChangeDataEnd = 0x10000 - (range.start() & 0xFFFF);
     int d = 0;
-    int nextDataEnd = qMin(dataPerLineCount,
-                           qMin(firstDataEnd, nextUpperAddressChangeDataEnd));
+    int nextDataEnd = std::min(dataPerLineCount,
+                               std::min(firstDataEnd, nextUpperAddressChangeDataEnd));
 
     // data
     if (mSettings.addressSizeId == IHexStreamEncoderSettings::AddressSizeId::Bits32) {
@@ -231,8 +231,8 @@ bool ByteArrayIHexStreamEncoder::encodeDataToStream(QIODevice* device,
                 }
             }
             nextUpperAddressChangeDataEnd = 0x10000 - (i & 0xFFFF);
-            nextDataEnd = qMin(dataPerLineCount,
-                               qMin(range.end() - i + 1, nextUpperAddressChangeDataEnd));
+            nextDataEnd = std::min(dataPerLineCount,
+                                   std::min(range.end() - i + 1, nextUpperAddressChangeDataEnd));
             d = 0;
         }
     }

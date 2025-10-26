@@ -15,6 +15,7 @@
 // Qt
 #include <QTextStream>
 // Std
+#include <algorithm>
 #include <array>
 
 namespace Kasten {
@@ -111,7 +112,7 @@ bool ByteArrayXxencodingStreamEncoder::encodeDataToStream(QIODevice* device,
     // header
     textStream << header << " 644 " << mSettings.fileName.toLatin1();
 
-    const int firstLineLength = qMin(range.width(), inputLineLength);
+    const int firstLineLength = std::min(range.width(), inputLineLength);
     if (firstLineLength > 0) {
         textStream << '\n';
         textStream << xxmapByte(firstLineLength);
@@ -145,7 +146,7 @@ bool ByteArrayXxencodingStreamEncoder::encodeDataToStream(QIODevice* device,
             ++inputGroupsPerLine;
             if (inputGroupsPerLine >= maxInputGroupsPerLine && i < range.end()) {
                 const int remainsCount = range.end() - i;
-                const int nextLineLength = qMin(remainsCount, inputLineLength);
+                const int nextLineLength = std::min(remainsCount, inputLineLength);
                 textStream << '\n';
                 textStream << xxmapByte(nextLineLength);
                 inputGroupsPerLine = 0;
