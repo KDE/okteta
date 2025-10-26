@@ -241,12 +241,18 @@ public:
 namespace DataTypeDisplayStringifierManagerNS {
 
 template<typename K, typename V>
-auto make_unique_unordered_map(std::initializer_list<std::pair<K, V*>> list)
+struct KeyValuePair
+{
+    K key;
+    V value;
+};
+template<typename K, typename V>
+auto make_unique_unordered_map(std::initializer_list<KeyValuePair<K, V*>> list)
 {
     std::unordered_map<K, std::unique_ptr<V>> map;
 
     for (const auto& entry : list) {
-        map.emplace(entry.first, std::unique_ptr<V>(entry.second));
+        map.emplace(entry.key, std::unique_ptr<V>(entry.value));
     }
 
     return map;
