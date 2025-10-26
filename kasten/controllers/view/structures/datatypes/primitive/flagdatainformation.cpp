@@ -22,7 +22,11 @@ FlagDataInformation::FlagDataInformation(const QString& name,
                "FlagDataInformation::FlagDataInformation", "Bitflags only work with integers!");
 }
 
-using FlagPair = QPair<QString, quint64>;
+struct FlagData
+{
+    QString name;
+    quint64 value;
+};
 
 template <typename T, int len>
 static void removeFromArray(QVarLengthArray<T, len>& array, int index)
@@ -41,27 +45,27 @@ QString FlagDataInformation::valueStringImpl() const
     Q_ASSERT(mWasAbleToRead);
     QMapIterator<AllPrimitiveTypes, QString> iter(mEnum->values());
     // I doubt more than 10 flags will be set very often -> only then do we need a malloc
-    QVarLengthArray<FlagPair, 10> arr;
+    QVarLengthArray<FlagData, 10> arr;
     const auto value = mValue->value().value<quint64>();
     while (iter.hasNext()) {
         iter.next();
         const auto flag = iter.key().value<quint64>();
         if ((value & flag) == flag) {
             // flag is set
-            arr.append(qMakePair(iter.value(), flag));
+            arr.append(FlagData{iter.value(), flag});
         }
     }
 
     // now we have all flags, check if some overlap
     for (int i = 0; i < arr.size(); ++i) {
-        const quint64 firstFlag = arr.at(i).second;
+        const quint64 firstFlag = arr.at(i).value;
         for (int j = 0; j < arr.size();) {
             if (j == i) {
                 j++;
                 continue;
             }
             // check if they overlap
-            quint64 secondFlag = arr.at(j).second;
+            quint64 secondFlag = arr.at(j).value;
             if ((firstFlag & secondFlag) == secondFlag) {
                 // they overlap, remove the second flag
                 removeFromArray(arr, j);
@@ -86,8 +90,8 @@ QString FlagDataInformation::valueStringImpl() const
         if (i != 0) {
             result += QLatin1String(" | ");
         }
-        result += arr.at(i).first;
-        usedBits |= arr.at(i).second;
+        result += arr.at(i).name;
+        usedBits |= arr.at(i).value;
     }
 
     // TODO remove a NONE flag if others present (value = 0)
