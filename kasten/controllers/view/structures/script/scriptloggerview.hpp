@@ -30,7 +30,7 @@ private:
     KComboBox* mSelector;
     QTableView* mView;
 
-    // QSharedPointers so they remain valid until this widget is deleted
+    // std::shared_ptrs so they remain valid until this widget is deleted
     // even if the backing data has changed
     const TopLevelDataInformation::List mList;
 };

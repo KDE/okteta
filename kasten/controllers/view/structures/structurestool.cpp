@@ -244,14 +244,14 @@ void StructuresTool::addChildItem(std::unique_ptr<TopLevelDataInformation>&& chi
                 this, &StructuresTool::childrenRemoved);
         connect(this, &StructuresTool::byteArrayModelChanged,
                 rawChild, &TopLevelDataInformation::newModelActivated);
-        mData.append(QSharedPointer<TopLevelDataInformation>(child.release()));
+        mData.append(std::shared_ptr<TopLevelDataInformation>(std::move(child)));
         // ensure that locking gets set up properly
         if (mByteArrayModel) {
             rawChild->newModelActivated(mByteArrayModel);
         }
     } else {
         child->setIndex(mInvalidData.size());
-        mInvalidData.append(QSharedPointer<TopLevelDataInformation>(child.release()));
+        mInvalidData.append(std::shared_ptr<TopLevelDataInformation>(std::move(child)));
     }
 }
 

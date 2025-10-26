@@ -15,7 +15,6 @@
 #include <Okteta/ArrayChangeMetricsList>
 // Qt
 #include <QFileInfo>
-#include <QSharedPointer>
 #include <QQueue>
 #include <QVector>
 #include <QScriptEngine>
@@ -40,7 +39,7 @@ class TopLevelDataInformation : public QObject
     Q_OBJECT
 
 public:
-    using Ptr = QSharedPointer<TopLevelDataInformation>;
+    using Ptr = std::shared_ptr<TopLevelDataInformation>;
     using List = QVector<Ptr>;
 
     static constexpr Okteta::Address INVALID_OFFSET = std::numeric_limits<Okteta::Address>::max();
