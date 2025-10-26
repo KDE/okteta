@@ -10,7 +10,8 @@
 #include <logging.hpp>
 // Qt
 #include <QLockFile>
-#include <QSharedPointer>
+// Std
+#include <memory>
 
 namespace Kasten {
 
@@ -21,7 +22,7 @@ public:
                                     const ByteArrayViewProfile::Id& viewProfileId);
 
 public:
-    QSharedPointer<QLockFile> lockFile;
+    std::shared_ptr<QLockFile> lockFile;
     ByteArrayViewProfile::Id viewProfileId;
 };
 
@@ -34,7 +35,7 @@ viewProfileFileLockPath(const QString& viewProfileFilePath)
 
 ByteArrayViewProfileLockPrivate::ByteArrayViewProfileLockPrivate(const QString& fileName,
                                                                  const ByteArrayViewProfile::Id& id)
-    : lockFile(new QLockFile(fileName.isEmpty() ? fileName : viewProfileFileLockPath(fileName)))
+    : lockFile(std::make_shared<QLockFile>(fileName.isEmpty() ? fileName : viewProfileFileLockPath(fileName)))
     , viewProfileId(id)
 {
     if (!fileName.isEmpty()) {
