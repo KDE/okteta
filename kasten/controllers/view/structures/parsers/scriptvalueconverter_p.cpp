@@ -235,8 +235,7 @@ std::unique_ptr<TaggedUnionDataInformation> toTaggedUnion(const QScriptValue& va
         QScriptValue current = alternatives.property(i);
         alt.name = current.property(PROPERTY_STRUCT_NAME()).toString();
         alt.selectIf = current.property(PROPERTY_SELECT_IF());
-        alt.fields = QSharedPointer<ChildrenParser>(
-            new ScriptValueChildrenParser(info, current.property(PROPERTY_CHILDREN())));
+        alt.fields = std::make_shared<ScriptValueChildrenParser>(info, current.property(PROPERTY_CHILDREN()));
     }
 
     tpd.children = std::make_unique<ScriptValueChildrenParser>(info, value.property(PROPERTY_CHILDREN()));

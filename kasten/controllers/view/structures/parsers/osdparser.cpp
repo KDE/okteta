@@ -522,9 +522,9 @@ std::unique_ptr<TaggedUnionDataInformation> OsdParser::taggedUnionFromXML(const 
         }
         alt.selectIf = selectIf;
         if (elem.tagName() == TYPE_GROUP()) {
-            alt.fields = QSharedPointer<ChildrenParser>(new OsdChildrenParser(info, elem.firstChildElement()));
+            alt.fields = std::make_shared<OsdChildrenParser>(info, elem.firstChildElement());
         } else {
-            alt.fields = QSharedPointer<ChildrenParser>(new SingleElementOsdChildrenParser(info, elem));
+            alt.fields = std::make_shared<SingleElementOsdChildrenParser>(info, elem);
         }
     }
 

@@ -23,7 +23,6 @@
 #include <scriptlogger.hpp>
 // Qt
 #include <QScriptValue>
-#include <QSharedPointer>
 // Std
 #include <memory>
 
@@ -139,7 +138,7 @@ struct TaggedUnionParsedData : public ParserInfo
     {
         QString name;
         QScriptValue selectIf;
-        QSharedPointer<ChildrenParser> fields;
+        std::shared_ptr<ChildrenParser> fields;
     };
     inline explicit TaggedUnionParsedData(const ParserInfo& i) : ParserInfo(i) {}
     TaggedUnionParsedData(const TaggedUnionParsedData&) = delete;
