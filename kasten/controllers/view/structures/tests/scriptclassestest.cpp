@@ -49,13 +49,31 @@ class ScriptClassesTest : public QObject
 {
     Q_OBJECT
 
-    using PropertyPair = QPair<QString, QScriptValue::PropertyFlags>;
+public:
+    struct PropertyData
+    {
+        QString name;
+        QScriptValue::PropertyFlags flags;
+
+        bool operator==(const PropertyData& other) const
+        {
+            return (name == other.name) && (flags == other.flags);
+        }
+        bool operator!=(const PropertyData& other) const
+        {
+            return !(operator==(other));
+        }
+        bool operator<(const PropertyData& other) const
+        {
+            return (name < other.name) || (!(other.name < name) && flags < other.flags);
+        }
+    };
 
 private:
-    static void checkProperties(const std::vector<PropertyPair>& expected, DataInformation* data,
+    static void checkProperties(const std::vector<PropertyData>& expected, DataInformation* data,
                                 const char* tag);
-    static PropertyPair pair(const char* name,
-                             QScriptValue::PropertyFlags flags = QScriptValue::Undeletable | QScriptValue::ReadOnly)
+    static PropertyData property(const char* name,
+                                 QScriptValue::PropertyFlags flags = QScriptValue::Undeletable | QScriptValue::ReadOnly)
     {
         return {QString::fromUtf8(name), flags};
     }
@@ -72,17 +90,17 @@ private Q_SLOTS:
     void testScriptValueContents();
 
 private:
-    std::vector<PropertyPair> commonProperties;
-    std::vector<PropertyPair> primitiveProperties;
+    std::vector<PropertyData> commonProperties;
+    std::vector<PropertyData> primitiveProperties;
     std::vector<std::unique_ptr<TopLevelDataInformation>> primitives;
 
-    std::vector<PropertyPair> enumProperties;
+    std::vector<PropertyData> enumProperties;
     EnumDataInformation* enumData;
     std::unique_ptr<TopLevelDataInformation> enumDataTop;
     FlagDataInformation* flagData;
     std::unique_ptr<TopLevelDataInformation> flagDataTop;
 
-    std::vector<PropertyPair> bitfieldProperties;
+    std::vector<PropertyData> bitfieldProperties;
     SignedBitfieldDataInformation* signedBitfield;
     std::unique_ptr<TopLevelDataInformation> signedBitfieldTop;
     UnsignedBitfieldDataInformation* unsignedBitfield;
@@ -90,47 +108,55 @@ private:
     BoolBitfieldDataInformation* boolBitfield;
     std::unique_ptr<TopLevelDataInformation> boolBitfieldTop;
 
-    std::vector<PropertyPair> structUnionProperties; // without children
+    std::vector<PropertyData> structUnionProperties; // without children
     StructureDataInformation* structData;
     std::unique_ptr<TopLevelDataInformation> structDataTop;
     UnionDataInformation* unionData;
     std::unique_ptr<TopLevelDataInformation> unionDataTop;
 
-    std::vector<PropertyPair> arrayProperties; // without children
+    std::vector<PropertyData> arrayProperties; // without children
     ArrayDataInformation* arrayData;
     std::unique_ptr<TopLevelDataInformation> arrayDataTop;
 
-    std::vector<PropertyPair> stringProperties; // without children
+    std::vector<PropertyData> stringProperties; // without children
     StringDataInformation* stringData;
     std::unique_ptr<TopLevelDataInformation> stringDataTop;
 
 };
+
+inline QDebug operator<<(QDebug debug, const ScriptClassesTest::PropertyData& pair)
+{
+    const bool oldAutoInsertSpacesSetting = debug.autoInsertSpaces();
+    debug.nospace() << "Property(" << pair.name << ':' << pair.flags << ')';
+    debug.setAutoInsertSpaces(oldAutoInsertSpacesSetting);
+    return debug.maybeSpace();
+}
 
 void ScriptClassesTest::initTestCase()
 {
     // we are only testing properties when updating
     // TODO fix this
     commonProperties = {
-        pair("name", QScriptValue::Undeletable),
-        pair("wasAbleToRead"),
-        pair("parent"),
-        pair("valid"),
-        pair("validationError"),
-        pair("byteOrder", QScriptValue::Undeletable),
-        pair("updateFunc", QScriptValue::Undeletable),
-        pair("validationFunc", QScriptValue::Undeletable),
-        pair("datatype", QScriptValue::Undeletable),
-        pair("typeName", QScriptValue::Undeletable),
-        pair("toStringFunc", QScriptValue::Undeletable),
+        property("name", QScriptValue::Undeletable),
+        property("wasAbleToRead"),
+        property("parent"),
+        property("valid"),
+        property("validationError"),
+        property("byteOrder", QScriptValue::Undeletable),
+        property("updateFunc", QScriptValue::Undeletable),
+        property("validationFunc", QScriptValue::Undeletable),
+        property("datatype", QScriptValue::Undeletable),
+        property("typeName", QScriptValue::Undeletable),
+        property("toStringFunc", QScriptValue::Undeletable),
     };
 
     primitiveProperties = commonProperties;
     primitiveProperties.insert(primitiveProperties.end(), {
-        pair("value"), pair("char"), pair("int"),
-        pair("int8"),  pair("int16"),  pair("int32"),  pair("int64"),  pair("uint"),
-        pair("uint8"),  pair("uint16"),  pair("uint32"),  pair("uint64"),  pair("bool"),
-        pair("float"),  pair("double"),  pair("int64high32"),  pair("int64low32"),
-        pair("uint64high32"),  pair("uint64low32"),  pair("type"),
+        property("value"), property("char"), property("int"),
+        property("int8"),  property("int16"),  property("int32"),  property("int64"),  property("uint"),
+        property("uint8"),  property("uint16"),  property("uint32"),  property("uint64"),  property("bool"),
+        property("float"),  property("double"),  property("int64high32"),  property("int64low32"),
+        property("uint64high32"),  property("uint64low32"),  property("type"),
     });
     std::sort(primitiveProperties.begin(), primitiveProperties.end());
 
@@ -144,7 +170,7 @@ void ScriptClassesTest::initTestCase()
     }
 
     enumProperties = primitiveProperties;
-    enumProperties.emplace_back(pair("enumValues", QScriptValue::Undeletable));
+    enumProperties.emplace_back(property("enumValues", QScriptValue::Undeletable));
     // TODO valueString property (i.e. the current value as enumerator name)
     // XXX enumName
     std::sort(enumProperties.begin(), enumProperties.end());
@@ -165,7 +191,7 @@ void ScriptClassesTest::initTestCase()
     flagDataTop = std::make_unique<TopLevelDataInformation>(std::move(managedFlagData), nullptr, ScriptEngineInitializer::newEngine());
 
     bitfieldProperties = primitiveProperties;
-    bitfieldProperties.emplace_back(pair("width", QScriptValue::Undeletable));
+    bitfieldProperties.emplace_back(property("width", QScriptValue::Undeletable));
     std::sort(bitfieldProperties.begin(), bitfieldProperties.end());
 
     auto managedUnsignedBitfield = std::make_unique<UnsignedBitfieldDataInformation>(QStringLiteral("unsignedBit"), 42);
@@ -180,12 +206,12 @@ void ScriptClassesTest::initTestCase()
 
     stringProperties = commonProperties;
     stringProperties.insert(stringProperties.end(), {
-        pair("terminatedBy", QScriptValue::Undeletable),
-        pair("byteCount"),
-        pair("maxCharCount", QScriptValue::Undeletable),
-        pair("charCount"),
-        pair("encoding", QScriptValue::Undeletable),
-        pair("maxByteCount", QScriptValue::Undeletable),
+        property("terminatedBy", QScriptValue::Undeletable),
+        property("byteCount"),
+        property("maxCharCount", QScriptValue::Undeletable),
+        property("charCount"),
+        property("encoding", QScriptValue::Undeletable),
+        property("maxByteCount", QScriptValue::Undeletable),
     });
     std::sort(stringProperties.begin(), stringProperties.end());
     auto managedStringData = std::make_unique<StringDataInformation>(QStringLiteral("string"), StringDataInformation::StringType::Latin1);
@@ -194,8 +220,8 @@ void ScriptClassesTest::initTestCase()
 
     arrayProperties = commonProperties;
     arrayProperties.insert(arrayProperties.end(), {
-        pair("length", QScriptValue::Undeletable),
-        pair("type", QScriptValue::Undeletable),
+        property("length", QScriptValue::Undeletable),
+        property("type", QScriptValue::Undeletable),
     });
     std::sort(arrayProperties.begin(), arrayProperties.end());
     auto managedArrayData = std::make_unique<ArrayDataInformation>(QStringLiteral("array"), 20,
@@ -204,7 +230,7 @@ void ScriptClassesTest::initTestCase()
     arrayDataTop = std::make_unique<TopLevelDataInformation>(std::move(managedArrayData), nullptr, ScriptEngineInitializer::newEngine());
 
     structUnionProperties = commonProperties;
-    structUnionProperties.emplace_back(pair("childCount"));
+    structUnionProperties.emplace_back(property("childCount"));
     // property children is only writable -> it is not in the iterator
     auto managedStructData = std::make_unique<StructureDataInformation>(QStringLiteral("struct"));
     structData = managedStructData.get();
@@ -255,7 +281,7 @@ void ScriptClassesTest::testScriptValueContents()
     QCOMPARE(DefaultScriptClass::toDataInformation(val), data);
 }
 
-void ScriptClassesTest::checkProperties(const std::vector<PropertyPair>& expected,
+void ScriptClassesTest::checkProperties(const std::vector<PropertyData>& expected,
                                         DataInformation* data, const char* tag)
 {
     // check in updating mode
@@ -265,10 +291,10 @@ void ScriptClassesTest::checkProperties(const std::vector<PropertyPair>& expecte
                                              data->topLevelDataInformation()->scriptHandler()->handlerInfo());
 
     QScriptValueIterator it(value);
-    std::vector<PropertyPair> foundProperties;
+    std::vector<PropertyData> foundProperties;
     while (it.hasNext()) {
         it.next();
-        foundProperties.emplace_back(qMakePair(it.name(), it.flags()));
+        foundProperties.emplace_back(PropertyData{it.name(), it.flags()});
     }
     data->topLevelDataInformation()->scriptHandler()->handlerInfo()->setMode(ScriptHandlerInfo::Mode::None);
     std::sort(foundProperties.begin(), foundProperties.end());
@@ -277,16 +303,16 @@ void ScriptClassesTest::checkProperties(const std::vector<PropertyPair>& expecte
             if (foundProperties.at(i) != expected.at(i)) {
                 qWarning() << tag << ":" << foundProperties.at(i) << ", but expected:" << expected.at(i);
             }
-            QCOMPARE(foundProperties.at(i).first, expected.at(i).first);
-            QCOMPARE(foundProperties.at(i).second, expected.at(i).second);
+            QCOMPARE(foundProperties.at(i).name, expected.at(i).name);
+            QCOMPARE(foundProperties.at(i).flags, expected.at(i).flags);
         }
     }
     for (std::size_t i = 0; i < foundProperties.size(); ++i) {
         if (foundProperties.at(i) != expected.at(i)) {
             qWarning() << tag << ":" << foundProperties.at(i) << "!=" << expected.at(i);
         }
-        QCOMPARE(foundProperties.at(i).first, expected.at(i).first);
-        QCOMPARE(foundProperties.at(i).second, expected.at(i).second);
+        QCOMPARE(foundProperties.at(i).name, expected.at(i).name);
+        QCOMPARE(foundProperties.at(i).flags, expected.at(i).flags);
     }
 
     QCOMPARE(foundProperties.size(), expected.size());
