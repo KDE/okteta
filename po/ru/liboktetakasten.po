@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: khexedit\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-25 02:02+0000\n"
+"POT-Creation-Date: 2025-10-27 02:01+0000\n"
 "PO-Revision-Date: 2022-10-12 16:05+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -395,20 +395,20 @@ msgstr[1] "преобразовано %1 байта."
 msgstr[2] "преобразовано %1 байтов."
 msgstr[3] "преобразован %1 байт."
 
-#: controllers/view/bytetable/bytetableview.cpp:72
+#: controllers/view/bytetable/bytetableview.cpp:73
 #, kde-format
 msgctxt "@label:spinbox number of bytes to insert"
 msgid "Number (bytes):"
 msgstr "Число байтов:"
 
-#: controllers/view/bytetable/bytetableview.cpp:80
+#: controllers/view/bytetable/bytetableview.cpp:81
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "Number of repeats of the currently selected byte in the table to be inserted."
 msgstr "Число повторений выбранного в таблице байта при вставке."
 
-#: controllers/view/bytetable/bytetableview.cpp:96
+#: controllers/view/bytetable/bytetableview.cpp:97
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -2035,7 +2035,7 @@ msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed: \"%1\""
 msgstr "Проверка не удалась: \"%1\""
 
-#: controllers/view/structures/datatypes/primitive/bitfield/abstractbitfielddatainformation.cpp:30
+#: controllers/view/structures/datatypes/primitive/bitfield/abstractbitfielddatainformation.cpp:32
 #, kde-format
 msgid "%1 bit"
 msgid_plural "%1 bits"
@@ -2114,12 +2114,12 @@ msgctxt ""
 msgid "enum %1 (%2)"
 msgstr "перечисление %1 (%2)"
 
-#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:79
+#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:83
 #, kde-format
 msgid "0x%1 (no matching flags)"
 msgstr "0x%1 (без соответствующих флагов)"
 
-#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:109
+#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:113
 #, kde-format
 msgctxt ""
 "Displayed in the type column. first comes the name of the enum, then the "
@@ -2338,7 +2338,7 @@ msgctxt "data type, then name"
 msgid "tagged union %1"
 msgstr "variant %1"
 
-#: controllers/view/structures/datatypes/uniondatainformation.cpp:27
+#: controllers/view/structures/datatypes/uniondatainformation.cpp:28
 #, kde-format
 msgctxt "data type in C/C++, then name"
 msgid "union %1"
@@ -2412,19 +2412,19 @@ msgctxt "@title:window"
 msgid "License Agreement"
 msgstr ""
 
-#: controllers/view/structures/settings/structureaddremovewidget.cpp:47
+#: controllers/view/structures/settings/structureaddremovewidget.cpp:48
 #, kde-format
 msgctxt "@info:label"
 msgid "Installed structures:"
 msgstr "Установленные структуры:"
 
-#: controllers/view/structures/settings/structureaddremovewidget.cpp:57
+#: controllers/view/structures/settings/structureaddremovewidget.cpp:58
 #, kde-format
 msgctxt "@info:label"
 msgid "Used structures:"
 msgstr "Используемые структуры:"
 
-#: controllers/view/structures/settings/structureitemdelegate.cpp:112
+#: controllers/view/structures/settings/structureitemdelegate.cpp:113
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "About"
@@ -2653,32 +2653,32 @@ msgstr "Показывать численные значения символо�
 msgid "Character value:"
 msgstr "Система счисления:"
 
-#: controllers/view/structures/structurestool.cpp:71
+#: controllers/view/structures/structurestool.cpp:72
 #: controllers/view/structures/structurestoolviewfactory.cpp:27
 #, kde-format
 msgctxt "@title:window"
 msgid "Structures"
 msgstr "Структуры данных"
 
-#: controllers/view/structures/structurestool.cpp:200
+#: controllers/view/structures/structurestool.cpp:201
 #, kde-format
 msgctxt "name of a data structure"
 msgid "Name"
 msgstr "Название"
 
-#: controllers/view/structures/structurestool.cpp:202
+#: controllers/view/structures/structurestool.cpp:203
 #, kde-format
 msgctxt "type of a data structure"
 msgid "Type"
 msgstr "Тип"
 
-#: controllers/view/structures/structurestool.cpp:204
+#: controllers/view/structures/structurestool.cpp:205
 #, kde-format
 msgctxt "value of a data structure (primitive type)"
 msgid "Value"
 msgstr "Значение"
 
-#: controllers/view/structures/structurestool.cpp:206
+#: controllers/view/structures/structurestool.cpp:207
 #, fuzzy, kde-format
 #| msgid "Size:"
 msgctxt "size of a data structure"
@@ -4028,7 +4028,7 @@ msgctxt "@item:inmenu address size"
 msgid "24-bit"
 msgstr "24 бита"
 
-#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoder.cpp:114
+#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoder.cpp:116
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "Uuencoding"
@@ -4102,7 +4102,7 @@ msgctxt "name of the encoding target"
 msgid "View in Plain Text"
 msgstr "Просмотреть как обычный текст"
 
-#: gui/io/streamencoder/xxencoding/bytearrayxxencodingstreamencoder.cpp:70
+#: gui/io/streamencoder/xxencoding/bytearrayxxencodingstreamencoder.cpp:71
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "Xxencoding"

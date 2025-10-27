@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-25 02:02+0000\n"
+"POT-Creation-Date: 2025-10-27 02:01+0000\n"
 "PO-Revision-Date: 2024-04-22 16:05\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -343,20 +343,20 @@ msgid "1 byte inserted."
 msgid_plural "%1 bytes inserted."
 msgstr[0] "已插入 %1 字节。"
 
-#: controllers/view/bytetable/bytetableview.cpp:72
+#: controllers/view/bytetable/bytetableview.cpp:73
 #, kde-format
 msgctxt "@label:spinbox number of bytes to insert"
 msgid "Number (bytes):"
 msgstr "数量(字节)："
 
-#: controllers/view/bytetable/bytetableview.cpp:80
+#: controllers/view/bytetable/bytetableview.cpp:81
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "Number of repeats of the currently selected byte in the table to be inserted."
 msgstr "重复插入表格中当前所选字节的次数。"
 
-#: controllers/view/bytetable/bytetableview.cpp:96
+#: controllers/view/bytetable/bytetableview.cpp:97
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1879,7 +1879,7 @@ msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed: \"%1\""
 msgstr "校验失败：“%1”"
 
-#: controllers/view/structures/datatypes/primitive/bitfield/abstractbitfielddatainformation.cpp:30
+#: controllers/view/structures/datatypes/primitive/bitfield/abstractbitfielddatainformation.cpp:32
 #, kde-format
 msgid "%1 bit"
 msgid_plural "%1 bits"
@@ -1946,12 +1946,12 @@ msgctxt ""
 msgid "enum %1 (%2)"
 msgstr "枚举 %1(%2)"
 
-#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:79
+#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:83
 #, kde-format
 msgid "0x%1 (no matching flags)"
 msgstr "0x%1(无匹配的标志)"
 
-#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:109
+#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:113
 #, kde-format
 msgctxt ""
 "Displayed in the type column. first comes the name of the enum, then the "
@@ -2170,7 +2170,7 @@ msgctxt "data type, then name"
 msgid "tagged union %1"
 msgstr "有标记联合 %1"
 
-#: controllers/view/structures/datatypes/uniondatainformation.cpp:27
+#: controllers/view/structures/datatypes/uniondatainformation.cpp:28
 #, kde-format
 msgctxt "data type in C/C++, then name"
 msgid "union %1"
@@ -2246,19 +2246,19 @@ msgctxt "@title:window"
 msgid "License Agreement"
 msgstr "许可证协议"
 
-#: controllers/view/structures/settings/structureaddremovewidget.cpp:47
+#: controllers/view/structures/settings/structureaddremovewidget.cpp:48
 #, kde-format
 msgctxt "@info:label"
 msgid "Installed structures:"
 msgstr "已安装的结构："
 
-#: controllers/view/structures/settings/structureaddremovewidget.cpp:57
+#: controllers/view/structures/settings/structureaddremovewidget.cpp:58
 #, kde-format
 msgctxt "@info:label"
 msgid "Used structures:"
 msgstr "已用的结构："
 
-#: controllers/view/structures/settings/structureitemdelegate.cpp:112
+#: controllers/view/structures/settings/structureitemdelegate.cpp:113
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "About"
@@ -2475,32 +2475,32 @@ msgstr "显示字符的数字值"
 msgid "Character value:"
 msgstr "字符数值："
 
-#: controllers/view/structures/structurestool.cpp:71
+#: controllers/view/structures/structurestool.cpp:72
 #: controllers/view/structures/structurestoolviewfactory.cpp:27
 #, kde-format
 msgctxt "@title:window"
 msgid "Structures"
 msgstr "结构"
 
-#: controllers/view/structures/structurestool.cpp:200
+#: controllers/view/structures/structurestool.cpp:201
 #, kde-format
 msgctxt "name of a data structure"
 msgid "Name"
 msgstr "文件名"
 
-#: controllers/view/structures/structurestool.cpp:202
+#: controllers/view/structures/structurestool.cpp:203
 #, kde-format
 msgctxt "type of a data structure"
 msgid "Type"
 msgstr "文件系统"
 
-#: controllers/view/structures/structurestool.cpp:204
+#: controllers/view/structures/structurestool.cpp:205
 #, kde-format
 msgctxt "value of a data structure (primitive type)"
 msgid "Value"
 msgstr "价值"
 
-#: controllers/view/structures/structurestool.cpp:206
+#: controllers/view/structures/structurestool.cpp:207
 #, kde-format
 msgctxt "size of a data structure"
 msgid "Size"
@@ -3748,7 +3748,7 @@ msgctxt "@item:inmenu address size"
 msgid "24-bit"
 msgstr "24 位"
 
-#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoder.cpp:114
+#: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoder.cpp:116
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "Uuencoding"
@@ -3820,7 +3820,7 @@ msgctxt "name of the encoding target"
 msgid "View in Plain Text"
 msgstr "以纯文本形式查看"
 
-#: gui/io/streamencoder/xxencoding/bytearrayxxencodingstreamencoder.cpp:70
+#: gui/io/streamencoder/xxencoding/bytearrayxxencodingstreamencoder.cpp:71
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "Xxencoding"
