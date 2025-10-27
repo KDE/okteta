@@ -9,6 +9,8 @@
 
 // Okteta core
 #include <Okteta/Byte>
+// Std
+#include <cstddef>
 
 class QByteArray;
 class QString;
@@ -30,7 +32,7 @@ public:
 
 public:
     [[nodiscard]]
-    QString encodeAsString(const char* byteArrayData, int byteArraySize, const CharCodec* charCodec) const;
+    QString encodeAsString(const char* byteArrayData, std::size_t byteArraySize, const CharCodec* charCodec) const;
     [[nodiscard]]
     QString encodeAsString(const QByteArray& byteArray, const CharCodec* charCodec) const;
     [[nodiscard]]

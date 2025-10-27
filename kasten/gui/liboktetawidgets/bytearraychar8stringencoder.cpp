@@ -34,12 +34,12 @@ QString ByteArrayChar8StringEncoder::encodeAsString(const QByteArray& byteArray,
     return encodeAsString(byteArray.constData(), byteArray.size(), charCodec);
 }
 
-QString ByteArrayChar8StringEncoder::encodeAsString(const char* byteArrayData, int byteArraySize, const CharCodec* charCodec) const
+QString ByteArrayChar8StringEncoder::encodeAsString(const char* byteArrayData, std::size_t byteArraySize, const CharCodec* charCodec) const
 {
     QString result;
 
     result.reserve(byteArraySize); // TODO: or prepare for worse-case and then shrink afterwards?
-    for (int i = 0; i < byteArraySize; ++i) {
+    for (std::size_t i = 0; i < byteArraySize; ++i) {
         const char byte = byteArrayData[i];
         const Character character = charCodec->decode(byte);
         if (!character.isUndefined()) {
