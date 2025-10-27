@@ -37,18 +37,18 @@ QString ByteArrayUtf8StringEncoder::encodeAsString(const QByteArray& byteArray, 
     return encodeAsString(byteArray.constData(), byteArray.size(), utf8Codec);
 }
 
-QString ByteArrayUtf8StringEncoder::encodeAsString(const char* byteArrayData, int byteArraySize, QTextCodec* utf8Codec) const
+QString ByteArrayUtf8StringEncoder::encodeAsString(const char* byteArrayData, std::size_t byteArraySize, QTextCodec* utf8Codec) const
 {
     QString result;
 
     const QChar replacementChar(QChar::ReplacementCharacter);
     result.reserve(byteArraySize); // TODO: or prepare for worse-case and then shrink afterwards?
-    for (int i = 0; i < byteArraySize;) {
-        const int maxUtf8DataSize = std::min(4, byteArraySize - i);
+    for (std::size_t i = 0; i < byteArraySize;) {
+        const std::size_t maxUtf8DataSize = std::min(byteArraySize - i, static_cast<std::size_t>(4));
         const char* const data = byteArrayData + i;
-        int byteUsed = 0;
+        std::size_t byteUsed = 0;
         QString utf8;
-        for (int b = 1; b <= maxUtf8DataSize; ++b) {
+        for (std::size_t b = 1; b <= maxUtf8DataSize; ++b) {
             utf8 = utf8Codec->toUnicode(data, b);
             if (utf8.size() == 1 && utf8[0] != replacementChar) {
                 byteUsed = b;
@@ -76,7 +76,7 @@ QString ByteArrayUtf8StringEncoder::encodeAsString(const char* byteArrayData, in
         } else {
             byteUsed = 1;
         }
-        for (int b = 0; b < byteUsed; ++b) {
+        for (std::size_t b = 0; b < byteUsed; ++b) {
             // TODO: make hex vs. oct. configurable? \X vs. \x? support memory of user usages?
             const char byte = byteArrayData[i];
             const unsigned int numericValue = static_cast<unsigned char>(byte);

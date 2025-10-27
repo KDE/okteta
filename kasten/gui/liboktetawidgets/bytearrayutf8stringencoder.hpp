@@ -7,6 +7,9 @@
 #ifndef OKTETA_BYTEARRAYUTF8STRINGENCODER_HPP
 #define OKTETA_BYTEARRAYUTF8STRINGENCODER_HPP
 
+// Std
+#include <cstddef>
+
 class QByteArray;
 class QString;
 class QLatin1String;
@@ -19,7 +22,7 @@ class ByteArrayUtf8StringEncoder
 {
 public:
     [[nodiscard]]
-    QString encodeAsString(const char* byteArrayData, int byteArraySize, QTextCodec* utf8Codec) const;
+    QString encodeAsString(const char* byteArrayData, std::size_t byteArraySize, QTextCodec* utf8Codec) const;
     [[nodiscard]]
     QString encodeAsString(const QByteArray& byteArray, QTextCodec* utf8Codec) const;
 
