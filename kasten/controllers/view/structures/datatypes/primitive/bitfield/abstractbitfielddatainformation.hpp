@@ -22,6 +22,9 @@ public:
         Boolean
     };
 
+private:
+    static constexpr quint8 MaxWidth = 64; // maximum width is 64 bits
+
 protected:
     AbstractBitfieldDataInformation(const AbstractBitfieldDataInformation& d);
 
@@ -91,7 +94,7 @@ inline quint64 AbstractBitfieldDataInformation::mask() const
      *     ret |= 1 << i;
      * return ret;
      */
-    if (Q_UNLIKELY(mWidth == 64U)) {
+    if (Q_UNLIKELY(mWidth == MaxWidth)) {
         return ~quint64(0);
     }
     return (quint64(1) << mWidth) - 1;
@@ -104,8 +107,8 @@ inline BitCount32 AbstractBitfieldDataInformation::width() const
 
 inline void AbstractBitfieldDataInformation::setWidth(BitCount32 newWidth)
 {
-    Q_ASSERT(newWidth > 0 && newWidth <= 64);
-    mWidth = std::min(newWidth, BitCount32(64U)); // maximum width is 64 bits
+    Q_ASSERT(newWidth > 0 && newWidth <= MaxWidth);
+    mWidth = std::min(newWidth, static_cast<BitCount32>(MaxWidth));
 }
 
 #endif /* KASTEN_ABSTRACTBITFIELDDATAINFORMATION_HPP */
