@@ -257,7 +257,7 @@ QSize ByteArrayRowViewPrivate::minimumSizeHint() const
         lineHeight()
         + noOfLines() > 1 ? q->style()->pixelMetric(QStyle::PM_ScrollBarExtent) : 0;
 
-    return {std::min(minWidth, 100), std::min(minHeight, 100)};
+    return {std::min(minWidth, GenericMinimumWidth), std::min(minHeight, GenericMinimumHeight)};
 }
 
 int ByteArrayRowViewPrivate::fittingBytesPerLine() const

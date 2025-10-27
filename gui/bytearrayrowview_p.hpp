@@ -19,6 +19,10 @@ class ByteArrayRowViewPrivate : public AbstractByteArrayViewPrivate
 {
     Q_DECLARE_PUBLIC(ByteArrayRowView)
 
+private:
+    static constexpr int GenericMinimumWidth = 100;
+    static constexpr int GenericMinimumHeight = 100;
+
 public:
     explicit ByteArrayRowViewPrivate(ByteArrayRowView* parent);
     ~ByteArrayRowViewPrivate() override;
