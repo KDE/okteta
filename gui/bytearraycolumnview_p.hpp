@@ -20,6 +20,10 @@ class ByteArrayColumnViewPrivate : public AbstractByteArrayViewPrivate
 {
     Q_DECLARE_PUBLIC(ByteArrayColumnView)
 
+private:
+    static constexpr int GenericMinimumWidth = 100;
+    static constexpr int GenericMinimumHeight = 100;
+
 public:
     explicit ByteArrayColumnViewPrivate(ByteArrayColumnView* parent);
     ~ByteArrayColumnViewPrivate() override;
