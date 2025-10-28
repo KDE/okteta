@@ -25,9 +25,8 @@ QScriptValue EnumScriptClass::additionalProperty(const DataInformation* data, co
     if (name == s_values) {
         const EnumDataInformation* const pData = data->asEnum();
         QScriptValue ret = engine()->newObject();
-        QMapIterator<AllPrimitiveTypes, QString> it(pData->enumValues()->values());
-        while (it.hasNext()) {
-            it.next();
+        const QMap<AllPrimitiveTypes, QString>& values = pData->enumValues()->values();
+        for (auto it = values.begin(); it != values.end(); ++it) {
             ret.setProperty(it.value(), QString::number(it.key().value<quint64>())); // should always work
         }
         return ret;
