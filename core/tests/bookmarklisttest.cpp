@@ -222,7 +222,7 @@ void BookmarkListTest::testAdjustToSwapped()
     QVERIFY(adjusted);
     QVERIFY(!bookmarkList.isEmpty());
     QCOMPARE(bookmarkList.size(), 5);
-    QVector<Address>::ConstIterator oit = newOffsets.constBegin();
+    auto oit = newOffsets.constBegin();
     for (const Bookmark& bookmark : std::as_const(bookmarkList)) {
         QCOMPARE(bookmark.offset(), *oit++);
     }

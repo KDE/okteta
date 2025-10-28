@@ -75,7 +75,7 @@ inline void PieceList::append(const Piece& piece)
 }
 inline void PieceList::append(const PieceList& other)
 {
-    QVector<Piece>::ConstIterator it = other.mList.begin();
+    auto it = other.mList.begin();
 
     // see if the ones at the border can be merged
     bool isMerged = false;
@@ -96,7 +96,7 @@ inline void PieceList::append(const PieceList& other)
 inline void PieceList::prepend(const PieceList& other)
 {
     QVector<Piece> otherCopy = other.mList;
-    QVector<Piece>::Iterator it = mList.begin();
+    auto it = mList.begin();
 
     // see if the ones at the border can be merged
     bool isMerged = false;

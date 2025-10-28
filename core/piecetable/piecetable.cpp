@@ -178,13 +178,13 @@ PieceList PieceTable::remove(const AddressRange& removeRange)
 
     AddressRange dataRange(0, -1);
 
-    QLinkedList<Piece>::Iterator it = mList.begin();
+    auto it = mList.begin();
     while (it != mList.end()) {
         Piece* piece = &*it;
         dataRange.setEndByWidth(piece->width());
 
         if (dataRange.includes(removeRange.start())) {
-            QLinkedList<Piece>::Iterator firstRemoved = it;
+            auto firstRemoved = it;
             const Address firstDataRangeStart = dataRange.start();
 // int sections = 1;
 
@@ -200,7 +200,7 @@ PieceList PieceTable::remove(const AddressRange& removeRange)
             }
             do {
                 if (dataRange.includes(removeRange.end())) {
-                    QLinkedList<Piece>::Iterator lastRemoved = it;
+                    auto lastRemoved = it;
 // qCDebug(LOG_OKTETA_CORE) << removeRange.start() << removeRange.end() << firstDataRangeStart << dataRange.end();
                     // cut from first section if not all
                     bool onlyCompletePiecesRemoved = true;
@@ -238,7 +238,7 @@ PieceList PieceTable::remove(const AddressRange& removeRange)
 
                     if (onlyCompletePiecesRemoved) {
                         if (firstRemoved != mList.begin() && lastRemoved != mList.end()) {
-                            QLinkedList<Piece>::Iterator beforeFirstRemoved = firstRemoved - 1;
+                            const auto beforeFirstRemoved = firstRemoved - 1;
                             if ((*beforeFirstRemoved).append(*lastRemoved)) {
                                 ++lastRemoved;
                             }
@@ -288,7 +288,7 @@ void PieceTable::swap(Address firstStart, const AddressRange& secondRange)
 {
     AddressRange dataRange(0, -1);
 
-    QLinkedList<Piece>::Iterator it = mList.begin();
+    auto it = mList.begin();
     while (it != mList.end()) {
         Piece* piece = &*it;
         dataRange.setEndByWidth(piece->width());
@@ -302,7 +302,7 @@ void PieceTable::swap(Address firstStart, const AddressRange& secondRange)
                 piece = &*it;
                 dataRange.setStart(firstStart);
             }
-            QLinkedList<Piece>::Iterator firstIt = it;
+            auto firstIt = it;
 
             do {
                 if (dataRange.includes(secondRange.start())) {
@@ -314,7 +314,7 @@ void PieceTable::swap(Address firstStart, const AddressRange& secondRange)
                         piece = &*it;
                         dataRange.setStart(secondRange.start());
                     }
-                    QLinkedList<Piece>::Iterator firstSecondIt = it;
+                    const auto firstSecondIt = it;
 
                     do {
                         if (dataRange.includes(secondRange.end())) {
@@ -326,7 +326,7 @@ void PieceTable::swap(Address firstStart, const AddressRange& secondRange)
                             } else {
                                 ++it;
                             }
-                            QLinkedList<Piece>::Iterator behindLastSecondIt = it;
+                            const auto behindLastSecondIt = it;
 
                             for (it = firstSecondIt; it != behindLastSecondIt; ++it) {
                                 firstIt = mList.insert(firstIt, *it) + 1;

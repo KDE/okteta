@@ -33,7 +33,7 @@ const Bookmark& BookmarkListConstIteratorAdapter::peekNext() const
 
 const Bookmark& BookmarkListConstIteratorAdapter::peekPrevious() const
 {
-    BookmarkList::ConstIterator p = m_iterator;
+    auto p = m_iterator;
     return *(--p);
 }
 

@@ -28,7 +28,7 @@ SafeReferenceHolder::~SafeReferenceHolder()
 void SafeReferenceHolder::invalidateAll(DataInformation* data)
 {
     // this is called from DataInformation destructor, don't do anything with data!
-    Container::iterator i = mRefs.find(data);
+    auto i = mRefs.find(data);
     // qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "invalidating all references to" << data->name();
     while (i != mRefs.end() && i.key() == data) {
         // qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "invalidating" << i.value();
