@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-27 02:01+0000\n"
+"POT-Creation-Date: 2025-10-29 02:02+0000\n"
 "PO-Revision-Date: 2025-09-01 19:26+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -2000,12 +2000,12 @@ msgctxt ""
 msgid "enum %1 (%2)"
 msgstr "uppräkningsvärde %1 (%2)"
 
-#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:83
+#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:82
 #, kde-format
 msgid "0x%1 (no matching flags)"
 msgstr "0x%1 (in matchande flaggor)"
 
-#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:113
+#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:112
 #, kde-format
 msgctxt ""
 "Displayed in the type column. first comes the name of the enum, then the "

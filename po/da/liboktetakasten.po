@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-27 02:01+0000\n"
+"POT-Creation-Date: 2025-10-29 02:02+0000\n"
 "PO-Revision-Date: 2016-07-11 21:35+0100\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -2085,12 +2085,12 @@ msgctxt ""
 msgid "enum %1 (%2)"
 msgstr "enum %1 (%2)"
 
-#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:83
+#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:82
 #, kde-format
 msgid "0x%1 (no matching flags)"
 msgstr "0x%1 (ingen matchende flag)"
 
-#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:113
+#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:112
 #, kde-format
 msgctxt ""
 "Displayed in the type column. first comes the name of the enum, then the "

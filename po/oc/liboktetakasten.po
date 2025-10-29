@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-27 02:01+0000\n"
+"POT-Creation-Date: 2025-10-29 02:02+0000\n"
 "PO-Revision-Date: 2008-08-05 22:28+0200\n"
 "Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
 "Language-Team: Occitan (lengadocian) <ubuntu-l10n-oci@lists.ubuntu.com>\n"
@@ -2054,12 +2054,12 @@ msgctxt ""
 msgid "enum %1 (%2)"
 msgstr "%1%"
 
-#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:83
+#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:82
 #, kde-format
 msgid "0x%1 (no matching flags)"
 msgstr ""
 
-#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:113
+#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:112
 #, fuzzy, kde-format
 #| msgctxt "zoom-factor (percentage)"
 #| msgid "%1%"

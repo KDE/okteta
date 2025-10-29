@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: playground-utils/okteta.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-27 02:01+0000\n"
+"POT-Creation-Date: 2025-10-29 02:02+0000\n"
 "PO-Revision-Date: 2007-11-05 08:28-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -2121,12 +2121,12 @@ msgctxt ""
 msgid "enum %1 (%2)"
 msgstr "enum (%1)"
 
-#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:83
+#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:82
 #, kde-format
 msgid "0x%1 (no matching flags)"
 msgstr ""
 
-#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:113
+#: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:112
 #, fuzzy, kde-format
 #| msgid "%1 (%2)"
 msgctxt ""
