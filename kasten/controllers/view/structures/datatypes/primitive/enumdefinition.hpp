@@ -38,7 +38,7 @@ public:
     {}
 
     const QMap<AllPrimitiveTypes, QString>& values() const;
-    const AllPrimitiveTypes key(QString& value) const;
+    const AllPrimitiveTypes key(const QString& value) const;
     const QString value(AllPrimitiveTypes key) const;
     PrimitiveDataType type() const;
     const QString& name() const;
@@ -61,7 +61,7 @@ inline const QMap<AllPrimitiveTypes, QString>& EnumDefinition::values() const
     return mValues;
 }
 
-inline const AllPrimitiveTypes EnumDefinition::key(QString& value) const
+inline const AllPrimitiveTypes EnumDefinition::key(const QString& value) const
 {
     return mValues.key(value);
 }
