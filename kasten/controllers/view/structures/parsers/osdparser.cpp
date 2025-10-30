@@ -158,8 +158,8 @@ std::vector<std::unique_ptr<TopLevelDataInformation>> OsdParser::parseStructures
         }
         std::unique_ptr<QScriptEngine> eng = ScriptEngineInitializer::newEngine(); // we need this for dynamic arrays
         auto logger = std::make_unique<ScriptLogger>();
-        QVector<EnumDefinition::Ptr> enums = parseEnums(rootElem, logger.get());
-        OsdParserInfo info(QString(), logger.get(), nullptr, eng.get(), enums);
+        std::vector<EnumDefinition::Ptr> enums = parseEnums(rootElem, logger.get());
+        OsdParserInfo info(QString(), logger.get(), nullptr, eng.get(), std::move(enums));
 
         auto data = parseElement(elem, info);
 
@@ -190,9 +190,9 @@ std::vector<std::unique_ptr<TopLevelDataInformation>> OsdParser::parseStructures
 }
 
 // TODO make type depend on the user not the definition
-QVector<EnumDefinition::Ptr> OsdParser::parseEnums(const QDomElement& rootElem, ScriptLogger* logger)
+std::vector<EnumDefinition::Ptr> OsdParser::parseEnums(const QDomElement& rootElem, ScriptLogger* logger)
 {
-    QVector<EnumDefinition::Ptr> ret;
+    std::vector<EnumDefinition::Ptr> ret;
     for (QDomElement elem = rootElem.firstChildElement(); !elem.isNull(); elem = elem.nextSiblingElement()) {
         if (elem.tagName() != TYPE_ENUMDEF()) {
             continue;
@@ -231,8 +231,7 @@ QVector<EnumDefinition::Ptr> OsdParser::parseEnums(const QDomElement& rootElem, 
         if (defs.isEmpty()) {
             lwc.error() << "Enum definition contains no valid elements!";
         } else {
-            EnumDefinition::Ptr enumDef = EnumDefinition::Ptr(new EnumDefinition(defs, enumName, type));
-            ret.append(enumDef);
+            ret.emplace_back(EnumDefinition::Ptr(new EnumDefinition(defs, enumName, type)));
         }
     }
 
