@@ -17,7 +17,7 @@ msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-10-25 03:32+0000\n"
-"PO-Revision-Date: 2025-05-25 11:31+0200\n"
+"PO-Revision-Date: 2025-09-01 18:53+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
 "Language: fr\n"
@@ -544,7 +544,7 @@ msgid ""
 "the set minimum length."
 msgstr ""
 "Si vous cliquez sur le bouton <interface>Calculer</interface>, la liste sera "
-"mise à jour avec toutes les chaînes de caractères contenues dans "
+"mise à jour avec toutes les chaines de caractères contenues dans "
 "l'intervalle sélectionné et comportant la longueur minimale définie."
 
 #: controllers/view/filter/filtertool.cpp:67
@@ -1650,7 +1650,7 @@ msgid ""
 "Finds the strings contained in the selected range and lists them in the view "
 "below."
 msgstr ""
-"Trouve les chaînes de caractères contenues dans l'intervalle sélectionné et "
+"Trouve les chaines de caractères contenues dans l'intervalle sélectionné et "
 "les liste dans la vue ci-dessous."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:71
@@ -1662,8 +1662,8 @@ msgid ""
 "found will be listed in the view below."
 msgstr ""
 "Si vous cliquez sur le bouton <interface>Extraire</interface>, une recherche "
-"est effectuée sur l'intervalle sélectionné pour toutes les chaînes dont la "
-"taille est associée à la longueur minimale. Les chaînes trouvées seront "
+"est effectuée sur l'intervalle sélectionné pour toutes les chaines dont la "
+"taille est associée à la longueur minimale. Les chaines trouvées seront "
 "listées dans la vue ci-dessous."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:81
@@ -1686,7 +1686,7 @@ msgstr "Cop&ier"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected strings to the clipboard."
-msgstr "Copie les chaînes de caractères sélectionnées dans le presse-papiers."
+msgstr "Copie les chaines de caractères sélectionnées dans le presse-papiers."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:143
 #, kde-kuit-format
@@ -1696,7 +1696,7 @@ msgid ""
 "selected in the list are copied to the clipboard."
 msgstr ""
 "Si vous cliquez sur le bouton <interface>Copier</interface>, toutes les "
-"chaînes de caractères que vous avez sélectionnées dans la liste seront "
+"chaines de caractères que vous avez sélectionnées dans la liste seront "
 "copiées dans le presse-papiers."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:152
@@ -1708,7 +1708,7 @@ msgstr "&Afficher"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Shows the selected string in the view."
-msgstr "Affiche la chaîne sélectionnée dans la vue."
+msgstr "Affiche la chaine sélectionnée dans la vue."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:157
 #, kde-kuit-format
@@ -1718,7 +1718,7 @@ msgid ""
 "last selected is marked and shown in the view."
 msgstr ""
 "Si vous cliquez sur le bouton <interface>Aller</interface>, la dernière "
-"chaîne de caractères sélectionnée est marquée et affichée dans la vue."
+"chaine de caractères sélectionnée est marquée et affichée dans la vue."
 
 #: controllers/view/structures/datatypes/array/complexarraydata.cpp:96
 #, kde-format
@@ -2240,7 +2240,7 @@ msgstr "Sélection de structures avancée"
 msgctxt "@info:tooltip"
 msgid "The base to use when converting unsigned numbers to a string."
 msgstr ""
-"La base à utiliser lors de la conversion de nombres non signés en une chaîne "
+"La base à utiliser lors de la conversion de nombres non signés en une chaine "
 "de caractères."
 
 #. i18n: ectx: tooltip, entry (SignedDisplayBase), group (ValueDisplay)
@@ -2249,7 +2249,7 @@ msgstr ""
 msgctxt "@info:tooltip"
 msgid "The base to use when converting signed numbers to a string."
 msgstr ""
-"La base à utiliser lors de la conversion de nombres signés en une chaîne de "
+"La base à utiliser lors de la conversion de nombres signés en une chaine de "
 "caractères."
 
 #. i18n: ectx: tooltip, entry (CharDisplayBase), group (ValueDisplay)
@@ -2258,7 +2258,7 @@ msgstr ""
 msgctxt "@info:tooltip"
 msgid "The base to use when converting characters to a value string."
 msgstr ""
-"La base à utiliser lors de la conversion de caractères en une chaîne de "
+"La base à utiliser lors de la conversion de caractères en une chaine de "
 "caractères."
 
 #. i18n: ectx: tooltip, entry (ShowCharNumericalValue), group (ValueDisplay)
@@ -2315,7 +2315,7 @@ msgid ""
 "of decimal digits)"
 msgstr ""
 "La précision utilisée pour convertir les nombres à virgule flottante en "
-"chaînes de caractères (nombre de chiffres décimaux)"
+"chaines de caractères (nombre de chiffres décimaux)"
 
 #. i18n: ectx: label, entry (ByteOrder), group (StructureSettings)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:47
