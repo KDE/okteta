@@ -10,6 +10,8 @@ set( OKTETAKASTEN_ABI_VERSION 2 )
 set( OKTETAKASTEN_LIB_SOVERSION 0 )
 set( OKTETAKASTEN_LIB_VERSION ${OKTETAKASTEN_VERSION} )
 
+ecm_test_set_dir_properties(PREFIX_NAME "oktetakasten")
+
 find_package(BZip2 1.0)
 set_package_properties(BZip2 PROPERTIES
     TYPE REQUIRED

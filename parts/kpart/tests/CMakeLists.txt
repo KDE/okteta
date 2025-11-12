@@ -10,7 +10,6 @@ ecm_add_test(
     oktetaparttest.cpp
 
     TEST_NAME oktetaparttest
-    NAME_PREFIX kpart-
     LINK_LIBRARIES
       OktetaKastenControllers
       OktetaKastenGui

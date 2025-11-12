@@ -20,7 +20,6 @@ ecm_add_test(
     bytearraydocumenttest.cpp
     ${SUTDIR}/bytearraydocument.cpp
     TEST_NAME bytearraydocumenttest
-    NAME_PREFIX oktetakasten-core-document-
     LINK_LIBRARIES
         OktetaKastenCoreDocumentSourcesTestShim
         KastenCore
@@ -40,7 +39,6 @@ ecm_add_test(
     ${LIBOKTETAWIDGETS_REL_DIR}/bytearraychar8stringdecoder.cpp
     ${LIBOKTETAWIDGETS_REL_DIR}/bytearrayvaluestringdecoder.cpp
     TEST_NAME bytearraydocumentfactorytest
-    NAME_PREFIX oktetakasten-core-document-
     LINK_LIBRARIES
         OktetaKastenCoreDocumentSourcesTestShim
         KastenCore

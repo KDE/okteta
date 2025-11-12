@@ -6,7 +6,6 @@ ecm_add_test(
     char8stringvalidatortest.cpp
 
     TEST_NAME char8stringvalidatortest
-    NAME_PREFIX oktetakasten-controllers-libdatatypeeditors-
     LINK_LIBRARIES
         OktetaCore
         Qt5::Gui

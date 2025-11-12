@@ -1,6 +1,14 @@
 set(OKTETACORE_VERSION ${OKTETALIBS_LIB_VERSION})
 set(OKTETACORE_SO_VERSION ${OKTETALIBS_LIB_SOVERSION})
 
+ecm_test_set_dir_properties(PREFIX_NAME "libokteta-core")
+
+ecm_test_set_dir_properties(
+    DIR piecetable
+    FIRST_PREFIX_NAME
+    PREFIX_NAME "libpiecetable"
+)
+
 okteta_add_library(Core NAMESPACE Okteta
     PUBLIC
         Qt5::Core

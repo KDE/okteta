@@ -13,7 +13,6 @@ ecm_add_tests(
     customtostringtest.cpp
     locktooffsettest.cpp
 
-    NAME_PREFIX oktetakasten-controllers-structures-
     LINK_LIBRARIES
         OktetaKastenControllersStructuresDataTypes
         Qt5::Test
@@ -21,7 +20,6 @@ ecm_add_tests(
 
 ecm_add_test(
     primitivedatainformationtest.cpp
-    NAME_PREFIX oktetakasten-controllers-structures-
     LINK_LIBRARIES
         OktetaKastenControllersStructuresDataTypes
         KF5::I18n
@@ -35,7 +33,6 @@ ecm_add_test(
     osdparsertest.cpp
 
     TEST_NAME osdparsertest
-    NAME_PREFIX oktetakasten-controllers-structures-
     LINK_LIBRARIES
         OktetaKastenControllersStructuresDataTypes
         KF5::I18n
