@@ -1,5 +1,8 @@
 set( SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/../.. )
 
+set(ECM_TEST_NAME_PREFIX_STRATEGY "VARIABLE")
+set(ECM_TEST_NAME_PREFIX "libpiecetable-")
+
 include_directories(
     ${SUTDIR}
 )
@@ -18,7 +21,6 @@ target_link_libraries(OktetaCoreTestPieceTableChange
 ########### piecetest ###############
 
 ecm_add_test( piecetest.cpp
-    NAME_PREFIX "libpiecetable-"
     LINK_LIBRARIES Qt5::Test
 )
 target_include_directories(piecetest
@@ -28,7 +30,6 @@ target_include_directories(piecetest
 ########### piecetabletest ###############
 
 ecm_add_test( piecetabletest.cpp
-    NAME_PREFIX "libpiecetable-"
     LINK_LIBRARIES
         OktetaCoreTestPieceTableChange
         OktetaCorePieceTable
@@ -38,7 +39,6 @@ ecm_add_test( piecetabletest.cpp
 ########### testpiecetablechangetest ###############
 
 ecm_add_test( testpiecetablechangetest.cpp
-    NAME_PREFIX "libpiecetable-"
     LINK_LIBRARIES
         OktetaCoreTestPieceTableChange
         Qt5::Test
@@ -47,7 +47,6 @@ ecm_add_test( testpiecetablechangetest.cpp
 ########### testpiecetablechangeabstractpiecetablechangeiftest ###############
 
 ecm_add_test( testpiecetablechangeabstractpiecetablechangeiftest.cpp
-    NAME_PREFIX "libpiecetable-"
     LINK_LIBRARIES
         OktetaCoreTestPieceTableChange
         OktetaCorePieceTable
@@ -57,7 +56,6 @@ ecm_add_test( testpiecetablechangeabstractpiecetablechangeiftest.cpp
 ########### insertpiecetablechangeabstractpiecetablechangeiftest ###############
 
 ecm_add_test( insertpiecetablechangeabstractpiecetablechangeiftest.cpp
-    NAME_PREFIX "libpiecetable-"
     LINK_LIBRARIES
         OktetaCoreTestPieceTableChange
         OktetaCorePieceTable
@@ -67,7 +65,6 @@ ecm_add_test( insertpiecetablechangeabstractpiecetablechangeiftest.cpp
 ########### removepiecetablechangeabstractpiecetablechangeiftest ###############
 
 ecm_add_test( removepiecetablechangeabstractpiecetablechangeiftest.cpp
-    NAME_PREFIX "libpiecetable-"
     LINK_LIBRARIES
         OktetaCoreTestPieceTableChange
         OktetaCorePieceTable
@@ -77,7 +74,6 @@ ecm_add_test( removepiecetablechangeabstractpiecetablechangeiftest.cpp
 ########### replacepiecetablechangeabstractpiecetablechangeiftest ###############
 
 ecm_add_test( replacepiecetablechangeabstractpiecetablechangeiftest.cpp
-    NAME_PREFIX "libpiecetable-"
     LINK_LIBRARIES
         OktetaCoreTestPieceTableChange
         OktetaCorePieceTable
@@ -87,7 +83,6 @@ ecm_add_test( replacepiecetablechangeabstractpiecetablechangeiftest.cpp
 ########### swaprangespiecetablechangeabstractpiecetablechangeiftest ###############
 
 ecm_add_test( swaprangespiecetablechangeabstractpiecetablechangeiftest.cpp
-    NAME_PREFIX "libpiecetable-"
     LINK_LIBRARIES
         OktetaCoreTestPieceTableChange
         OktetaCorePieceTable
@@ -99,7 +94,6 @@ ecm_add_test( swaprangespiecetablechangeabstractpiecetablechangeiftest.cpp
 # grouped changes break some assumptions and got workarounds, so disable for now
 if(IWILLPICKUPWORKONOKTETACORE)
 ecm_add_test( grouppiecetablechangeabstractpiecetablechangeiftest.cpp
-    NAME_PREFIX "libpiecetable-"
     LINK_LIBRARIES
         OktetaCoreTestPieceTableChange
         OktetaCorePieceTable
@@ -110,7 +104,6 @@ endif()
 ########### grouppiecetablechangetest ###############
 
 ecm_add_test( grouppiecetablechangetest.cpp
-    NAME_PREFIX "libpiecetable-"
     LINK_LIBRARIES
         OktetaCoreTestPieceTableChange
         OktetaCorePieceTable
@@ -120,7 +113,6 @@ ecm_add_test( grouppiecetablechangetest.cpp
 ########### piecetablechangehistorytest ###############
 
 ecm_add_test( piecetablechangehistorytest.cpp
-    NAME_PREFIX "libpiecetable-"
     LINK_LIBRARIES
         OktetaCoreTestPieceTableChange
         OktetaCorePieceTable
@@ -130,7 +122,6 @@ ecm_add_test( piecetablechangehistorytest.cpp
 ########### revertablepiecetabletest ###############
 
 ecm_add_test( revertablepiecetabletest.cpp
-    NAME_PREFIX "libpiecetable-"
     LINK_LIBRARIES
         OktetaCorePieceTable
         Qt5::Test

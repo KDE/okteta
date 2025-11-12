@@ -1,5 +1,7 @@
 set(SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/..)
 
+list(APPEND ECM_TEST_NAME_PREFIX_IGNORE_DIRS "gui")
+
 add_library(OktetaWidgetsSourcesTestShim INTERFACE)
 target_include_directories(OktetaWidgetsSourcesTestShim INTERFACE
     ${SUTDIR}
@@ -16,7 +18,6 @@ ecm_add_test(
     bytearraychar8stringencodertest.cpp
     ${SUTDIR}/bytearraychar8stringencoder.cpp
     TEST_NAME bytearraychar8stringencodertest
-    NAME_PREFIX oktetakasten-oktetawidgets-
     LINK_LIBRARIES
         OktetaWidgetsSourcesTestShim
         OktetaCoreCharCodecs
@@ -27,7 +28,6 @@ ecm_add_test(
     bytearraychar8stringdecodertest.cpp
     ${SUTDIR}/bytearraychar8stringdecoder.cpp
     TEST_NAME bytearraychar8stringdecodertest
-    NAME_PREFIX oktetakasten-oktetawidgets-
     LINK_LIBRARIES
         OktetaWidgetsSourcesTestShim
         OktetaCoreCharCodecs
@@ -39,7 +39,6 @@ ecm_add_test(
     ${SUTDIR}/bytearraychar8stringdecoder.cpp
     ${SUTDIR}/bytearraychar8stringencoder.cpp
     TEST_NAME bytearraychar8stringcodecroundtriptest
-    NAME_PREFIX oktetakasten-oktetawidgets-
     LINK_LIBRARIES
         OktetaWidgetsSourcesTestShim
         OktetaCoreCharCodecs
@@ -50,7 +49,6 @@ ecm_add_test(
     bytearrayutf8stringencodertest.cpp
     ${SUTDIR}/bytearrayutf8stringencoder.cpp
     TEST_NAME bytearrayutf8stringencodertest
-    NAME_PREFIX oktetakasten-oktetawidgets-
     LINK_LIBRARIES
         OktetaWidgetsSourcesTestShim
         OktetaCoreCharCodecs
@@ -61,7 +59,6 @@ ecm_add_test(
     bytearrayutf8stringdecodertest.cpp
     ${SUTDIR}/bytearrayutf8stringdecoder.cpp
     TEST_NAME bytearrayutf8stringdecodertest
-    NAME_PREFIX oktetakasten-oktetawidgets-
     LINK_LIBRARIES
         OktetaWidgetsSourcesTestShim
         OktetaCoreCharCodecs
@@ -72,7 +69,6 @@ ecm_add_test(
     bytearrayvaluestringdecodertest.cpp
     ${SUTDIR}/bytearrayvaluestringdecoder.cpp
     TEST_NAME bytearrayvaluestringdecodertest
-    NAME_PREFIX oktetakasten-oktetawidgets-
     LINK_LIBRARIES
         OktetaWidgetsSourcesTestShim
         OktetaCoreValueCodecs
@@ -90,7 +86,6 @@ ecm_add_test(
     ${SUTDIR}/bytearrayvaluestringvalidator.cpp
     ${SUTDIR}/bytearrayvalidator.cpp
     TEST_NAME bytearrayvalidatortest
-    NAME_PREFIX oktetakasten-oktetawidgets-
     LINK_LIBRARIES
         OktetaWidgetsSourcesTestShim
         OktetaCoreCharCodecs

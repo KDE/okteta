@@ -45,7 +45,6 @@ ecm_add_test(
     ${SUTDIR}/filesystem/bytearrayrawfilesynchronizer.cpp
     ${SUTDIR}/filesystem/externalbookmarkstorage.cpp
     TEST_NAME bytearrayrawfilesynchronizertest
-    NAME_PREFIX oktetakasten-core-io-
     LINK_LIBRARIES
         OktetaKastenCoreIoSut
         KastenCoreTestUtil
@@ -66,7 +65,6 @@ ecm_add_test(
     ${SUTDIR}/filesystem/bytearrayrawfilesynchronizer.cpp
     ${SUTDIR}/filesystem/bytearrayrawfilesynchronizerfactory.cpp
     TEST_NAME bytearrayrawfilesynchronizerfactorytest
-    NAME_PREFIX oktetakasten-core-io-
     LINK_LIBRARIES
         OktetaKastenCoreIoSut
         KastenCoreTestUtil

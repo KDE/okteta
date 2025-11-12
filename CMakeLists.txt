@@ -7,6 +7,13 @@ find_package(ECM ${REQUIRED_KF_VERSION} REQUIRED NO_MODULE)
 
 set(CMAKE_MODULE_PATH ${CMAKE_SOURCE_DIR}/cmake ${ECM_MODULE_PATH})
 
+# setup use of ECMAddTest copy with newer features
+if(ECM_VERSION VERSION_LESS 6.22)
+    list(PREPEND CMAKE_MODULE_PATH "${CMAKE_SOURCE_DIR}/cmake/ecmcopy")
+elseif(REQUIRED_KF_VERSION VERSION_GREATER_EQUAL 6.22)
+    message(WARNING "Remove copy of ECMAddTest, min. required ECM now provides it.")
+endif()
+
 # ECM KDE macros (include first, to have their policies and settings effect all other macros)
 include(KDEInstallDirs)
 include(KDECMakeSettings NO_POLICY_SCOPE)
@@ -21,6 +28,7 @@ include(FeatureSummary)
 include(CMakeDependentOption)
 if(BUILD_TESTING)
     include(ECMAddTests)
+    set(ECM_TEST_NAME_PREFIX_STRATEGY "PATH")
 endif()
 # Okteta macros
 include(OktetaInternalMacros)

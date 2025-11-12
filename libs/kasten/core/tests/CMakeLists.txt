@@ -39,7 +39,6 @@ ecm_add_test(
     testdocument.cpp
     testdocumenttest.cpp
     TEST_NAME testdocumenttest
-    NAME_PREFIX libkasten-core-
     LINK_LIBRARIES
         KastenCore
         Qt5::Test
@@ -52,7 +51,6 @@ ecm_add_test(
     testdocumentfilesynchronizer.cpp
     testdocumentfilesynchronizertest.cpp
     TEST_NAME testdocumentfilesynchronizertest
-    NAME_PREFIX libkasten-core-
     LINK_LIBRARIES
         KastenCoreTestIo
         KastenCoreTestUtil
@@ -68,7 +66,6 @@ ecm_add_test(
     testdocumentfilesynchronizerfactory.cpp
     testdocumentfilesynchronizerfactorytest.cpp
     TEST_NAME testdocumentfilesynchronizerfactorytest
-    NAME_PREFIX libkasten-core-
     LINK_LIBRARIES
         KastenCoreTestIo
         KastenCoreTestUtil
@@ -82,7 +79,6 @@ ecm_add_test(
     testdocument.cpp
     documentmanagertest.cpp
     TEST_NAME documentmanagertest
-    NAME_PREFIX libkasten-core-
     LINK_LIBRARIES
         KastenCore
         Qt5::Test
