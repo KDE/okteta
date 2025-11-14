@@ -231,7 +231,7 @@ std::vector<EnumDefinition::Ptr> OsdParser::parseEnums(const QDomElement& rootEl
         if (defs.isEmpty()) {
             lwc.error() << "Enum definition contains no valid elements!";
         } else {
-            ret.emplace_back(EnumDefinition::Ptr(new EnumDefinition(defs, enumName, type)));
+            ret.emplace_back(EnumDefinition::Ptr(new EnumDefinition(std::move(defs), enumName, type)));
         }
     }
 

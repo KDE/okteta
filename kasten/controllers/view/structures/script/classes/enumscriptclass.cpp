@@ -58,7 +58,7 @@ bool EnumScriptClass::setAdditionalProperty(DataInformation* data, const QScript
         if (newValues.isEmpty()) {
             pData->logWarn() << "attempting to set empty list of enum values!";
         }
-        pData->setEnumValues(newValues);
+        pData->setEnumValues(std::move(newValues));
         return true;
     }
     return PrimitiveScriptClass::setAdditionalProperty(data, name, id, value);

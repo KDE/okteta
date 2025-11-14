@@ -86,7 +86,7 @@ std::unique_ptr<T> newEnumOrFlags(const EnumParsedData& pd)
             pd.error() << "No enum values specified!";
             return nullptr;
         }
-        definition = EnumDefinition::Ptr(new EnumDefinition(enumValues, pd.enumName, primitiveType));
+        definition = EnumDefinition::Ptr(new EnumDefinition(std::move(enumValues), pd.enumName, primitiveType));
     }
     if (definition->type() != primitiveType) {
         pd.error().nospace() << "Enum type (" << definition->type() << ") and value type (" << primitiveType

@@ -297,7 +297,7 @@ void BasicDataInformationTest::initTestCase()
     enumVals[1] = QStringLiteral("one");
     enumVals[2] = QStringLiteral("two");
     enumVals[4] = QStringLiteral("four");
-    EnumDefinition::Ptr edef(new EnumDefinition(enumVals, QStringLiteral("eDef"), PrimitiveDataType::UInt32));
+    EnumDefinition::Ptr edef(new EnumDefinition(std::move(enumVals), QStringLiteral("eDef"), PrimitiveDataType::UInt32));
     flagData = std::make_unique<FlagDataInformation>(QStringLiteral("flagData"), PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc), edef);
     enumData = std::make_unique<EnumDataInformation>(QStringLiteral("enumData"), PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc), edef);
     emptyString = std::make_unique<StringDataInformation>(QStringLiteral("string"), StringDataInformation::StringType::ASCII);

@@ -36,7 +36,7 @@ public: // DataInformationBase API
 public:
     [[nodiscard]]
     EnumDefinition::Ptr enumValues() const;
-    void setEnumValues(const QMap<AllPrimitiveTypes, QString>& newValues);
+    void setEnumValues(QMap<AllPrimitiveTypes, QString>&& newValues);
 
 private: // DataInformation API
     [[nodiscard]]
@@ -55,8 +55,8 @@ inline EnumDefinition::Ptr EnumDataInformation::enumValues() const
     return mEnum;
 }
 
-inline void EnumDataInformation::setEnumValues(const QMap<AllPrimitiveTypes, QString>& newValues)
+inline void EnumDataInformation::setEnumValues(QMap<AllPrimitiveTypes, QString>&& newValues)
 {
-    mEnum->setValues(newValues);
+    mEnum->setValues(std::move(newValues));
 }
 #endif /* KASTEN_ENUMDATAINFORMATION_HPP */
