@@ -25,8 +25,6 @@
 #include <algorithm>
 #include <utility>
 
-using namespace Kasten;
-
 namespace {
 
 enum EntryRoles {
