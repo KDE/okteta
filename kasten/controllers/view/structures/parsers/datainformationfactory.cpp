@@ -80,9 +80,9 @@ std::unique_ptr<T> newEnumOrFlags(const EnumParsedData& pd)
     }
     std::shared_ptr<EnumDefinition> definition = pd.enumDef;
     if (!definition) {
-        QMap<AllPrimitiveTypes, QString> enumValues =
+        std::map<AllPrimitiveTypes, QString> enumValues =
             EnumDefinition::parseEnumValues(pd.enumValuesObject, lwc, primitiveType);
-        if (enumValues.isEmpty()) {
+        if (enumValues.empty()) {
             pd.error() << "No enum values specified!";
             return nullptr;
         }

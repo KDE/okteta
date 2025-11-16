@@ -43,15 +43,15 @@ static void removeFromArray(QVarLengthArray<T, len>& array, int index)
 QString FlagDataInformation::valueStringImpl() const
 {
     Q_ASSERT(mWasAbleToRead);
-    const QMap<AllPrimitiveTypes, QString>& values = mEnum->values();
+    const std::map<AllPrimitiveTypes, QString>& values = mEnum->values();
     // I doubt more than 10 flags will be set very often -> only then do we need a malloc
     QVarLengthArray<FlagData, 10> arr;
     const auto value = mValue->value().value<quint64>();
-    for (auto it = values.begin(); it != values.end(); ++it) {
-        const auto flag = it.key().value<quint64>();
+    for (const auto& [enumeralValue, enumeralName] : values) {
+        const auto flag = enumeralValue.value<quint64>();
         if ((value & flag) == flag) {
             // flag is set
-            arr.append(FlagData{it.value(), flag});
+            arr.append(FlagData{enumeralName, flag});
         }
     }
 

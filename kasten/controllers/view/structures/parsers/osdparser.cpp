@@ -198,7 +198,7 @@ std::vector<std::shared_ptr<EnumDefinition>> OsdParser::parseEnums(const QDomEle
             continue;
         }
 
-        QMap<AllPrimitiveTypes, QString> defs;
+        std::map<AllPrimitiveTypes, QString> defs;
         const QString enumName = readProperty(elem, PROPERTY_NAME(), i18n("<invalid name>"));
         const QString typeStr = readProperty(elem, PROPERTY_TYPE());
         if (typeStr.isEmpty()) {
@@ -224,11 +224,11 @@ std::vector<std::shared_ptr<EnumDefinition>> OsdParser::parseEnums(const QDomEle
             if (converted.isEmpty()) {
                 continue;
             }
-            defs.insert(converted.value, converted.name);
+            defs.emplace(converted.value, converted.name);
         }
 
         // now add this enum to the list of enums
-        if (defs.isEmpty()) {
+        if (defs.empty()) {
             lwc.error() << "Enum definition contains no valid elements!";
         } else {
             ret.emplace_back(std::make_shared<EnumDefinition>(std::move(defs), enumName, type));

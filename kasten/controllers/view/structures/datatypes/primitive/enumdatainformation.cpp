@@ -36,20 +36,18 @@ QWidget* EnumDataInformation::createEditWidget(QWidget* parent) const
 {
     auto* const box = new KComboBox(false, parent);
 
-    const QMap<AllPrimitiveTypes, QString>& enumValues = mEnum->values();
+    const std::map<AllPrimitiveTypes, QString>& enumValues = mEnum->values();
 
     // TODO: have an option to edit custom values not defined in the enum
-    if (!enumValues.contains(mValue->value())) {
+    if (enumValues.find(mValue->value()) == enumValues.end()) {
         const QString text = i18n("%1 (value not in enum)", mValue->valueString());
         box->addItem(text, mValue->valueToQVariant());
         box->insertSeparator(1);
     }
 
-    for (auto it = enumValues.begin(), end = enumValues.end(); it != end; ++it) {
-        const AllPrimitiveTypes data = it.key();
-        const QString& enumVal = it.value();
-        const QString text = i18n("%1 (%2)", enumVal, mValue->valueToQString(data));
-        box->addItem(text, mValue->valueToQVariant(data));
+    for (const auto& [enumeralValue, enumeralName] : enumValues) {
+        const QString text = i18n("%1 (%2)", enumeralName, mValue->valueToQString(enumeralValue));
+        box->addItem(text, mValue->valueToQVariant(enumeralValue));
     }
     return box;
 }

@@ -293,10 +293,11 @@ void BasicDataInformationTest::initTestCase()
     primitiveArrayWithChildren = std::make_unique<ArrayDataInformation>(QStringLiteral("primitiveArrayWithChildren"), 2, PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc));
     complexArrayWithChildren = std::make_unique<ArrayDataInformation>(QStringLiteral("complexArrayWithChildren"), 2, structWithChildren->clone());
 
-    QMap<AllPrimitiveTypes, QString> enumVals;
-    enumVals[1] = QStringLiteral("one");
-    enumVals[2] = QStringLiteral("two");
-    enumVals[4] = QStringLiteral("four");
+    std::map<AllPrimitiveTypes, QString> enumVals {
+        {1, QStringLiteral("one")},
+        {2, QStringLiteral("two")},
+        {4, QStringLiteral("four")},
+    };
     auto edef = std::make_shared<EnumDefinition>(std::move(enumVals), QStringLiteral("eDef"), PrimitiveDataType::UInt32);
     flagData = std::make_unique<FlagDataInformation>(QStringLiteral("flagData"), PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc), edef);
     enumData = std::make_unique<EnumDataInformation>(QStringLiteral("enumData"), PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc), edef);

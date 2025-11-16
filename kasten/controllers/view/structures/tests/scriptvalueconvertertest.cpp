@@ -247,13 +247,16 @@ void ScriptValueConverterTest::testParseEnum()
     EnumDataInformation* const e = data->asEnum();
     QVERIFY(e);
 
-    QMap<AllPrimitiveTypes, QString> enumVals = e->enumValues()->values();
+    const std::map<AllPrimitiveTypes, QString>& enumVals = e->enumValues()->values();
     QCOMPARE(enumVals.size(), expectedCount);
 
     if (expectedCount != 0) {
         QFETCH(quint64, expectedValue);
         // to ensure it does not match when value is not found add 1 to the default
-        AllPrimitiveTypes result = enumVals.key(QStringLiteral("value"), expectedValue + 1);
+        const auto it = std::find_if(enumVals.begin(), enumVals.end(), [](const auto& v) {
+            return (v.second == QStringLiteral("value"));
+        });
+        const AllPrimitiveTypes result = (it != enumVals.end()) ? it->first : (expectedValue + 1);
         QCOMPARE(result.value<quint64>(), expectedValue);
     }
 }

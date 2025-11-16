@@ -25,10 +25,10 @@ QScriptValue EnumScriptClass::additionalProperty(const DataInformation* data, co
     if (name == s_values) {
         const EnumDataInformation* const pData = data->asEnum();
         const EnumDefinition* const enumValues = pData->enumValues();
-        const QMap<AllPrimitiveTypes, QString>& values = enumValues->values();
+        const std::map<AllPrimitiveTypes, QString>& values = enumValues->values();
         QScriptValue ret = engine()->newObject();
-        for (auto it = values.begin(); it != values.end(); ++it) {
-            ret.setProperty(it.value(), QString::number(it.key().value<quint64>())); // should always work
+        for (const auto& [enumeralValue, enumeralName] : values) {
+            ret.setProperty(enumeralName, QString::number(enumeralValue.value<quint64>())); // should always work
         }
         return ret;
     }
@@ -51,9 +51,9 @@ bool EnumScriptClass::setAdditionalProperty(DataInformation* data, const QScript
 {
     if (name == s_values) {
         EnumDataInformation* const pData = data->asEnum();
-        QMap<AllPrimitiveTypes, QString> newValues = EnumDefinition::parseEnumValues(value,
-                                                                                     LoggerWithContext(pData->logger(), pData->fullObjectPath()), pData->type());
-        if (newValues.isEmpty()) {
+        std::map<AllPrimitiveTypes, QString> newValues = EnumDefinition::parseEnumValues(value,
+                                                                                         LoggerWithContext(pData->logger(), pData->fullObjectPath()), pData->type());
+        if (newValues.empty()) {
             pData->logWarn() << "attempting to set empty list of enum values!";
         }
         pData->setEnumValues(std::move(newValues));

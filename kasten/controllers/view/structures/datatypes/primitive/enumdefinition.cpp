@@ -14,10 +14,10 @@
 // Std
 #include <limits>
 
-QMap<AllPrimitiveTypes, QString> EnumDefinition::parseEnumValues(const QScriptValue& val,
-                                                                 const LoggerWithContext& logger, PrimitiveDataType type)
+std::map<AllPrimitiveTypes, QString> EnumDefinition::parseEnumValues(const QScriptValue& val,
+                                                                     const LoggerWithContext& logger, PrimitiveDataType type)
 {
-    QMap<AllPrimitiveTypes, QString> enumValues;
+    std::map<AllPrimitiveTypes, QString> enumValues;
 
     QScriptValueIterator it(val);
     while (it.hasNext()) {
@@ -34,7 +34,7 @@ QMap<AllPrimitiveTypes, QString> EnumDefinition::parseEnumValues(const QScriptVa
         if (conv.isEmpty()) {
             continue;
         }
-        enumValues.insert(conv.value, conv.name);
+        enumValues.emplace(conv.value, conv.name);
     }
     return enumValues;
 }

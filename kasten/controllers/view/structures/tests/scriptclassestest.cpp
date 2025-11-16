@@ -175,10 +175,11 @@ void ScriptClassesTest::initTestCase()
     // XXX enumName
     std::sort(enumProperties.begin(), enumProperties.end());
 
-    QMap<AllPrimitiveTypes, QString> enumValues;
-    enumValues.insert(1, QStringLiteral("one"));
-    enumValues.insert(2, QStringLiteral("tow"));
-    enumValues.insert(4, QStringLiteral("four"));
+    std::map<AllPrimitiveTypes, QString> enumValues {
+        {1, QStringLiteral("one")},
+        {2, QStringLiteral("two")},
+        {4, QStringLiteral("four")},
+    };
     auto enumDef = std::make_shared<EnumDefinition>(std::move(enumValues),
                                                     QStringLiteral("theEnum"), PrimitiveDataType::Int32);
     auto managedEnumData = std::make_unique<EnumDataInformation>(QStringLiteral("enumData"),

@@ -10,9 +10,10 @@
 // lib
 #include <allprimitivetypes.hpp>
 #include <primitivedatatype.hpp>
-// Qt core
-#include <QMap>
+// Qt
 #include <QString>
+// Std
+#include <map>
 
 class QScriptValue;
 struct LoggerWithContext;
@@ -31,7 +32,7 @@ struct EnumEntry
 class EnumDefinition
 {
 public:
-    EnumDefinition(QMap<AllPrimitiveTypes, QString>&& values, const QString& name,
+    EnumDefinition(std::map<AllPrimitiveTypes, QString>&& values, const QString& name,
                    PrimitiveDataType type)
         : mName(name)
         , mValues(std::move(values))
@@ -45,43 +46,48 @@ public:
     EnumDefinition& operator=(EnumDefinition&& e) = delete;
 
 public:
-    const QMap<AllPrimitiveTypes, QString>& values() const;
+    const std::map<AllPrimitiveTypes, QString>& values() const;
     AllPrimitiveTypes key(const QString& value) const;
     QString value(AllPrimitiveTypes key) const;
     PrimitiveDataType type() const;
     const QString& name() const;
 
 public:
-    static QMap<AllPrimitiveTypes, QString> parseEnumValues(const QScriptValue& val,
-                                                            const LoggerWithContext& logger, PrimitiveDataType type = PrimitiveDataType::UInt64);
+    static std::map<AllPrimitiveTypes, QString> parseEnumValues(const QScriptValue& val,
+                                                                const LoggerWithContext& logger, PrimitiveDataType type = PrimitiveDataType::UInt64);
     /** @return a pair containing the converted value. A default constructed pair means error! */
     static EnumEntry convertToEnumEntry(const QString& name, const QVariant& value,
                                         const LoggerWithContext& logger, PrimitiveDataType type);
 
 protected:
-    void setValues(QMap<AllPrimitiveTypes, QString>&& newValues);
+    void setValues(std::map<AllPrimitiveTypes, QString>&& newValues);
 
 protected:
     const QString mName;
-    QMap<AllPrimitiveTypes, QString> mValues;
+    std::map<AllPrimitiveTypes, QString> mValues;
     const PrimitiveDataType mType;
 
     friend class EnumDataInformation;
 };
 
-inline const QMap<AllPrimitiveTypes, QString>& EnumDefinition::values() const
+inline const std::map<AllPrimitiveTypes, QString>& EnumDefinition::values() const
 {
     return mValues;
 }
 
 inline AllPrimitiveTypes EnumDefinition::key(const QString& value) const
 {
-    return mValues.key(value);
+    const auto it = std::find_if(mValues.begin(), mValues.end(), [&value](const auto& v) {
+        return (v.second == value);
+    });
+
+    return (it != mValues.end()) ? it->first :  AllPrimitiveTypes();
 }
 
 inline QString EnumDefinition::value(AllPrimitiveTypes key) const
 {
-    return mValues.value(key);
+    const auto it = mValues.find(key);
+    return (it != mValues.end()) ? it->second : QString();
 }
 
 inline PrimitiveDataType EnumDefinition::type() const
@@ -94,7 +100,7 @@ inline const QString& EnumDefinition::name() const
     return mName;
 }
 
-inline void EnumDefinition::setValues(QMap<AllPrimitiveTypes, QString>&& newValues)
+inline void EnumDefinition::setValues(std::map<AllPrimitiveTypes, QString>&& newValues)
 {
     mValues = newValues;
 }

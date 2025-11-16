@@ -37,7 +37,7 @@ public:
     [[nodiscard]]
     const EnumDefinition* enumValues() const;
     /// Not thread-safe
-    void setEnumValues(QMap<AllPrimitiveTypes, QString>&& newValues);
+    void setEnumValues(std::map<AllPrimitiveTypes, QString>&& newValues);
 
 private: // DataInformation API
     [[nodiscard]]
@@ -56,7 +56,7 @@ inline const EnumDefinition* EnumDataInformation::enumValues() const
     return mEnum.get();
 }
 
-inline void EnumDataInformation::setEnumValues(QMap<AllPrimitiveTypes, QString>&& newValues)
+inline void EnumDataInformation::setEnumValues(std::map<AllPrimitiveTypes, QString>&& newValues)
 {
     if (mEnum.use_count() == 1) {
         // TODO: is keeping the old name always correct?
