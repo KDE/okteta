@@ -35,7 +35,7 @@ public: // DataInformationBase API
 
 public:
     [[nodiscard]]
-    std::shared_ptr<EnumDefinition> enumValues() const;
+    const EnumDefinition* enumValues() const;
     /// Not thread-safe
     void setEnumValues(QMap<AllPrimitiveTypes, QString>&& newValues);
 
@@ -51,9 +51,9 @@ protected:
     std::shared_ptr<EnumDefinition> mEnum;
 };
 
-inline std::shared_ptr<EnumDefinition> EnumDataInformation::enumValues() const
+inline const EnumDefinition* EnumDataInformation::enumValues() const
 {
-    return mEnum;
+    return mEnum.get();
 }
 
 inline void EnumDataInformation::setEnumValues(QMap<AllPrimitiveTypes, QString>&& newValues)

@@ -24,9 +24,7 @@ QScriptValue EnumScriptClass::additionalProperty(const DataInformation* data, co
 {
     if (name == s_values) {
         const EnumDataInformation* const pData = data->asEnum();
-        // store enumValues as const, to not invoke detaching on -> call below
-        // would create a temporary copy otherwise gone again after the end of the line
-        const std::shared_ptr<EnumDefinition> enumValues = pData->enumValues();
+        const EnumDefinition* const enumValues = pData->enumValues();
         const QMap<AllPrimitiveTypes, QString>& values = enumValues->values();
         QScriptValue ret = engine()->newObject();
         for (auto it = values.begin(); it != values.end(); ++it) {
