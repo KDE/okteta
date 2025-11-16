@@ -9,8 +9,8 @@
 
 // lib
 #include "bytearrayviewprofile.hpp"
-// Qt
-#include <QSharedDataPointer>
+// Std
+#include <memory>
 
 class QString;
 
@@ -36,6 +36,7 @@ public:
     ByteArrayViewProfileLock& operator=(ByteArrayViewProfileLock&& other);
 
 public:
+    // TODO: check if thread-safeness is needed
     void unlock();
     [[nodiscard]]
     bool isLocked() const;
@@ -43,7 +44,7 @@ public:
     ByteArrayViewProfile::Id viewProfileId() const;
 
 private:
-    QSharedDataPointer<ByteArrayViewProfileLockPrivate> d;
+    std::shared_ptr<ByteArrayViewProfileLockPrivate> d;
 };
 
 }

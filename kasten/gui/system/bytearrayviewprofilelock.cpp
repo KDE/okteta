@@ -10,19 +10,21 @@
 #include <logging.hpp>
 // Qt
 #include <QLockFile>
-// Std
-#include <memory>
 
 namespace Kasten {
 
-class ByteArrayViewProfileLockPrivate : public QSharedData
+class ByteArrayViewProfileLockPrivate
 {
 public:
     ByteArrayViewProfileLockPrivate(const QString& fileName,
                                     const ByteArrayViewProfile::Id& viewProfileId);
+    ByteArrayViewProfileLockPrivate(const ByteArrayViewProfileLockPrivate&) = delete;
+    ByteArrayViewProfileLockPrivate(ByteArrayViewProfileLockPrivate&&) = delete;
+
+    ~ByteArrayViewProfileLockPrivate() = default;
 
 public:
-    std::shared_ptr<QLockFile> lockFile;
+    QLockFile lockFile;
     ByteArrayViewProfile::Id viewProfileId;
 };
 
@@ -35,21 +37,21 @@ viewProfileFileLockPath(const QString& viewProfileFilePath)
 
 ByteArrayViewProfileLockPrivate::ByteArrayViewProfileLockPrivate(const QString& fileName,
                                                                  const ByteArrayViewProfile::Id& id)
-    : lockFile(std::make_shared<QLockFile>(fileName.isEmpty() ? fileName : viewProfileFileLockPath(fileName)))
+    : lockFile(fileName.isEmpty() ? fileName : viewProfileFileLockPath(fileName))
     , viewProfileId(id)
 {
     if (!fileName.isEmpty()) {
-        if (!lockFile->tryLock(1000)) {
+        if (!lockFile.tryLock(1000)) {
             qCWarning(LOG_KASTEN_OKTETA_GUI)
                 << "Failed to acquire lock file" << fileName
-                << "error =" << lockFile->error();
+                << "error =" << lockFile.error();
         }
     }
 }
 
 ByteArrayViewProfileLock::ByteArrayViewProfileLock(const QString& fileName,
                                                    const ByteArrayViewProfile::Id& viewProfileId)
-    : d(new ByteArrayViewProfileLockPrivate(fileName, viewProfileId))
+    : d(std::make_shared<ByteArrayViewProfileLockPrivate>(fileName, viewProfileId))
 {
 }
 
@@ -64,13 +66,13 @@ ByteArrayViewProfileLock& ByteArrayViewProfileLock::operator=(ByteArrayViewProfi
 void
 ByteArrayViewProfileLock::unlock()
 {
-    d->lockFile->unlock();
+    d->lockFile.unlock();
 }
 
 bool
 ByteArrayViewProfileLock::isLocked() const
 {
-    return d->lockFile->isLocked();
+    return d->lockFile.isLocked();
 }
 
 ByteArrayViewProfile::Id
