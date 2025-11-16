@@ -179,8 +179,8 @@ void ScriptClassesTest::initTestCase()
     enumValues.insert(1, QStringLiteral("one"));
     enumValues.insert(2, QStringLiteral("tow"));
     enumValues.insert(4, QStringLiteral("four"));
-    EnumDefinition::Ptr enumDef(new EnumDefinition(std::move(enumValues),
-                                                   QStringLiteral("theEnum"), PrimitiveDataType::Int32));
+    auto enumDef = std::make_shared<EnumDefinition>(std::move(enumValues),
+                                                    QStringLiteral("theEnum"), PrimitiveDataType::Int32);
     auto managedEnumData = std::make_unique<EnumDataInformation>(QStringLiteral("enumData"),
                                                                  PrimitiveFactory::newInstance(QStringLiteral("dummy"), PrimitiveDataType::Int32, lwc), enumDef);
     enumData = managedEnumData.get();

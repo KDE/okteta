@@ -19,7 +19,7 @@ public:
     /** this object takes ownership of @p type */
     EnumDataInformation(const QString& name,
                         std::unique_ptr<PrimitiveDataInformation>&& type,
-                        const EnumDefinition::Ptr& enumDef, DataInformation* parent = nullptr);
+                        const std::shared_ptr<EnumDefinition>& enumDef, DataInformation* parent = nullptr);
     ~EnumDataInformation() override;
 
 public: // DataInformation API
@@ -35,7 +35,8 @@ public: // DataInformationBase API
 
 public:
     [[nodiscard]]
-    EnumDefinition::Ptr enumValues() const;
+    std::shared_ptr<EnumDefinition> enumValues() const;
+    /// Not thread-safe
     void setEnumValues(QMap<AllPrimitiveTypes, QString>&& newValues);
 
 private: // DataInformation API
@@ -47,16 +48,22 @@ private: // DataInformation API
     QScriptClass* scriptClass(ScriptHandlerInfo* handlerInfo) const override;
 
 protected:
-    EnumDefinition::Ptr mEnum;
+    std::shared_ptr<EnumDefinition> mEnum;
 };
 
-inline EnumDefinition::Ptr EnumDataInformation::enumValues() const
+inline std::shared_ptr<EnumDefinition> EnumDataInformation::enumValues() const
 {
     return mEnum;
 }
 
 inline void EnumDataInformation::setEnumValues(QMap<AllPrimitiveTypes, QString>&& newValues)
 {
-    mEnum->setValues(std::move(newValues));
+    if (mEnum.use_count() == 1) {
+        // TODO: is keeping the old name always correct?
+        mEnum->setValues(std::move(newValues));
+    } else {
+        // create new definition instance, unnamed
+        mEnum = std::make_shared<EnumDefinition>(std::move(newValues), QString(), mEnum->type());
+    }
 }
 #endif /* KASTEN_ENUMDATAINFORMATION_HPP */

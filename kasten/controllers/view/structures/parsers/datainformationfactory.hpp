@@ -80,7 +80,7 @@ struct EnumParsedData : public ParserInfo
 
     QString type;
     QString enumName;
-    EnumDefinition::Ptr enumDef; // TODO QMap<QString, QScriptValue> instead
+    std::shared_ptr<EnumDefinition> enumDef; // TODO QMap<QString, QScriptValue> instead
     /** only used if enumDef is null, to allow sharing (only possible in OSD) */
     QScriptValue enumValuesObject;
 };

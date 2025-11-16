@@ -15,7 +15,7 @@
 
 FlagDataInformation::FlagDataInformation(const QString& name,
                                          std::unique_ptr<PrimitiveDataInformation>&& type,
-                                         const EnumDefinition::Ptr& enumDef, DataInformation* parent)
+                                         const std::shared_ptr<EnumDefinition>& enumDef, DataInformation* parent)
     : EnumDataInformation(name, std::move(type), enumDef, parent)
 {
     Q_ASSERT_X(mValue->type() != PrimitiveDataType::Double && mValue->type() != PrimitiveDataType::Float && mValue->type() != PrimitiveDataType::Invalid,

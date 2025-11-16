@@ -31,7 +31,7 @@ class ScriptLogger;
 struct OsdParserInfo : public ParserInfo
 {
     inline OsdParserInfo(const QString& name, ScriptLogger* logger, DataInformation* parent,
-                         QScriptEngine* engine, std::vector<EnumDefinition::Ptr>&& enums)
+                         QScriptEngine* engine, std::vector<std::shared_ptr<EnumDefinition>>&& enums)
         : ParserInfo(name, logger, parent, engine)
         , enums(std::move(enums))
     {}
@@ -40,7 +40,7 @@ struct OsdParserInfo : public ParserInfo
 
     OsdParserInfo& operator=(const OsdParserInfo&) = delete;
 
-    const std::vector<EnumDefinition::Ptr> enums;
+    const std::vector<std::shared_ptr<EnumDefinition>> enums;
 };
 
 class OsdParser : public AbstractStructureParser
@@ -75,9 +75,9 @@ private:
     static std::unique_ptr<DataInformation> parseType(const QDomElement& xmlElem, const OsdParserInfo& info, const QString& name);
     static std::unique_ptr<DataInformation> parseChildElement(const QDomElement& xmlElem, const OsdParserInfo& info, const QString& name);
 
-    static EnumDefinition::Ptr findEnum(const QString& defName, const OsdParserInfo& info);
+    static std::shared_ptr<EnumDefinition> findEnum(const QString& defName, const OsdParserInfo& info);
 
-    static std::vector<EnumDefinition::Ptr> parseEnums(const QDomElement& rootElem, ScriptLogger* logger);
+    static std::vector<std::shared_ptr<EnumDefinition>> parseEnums(const QDomElement& rootElem, ScriptLogger* logger);
 
     QDomDocument openDoc(ScriptLogger* logger) const;
     QDomDocument openDocFromFile(ScriptLogger* logger) const;

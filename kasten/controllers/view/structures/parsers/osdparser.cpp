@@ -158,7 +158,7 @@ std::vector<std::unique_ptr<TopLevelDataInformation>> OsdParser::parseStructures
         }
         std::unique_ptr<QScriptEngine> eng = ScriptEngineInitializer::newEngine(); // we need this for dynamic arrays
         auto logger = std::make_unique<ScriptLogger>();
-        std::vector<EnumDefinition::Ptr> enums = parseEnums(rootElem, logger.get());
+        std::vector<std::shared_ptr<EnumDefinition>> enums = parseEnums(rootElem, logger.get());
         OsdParserInfo info(QString(), logger.get(), nullptr, eng.get(), std::move(enums));
 
         auto data = parseElement(elem, info);
@@ -190,9 +190,9 @@ std::vector<std::unique_ptr<TopLevelDataInformation>> OsdParser::parseStructures
 }
 
 // TODO make type depend on the user not the definition
-std::vector<EnumDefinition::Ptr> OsdParser::parseEnums(const QDomElement& rootElem, ScriptLogger* logger)
+std::vector<std::shared_ptr<EnumDefinition>> OsdParser::parseEnums(const QDomElement& rootElem, ScriptLogger* logger)
 {
-    std::vector<EnumDefinition::Ptr> ret;
+    std::vector<std::shared_ptr<EnumDefinition>> ret;
     for (QDomElement elem = rootElem.firstChildElement(); !elem.isNull(); elem = elem.nextSiblingElement()) {
         if (elem.tagName() != TYPE_ENUMDEF()) {
             continue;
@@ -231,7 +231,7 @@ std::vector<EnumDefinition::Ptr> OsdParser::parseEnums(const QDomElement& rootEl
         if (defs.isEmpty()) {
             lwc.error() << "Enum definition contains no valid elements!";
         } else {
-            ret.emplace_back(EnumDefinition::Ptr(new EnumDefinition(std::move(defs), enumName, type)));
+            ret.emplace_back(std::make_shared<EnumDefinition>(std::move(defs), enumName, type));
         }
     }
 
@@ -459,7 +459,7 @@ std::unique_ptr<DataInformation> OsdParser::parseElement(const QDomElement& elem
     return data;
 }
 
-EnumDefinition::Ptr OsdParser::findEnum(const QString& defName, const OsdParserInfo& info)
+std::shared_ptr<EnumDefinition> OsdParser::findEnum(const QString& defName, const OsdParserInfo& info)
 {
     for (const auto& def : info.enums) {
         if (def->name() == defName) {
@@ -468,7 +468,7 @@ EnumDefinition::Ptr OsdParser::findEnum(const QString& defName, const OsdParserI
     }
 
     info.error() << "Could not find enum definition with name" << defName;
-    return EnumDefinition::Ptr(nullptr);
+    return {};
 }
 
 QString OsdParser::readProperty(const QDomElement& elem, const QString& property, const QString& defaultVal)

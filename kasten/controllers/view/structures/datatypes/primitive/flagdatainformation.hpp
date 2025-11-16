@@ -17,7 +17,7 @@ class FlagDataInformation : public EnumDataInformation
 public:
     FlagDataInformation(const QString& name,
                         std::unique_ptr<PrimitiveDataInformation>&& type,
-                        const EnumDefinition::Ptr& enumDef,
+                        const std::shared_ptr<EnumDefinition>& enumDef,
                         DataInformation* parent = nullptr);
 
 private: // DataInformation API

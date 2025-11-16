@@ -78,7 +78,7 @@ std::unique_ptr<T> newEnumOrFlags(const EnumParsedData& pd)
         pd.error() << "Floating-point enums are not allowed since they make little sense.";
         return {};
     }
-    EnumDefinition::Ptr definition = pd.enumDef;
+    std::shared_ptr<EnumDefinition> definition = pd.enumDef;
     if (!definition) {
         QMap<AllPrimitiveTypes, QString> enumValues =
             EnumDefinition::parseEnumValues(pd.enumValuesObject, lwc, primitiveType);
@@ -86,7 +86,7 @@ std::unique_ptr<T> newEnumOrFlags(const EnumParsedData& pd)
             pd.error() << "No enum values specified!";
             return nullptr;
         }
-        definition = EnumDefinition::Ptr(new EnumDefinition(std::move(enumValues), pd.enumName, primitiveType));
+        definition = std::make_shared<EnumDefinition>(std::move(enumValues), pd.enumName, primitiveType);
     }
     if (definition->type() != primitiveType) {
         pd.error().nospace() << "Enum type (" << definition->type() << ") and value type (" << primitiveType

@@ -12,8 +12,6 @@
 #include <primitivedatatype.hpp>
 // Qt core
 #include <QMap>
-#include <QSharedData>
-#include <QSharedDataPointer>
 #include <QString>
 
 class QScriptValue;
@@ -30,22 +28,21 @@ struct EnumEntry
     }
 };
 
-class EnumDefinition : public QSharedData
+class EnumDefinition
 {
 public:
-    using Ptr = QSharedDataPointer<EnumDefinition>;
-
     EnumDefinition(QMap<AllPrimitiveTypes, QString>&& values, const QString& name,
                    PrimitiveDataType type)
         : mName(name)
         , mValues(std::move(values))
         , mType(type)
     {}
-    EnumDefinition(const EnumDefinition& e)
-        : QSharedData(e)
-        , mValues(e.mValues)
-        , mType(e.mType)
-    {}
+
+    EnumDefinition(const EnumDefinition& e) = delete;
+    EnumDefinition(EnumDefinition&& e) = delete;
+
+    EnumDefinition& operator=(const EnumDefinition& e) = delete;
+    EnumDefinition& operator=(EnumDefinition&& e) = delete;
 
 public:
     const QMap<AllPrimitiveTypes, QString>& values() const;
@@ -53,8 +50,6 @@ public:
     QString value(AllPrimitiveTypes key) const;
     PrimitiveDataType type() const;
     const QString& name() const;
-
-    void setValues(QMap<AllPrimitiveTypes, QString>&& newValues);
 
 public:
     static QMap<AllPrimitiveTypes, QString> parseEnumValues(const QScriptValue& val,
@@ -64,9 +59,14 @@ public:
                                         const LoggerWithContext& logger, PrimitiveDataType type);
 
 protected:
+    void setValues(QMap<AllPrimitiveTypes, QString>&& newValues);
+
+protected:
     const QString mName;
     QMap<AllPrimitiveTypes, QString> mValues;
     const PrimitiveDataType mType;
+
+    friend class EnumDataInformation;
 };
 
 inline const QMap<AllPrimitiveTypes, QString>& EnumDefinition::values() const
@@ -96,7 +96,7 @@ inline const QString& EnumDefinition::name() const
 
 inline void EnumDefinition::setValues(QMap<AllPrimitiveTypes, QString>&& newValues)
 {
-    mValues = newValues; // causes the QSharedPointer to detach and copy
+    mValues = newValues;
 }
 
 #endif /* KASTEN_ENUMDEFINITION_HPP */

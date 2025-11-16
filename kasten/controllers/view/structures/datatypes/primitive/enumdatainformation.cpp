@@ -18,7 +18,7 @@
 
 EnumDataInformation::EnumDataInformation(const QString& name,
                                          std::unique_ptr<PrimitiveDataInformation>&& type,
-                                         const EnumDefinition::Ptr& enumDef, DataInformation* parent)
+                                         const std::shared_ptr<EnumDefinition>& enumDef, DataInformation* parent)
     : PrimitiveDataInformationWrapper(name, std::move(type), parent)
     , mEnum(enumDef)
 {
