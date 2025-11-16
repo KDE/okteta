@@ -16,6 +16,8 @@
 #include <Kasten/AbstractTool>
 // Okteta core
 #include <Okteta/AddressRange>
+// Qt
+#include <QVector>
 // Std
 #include <memory>
 
@@ -85,7 +87,7 @@ public:
     [[nodiscard]]
     DataInformation* childAt(int idx) const;
     [[nodiscard]]
-    TopLevelDataInformation::List allData() const;
+    QVector<std::shared_ptr<TopLevelDataInformation>> allData() const;
 
 Q_SIGNALS:
     void dataChanged(int row, void* data); // actually a DataInformation*
@@ -132,8 +134,8 @@ private:
     // settings
     QSysInfo::Endian mByteOrder;
     std::unique_ptr<StructuresManager> mManager;
-    TopLevelDataInformation::List mData;
-    TopLevelDataInformation::List mInvalidData;
+    QVector<std::shared_ptr<TopLevelDataInformation>> mData;
+    QVector<std::shared_ptr<TopLevelDataInformation>> mInvalidData;
     bool mWritingData : 1;
     bool mCurrentItemDataChanged : 1;
     bool mIsStructureMarked : 1;

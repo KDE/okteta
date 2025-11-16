@@ -182,7 +182,7 @@ void StructuresTool::updateData(const Okteta::ArrayChangeMetricsList& list)
     }
 
     for (int i = 0; i < mData.size(); i++) {
-        const TopLevelDataInformation::Ptr& dat = mData.at(i);
+        const std::shared_ptr<TopLevelDataInformation>& dat = mData.at(i);
         dat->read(mByteArrayModel, mCursorIndex, list, false);
         if (mCurrentItemDataChanged) {
             Q_EMIT dataChanged(i, mData.at(i)->actualDataInformation());
@@ -496,9 +496,9 @@ QSysInfo::Endian StructuresTool::byteOrder() const
     return mByteOrder;
 }
 
-TopLevelDataInformation::List StructuresTool::allData() const
+QVector<std::shared_ptr<TopLevelDataInformation>> StructuresTool::allData() const
 {
-    TopLevelDataInformation::List ret;
+    QVector<std::shared_ptr<TopLevelDataInformation>> ret;
     ret << mData << mInvalidData;
     return ret;
 }

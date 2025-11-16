@@ -10,6 +10,7 @@
 // lib
 #include <topleveldatainformation.hpp>
 // Qt
+#include <QVector>
 #include <QWidget>
 
 class QTableView;
@@ -20,7 +21,7 @@ class ScriptLoggerView : public QWidget
     Q_OBJECT
 
 public:
-    explicit ScriptLoggerView(const TopLevelDataInformation::List& data, QWidget* parent = nullptr);
+    explicit ScriptLoggerView(const QVector<std::shared_ptr<TopLevelDataInformation>>& data, QWidget* parent = nullptr);
     ~ScriptLoggerView() override;
 
 private Q_SLOTS:
@@ -32,7 +33,7 @@ private:
 
     // std::shared_ptrs so they remain valid until this widget is deleted
     // even if the backing data has changed
-    const TopLevelDataInformation::List mList;
+    const QVector<std::shared_ptr<TopLevelDataInformation>> mList;
 };
 
 #endif /* KASTEN_SCRIPTLOGGERVIEW_HPP */

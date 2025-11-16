@@ -17,7 +17,7 @@
 // Std
 #include <utility>
 
-ScriptLoggerView::ScriptLoggerView(const TopLevelDataInformation::List& data, QWidget* parent)
+ScriptLoggerView::ScriptLoggerView(const QVector<std::shared_ptr<TopLevelDataInformation>>& data, QWidget* parent)
     : QWidget(parent)
     , mSelector(new KComboBox(this))
     , mView(new QTableView(this))
