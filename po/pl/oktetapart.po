@@ -1,5 +1,5 @@
 # translation of oktetapart.po to
-# Version: $Revision: 1691747 $
+# Version: $Revision: 1722990 $
 # Major part translated by Piotr Roszatycki <dexter@fnet.pl>
 # Minor latest updates by Jacek Stolarczyk <jacek@mer.chemia.polsl.gliwice.pl>
 # Michal Rudolf <mrudolf@kdewebdev.org>, 2003.
