@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: playground-utils/okteta.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-29 02:02+0000\n"
+"POT-Creation-Date: 2025-11-17 02:01+0000\n"
 "PO-Revision-Date: 2007-11-05 08:28-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -2101,18 +2101,18 @@ msgid "true (%1)"
 msgstr "fíor (%1)"
 
 #: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:43
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:82
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:80
 #, kde-format
 msgid "%1 (value not in enum)"
 msgstr "%1 (níl an luach san enum)"
 
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:51
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:79
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:49
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:77
 #, kde-format
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:89
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:87
 #, fuzzy, kde-format
 #| msgid "enum (%1)"
 msgctxt ""
@@ -2427,13 +2427,13 @@ msgctxt "@title:window"
 msgid "License Agreement"
 msgstr ""
 
-#: controllers/view/structures/settings/structureaddremovewidget.cpp:48
+#: controllers/view/structures/settings/structureaddremovewidget.cpp:46
 #, kde-format
 msgctxt "@info:label"
 msgid "Installed structures:"
 msgstr "Struchtúir shuiteáilte:"
 
-#: controllers/view/structures/settings/structureaddremovewidget.cpp:58
+#: controllers/view/structures/settings/structureaddremovewidget.cpp:56
 #, kde-format
 msgctxt "@info:label"
 msgid "Used structures:"

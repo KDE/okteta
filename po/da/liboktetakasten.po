@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-10-29 02:02+0000\n"
+"POT-Creation-Date: 2025-11-17 02:01+0000\n"
 "PO-Revision-Date: 2016-07-11 21:35+0100\n"
 "Last-Translator: Martin Schlander <mschlander@opensuse.org>\n"
 "Language-Team: Danish <kde-i18n-doc@kde.org>\n"
@@ -2066,18 +2066,18 @@ msgid "true (%1)"
 msgstr "sand (%1)"
 
 #: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:43
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:82
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:80
 #, kde-format
 msgid "%1 (value not in enum)"
 msgstr "%1 (værdi ikke i enum)"
 
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:51
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:79
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:49
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:77
 #, kde-format
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:89
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:87
 #, kde-format
 msgctxt ""
 "Displayed in the type column. first comes the name of the enum, then the "
@@ -2388,13 +2388,13 @@ msgctxt "@title:window"
 msgid "License Agreement"
 msgstr ""
 
-#: controllers/view/structures/settings/structureaddremovewidget.cpp:48
+#: controllers/view/structures/settings/structureaddremovewidget.cpp:46
 #, kde-format
 msgctxt "@info:label"
 msgid "Installed structures:"
 msgstr "Installerede strukturer:"
 
-#: controllers/view/structures/settings/structureaddremovewidget.cpp:58
+#: controllers/view/structures/settings/structureaddremovewidget.cpp:56
 #, kde-format
 msgctxt "@info:label"
 msgid "Used structures:"
