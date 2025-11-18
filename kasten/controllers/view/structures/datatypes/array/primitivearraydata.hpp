@@ -44,7 +44,7 @@ public:
     BitCount32 size() const override;
     PrimitiveDataType primitiveType() const override;
     BitCount32 sizeAt(uint index) const override;
-    Qt::ItemFlags childFlags(int row, int column, bool fileLoaded) override;
+    Qt::ItemFlags childFlags(int row, int column, bool fileLoaded) const override;
 
     QScriptValue toScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) override;
     QString typeName() const override;
@@ -137,7 +137,7 @@ inline BitCount32 PrimitiveArrayData<type>::sizeAt(uint index) const
 }
 
 template <PrimitiveDataType type>
-inline Qt::ItemFlags PrimitiveArrayData<type>::childFlags(int row, int column, bool fileLoaded)
+inline Qt::ItemFlags PrimitiveArrayData<type>::childFlags(int row, int column, bool fileLoaded) const
 {
     Q_ASSERT(row >= 0 && uint(row) < length());
     Q_UNUSED(row)

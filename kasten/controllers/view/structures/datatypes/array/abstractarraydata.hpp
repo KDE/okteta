@@ -66,7 +66,7 @@ public:
     virtual bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
                               Okteta::Address address, BitCount64 bitsRemaining) = 0;
     virtual BitCount32 sizeAt(uint index) const = 0;
-    virtual Qt::ItemFlags childFlags(int row, int column, bool fileLoaded) = 0;
+    virtual Qt::ItemFlags childFlags(int row, int column, bool fileLoaded) const = 0;
     virtual bool isComplex() const = 0;
 
     virtual QWidget* createChildEditWidget(uint index, QWidget* parent) const = 0;
