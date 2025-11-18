@@ -58,7 +58,7 @@ public:
 
     QString nameAt(uint index) const;
     QString valueStringAt(uint index); // cannot be const due to calling activateIndex()
-    QString sizeStringAt(uint index); // cannot be const due to calling sizeAt()
+    QString sizeStringAt(uint index) const;
 
     static void writeOneItem(T value, Okteta::Address addr, Okteta::AbstractByteArrayModel* out, QSysInfo::Endian endianness);
 

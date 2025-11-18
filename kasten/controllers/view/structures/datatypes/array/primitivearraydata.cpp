@@ -268,7 +268,7 @@ QString PrimitiveArrayData<type>::valueStringAt(uint index)
 }
 
 template <PrimitiveDataType type>
-QString PrimitiveArrayData<type>::sizeStringAt(uint index)
+QString PrimitiveArrayData<type>::sizeStringAt(uint index) const
 {
     return DataInformation::sizeString(sizeAt(index));
 }
