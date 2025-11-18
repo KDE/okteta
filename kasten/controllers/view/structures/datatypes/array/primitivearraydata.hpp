@@ -43,7 +43,7 @@ public:
     BitCount64 offset(const DataInformation* data) const override;
     BitCount32 size() const override;
     PrimitiveDataType primitiveType() const override;
-    BitCount32 sizeAt(uint index) override;
+    BitCount32 sizeAt(uint index) const override;
     Qt::ItemFlags childFlags(int row, int column, bool fileLoaded) override;
 
     QScriptValue toScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) override;
@@ -129,7 +129,7 @@ inline PrimitiveDataType PrimitiveArrayData<type>::primitiveType() const
 }
 
 template <PrimitiveDataType type>
-inline BitCount32 PrimitiveArrayData<type>::sizeAt(uint index)
+inline BitCount32 PrimitiveArrayData<type>::sizeAt(uint index) const
 {
     Q_ASSERT(index < length());
     Q_UNUSED(index)

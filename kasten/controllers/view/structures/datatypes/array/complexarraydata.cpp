@@ -174,7 +174,7 @@ PrimitiveDataType ComplexArrayData::primitiveType() const
     return PrimitiveDataType::Invalid;
 }
 
-BitCount32 ComplexArrayData::sizeAt(uint index)
+BitCount32 ComplexArrayData::sizeAt(uint index) const
 {
     Q_ASSERT(index < length());
     return mChildren[index]->size();
