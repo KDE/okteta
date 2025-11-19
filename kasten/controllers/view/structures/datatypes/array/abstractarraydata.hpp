@@ -34,10 +34,12 @@ class AbstractArrayData
 public:
     explicit AbstractArrayData(std::unique_ptr<DataInformation>&& childType, ArrayDataInformation* parent);
     AbstractArrayData(const AbstractArrayData&) = delete;
+    AbstractArrayData(AbstractArrayData&&) = delete;
 
     virtual ~AbstractArrayData();
 
     AbstractArrayData& operator=(const AbstractArrayData&) = delete;
+    AbstractArrayData& operator=(AbstractArrayData&&) = delete;
 
 public:
     void setParent(ArrayDataInformation* parent);
