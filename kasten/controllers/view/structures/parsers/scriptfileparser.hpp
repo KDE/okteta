@@ -22,6 +22,7 @@ public:
     ScriptFileParser(const QString& pluginName, const QString& absolutePath);
     ~ScriptFileParser() override;
 
+public: // AbstractStructureParser API
     QStringList parseStructureNames() const override;
     std::vector<std::unique_ptr<TopLevelDataInformation>> parseStructures() const override;
 

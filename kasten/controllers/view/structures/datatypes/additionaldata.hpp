@@ -25,10 +25,15 @@ public:
         ToStringFunction,
         PointerInterpreterFunction,
     };
+
+public:
     explicit AdditionalData();
     AdditionalData(const AdditionalData& data);
     ~AdditionalData();
+
     AdditionalData& operator=(const AdditionalData& data);
+
+public:
     QVariant get(AdditionalDataType entry) const;
     void set(AdditionalDataType entry, const QVariant& value);
     void remove(AdditionalDataType entry);

@@ -33,6 +33,8 @@ class ScriptValueChildrenParser : public ChildrenParser
 public:
     ScriptValueChildrenParser(const ParserInfo& info, const QScriptValue& children);
     ~ScriptValueChildrenParser() override;
+
+public: // ChildrenParser API
     std::unique_ptr<DataInformation> next() override;
     bool hasNext() override;
     void setParent(DataInformation* newParent) override;

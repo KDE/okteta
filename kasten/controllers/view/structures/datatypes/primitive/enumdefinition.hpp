@@ -59,10 +59,10 @@ public:
     static EnumEntry convertToEnumEntry(const QString& name, const QVariant& value,
                                         const LoggerWithContext& logger, PrimitiveDataType type);
 
-protected:
+private:
     void setValues(std::map<AllPrimitiveTypes, QString>&& newValues);
 
-protected:
+private:
     const QString mName;
     std::map<AllPrimitiveTypes, QString> mValues;
     const PrimitiveDataType mType;

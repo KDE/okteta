@@ -52,10 +52,17 @@ public:
     explicit OsdParser(const QString& xml);
     ~OsdParser() override;
 
+public: // AbstractStructureParser API
     QStringList parseStructureNames() const override;
     std::vector<std::unique_ptr<TopLevelDataInformation>> parseStructures() const override;
 
+public:
     static std::unique_ptr<DataInformation> parseElement(const QDomElement& elem, const OsdParserInfo& oldInfo);
+
+private:
+    QDomDocument openDoc(ScriptLogger* logger) const;
+    QDomDocument openDocFromFile(ScriptLogger* logger) const;
+    QDomDocument openDocFromString(ScriptLogger* logger) const;
 
 private:
     static std::unique_ptr<PrimitiveDataInformation> primitiveFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
@@ -79,13 +86,11 @@ private:
 
     static std::vector<std::shared_ptr<EnumDefinition>> parseEnums(const QDomElement& rootElem, ScriptLogger* logger);
 
-    QDomDocument openDoc(ScriptLogger* logger) const;
-    QDomDocument openDocFromFile(ScriptLogger* logger) const;
-    QDomDocument openDocFromString(ScriptLogger* logger) const;
-
     /** Reads an property of the QDomElement. First it is checked whether an attribute exists, if this is not the case
      * the inner text of an element with tag equal to @p property is returned*/
     static QString readProperty(const QDomElement& elem, const QString& property, const QString& defaultVal = QString());
+
+private:
     /** if not empty construct the document from this, instead of opening file */
     const QString mXmlString;
 };
@@ -102,6 +107,7 @@ public:
     OsdChildrenParser& operator=(const OsdChildrenParser&) = delete;
     OsdChildrenParser& operator=(OsdChildrenParser&&) = delete;
 
+public: // ChildrenParser API
     std::unique_ptr<DataInformation> next() override;
     bool hasNext() override;
     void setParent(DataInformation* newParent) override;
@@ -116,6 +122,8 @@ class SingleElementOsdChildrenParser : public OsdChildrenParser
 public:
     SingleElementOsdChildrenParser(const OsdParserInfo& info, const QDomElement& element);
     ~SingleElementOsdChildrenParser() override;
+
+public: // ChildrenParser API
     std::unique_ptr<DataInformation> next() override;
     bool hasNext() override;
 
