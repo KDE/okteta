@@ -95,10 +95,12 @@ class OsdChildrenParser : public ChildrenParser
 public:
     OsdChildrenParser(const OsdParserInfo& info, const QDomElement& firstChild);
     OsdChildrenParser(const OsdChildrenParser&) = delete;
+    OsdChildrenParser(OsdChildrenParser&&) = delete;
 
     ~OsdChildrenParser() override;
 
     OsdChildrenParser& operator=(const OsdChildrenParser&) = delete;
+    OsdChildrenParser& operator=(OsdChildrenParser&&) = delete;
 
     std::unique_ptr<DataInformation> next() override;
     bool hasNext() override;

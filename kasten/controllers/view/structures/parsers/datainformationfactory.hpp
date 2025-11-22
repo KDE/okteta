@@ -32,10 +32,12 @@ struct CommonParsedData : public ParserInfo
         : ParserInfo(i)
     {}
     CommonParsedData(const CommonParsedData&) = delete;
+    CommonParsedData(CommonParsedData&&) = delete;
 
     ~CommonParsedData() = default;
 
     CommonParsedData& operator=(const CommonParsedData&) = delete;
+    CommonParsedData& operator=(CommonParsedData&&) = delete;
 
     QScriptValue updateFunc;
     QScriptValue validationFunc;
@@ -48,10 +50,12 @@ struct BitfieldParsedData : public ParserInfo
 {
     inline explicit BitfieldParsedData(const ParserInfo& i) : ParserInfo(i) {}
     BitfieldParsedData(const BitfieldParsedData&) = delete;
+    BitfieldParsedData(BitfieldParsedData&&) = delete;
 
     ~BitfieldParsedData() = default;
 
     BitfieldParsedData& operator=(const BitfieldParsedData&) = delete;
+    BitfieldParsedData& operator=(BitfieldParsedData&&) = delete;
 
     QString type;
     ParsedNumber<int> width;
@@ -61,10 +65,12 @@ struct PrimitiveParsedData : public ParserInfo
 {
     inline explicit PrimitiveParsedData(const ParserInfo& i) : ParserInfo(i) {}
     PrimitiveParsedData(const PrimitiveParsedData&) = delete;
+    PrimitiveParsedData(PrimitiveParsedData&&) = delete;
 
     ~PrimitiveParsedData() = default;
 
     PrimitiveParsedData& operator=(const PrimitiveParsedData&) = delete;
+    PrimitiveParsedData& operator=(PrimitiveParsedData&&) = delete;
 
     QString type;
 };
@@ -73,10 +79,12 @@ struct EnumParsedData : public ParserInfo
 {
     inline explicit EnumParsedData(const ParserInfo& i) : ParserInfo(i) {}
     EnumParsedData(const EnumParsedData&) = delete;
+    EnumParsedData(EnumParsedData&&) = delete;
 
     ~EnumParsedData() = default;
 
     EnumParsedData& operator=(const EnumParsedData&) = delete;
+    EnumParsedData& operator=(EnumParsedData&&) = delete;
 
     QString type;
     QString enumName;
@@ -89,10 +97,12 @@ struct StringParsedData : public ParserInfo
 {
     inline explicit StringParsedData(const ParserInfo& i) : ParserInfo(i) {}
     StringParsedData(const StringParsedData&) = delete;
+    StringParsedData(StringParsedData&&) = delete;
 
     ~StringParsedData() = default;
 
     StringParsedData& operator=(const StringParsedData&) = delete;
+    StringParsedData& operator=(StringParsedData&&) = delete;
 
     QString encoding;
     ParsedNumber<quint32> termination;
@@ -106,10 +116,12 @@ struct ArrayParsedData : public ParserInfo
         : ParserInfo(i)
     {}
     ArrayParsedData(const ArrayParsedData&) = delete;
+    ArrayParsedData(ArrayParsedData&&) = delete;
 
     ~ArrayParsedData() = default;
 
     ArrayParsedData& operator=(const ArrayParsedData&) = delete;
+    ArrayParsedData& operator=(ArrayParsedData&&) = delete;
 
     QScriptValue length;
     std::unique_ptr<DataInformation> arrayType;
@@ -121,10 +133,12 @@ struct PointerParsedData : public ParserInfo
         : ParserInfo(i)
     {}
     PointerParsedData(const PointerParsedData&) = delete;
+    PointerParsedData(PointerParsedData&&) = delete;
 
     ~PointerParsedData() = default;
 
     PointerParsedData& operator=(const PointerParsedData&) = delete;
+    PointerParsedData& operator=(PointerParsedData&&) = delete;
 
     std::unique_ptr<DataInformation> valueType;
     std::unique_ptr<DataInformation> pointerTarget;
@@ -142,10 +156,12 @@ struct TaggedUnionParsedData : public ParserInfo
     };
     inline explicit TaggedUnionParsedData(const ParserInfo& i) : ParserInfo(i) {}
     TaggedUnionParsedData(const TaggedUnionParsedData&) = delete;
+    TaggedUnionParsedData(TaggedUnionParsedData&&) = delete;
 
     ~TaggedUnionParsedData() = default;
 
     TaggedUnionParsedData& operator=(const TaggedUnionParsedData&) = delete;
+    TaggedUnionParsedData& operator=(TaggedUnionParsedData&&) = delete;
 
     std::unique_ptr<ChildrenParser> children;
     std::vector<Alternatives> alternatives;
@@ -156,10 +172,12 @@ struct StructOrUnionParsedData : public ParserInfo
 {
     inline explicit StructOrUnionParsedData(const ParserInfo& i) : ParserInfo(i) {}
     StructOrUnionParsedData(const StructOrUnionParsedData&) = delete;
+    StructOrUnionParsedData(StructOrUnionParsedData&&) = delete;
 
     ~StructOrUnionParsedData() = default;
 
     StructOrUnionParsedData& operator=(const StructOrUnionParsedData&) = delete;
+    StructOrUnionParsedData& operator=(StructOrUnionParsedData&&) = delete;
 
     std::unique_ptr<ChildrenParser> children;
 };

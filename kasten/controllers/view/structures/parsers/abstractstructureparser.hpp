@@ -24,10 +24,12 @@ class AbstractStructureParser
 public:
     AbstractStructureParser(const QString& pluginName, const QString& absolutePath);
     AbstractStructureParser(const AbstractStructureParser&) = delete;
+    AbstractStructureParser(AbstractStructureParser&&) = delete;
 
     virtual ~AbstractStructureParser();
 
     AbstractStructureParser& operator=(const AbstractStructureParser&) = delete;
+    AbstractStructureParser& operator=(AbstractStructureParser&&) = delete;
 
 public:
     virtual QStringList parseStructureNames() const = 0;

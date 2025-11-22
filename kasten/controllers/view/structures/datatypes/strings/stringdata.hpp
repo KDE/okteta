@@ -37,10 +37,12 @@ public:
 
     explicit StringData(StringDataInformation* parent);
     StringData(const StringData&) = delete;
+    StringData(StringData&&) = delete;
 
     virtual ~StringData();
 
     StringData& operator=(const StringData&) = delete;
+    StringData& operator=(StringData&&) = delete;
 
 public:
     virtual QString typeName() const = 0;
