@@ -20,11 +20,14 @@ namespace PrimitiveFactory {
 /** Converts @p typeStr to a PrimitiveDataType case-insensitively
  * @return The corresponding type or PrimitiveDataType::Invalid if string is not regcognized
  */
+[[nodiscard]]
 PrimitiveDataType typeStringToType(const QString& string, const LoggerWithContext& logger);
 
+[[nodiscard]]
 std::unique_ptr<PrimitiveDataInformation> newInstance(const QString& name, PrimitiveDataType type,
                                                       const LoggerWithContext& logger, DataInformation* parent = nullptr);
 
+[[nodiscard]]
 inline std::unique_ptr<PrimitiveDataInformation> newInstance(const QString& name, const QString& typeString,
                                                              const LoggerWithContext& logger, DataInformation* parent = nullptr)
 {

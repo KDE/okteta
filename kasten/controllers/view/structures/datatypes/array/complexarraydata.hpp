@@ -26,31 +26,48 @@ public:
     ~ComplexArrayData() override;
 
 public: // AbstractArrayData API
+    [[nodiscard]]
     unsigned int length() const override;
     void setLength(uint newLength) override;
 
+    [[nodiscard]]
     QString typeName() const override;
+    [[nodiscard]]
     QString valueString() const override;
 
+    [[nodiscard]]
     BitCount32 size() const override;
 
+    [[nodiscard]]
     qint64 readData(const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
                     BitCount64 bitsRemaining) override;
+    [[nodiscard]]
     QScriptValue toScriptValue(uint index, QScriptEngine* engine,
                                ScriptHandlerInfo* handlerInfo) override;
+    [[nodiscard]]
     PrimitiveDataType primitiveType() const override;
+    [[nodiscard]]
     bool isComplex() const override;
 
+    [[nodiscard]]
     DataInformation* childAt(unsigned int idx) override;
+    [[nodiscard]]
     int indexOf(const DataInformation* data) const override;
+    [[nodiscard]]
     BitCount64 offset(const DataInformation* child) const override;
+    [[nodiscard]]
     QVariant dataAt(uint index, int column, int role) override;
+    [[nodiscard]]
     BitCount32 sizeAt(uint index) const override;
+    [[nodiscard]]
     Qt::ItemFlags childFlags(int index, int column, bool fileLoaded) const override;
+    [[nodiscard]]
     bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
                       Okteta::Address address, BitCount64 bitsRemaining) override;
 
+    [[nodiscard]]
     QWidget* createChildEditWidget(uint index, QWidget* parent) const override;
+    [[nodiscard]]
     QVariant dataFromChildWidget(uint index, const QWidget* w) const override;
     void setChildWidgetData(uint index, QWidget* w) const override;
 

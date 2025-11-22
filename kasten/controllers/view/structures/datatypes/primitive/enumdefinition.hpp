@@ -23,6 +23,7 @@ struct EnumEntry
     AllPrimitiveTypes value;
     QString name;
 
+    [[nodiscard]]
     bool isEmpty() const
     {
         return (value == AllPrimitiveTypes()) && name.isEmpty();
@@ -46,16 +47,23 @@ public:
     EnumDefinition& operator=(EnumDefinition&& e) = delete;
 
 public:
+    [[nodiscard]]
     const std::map<AllPrimitiveTypes, QString>& values() const;
+    [[nodiscard]]
     AllPrimitiveTypes key(const QString& value) const;
+    [[nodiscard]]
     QString value(AllPrimitiveTypes key) const;
+    [[nodiscard]]
     PrimitiveDataType type() const;
+    [[nodiscard]]
     const QString& name() const;
 
 public:
+    [[nodiscard]]
     static std::map<AllPrimitiveTypes, QString> parseEnumValues(const QScriptValue& val,
                                                                 const LoggerWithContext& logger, PrimitiveDataType type = PrimitiveDataType::UInt64);
     /** @return a pair containing the converted value. A default constructed pair means error! */
+    [[nodiscard]]
     static EnumEntry convertToEnumEntry(const QString& name, const QVariant& value,
                                         const LoggerWithContext& logger, PrimitiveDataType type);
 

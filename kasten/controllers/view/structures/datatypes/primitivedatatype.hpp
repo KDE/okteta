@@ -40,10 +40,13 @@ namespace PrimitiveType {
  * @return either PrimitiveType::longTypename() or
  * PrimitiveType::standardTypeName() depending on settings
  */
+[[nodiscard]]
 QString typeName(PrimitiveDataType type);
 /** @return the name of the type, e.g. "uint8", "double", etc. */
+[[nodiscard]]
 QString standardTypeName(PrimitiveDataType type);
 /** @return the localized type name */
+[[nodiscard]]
 QString longTypeName(PrimitiveDataType type);
 
 }

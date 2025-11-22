@@ -23,10 +23,13 @@ public:
     ~ScriptFileParser() override;
 
 public: // AbstractStructureParser API
+    [[nodiscard]]
     QStringList parseStructureNames() const override;
+    [[nodiscard]]
     std::vector<std::unique_ptr<TopLevelDataInformation>> parseStructures() const override;
 
 private:
+    [[nodiscard]]
     QScriptValue loadScriptValue(ScriptLogger* logger, QScriptEngine* engine) const;
 };
 

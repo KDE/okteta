@@ -32,7 +32,9 @@ public:
     AbstractStructureParser& operator=(AbstractStructureParser&&) = delete;
 
 public: // API to implement
+    [[nodiscard]]
     virtual QStringList parseStructureNames() const = 0;
+    [[nodiscard]]
     virtual std::vector<std::unique_ptr<TopLevelDataInformation>> parseStructures() const = 0;
 
 protected:

@@ -275,30 +275,30 @@ void PrimitiveDataInformationTest::testValueStringInt_data()
 void PrimitiveDataInformationTest::testFromVariant()
 {
     bool ok = false;
-    FloatDataInformationMethods::fromVariant(QVariant(float(42.0F)), &ok);
+    std::ignore = FloatDataInformationMethods::fromVariant(QVariant(float(42.0F)), &ok);
     QCOMPARE(ok, true); // float in range
-    FloatDataInformationMethods::fromVariant(QVariant(double(42.0)), &ok);
+    std::ignore = FloatDataInformationMethods::fromVariant(QVariant(double(42.0)), &ok);
     QCOMPARE(ok, true); // double should be fine too
-    FloatDataInformationMethods::fromVariant(QVariant(double(std::numeric_limits<float>::max())), &ok);
+    std::ignore = FloatDataInformationMethods::fromVariant(QVariant(double(std::numeric_limits<float>::max())), &ok);
     QCOMPARE(ok, true); // float max as a double should work too
-    FloatDataInformationMethods::fromVariant(QVariant(std::numeric_limits<float>::quiet_NaN()), &ok);
+    std::ignore = FloatDataInformationMethods::fromVariant(QVariant(std::numeric_limits<float>::quiet_NaN()), &ok);
     QCOMPARE(ok, true); // nan should be fine too
-    FloatDataInformationMethods::fromVariant(QVariant(std::numeric_limits<double>::quiet_NaN()), &ok);
+    std::ignore = FloatDataInformationMethods::fromVariant(QVariant(std::numeric_limits<double>::quiet_NaN()), &ok);
     QCOMPARE(ok, true); // double nan gets mapped to float nan
-    FloatDataInformationMethods::fromVariant(QVariant(QStringLiteral("abc")), &ok);
+    std::ignore = FloatDataInformationMethods::fromVariant(QVariant(QStringLiteral("abc")), &ok);
     QCOMPARE(ok, false); // bad data type
-    FloatDataInformationMethods::fromVariant(QVariant(std::numeric_limits<double>::max()), &ok);
+    std::ignore = FloatDataInformationMethods::fromVariant(QVariant(std::numeric_limits<double>::max()), &ok);
     QCOMPARE(ok, false); // out of range
 
-    DoubleDataInformationMethods::fromVariant(QVariant(float(42.0F)), &ok);
+    std::ignore = DoubleDataInformationMethods::fromVariant(QVariant(float(42.0F)), &ok);
     QCOMPARE(ok, true); // float should be fine too QVariant::type() == Float
-    DoubleDataInformationMethods::fromVariant(QVariant(std::numeric_limits<double>::max()), &ok);
+    std::ignore = DoubleDataInformationMethods::fromVariant(QVariant(std::numeric_limits<double>::max()), &ok);
     QCOMPARE(ok, true); // double
-    DoubleDataInformationMethods::fromVariant(QVariant(std::numeric_limits<float>::quiet_NaN()), &ok);
+    std::ignore = DoubleDataInformationMethods::fromVariant(QVariant(std::numeric_limits<float>::quiet_NaN()), &ok);
     QCOMPARE(ok, true); // nan should be fine too
-    DoubleDataInformationMethods::fromVariant(QVariant(std::numeric_limits<double>::quiet_NaN()), &ok);
+    std::ignore = DoubleDataInformationMethods::fromVariant(QVariant(std::numeric_limits<double>::quiet_NaN()), &ok);
     QCOMPARE(ok, true); // double nan gets mapped to float nan
-    DoubleDataInformationMethods::fromVariant(QVariant(QStringLiteral("abc")), &ok);
+    std::ignore = DoubleDataInformationMethods::fromVariant(QVariant(QStringLiteral("abc")), &ok);
     QCOMPARE(ok, false); // bad data type
     // TODO test other types!
 

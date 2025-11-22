@@ -48,12 +48,16 @@ struct ParserInfo
     DataInformation* parent;
     QScriptEngine* const engine;
 
+    [[nodiscard]]
     inline QString context() const
     {
         return parent ? parent->fullObjectPath() + QLatin1Char('.') + name : name;
     }
+    [[nodiscard]]
     inline QDebug info() const { return logger->info(context()); }
+    [[nodiscard]]
     inline QDebug warn() const { return logger->warn(context()); }
+    [[nodiscard]]
     inline QDebug error() const { return logger->error(context()); }
 };
 
@@ -63,7 +67,9 @@ public:
     virtual ~ChildrenParser() = default;
 
 public: // API to implement
+    [[nodiscard]]
     virtual std::unique_ptr<DataInformation> next() = 0;
+    [[nodiscard]]
     virtual bool hasNext() = 0;
     virtual void setParent(DataInformation* parent) = 0;
 };
@@ -85,8 +91,11 @@ struct ParsedNumber
     T value = 0;
     bool isValid = false;
 
+    [[nodiscard]]
     static ParsedNumber<T> badInput(const QString& str) { return ParsedNumber<T>(T(), str, false); }
+    [[nodiscard]]
     inline bool isError() { return !isValid && !string.isEmpty(); }
+    [[nodiscard]]
     inline bool isEmpty() { Q_ASSERT(!isValid); return string.isEmpty(); }
 };
 
@@ -171,28 +180,38 @@ namespace ParserUtils {
  * @param str the string to convert
  * @return a parsed number (check the isValid member to see if conversion succeeded)
  */
+[[nodiscard]]
 ParsedNumber<int> intFromString(const QString& str);
 /** @see ParserUtils::intFromString() */
+[[nodiscard]]
 ParsedNumber<uint> uintFromString(const QString& str);
 /** @see ParserUtils::intFromString() */
+[[nodiscard]]
 ParsedNumber<quint64> uint64FromString(const QString& str);
 /** Checks whether the value is a number, and if it is converts it.
  * Since all script values use double internally, a valid number can be out of bounds, too
  * @param val the value to convert
  * @see ParserUtils::intFromString()
  */
+[[nodiscard]]
 ParsedNumber<int> intFromScriptValue(const QScriptValue& val);
 /** @see ParserUtils::intFromScriptValue() */
+[[nodiscard]]
 ParsedNumber<uint> uintFromScriptValue(const QScriptValue& val);
 /** @see ParserUtils::intFromScriptValue() */
+[[nodiscard]]
 ParsedNumber<quint64> uint64FromScriptValue(const QScriptValue& val);
 
+[[nodiscard]]
 DataInformation::DataInformationEndianness byteOrderFromString(const QString& string, const LoggerWithContext& logger);
+[[nodiscard]]
 QString byteOrderToString(DataInformation::DataInformationEndianness order);
 
+[[nodiscard]]
 StringDataInformation::StringType toStringEncoding(const QString& str, const LoggerWithContext& logger);
 
 /** This essentially calls engine->evaluate(str), but ensures it can be a function (QTBUG-5757)  */
+[[nodiscard]]
 QScriptValue functionSafeEval(QScriptEngine* engine, const QString& str);
 
 }

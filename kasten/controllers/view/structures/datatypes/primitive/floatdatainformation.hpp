@@ -13,13 +13,20 @@
 class FloatDataInformationMethods
 {
 public:
+    [[nodiscard]]
     static PrimitiveDataType staticType();
+    [[nodiscard]]
     static QString staticValueString(float value);
+    [[nodiscard]]
     static QScriptValue asScriptValue(float value, QScriptEngine* engine, ScriptHandlerInfo* handler);
+    [[nodiscard]]
     static float fromVariant(const QVariant& value, bool* ok);
+    [[nodiscard]]
     static QVariant staticToQVariant(float value);
 
+    [[nodiscard]]
     static QWidget* staticCreateEditWidget(QWidget* parent);
+    [[nodiscard]]
     static QVariant staticDataFromWidget(const QWidget* w);
     static void staticSetWidgetData(float value, QWidget* w);
 };

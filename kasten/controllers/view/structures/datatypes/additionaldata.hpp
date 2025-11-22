@@ -34,6 +34,7 @@ public:
     AdditionalData& operator=(const AdditionalData& data);
 
 public:
+    [[nodiscard]]
     QVariant get(AdditionalDataType entry) const;
     void set(AdditionalDataType entry, const QVariant& value);
     void remove(AdditionalDataType entry);

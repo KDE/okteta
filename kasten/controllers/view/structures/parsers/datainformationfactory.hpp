@@ -183,17 +183,28 @@ struct StructOrUnionParsedData : public ParserInfo
 };
 
 namespace DataInformationFactory {
+[[nodiscard]]
 std::unique_ptr<AbstractBitfieldDataInformation> newBitfield(const BitfieldParsedData& pd);
+[[nodiscard]]
 std::unique_ptr<PrimitiveDataInformation> newPrimitive(const PrimitiveParsedData& pd);
+[[nodiscard]]
 std::unique_ptr<EnumDataInformation> newEnum(const EnumParsedData& pd);
+[[nodiscard]]
 std::unique_ptr<FlagDataInformation> newFlags(const EnumParsedData& pd);
+[[nodiscard]]
 std::unique_ptr<ArrayDataInformation> newArray(ArrayParsedData& pd);
+[[nodiscard]]
 std::unique_ptr<StringDataInformation> newString(const StringParsedData& pd);
+[[nodiscard]]
 std::unique_ptr<PointerDataInformation> newPointer(PointerParsedData& pd);
+[[nodiscard]]
 std::unique_ptr<UnionDataInformation> newUnion(const StructOrUnionParsedData& pd);
+[[nodiscard]]
 std::unique_ptr<StructureDataInformation> newStruct(const StructOrUnionParsedData& pd);
+[[nodiscard]]
 std::unique_ptr<TaggedUnionDataInformation> newTaggedUnion(const TaggedUnionParsedData& pd);
 
+[[nodiscard]]
 bool commonInitialization(DataInformation* data, const CommonParsedData& pd);
 }
 

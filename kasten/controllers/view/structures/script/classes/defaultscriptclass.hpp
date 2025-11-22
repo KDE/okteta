@@ -119,10 +119,15 @@ public:
     ~DefaultscriptClassIterator() override;
 
 public: // QScriptClassPropertyIterator API
+    [[nodiscard]]
     bool hasNext() const override;
+    [[nodiscard]]
     bool hasPrevious() const override;
+    [[nodiscard]]
     QScriptString name() const override;
+    [[nodiscard]]
     QScriptValue::PropertyFlags flags() const override;
+    [[nodiscard]]
     uint id() const override;
     void next() override;
     void previous() override;

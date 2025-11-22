@@ -13,13 +13,20 @@
 class CharDataInformationMethods
 {
 public:
+    [[nodiscard]]
     static QString staticValueString(quint8 value);
+    [[nodiscard]]
     static quint8 fromVariant(const QVariant& value, bool* ok);
+    [[nodiscard]]
     static PrimitiveDataType staticType();
+    [[nodiscard]]
     static QScriptValue asScriptValue(quint8 value, QScriptEngine* engine, ScriptHandlerInfo* handler);
+    [[nodiscard]]
     static QVariant staticToQVariant(quint8 value);
 
+    [[nodiscard]]
     static QWidget* staticCreateEditWidget(QWidget* parent);
+    [[nodiscard]]
     static QVariant staticDataFromWidget(const QWidget* w);
     static void staticSetWidgetData(quint8 value, QWidget* w);
 };

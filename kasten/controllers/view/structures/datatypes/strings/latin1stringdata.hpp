@@ -19,13 +19,21 @@ public:
     ~Latin1StringData() override;
 
 public: // StringData API
+    [[nodiscard]]
     QString typeName() const override;
+    [[nodiscard]]
     QString charType() const override;
+    [[nodiscard]]
     QString stringValue(int row) const override;
+    [[nodiscard]]
     QString completeString() const override;
+    [[nodiscard]]
     uint count() const override;
+    [[nodiscard]]
     BitCount32 size() const override;
+    [[nodiscard]]
     BitCount32 sizeAt(uint i) const override;
+    [[nodiscard]]
     qint64 read(const Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining) override;
 
 private:

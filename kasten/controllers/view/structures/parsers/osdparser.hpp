@@ -53,41 +53,61 @@ public:
     ~OsdParser() override;
 
 public: // AbstractStructureParser API
+    [[nodiscard]]
     QStringList parseStructureNames() const override;
+    [[nodiscard]]
     std::vector<std::unique_ptr<TopLevelDataInformation>> parseStructures() const override;
 
 public:
+    [[nodiscard]]
     static std::unique_ptr<DataInformation> parseElement(const QDomElement& elem, const OsdParserInfo& oldInfo);
 
 private:
+    [[nodiscard]]
     QDomDocument openDoc(ScriptLogger* logger) const;
+    [[nodiscard]]
     QDomDocument openDocFromFile(ScriptLogger* logger) const;
+    [[nodiscard]]
     QDomDocument openDocFromString(ScriptLogger* logger) const;
 
 private:
+    [[nodiscard]]
     static std::unique_ptr<PrimitiveDataInformation> primitiveFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
+    [[nodiscard]]
     static std::unique_ptr<PointerDataInformation> pointerFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
+    [[nodiscard]]
     static std::unique_ptr<AbstractBitfieldDataInformation> bitfieldFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
+    [[nodiscard]]
     static std::unique_ptr<EnumDataInformation> enumFromXML(const QDomElement& elem, bool isFlags, const OsdParserInfo& info);
+    [[nodiscard]]
     static std::unique_ptr<StringDataInformation> stringFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
+    [[nodiscard]]
     static std::unique_ptr<UnionDataInformation> unionFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
+    [[nodiscard]]
     static std::unique_ptr<StructureDataInformation> structFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
+    [[nodiscard]]
     static std::unique_ptr<ArrayDataInformation> arrayFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
+    [[nodiscard]]
     static std::unique_ptr<TaggedUnionDataInformation> taggedUnionFromXML(const QDomElement& xmlElem, const OsdParserInfo& info);
     /** Get the child type from the <type> element or type="" attribute.
      * This handles both the case where it is passed as an XML element and as a primitive type string
      * @param xmlElem the parent XML element
      * @param info the parser info
      * @return The parsed element or null if not possible. */
+    [[nodiscard]]
     static std::unique_ptr<DataInformation> parseType(const QDomElement& xmlElem, const OsdParserInfo& info, const QString& name);
+    [[nodiscard]]
     static std::unique_ptr<DataInformation> parseChildElement(const QDomElement& xmlElem, const OsdParserInfo& info, const QString& name);
 
+    [[nodiscard]]
     static std::shared_ptr<EnumDefinition> findEnum(const QString& defName, const OsdParserInfo& info);
 
+    [[nodiscard]]
     static std::vector<std::shared_ptr<EnumDefinition>> parseEnums(const QDomElement& rootElem, ScriptLogger* logger);
 
     /** Reads an property of the QDomElement. First it is checked whether an attribute exists, if this is not the case
      * the inner text of an element with tag equal to @p property is returned*/
+    [[nodiscard]]
     static QString readProperty(const QDomElement& elem, const QString& property, const QString& defaultVal = QString());
 
 private:
@@ -108,7 +128,9 @@ public:
     OsdChildrenParser& operator=(OsdChildrenParser&&) = delete;
 
 public: // ChildrenParser API
+    [[nodiscard]]
     std::unique_ptr<DataInformation> next() override;
+    [[nodiscard]]
     bool hasNext() override;
     void setParent(DataInformation* newParent) override;
 
@@ -124,7 +146,9 @@ public:
     ~SingleElementOsdChildrenParser() override;
 
 public: // ChildrenParser API
+    [[nodiscard]]
     std::unique_ptr<DataInformation> next() override;
+    [[nodiscard]]
     bool hasNext() override;
 
 private:

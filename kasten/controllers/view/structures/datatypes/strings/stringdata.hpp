@@ -50,27 +50,40 @@ public:
     StringData& operator=(StringData&&) = delete;
 
 public: // API to implement
+    [[nodiscard]]
     virtual QString typeName() const = 0;
+    [[nodiscard]]
     virtual QString charType() const = 0;
+    [[nodiscard]]
     virtual QString stringValue(int row) const = 0;
+    [[nodiscard]]
     virtual QString completeString() const = 0;
+    [[nodiscard]]
     virtual uint count() const = 0;
+    [[nodiscard]]
     virtual BitCount32 size() const = 0;
+    [[nodiscard]]
     virtual BitCount32 sizeAt(uint index) const = 0;
+    [[nodiscard]]
     virtual qint64 read(const Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining) = 0;
     /** by default just sets value, if more logic is needed can be overridden */
     virtual void setEndianness(QSysInfo::Endian endianness);
 
 public:
+    [[nodiscard]]
     TerminationMode terminationMode() const;
     void setTerminationMode(TerminationMode mode);
 
+    [[nodiscard]]
     bool wasEof() const;
 
+    [[nodiscard]]
     uint maxByteCount() const;
     void setMaxByteCount(uint count);
+    [[nodiscard]]
     uint maxCharCount() const;
     void setMaxCharCount(uint count);
+    [[nodiscard]]
     uint terminationCodePoint() const;
     void setTerminationCodePoint(quint32 term);
 

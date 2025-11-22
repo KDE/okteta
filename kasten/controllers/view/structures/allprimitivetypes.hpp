@@ -119,6 +119,7 @@ public:
      *  @param bitOffset the bit to start at in the first byte
      *  @return @c true on success, @c false otherwise
      */
+    [[nodiscard]]
     bool writeBits(quint8 bitCount, AllPrimitiveTypes newValue,
                    Okteta::AbstractByteArrayModel* out, QSysInfo::Endian byteOrder,
                    Okteta::Address address, BitCount64 bitsRemaining, quint8 * const bitOffset);
@@ -138,11 +139,14 @@ public:
      *  @param bitOffset the bit to start at in the first byte
      *  @return @c true on success, @c false otherwise
      */
+    [[nodiscard]]
     bool readBits(quint8 bitCount, const Okteta::AbstractByteArrayModel* input,
                   QSysInfo::Endian byteOrder, Okteta::Address address, BitCount64 bitsRemaining,
                   quint8 * const bitOffset);
 
-    template <typename T> T value() const;
+    template <typename T>
+    [[nodiscard]]
+    T value() const;
     /**
      * Read data of type @p T from the model. Range checking must have been performed before
      * @param input the input to read from
@@ -152,15 +156,21 @@ public:
      * @return the read value
      */
     // TODO bool* ok parameter for when reading from model can cause errors (or exceptions sometime?)
-    template <typename T> static T readValue(const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+    template <typename T>
+    [[nodiscard]]
+    static T readValue(const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
         QSysInfo::Endian endianness, quint8 bitOffset);
     // TODO add writeValue
 
 private:
-    template <int size> static typename QIntegerForSize<size>::Unsigned readValuePrivate(
+    template <int size>
+    [[nodiscard]]
+    static typename QIntegerForSize<size>::Unsigned readValuePrivate(
         const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
         QSysInfo::Endian endianness, quint8 bitOffset);
-    template <int size> static typename QIntegerForSize<size>::Unsigned readRawBytes(
+    template <int size>
+    [[nodiscard]]
+    static typename QIntegerForSize<size>::Unsigned readRawBytes(
         const Okteta::AbstractByteArrayModel* input, Okteta::Address address);
 
     void readDataLittleEndian(quint8 bitCount, const Okteta::AbstractByteArrayModel* input,

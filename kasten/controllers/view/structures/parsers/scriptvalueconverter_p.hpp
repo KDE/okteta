@@ -17,15 +17,25 @@
 
 namespace ScriptValueConverter {
 
+[[nodiscard]]
 std::unique_ptr<DataInformation> toDataInformation(const QScriptValue& value, const ParserInfo& info);
+[[nodiscard]]
 std::unique_ptr<ArrayDataInformation> toArray(const QScriptValue& value, const ParserInfo& info);
+[[nodiscard]]
 std::unique_ptr<AbstractBitfieldDataInformation> toBitfield(const QScriptValue& value, const ParserInfo& info);
+[[nodiscard]]
 std::unique_ptr<PrimitiveDataInformation> toPrimitive(const QScriptValue& value, const ParserInfo& info);
+[[nodiscard]]
 std::unique_ptr<StructureDataInformation> toStruct(const QScriptValue& value, const ParserInfo& info);
+[[nodiscard]]
 std::unique_ptr<UnionDataInformation> toUnion(const QScriptValue& value, const ParserInfo& info);
+[[nodiscard]]
 std::unique_ptr<StringDataInformation> toString(const QScriptValue& value, const ParserInfo& info);
+[[nodiscard]]
 std::unique_ptr<PointerDataInformation> toPointer(const QScriptValue& value, const ParserInfo& info);
+[[nodiscard]]
 std::unique_ptr<EnumDataInformation> toEnum(const QScriptValue& value, bool isFlags, const ParserInfo& info);
+[[nodiscard]]
 std::unique_ptr<TaggedUnionDataInformation> toTaggedUnion(const QScriptValue& value, const ParserInfo& info);
 
 class ScriptValueChildrenParser : public ChildrenParser
@@ -35,7 +45,9 @@ public:
     ~ScriptValueChildrenParser() override;
 
 public: // ChildrenParser API
+    [[nodiscard]]
     std::unique_ptr<DataInformation> next() override;
+    [[nodiscard]]
     bool hasNext() override;
     void setParent(DataInformation* newParent) override;
 

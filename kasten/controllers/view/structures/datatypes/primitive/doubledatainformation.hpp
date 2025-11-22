@@ -13,13 +13,20 @@
 class DoubleDataInformationMethods
 {
 public:
+    [[nodiscard]]
     static QString staticValueString(double value);
+    [[nodiscard]]
     static PrimitiveDataType staticType();
+    [[nodiscard]]
     static QScriptValue asScriptValue(double value, QScriptEngine* engine, ScriptHandlerInfo* handler);
+    [[nodiscard]]
     static double fromVariant(const QVariant& value, bool* ok);
+    [[nodiscard]]
     static QVariant staticToQVariant(double value);
 
+    [[nodiscard]]
     static QWidget* staticCreateEditWidget(QWidget* parent);
+    [[nodiscard]]
     static QVariant staticDataFromWidget(const QWidget* w);
     static void staticSetWidgetData(double value, QWidget* w);
 };

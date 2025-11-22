@@ -16,13 +16,20 @@ template <typename T>
 class BoolDataInformationMethods
 {
 public:
+    [[nodiscard]]
     static QScriptValue asScriptValue(T value, QScriptEngine* engine, ScriptHandlerInfo* handler);
+    [[nodiscard]]
     static QString staticValueString(T val, int base = Kasten::StructureViewPreferences::unsignedDisplayBase());
+    [[nodiscard]]
     static PrimitiveDataType staticType();
+    [[nodiscard]]
     static T fromVariant(const QVariant& value, bool* ok);
+    [[nodiscard]]
     static QVariant staticToQVariant(T value);
 
+    [[nodiscard]]
     static QWidget* staticCreateEditWidget(QWidget* parent);
+    [[nodiscard]]
     static QVariant staticDataFromWidget(const QWidget* w);
     static void staticSetWidgetData(T value, QWidget* w);
 };
