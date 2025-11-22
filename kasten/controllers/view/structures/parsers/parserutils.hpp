@@ -44,9 +44,9 @@ struct ParserInfo
     inline ~ParserInfo() = default;
 
     QString name;
-    ScriptLogger* logger;
+    ScriptLogger* const logger;
     DataInformation* parent;
-    QScriptEngine* engine;
+    QScriptEngine* const engine;
 
     inline QString context() const
     {
