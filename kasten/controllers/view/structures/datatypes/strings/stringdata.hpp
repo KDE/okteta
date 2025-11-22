@@ -35,6 +35,11 @@ public:
     };
     Q_DECLARE_FLAGS(TerminationModes, TerminationMode)
 
+    static constexpr uint UNICODE_MAX = 0x10ffff;
+    static constexpr uint BMP_MAX = 0xffff;
+    static constexpr char ASCII_MAX = 0x7f;
+
+public:
     explicit StringData(StringDataInformation* parent);
     StringData(const StringData&) = delete;
     StringData(StringData&&) = delete;
@@ -44,17 +49,19 @@ public:
     StringData& operator=(const StringData&) = delete;
     StringData& operator=(StringData&&) = delete;
 
-public:
+public: // API to implement
     virtual QString typeName() const = 0;
-    virtual uint count() const = 0;
     virtual QString charType() const = 0;
     virtual QString stringValue(int row) const = 0;
     virtual QString completeString() const = 0;
+    virtual uint count() const = 0;
     virtual BitCount32 size() const = 0;
     virtual BitCount32 sizeAt(uint index) const = 0;
     virtual qint64 read(const Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining) = 0;
     /** by default just sets value, if more logic is needed can be overridden */
     virtual void setEndianness(QSysInfo::Endian endianness);
+
+public:
     TerminationMode terminationMode() const;
     void setTerminationMode(TerminationMode mode);
 
@@ -68,10 +75,6 @@ public:
     void setTerminationCodePoint(quint32 term);
 
     void copyTerminationFrom(const StringData* data);
-
-    static constexpr uint UNICODE_MAX = 0x10ffff;
-    static constexpr uint BMP_MAX = 0xffff;
-    static constexpr char ASCII_MAX = 0x7f;
 
 protected:
     StringDataInformation* mParent;

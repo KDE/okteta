@@ -18,14 +18,15 @@ public:
     explicit Utf16StringData(StringDataInformation* parent);
     ~Utf16StringData() override;
 
+public: // StringData API
+    QString typeName() const override;
     QString charType() const override;
+    QString stringValue(int row) const override;
     QString completeString() const override;
     uint count() const override;
-    qint64 read(const Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining) override;
     BitCount32 size() const override;
     BitCount32 sizeAt(uint i) const override;
-    QString stringValue(int row) const override;
-    QString typeName() const override;
+    qint64 read(const Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining) override;
 
 private:
     std::vector<quint32> mCodePoints;
