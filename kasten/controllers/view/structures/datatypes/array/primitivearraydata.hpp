@@ -23,44 +23,52 @@ public:
     using T = typename PrimitiveInfo<type>::valueType;
     using DisplayClass = typename PrimitiveInfo<type>::Methods;
 
+public:
     explicit PrimitiveArrayData(unsigned int initialLength,
                                 std::unique_ptr<PrimitiveDataInformation>&& childType,
                                 ArrayDataInformation* parent);
     ~PrimitiveArrayData() override;
 
-public:
-    qint64 readData(const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
-                    BitCount64 bitsRemaining) override;
-    bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
-                      Okteta::Address address, BitCount64 bitsRemaining) override;
-
-    DataInformation* childAt(unsigned int idx) override;
-    QVariant dataAt(uint index, int column, int role) override;
-    AllPrimitiveTypes valueAt(int index) const;
-    int indexOf(const DataInformation* data) const override;
+public: // AbstractArrayData API
     unsigned int length() const override;
     void setLength(uint newLength) override;
-    BitCount64 offset(const DataInformation* data) const override;
-    BitCount32 size() const override;
-    PrimitiveDataType primitiveType() const override;
-    BitCount32 sizeAt(uint index) const override;
-    Qt::ItemFlags childFlags(int row, int column, bool fileLoaded) const override;
 
-    QScriptValue toScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) override;
     QString typeName() const override;
     QString valueString() const override;
 
+    BitCount32 size() const override;
+
+    qint64 readData(const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+                    BitCount64 bitsRemaining) override;
+    QScriptValue toScriptValue(uint index, QScriptEngine* engine,
+                               ScriptHandlerInfo* handlerInfo) override;
+    PrimitiveDataType primitiveType() const override;
     bool isComplex() const override;
+
+    DataInformation* childAt(unsigned int idx) override;
+    int indexOf(const DataInformation* data) const override;
+    BitCount64 offset(const DataInformation* data) const override;
+    QVariant dataAt(uint index, int column, int role) override;
+    BitCount32 sizeAt(uint index) const override;
+    Qt::ItemFlags childFlags(int row, int column, bool fileLoaded) const override;
+    bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
+                      Okteta::Address address, BitCount64 bitsRemaining) override;
 
     QWidget* createChildEditWidget(uint index, QWidget* parent) const override;
     QVariant dataFromChildWidget(uint index, const QWidget* w) const override;
     void setChildWidgetData(uint index, QWidget* w) const override;
 
+public:
     QString nameAt(uint index) const;
+    AllPrimitiveTypes valueAt(int index) const;
     QString valueStringAt(uint index); // cannot be const due to calling activateIndex()
     QString sizeStringAt(uint index) const;
 
+public:
     static void writeOneItem(T value, Okteta::Address addr, Okteta::AbstractByteArrayModel* out, QSysInfo::Endian endianness);
+
+protected: // AbstractArrayData API
+    void setNewParentForChildren() override;
 
 protected:
     /** sets mChildType and mDummy as @p index, which must have been checked before calling this method!! */
@@ -69,8 +77,8 @@ protected:
     void readDataNativeOrder(uint numItems, const Okteta::AbstractByteArrayModel* input, Okteta::Address addr);
     /** reads @p numItems items from the input, sizes must have been checked before calling this method!! */
     void readDataNonNativeOrder(uint numItems, const Okteta::AbstractByteArrayModel* input, Okteta::Address addr);
-    void setNewParentForChildren() override;
 
+protected:
     std::vector<T> mData;
     uint mNumReadValues = 0; // the number of values read before EOF
     DummyDataInformation mDummy;

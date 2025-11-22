@@ -41,12 +41,7 @@ public:
     AbstractArrayData& operator=(const AbstractArrayData&) = delete;
     AbstractArrayData& operator=(AbstractArrayData&&) = delete;
 
-public:
-    void setParent(ArrayDataInformation* parent);
-    /** @return The current child type. Ownership is NOT transferred */
-    DataInformation* childType() const;
-
-    virtual QVariant dataAt(uint index, int column, int role) = 0;
+public: // API to implement
     virtual unsigned int length() const = 0;
     virtual void setLength(uint newLength) = 0;
 
@@ -55,32 +50,39 @@ public:
 
     virtual BitCount32 size() const = 0;
 
-    virtual DataInformation* childAt(unsigned int idx) = 0;
-
+    virtual qint64 readData(const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+                            BitCount64 bitsRemaining) = 0;
     virtual QScriptValue toScriptValue(uint index, QScriptEngine* engine,
                                        ScriptHandlerInfo* handlerInfo) = 0;
     /** the primitive type or PrimitiveDataType::Invalid for structs etc */
     virtual PrimitiveDataType primitiveType() const = 0;
+    virtual bool isComplex() const = 0;
 
+    virtual DataInformation* childAt(unsigned int idx) = 0;
     virtual int indexOf(const DataInformation* data) const = 0;
     virtual BitCount64 offset(const DataInformation* child) const = 0;
-    virtual qint64 readData(const Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining) = 0;
-    virtual bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
-                              Okteta::Address address, BitCount64 bitsRemaining) = 0;
+    virtual QVariant dataAt(uint index, int column, int role) = 0;
     virtual BitCount32 sizeAt(uint index) const = 0;
     virtual Qt::ItemFlags childFlags(int row, int column, bool fileLoaded) const = 0;
-    virtual bool isComplex() const = 0;
+    virtual bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
+                              Okteta::Address address, BitCount64 bitsRemaining) = 0;
 
     virtual QWidget* createChildEditWidget(uint index, QWidget* parent) const = 0;
     virtual QVariant dataFromChildWidget(uint index, const QWidget* w) const = 0;
     virtual void setChildWidgetData(uint index, QWidget* w) const = 0;
 
+public:
+    void setParent(ArrayDataInformation* parent);
+
+    /** @return The current child type. Ownership is NOT transferred */
+    DataInformation* childType() const;
+
+public:
     /** Takes ownership over @p type ! */
     static std::unique_ptr<AbstractArrayData> newArrayData(uint length,
                                                            std::unique_ptr<DataInformation>&& type,
                                                            ArrayDataInformation* parent);
-
-protected:
+protected: // API to implement:
     virtual void setNewParentForChildren() = 0;
 
 protected:

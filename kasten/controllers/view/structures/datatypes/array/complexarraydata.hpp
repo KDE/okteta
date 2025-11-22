@@ -25,28 +25,28 @@ public:
                      ArrayDataInformation* parent);
     ~ComplexArrayData() override;
 
-public:
-    QVariant dataAt(uint index, int column, int role) override;
-
+public: // AbstractArrayData API
     unsigned int length() const override;
     void setLength(uint newLength) override;
-    BitCount32 size() const override;
 
     QString typeName() const override;
     QString valueString() const override;
 
-    DataInformation* childAt(unsigned int idx) override;
-    int indexOf(const DataInformation* data) const override;
-    BitCount64 offset(const DataInformation* child) const override;
-    BitCount32 sizeAt(uint index) const override;
-    Qt::ItemFlags childFlags(int index, int column, bool fileLoaded) const override;
+    BitCount32 size() const override;
 
+    qint64 readData(const Okteta::AbstractByteArrayModel* input, Okteta::Address address,
+                    BitCount64 bitsRemaining) override;
+    QScriptValue toScriptValue(uint index, QScriptEngine* engine,
+                               ScriptHandlerInfo* handlerInfo) override;
     PrimitiveDataType primitiveType() const override;
     bool isComplex() const override;
 
-    QScriptValue toScriptValue(uint index, QScriptEngine* engine, ScriptHandlerInfo* handlerInfo) override;
-
-    qint64 readData(const Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining) override;
+    DataInformation* childAt(unsigned int idx) override;
+    int indexOf(const DataInformation* data) const override;
+    BitCount64 offset(const DataInformation* child) const override;
+    QVariant dataAt(uint index, int column, int role) override;
+    BitCount32 sizeAt(uint index) const override;
+    Qt::ItemFlags childFlags(int index, int column, bool fileLoaded) const override;
     bool setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
                       Okteta::Address address, BitCount64 bitsRemaining) override;
 
@@ -54,7 +54,7 @@ public:
     QVariant dataFromChildWidget(uint index, const QWidget* w) const override;
     void setChildWidgetData(uint index, QWidget* w) const override;
 
-protected:
+protected: // AbstractArrayData API
     void setNewParentForChildren() override;
 
 private:
