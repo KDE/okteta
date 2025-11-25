@@ -11,14 +11,14 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 16:19+0000\n"
-"PO-Revision-Date: 2025-09-22 06:23+0900\n"
+"PO-Revision-Date: 2025-11-24 20:50+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.07.70\n"
+"X-Generator: Lokalize 26.03.70\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: controllers/document/info/documentinfotool.cpp:47
@@ -626,7 +626,7 @@ msgstr "往前移動。"
 #, kde-format
 msgctxt "@action:button"
 msgid "&Go"
-msgstr "走(&G)"
+msgstr "跳到(&G)"
 
 #: controllers/view/gotooffset/gotooffsetview.cpp:126
 #, kde-format
