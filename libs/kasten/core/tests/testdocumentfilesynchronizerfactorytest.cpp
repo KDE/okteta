@@ -17,7 +17,6 @@
 #include <abstractconnectjob.hpp>
 // Qt
 #include <QTest>
-#include <QSignalSpy>
 #include <QByteArray>
 #include <QFile>
 #include <QDataStream>
