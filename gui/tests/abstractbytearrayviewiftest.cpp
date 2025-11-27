@@ -35,7 +35,7 @@ void AbstractByteArrayViewIfTest::init()
     m_byteArrayView = createByteArrayView();
     m_byteArrayView->setByteArrayModel(m_byteArrayModel.get());
 
-    m_zoomScaleSpy = std::make_unique<QSignalSpy>(m_byteArrayView.get(), SIGNAL(zoomScaleChanged(double)));
+    m_zoomScaleSpy = std::make_unique<QSignalSpy>(m_byteArrayView.get(), &AbstractByteArrayView::zoomScaleChanged);
 }
 
 void AbstractByteArrayViewIfTest::cleanup()

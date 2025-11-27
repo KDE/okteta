@@ -37,7 +37,7 @@ void ByteArrayDocumentTest::testCreateNew()
 void ByteArrayDocumentTest::testSetTitle()
 {
     auto document = std::make_unique<ByteArrayDocument>(QStringLiteral("New created for test."));
-    auto titleChangeSpy =  std::make_unique<QSignalSpy>(document.get(), SIGNAL(titleChanged(QString)));
+    auto titleChangeSpy =  std::make_unique<QSignalSpy>(document.get(), &AbstractModel::titleChanged);
 
     const QLatin1String title(Title);
     document->setTitle(title);

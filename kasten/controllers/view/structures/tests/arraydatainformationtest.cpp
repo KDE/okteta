@@ -96,10 +96,10 @@ void ArrayDataInformationTest::initTestCase()
 
 void ArrayDataInformationTest::testResizeHelper(ArrayDataInformation* array, TopLevelDataInformation* top)
 {
-    QSignalSpy spyAboutToInsert(top, SIGNAL(childrenAboutToBeInserted(DataInformation*,uint,uint)));
-    QSignalSpy spyInserted(top, SIGNAL(childrenInserted(const DataInformation*,uint,uint)));
-    QSignalSpy spyAboutToRemove(top, SIGNAL(childrenAboutToBeRemoved(DataInformation*,uint,uint)));
-    QSignalSpy spyRemoved(top, SIGNAL(childrenRemoved(const DataInformation*,uint,uint)));
+    QSignalSpy spyAboutToInsert(top, &TopLevelDataInformation::childrenAboutToBeInserted);
+    QSignalSpy spyInserted(top, &TopLevelDataInformation::childrenInserted);
+    QSignalSpy spyAboutToRemove(top, &TopLevelDataInformation::childrenAboutToBeRemoved);
+    QSignalSpy spyRemoved(top, &TopLevelDataInformation::childrenRemoved);
 
     QFETCH(uint, newsize);
     QFETCH(uint, postsize);

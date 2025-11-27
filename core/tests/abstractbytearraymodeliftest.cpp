@@ -37,7 +37,7 @@ void AbstractByteArrayModelIfTest::init()
     mByteArrayModel = createByteArrayModel();
 
     qRegisterMetaType<ArrayChangeMetricsList>("Okteta::ArrayChangeMetricsList");
-    ContentsChangeListSpy = std::make_unique<QSignalSpy>(mByteArrayModel.get(), SIGNAL(contentsChanged(Okteta::ArrayChangeMetricsList)));
+    ContentsChangeListSpy = std::make_unique<QSignalSpy>(mByteArrayModel.get(), &AbstractByteArrayModel::contentsChanged);
 }
 
 void AbstractByteArrayModelIfTest::cleanup()
