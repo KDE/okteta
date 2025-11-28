@@ -22,9 +22,11 @@ namespace Okteta {
 class ByteArrayModelPrivate : public AbstractByteArrayModelPrivate
 {
 public:
-    ByteArrayModelPrivate(ByteArrayModel* parent, Byte* data, int size, int rawSize, bool keepsMemory);
     ByteArrayModelPrivate(ByteArrayModel* parent, const Byte* data, int size);
-    ByteArrayModelPrivate(ByteArrayModel* parent, int size, int maxSize);
+    ByteArrayModelPrivate(ByteArrayModel* parent, Byte* data, int size, int capacity);
+    ByteArrayModelPrivate(ByteArrayModel* parent, std::unique_ptr<Okteta::Byte[]>&& data, int size, int capacity);
+    ByteArrayModelPrivate(ByteArrayModel* parent, int size, Byte fillByte);
+    ByteArrayModelPrivate(ByteArrayModel* parent, int size);
 
     ~ByteArrayModelPrivate() override;
 
@@ -54,25 +56,21 @@ public: // AbstractByteArrayModel API
 
 public:
     void setReadOnly(bool readOnly = true);
+
+    void setData(const Byte* data, int size);
+    void setData(Byte* data, int size, int capacity);
+    void setData(std::unique_ptr<Okteta::Byte[]>&& data, int size, int capacity);
+
     void setMaxSize(int maxSize);
-    /** sets whether the memory given by setData or in the constructor should be kept on resize
-     */
-    void setKeepsMemory(bool keepsMemory = true);
-    void setAutoDelete(bool autoDelete = true);
-    void setData(Byte* data, int size, int rawSize = -1, bool keepMemory = true);
+
+    [[nodiscard]]
+    std::unique_ptr<Okteta::Byte[]> releaseData();
 
 public:
     [[nodiscard]]
-    Byte* data() const;
-    [[nodiscard]]
     int maxSize() const;
-    /** returns whether the memory of the byte array is kept on resize */
     [[nodiscard]]
-    bool keepsMemory() const;
-    // TODO 0.10: turn this bool flag into a real flag which also tells how to free the memory if "autodeleted"
-    // perhaps merge keepsMemory flag into that new flag as well
-    [[nodiscard]]
-    bool autoDelete() const;
+    int capacity() const;
 
 public: // Bookmarkable API
     void addBookmarks(const QVector<Bookmark>& bookmarks);
@@ -105,14 +103,17 @@ private:
     std::unique_ptr<Byte[]> mData;
     /** size of the data */
     int mSize;
-    /** mSize of data array */
-    int mRawSize;
+    /** capacity of data array */
+    int m_capacity;
     /** maximal size of array, unlimited if -1 */
     int mMaxSize = -1;
-    /** flag whether the initially given memory should be kept */
-    bool mKeepsMemory : 1;
-    /** flag whether the  */
-    bool mAutoDelete : 1;
+
+    Byte m_fillByte = '\0';
+
+    /** flag whether the is owned or just shared with */
+    bool m_ownsMemory : 1;
+    /**  */
+    bool m_isWritable : 1;
     /**  */
     bool mReadOnly : 1;
     /** */
@@ -126,7 +127,7 @@ private:
 
 inline ByteArrayModelPrivate::~ByteArrayModelPrivate()
 {
-    if (!mAutoDelete) {
+    if (!m_ownsMemory) {
         mData.release();
     }
 }
@@ -141,14 +142,15 @@ inline void ByteArrayModelPrivate::setReadOnly(bool isReadOnly)
 {
     Q_Q(ByteArrayModel);
 
+    if (!m_isWritable) {
+        return;
+    }
+
     if (mReadOnly != isReadOnly) {
         mReadOnly = isReadOnly;
         Q_EMIT q->readOnlyChanged(isReadOnly);
     }
 }
-inline void ByteArrayModelPrivate::setMaxSize(int maxSize)          { mMaxSize = maxSize; }
-inline void ByteArrayModelPrivate::setKeepsMemory(bool keepsMemory) { mKeepsMemory = keepsMemory; }
-inline void ByteArrayModelPrivate::setAutoDelete(bool autoDelete)   { mAutoDelete = autoDelete; }
 inline void ByteArrayModelPrivate::setByte(Address offset, Byte byte)
 {
     Q_Q(ByteArrayModel);
@@ -169,10 +171,8 @@ inline void ByteArrayModelPrivate::setModified(bool modified)
     Q_EMIT q->modifiedChanged(mModified);
 }
 
-inline Byte* ByteArrayModelPrivate::data()       const { return mData.get(); }
 inline int ByteArrayModelPrivate::maxSize()      const { return mMaxSize; }
-inline bool ByteArrayModelPrivate::keepsMemory() const { return mKeepsMemory; }
-inline bool ByteArrayModelPrivate::autoDelete()  const { return mAutoDelete; }
+inline int ByteArrayModelPrivate::capacity()     const { return m_capacity; }
 
 inline void ByteArrayModelPrivate::addBookmarks(const QVector<Bookmark>& bookmarks)
 {

@@ -77,10 +77,8 @@ const std::array<unsigned char, 128> testData2 =
 
 void LockToOffsetTest::initTestCase()
 {
-    model = new Okteta::ByteArrayModel(testData.data(), testData.size());
-    model->setAutoDelete(false);
-    model2 = new Okteta::ByteArrayModel(testData2.data(), testData2.size());
-    model2->setAutoDelete(false);
+    model = new Okteta::ByteArrayModel(testData);
+    model2 = new Okteta::ByteArrayModel(testData2);
 }
 
 void LockToOffsetTest::cleanupTestCase()

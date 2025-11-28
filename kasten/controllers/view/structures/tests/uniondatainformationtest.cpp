@@ -45,8 +45,7 @@ static constexpr std::array<Okteta::Byte, 8> testData = {
 
 void UnionDataInformationTest::initTestCase()
 {
-    model = std::make_unique<Okteta::ByteArrayModel>(testData.data(), testData.size());
-    model->setAutoDelete(false);
+    model = std::make_unique<Okteta::ByteArrayModel>(testData);
     QCOMPARE(model->size(), static_cast<Okteta::Size>(testData.size()));
 }
 

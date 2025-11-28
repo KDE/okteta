@@ -43,10 +43,9 @@ static constexpr std::array<Okteta::Byte, 9> data =
 
 inline void AllPrimitiveTypesTest::initTestCase()
 {
-    auto* const copy = new Okteta::Byte[data.size()];
-    memcpy(copy, data.data(), data.size());
-    model = std::make_unique<Okteta::ByteArrayModel>(copy, data.size());
-    model->setAutoDelete(true);
+    auto copy = std::unique_ptr<Okteta::Byte[]>(new Okteta::Byte[data.size()]); // no make_unique, no need for initialization, TODO C++20: use std::make_unique_for_overwrite<Okteta::Byte[]>(data.size())
+    memcpy(copy.get(), data.data(), data.size());
+    model = std::make_unique<Okteta::ByteArrayModel>(std::move(copy), data.size());
     QCOMPARE(model->size(), static_cast<Okteta::Size>(data.size()));
 }
 

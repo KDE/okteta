@@ -94,10 +94,9 @@ void PrimitiveArrayTest::initTestCase()
         data[i] = static_cast<Okteta::Byte>(randomGenerator->bounded(256));
     }
 
-    auto* const copy = new Okteta::Byte[SIZE];
-    memcpy(copy, data.get(), SIZE);
-    model = std::make_unique<Okteta::ByteArrayModel>(copy, SIZE);
-    model->setAutoDelete(true);
+    auto copy = std::unique_ptr<Okteta::Byte[]>(new Okteta::Byte[SIZE]); // no make_unique, no need for initialization, TODO C++20: use std::make_unique_for_overwrite<Okteta::Byte[]>(SIZE)
+    memcpy(copy.get(), data.get(), SIZE);
+    model = std::make_unique<Okteta::ByteArrayModel>(std::move(copy), SIZE);
     QCOMPARE(model->size(), Okteta::Size(SIZE));
 
     endianData = std::unique_ptr<Okteta::Byte[]>(new Okteta::Byte[ENDIAN_SIZE]);
@@ -105,10 +104,9 @@ void PrimitiveArrayTest::initTestCase()
         endianData[i] = i;
     }
 
-    auto* const endianCopy = new Okteta::Byte[ENDIAN_SIZE];
-    memcpy(endianCopy, endianData.get(), ENDIAN_SIZE);
-    endianModel = std::make_unique<Okteta::ByteArrayModel>(endianCopy, ENDIAN_SIZE);
-    endianModel->setAutoDelete(true);
+    auto endianCopy = std::unique_ptr<Okteta::Byte[]>(new Okteta::Byte[ENDIAN_SIZE]); // no make_unique, no need for initialization, TODO C++20: use std::make_unique_for_overwrite<Okteta::Byte[]>(ENDIAN_SIZE)
+    memcpy(endianCopy.get(), endianData.get(), ENDIAN_SIZE);
+    endianModel = std::make_unique<Okteta::ByteArrayModel>(std::move(endianCopy), ENDIAN_SIZE);
     QCOMPARE(endianModel->size(), Okteta::Size(ENDIAN_SIZE));
 }
 

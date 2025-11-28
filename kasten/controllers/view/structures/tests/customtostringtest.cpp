@@ -96,8 +96,7 @@ void CustomToStringTest::testUuid()
     QCOMPARE(structure->childCount(), 4U);
 
     QVERIFY(structure->toStringFunction().isFunction());
-    Okteta::ByteArrayModel model(reinterpret_cast<const uchar*>(data.constData()), data.size());
-    model.setAutoDelete(false);
+    Okteta::ByteArrayModel model(data);
     top.read(&model, 0, Okteta::ArrayChangeMetricsList(), true);
 
     QCOMPARE(structure->childAt(0)->effectiveByteOrder(),

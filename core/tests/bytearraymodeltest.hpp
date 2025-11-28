@@ -17,7 +17,13 @@ class ByteArrayModelTest : public QObject
     Q_OBJECT
 
 private Q_SLOTS: // test functions
-    void testNothing();
+    void init();
+
+    void testMaxSize_data();
+    void testMaxSize();
+
+    void testReleaseData_data();
+    void testReleaseData();
 };
 
 }

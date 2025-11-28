@@ -10,6 +10,8 @@
 // lib
 #include "abstractbytearraymodel.hpp"
 #include "bookmarkable.hpp"
+// Qt
+#include <QByteArray>
 
 namespace Okteta {
 
@@ -30,9 +32,52 @@ class OKTETACORE_EXPORT ByteArrayModel : public AbstractByteArrayModel
     friend class ByteArrayModelPrivate;
 
 public:
-    ByteArrayModel(Byte* data, int size, int rawSize = -1, bool keepMemory = true, QObject* parent = nullptr);
+    /// Pass shared data as read-only
+    /// The range pointed to by @p data pointer is expected to be valid the whole life-time,
+    /// or until @c setData() is called.
     ByteArrayModel(const Byte* data, int size, QObject* parent = nullptr);
-    explicit ByteArrayModel(int size = 0, int maxSize = -1, QObject* parent = nullptr);
+    /// Overload: shared data as read-only
+    /// The range pointed to by @p byteArray's data() when the constructor is invoked
+    /// is expected to be valid the whole life-time, or until @c setData() is called.
+    explicit ByteArrayModel(const QByteArray& byteArray, QObject* parent = nullptr);
+    /// Overload: shared data as read-only
+    /// The range pointed to by @p data's data() when the constructor is invoked
+    /// is expected to be valid the whole life-time, or until @c setData() is called.
+    explicit ByteArrayModel(const std::vector<Okteta::Byte>& data, QObject* parent = nullptr);
+    /// Overload: shared data as read-only
+    /// The range pointed to by @p data's data() when the constructor is invoked
+    /// is expected to be valid the whole life-time, or until @c setData() is called.
+    template <std::size_t N>
+    explicit ByteArrayModel(const std::array<Okteta::Byte, N>& data, QObject* parent = nullptr);
+
+    /// Pass shared data as read-write, reusing memory
+    /// The range pointed to by @p data pointer is expected to be valid the whole life-time,
+    /// or until @c setData() is called.
+    /// @param capacity The number of bytes that could be hold with the allocated memory.
+    ///                 Also defaults the maximum number of bytes the model will allow.
+    ///                 -1 will default to the value of @p size.
+    ByteArrayModel(Byte* data, int size, int capacity = -1, QObject* parent = nullptr);
+    /// Overload: shared data as read-write
+    /// The range pointed to by @p data's data() when the constructor is invoked
+    /// is expected to be valid the whole life-time, or until @c setData() is called.
+    explicit ByteArrayModel(std::vector<Okteta::Byte>& data, QObject* parent = nullptr);
+    /// Overload: shared data as read-write
+    /// The range pointed to by @p data's data() when the constructor is invoked
+    /// is expected to be valid the whole life-time, or until @c setData() is called.
+    template <std::size_t N>
+    explicit ByteArrayModel(std::array<Okteta::Byte, N>& data, QObject* parent = nullptr);
+
+    /// Passes data as managed
+    /// @see releaseData
+    explicit ByteArrayModel(std::unique_ptr<Okteta::Byte[]>&& data, int size, int capacity = -1,
+                            QObject* parent = nullptr);
+
+    /// Creates managed byte array model
+    /// @see releaseData
+    explicit ByteArrayModel(int size, Byte fillByte, QObject* parent = nullptr);
+    // not preset
+    explicit ByteArrayModel(int size, QObject* parent = nullptr);
+    explicit ByteArrayModel(QObject* parent = nullptr);
 
     ~ByteArrayModel() override;
 
@@ -85,31 +130,105 @@ Q_SIGNALS: // Okteta::Bookmarkable API
     void bookmarksModified(const QVector<int>& indizes) override;
 
 public:
+    void setData(const Byte* data, int size);
+    void setData(const QByteArray& byteArray);
+    void setData(const std::vector<Okteta::Byte>& data);
+    template <std::size_t N>
+    void setData(const std::array<Okteta::Byte, N>& data);
+
+    // pass shared data as read-write, reusing memory
+    void setData(Byte* data, int size, int capacity = -1);
+    void setData(std::vector<Okteta::Byte>& data);
+    template <std::size_t N>
+    void setData(std::array<Okteta::Byte, N>& data);
+
+    // Passes data as managed
+    void setData(std::unique_ptr<Okteta::Byte[]>&& data, int size, int capacity = -1);
+
+    // TODO: setMinSize?
+    /// Value -1 means full capacity
+    /// If the current data is only shared with the model and @p maxSize is larger than
+    /// the current capacity, it will be capped to thzat.
+    /// If the current size is larger than the new maximal size, the size is capped to it.
     void setMaxSize(int maxSize);
-    /** sets whether the memory given by setData or in the constructor should be kept on resize
+
+    /**
+     * @param start first position
+     * @param end last position
      */
-    void setKeepsMemory(bool keepsMemory = true);
-    /** sets whether the memory given by setData or in the constructor gets deleted in destructor
-     * or when new data is set. The data MUST have been allocated using new[] otherwise behaviour
-     * is undefined */
-    void setAutoDelete(bool autoDelete = true);
-    void setData(Byte* data, int size, int rawSize = -1, bool keepMemory = true);
     void signalContentsChanged(int start, int end);
+
+    [[nodiscard]]
+    std::unique_ptr<Okteta::Byte[]> releaseData();
 
 public:
     [[nodiscard]]
-    Byte* data() const;
-    [[nodiscard]]
     int maxSize() const;
-    /** returns whether the memory of the byte array is kept on resize */
     [[nodiscard]]
-    bool keepsMemory() const;
-    [[nodiscard]]
-    bool autoDelete() const;
+    int capacity() const;
 
 private:
     Q_DECLARE_PRIVATE(ByteArrayModel)
 };
+
+inline ByteArrayModel::ByteArrayModel(const QByteArray& byteArray, QObject* parent)
+    : ByteArrayModel(reinterpret_cast<const Byte*>(byteArray.data()), byteArray.size(), parent)
+{
+}
+
+inline ByteArrayModel::ByteArrayModel(const std::vector<Okteta::Byte>& data, QObject* parent)
+        : ByteArrayModel(data.data(),  static_cast<int>(data.size()), parent)
+{
+}
+
+template <std::size_t N>
+inline ByteArrayModel::ByteArrayModel(const std::array<Okteta::Byte, N>& data, QObject* parent)
+    : ByteArrayModel(data.data(),  static_cast<int>(data.size()), parent)
+{
+}
+
+inline ByteArrayModel::ByteArrayModel(std::vector<Okteta::Byte>& data, QObject* parent)
+    : ByteArrayModel(data.data(),  static_cast<int>(data.size()), parent)
+{
+}
+
+template <std::size_t N>
+inline ByteArrayModel::ByteArrayModel(std::array<Okteta::Byte, N>& data, QObject* parent)
+    : ByteArrayModel(data.data(),  static_cast<int>(data.size()), parent)
+{
+}
+
+inline ByteArrayModel::ByteArrayModel(QObject* parent)
+    : ByteArrayModel(0, parent)
+{
+}
+
+inline void ByteArrayModel::setData(const QByteArray& byteArray)
+{
+    setData(reinterpret_cast<const Byte*>(byteArray.data()), byteArray.size());
+}
+
+inline void ByteArrayModel::setData(const std::vector<Okteta::Byte>& data)
+{
+    setData(data.data(),  static_cast<int>(data.size()));
+}
+
+template <std::size_t N>
+inline void ByteArrayModel::setData(const std::array<Okteta::Byte, N>& data)
+{
+    setData(data.data(),  static_cast<int>(data.size()));
+}
+
+inline void ByteArrayModel::setData(std::vector<Okteta::Byte>& data)
+{
+    setData(data.data(),  static_cast<int>(data.size()));
+}
+
+template <std::size_t N>
+inline void ByteArrayModel::setData(std::array<Okteta::Byte, N>& data)
+{
+    setData(data.data(),  static_cast<int>(data.size()));
+}
 
 }
 

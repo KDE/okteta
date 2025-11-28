@@ -12,17 +12,31 @@
 
 namespace Okteta {
 
-ByteArrayModel::ByteArrayModel(Byte* data, int size, int rawSize, bool keepMemory, QObject* parent)
-    : AbstractByteArrayModel(std::make_unique<ByteArrayModelPrivate>(this, data, size, rawSize, keepMemory), parent)
-{}
-
 ByteArrayModel::ByteArrayModel(const Byte* data, int size, QObject* parent)
     : AbstractByteArrayModel(std::make_unique<ByteArrayModelPrivate>(this, data, size), parent)
-{}
+{
+}
 
-ByteArrayModel::ByteArrayModel(int size, int maxSize, QObject* parent)
-    : AbstractByteArrayModel(std::make_unique<ByteArrayModelPrivate>(this, size, maxSize), parent)
-{}
+ByteArrayModel::ByteArrayModel(Byte* data, int size, int capacity, QObject* parent)
+    : AbstractByteArrayModel(std::make_unique<ByteArrayModelPrivate>(this, data, size, capacity), parent)
+{
+}
+
+ByteArrayModel::ByteArrayModel(std::unique_ptr<Okteta::Byte[]>&& data, int size, int capacity,
+                               QObject* parent)
+    : AbstractByteArrayModel(std::make_unique<ByteArrayModelPrivate>(this, std::move(data), size, capacity), parent)
+{
+}
+
+ByteArrayModel::ByteArrayModel(int size, Byte fillByte, QObject* parent)
+    : AbstractByteArrayModel(std::make_unique<ByteArrayModelPrivate>(this, size, fillByte), parent)
+{
+}
+
+ByteArrayModel::ByteArrayModel(int size, QObject* parent)
+    : AbstractByteArrayModel(std::make_unique<ByteArrayModelPrivate>(this, size), parent)
+{
+}
 
 ByteArrayModel::~ByteArrayModel() = default;
 
@@ -68,39 +82,39 @@ void ByteArrayModel::setModified(bool modified)
     d->setModified(modified);
 }
 
+void ByteArrayModel::setData(const Byte* data, int size)
+{
+    Q_D(ByteArrayModel);
+
+    d->setData(data, size);
+}
+
+void ByteArrayModel::setData(Byte* data, int size, int capacity)
+{
+    Q_D(ByteArrayModel);
+
+    d->setData(data, size, capacity);
+}
+
+void ByteArrayModel::setData(std::unique_ptr<Okteta::Byte[]>&& data, int size, int capacity)
+{
+    Q_D(ByteArrayModel);
+
+    d->setData(std::move(data), size, capacity);
+}
+
+std::unique_ptr<Okteta::Byte[]> ByteArrayModel::releaseData()
+{
+    Q_D(ByteArrayModel);
+
+    return d->releaseData();
+}
+
 void ByteArrayModel::setMaxSize(int maxSize)
 {
     Q_D(ByteArrayModel);
 
     d->setMaxSize(maxSize);
-}
-
-void ByteArrayModel::setKeepsMemory(bool keepsMemory)
-{
-    Q_D(ByteArrayModel);
-
-    d->setKeepsMemory(keepsMemory);
-}
-
-void ByteArrayModel::setAutoDelete(bool autoDelete)
-{
-    Q_D(ByteArrayModel);
-
-    d->setAutoDelete(autoDelete);
-}
-
-void ByteArrayModel::setData(Byte* data, int size, int rawSize, bool keepMemory)
-{
-    Q_D(ByteArrayModel);
-
-    d->setData(data, size, rawSize, keepMemory);
-}
-
-Byte* ByteArrayModel::data() const
-{
-    Q_D(const ByteArrayModel);
-
-    return d->data();
 }
 
 int ByteArrayModel::maxSize() const
@@ -110,18 +124,11 @@ int ByteArrayModel::maxSize() const
     return d->maxSize();
 }
 
-bool ByteArrayModel::keepsMemory() const
+int ByteArrayModel::capacity() const
 {
     Q_D(const ByteArrayModel);
 
-    return d->keepsMemory();
-}
-
-bool ByteArrayModel::autoDelete() const
-{
-    Q_D(const ByteArrayModel);
-
-    return d->autoDelete();
+    return d->capacity();
 }
 
 void ByteArrayModel::signalContentsChanged(int start, int end)

@@ -18,65 +18,178 @@ static constexpr int maxChunkSize = 1024 * 10; // TODO: get max. memory page siz
 namespace Okteta {
 
 ByteArrayModelPrivate::ByteArrayModelPrivate(ByteArrayModel* parent,
-                                             Byte* data, int size, int rawSize, bool keepsMemory)
-    : AbstractByteArrayModelPrivate(parent)
-    , mData(data)
-    , mSize(size)
-    , mRawSize(rawSize < size ? size : rawSize)
-    , mKeepsMemory(keepsMemory)
-    , mAutoDelete(false)
-    , mReadOnly(true)
-    , mModified(false)
-{
-}
-
-ByteArrayModelPrivate::ByteArrayModelPrivate(ByteArrayModel* parent,
                                              const Byte* data, int size)
     : AbstractByteArrayModelPrivate(parent)
     , mData(const_cast<Byte*>(data))
-    , mSize(size)
-    , mRawSize(size)
-    , mKeepsMemory(true)
-    , mAutoDelete(false)
+    , mSize(size >= 0 ? size : 0)
+    , m_capacity(mSize)
+    , m_ownsMemory(false)
+    , m_isWritable(false)
     , mReadOnly(true)
     , mModified(false)
 {
 }
 
 ByteArrayModelPrivate::ByteArrayModelPrivate(ByteArrayModel* parent,
-                                             int size, int maxSize)
+                                             Byte* data, int size, int capacity)
     : AbstractByteArrayModelPrivate(parent)
-    , mData((size > 0) ? new Byte[size] : nullptr)
-    , mSize(size)
-    , mRawSize(size)
-    , mMaxSize(maxSize)
-    , mKeepsMemory(false)
-    , mAutoDelete(true)
+    , mData(data)
+    , mSize(size >= 0 ? size : 0)
+    , m_capacity(capacity < mSize ? mSize : capacity)
+    , m_ownsMemory(false)
+    , m_isWritable(true)
     , mReadOnly(false)
     , mModified(false)
 {
 }
 
-void ByteArrayModelPrivate::setData(Byte* data, int size, int rawSize, bool keepMemory)
+ByteArrayModelPrivate::ByteArrayModelPrivate(ByteArrayModel* parent,
+                                             std::unique_ptr<Okteta::Byte[]>&& data, int size, int capacity)
+    : AbstractByteArrayModelPrivate(parent)
+    , mData(std::move(data))
+    , mSize(size >= 0 ? size : 0)
+    , m_capacity(capacity < mSize ? mSize : capacity)
+    , m_ownsMemory(true)
+    , m_isWritable(true)
+    , mReadOnly(false)
+    , mModified(false)
+{
+}
+
+ByteArrayModelPrivate::ByteArrayModelPrivate(ByteArrayModel* parent, int size, Byte fillByte)
+    : ByteArrayModelPrivate(parent, size)
+{
+    memset(mData.get(), fillByte, mSize);
+}
+
+ByteArrayModelPrivate::ByteArrayModelPrivate(ByteArrayModel* parent, int size)
+    : AbstractByteArrayModelPrivate(parent)
+    , mData((size > 0) ? new Byte[size] : nullptr)
+    , mSize(size >= 0 ? size : 0)
+    , m_capacity(mSize)
+    , m_ownsMemory(true)
+    , m_isWritable(true)
+    , mReadOnly(false)
+    , mModified(false)
+{
+}
+
+void ByteArrayModelPrivate::setData(const Byte* data, int size)
 {
     Q_Q(ByteArrayModel);
 
-    if (!mAutoDelete) {
+    if (!m_ownsMemory) {
+        mData.release();
+    }
+    const int oldSize = mSize;
+
+    mData.reset(const_cast<Byte*>(data));
+    mSize = (size >= 0) ? size : 0;
+    m_capacity = mSize;
+    if (mMaxSize != -1 && mMaxSize < mSize) {
+        mMaxSize = mSize;
+    }
+    m_ownsMemory = false;
+
+    mModified = false;
+    Q_EMIT q->contentsChanged(ArrayChangeMetricsList::oneReplacement(0, oldSize, size));
+    Q_EMIT q->modifiedChanged(false);
+}
+
+void ByteArrayModelPrivate::setData(Byte* data, int size, int capacity)
+{
+    Q_Q(ByteArrayModel);
+
+    if (!m_ownsMemory) {
         mData.release();
     }
     const int oldSize = mSize;
 
     mData.reset(data);
-    mSize = size;
-    mRawSize = (rawSize < size) ? size : rawSize;
-    if (mMaxSize != -1 && mMaxSize < size) {
-        mMaxSize = size;
+    mSize = (size >= 0) ? size : 0;
+    m_capacity = (capacity < mSize) ? mSize : capacity;
+    if (mMaxSize != -1 && mMaxSize < mSize) {
+        mMaxSize = mSize;
     }
-    mKeepsMemory = keepMemory;
+    m_ownsMemory = false;
 
     mModified = false;
-    Q_EMIT q->contentsChanged(ArrayChangeMetricsList::oneReplacement(0, oldSize, size));
+    Q_EMIT q->contentsChanged(ArrayChangeMetricsList::oneReplacement(0, oldSize, mSize));
     Q_EMIT q->modifiedChanged(false);
+}
+
+void ByteArrayModelPrivate::setData(std::unique_ptr<Okteta::Byte[]>&& data, int size, int capacity)
+{
+    Q_Q(ByteArrayModel);
+
+    if (!m_ownsMemory) {
+        mData.release();
+    }
+    const int oldSize = mSize;
+
+    mData = std::move(data);
+    mSize = (size >= 0) ? size : 0;
+    m_capacity = (capacity < mSize) ? mSize : capacity;
+    if (mMaxSize != -1 && mMaxSize < mSize) {
+        mMaxSize = mSize;
+    }
+    m_ownsMemory = true;
+
+    mModified = false;
+    Q_EMIT q->contentsChanged(ArrayChangeMetricsList::oneReplacement(0, oldSize, mSize));
+    Q_EMIT q->modifiedChanged(false);
+}
+
+void ByteArrayModelPrivate::setMaxSize(int maxSize)
+{
+    Q_Q(ByteArrayModel);
+
+    if (maxSize > m_capacity) {
+        if (!m_ownsMemory) {
+            maxSize = m_capacity;
+        }
+    } else if (maxSize < -1) {
+        maxSize = -1;
+    }
+
+    if (mMaxSize == maxSize) {
+        return;
+    }
+
+    mMaxSize = maxSize;
+
+    if ((mMaxSize == -1) || (mSize <= mMaxSize)) {
+        return;
+    }
+
+    const int sizeReduction = mSize - mMaxSize;
+    mSize = mMaxSize;
+
+    Q_EMIT q->contentsChanged(ArrayChangeMetricsList::oneReplacement(mSize, sizeReduction, 0));
+}
+
+std::unique_ptr<Okteta::Byte[]> ByteArrayModelPrivate::releaseData()
+{
+    Q_Q(ByteArrayModel);
+
+    if (!m_ownsMemory) {
+        return {};
+    }
+
+    const int oldSize = mSize;
+
+    std::unique_ptr<Okteta::Byte[]> data = std::move(mData);
+
+    mSize = 0;
+    mMaxSize = -1;
+    m_capacity = 0;
+    m_ownsMemory = true;
+
+    mModified = false;
+    Q_EMIT q->contentsChanged(ArrayChangeMetricsList::oneReplacement(0, oldSize, mSize));
+    Q_EMIT q->modifiedChanged(false);
+
+    return data;
 }
 
 Size ByteArrayModelPrivate::insertBytes(Address offset, const Byte* insertData, int insertLength)
@@ -182,19 +295,19 @@ Size ByteArrayModelPrivate::replaceBytes(const AddressRange& _removeRange, const
         }
         insertLength -= newSize - mMaxSize;
         newSize = mMaxSize;
-    } else if (mKeepsMemory && newSize > mRawSize) {
-        if (mSize == mRawSize) {
+    } else if (!m_ownsMemory && newSize > m_capacity) {
+        if (mSize == m_capacity) {
             return 0;
         }
-        insertLength -= newSize - mRawSize;
-        newSize = mRawSize;
+        insertLength -= newSize - m_capacity;
+        newSize = m_capacity;
     }
 
     const Address behindInsertPos = removeRange.start() + insertLength;
     const Address behindRemovePos = removeRange.nextBehindEnd();
 
     // raw array not big enough?
-    if (mRawSize < newSize) {
+    if (m_capacity < newSize) {
         // create new buffer
         auto newData = std::unique_ptr<Byte[]>(new Byte[newSize]); // no make_unique, no need for initialization
         if (!newData) {
@@ -207,7 +320,7 @@ Size ByteArrayModelPrivate::replaceBytes(const AddressRange& _removeRange, const
 
         // remove old & set new values
         mData = std::move(newData);
-        mRawSize = newSize;
+        m_capacity = newSize;
     } else {
         // move old data to its (new) places
         memmove(&mData[behindInsertPos], &mData[behindRemovePos], mSize - behindRemovePos);
@@ -373,17 +486,17 @@ int ByteArrayModelPrivate::addSize(int addSize, int splitPosition, bool saveUppe
         }
         newSize = mMaxSize;
         addSize = newSize - mSize;
-    } else if (mKeepsMemory && newSize > mRawSize) {
-        if (mSize == mRawSize) {
+    } else if (!m_ownsMemory && (newSize > m_capacity)) {
+        if (mSize == m_capacity) {
             return 0;
         }
-        newSize = mRawSize;
+        newSize = m_capacity;
         addSize = newSize - mSize;
     }
 
     const int BehindSplitPos = splitPosition + addSize;
     // raw array not big enough?
-    if (mRawSize < newSize) {
+    if (m_capacity < newSize) {
         // get new raw size
         int chunkSize = minChunkSize;
         // find chunk size where newsize fits into
@@ -395,12 +508,12 @@ int ByteArrayModelPrivate::addSize(int addSize, int splitPosition, bool saveUppe
             chunkSize = maxChunkSize;
         }
         // find add size
-        int NewRawSize = chunkSize;
-        while (NewRawSize < newSize) {
-            NewRawSize += chunkSize;
+        int newCapacity = chunkSize;
+        while (newCapacity < newSize) {
+            newCapacity += chunkSize;
         }
         // create new buffer
-        auto newData = std::unique_ptr<Byte[]>(new Byte[NewRawSize]); // no make_unique, no need for initialization
+        auto newData = std::unique_ptr<Byte[]>(new Byte[newCapacity]); // no make_unique, no need for initialization
 
         // move old data to its (new) places
         memcpy(newData.get(), mData.get(), splitPosition);
@@ -410,7 +523,7 @@ int ByteArrayModelPrivate::addSize(int addSize, int splitPosition, bool saveUppe
 
         // remove old & set new values
         mData = std::move(newData);
-        mRawSize = NewRawSize;
+        m_capacity = newCapacity;
     }
     // old buffer kept
     else {
