@@ -35,10 +35,10 @@ static constexpr int DefaultOffsetCoding = 0;
 static constexpr int DefaultValueCoding = 0;
 static inline QString DefaultCharCoding() { return {}; } // -> local 8-bit
 
-static QVector<ByteArrayViewProfile::Id>
+static QList<ByteArrayViewProfile::Id>
 lockedViewProfileIds(const ByteArrayViewProfileFileInfoLookup& viewProfileFileInfoLookup)
 {
-    QVector<ByteArrayViewProfile::Id> result;
+    QList<ByteArrayViewProfile::Id> result;
 
     for (const auto& entry : viewProfileFileInfoLookup) {
         if (entry.second.isLocked()) {
@@ -51,8 +51,8 @@ lockedViewProfileIds(const ByteArrayViewProfileFileInfoLookup& viewProfileFileIn
 
 static void
 updateLockStatus(ByteArrayViewProfileFileInfoLookup& viewProfileFileInfoLookup,
-                 const QVector<ByteArrayViewProfile::Id>& lockedViewProfileIds,
-                 const QVector<ByteArrayViewProfile::Id>& unlockedViewProfileIds)
+                 const QList<ByteArrayViewProfile::Id>& lockedViewProfileIds,
+                 const QList<ByteArrayViewProfile::Id>& unlockedViewProfileIds)
 {
     if (lockedViewProfileIds.isEmpty() && unlockedViewProfileIds.isEmpty()) {
         return;
@@ -139,7 +139,7 @@ ByteArrayViewProfileManager::viewProfilesCount() const
     return mViewProfiles.size();
 }
 
-QVector<ByteArrayViewProfile>
+QList<ByteArrayViewProfile>
 ByteArrayViewProfileManager::viewProfiles() const
 {
     return mViewProfiles;
@@ -190,7 +190,7 @@ ByteArrayViewProfileManager::isViewProfileLocked(const ByteArrayViewProfile::Id&
     return result;
 }
 
-void ByteArrayViewProfileManager::saveViewProfiles(QVector<ByteArrayViewProfile>& viewProfiles)
+void ByteArrayViewProfileManager::saveViewProfiles(QList<ByteArrayViewProfile>& viewProfiles)
 {
     // TODO: do not save if locked by someone else -> needs passing of our lock? or just registering our own and check?
     // create and set unique id
@@ -218,7 +218,7 @@ void ByteArrayViewProfileManager::saveViewProfiles(QVector<ByteArrayViewProfile>
 }
 
 void
-ByteArrayViewProfileManager::removeViewProfiles(const QVector<ByteArrayViewProfile::Id>& viewProfileIds)
+ByteArrayViewProfileManager::removeViewProfiles(const QList<ByteArrayViewProfile::Id>& viewProfileIds)
 {
     for (const ByteArrayViewProfile::Id& viewProfileId : viewProfileIds) {
         removeViewProfile(viewProfileId);
@@ -287,7 +287,7 @@ ByteArrayViewProfileManager::loadViewProfile(const QString& absoluteFilePath) co
     KConfig configFile(absoluteFilePath, KConfig::SimpleConfig);
 
     // check version
-    KConfigGroup formatConfigGroup = configFile.group("OBAVP");
+    KConfigGroup formatConfigGroup = configFile.group(QStringLiteral("OBAVP"));
     const QString formatVersion = formatConfigGroup.readEntry("Version");
     if (!formatVersion.startsWith(QLatin1String("1."))) {
         return result;
@@ -295,26 +295,26 @@ ByteArrayViewProfileManager::loadViewProfile(const QString& absoluteFilePath) co
 
     result.setId(QFileInfo(absoluteFilePath).baseName());
 
-    KConfigGroup generalConfigGroup = configFile.group("General");
+    KConfigGroup generalConfigGroup = configFile.group(QStringLiteral("General"));
     result.setViewProfileTitle(generalConfigGroup.readEntry("Title"));
 
-    KConfigGroup layoutConfigGroup = configFile.group("Layout");
+    KConfigGroup layoutConfigGroup = configFile.group(QStringLiteral("Layout"));
     result.setNoOfBytesPerLine(layoutConfigGroup.readEntry("NoOfBytesPerLine", DefaultNoOfBytesPerLine));
     result.setNoOfGroupedBytes(layoutConfigGroup.readEntry("NoOfBytesPerGroup", DefaultNoOfBytesPerGroup));
     result.setLayoutStyle(layoutConfigGroup.readEntry("LayoutStyle", DefaultLayoutStyle));
 
-    KConfigGroup displayConfigGroup = configFile.group("Display");
+    KConfigGroup displayConfigGroup = configFile.group(QStringLiteral("Display"));
     result.setOffsetColumnVisible(displayConfigGroup.readEntry("OffsetColumnVisible", true));
     result.setOffsetCoding(displayConfigGroup.readEntry("OffsetCoding", DefaultOffsetCoding));
     result.setViewModus(displayConfigGroup.readEntry("ViewModus", DefaultViewModus));
     result.setVisibleByteArrayCodings(displayConfigGroup.readEntry("VisibleByteArrayCodings", DefaultVisibleByteArrayCodings));
 
-    KConfigGroup interpretationConfigGroup = configFile.group("Interpretation");
+    KConfigGroup interpretationConfigGroup = configFile.group(QStringLiteral("Interpretation"));
 
-    KConfigGroup valuesConfigGroup = interpretationConfigGroup.group("Values");
+    KConfigGroup valuesConfigGroup = interpretationConfigGroup.group(QStringLiteral("Values"));
     result.setValueCoding(valuesConfigGroup.readEntry("Coding", DefaultValueCoding));
 
-    KConfigGroup charsConfigGroup = interpretationConfigGroup.group("Chars");
+    KConfigGroup charsConfigGroup = interpretationConfigGroup.group(QStringLiteral("Chars"));
     result.setCharCoding(charsConfigGroup.readEntry("Coding", DefaultCharCoding()));
     result.setShowsNonprinting(charsConfigGroup.readEntry("NonprintingShown", false));
     result.setSubstituteChar(charsConfigGroup.readEntry("SubstituteChar", ".").at(0));
@@ -329,29 +329,29 @@ ByteArrayViewProfileManager::saveViewProfile(const ByteArrayViewProfile& viewPro
     const QString fileName = viewProfileFilePath(viewProfile.id());
     KConfig configFile(fileName, KConfig::SimpleConfig);
 
-    KConfigGroup formatConfigGroup = configFile.group("OBAVP");
+    KConfigGroup formatConfigGroup = configFile.group(QStringLiteral("OBAVP"));
     formatConfigGroup.writeEntry("Version", "1.1");
 
-    KConfigGroup generalConfigGroup = configFile.group("General");
+    KConfigGroup generalConfigGroup = configFile.group(QStringLiteral("General"));
     generalConfigGroup.writeEntry("Title", viewProfile.viewProfileTitle());
 
-    KConfigGroup layoutConfigGroup = configFile.group("Layout");
+    KConfigGroup layoutConfigGroup = configFile.group(QStringLiteral("Layout"));
     layoutConfigGroup.writeEntry("NoOfBytesPerLine", viewProfile.noOfBytesPerLine());
     layoutConfigGroup.writeEntry("NoOfBytesPerGroup", viewProfile.noOfGroupedBytes());
     layoutConfigGroup.writeEntry("LayoutStyle", viewProfile.layoutStyle());
 
-    KConfigGroup displayConfigGroup = configFile.group("Display");
+    KConfigGroup displayConfigGroup = configFile.group(QStringLiteral("Display"));
     displayConfigGroup.writeEntry("OffsetColumnVisible", viewProfile.offsetColumnVisible());
     displayConfigGroup.writeEntry("OffsetCoding", viewProfile.offsetCoding());
     displayConfigGroup.writeEntry("ViewModus", viewProfile.viewModus());
     displayConfigGroup.writeEntry("VisibleByteArrayCodings", viewProfile.visibleByteArrayCodings());
 
-    KConfigGroup interpretationConfigGroup = configFile.group("Interpretation");
+    KConfigGroup interpretationConfigGroup = configFile.group(QStringLiteral("Interpretation"));
 
-    KConfigGroup valuesConfigGroup = interpretationConfigGroup.group("Values");
+    KConfigGroup valuesConfigGroup = interpretationConfigGroup.group(QStringLiteral("Values"));
     valuesConfigGroup.writeEntry("Coding", viewProfile.valueCoding());
 
-    KConfigGroup charsConfigGroup = interpretationConfigGroup.group("Chars");
+    KConfigGroup charsConfigGroup = interpretationConfigGroup.group(QStringLiteral("Chars"));
     charsConfigGroup.writeEntry("Coding", viewProfile.charCodingName());
     charsConfigGroup.writeEntry("NonprintingShown", viewProfile.showsNonprinting());
     charsConfigGroup.writeEntry("SubstituteChar", QString(viewProfile.substituteChar()));
@@ -392,17 +392,17 @@ ByteArrayViewProfileManager::onViewProfilesFolderChanged(const QString& viewProf
 
     // TODO: reparse for new, removed and changed files
     // assume all are removed and unlocked in the beginning
-    QVector<ByteArrayViewProfile::Id> removedViewProfileIds;
+    QList<ByteArrayViewProfile::Id> removedViewProfileIds;
     removedViewProfileIds.reserve(viewProfileFileInfoLookup.size());
     std::transform(viewProfileFileInfoLookup.cbegin(), viewProfileFileInfoLookup.cend(),
                    std::back_inserter(removedViewProfileIds),
                    [](const ByteArrayViewProfileFileInfoLookup::value_type& entry){ return entry.first; });
 
-    QVector<ByteArrayViewProfile> newViewProfiles;
-    QVector<ByteArrayViewProfile> changedViewProfiles;
+    QList<ByteArrayViewProfile> newViewProfiles;
+    QList<ByteArrayViewProfile> changedViewProfiles;
 
-    QVector<ByteArrayViewProfile::Id> newUnlockedViewProfileIds = lockedViewProfileIds(viewProfileFileInfoLookup);
-    QVector<ByteArrayViewProfile::Id> newLockedViewProfileIds;
+    QList<ByteArrayViewProfile::Id> newUnlockedViewProfileIds = lockedViewProfileIds(viewProfileFileInfoLookup);
+    QList<ByteArrayViewProfile::Id> newLockedViewProfileIds;
     // iterate all files in folder
     const QFileInfoList viewProfileFileInfoList =
         QDir(viewProfileFolderPath).entryInfoList(viewProfileFileNameFilter(), QDir::Files);

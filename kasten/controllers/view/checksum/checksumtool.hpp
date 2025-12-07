@@ -31,7 +31,7 @@ class ChecksumTool : public AbstractTool
     Q_OBJECT
 
 private:
-    static constexpr char ConfigGroupId[] = "ChecksumTool";
+    static const QString ConfigGroupId;
     static constexpr char AlgorithmConfigKey[] = "Algorithm";
 
 public:

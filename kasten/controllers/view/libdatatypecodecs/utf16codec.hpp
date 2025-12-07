@@ -9,11 +9,9 @@
 
 // tool
 #include "abstracttypecodec.hpp"
-// Std
-#include <memory>
-
-class QTextEncoder;
-class QTextDecoder;
+// Qt
+#include <QStringDecoder>
+#include <QStringEncoder>
 
 namespace Okteta {
 
@@ -34,8 +32,8 @@ public: // AbstractTypeCodec API
     bool areEqual(const QVariant& value, QVariant& otherValue) const override;
 
 private:
-    std::unique_ptr<QTextEncoder> mUtf16Encoder;
-    std::unique_ptr<QTextDecoder> mUtf16Decoder;
+    mutable QStringDecoder mUtf16Decoder;
+    mutable QStringEncoder mUtf16Encoder;
 };
 
 }

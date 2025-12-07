@@ -165,6 +165,8 @@ void ByteArraySRecStreamEncoder::streamBlockEnd(QTextStream& textStream, unsigne
     streamLine(textStream, recordType, line);
 }
 
+const QString ByteArraySRecStreamEncoder::ConfigGroupId = QStringLiteral("ByteArraySRecordStreamEncoder");
+
 ByteArraySRecStreamEncoder::ByteArraySRecStreamEncoder()
     : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "S-Record"), QStringLiteral("text/x-srecord"))
 {

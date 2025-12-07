@@ -24,7 +24,7 @@ ExternalBookmarkStorage::ExternalBookmarkStorage()
 {
     const QString bookmarksFileName =
         QStandardPaths::writableLocation(QStandardPaths::GenericDataLocation) + QLatin1String("/okteta/bookmarks.xml");
-    mBookmarkManager = KBookmarkManager::managerForFile(bookmarksFileName, QStringLiteral("okteta"));
+    mBookmarkManager = new KBookmarkManager(bookmarksFileName);
 }
 
 ExternalBookmarkStorage::~ExternalBookmarkStorage() = default;
@@ -48,7 +48,7 @@ void ExternalBookmarkStorage::readBookmarks(ByteArrayDocument* document, const Q
         if (bm.fullText() == urlString) {
             KBookmarkGroup bmGroup = bm.toGroup();
 
-            QVector<Okteta::Bookmark> bookmarksToBeCreated;
+            QList<Okteta::Bookmark> bookmarksToBeCreated;
             Okteta::Bookmark bookmark;
             for (bm = bmGroup.first(); !bm.isNull(); bm = bmGroup.next(bm)) {
                 if (bm.isSeparator() || bm.isGroup()) {

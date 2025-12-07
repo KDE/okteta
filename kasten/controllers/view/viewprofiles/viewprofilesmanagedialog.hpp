@@ -12,7 +12,7 @@
 // Qt
 #include <QDialog>
 
-template <class C> class QVector;
+template <class C> class QList;
 class QTreeView;
 class QPushButton;
 
@@ -42,8 +42,8 @@ private Q_SLOTS:
     void saveViewProfile(const Kasten::ByteArrayViewProfile& viewProfile);
 
     void onModelReset();
-    void onViewProfilesLocked(const QVector<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
-    void onViewProfilesUnlocked(const QVector<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
+    void onViewProfilesLocked(const QList<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
+    void onViewProfilesUnlocked(const QList<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
     void onDefaultViewProfileChanged(const Kasten::ByteArrayViewProfile::Id& viewProfileId);
 
 private:

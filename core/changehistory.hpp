@@ -10,7 +10,7 @@
 // lib
 #include "bytearraychange.hpp"
 // Qt
-#include <QVector>
+#include <QList>
 #include <QtPlugin>
 
 class QByteArray;
@@ -25,16 +25,16 @@ public:
 
 public: // get
     [[nodiscard]]
-    virtual QVector<ByteArrayChange> changes(int firstVersionIndex, int lastVersionIndex) const = 0;
+    virtual QList<ByteArrayChange> changes(int firstVersionIndex, int lastVersionIndex) const = 0;
     [[nodiscard]]
     virtual QByteArray initialData() const = 0;
 
 public: // set
-    virtual void doChanges(const QVector<Okteta::ByteArrayChange>& changes,
+    virtual void doChanges(const QList<Okteta::ByteArrayChange>& changes,
                            int oldVersionIndex, int newVersionIndex) = 0;
 
 public: // signal
-    virtual void changesDone(const QVector<Okteta::ByteArrayChange>& changes,
+    virtual void changesDone(const QList<Okteta::ByteArrayChange>& changes,
                              int oldVersionIndex, int newVersionIndex) = 0;
 };
 

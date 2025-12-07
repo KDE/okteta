@@ -23,7 +23,7 @@
 #include <memory>
 #include <utility>
 
-Q_DECLARE_METATYPE(QVector<Kasten::ReplaceBehaviour>)
+Q_DECLARE_METATYPE(QList<Kasten::ReplaceBehaviour>)
 
 class TestReplaceUserQueryAgent : public QObject
                                 , public Kasten::If::ReplaceUserQueryable
@@ -34,7 +34,7 @@ class TestReplaceUserQueryAgent : public QObject
     )
 
 public:
-    explicit TestReplaceUserQueryAgent(const QVector<Kasten::ReplaceBehaviour>& replies)
+    explicit TestReplaceUserQueryAgent(const QList<Kasten::ReplaceBehaviour>& replies)
         : m_replies(replies)
     {}
 
@@ -51,7 +51,7 @@ Q_SIGNALS: // If::ReplaceUserQueryable API
     void queryReplaceCurrentFinished(Kasten::ReplaceBehaviour result) override;
 
 private:
-    QVector<Kasten::ReplaceBehaviour> m_replies;
+    QList<Kasten::ReplaceBehaviour> m_replies;
     int m_noOfReplacements = 0;
 };
 
@@ -97,7 +97,7 @@ void ReplaceJobTest::testReplace_data()
     QTest::addColumn<int>("expectedReplacementCount");
     QTest::addColumn<Okteta::Address>("startIndex");
     QTest::addColumn<bool>("backwards");
-    QTest::addColumn<QVector<Kasten::ReplaceBehaviour>>("replies");
+    QTest::addColumn<QList<Kasten::ReplaceBehaviour>>("replies");
 
     const struct {
         QString name;
@@ -155,19 +155,19 @@ void ReplaceJobTest::testReplace_data()
         QTest::newRow(QString(data.name+QLatin1String("-forward-frombegin")).toLatin1().constData())
             << data.originalData << data.searchData
             << data.replaceData << data.expectedData << data.expectedReplacementCount
-            << Okteta::Address(0) << false << QVector<Kasten::ReplaceBehaviour>();
+            << Okteta::Address(0) << false << QList<Kasten::ReplaceBehaviour>();
         QTest::newRow(QString(data.name+QLatin1String("-backward-fromend")).toLatin1().constData())
             << data.originalData << data.searchData
             << data.replaceData << data.expectedData << data.expectedReplacementCount
-            << static_cast<Okteta::Address>(data.originalData.length()) << true << QVector<Kasten::ReplaceBehaviour>();
+            << static_cast<Okteta::Address>(data.originalData.length()) << true << QList<Kasten::ReplaceBehaviour>();
         QTest::newRow(QString(data.name+QLatin1String("-forward-frommiddle")).toLatin1().constData())
             << data.originalData << data.searchData
             << data.replaceData << data.expectedData << data.expectedReplacementCount
-            << Okteta::Address(4) << false << QVector<Kasten::ReplaceBehaviour>();
+            << Okteta::Address(4) << false << QList<Kasten::ReplaceBehaviour>();
         QTest::newRow(QString(data.name+QLatin1String("-backward-frommiddle")).toLatin1().constData())
             << data.originalData << data.searchData
             << data.replaceData << data.expectedData << data.expectedReplacementCount
-            << Okteta::Address(3) << true << QVector<Kasten::ReplaceBehaviour>();
+            << Okteta::Address(3) << true << QList<Kasten::ReplaceBehaviour>();
     }
 
     {
@@ -181,19 +181,19 @@ void ReplaceJobTest::testReplace_data()
             << originalData << searchData
             << replaceData << expectedData << expectedReplacementCount
             << Okteta::Address(0) << false
-            << QVector<Kasten::ReplaceBehaviour>{ Kasten::ReplaceAll };
+            << QList<Kasten::ReplaceBehaviour>{ Kasten::ReplaceAll };
 
         QTest::newRow("replies-forward-replace8x")
             << originalData << searchData
             << replaceData << expectedData << expectedReplacementCount
             << Okteta::Address(0) << false
-            << QVector<Kasten::ReplaceBehaviour>(8, Kasten::ReplaceCurrent);
+            << QList<Kasten::ReplaceBehaviour>(8, Kasten::ReplaceCurrent);
 
         QTest::newRow("replies-forward-replace3xreplaceall")
             << originalData << searchData
             << replaceData << expectedData << expectedReplacementCount
             << Okteta::Address(0) << false
-            << QVector<Kasten::ReplaceBehaviour>{Kasten::ReplaceCurrent, Kasten::ReplaceCurrent, Kasten::ReplaceCurrent, Kasten::ReplaceAll };
+            << QList<Kasten::ReplaceBehaviour>{Kasten::ReplaceCurrent, Kasten::ReplaceCurrent, Kasten::ReplaceCurrent, Kasten::ReplaceAll };
     }
 
     {
@@ -201,7 +201,7 @@ void ReplaceJobTest::testReplace_data()
             << byteArrayFromLiteral("11111111") << byteArrayFromLiteral("1")
             << byteArrayFromLiteral("2") << byteArrayFromLiteral("12121212") << 4
             << Okteta::Address(0) << false
-            << QVector<Kasten::ReplaceBehaviour>{ Kasten::SkipCurrent, Kasten::ReplaceCurrent,
+            << QList<Kasten::ReplaceBehaviour>{ Kasten::SkipCurrent, Kasten::ReplaceCurrent,
                 Kasten::SkipCurrent, Kasten::ReplaceCurrent, Kasten::SkipCurrent, Kasten::ReplaceCurrent,
                 Kasten::SkipCurrent, Kasten::ReplaceCurrent };
     }
@@ -217,19 +217,19 @@ void ReplaceJobTest::testReplace_data()
             << originalData << searchData
             << replaceData << expectedData << expectedReplacementCount
             << Okteta::Address(0) << false
-            << QVector<Kasten::ReplaceBehaviour>{ Kasten::CancelReplacing };
+            << QList<Kasten::ReplaceBehaviour>{ Kasten::CancelReplacing };
 
         QTest::newRow("replies-forward-skip8x")
             << originalData << searchData
             << replaceData << expectedData << expectedReplacementCount
             << Okteta::Address(0) << false
-            << QVector<Kasten::ReplaceBehaviour>(8, Kasten::SkipCurrent);
+            << QList<Kasten::ReplaceBehaviour>(8, Kasten::SkipCurrent);
 
         QTest::newRow("replies-forward-skip3xcancel")
             << originalData << searchData
             << replaceData << expectedData << expectedReplacementCount
             << Okteta::Address(0) << false
-            << QVector<Kasten::ReplaceBehaviour>{Kasten::SkipCurrent, Kasten::SkipCurrent, Kasten::SkipCurrent, Kasten::CancelReplacing };
+            << QList<Kasten::ReplaceBehaviour>{Kasten::SkipCurrent, Kasten::SkipCurrent, Kasten::SkipCurrent, Kasten::CancelReplacing };
     }
 }
 
@@ -242,7 +242,7 @@ void ReplaceJobTest::testReplace()
     QFETCH(QByteArray, replaceData);
     QFETCH(QByteArray, expectedData);
     QFETCH(int, expectedReplacementCount);
-    QFETCH(QVector<Kasten::ReplaceBehaviour>, replies);
+    QFETCH(QList<Kasten::ReplaceBehaviour>, replies);
 
     std::unique_ptr<TestReplaceUserQueryAgent> queryAgent;
     if (!replies.isEmpty()) {

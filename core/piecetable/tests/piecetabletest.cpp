@@ -9,7 +9,7 @@
 // test object
 #include <piecetable/piecetable.hpp>
 // Qt
-#include <QVector>
+#include <QList>
 #include <QTest>
 // Std
 #include <cstdio>
@@ -41,8 +41,8 @@ private:
 };
 }
 
-Q_DECLARE_METATYPE(QVector<KPieceTable::StorageDataTestData>)
-Q_DECLARE_METATYPE(QVector<KPieceTable::Piece>)
+Q_DECLARE_METATYPE(QList<KPieceTable::StorageDataTestData>)
+Q_DECLARE_METATYPE(QList<KPieceTable::Piece>)
 Q_DECLARE_METATYPE(KPieceTable::Piece)
 Q_DECLARE_METATYPE(KPieceTable::Piece::StorageType)
 Q_DECLARE_METATYPE(KPieceTable::AddressRange)
@@ -82,7 +82,7 @@ char* toString(Piece piece)
     return QTest::toString(static_cast<const char*>(text));
 }
 
-void compare(const PieceList& pieceList, const QVector<Piece>& expectedPieces)
+void compare(const PieceList& pieceList, const QList<Piece>& expectedPieces)
 {
     const Size expectedListSize = std::accumulate(expectedPieces.begin(), expectedPieces.end(), 0, [](Size sum, const Piece& piece) {
         return sum + piece.width();
@@ -110,7 +110,7 @@ void compare(const PieceList& pieceList, const QVector<Piece>& expectedPieces)
     }
 }
 
-void compare(const PieceTable& pieceTable, const QVector<Piece>& expectedPieces)
+void compare(const PieceTable& pieceTable, const QList<Piece>& expectedPieces)
 {
     const Size expectedTableSize = std::accumulate(expectedPieces.begin(), expectedPieces.end(), 0, [](Size sum, const Piece& piece) {
         return sum + piece.width();
@@ -153,7 +153,7 @@ void PieceTableTest::testInit()
     pieceTable.init(BaseSize);
 
     // check result
-    const QVector<Piece> expectedPieces {
+    const QList<Piece> expectedPieces {
             {0, BaseSize, Piece::OriginalStorage}
     };
     compare(pieceTable, expectedPieces);
@@ -161,32 +161,32 @@ void PieceTableTest::testInit()
 
 void PieceTableTest::testInsertPieceListToEmpty_data()
 {
-    QTest::addColumn<QVector<Piece>>("insertPieces");
-    QTest::addColumn<QVector<Piece>>("expectedPieces");
+    QTest::addColumn<QList<Piece>>("insertPieces");
+    QTest::addColumn<QList<Piece>>("expectedPieces");
 
     QTest::newRow("empty")
-        << QVector<Piece> {}
-        << QVector<Piece> {};
+        << QList<Piece> {}
+        << QList<Piece> {};
 
     QTest::newRow("one")
-        << QVector<Piece> {
+        << QList<Piece> {
             {Start, Width, Piece::ChangeStorage}}
-        << QVector<Piece> {
+        << QList<Piece> {
             {Start, Width, Piece::ChangeStorage}};
 
     QTest::newRow("two")
-        << QVector<Piece> {
+        << QList<Piece> {
             {Start, Width, Piece::ChangeStorage},
             {0, Width, Piece::OriginalStorage}}
-        << QVector<Piece> {
+        << QList<Piece> {
             {Start, Width, Piece::ChangeStorage},
             {0, Width, Piece::OriginalStorage}};
 }
 
 void PieceTableTest::testInsertPieceListToEmpty()
 {
-    QFETCH(const QVector<Piece>, insertPieces);
-    QFETCH(const QVector<Piece>, expectedPieces);
+    QFETCH(const QList<Piece>, insertPieces);
+    QFETCH(const QList<Piece>, expectedPieces);
 
     PieceList insertPieceList;
     for (const auto& piece : insertPieces) {
@@ -204,11 +204,11 @@ void PieceTableTest::testInsertPieceListToEmpty()
 
 void PieceTableTest::testInsert_data()
 {
-    QTest::addColumn<QVector<Piece>>("initPieces");
+    QTest::addColumn<QList<Piece>>("initPieces");
     QTest::addColumn<Address>("insertDataOffset");
     QTest::addColumn<Size>("insertLength");
     QTest::addColumn<Address>("insertStorageOffset");
-    QTest::addColumn<QVector<Piece>>("expectedPieces");
+    QTest::addColumn<QList<Piece>>("expectedPieces");
 
     const Piece originalPieceA {0, BaseSize, Piece::OriginalStorage};
     const Piece originalPieceA1 {0, 1, Piece::OriginalStorage};
@@ -237,284 +237,284 @@ void PieceTableTest::testInsert_data()
     const Piece changePieceAB1 {0, BaseSize + 1, Piece::ChangeStorage};
 
     QTest::newRow("empty-to-empty")
-        << QVector<Piece> {}
+        << QList<Piece> {}
         << 0 << 0 << 0
-        << QVector<Piece> {};
+        << QList<Piece> {};
     QTest::newRow("one-to-empty")
-        << QVector<Piece> {}
+        << QList<Piece> {}
         << 0 << changePieceB1.width() << changePieceB1.start()
-        << QVector<Piece> {changePieceB1};
+        << QList<Piece> {changePieceB1};
     QTest::newRow("multi-to-empty")
-        << QVector<Piece> {}
+        << QList<Piece> {}
         << 0 << changePieceB.width() << changePieceB.start()
-        << QVector<Piece> {changePieceB};
+        << QList<Piece> {changePieceB};
 
     QTest::newRow("empty-to-begin-one")
-        << QVector<Piece> {originalPieceA1}
+        << QList<Piece> {originalPieceA1}
         << 0 << 0 << 0
-        << QVector<Piece> {originalPieceA1};
+        << QList<Piece> {originalPieceA1};
     QTest::newRow("one-to-begin-one-noncontinuous-samestorage")
-        << QVector<Piece> {changePieceB2}
+        << QList<Piece> {changePieceB2}
         << 0 << changePiece1A.width() << changePiece1A.start()
-        << QVector<Piece> {changePiece1A, changePieceB2};
+        << QList<Piece> {changePiece1A, changePieceB2};
     QTest::newRow("one-to-begin-one-noncontinuous-differentstorage")
-        << QVector<Piece> {originalPieceB1}
+        << QList<Piece> {originalPieceB1}
         << 0 << changePiece1A.width() << changePiece1A.start()
-        << QVector<Piece> {changePiece1A, originalPieceB1};
+        << QList<Piece> {changePiece1A, originalPieceB1};
     QTest::newRow("one-to-begin-one-continuous")
-        << QVector<Piece> {changePieceA2}
+        << QList<Piece> {changePieceA2}
         << 0 << changePieceA1.width() << changePieceA1.start()
-        << QVector<Piece> {changePieceA12};
+        << QList<Piece> {changePieceA12};
     QTest::newRow("multi-to-begin-one-noncontinuous-samestorage")
-        << QVector<Piece> {changePieceB2}
+        << QList<Piece> {changePieceB2}
         << 0 << changePieceA.width() << changePieceA.start()
-        << QVector<Piece> {changePieceA, changePieceB2};
+        << QList<Piece> {changePieceA, changePieceB2};
     QTest::newRow("multi-to-begin-one-noncontinuous-differentstorage")
-        << QVector<Piece> {originalPieceB1}
+        << QList<Piece> {originalPieceB1}
         << 0 << changePieceA.width() << changePieceA.start()
-        << QVector<Piece> {changePieceA, originalPieceB1};
+        << QList<Piece> {changePieceA, originalPieceB1};
     QTest::newRow("multi-to-begin-one-continuous")
-        << QVector<Piece> {changePieceB1}
+        << QList<Piece> {changePieceB1}
         << 0 << changePieceA.width() << changePieceA.start()
-        << QVector<Piece> {changePieceAB1};
+        << QList<Piece> {changePieceAB1};
 
     QTest::newRow("empty-to-end-one")
-        << QVector<Piece> {originalPieceA1}
+        << QList<Piece> {originalPieceA1}
         << originalPieceA1.width() << 0 << 0
-        << QVector<Piece> {originalPieceA1};
+        << QList<Piece> {originalPieceA1};
     QTest::newRow("one-to-end-one-noncontinuous-samestorage")
-        << QVector<Piece> {changePiece1A}
+        << QList<Piece> {changePiece1A}
         << changePiece1A.width() << changePieceB2.width() << changePieceB2.start()
-        << QVector<Piece> {changePiece1A, changePieceB2};
+        << QList<Piece> {changePiece1A, changePieceB2};
     QTest::newRow("one-to-end-one-noncontinuous-differentstorage")
-        << QVector<Piece> {originalPiece1A}
+        << QList<Piece> {originalPiece1A}
         << originalPiece1A.width() << changePieceB1.width() << changePieceB1.start()
-        << QVector<Piece> {originalPiece1A, changePieceB1};
+        << QList<Piece> {originalPiece1A, changePieceB1};
     QTest::newRow("one-to-end-one-continuous")
-        << QVector<Piece> {changePieceA1}
+        << QList<Piece> {changePieceA1}
         << changePieceA1.width() << changePieceA2.width() << changePieceA2.start()
-        << QVector<Piece> {changePieceA12};
+        << QList<Piece> {changePieceA12};
     QTest::newRow("multi-to-end-one-noncontinuous-samestorage")
-        << QVector<Piece> {changePiece1A}
+        << QList<Piece> {changePiece1A}
         << changePiece1A.width() << changePiece_B.width() << changePiece_B.start()
-        << QVector<Piece> {changePiece1A, changePiece_B};
+        << QList<Piece> {changePiece1A, changePiece_B};
     QTest::newRow("multi-to-end-one-noncontinuous-differentstorage")
-        << QVector<Piece> {originalPiece1A}
+        << QList<Piece> {originalPiece1A}
         << originalPiece1A.width() << changePieceB.width() << changePieceB.start()
-        << QVector<Piece> {originalPiece1A, changePieceB};
+        << QList<Piece> {originalPiece1A, changePieceB};
     QTest::newRow("multi-to-end-one-continuous")
-        << QVector<Piece> {changePieceA1}
+        << QList<Piece> {changePieceA1}
         << changePieceA1.width() << changePiece_A.width() << changePiece_A.start()
-        << QVector<Piece> {changePieceA};
+        << QList<Piece> {changePieceA};
 
     QTest::newRow("empty-to-begin-multi")
-        << QVector<Piece> {originalPieceA}
+        << QList<Piece> {originalPieceA}
         << 0 << 0 << 0
-        << QVector<Piece> {originalPieceA};
+        << QList<Piece> {originalPieceA};
     QTest::newRow("one-to-begin-multi-noncontinuous-samestorage")
-        << QVector<Piece> {changePiece_B}
+        << QList<Piece> {changePiece_B}
         << 0 << changePiece1A.width() << changePiece1A.start()
-        << QVector<Piece> {changePiece1A, changePiece_B};
+        << QList<Piece> {changePiece1A, changePiece_B};
     QTest::newRow("one-to-begin-multi-noncontinuous-differentstorage")
-        << QVector<Piece> {originalPieceB}
+        << QList<Piece> {originalPieceB}
         << 0 << changePiece1A.width() << changePiece1A.start()
-        << QVector<Piece> {changePiece1A, originalPieceB};
+        << QList<Piece> {changePiece1A, originalPieceB};
     QTest::newRow("one-to-begin-multi-continuous")
-        << QVector<Piece> {changePiece_A}
+        << QList<Piece> {changePiece_A}
         << 0 << changePieceA1.width() << changePieceA1.start()
-        << QVector<Piece> {changePieceA};
+        << QList<Piece> {changePieceA};
     QTest::newRow("multi-to-begin-multi-noncontinuous-samestorage")
-        << QVector<Piece> {changePiece_B}
+        << QList<Piece> {changePiece_B}
         << 0 << changePieceA.width() << changePieceA.start()
-        << QVector<Piece> {changePieceA, changePiece_B};
+        << QList<Piece> {changePieceA, changePiece_B};
     QTest::newRow("multi-to-begin-multi-noncontinuous-differentstorage")
-        << QVector<Piece> {originalPieceB}
+        << QList<Piece> {originalPieceB}
         << 0 << changePieceA.width() << changePieceA.start()
-        << QVector<Piece> {changePieceA, originalPieceB};
+        << QList<Piece> {changePieceA, originalPieceB};
     QTest::newRow("multi-to-begin-multi-continuous")
-        << QVector<Piece> {changePieceB}
+        << QList<Piece> {changePieceB}
         << 0 << changePieceA.width() << changePieceA.start()
-        << QVector<Piece> {changePieceAB};
+        << QList<Piece> {changePieceAB};
 
     QTest::newRow("empty-to-after-begin-multi")
-        << QVector<Piece> {originalPieceA}
+        << QList<Piece> {originalPieceA}
         << 1 << 0 << 0
-        << QVector<Piece> {originalPieceA};
+        << QList<Piece> {originalPieceA};
     QTest::newRow("one-to-after-begin-multi")
-        << QVector<Piece> {originalPieceA}
+        << QList<Piece> {originalPieceA}
         << 1 << changePieceB1.width() << changePieceB1.start()
-        << QVector<Piece> {originalPieceA1, changePieceB1, originalPiece_A};
+        << QList<Piece> {originalPieceA1, changePieceB1, originalPiece_A};
     QTest::newRow("multi-to-after-begin-multi")
-        << QVector<Piece> {originalPieceA}
+        << QList<Piece> {originalPieceA}
         << 1 << changePieceB.width() << changePieceB.start()
-        << QVector<Piece> {originalPieceA1, changePieceB, originalPiece_A};
+        << QList<Piece> {originalPieceA1, changePieceB, originalPiece_A};
 
     QTest::newRow("emoty-to-middle-multi")
-        << QVector<Piece> {originalPieceA}
+        << QList<Piece> {originalPieceA}
         << originalPieceAM.width() << 0 << 0
-        << QVector<Piece> {originalPieceA};
+        << QList<Piece> {originalPieceA};
     QTest::newRow("one-to-middle-multi")
-        << QVector<Piece> {originalPieceA}
+        << QList<Piece> {originalPieceA}
         << originalPieceAM.width() << changePieceB1.width() << changePieceB1.start()
-        << QVector<Piece> {originalPieceAM, changePieceB1, originalPieceMA};
+        << QList<Piece> {originalPieceAM, changePieceB1, originalPieceMA};
     QTest::newRow("multi-to-middle-multi")
-        << QVector<Piece> {originalPieceA}
+        << QList<Piece> {originalPieceA}
         << originalPieceAM.width() << changePieceB.width() << changePieceB.start()
-        << QVector<Piece> {originalPieceAM, changePieceB, originalPieceMA};
+        << QList<Piece> {originalPieceAM, changePieceB, originalPieceMA};
 
     QTest::newRow("empty-to-before-end-multi")
-        << QVector<Piece> {originalPieceA}
+        << QList<Piece> {originalPieceA}
         << originalPieceA.width() - 1 << 0 << 0
-        << QVector<Piece> {originalPieceA};
+        << QList<Piece> {originalPieceA};
     QTest::newRow("one-to-before-end-multi")
-        << QVector<Piece> {originalPieceA}
+        << QList<Piece> {originalPieceA}
         << originalPieceA.width() - 1 << changePieceB1.width() << changePieceB1.start()
-        << QVector<Piece> {originalPieceA_, changePieceB1, originalPiece1A};
+        << QList<Piece> {originalPieceA_, changePieceB1, originalPiece1A};
     QTest::newRow("multi-to-before-end-multi")
-        << QVector<Piece> {originalPieceA}
+        << QList<Piece> {originalPieceA}
         << originalPieceA.width() - 1 << changePieceB.width() << changePieceB.start()
-        << QVector<Piece> {originalPieceA_, changePieceB, originalPiece1A};
+        << QList<Piece> {originalPieceA_, changePieceB, originalPiece1A};
 
     QTest::newRow("empty-to-end-multi")
-        << QVector<Piece> {originalPieceA}
+        << QList<Piece> {originalPieceA}
         << originalPieceA.width() << 0 << 0
-        << QVector<Piece> {originalPieceA};
+        << QList<Piece> {originalPieceA};
     QTest::newRow("one-to-end-multi-noncontinuous-samestorage")
-        << QVector<Piece> {changePieceA}
+        << QList<Piece> {changePieceA}
         << changePieceA.width() << changePieceB2.width() << changePieceB2.start()
-        << QVector<Piece> {changePieceA, changePieceB2};
+        << QList<Piece> {changePieceA, changePieceB2};
     QTest::newRow("one-to-end-multi-noncontinuous-differentstorage")
-        << QVector<Piece> {originalPieceA}
+        << QList<Piece> {originalPieceA}
         << originalPieceA.width() << changePieceB1.width() << changePieceB1.start()
-        << QVector<Piece> {originalPieceA, changePieceB1};
+        << QList<Piece> {originalPieceA, changePieceB1};
     QTest::newRow("one-to-end-multi-continuous")
-        << QVector<Piece> {changePieceA_}
+        << QList<Piece> {changePieceA_}
         << changePieceA_.width() << changePiece1A.width() << changePiece1A.start()
-        << QVector<Piece> {changePieceA};
+        << QList<Piece> {changePieceA};
     QTest::newRow("multi-to-end-multi-noncontinuous-samestorage")
-        << QVector<Piece> {changePieceA}
+        << QList<Piece> {changePieceA}
         << changePieceA.width() << changePiece_B.width() << changePiece_B.start()
-        << QVector<Piece> {changePieceA, changePiece_B};
+        << QList<Piece> {changePieceA, changePiece_B};
     QTest::newRow("multi-to-end-multi-noncontinuous-differentstorage")
-        << QVector<Piece> {originalPieceA}
+        << QList<Piece> {originalPieceA}
         << originalPieceA.width() << changePieceB.width() << changePieceB.start()
-        << QVector<Piece> {originalPieceA, changePieceB};
+        << QList<Piece> {originalPieceA, changePieceB};
     QTest::newRow("multi-to-end-multi-continuous")
-        << QVector<Piece> {changePieceA}
+        << QList<Piece> {changePieceA}
         << changePieceA.width() << changePieceB.width() << changePieceB.start()
-        << QVector<Piece> {changePieceAB};
+        << QList<Piece> {changePieceAB};
 
     QTest::newRow("empty-to-begin-first-two-multi")
-        << QVector<Piece> {originalPieceB, originalPieceA}
+        << QList<Piece> {originalPieceB, originalPieceA}
         << 0 << 0 << 0
-        << QVector<Piece> {originalPieceB, originalPieceA};
+        << QList<Piece> {originalPieceB, originalPieceA};
     QTest::newRow("one-to-begin-first-two-multi-noncontinuous-samestorage")
-        << QVector<Piece> {changePiece_B, originalPieceB}
+        << QList<Piece> {changePiece_B, originalPieceB}
         << 0 << changePiece1A.width() << changePiece1A.start()
-        << QVector<Piece> {changePiece1A, changePiece_B, originalPieceB};
+        << QList<Piece> {changePiece1A, changePiece_B, originalPieceB};
     QTest::newRow("one-to-begin-first-two-multi-noncontinuous-differentstorage")
-        << QVector<Piece> {originalPieceB, changePieceB}
+        << QList<Piece> {originalPieceB, changePieceB}
         << 0 << changePiece1A.width() << changePiece1A.start()
-        << QVector<Piece> {changePiece1A, originalPieceB, changePieceB};
+        << QList<Piece> {changePiece1A, originalPieceB, changePieceB};
     QTest::newRow("one-to-begin-first-two-multi-continuous")
-        << QVector<Piece> {changePiece_A, originalPieceB}
+        << QList<Piece> {changePiece_A, originalPieceB}
         << 0 << changePieceA1.width() << changePieceA1.start()
-        << QVector<Piece> {changePieceA, originalPieceB};
+        << QList<Piece> {changePieceA, originalPieceB};
     QTest::newRow("multi-to-begin-first-two-multi-noncontinuous-samestorage")
-        << QVector<Piece> {changePiece_B, originalPieceB}
+        << QList<Piece> {changePiece_B, originalPieceB}
         << 0 << changePieceA.width() << changePieceA.start()
-        << QVector<Piece> {changePieceA, changePiece_B, originalPieceB};
+        << QList<Piece> {changePieceA, changePiece_B, originalPieceB};
     QTest::newRow("multi-to-begin-first-two-multi-noncontinuous-differentstorage")
-        << QVector<Piece> {originalPieceB, changePieceB}
+        << QList<Piece> {originalPieceB, changePieceB}
         << 0 << changePieceA.width() << changePieceA.start()
-        << QVector<Piece> {changePieceA, originalPieceB, changePieceB};
+        << QList<Piece> {changePieceA, originalPieceB, changePieceB};
     QTest::newRow("multi-to-begin-first-two-multi-continuous")
-        << QVector<Piece> {changePieceB,originalPieceB}
+        << QList<Piece> {changePieceB,originalPieceB}
         << 0 << changePieceA.width() << changePieceA.start()
-        << QVector<Piece> {changePieceAB, originalPieceB};
+        << QList<Piece> {changePieceAB, originalPieceB};
 
     QTest::newRow("empty-to-begin-second-two-multi")
-        << QVector<Piece> {originalPieceB, originalPieceA}
+        << QList<Piece> {originalPieceB, originalPieceA}
         << originalPieceB.width() << 0 << 0
-        << QVector<Piece> {originalPieceB, originalPieceA};
+        << QList<Piece> {originalPieceB, originalPieceA};
     QTest::newRow("one-to-begin-second-two-multi-noncontinuous-samestorage")
-        << QVector<Piece> {originalPieceB, changePiece_B}
+        << QList<Piece> {originalPieceB, changePiece_B}
         << originalPieceB.width() << changePiece1A.width() << changePiece1A.start()
-        << QVector<Piece> {originalPieceB, changePiece1A, changePiece_B};
+        << QList<Piece> {originalPieceB, changePiece1A, changePiece_B};
     QTest::newRow("one-to-begin-second-two-multi-noncontinuous-differentstorage")
-        << QVector<Piece> {changePieceB, originalPieceB}
+        << QList<Piece> {changePieceB, originalPieceB}
         << changePieceB.width() << changePiece1A.width() << changePiece1A.start()
-        << QVector<Piece> {changePieceB, changePiece1A, originalPieceB};
+        << QList<Piece> {changePieceB, changePiece1A, originalPieceB};
     QTest::newRow("one-to-begin-second-two-multi-continuous-first")
-        << QVector<Piece> {changePieceA_, originalPieceB}
+        << QList<Piece> {changePieceA_, originalPieceB}
         << changePieceA_.width() << changePiece1A.width() << changePiece1A.start()
-        << QVector<Piece> {changePieceA, originalPieceB};
+        << QList<Piece> {changePieceA, originalPieceB};
     QTest::newRow("one-to-begin-second-two-multi-continuous-second")
-        << QVector<Piece> {originalPieceB, changePiece_A}
+        << QList<Piece> {originalPieceB, changePiece_A}
         << originalPieceB.width() << changePieceA1.width() << changePieceA1.start()
-        << QVector<Piece> {originalPieceB, changePieceA};
+        << QList<Piece> {originalPieceB, changePieceA};
     QTest::newRow("one-to-begin-second-two-multi-continuous-all")
-        << QVector<Piece> {changePieceA_, changePieceB}
+        << QList<Piece> {changePieceA_, changePieceB}
         << changePieceA_.width() << changePiece1A.width() << changePiece1A.start()
-        << QVector<Piece> {changePieceAB};
+        << QList<Piece> {changePieceAB};
     QTest::newRow("multi-to-begin-second-two-multi-noncontinuous-samestorage")
-        << QVector<Piece> {originalPieceB, changePiece_B}
+        << QList<Piece> {originalPieceB, changePiece_B}
         << originalPieceB.width() << changePieceA.width() << changePieceA.start()
-        << QVector<Piece> {originalPieceB, changePieceA, changePiece_B};
+        << QList<Piece> {originalPieceB, changePieceA, changePiece_B};
     QTest::newRow("multi-to-begin-second-two-multi-noncontinuous-differentstorage")
-        << QVector<Piece> {changePieceB, originalPieceB}
+        << QList<Piece> {changePieceB, originalPieceB}
         << changePieceB.width() << changePieceA.width() << changePieceA.start()
-        << QVector<Piece> {changePieceB, changePieceA, originalPieceB};
+        << QList<Piece> {changePieceB, changePieceA, originalPieceB};
     QTest::newRow("multi-to-begin-second-two-multi-continuous-first")
-        << QVector<Piece> {changePieceA, originalPieceB}
+        << QList<Piece> {changePieceA, originalPieceB}
         << changePieceA.width() << changePieceB.width() << changePieceB.start()
-        << QVector<Piece> {changePieceAB, originalPieceB};
+        << QList<Piece> {changePieceAB, originalPieceB};
     QTest::newRow("multi-to-begin-second-two-multi-continuous-second")
-        << QVector<Piece> {originalPieceB, changePieceB}
+        << QList<Piece> {originalPieceB, changePieceB}
         << originalPieceB.width() << changePieceA.width() << changePieceA.start()
-        << QVector<Piece> {originalPieceB, changePieceAB};
+        << QList<Piece> {originalPieceB, changePieceAB};
     QTest::newRow("multi-to-begin-second-two-multi-continuous-all")
-        << QVector<Piece> {changePieceA12, changePieceB}
+        << QList<Piece> {changePieceA12, changePieceB}
         << changePieceA12.width() << changePiece__A.width() << changePiece__A.start()
-        << QVector<Piece> {changePieceAB};
+        << QList<Piece> {changePieceAB};
 
     QTest::newRow("empty-to-end-second-two-multi")
-        << QVector<Piece> {originalPieceB, originalPieceA}
+        << QList<Piece> {originalPieceB, originalPieceA}
         << originalPieceB.width() + originalPieceA.width() << 0 << 0
-        << QVector<Piece> {originalPieceB, originalPieceA};
+        << QList<Piece> {originalPieceB, originalPieceA};
     QTest::newRow("one-to-end-second-two-multi-noncontinuous-samestorage")
-        << QVector<Piece> {originalPieceB, changePieceA}
+        << QList<Piece> {originalPieceB, changePieceA}
         << originalPieceB.width() + changePieceA.width() << changePieceB2.width() << changePieceB2.start()
-        << QVector<Piece> {originalPieceB, changePieceA, changePieceB2};
+        << QList<Piece> {originalPieceB, changePieceA, changePieceB2};
     QTest::newRow("one-to-end-second-two-multi-noncontinuous-differentstorage")
-        << QVector<Piece> {originalPieceB, originalPieceA}
+        << QList<Piece> {originalPieceB, originalPieceA}
         << originalPieceB.width() + originalPieceA.width() << changePieceB1.width() << changePieceB1.start()
-        << QVector<Piece> {originalPieceB, originalPieceA, changePieceB1};
+        << QList<Piece> {originalPieceB, originalPieceA, changePieceB1};
     QTest::newRow("one-to-end-second-two-multi-continuous")
-        << QVector<Piece> {originalPieceB, changePieceA_}
+        << QList<Piece> {originalPieceB, changePieceA_}
         << originalPieceB.width() + changePieceA_.width() << changePiece1A.width() << changePiece1A.start()
-        << QVector<Piece> {originalPieceB, changePieceA};
+        << QList<Piece> {originalPieceB, changePieceA};
     QTest::newRow("multi-to-end-second-two-multi-noncontinuous-samestorage")
-        << QVector<Piece> {originalPieceB, changePieceA}
+        << QList<Piece> {originalPieceB, changePieceA}
         << originalPieceB.width() + changePieceA.width() << changePiece_B.width() << changePiece_B.start()
-        << QVector<Piece> {originalPieceB, changePieceA, changePiece_B};
+        << QList<Piece> {originalPieceB, changePieceA, changePiece_B};
     QTest::newRow("multi-to-end-second-two-multi-noncontinuous-differentstorage")
-        << QVector<Piece> {originalPieceB, originalPieceA}
+        << QList<Piece> {originalPieceB, originalPieceA}
         << originalPieceB.width() + originalPieceA.width() << changePieceB.width() << changePieceB.start()
-        << QVector<Piece> {originalPieceB, originalPieceA, changePieceB};
+        << QList<Piece> {originalPieceB, originalPieceA, changePieceB};
     QTest::newRow("multi-to-end-second-two-multi-continuous")
-        << QVector<Piece> {originalPieceB, changePieceA}
+        << QList<Piece> {originalPieceB, changePieceA}
         << originalPieceB.width() + changePieceA.width() << changePieceB.width() << changePieceB.start()
-        << QVector<Piece> {originalPieceB, changePieceAB};
+        << QList<Piece> {originalPieceB, changePieceAB};
 }
 
 void PieceTableTest::testInsert()
 {
-    QFETCH(const QVector<Piece>, initPieces);
+    QFETCH(const QList<Piece>, initPieces);
     QFETCH(const Address, insertDataOffset);
     QFETCH(const Size, insertLength);
     QFETCH(const Address, insertStorageOffset);
-    QFETCH(const QVector<Piece>, expectedPieces);
+    QFETCH(const QList<Piece>, expectedPieces);
 
     PieceList initPieceList;
     for (const auto& piece : initPieces) {
@@ -588,7 +588,7 @@ void PieceTableTest::testInsertMulti()
     // test
     QCOMPARE(pieceTable.size(), BaseSize + 12 * BaseSize);
 
-    const QVector<Piece> expectedPieces {
+    const QList<Piece> expectedPieces {
         {changeStarts[12],      BaseSize,       Piece::ChangeStorage},
         {changeStarts[9],       Mid,            Piece::ChangeStorage}, // part ninth
         {changeStarts[11],      BaseSize,       Piece::ChangeStorage},
@@ -610,12 +610,12 @@ void PieceTableTest::testInsertMulti()
 
 void PieceTableTest::testInsertPieceList_data()
 {
-    QTest::addColumn<QVector<Piece>>("initPieces");
+    QTest::addColumn<QList<Piece>>("initPieces");
     QTest::addColumn<Address>("insertDataOffset");
-    QTest::addColumn<QVector<Piece>>("insertPieces");
-    QTest::addColumn<QVector<Piece>>("expectedPieces");
+    QTest::addColumn<QList<Piece>>("insertPieces");
+    QTest::addColumn<QList<Piece>>("expectedPieces");
 
-    const QVector<Piece> noPieces;
+    const QList<Piece> noPieces;
 
     const Piece changePieceA {0, Start, Piece::ChangeStorage};
     const Piece changePieceA_ {0, Start - 1, Piece::ChangeStorage};
@@ -648,274 +648,274 @@ void PieceTableTest::testInsertPieceList_data()
     QTest::newRow("one-to-empty")
         << noPieces
         << 0
-        << QVector<Piece> {changePieceB}
-        << QVector<Piece> {changePieceB};
+        << QList<Piece> {changePieceB}
+        << QList<Piece> {changePieceB};
 
     QTest::newRow("three-to-empty")
         << noPieces
         << 0
-        << QVector<Piece> {changePieceB, originalPieceB, originalPieceA}
-        << QVector<Piece> {changePieceB, originalPieceB, originalPieceA};
+        << QList<Piece> {changePieceB, originalPieceB, originalPieceA}
+        << QList<Piece> {changePieceB, originalPieceB, originalPieceA};
 
     QTest::newRow("empty-to-one-begin")
-        << QVector<Piece> {changePieceB}
+        << QList<Piece> {changePieceB}
         << 0
         << noPieces
-        << QVector<Piece> {changePieceB};
+        << QList<Piece> {changePieceB};
 
     QTest::newRow("one-to-one-begin-noncontinuous-samestorage")
-        << QVector<Piece> {changePieceB}
+        << QList<Piece> {changePieceB}
         << 0
-        << QVector<Piece> {changePieceA_}
-        << QVector<Piece> {changePieceA_, changePieceB};
+        << QList<Piece> {changePieceA_}
+        << QList<Piece> {changePieceA_, changePieceB};
 
     QTest::newRow("one-to-one-begin-noncontinuous-differentstorage")
-        << QVector<Piece> {changePieceB}
+        << QList<Piece> {changePieceB}
         << 0
-        << QVector<Piece> {originalPieceA_}
-        << QVector<Piece> {originalPieceA_, changePieceB};
+        << QList<Piece> {originalPieceA_}
+        << QList<Piece> {originalPieceA_, changePieceB};
 
     QTest::newRow("one-to-one-begin-continuous-samestorage")
-        << QVector<Piece> {changePieceB}
+        << QList<Piece> {changePieceB}
         << 0
-        << QVector<Piece> {changePieceA}
-        << QVector<Piece> {changePieceAB};
+        << QList<Piece> {changePieceA}
+        << QList<Piece> {changePieceAB};
 
     QTest::newRow("one-to-one-begin-continuous-differentstorage")
-        << QVector<Piece> {changePieceB}
+        << QList<Piece> {changePieceB}
         << 0
-        << QVector<Piece> {originalPieceA}
-        << QVector<Piece> {originalPieceA, changePieceB};
+        << QList<Piece> {originalPieceA}
+        << QList<Piece> {originalPieceA, changePieceB};
 
     QTest::newRow("two-to-one-begin-noncontinuous-samestorage")
-        << QVector<Piece> {changePieceB}
+        << QList<Piece> {changePieceB}
         << 0
-        << QVector<Piece> {originalPieceB, changePieceA_}
-        << QVector<Piece> {originalPieceB, changePieceA_, changePieceB};
+        << QList<Piece> {originalPieceB, changePieceA_}
+        << QList<Piece> {originalPieceB, changePieceA_, changePieceB};
 
     QTest::newRow("two-to-one-begin-continuous-samestorage")
-        << QVector<Piece> {changePieceB}
+        << QList<Piece> {changePieceB}
         << 0
-        << QVector<Piece> {originalPieceB, changePieceA}
-        << QVector<Piece> {originalPieceB, changePieceAB};
+        << QList<Piece> {originalPieceB, changePieceA}
+        << QList<Piece> {originalPieceB, changePieceAB};
 
     QTest::newRow("empty-to-one-after-begin")
-        << QVector<Piece> {changePieceB}
+        << QList<Piece> {changePieceB}
         << 1
         << noPieces
-        << QVector<Piece> {changePieceB};
+        << QList<Piece> {changePieceB};
 
     QTest::newRow("one-to-one-after-begin-noncontinuous-samestorage")
-        << QVector<Piece> {changePieceB}
+        << QList<Piece> {changePieceB}
         << 1
-        << QVector<Piece> {changePieceA_}
-        << QVector<Piece> {changePieceB1, changePieceA_, changePiece_B};
+        << QList<Piece> {changePieceA_}
+        << QList<Piece> {changePieceB1, changePieceA_, changePiece_B};
 
     QTest::newRow("two-to-one-after-begin")
-        << QVector<Piece> {changePieceB}
+        << QList<Piece> {changePieceB}
         << 1
-        << QVector<Piece> {originalPieceB, changePieceA}
-        << QVector<Piece> {changePieceB1, originalPieceB, changePieceA, changePiece_B};
+        << QList<Piece> {originalPieceB, changePieceA}
+        << QList<Piece> {changePieceB1, originalPieceB, changePieceA, changePiece_B};
 
     QTest::newRow("empty-to-one-middle")
-        << QVector<Piece> {changePieceB}
+        << QList<Piece> {changePieceB}
         << changePieceB.width() / 2
         << noPieces
-        << QVector<Piece> {changePieceB};
+        << QList<Piece> {changePieceB};
 
     QTest::newRow("one-to-one-middle-noncontinuous-samestorage")
-        << QVector<Piece> {changePieceB}
+        << QList<Piece> {changePieceB}
         << changePieceB.width() / 2
-        << QVector<Piece> {changePieceA_}
-        << QVector<Piece> {changePieceBM, changePieceA_, changePieceMB};
+        << QList<Piece> {changePieceA_}
+        << QList<Piece> {changePieceBM, changePieceA_, changePieceMB};
 
     QTest::newRow("one-to-one-middle-noncontinuous-differentstorage")
-        << QVector<Piece> {changePieceB}
+        << QList<Piece> {changePieceB}
         << changePieceB.width() / 2
-        << QVector<Piece> {originalPieceA_}
-        << QVector<Piece> {changePieceBM, originalPieceA_, changePieceMB};
+        << QList<Piece> {originalPieceA_}
+        << QList<Piece> {changePieceBM, originalPieceA_, changePieceMB};
 
     QTest::newRow("two-to-one-middle")
-        << QVector<Piece> {changePieceB}
+        << QList<Piece> {changePieceB}
         << changePieceB.width() / 2
-        << QVector<Piece> {changePieceA_, originalPieceB}
-        << QVector<Piece> {changePieceBM, changePieceA_, originalPieceB, changePieceMB};
+        << QList<Piece> {changePieceA_, originalPieceB}
+        << QList<Piece> {changePieceBM, changePieceA_, originalPieceB, changePieceMB};
 
     QTest::newRow("three-to-one-middle")
-        << QVector<Piece> {changePieceB}
+        << QList<Piece> {changePieceB}
         << changePieceB.width() / 2
-        << QVector<Piece> {changePieceA_, originalPieceB, originalPieceA_}
-        << QVector<Piece> {changePieceBM, changePieceA_, originalPieceB, originalPieceA_, changePieceMB};
+        << QList<Piece> {changePieceA_, originalPieceB, originalPieceA_}
+        << QList<Piece> {changePieceBM, changePieceA_, originalPieceB, originalPieceA_, changePieceMB};
 
     QTest::newRow("empty-to-one-before-end")
-        << QVector<Piece> {changePieceB}
+        << QList<Piece> {changePieceB}
         << changePieceB.width() - 1
         << noPieces
-        << QVector<Piece> {changePieceB};
+        << QList<Piece> {changePieceB};
 
     QTest::newRow("one-to-one-before-end-noncontinuous-samestorage")
-        << QVector<Piece> {changePieceB}
+        << QList<Piece> {changePieceB}
         << changePieceB.width() - 1
-        << QVector<Piece> {changePiece_C}
-        << QVector<Piece> {changePieceB_, changePiece_C, changePiece1B};
+        << QList<Piece> {changePiece_C}
+        << QList<Piece> {changePieceB_, changePiece_C, changePiece1B};
 
     QTest::newRow("one-to-one-before-end-continuous-samestorage")
-        << QVector<Piece> {changePieceB}
+        << QList<Piece> {changePieceB}
         << changePieceB.width() - 1
-        << QVector<Piece> {changePieceC}
-        << QVector<Piece> {changePieceB_, changePieceC, changePiece1B};
+        << QList<Piece> {changePieceC}
+        << QList<Piece> {changePieceB_, changePieceC, changePiece1B};
 
     QTest::newRow("two-to-one-before-end")
-        << QVector<Piece> {changePieceB}
+        << QList<Piece> {changePieceB}
         << changePieceB.width() - 1
-        << QVector<Piece> {originalPieceB, changePieceC}
-        << QVector<Piece> {changePieceB_, originalPieceB, changePieceC, changePiece1B};
+        << QList<Piece> {originalPieceB, changePieceC}
+        << QList<Piece> {changePieceB_, originalPieceB, changePieceC, changePiece1B};
 
     QTest::newRow("empty-to-one-end")
-        << QVector<Piece> {changePieceB}
+        << QList<Piece> {changePieceB}
         << changePieceB.width() - 1
         << noPieces
-        << QVector<Piece> {changePieceB};
+        << QList<Piece> {changePieceB};
 
     QTest::newRow("one-to-one-end-noncontinuous-samestorage")
-        << QVector<Piece> {changePieceB}
+        << QList<Piece> {changePieceB}
         << changePieceB.width()
-        << QVector<Piece> {changePiece_C}
-        << QVector<Piece> {changePieceB, changePiece_C};
+        << QList<Piece> {changePiece_C}
+        << QList<Piece> {changePieceB, changePiece_C};
 
     QTest::newRow("one-to-one-end-noncontinuous-differentstorage")
-        << QVector<Piece> {changePieceB}
+        << QList<Piece> {changePieceB}
         << changePieceB.width()
-        << QVector<Piece> {originalPiece_C}
-        << QVector<Piece> {changePieceB, originalPiece_C};
+        << QList<Piece> {originalPiece_C}
+        << QList<Piece> {changePieceB, originalPiece_C};
 
     QTest::newRow("one-to-one-end-continuous-samestorage")
-        << QVector<Piece> {changePieceB}
+        << QList<Piece> {changePieceB}
         << changePieceB.width()
-        << QVector<Piece> {changePieceC}
-        << QVector<Piece> {changePieceBC};
+        << QList<Piece> {changePieceC}
+        << QList<Piece> {changePieceBC};
 
     QTest::newRow("one-to-one-end-continuous-differentstorage")
-        << QVector<Piece> {changePieceB}
+        << QList<Piece> {changePieceB}
         << changePieceB.width()
-        << QVector<Piece> {originalPieceC}
-        << QVector<Piece> {changePieceB, originalPieceC};
+        << QList<Piece> {originalPieceC}
+        << QList<Piece> {changePieceB, originalPieceC};
 
     QTest::newRow("two-to-one-end-continuous-samestorage")
-        << QVector<Piece> {changePieceB}
+        << QList<Piece> {changePieceB}
         << changePieceB.width()
-        << QVector<Piece> {changePieceC, originalPieceB}
-        << QVector<Piece> {changePieceBC, originalPieceB};
+        << QList<Piece> {changePieceC, originalPieceB}
+        << QList<Piece> {changePieceBC, originalPieceB};
 
     QTest::newRow("empty-to-two-begin")
-        << QVector<Piece> {changePieceA, originalPieceB}
+        << QList<Piece> {changePieceA, originalPieceB}
         << 0
         << noPieces
-        << QVector<Piece> {changePieceA, originalPieceB};
+        << QList<Piece> {changePieceA, originalPieceB};
 
     QTest::newRow("one-to-two-begin-noncontinuous-samestorage")
-        << QVector<Piece> {changePieceB, originalPieceB}
+        << QList<Piece> {changePieceB, originalPieceB}
         << 0
-        << QVector<Piece> {changePieceA_}
-        << QVector<Piece> {changePieceA_, changePieceB, originalPieceB};
+        << QList<Piece> {changePieceA_}
+        << QList<Piece> {changePieceA_, changePieceB, originalPieceB};
 
     QTest::newRow("one-to-two-begin-noncontinuous-differentstorage")
-        << QVector<Piece> {changePieceB, originalPieceB}
+        << QList<Piece> {changePieceB, originalPieceB}
         << 0
-        << QVector<Piece> {originalPieceA_}
-        << QVector<Piece> {originalPieceA_, changePieceB, originalPieceB};
+        << QList<Piece> {originalPieceA_}
+        << QList<Piece> {originalPieceA_, changePieceB, originalPieceB};
 
     QTest::newRow("one-to-two-begin-continuous-samestorage")
-        << QVector<Piece> {changePieceB, originalPieceB}
+        << QList<Piece> {changePieceB, originalPieceB}
         << 0
-        << QVector<Piece> {changePieceA}
-        << QVector<Piece> {changePieceAB, originalPieceB};
+        << QList<Piece> {changePieceA}
+        << QList<Piece> {changePieceAB, originalPieceB};
 
     QTest::newRow("one-to-two-begin-continuous-differentstorage")
-        << QVector<Piece> {changePieceB, originalPieceB}
+        << QList<Piece> {changePieceB, originalPieceB}
         << 0
-        << QVector<Piece> {originalPieceA}
-        << QVector<Piece> {originalPieceA, changePieceB, originalPieceB};
+        << QList<Piece> {originalPieceA}
+        << QList<Piece> {originalPieceA, changePieceB, originalPieceB};
 
     QTest::newRow("two-to-two-begin-noncontinuous-samestorage")
-        << QVector<Piece> {changePieceB, originalPieceC}
+        << QList<Piece> {changePieceB, originalPieceC}
         << 0
-        << QVector<Piece> {originalPieceB, changePieceA_}
-        << QVector<Piece> {originalPieceB, changePieceA_, changePieceB, originalPieceC};
+        << QList<Piece> {originalPieceB, changePieceA_}
+        << QList<Piece> {originalPieceB, changePieceA_, changePieceB, originalPieceC};
 
     QTest::newRow("two-to-two-begin-continuous-samestorage")
-        << QVector<Piece> {changePieceB, originalPieceC}
+        << QList<Piece> {changePieceB, originalPieceC}
         << 0
-        << QVector<Piece> {originalPieceB, changePieceA}
-        << QVector<Piece> {originalPieceB, changePieceAB, originalPieceC};
+        << QList<Piece> {originalPieceB, changePieceA}
+        << QList<Piece> {originalPieceB, changePieceAB, originalPieceC};
 
     QTest::newRow("empty-to-two-after-begin")
-        << QVector<Piece> {changePieceB, originalPieceC}
+        << QList<Piece> {changePieceB, originalPieceC}
         << 1
         << noPieces
-        << QVector<Piece> {changePieceB, originalPieceC};
+        << QList<Piece> {changePieceB, originalPieceC};
 
     QTest::newRow("one-to-two-after-begin-noncontinuous-samestorage")
-        << QVector<Piece> {changePieceB, originalPieceC}
+        << QList<Piece> {changePieceB, originalPieceC}
         << 1
-        << QVector<Piece> {changePieceA_}
-        << QVector<Piece> {changePieceB1, changePieceA_, changePiece_B, originalPieceC};
+        << QList<Piece> {changePieceA_}
+        << QList<Piece> {changePieceB1, changePieceA_, changePiece_B, originalPieceC};
 
     QTest::newRow("two-to-two-after-begin")
-        << QVector<Piece> {changePieceB, originalPieceC}
+        << QList<Piece> {changePieceB, originalPieceC}
         << 1
-        << QVector<Piece> {originalPieceB, changePieceA}
-        << QVector<Piece> {changePieceB1, originalPieceB, changePieceA, changePiece_B, originalPieceC};
+        << QList<Piece> {originalPieceB, changePieceA}
+        << QList<Piece> {changePieceB1, originalPieceB, changePieceA, changePiece_B, originalPieceC};
 
     QTest::newRow("one-to-two-middle-continuous-samestorage")
-        << QVector<Piece> {changePieceA, changePieceC}
+        << QList<Piece> {changePieceA, changePieceC}
         << Start
-        << QVector<Piece> {changePieceB}
-        << QVector<Piece> {changePieceABC};
+        << QList<Piece> {changePieceB}
+        << QList<Piece> {changePieceABC};
 
     QTest::newRow("one-to-two-middle-continuous-differentstorage")
-        << QVector<Piece> {changePieceA, changePieceC}
+        << QList<Piece> {changePieceA, changePieceC}
         << changePieceA.width()
-        << QVector<Piece> {originalPieceB}
-        << QVector<Piece> {changePieceA, originalPieceB, changePieceC};
+        << QList<Piece> {originalPieceB}
+        << QList<Piece> {changePieceA, originalPieceB, changePieceC};
 
     QTest::newRow("one-to-two-middle-first-continuous-samestorage")
-        << QVector<Piece> {changePieceA, changePiece_C}
+        << QList<Piece> {changePieceA, changePiece_C}
         << changePieceA.width()
-        << QVector<Piece> {changePieceB}
-        << QVector<Piece> {changePieceAB, changePiece_C};
+        << QList<Piece> {changePieceB}
+        << QList<Piece> {changePieceAB, changePiece_C};
 
     QTest::newRow("one-to-two-middle-second-continuous-samestorage")
-        << QVector<Piece> {changePieceA_, changePieceC}
+        << QList<Piece> {changePieceA_, changePieceC}
         << changePieceA_.width()
-        << QVector<Piece> {changePieceB}
-        << QVector<Piece> {changePieceA_, changePieceBC};
+        << QList<Piece> {changePieceB}
+        << QList<Piece> {changePieceA_, changePieceBC};
 
     QTest::newRow("two-to-two-middle-continuous-samestorage")
-        << QVector<Piece> {changePieceA, originalPieceC}
+        << QList<Piece> {changePieceA, originalPieceC}
         << changePieceA.width()
-        << QVector<Piece> {changePieceB, originalPieceB}
-        << QVector<Piece> {changePieceAB, originalPieceBC};
+        << QList<Piece> {changePieceB, originalPieceB}
+        << QList<Piece> {changePieceAB, originalPieceBC};
 
     QTest::newRow("two-to-two-middle-continuous-differentstorage")
-        << QVector<Piece> {changePieceA, originalPieceC}
+        << QList<Piece> {changePieceA, originalPieceC}
         << changePieceA.width()
-        << QVector<Piece> {originalPieceB, changePieceB}
-        << QVector<Piece> {changePieceA, originalPieceB, changePieceB, originalPieceC};
+        << QList<Piece> {originalPieceB, changePieceB}
+        << QList<Piece> {changePieceA, originalPieceB, changePieceB, originalPieceC};
 
     QTest::newRow("three-to-two-middle-continuous-samestorage")
-        << QVector<Piece> {changePieceA, originalPieceC}
+        << QList<Piece> {changePieceA, originalPieceC}
         << changePieceA.width()
-        << QVector<Piece> {changePieceB, originalPieceA_, originalPieceB}
-        << QVector<Piece> {changePieceAB, originalPieceA_, originalPieceBC};
+        << QList<Piece> {changePieceB, originalPieceA_, originalPieceB}
+        << QList<Piece> {changePieceAB, originalPieceA_, originalPieceBC};
 }
 
 void PieceTableTest::testInsertPieceList()
 {
-    QFETCH(const QVector<Piece>, initPieces);
+    QFETCH(const QList<Piece>, initPieces);
     QFETCH(const Address, insertDataOffset);
-    QFETCH(const QVector<Piece>, insertPieces);
-    QFETCH(const QVector<Piece>, expectedPieces);
+    QFETCH(const QList<Piece>, insertPieces);
+    QFETCH(const QList<Piece>, expectedPieces);
 
     PieceList initPieceList;
     for (const auto& piece : initPieces) {
@@ -939,10 +939,10 @@ void PieceTableTest::testInsertPieceList()
 
 void PieceTableTest::testRemove_data()
 {
-    QTest::addColumn<QVector<Piece>>("initPieces");
+    QTest::addColumn<QList<Piece>>("initPieces");
     QTest::addColumn<AddressRange>("removeRange");
-    QTest::addColumn<QVector<Piece>>("expectedRemovedPieces");
-    QTest::addColumn<QVector<Piece>>("expectedPieces");
+    QTest::addColumn<QList<Piece>>("expectedRemovedPieces");
+    QTest::addColumn<QList<Piece>>("expectedPieces");
 
     const Piece originalPieceA {0, BaseSize, Piece::OriginalStorage};
     const Piece originalPieceA1 {0, 1, Piece::OriginalStorage};
@@ -976,361 +976,361 @@ void PieceTableTest::testRemove_data()
 
     AddressRange removeRange = AddressRange(0, 0);
     QTest::newRow("one-at-begin-one-multi")
-        << QVector<Piece> {originalPieceA}
+        << QList<Piece> {originalPieceA}
         << removeRange
-        << QVector<Piece> {originalPieceA1}
-        << QVector<Piece> {originalPiece_A};
+        << QList<Piece> {originalPieceA1}
+        << QList<Piece> {originalPiece_A};
     removeRange = AddressRange(0, 1);
     QTest::newRow("multi-at-begin-one-multi")
-        << QVector<Piece> {originalPieceA}
+        << QList<Piece> {originalPieceA}
         << removeRange
-        << QVector<Piece> {originalPieceA12}
-        << QVector<Piece> {originalPiece__A};
+        << QList<Piece> {originalPieceA12}
+        << QList<Piece> {originalPiece__A};
     removeRange = AddressRange::fromWidth(BaseSize / 2, 1);
     QTest::newRow("one-at-middle-one-multi")
-        << QVector<Piece> {originalPieceA}
+        << QList<Piece> {originalPieceA}
         << removeRange
-        << QVector<Piece> {originalPiece1MA}
-        << QVector<Piece> {originalPieceAM, originalPiece_MA};
+        << QList<Piece> {originalPiece1MA}
+        << QList<Piece> {originalPieceAM, originalPiece_MA};
     removeRange = AddressRange::fromWidth(BaseSize / 2, 2);
     QTest::newRow("multi-at-middle-one-multi")
-        << QVector<Piece> {originalPieceA}
+        << QList<Piece> {originalPieceA}
         << removeRange
-        << QVector<Piece> {originalPiece12MA}
-        << QVector<Piece> {originalPieceAM, originalPiece__MA};
+        << QList<Piece> {originalPiece12MA}
+        << QList<Piece> {originalPieceAM, originalPiece__MA};
     removeRange = AddressRange(BaseSize - 1, BaseSize - 1);
     QTest::newRow("one-at-end-one-multi")
-        << QVector<Piece> {originalPieceA}
+        << QList<Piece> {originalPieceA}
         << removeRange
-        << QVector<Piece> {originalPiece1A}
-        << QVector<Piece> {originalPieceA_};
+        << QList<Piece> {originalPiece1A}
+        << QList<Piece> {originalPieceA_};
     removeRange = AddressRange(BaseSize - 2, BaseSize - 1);
     QTest::newRow("multi-at-end-one-multi")
-        << QVector<Piece> {originalPieceA}
+        << QList<Piece> {originalPieceA}
         << removeRange
-        << QVector<Piece> {originalPiece12A}
-        << QVector<Piece> {originalPieceA__};
+        << QList<Piece> {originalPiece12A}
+        << QList<Piece> {originalPieceA__};
     removeRange = AddressRange(0, 0);
     QTest::newRow("all-one-one")
-        << QVector<Piece> {originalPieceA1}
+        << QList<Piece> {originalPieceA1}
         << removeRange
-        << QVector<Piece> {originalPieceA1}
-        << QVector<Piece> {};
+        << QList<Piece> {originalPieceA1}
+        << QList<Piece> {};
     removeRange = AddressRange::fromWidth(BaseSize);
     QTest::newRow("all-one-multi")
-        << QVector<Piece> {originalPieceA}
+        << QList<Piece> {originalPieceA}
         << removeRange
-        << QVector<Piece> {originalPieceA}
-        << QVector<Piece>();
+        << QList<Piece> {originalPieceA}
+        << QList<Piece>();
 
     removeRange = AddressRange(0, 0);
     QTest::newRow("one-at-begin-first-two-multi")
-        << QVector<Piece> {originalPieceA, changePieceA}
+        << QList<Piece> {originalPieceA, changePieceA}
         << removeRange
-        << QVector<Piece> {originalPieceA1}
-        << QVector<Piece> {originalPiece_A, changePieceA};
+        << QList<Piece> {originalPieceA1}
+        << QList<Piece> {originalPiece_A, changePieceA};
     removeRange = AddressRange(0, 1);
     QTest::newRow("multi-at-begin-first-two-multi")
-        << QVector<Piece> {originalPieceA, changePieceA}
+        << QList<Piece> {originalPieceA, changePieceA}
         << removeRange
-        << QVector<Piece> {originalPieceA12}
-        << QVector<Piece> {originalPiece__A, changePieceA};
+        << QList<Piece> {originalPieceA12}
+        << QList<Piece> {originalPiece__A, changePieceA};
     removeRange = AddressRange::fromWidth(BaseSize / 2, 1);
     QTest::newRow("one-at-middle-first-two-multi")
-        << QVector<Piece> {originalPieceA, changePieceA}
+        << QList<Piece> {originalPieceA, changePieceA}
         << removeRange
-        << QVector<Piece> {originalPiece1MA}
-        << QVector<Piece> {originalPieceAM, originalPiece_MA, changePieceA};
+        << QList<Piece> {originalPiece1MA}
+        << QList<Piece> {originalPieceAM, originalPiece_MA, changePieceA};
     removeRange = AddressRange::fromWidth(BaseSize / 2, 2);
     QTest::newRow("multi-at-middle-first-two-multi")
-        << QVector<Piece> {originalPieceA, changePieceA}
+        << QList<Piece> {originalPieceA, changePieceA}
         << removeRange
-        << QVector<Piece> {originalPiece12MA}
-        << QVector<Piece> {originalPieceAM, originalPiece__MA, changePieceA};
+        << QList<Piece> {originalPiece12MA}
+        << QList<Piece> {originalPieceAM, originalPiece__MA, changePieceA};
     removeRange = AddressRange(BaseSize - 1, BaseSize - 1);
     QTest::newRow("one-at-end-first-two-multi-noncontinuous")
-        << QVector<Piece> {originalPieceA, changePieceA}
+        << QList<Piece> {originalPieceA, changePieceA}
         << removeRange
-        << QVector<Piece> {originalPiece1A}
-        << QVector<Piece> {originalPieceA_, changePieceA};
+        << QList<Piece> {originalPiece1A}
+        << QList<Piece> {originalPieceA_, changePieceA};
     removeRange = AddressRange(BaseSize - 2, BaseSize - 1);
     QTest::newRow("multi-at-end-first-two-multi-noncontinuous")
-        << QVector<Piece> {originalPieceA, changePieceA}
+        << QList<Piece> {originalPieceA, changePieceA}
         << removeRange
-        << QVector<Piece> {originalPiece12A}
-        << QVector<Piece> {originalPieceA__, changePieceA};
+        << QList<Piece> {originalPiece12A}
+        << QList<Piece> {originalPieceA__, changePieceA};
     removeRange = AddressRange(0, 0);
     QTest::newRow("all-first-two-one")
-        << QVector<Piece> {originalPieceA1, changePieceA}
+        << QList<Piece> {originalPieceA1, changePieceA}
         << removeRange
-        << QVector<Piece> {originalPieceA1}
-        << QVector<Piece> {changePieceA};
+        << QList<Piece> {originalPieceA1}
+        << QList<Piece> {changePieceA};
     removeRange = AddressRange::fromWidth(BaseSize);
     QTest::newRow("all-first-two-multi")
-        << QVector<Piece> {originalPieceA, changePieceA}
+        << QList<Piece> {originalPieceA, changePieceA}
         << removeRange
-        << QVector<Piece> {originalPieceA}
-        << QVector<Piece> {changePieceA};
+        << QList<Piece> {originalPieceA}
+        << QList<Piece> {changePieceA};
     removeRange = AddressRange::fromWidth(0, BaseSize + 1);
     QTest::newRow("all-first-one-at-begin-second-two-multi")
-        << QVector<Piece> {originalPieceA, changePieceA}
+        << QList<Piece> {originalPieceA, changePieceA}
         << removeRange
-        << QVector<Piece> {originalPieceA, changePieceA1}
-        << QVector<Piece> {changePiece_A};
+        << QList<Piece> {originalPieceA, changePieceA1}
+        << QList<Piece> {changePiece_A};
     removeRange = AddressRange::fromWidth(0, BaseSize + 2);
     QTest::newRow("all-first-multi-at-begin-second-two-multi")
-        << QVector<Piece> {originalPieceA, changePieceA}
+        << QList<Piece> {originalPieceA, changePieceA}
         << removeRange
-        << QVector<Piece> {originalPieceA, changePieceA12}
-        << QVector<Piece> {changePiece__A};
+        << QList<Piece> {originalPieceA, changePieceA12}
+        << QList<Piece> {changePiece__A};
 
     removeRange = AddressRange::fromWidth(BaseSize, 1);
     QTest::newRow("one-at-begin-second-two-multi-noncontinuous")
-        << QVector<Piece> {changePieceA, originalPieceA}
+        << QList<Piece> {changePieceA, originalPieceA}
         << removeRange
-        << QVector<Piece> {originalPieceA1}
-        << QVector<Piece> {changePieceA, originalPiece_A};
+        << QList<Piece> {originalPieceA1}
+        << QList<Piece> {changePieceA, originalPiece_A};
     removeRange = AddressRange::fromWidth(BaseSize, 2);
     QTest::newRow("multi-at-begin-second-two-multi-noncontinuous")
-        << QVector<Piece> {changePieceA, originalPieceA}
+        << QList<Piece> {changePieceA, originalPieceA}
         << removeRange
-        << QVector<Piece> {originalPieceA12}
-        << QVector<Piece> {changePieceA, originalPiece__A};
+        << QList<Piece> {originalPieceA12}
+        << QList<Piece> {changePieceA, originalPiece__A};
     removeRange = AddressRange::fromWidth(BaseSize + BaseSize / 2, 1);
     QTest::newRow("one-at-middle-second-two-multi")
-        << QVector<Piece> {changePieceA, originalPieceA}
+        << QList<Piece> {changePieceA, originalPieceA}
         << removeRange
-        << QVector<Piece> {originalPiece1MA}
-        << QVector<Piece> {changePieceA, originalPieceAM, originalPiece_MA};
+        << QList<Piece> {originalPiece1MA}
+        << QList<Piece> {changePieceA, originalPieceAM, originalPiece_MA};
     removeRange = AddressRange::fromWidth(BaseSize + BaseSize / 2, 2);
     QTest::newRow("multi-at-middle-second-two-multi")
-        << QVector<Piece> {changePieceA, originalPieceA}
+        << QList<Piece> {changePieceA, originalPieceA}
         << removeRange
-        << QVector<Piece> {originalPiece12MA}
-        << QVector<Piece> {changePieceA, originalPieceAM, originalPiece__MA};
+        << QList<Piece> {originalPiece12MA}
+        << QList<Piece> {changePieceA, originalPieceAM, originalPiece__MA};
     removeRange = AddressRange::fromWidth(2 * BaseSize - 1, 1);
     QTest::newRow("one-at-end-second-two-multi")
-        << QVector<Piece> {changePieceA, originalPieceA}
+        << QList<Piece> {changePieceA, originalPieceA}
         << removeRange
-        << QVector<Piece> {originalPiece1A}
-        << QVector<Piece> {changePieceA, originalPieceA_};
+        << QList<Piece> {originalPiece1A}
+        << QList<Piece> {changePieceA, originalPieceA_};
     removeRange = AddressRange::fromWidth(2 * BaseSize - 2, 2);
     QTest::newRow("multi-at-end-second-two-multi")
-        << QVector<Piece> {changePieceA, originalPieceA}
+        << QList<Piece> {changePieceA, originalPieceA}
         << removeRange
-        << QVector<Piece> {originalPiece12A}
-        << QVector<Piece> {changePieceA, originalPieceA__};
+        << QList<Piece> {originalPiece12A}
+        << QList<Piece> {changePieceA, originalPieceA__};
     removeRange = AddressRange::fromWidth(BaseSize, 1);
     QTest::newRow("all-second-two-one")
-        << QVector<Piece> {changePieceA, originalPieceA1}
+        << QList<Piece> {changePieceA, originalPieceA1}
         << removeRange
-        << QVector<Piece> {originalPieceA1}
-        << QVector<Piece> {changePieceA};
+        << QList<Piece> {originalPieceA1}
+        << QList<Piece> {changePieceA};
     removeRange = AddressRange::fromWidth(BaseSize, BaseSize);
     QTest::newRow("all-second-two-multi")
-        << QVector<Piece> {changePieceA, originalPieceA}
+        << QList<Piece> {changePieceA, originalPieceA}
         << removeRange
-        << QVector<Piece> {originalPieceA}
-        << QVector<Piece> {changePieceA};
+        << QList<Piece> {originalPieceA}
+        << QList<Piece> {changePieceA};
     removeRange = AddressRange::fromWidth(BaseSize - 1, BaseSize + 1);
     QTest::newRow("all-second-one-at-end-first-two-multi")
-        << QVector<Piece> {changePieceA, originalPieceA}
+        << QList<Piece> {changePieceA, originalPieceA}
         << removeRange
-        << QVector<Piece> {changePiece1A, originalPieceA}
-        << QVector<Piece> {changePieceA_};
+        << QList<Piece> {changePiece1A, originalPieceA}
+        << QList<Piece> {changePieceA_};
     removeRange = AddressRange::fromWidth(BaseSize - 2, BaseSize + 2);
     QTest::newRow("all-second-multi-at-end-first-two-multi")
-        << QVector<Piece> {changePieceA, originalPieceA}
+        << QList<Piece> {changePieceA, originalPieceA}
         << removeRange
-        << QVector<Piece> {changePiece12A, originalPieceA}
-        << QVector<Piece> {changePieceA__};
+        << QList<Piece> {changePiece12A, originalPieceA}
+        << QList<Piece> {changePieceA__};
 
     removeRange = AddressRange::fromWidth(BaseSize - 1, 2);
     QTest::newRow("one-at-end-first-one-at-begin-second-two-multi")
-        << QVector<Piece> {changePieceA, originalPieceA}
+        << QList<Piece> {changePieceA, originalPieceA}
         << removeRange
-        << QVector<Piece> {changePiece1A, originalPieceA1}
-        << QVector<Piece> {changePieceA_, originalPiece_A};
+        << QList<Piece> {changePiece1A, originalPieceA1}
+        << QList<Piece> {changePieceA_, originalPiece_A};
     removeRange = AddressRange::fromWidth(BaseSize - 2, 4);
     QTest::newRow("multi-at-end-first-multi-at-begin-second-two-multi")
-        << QVector<Piece> {changePieceA, originalPieceA}
+        << QList<Piece> {changePieceA, originalPieceA}
         << removeRange
-        << QVector<Piece> {changePiece12A, originalPieceA12}
-        << QVector<Piece> {changePieceA__, originalPiece__A};
+        << QList<Piece> {changePiece12A, originalPieceA12}
+        << QList<Piece> {changePieceA__, originalPiece__A};
     removeRange = AddressRange::fromWidth(0, 2);
     QTest::newRow("all-two-one")
-        << QVector<Piece> {changePieceA1, originalPieceA1}
+        << QList<Piece> {changePieceA1, originalPieceA1}
         << removeRange
-        << QVector<Piece> {changePieceA1, originalPieceA1}
-        << QVector<Piece> {};
+        << QList<Piece> {changePieceA1, originalPieceA1}
+        << QList<Piece> {};
     removeRange = AddressRange::fromWidth(0, 2 * BaseSize);
     QTest::newRow("all-two-multi")
-        << QVector<Piece> {changePieceA, originalPieceA}
+        << QList<Piece> {changePieceA, originalPieceA}
         << removeRange
-        << QVector<Piece> {changePieceA, originalPieceA}
-        << QVector<Piece> {};
+        << QList<Piece> {changePieceA, originalPieceA}
+        << QList<Piece> {};
 
     removeRange = AddressRange::fromWidth(2 * BaseSize, 1);
     QTest::newRow("one-at-begin-third-five-multi-noncontinuous")
-        << QVector<Piece> {changePieceE, changePieceD, originalPieceA, changePieceB, changePieceA}
+        << QList<Piece> {changePieceE, changePieceD, originalPieceA, changePieceB, changePieceA}
         << removeRange
-        << QVector<Piece> {originalPieceA1}
-        << QVector<Piece> {changePieceE, changePieceD, originalPiece_A, changePieceB, changePieceA};
+        << QList<Piece> {originalPieceA1}
+        << QList<Piece> {changePieceE, changePieceD, originalPiece_A, changePieceB, changePieceA};
     removeRange = AddressRange::fromWidth(2 * BaseSize, 2);
     QTest::newRow("multi-at-begin-third-five-multi-noncontinuous")
-        << QVector<Piece> {changePieceE, changePieceD, originalPieceA, changePieceB, changePieceA}
+        << QList<Piece> {changePieceE, changePieceD, originalPieceA, changePieceB, changePieceA}
         << removeRange
-        << QVector<Piece> {originalPieceA12}
-        << QVector<Piece> {changePieceE, changePieceD, originalPiece__A, changePieceB, changePieceA};
+        << QList<Piece> {originalPieceA12}
+        << QList<Piece> {changePieceE, changePieceD, originalPiece__A, changePieceB, changePieceA};
     removeRange = AddressRange::fromWidth(2 * BaseSize + BaseSize / 2, 1);
     QTest::newRow("one-at-middle-third-five-multi")
-        << QVector<Piece> {changePieceE, changePieceD, originalPieceA, changePieceB, changePieceA}
+        << QList<Piece> {changePieceE, changePieceD, originalPieceA, changePieceB, changePieceA}
         << removeRange
-        << QVector<Piece> {originalPiece1MA}
-        << QVector<Piece> {changePieceE, changePieceD, originalPieceAM, originalPiece_MA, changePieceB, changePieceA};
+        << QList<Piece> {originalPiece1MA}
+        << QList<Piece> {changePieceE, changePieceD, originalPieceAM, originalPiece_MA, changePieceB, changePieceA};
     removeRange = AddressRange::fromWidth(2 * BaseSize + BaseSize / 2, 2);
     QTest::newRow("multi-at-middle-third-five-multi")
-        << QVector<Piece> {changePieceE, changePieceD, originalPieceA, changePieceB, changePieceA}
+        << QList<Piece> {changePieceE, changePieceD, originalPieceA, changePieceB, changePieceA}
         << removeRange
-        << QVector<Piece> {originalPiece12MA}
-        << QVector<Piece> {changePieceE, changePieceD, originalPieceAM, originalPiece__MA, changePieceB, changePieceA};
+        << QList<Piece> {originalPiece12MA}
+        << QList<Piece> {changePieceE, changePieceD, originalPieceAM, originalPiece__MA, changePieceB, changePieceA};
     removeRange = AddressRange::fromWidth(3 * BaseSize - 1, 1);
     QTest::newRow("one-at-end-third-five-multi")
-        << QVector<Piece> {changePieceE, changePieceD, originalPieceA, changePieceB, changePieceA}
+        << QList<Piece> {changePieceE, changePieceD, originalPieceA, changePieceB, changePieceA}
         << removeRange
-        << QVector<Piece> {originalPiece1A}
-        << QVector<Piece> {changePieceE, changePieceD, originalPieceA_, changePieceB, changePieceA};
+        << QList<Piece> {originalPiece1A}
+        << QList<Piece> {changePieceE, changePieceD, originalPieceA_, changePieceB, changePieceA};
     removeRange = AddressRange::fromWidth(3 * BaseSize - 2, 2);
     QTest::newRow("multi-at-end-third-five-multi")
-        << QVector<Piece> {changePieceE, changePieceD, originalPieceA, changePieceB, changePieceA}
+        << QList<Piece> {changePieceE, changePieceD, originalPieceA, changePieceB, changePieceA}
         << removeRange
-        << QVector<Piece> {originalPiece12A}
-        << QVector<Piece> {changePieceE, changePieceD, originalPieceA__, changePieceB, changePieceA};
+        << QList<Piece> {originalPiece12A}
+        << QList<Piece> {changePieceE, changePieceD, originalPieceA__, changePieceB, changePieceA};
     removeRange = AddressRange::fromWidth(2 * BaseSize, 1);
     QTest::newRow("all-third-five-one-noncontinuous")
-        << QVector<Piece> {changePieceE, changePieceD, originalPieceA1, changePieceB, changePieceA}
+        << QList<Piece> {changePieceE, changePieceD, originalPieceA1, changePieceB, changePieceA}
         << removeRange
-        << QVector<Piece> {originalPieceA1}
-        << QVector<Piece> {changePieceE, changePieceD, changePieceB, changePieceA};
+        << QList<Piece> {originalPieceA1}
+        << QList<Piece> {changePieceE, changePieceD, changePieceB, changePieceA};
     removeRange = AddressRange::fromWidth(2 * BaseSize, BaseSize);
     QTest::newRow("all-third-five-multi-noncontinuous")
-        << QVector<Piece> {changePieceE, changePieceD, originalPieceA, changePieceB, changePieceA}
+        << QList<Piece> {changePieceE, changePieceD, originalPieceA, changePieceB, changePieceA}
         << removeRange
-        << QVector<Piece> {originalPieceA}
-        << QVector<Piece> {changePieceE, changePieceD, changePieceB, changePieceA};
+        << QList<Piece> {originalPieceA}
+        << QList<Piece> {changePieceE, changePieceD, changePieceB, changePieceA};
     removeRange = AddressRange::fromWidth(2 * BaseSize, 1);
     QTest::newRow("all-third-five-one-continuous")
-        << QVector<Piece> {changePieceE, changePieceB, originalPieceA1, changePieceC, changePieceA}
+        << QList<Piece> {changePieceE, changePieceB, originalPieceA1, changePieceC, changePieceA}
         << removeRange
-        << QVector<Piece> {originalPieceA1}
-        << QVector<Piece> {changePieceE, changePieceBC, changePieceA};
+        << QList<Piece> {originalPieceA1}
+        << QList<Piece> {changePieceE, changePieceBC, changePieceA};
     removeRange = AddressRange::fromWidth(2 * BaseSize, BaseSize);
     QTest::newRow("all-third-five-multi-noncontinuous")
-        << QVector<Piece> {changePieceE, changePieceB, originalPieceA, changePieceC, changePieceA}
+        << QList<Piece> {changePieceE, changePieceB, originalPieceA, changePieceC, changePieceA}
         << removeRange
-        << QVector<Piece> {originalPieceA}
-        << QVector<Piece> {changePieceE, changePieceBC, changePieceA};
+        << QList<Piece> {originalPieceA}
+        << QList<Piece> {changePieceE, changePieceBC, changePieceA};
 
     removeRange = AddressRange::fromWidth(2 * BaseSize, BaseSize + 1);
     QTest::newRow("all-third-one-at-begin-fourth-five-multi")
-        << QVector<Piece> {changePieceE, changePieceD, originalPieceA, changePieceA, changePieceC}
+        << QList<Piece> {changePieceE, changePieceD, originalPieceA, changePieceA, changePieceC}
         << removeRange
-        << QVector<Piece> {originalPieceA, changePieceA1}
-        << QVector<Piece> {changePieceE, changePieceD, changePiece_A, changePieceC};
+        << QList<Piece> {originalPieceA, changePieceA1}
+        << QList<Piece> {changePieceE, changePieceD, changePiece_A, changePieceC};
     removeRange = AddressRange::fromWidth(2 * BaseSize, BaseSize + 2);
     QTest::newRow("all-third-multi-at-begin-fourth-five-multi")
-        << QVector<Piece> {changePieceE, changePieceD, originalPieceA, changePieceA, changePieceC}
+        << QList<Piece> {changePieceE, changePieceD, originalPieceA, changePieceA, changePieceC}
         << removeRange
-        << QVector<Piece> {originalPieceA, changePieceA12}
-        << QVector<Piece> {changePieceE, changePieceD, changePiece__A, changePieceC};
+        << QList<Piece> {originalPieceA, changePieceA12}
+        << QList<Piece> {changePieceE, changePieceD, changePiece__A, changePieceC};
     removeRange = AddressRange::fromWidth(2 * BaseSize - 1, BaseSize + 1);
     QTest::newRow("all-third-one-at-end-second-five-multi")
-        << QVector<Piece> {changePieceE, changePieceA, originalPieceA, changePieceD, changePieceC}
+        << QList<Piece> {changePieceE, changePieceA, originalPieceA, changePieceD, changePieceC}
         << removeRange
-        << QVector<Piece> {changePiece1A, originalPieceA}
-        << QVector<Piece> {changePieceE, changePieceA_, changePieceD, changePieceC};
+        << QList<Piece> {changePiece1A, originalPieceA}
+        << QList<Piece> {changePieceE, changePieceA_, changePieceD, changePieceC};
     removeRange = AddressRange::fromWidth(2 * BaseSize - 2, BaseSize + 2);
     QTest::newRow("all-third-multi-at-end-second-five-multi")
-        << QVector<Piece> {changePieceE, changePieceA, originalPieceA, changePieceD, changePieceC}
+        << QList<Piece> {changePieceE, changePieceA, originalPieceA, changePieceD, changePieceC}
         << removeRange
-        << QVector<Piece> {changePiece12A, originalPieceA}
-        << QVector<Piece> {changePieceE, changePieceA__, changePieceD, changePieceC};
+        << QList<Piece> {changePiece12A, originalPieceA}
+        << QList<Piece> {changePieceE, changePieceA__, changePieceD, changePieceC};
     removeRange = AddressRange::fromWidth(2 * BaseSize - 1, BaseSize + 2);
     QTest::newRow("all-third-one-at-end-second-one-at-begin-fourth-five-multi")
-        << QVector<Piece> {changePieceE, changePieceA, changePieceD, originalPieceA, changePieceC}
+        << QList<Piece> {changePieceE, changePieceA, changePieceD, originalPieceA, changePieceC}
         << removeRange
-        << QVector<Piece> {changePiece1A, changePieceD, originalPieceA1}
-        << QVector<Piece> {changePieceE, changePieceA_, originalPiece_A, changePieceC};
+        << QList<Piece> {changePiece1A, changePieceD, originalPieceA1}
+        << QList<Piece> {changePieceE, changePieceA_, originalPiece_A, changePieceC};
     removeRange = AddressRange::fromWidth(2 * BaseSize - 2, BaseSize + 4);
     QTest::newRow("all-third-multi-at-end-second-multi-at-begin-fourth-five-multi")
-        << QVector<Piece> {changePieceE, changePieceA, changePieceD, originalPieceA, changePieceC}
+        << QList<Piece> {changePieceE, changePieceA, changePieceD, originalPieceA, changePieceC}
         << removeRange
-        << QVector<Piece> {changePiece12A, changePieceD, originalPieceA12}
-        << QVector<Piece> {changePieceE, changePieceA__, originalPiece__A, changePieceC};
+        << QList<Piece> {changePiece12A, changePieceD, originalPieceA12}
+        << QList<Piece> {changePieceE, changePieceA__, originalPiece__A, changePieceC};
     removeRange = AddressRange::fromWidth(BaseSize, 3 * BaseSize);
     QTest::newRow("all-second-third-fourth-five-multi-noncontinuous")
-        << QVector<Piece> {changePieceE, changePieceA, changePieceD, originalPieceA, changePieceC}
+        << QList<Piece> {changePieceE, changePieceA, changePieceD, originalPieceA, changePieceC}
         << removeRange
-        << QVector<Piece> {changePieceA, changePieceD, originalPieceA}
-        << QVector<Piece> {changePieceE, changePieceC};
+        << QList<Piece> {changePieceA, changePieceD, originalPieceA}
+        << QList<Piece> {changePieceE, changePieceC};
     removeRange = AddressRange::fromWidth(BaseSize, 3 * BaseSize);
     QTest::newRow("all-second-third-fourth-five-multi-continuous")
-        << QVector<Piece> {changePieceB, changePieceA, changePieceD, originalPieceA, changePieceC}
+        << QList<Piece> {changePieceB, changePieceA, changePieceD, originalPieceA, changePieceC}
         << removeRange
-        << QVector<Piece> {changePieceA, changePieceD, originalPieceA}
-        << QVector<Piece> {changePieceBC};
+        << QList<Piece> {changePieceA, changePieceD, originalPieceA}
+        << QList<Piece> {changePieceBC};
 
     removeRange = AddressRange::fromWidth(0, 2);
     QTest::newRow("multi-at-begin-first-five-multi")
-        << QVector<Piece> {originalPieceA, changePieceD, changePieceC, changePieceB, changePieceA}
+        << QList<Piece> {originalPieceA, changePieceD, changePieceC, changePieceB, changePieceA}
         << removeRange
-        << QVector<Piece> {originalPieceA12}
-        << QVector<Piece> {originalPiece__A, changePieceD, changePieceC, changePieceB, changePieceA};
+        << QList<Piece> {originalPieceA12}
+        << QList<Piece> {originalPiece__A, changePieceD, changePieceC, changePieceB, changePieceA};
     removeRange = AddressRange::fromWidth(BaseSize);
     QTest::newRow("all-first-five-multi")
-        << QVector<Piece> {changePieceE, changePieceD, changePieceC, changePieceB, changePieceA}
+        << QList<Piece> {changePieceE, changePieceD, changePieceC, changePieceB, changePieceA}
         << removeRange
-        << QVector<Piece> {changePieceE}
-        << QVector<Piece> {changePieceD, changePieceC, changePieceB, changePieceA};
+        << QList<Piece> {changePieceE}
+        << QList<Piece> {changePieceD, changePieceC, changePieceB, changePieceA};
     removeRange = AddressRange::fromWidth(0, BaseSize + 2);
     QTest::newRow("all-first-multi-at-begin-second-five-multi")
-        << QVector<Piece> {changePieceD, originalPieceA, changePieceC, changePieceB, changePieceA}
+        << QList<Piece> {changePieceD, originalPieceA, changePieceC, changePieceB, changePieceA}
         << removeRange
-        << QVector<Piece> {changePieceD, originalPieceA12}
-        << QVector<Piece> {originalPiece__A, changePieceC, changePieceB, changePieceA};
+        << QList<Piece> {changePieceD, originalPieceA12}
+        << QList<Piece> {originalPiece__A, changePieceC, changePieceB, changePieceA};
     removeRange = AddressRange::fromWidth(5 * BaseSize - 2, 2);
     QTest::newRow("multi-at-end-last-five-multi")
-        << QVector<Piece> {changePieceE, changePieceD, changePieceC, changePieceB, originalPieceA}
+        << QList<Piece> {changePieceE, changePieceD, changePieceC, changePieceB, originalPieceA}
         << removeRange
-        << QVector<Piece> {originalPiece12A}
-        << QVector<Piece> {changePieceE, changePieceD, changePieceC, changePieceB, originalPieceA__};
+        << QList<Piece> {originalPiece12A}
+        << QList<Piece> {changePieceE, changePieceD, changePieceC, changePieceB, originalPieceA__};
     removeRange = AddressRange::fromWidth(4 * BaseSize, BaseSize);
     QTest::newRow("all-last-five-multi")
-        << QVector<Piece> {changePieceE, changePieceD, changePieceC, changePieceB, changePieceA}
+        << QList<Piece> {changePieceE, changePieceD, changePieceC, changePieceB, changePieceA}
         << removeRange
-        << QVector<Piece> {changePieceA}
-        << QVector<Piece> {changePieceE, changePieceD, changePieceC, changePieceB};
+        << QList<Piece> {changePieceA}
+        << QList<Piece> {changePieceE, changePieceD, changePieceC, changePieceB};
     removeRange = AddressRange::fromWidth(4 * BaseSize - 2, BaseSize + 2);
     QTest::newRow("all-last-multi-at-end-fourth-five-multi")
-        << QVector<Piece> {changePieceE, changePieceD, changePieceC, originalPieceA, changePieceA}
+        << QList<Piece> {changePieceE, changePieceD, changePieceC, originalPieceA, changePieceA}
         << removeRange
-        << QVector<Piece> {originalPiece12A, changePieceA}
-        << QVector<Piece> {changePieceE, changePieceD, changePieceC, originalPieceA__};
+        << QList<Piece> {originalPiece12A, changePieceA}
+        << QList<Piece> {changePieceE, changePieceD, changePieceC, originalPieceA__};
 
     removeRange = AddressRange::fromWidth(0, 5 * BaseSize);
     QTest::newRow("all-five-multi")
-        << QVector<Piece> {changePieceE, changePieceD, originalPieceA, changePieceB, changePieceA}
+        << QList<Piece> {changePieceE, changePieceD, originalPieceA, changePieceB, changePieceA}
         << removeRange
-        << QVector<Piece> {changePieceE, changePieceD, originalPieceA, changePieceB, changePieceA}
-        << QVector<Piece> {};
+        << QList<Piece> {changePieceE, changePieceD, originalPieceA, changePieceB, changePieceA}
+        << QList<Piece> {};
 }
 
 void PieceTableTest::testRemove()
 {
-    QFETCH(const QVector<Piece>, initPieces);
+    QFETCH(const QList<Piece>, initPieces);
     QFETCH(const AddressRange, removeRange);
-    QFETCH(const QVector<Piece>, expectedRemovedPieces);
-    QFETCH(const QVector<Piece>, expectedPieces);
+    QFETCH(const QList<Piece>, expectedRemovedPieces);
+    QFETCH(const QList<Piece>, expectedPieces);
 
     PieceList initPieceList;
     for (const auto& piece : initPieces) {
@@ -1352,25 +1352,25 @@ void PieceTableTest::testSwap_data()
 {
     QTest::addColumn<Address>("firstStart");
     QTest::addColumn<AddressRange>("secondRange");
-    QTest::addColumn<QVector<Piece>>("expectedPieces");
+    QTest::addColumn<QList<Piece>>("expectedPieces");
 
     AddressRange moveRange = AddressRange::fromWidth(End + 1, BaseSize - (End + 1));
     QTest::newRow("moving-end-at-begin")
         << 0 << moveRange
-        << QVector<Piece> {
+        << QList<Piece> {
             {moveRange, Piece::OriginalStorage},
             {0, moveRange.start(), Piece::OriginalStorage}};
     moveRange = AddressRange::fromWidth(End + 1, BaseSize - (End + 1));
     QTest::newRow("moving-end-at-mid")
         << Start << moveRange
-        << QVector<Piece> {
+        << QList<Piece> {
             {0, Start, Piece::OriginalStorage},
             {moveRange, Piece::OriginalStorage},
             {Start, Width, Piece::OriginalStorage}};
     moveRange = AddressRange::fromWidth(Start, Width);
     QTest::newRow("moving-mid-at-begin")
         << 0 << moveRange
-        << QVector<Piece> {
+        << QList<Piece> {
             {moveRange, Piece::OriginalStorage},
             {0, moveRange.start(), Piece::OriginalStorage},
             {moveRange.nextBehindEnd(), BaseSize - moveRange.nextBehindEnd(), Piece::OriginalStorage}};
@@ -1378,7 +1378,7 @@ void PieceTableTest::testSwap_data()
     moveRange = AddressRange::fromWidth(mid, End - mid + 1);
     QTest::newRow("moving-mid-at-mid")
         << Start << moveRange
-        << QVector<Piece> {
+        << QList<Piece> {
             {0, Start, Piece::OriginalStorage},
             {moveRange, Piece::OriginalStorage},
             {Start,  Width - moveRange.width(), Piece::OriginalStorage},
@@ -1389,7 +1389,7 @@ void PieceTableTest::testSwap()
 {
     QFETCH(const Address, firstStart);
     QFETCH(const AddressRange, secondRange);
-    QFETCH(const QVector<Piece>, expectedPieces);
+    QFETCH(const QList<Piece>, expectedPieces);
 
     PieceTable pieceTable;
     pieceTable.init(BaseSize);
@@ -1405,12 +1405,12 @@ void PieceTableTest::testSwap()
 
 void PieceTableTest::testReplaceOne_data()
 {
-    QTest::addColumn<QVector<Piece>>("initPieces");
+    QTest::addColumn<QList<Piece>>("initPieces");
     QTest::addColumn<Address>("replaceDataOffset");
     QTest::addColumn<Address>("replaceStorageOffset");
     QTest::addColumn<Piece::StorageType>("replaceStorageId");
     QTest::addColumn<Piece>("expectedReplacedPiece");
-    QTest::addColumn<QVector<Piece>>("expectedPieces");
+    QTest::addColumn<QList<Piece>>("expectedPieces");
 
     const Piece changePieceA1 {0, 1, Piece::ChangeStorage};
     const Piece changePieceA2 {1, 1, Piece::ChangeStorage};
@@ -1433,92 +1433,92 @@ void PieceTableTest::testReplaceOne_data()
     const Piece originalPiece_MB {Start + Width / 2 + 1, Width / 2, Piece::OriginalStorage};
 
     QTest::newRow("one-with-one-only")
-        << QVector<Piece> {originalPieceB1}
+        << QList<Piece> {originalPieceB1}
         << 0 << Start + 1 << Piece::ChangeStorage
         << originalPieceB1
-        << QVector<Piece> {changePieceB2};
+        << QList<Piece> {changePieceB2};
 
     QTest::newRow("one-with-one-first-continuous")
-        << QVector<Piece> {originalPieceB1, changePieceA2}
+        << QList<Piece> {originalPieceB1, changePieceA2}
         << 0 << 0 << Piece::ChangeStorage
         << originalPieceB1
-        << QVector<Piece> {changePieceA12};
+        << QList<Piece> {changePieceA12};
 
     QTest::newRow("one-with-one-first-noncontinuous")
-        << QVector<Piece> {originalPieceB1, changePieceA1}
+        << QList<Piece> {originalPieceB1, changePieceA1}
         << 0 << Start + 1 << Piece::ChangeStorage
         << originalPieceB1
-        << QVector<Piece> {changePieceB2, changePieceA1};
+        << QList<Piece> {changePieceB2, changePieceA1};
 
     QTest::newRow("one-with-one-second-continuous")
-        << QVector<Piece> {changePieceA1, originalPieceB1}
+        << QList<Piece> {changePieceA1, originalPieceB1}
         << 1 << 1 << Piece::ChangeStorage
         << originalPieceB1
-        << QVector<Piece> {changePieceA12};
+        << QList<Piece> {changePieceA12};
 
     QTest::newRow("one-with-one-second-noncontinuous")
-        << QVector<Piece> {changePieceA1, originalPieceB1}
+        << QList<Piece> {changePieceA1, originalPieceB1}
         << 1 << Start + 1 << Piece::ChangeStorage
         << originalPieceB1
-        << QVector<Piece> {changePieceA1, changePieceB2};
+        << QList<Piece> {changePieceA1, changePieceB2};
 
     QTest::newRow("one-with-one-three-continuous")
-        << QVector<Piece> {changePieceA1, originalPieceB1, changePieceA3}
+        << QList<Piece> {changePieceA1, originalPieceB1, changePieceA3}
         << 1 << 1 << Piece::ChangeStorage
         << originalPieceB1
-        << QVector<Piece> {changePieceA123};
+        << QList<Piece> {changePieceA123};
 
     QTest::newRow("one-with-begin-multi")
-        << QVector<Piece> {originalPieceB}
+        << QList<Piece> {originalPieceB}
         << 0 << Start + 1 << Piece::ChangeStorage
         << originalPieceB1
-        << QVector<Piece> {changePieceB2, originalPiece_B};
+        << QList<Piece> {changePieceB2, originalPiece_B};
 
     QTest::newRow("one-with-middle-multi")
-        << QVector<Piece> {originalPieceB}
+        << QList<Piece> {originalPieceB}
         << Width / 2 << Start + 1 << Piece::ChangeStorage
         << Piece {Start + Width / 2, 1, Piece::OriginalStorage}
-        << QVector<Piece> {originalPieceBM, changePieceB2, originalPiece_MB};
+        << QList<Piece> {originalPieceBM, changePieceB2, originalPiece_MB};
 
     QTest::newRow("one-with-end-multi")
-        << QVector<Piece> {originalPieceB}
+        << QList<Piece> {originalPieceB}
         << Width - 1 << Start + 1 << Piece::ChangeStorage
         << originalPiece1B
-        << QVector<Piece> {originalPieceB_, changePieceB2};
+        << QList<Piece> {originalPieceB_, changePieceB2};
 
     QTest::newRow("one-with-end-multi-next-continuous")
-        << QVector<Piece> {originalPieceB, changePiece_B}
+        << QList<Piece> {originalPieceB, changePiece_B}
         << Width - 1 << Start << Piece::ChangeStorage
         << originalPiece1B
-        << QVector<Piece> {originalPieceB_, changePieceB};
+        << QList<Piece> {originalPieceB_, changePieceB};
 
     QTest::newRow("one-with-end-multi-next-noncontinuous")
-        << QVector<Piece> {originalPieceB, changePiece__B}
+        << QList<Piece> {originalPieceB, changePiece__B}
         << Width - 1 << Start << Piece::ChangeStorage
         << originalPiece1B
-        << QVector<Piece> {originalPieceB_, changePieceB1, changePiece__B};
+        << QList<Piece> {originalPieceB_, changePieceB1, changePiece__B};
 
     QTest::newRow("one-with-begin-multi-previous-continuous")
-        << QVector<Piece> {originalPieceB_, changePieceB}
+        << QList<Piece> {originalPieceB_, changePieceB}
         << Width - 1 << End << Piece::OriginalStorage
         << changePieceB1
-        << QVector<Piece> {originalPieceB, changePiece_B};
+        << QList<Piece> {originalPieceB, changePiece_B};
 
     QTest::newRow("one-with-begin-multi-previous-noncontinuous")
-        << QVector<Piece> {originalPieceB__, changePieceB}
+        << QList<Piece> {originalPieceB__, changePieceB}
         << Width - 2 << End << Piece::OriginalStorage
         << changePieceB1
-        << QVector<Piece> {originalPieceB__, originalPiece1B, changePiece_B};
+        << QList<Piece> {originalPieceB__, originalPiece1B, changePiece_B};
 }
 
 void PieceTableTest::testReplaceOne()
 {
-    QFETCH(const QVector<Piece>, initPieces);
+    QFETCH(const QList<Piece>, initPieces);
     QFETCH(const Address, replaceDataOffset);
     QFETCH(const Address, replaceStorageOffset);
     QFETCH(const Piece::StorageType, replaceStorageId);
     QFETCH(const Piece, expectedReplacedPiece);
-    QFETCH(const QVector<Piece>, expectedPieces);
+    QFETCH(const QList<Piece>, expectedPieces);
 
     PieceList initPieceList;
     for (const auto& piece : initPieces) {
@@ -1543,22 +1543,22 @@ void PieceTableTest::testGetStorageData_data()
     static constexpr Size Width2 = Width;
     static constexpr Address End2 = Start2 + Width2 - 1;
 
-    QTest::addColumn<QVector<Piece>>("pieces");
-    QTest::addColumn<QVector<StorageDataTestData>>("testData");
+    QTest::addColumn<QList<Piece>>("pieces");
+    QTest::addColumn<QList<StorageDataTestData>>("testData");
 
     QTest::newRow("void")
-        << QVector<Piece> {
+        << QList<Piece> {
         }
-        << QVector<StorageDataTestData> {
+        << QList<StorageDataTestData> {
             StorageDataTestData::invalid(0),
             StorageDataTestData::invalid(1),
         };
 
     QTest::newRow("one-original")
-        << QVector<Piece> {
+        << QList<Piece> {
             {Start, Width, Piece::OriginalStorage},
         }
-        << QVector<StorageDataTestData> {
+        << QList<StorageDataTestData> {
             StorageDataTestData::valid(0, Start, Piece::OriginalStorage),
             StorageDataTestData::valid(1, Start + 1, Piece::OriginalStorage),
             StorageDataTestData::valid(Width - 2, End - 1, Piece::OriginalStorage),
@@ -1567,19 +1567,19 @@ void PieceTableTest::testGetStorageData_data()
         };
 
     QTest::newRow("one-original-short")
-        << QVector<Piece> {
+        << QList<Piece> {
             {Start, 1, Piece::OriginalStorage},
         }
-        << QVector<StorageDataTestData> {
+        << QList<StorageDataTestData> {
             StorageDataTestData::valid(0, Start, Piece::OriginalStorage),
             StorageDataTestData::invalid(1),
         };
 
     QTest::newRow("one-change")
-        << QVector<Piece> {
+        << QList<Piece> {
             {Start2, Width2, Piece::ChangeStorage},
         }
-        << QVector<StorageDataTestData> {
+        << QList<StorageDataTestData> {
             StorageDataTestData::valid(0, Start2, Piece::ChangeStorage),
             StorageDataTestData::valid(1, Start2 + 1, Piece::ChangeStorage),
             StorageDataTestData::valid(Width2 - 2, End2 - 1, Piece::ChangeStorage),
@@ -1588,11 +1588,11 @@ void PieceTableTest::testGetStorageData_data()
         };
 
     QTest::newRow("two-original")
-        << QVector<Piece> {
+        << QList<Piece> {
             {Start, Width, Piece::OriginalStorage},
             {Start2, Width2, Piece::OriginalStorage},
         }
-        << QVector<StorageDataTestData> {
+        << QList<StorageDataTestData> {
             StorageDataTestData::valid(0, Start, Piece::OriginalStorage),
             StorageDataTestData::valid(1, Start + 1, Piece::OriginalStorage),
             StorageDataTestData::valid(Width - 2, End - 1, Piece::OriginalStorage),
@@ -1605,11 +1605,11 @@ void PieceTableTest::testGetStorageData_data()
         };
 
     QTest::newRow("two-change")
-        << QVector<Piece> {
+        << QList<Piece> {
             {Start2, Width2, Piece::ChangeStorage},
             {Start, Width, Piece::ChangeStorage},
         }
-        << QVector<StorageDataTestData> {
+        << QList<StorageDataTestData> {
             StorageDataTestData::valid(0, Start2, Piece::ChangeStorage),
             StorageDataTestData::valid(1, Start2 + 1, Piece::ChangeStorage),
             StorageDataTestData::valid(Width2 - 2, End2 - 1, Piece::ChangeStorage),
@@ -1622,11 +1622,11 @@ void PieceTableTest::testGetStorageData_data()
         };
 
     QTest::newRow("two-original-change")
-        << QVector<Piece> {
+        << QList<Piece> {
             {Start, Width, Piece::OriginalStorage},
             {Start2, Width2, Piece::ChangeStorage},
         }
-        << QVector<StorageDataTestData> {
+        << QList<StorageDataTestData> {
             StorageDataTestData::valid(0, Start, Piece::OriginalStorage),
             StorageDataTestData::valid(1, Start + 1, Piece::OriginalStorage),
             StorageDataTestData::valid(Width - 2, End - 1, Piece::OriginalStorage),
@@ -1639,22 +1639,22 @@ void PieceTableTest::testGetStorageData_data()
         };
 
     QTest::newRow("two-original-change-short")
-        << QVector<Piece> {
+        << QList<Piece> {
             {Start, 1, Piece::OriginalStorage},
             {Start2, 1, Piece::ChangeStorage},
         }
-        << QVector<StorageDataTestData> {
+        << QList<StorageDataTestData> {
             StorageDataTestData::valid(0, Start, Piece::OriginalStorage),
             StorageDataTestData::valid(1, Start2, Piece::ChangeStorage),
             StorageDataTestData::invalid(2),
         };
 
     QTest::newRow("two-change-original")
-        << QVector<Piece> {
+        << QList<Piece> {
             {Start2, Width2, Piece::ChangeStorage},
             {Start, Width, Piece::OriginalStorage},
         }
-        << QVector<StorageDataTestData> {
+        << QList<StorageDataTestData> {
             StorageDataTestData::valid(0, Start2, Piece::ChangeStorage),
             StorageDataTestData::valid(1, Start2 + 1, Piece::ChangeStorage),
             StorageDataTestData::valid(Width2 - 2, End2 - 1, Piece::ChangeStorage),
@@ -1669,8 +1669,8 @@ void PieceTableTest::testGetStorageData_data()
 
 void PieceTableTest::testGetStorageData()
 {
-    QFETCH(const QVector<Piece>, pieces);
-    QFETCH(const QVector<StorageDataTestData>, testData);
+    QFETCH(const QList<Piece>, pieces);
+    QFETCH(const QList<StorageDataTestData>, testData);
 
     // setup piece-table
     PieceList pieceList;

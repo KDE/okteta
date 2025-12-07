@@ -14,7 +14,7 @@
 // Std
 #include <memory>
 
-template <typename C> class QVector;
+template <typename C> class QList;
 class QUrl;
 
 namespace Kasten {
@@ -41,7 +41,7 @@ public: // API to be implemented
     virtual void load(const QUrl& url) = 0;
 
     virtual void closeDocument(AbstractDocument* document) = 0;
-//     virtual void closeDocuments( const QVector<AbstractDocument*>& documents ) = 0;
+//     virtual void closeDocuments( const QList<AbstractDocument*>& documents ) = 0;
     virtual void closeAll() = 0;
 // TODO: think about if a more general close( documentList, theseOrOthers ) is better, same with canCloseAllOther()
     virtual void closeAllOther(AbstractDocument* document) = 0;
@@ -52,14 +52,14 @@ public: // const API to be implemented
     /// Returns \c true if there
 //     virtual bool allowsMultipleDocuments() const = 0;
     [[nodiscard]]
-    virtual QVector<AbstractDocument*> documents() const = 0;
+    virtual QList<AbstractDocument*> documents() const = 0;
     [[nodiscard]]
     virtual QStringList supportedRemoteTypes() const = 0;
 
     // TODO: what to do for documents not added?
     [[nodiscard]]
     virtual bool canClose(AbstractDocument* document) const = 0;
-//     virtual bool canClose( const QVector<AbstractDocument*>& documents ) const = 0;
+//     virtual bool canClose( const QList<AbstractDocument*>& documents ) const = 0;
     [[nodiscard]]
     virtual bool canCloseAll() const = 0;
     [[nodiscard]]
@@ -67,9 +67,9 @@ public: // const API to be implemented
 
 Q_SIGNALS:
     // documents got added
-    void added(const QVector<Kasten::AbstractDocument*>& documents);
+    void added(const QList<Kasten::AbstractDocument*>& documents);
     /// documents are about to be closed, cannot be stopped
-    void closing(const QVector<Kasten::AbstractDocument*>& documents);
+    void closing(const QList<Kasten::AbstractDocument*>& documents);
 
     // TODO: or should the document be able to emit this?
     void focusRequested(Kasten::AbstractDocument* document);

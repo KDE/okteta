@@ -39,7 +39,7 @@ ExportController::ExportController(ModelCodecViewManager* modelCodecViewManager,
                                             i18nc("@title:menu", "Export"),
                                             this);
     mExportSelectAction->setToolBarMode(KSelectAction::MenuMode);
-    connect(mExportSelectAction, qOverload<QAction*>(&KSelectAction::triggered),
+    connect(mExportSelectAction, &KSelectAction::actionTriggered,
             this, &ExportController::onActionTriggered);
 
     guiClient->actionCollection()->addAction(QStringLiteral("export"), mExportSelectAction);

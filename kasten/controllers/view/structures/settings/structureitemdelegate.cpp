@@ -146,7 +146,7 @@ QList<QWidget*> StructureItemDelegate::createItemWidgets(const QModelIndex& inde
     return widgetList;
 }
 
-void StructureItemDelegate::updateItemWidgets(const QList<QWidget*> widgets,
+void StructureItemDelegate::updateItemWidgets(const QList<QWidget*>& widgets,
                                               const QStyleOptionViewItem &option,
                                               const QPersistentModelIndex& index) const
 {

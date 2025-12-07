@@ -32,7 +32,8 @@ class SearchTool : public AbstractTool
 private:
     static constexpr Qt::CaseSensitivity DefaultCaseSensitivity = Qt::CaseInsensitive;
 
-    static constexpr char ConfigGroupId[] = "SearchTool";
+    static const QString ConfigGroupId;
+
     static constexpr char CaseSensitivityConfigKey[] = "CaseSensitivity";
 
 public:

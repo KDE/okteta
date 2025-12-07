@@ -11,17 +11,15 @@ okteta_add_library(Gui NAMESPACE Okteta Kasten
         KastenGui
         OktetaGui
     PRIVATE
-        KF5::Completion
-        KF5::I18n
+        KF6::Completion
+        KF6::I18n
     VERSION     ${OKTETAKASTENGUI_VERSION}
     SOVERSION   ${OKTETAKASTENGUI_SO_VERSION}
     ABIVERSION  ${OKTETAKASTEN_ABI_VERSION} ${KASTEN_ABI_VERSION}
     NO_VERSIONED_INCLUDEDIR
-    NO_VERSIONED_PACKAGE_NAME
     REVERSE_NAMESPACE_INCLUDEDIR
     REVERSE_NAMESPACE_LIB
     NO_TARGET_NAMESPACE
-    NO_VERSIONED_EXPORTED_TARGET_NAME
     KI18N_TRANSLATION_DOMAIN "liboktetakasten"
 )
 
@@ -59,11 +57,11 @@ oktetakastengui_add_sublibrary(OktetaKastenGuiWidgets
     UNTESTED
     PUBLIC
         OktetaCore
-        Qt5::Widgets
+        Qt6::Widgets
     PRIVATE
-        KF5::Completion
-        KF5::I18n
-        Qt5::Qml
+        KF6::Completion
+        KF6::I18n
+        Qt6::Qml
     KI18N_TRANSLATION_DOMAIN "liboktetakasten"
 )
 
@@ -93,7 +91,7 @@ oktetakastengui_add_sublibrary(OktetaKastenGuiView
         KastenGui
         OktetaGui
     PRIVATE
-        KF5::I18n
+        KF6::I18n
     KI18N_TRANSLATION_DOMAIN "liboktetakasten"
 )
 
@@ -135,8 +133,8 @@ oktetakastengui_add_sublibrary(OktetaKastenGuiStreamEncoder
     PRIVATE
         OktetaKastenGuiWidgets
         OktetaKastenGuiView
-        KF5::Completion
-        KF5::I18n
+        KF6::Completion
+        KF6::I18n
         BZip2::BZip2
         LibLZMA::LibLZMA
         ZLIB::ZLIB
@@ -340,8 +338,8 @@ oktetakastengui_add_sublibrary(OktetaKastenGuiGenerator
     PRIVATE
         OktetaKastenGuiWidgets
         OktetaKastenGuiView
-        KF5::Completion
-        KF5::I18n
+        KF6::Completion
+        KF6::I18n
     KI18N_TRANSLATION_DOMAIN "liboktetakasten"
 )
 

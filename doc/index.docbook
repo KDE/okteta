@@ -86,7 +86,7 @@ extraction tool.</para>
     <menuchoice><guisubmenu>Applications</guisubmenu><guisubmenu>Utilities</guisubmenu>
     </menuchoice> group in the application launcher.</para>
 
-    <para>The standard &Qt; and &kf5-full; command line
+    <para>The standard &Qt; and &kf6-full; command line
     options are available, and can be listed by entering
     <userinput><command>okteta</command> <option>--help</option></userinput>.</para>
 

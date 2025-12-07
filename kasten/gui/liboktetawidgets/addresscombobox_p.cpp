@@ -43,7 +43,7 @@ void AddressComboBoxPrivate::init()
 
     mFormatComboBox = new KComboBox(q);
     mFormatComboBox->addItems(formatStrings());
-    QObject::connect(mFormatComboBox, qOverload<int>(&QComboBox::activated),
+    QObject::connect(mFormatComboBox, &QComboBox::activated,
                      q, [this](int index) { onFormatChanged(index); });
 
     mValueComboBox = new KComboBox(q);
@@ -64,7 +64,7 @@ void AddressComboBoxPrivate::init()
     const auto coding = static_cast<AddressValidator::Coding>(mFormatComboBox->currentIndex());
     mValidator->setCodec(coding);
     mValueComboBox->setValidator(mValidator);
-    QObject::connect(mValueComboBox, qOverload<int>(&QComboBox::activated),
+    QObject::connect(mValueComboBox, &QComboBox::activated,
                      q, [this](int index) { onValueActivated(index); });
     baseLayout->addWidget(mFormatComboBox);
     baseLayout->addWidget(mValueComboBox, 1);

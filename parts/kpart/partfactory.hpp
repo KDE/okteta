@@ -40,8 +40,7 @@ public: // KPluginFactory API
     QObject* create(const char* iface,
                     QWidget* parentWidget,
                     QObject* parent,
-                    const QVariantList& args,
-                    const QString& keyword) override;
+                    const QVariantList& args) override;
 
 private:
     const std::unique_ptr<Kasten::ByteArrayViewProfileManager> mByteArrayViewProfileManager;

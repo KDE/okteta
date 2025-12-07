@@ -86,6 +86,8 @@ void GZipStreamCompressorSettings::saveConfig(KConfigGroup& configGroup) const
     configGroup.writeEntry(CommentConfigKey, comment);
 }
 
+const QString ByteArrayGZipStreamCompressor::ConfigGroupId = QStringLiteral("ByteArrayGZipStreamCompressor");
+
 ByteArrayGZipStreamCompressor::ByteArrayGZipStreamCompressor()
     : AbstractByteArrayStreamCompressor(i18nc("name of the encoding target", "gzip"), QStringLiteral("application/gzip"))
 {
