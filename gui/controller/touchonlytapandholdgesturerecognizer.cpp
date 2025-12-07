@@ -37,9 +37,9 @@ QGestureRecognizer::Result TouchOnlyTapAndHoldGestureRecognizer::recognize(QGest
     switch (event->type()) {
     case QEvent::TouchBegin: {
         const auto* const touchEvent = static_cast<const QTouchEvent*>(event);
-        const QTouchEvent::TouchPoint touchPoint = touchEvent->touchPoints().at(0);
-        const QPointF screenPosition = touchPoint.screenPos();
-        const QPointF widgetPosition = touchPoint.pos();
+        const QTouchEvent::TouchPoint touchPoint = touchEvent->points().at(0);
+        const QPointF screenPosition = touchPoint.globalPosition();
+        const QPointF widgetPosition = touchPoint.position();
         tapAndHoldGesture->setHotSpot(screenPosition);
         tapAndHoldGesture->setPosition(widgetPosition);
         tapAndHoldGesture->beginHoldTimeer();
@@ -48,9 +48,9 @@ QGestureRecognizer::Result TouchOnlyTapAndHoldGestureRecognizer::recognize(QGest
     case QEvent::TouchUpdate: {
         if (tapAndHoldGesture->isHoldTimerActive()) {
             const auto* const touchEvent = static_cast<const QTouchEvent*>(event);
-            if (touchEvent->touchPoints().size() == 1) {
-                const QTouchEvent::TouchPoint touchPoint = touchEvent->touchPoints().at(0);
-                const QPoint delta = touchPoint.pos().toPoint() - touchPoint.startPos().toPoint();
+            if (touchEvent->points().size() == 1) {
+                const QTouchEvent::TouchPoint touchPoint = touchEvent->points().at(0);
+                const QPoint delta = touchPoint.position().toPoint() - touchPoint.pressPosition().toPoint();
                 if (delta.manhattanLength() <= tapRadius) {
                     return QGestureRecognizer::MayBeGesture;
                 }

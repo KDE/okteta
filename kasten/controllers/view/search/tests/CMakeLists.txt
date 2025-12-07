@@ -10,8 +10,8 @@ ecm_add_test(
         OktetaKastenControllersByteArraySearch
         OktetaKastenGui
         OktetaKastenCore
-        KF5::I18n
-        Qt5::Test
+        KF6::I18n
+        Qt6::Test
 )
 target_include_directories(searchtooltest
     PUBLIC

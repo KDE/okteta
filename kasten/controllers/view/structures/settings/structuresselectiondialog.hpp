@@ -14,7 +14,8 @@
 #include <map>
 #include <memory>
 
-class QStringList;
+template <class T> class QList;
+using QStringList = QList<QString>;
 
 namespace Kasten {
 

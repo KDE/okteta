@@ -10,7 +10,7 @@
 // lib
 #include "oktetagui_export.hpp"
 // Qt
-#include <QtGlobal>
+#include <QtTypes>
 
 namespace Okteta {
 

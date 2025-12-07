@@ -14,7 +14,7 @@
 // Qt
 #include <QtEndian>
 
-static constexpr char ModSum32ConfigGroupId[] = "ModularSum32";
+static const QString ModSum32ConfigGroupId = QStringLiteral("ModularSum32");
 
 ModSum32ByteArrayChecksumAlgorithm::ModSum32ByteArrayChecksumAlgorithm()
     : AbstractByteArrayChecksumAlgorithm(
