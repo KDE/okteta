@@ -14,12 +14,14 @@
 #include <map>
 #include <memory>
 
+template <class T> class QList;
+using QStringList = QList<QString>;
+
 namespace Kasten {
 class StructureDefinitionFile;
 }
 class StructureAddRemoveWidget;
 class StructureEnabledList;
-class QStringList;
 
 class StructuresSelectionDialog : public QDialog
 {
