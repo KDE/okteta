@@ -35,7 +35,7 @@ void ViewManagerPrivate::setViewFactory(std::unique_ptr<AbstractViewFactory>&& f
     mFactory = std::move(factory);
 }
 
-QVector<AbstractView*> ViewManagerPrivate::views() const
+QList<AbstractView*> ViewManagerPrivate::views() const
 {
     return mViewList;
 }
@@ -63,15 +63,15 @@ void ViewManagerPrivate::createCopyOfView(AbstractView* view, Qt::Alignment alig
 
     mViewList.append(rawViewCopy);
 
-    const QVector<Kasten::AbstractView*> views { rawViewCopy };
+    const QList<Kasten::AbstractView*> views { rawViewCopy };
     Q_EMIT q->opened(views);
 }
 
-void ViewManagerPrivate::createViewsFor(const QVector<Kasten::AbstractDocument*>& documents)
+void ViewManagerPrivate::createViewsFor(const QList<Kasten::AbstractDocument*>& documents)
 {
     Q_Q(ViewManager);
 
-    QVector<Kasten::AbstractView*> openedViews;
+    QList<Kasten::AbstractView*> openedViews;
 
     openedViews.reserve(documents.size());
     mViewList.reserve(mViewList.size() + documents.size());
@@ -91,11 +91,11 @@ void ViewManagerPrivate::createViewsFor(const QVector<Kasten::AbstractDocument*>
     }
 }
 
-void ViewManagerPrivate::removeViewsFor(const QVector<Kasten::AbstractDocument*>& documents)
+void ViewManagerPrivate::removeViewsFor(const QList<Kasten::AbstractDocument*>& documents)
 {
     Q_Q(ViewManager);
 
-    QVector<Kasten::AbstractView*> closedViews;
+    QList<Kasten::AbstractView*> closedViews;
 
     for (AbstractDocument* document : documents) {
         auto it = mViewList.begin();
@@ -119,7 +119,7 @@ void ViewManagerPrivate::removeViewsFor(const QVector<Kasten::AbstractDocument*>
     }
 }
 
-void ViewManagerPrivate::removeViews(const QVector<AbstractView*>& views)
+void ViewManagerPrivate::removeViews(const QList<AbstractView*>& views)
 {
     Q_Q(ViewManager);
 
