@@ -85,7 +85,7 @@ private:
 
     static const std::array<char, 16> hexDigits;
 
-    static constexpr char ConfigGroupId[] = "ByteArraySRecordStreamEncoder";
+    static const QString ConfigGroupId;
 
 private:
     [[nodiscard]]

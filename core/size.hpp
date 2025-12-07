@@ -8,7 +8,7 @@
 #define OKTETA_SIZE_HPP
 
 // Qt
-#include <QtGlobal>
+#include <QtTypes>
 
 namespace Okteta {
 

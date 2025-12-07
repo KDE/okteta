@@ -54,9 +54,9 @@ void TabbedViewsPrivate::init()
                      q, [this]() { onEmptySpaceMouseDoubleClicked(); });
 }
 
-QVector<AbstractView*> TabbedViewsPrivate::viewList() const
+QList<AbstractView*> TabbedViewsPrivate::viewList() const
 {
-    QVector<AbstractView*> result;
+    QList<AbstractView*> result;
 
     const int count = mTabWidget->count();
     result.reserve(count);
@@ -85,7 +85,7 @@ int TabbedViewsPrivate::indexOf(AbstractView* view) const
     return result;
 }
 
-void TabbedViewsPrivate::addViews(const QVector<AbstractView*>& views)
+void TabbedViewsPrivate::addViews(const QList<AbstractView*>& views)
 {
     Q_Q(TabbedViews);
 
@@ -114,7 +114,7 @@ void TabbedViewsPrivate::addViews(const QVector<AbstractView*>& views)
     Q_EMIT q->added(views);
 }
 
-void TabbedViewsPrivate::removeViews(const QVector<AbstractView*>& views)
+void TabbedViewsPrivate::removeViews(const QList<AbstractView*>& views)
 {
     Q_Q(TabbedViews);
 
@@ -193,7 +193,7 @@ void TabbedViewsPrivate::onTabCloseRequest(int tabIndex)
     const auto* const viewBox = static_cast<const ViewBox*>(widget);
     AbstractView* const view = viewBox->view();
 
-    const QVector<Kasten::AbstractView*> views { view };
+    const QList<Kasten::AbstractView*> views { view };
     Q_EMIT q->closeRequest(views);
 }
 
@@ -301,7 +301,7 @@ void TabbedViewsPrivate::setDropEventAction(QDropEvent* dropEvent)
 {
     const Qt::DropAction action = dropEvent->mimeData()->urls().isEmpty() ?
         // default to copy, force move by Ctrl
-        ((dropEvent->keyboardModifiers() & Qt::ControlModifier) ? Qt::MoveAction : Qt::CopyAction) :
+        ((dropEvent->modifiers() & Qt::ControlModifier) ? Qt::MoveAction : Qt::CopyAction) :
         // TODO: URLS hard-coded to copy for now, instead have dataOffered & dataDropped handlers decide
         Qt::CopyAction;
     dropEvent->setDropAction(action);

@@ -21,7 +21,7 @@ class SearchDialog : public AbstractFindDialog
     Q_OBJECT
 
 private:
-    static constexpr char ConfigGroupId[] = "SearchTool";
+    static const QString ConfigGroupId;
 
     static constexpr char FromCursorConfigKey[] = "FromCursor";
     static constexpr char DirectionConfigKey[] = "Direction";

@@ -23,6 +23,8 @@
 
 namespace Kasten {
 
+const QString ReplaceDialog::ConfigGroupId = QStringLiteral("ReplaceTool");
+
 ReplaceDialog::ReplaceDialog(ReplaceTool* tool, QWidget* parent)
     : AbstractFindDialog(parent)
     , mTool(tool)

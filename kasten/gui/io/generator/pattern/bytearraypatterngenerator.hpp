@@ -68,7 +68,7 @@ class ByteArrayPatternGenerator : public AbstractModelDataGenerator
     Q_OBJECT
 
 private:
-    static constexpr char ConfigGroupId[] = "ByteArrayPatternGenerator";
+    static const QString ConfigGroupId;
 
 public:
     ByteArrayPatternGenerator();

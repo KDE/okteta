@@ -65,7 +65,7 @@ class ByteArrayIHexStreamEncoder : public AbstractByteArrayStreamEncoder
     Q_OBJECT
 
 private:
-    static constexpr char ConfigGroupId[] = "ByteArrayIntelHexStreamEncoder";
+    static const QString ConfigGroupId;
 
     static constexpr unsigned char dataRecordCode = 0x0;
     static constexpr unsigned char endOfFileRecordCode = 0x1;
