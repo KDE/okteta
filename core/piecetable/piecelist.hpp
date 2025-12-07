@@ -10,7 +10,7 @@
 // lib
 #include "piece.hpp"
 // Qt
-#include <QVector>
+#include <QList>
 
 namespace KPieceTable {
 
@@ -43,7 +43,7 @@ public:
     void prepend(const PieceList& other);
 
 public: // introspection API, used for tests
-    using ConstIterator = QVector<Piece>::ConstIterator;
+    using ConstIterator = QList<Piece>::ConstIterator;
 
     [[nodiscard]]
     ConstIterator begin() const;
@@ -51,7 +51,7 @@ public: // introspection API, used for tests
     ConstIterator end() const;
 
 private:
-    QVector<Piece> mList;
+    QList<Piece> mList;
     Size mTotalLength = 0;
 };
 

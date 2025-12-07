@@ -60,7 +60,7 @@ void PieceList::prepend(const PieceList& other)
         return;
     }
 
-    QVector<Piece> otherCopy = other.mList;
+    QList<Piece> otherCopy = other.mList;
     auto it = mList.begin();
 
     // see if the ones at the border can be merged

@@ -29,7 +29,7 @@ TerminalView::TerminalView(TerminalTool* tool, QWidget* parent)
     layout->setContentsMargins(0, 0, 0, 0);
 
     connect(mTool, &TerminalTool::currentUrlChanged, this, &TerminalView::onCurrentUrlChanged);
-    QMetaObject::invokeMethod(this, "createTerminalPart", Qt::QueuedConnection);
+    QMetaObject::invokeMethod(this, &TerminalView::createTerminalPart, Qt::QueuedConnection);
 }
 
 TerminalView::~TerminalView()
@@ -42,7 +42,7 @@ TerminalView::~TerminalView()
 
 void TerminalView::createTerminalPart()
 {
-    KPluginFactory *factory = KPluginFactory::loadFactory(KPluginMetaData(QStringLiteral("konsolepart"))).plugin;
+    KPluginFactory *factory = KPluginFactory::loadFactory(KPluginMetaData(QStringLiteral("kf6/parts/konsolepart"))).plugin;
     mTerminalPart = factory ? (factory->create<KParts::ReadOnlyPart>(this)) : nullptr;
 
     if (mTerminalPart) {

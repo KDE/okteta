@@ -61,7 +61,7 @@ bool Dropper::handleDragMoveEvent(QDragMoveEvent* dragMoveEvent)
         mByteArrayView->pauseCursor();
         // TODO: just for following skip the value edit, remember we are and get back
         mByteArrayView->finishByteEditor();
-        mByteArrayView->placeCursor(dragMoveEvent->pos());
+        mByteArrayView->placeCursor(dragMoveEvent->position().toPoint());
         mByteArrayView->unpauseCursor();
 
         eventUsed = true;
@@ -125,9 +125,9 @@ void Dropper::setDropEventAction(QDropEvent* dropEvent)
 
     const Qt::DropAction action = isInternal ?
         // internal: default to move, force copy by Shift
-        ((dropEvent->keyboardModifiers() & Qt::ShiftModifier) ? Qt::CopyAction : Qt::MoveAction) :
+        ((dropEvent->modifiers() & Qt::ShiftModifier) ? Qt::CopyAction : Qt::MoveAction) :
         // external: default to copy, force move by Ctrl
-        ((dropEvent->keyboardModifiers() & Qt::ControlModifier) ? Qt::MoveAction : Qt::CopyAction);
+        ((dropEvent->modifiers() & Qt::ControlModifier) ? Qt::MoveAction : Qt::CopyAction);
     dropEvent->setDropAction(action);
 }
 

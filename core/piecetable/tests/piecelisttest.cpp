@@ -39,7 +39,7 @@ char* toString(Piece piece)
     return QTest::toString(static_cast<const char*>(text));
 }
 
-void compare(const PieceList& pieceList, const QVector<Piece>& expectedPieces)
+void compare(const PieceList& pieceList, const QList<Piece>& expectedPieces)
 {
     // TODO: find some useful output with QCOMPARE
     if (pieceList.size() != expectedPieces.size()) {
@@ -114,27 +114,27 @@ void PieceListTest::testAppendPiece_data()
     QTest::addColumn<Piece>("initPiece");
     QTest::addColumn<Piece>("appendedPiece");
     QTest::addColumn<Size>("expectedTotalLength");
-    QTest::addColumn<QVector<Piece>>("expectedPieces");
+    QTest::addColumn<QList<Piece>>("expectedPieces");
 
     QTest::newRow("emptylist")
         << Piece()
         << Piece{20, 5, Piece::OriginalStorage}
         << 5
-        << QVector<Piece> {
+        << QList<Piece> {
             {20, 5, Piece::OriginalStorage}};
 
     QTest::newRow("invalid")
         << Piece{0, 10, Piece::OriginalStorage}
         << Piece()
         << 10
-        << QVector<Piece> {
+        << QList<Piece> {
             {0, 10, Piece::OriginalStorage}};
 
     QTest::newRow("noncontinous-samestorage")
         << Piece{0, 10, Piece::OriginalStorage}
         << Piece{20, 5, Piece::OriginalStorage}
         << 15
-        << QVector<Piece> {
+        << QList<Piece> {
             {0, 10, Piece::OriginalStorage},
             {20, 5, Piece::OriginalStorage}};
 
@@ -142,7 +142,7 @@ void PieceListTest::testAppendPiece_data()
         << Piece{0, 10, Piece::OriginalStorage}
         << Piece{20, 5, Piece::ChangeStorage}
         << 15
-        << QVector<Piece> {
+        << QList<Piece> {
             {0, 10, Piece::OriginalStorage},
             {20, 5, Piece::ChangeStorage}};
 
@@ -150,14 +150,14 @@ void PieceListTest::testAppendPiece_data()
         << Piece{0, 10, Piece::OriginalStorage}
         << Piece{10, 5, Piece::OriginalStorage}
         << 15
-        << QVector<Piece> {
+        << QList<Piece> {
             {0, 15, Piece::OriginalStorage}};
 
     QTest::newRow("continous-differentstorage")
         << Piece{0, 10, Piece::OriginalStorage}
         << Piece{10, 5, Piece::ChangeStorage}
         << 15
-        << QVector<Piece> {
+        << QList<Piece> {
             {0, 10, Piece::OriginalStorage},
             {10, 5, Piece::ChangeStorage}};
 }
@@ -167,7 +167,7 @@ void PieceListTest::testAppendPiece()
     QFETCH(const Piece, initPiece);
     QFETCH(const Piece, appendedPiece);
     QFETCH(const Size, expectedTotalLength);
-    QFETCH(const QVector<Piece>, expectedPieces);
+    QFETCH(const QList<Piece>, expectedPieces);
 
     PieceList pieceList(initPiece);
 
@@ -181,77 +181,77 @@ void PieceListTest::testAppendPiece()
 
 void PieceListTest::testAppendPieceList_data()
 {
-    QTest::addColumn<QVector<Piece>>("initPieces");
-    QTest::addColumn<QVector<Piece>>("appendedPieces");
+    QTest::addColumn<QList<Piece>>("initPieces");
+    QTest::addColumn<QList<Piece>>("appendedPieces");
     QTest::addColumn<Size>("expectedTotalLength");
-    QTest::addColumn<QVector<Piece>>("expectedPieces");
+    QTest::addColumn<QList<Piece>>("expectedPieces");
 
     QTest::newRow("to-emptylist")
-        << QVector<Piece> ()
-        << QVector<Piece> {
+        << QList<Piece> ()
+        << QList<Piece> {
             {20, 5, Piece::OriginalStorage}}
         << 5
-        << QVector<Piece> {
+        << QList<Piece> {
             {20, 5, Piece::OriginalStorage}};
 
     QTest::newRow("by-emptylist")
-        << QVector<Piece> {
+        << QList<Piece> {
             {0, 5, Piece::ChangeStorage},
             {0, 10, Piece::OriginalStorage}}
-        << QVector<Piece> ()
+        << QList<Piece> ()
         << 15
-        << QVector<Piece> {
+        << QList<Piece> {
             {0, 5, Piece::ChangeStorage},
             {0, 10, Piece::OriginalStorage}};
 
     QTest::newRow("noncontinous-samestorage")
-        << QVector<Piece> {
+        << QList<Piece> {
             {0, 5, Piece::ChangeStorage},
             {0, 10, Piece::OriginalStorage}}
-        << QVector<Piece> {
+        << QList<Piece> {
             {20, 5, Piece::OriginalStorage}}
         << 20
-        << QVector<Piece> {
+        << QList<Piece> {
             {0, 5, Piece::ChangeStorage},
             {0, 10, Piece::OriginalStorage},
             {20, 5, Piece::OriginalStorage}};
 
     QTest::newRow("noncontinous-differentstorage")
-        << QVector<Piece> {
+        << QList<Piece> {
             {0, 5, Piece::ChangeStorage},
             {0, 10, Piece::OriginalStorage}}
-        << QVector<Piece> {
+        << QList<Piece> {
             {20, 5, Piece::ChangeStorage},
             {20, 10, Piece::OriginalStorage}}
         << 30
-        << QVector<Piece> {
+        << QList<Piece> {
             {0, 5, Piece::ChangeStorage},
             {0, 10, Piece::OriginalStorage},
             {20, 5, Piece::ChangeStorage},
             {20, 10, Piece::OriginalStorage}};
 
     QTest::newRow("continous-samestorage")
-        << QVector<Piece> {
+        << QList<Piece> {
             {0, 5, Piece::ChangeStorage},
             {0, 10, Piece::OriginalStorage}}
-        << QVector<Piece> {
+        << QList<Piece> {
             {10, 5, Piece::OriginalStorage},
             {20, 5, Piece::OriginalStorage}}
         << 25
-        << QVector<Piece> {
+        << QList<Piece> {
             {0, 5, Piece::ChangeStorage},
             {0, 15, Piece::OriginalStorage},
             {20, 5, Piece::OriginalStorage}};
 
     QTest::newRow("continous-differentstorage")
-        << QVector<Piece> {
+        << QList<Piece> {
             {0, 5, Piece::ChangeStorage},
             {0, 10, Piece::OriginalStorage}}
-        << QVector<Piece> {
+        << QList<Piece> {
             {10, 5, Piece::ChangeStorage},
             {20, 5, Piece::OriginalStorage}}
         << 25
-        << QVector<Piece> {
+        << QList<Piece> {
             {0, 5, Piece::ChangeStorage},
             {0, 10, Piece::OriginalStorage},
             {10, 5, Piece::ChangeStorage},
@@ -260,10 +260,10 @@ void PieceListTest::testAppendPieceList_data()
 
 void PieceListTest::testAppendPieceList()
 {
-    QFETCH(const QVector<Piece>, initPieces);
-    QFETCH(const QVector<Piece>, appendedPieces);
+    QFETCH(const QList<Piece>, initPieces);
+    QFETCH(const QList<Piece>, appendedPieces);
     QFETCH(const Size, expectedTotalLength);
-    QFETCH(const QVector<Piece>, expectedPieces);
+    QFETCH(const QList<Piece>, expectedPieces);
 
     PieceList pieceList;
     for (const auto& piece : initPieces) {
@@ -285,77 +285,77 @@ void PieceListTest::testAppendPieceList()
 
 void PieceListTest::testPrependPieceList_data()
 {
-    QTest::addColumn<QVector<Piece>>("initPieces");
-    QTest::addColumn<QVector<Piece>>("prependedPieces");
+    QTest::addColumn<QList<Piece>>("initPieces");
+    QTest::addColumn<QList<Piece>>("prependedPieces");
     QTest::addColumn<Size>("expectedTotalLength");
-    QTest::addColumn<QVector<Piece>>("expectedPieces");
+    QTest::addColumn<QList<Piece>>("expectedPieces");
 
     QTest::newRow("to-emptylist")
-        << QVector<Piece> ()
-        << QVector<Piece> {
+        << QList<Piece> ()
+        << QList<Piece> {
             {20, 5, Piece::OriginalStorage}}
         << 5
-        << QVector<Piece> {
+        << QList<Piece> {
             {20, 5, Piece::OriginalStorage}};
 
     QTest::newRow("by-emptylist")
-        << QVector<Piece> {
+        << QList<Piece> {
             {0, 5, Piece::ChangeStorage},
             {0, 10, Piece::OriginalStorage}}
-        << QVector<Piece> ()
+        << QList<Piece> ()
         << 15
-        << QVector<Piece> {
+        << QList<Piece> {
             {0, 5, Piece::ChangeStorage},
             {0, 10, Piece::OriginalStorage}};
 
     QTest::newRow("noncontinous-samestorage")
-        << QVector<Piece> {
+        << QList<Piece> {
             {20, 5, Piece::OriginalStorage}}
-        << QVector<Piece> {
+        << QList<Piece> {
             {0, 5, Piece::ChangeStorage},
             {0, 10, Piece::OriginalStorage}}
         << 20
-        << QVector<Piece> {
+        << QList<Piece> {
             {0, 5, Piece::ChangeStorage},
             {0, 10, Piece::OriginalStorage},
             {20, 5, Piece::OriginalStorage}};
 
     QTest::newRow("noncontinous-differentstorage")
-        << QVector<Piece> {
+        << QList<Piece> {
             {20, 5, Piece::ChangeStorage},
             {20, 10, Piece::OriginalStorage}}
-        << QVector<Piece> {
+        << QList<Piece> {
             {0, 5, Piece::ChangeStorage},
             {0, 10, Piece::OriginalStorage}}
         << 30
-        << QVector<Piece> {
+        << QList<Piece> {
             {0, 5, Piece::ChangeStorage},
             {0, 10, Piece::OriginalStorage},
             {20, 5, Piece::ChangeStorage},
             {20, 10, Piece::OriginalStorage}};
 
     QTest::newRow("continous-samestorage")
-        << QVector<Piece> {
+        << QList<Piece> {
             {10, 5, Piece::OriginalStorage},
             {20, 5, Piece::OriginalStorage}}
-        << QVector<Piece> {
+        << QList<Piece> {
             {0, 5, Piece::ChangeStorage},
             {0, 10, Piece::OriginalStorage}}
         << 25
-        << QVector<Piece> {
+        << QList<Piece> {
             {0, 5, Piece::ChangeStorage},
             {0, 15, Piece::OriginalStorage},
             {20, 5, Piece::OriginalStorage}};
 
     QTest::newRow("continous-differentstorage")
-        << QVector<Piece> {
+        << QList<Piece> {
             {10, 5, Piece::ChangeStorage},
             {20, 5, Piece::OriginalStorage}}
-        << QVector<Piece> {
+        << QList<Piece> {
             {0, 5, Piece::ChangeStorage},
             {0, 10, Piece::OriginalStorage}}
         << 25
-        << QVector<Piece> {
+        << QList<Piece> {
             {0, 5, Piece::ChangeStorage},
             {0, 10, Piece::OriginalStorage},
             {10, 5, Piece::ChangeStorage},
@@ -364,10 +364,10 @@ void PieceListTest::testPrependPieceList_data()
 
 void PieceListTest::testPrependPieceList()
 {
-    QFETCH(const QVector<Piece>, initPieces);
-    QFETCH(const QVector<Piece>, prependedPieces);
+    QFETCH(const QList<Piece>, initPieces);
+    QFETCH(const QList<Piece>, prependedPieces);
     QFETCH(const Size, expectedTotalLength);
-    QFETCH(const QVector<Piece>, expectedPieces);
+    QFETCH(const QList<Piece>, expectedPieces);
 
     PieceList pieceList;
     for (const auto& piece : initPieces) {
