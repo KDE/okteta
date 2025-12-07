@@ -22,7 +22,7 @@ MultiDocumentStrategy::MultiDocumentStrategy(DocumentManager* documentManager,
 
 MultiDocumentStrategy::~MultiDocumentStrategy() = default;
 
-QVector<AbstractDocument*> MultiDocumentStrategy::documents() const
+QList<AbstractDocument*> MultiDocumentStrategy::documents() const
 {
     Q_D(const MultiDocumentStrategy);
 

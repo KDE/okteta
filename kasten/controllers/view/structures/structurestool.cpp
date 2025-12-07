@@ -493,9 +493,9 @@ QSysInfo::Endian StructuresTool::byteOrder() const
     return mByteOrder;
 }
 
-QVector<std::shared_ptr<TopLevelDataInformation>> StructuresTool::allData() const
+QList<std::shared_ptr<TopLevelDataInformation>> StructuresTool::allData() const
 {
-    QVector<std::shared_ptr<TopLevelDataInformation>> ret;
+    QList<std::shared_ptr<TopLevelDataInformation>> ret;
     ret << mData << mInvalidData;
     return ret;
 }

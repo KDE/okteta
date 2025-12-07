@@ -12,7 +12,7 @@
 #include <KConfigGroup>
 #include <KLocalizedString>
 
-static constexpr char AndFilterConfigGroupId[] = "AND";
+static const QString AndFilterConfigGroupId = QStringLiteral("AND");
 
 AndByteArrayFilter::AndByteArrayFilter()
     : AbstractByteArrayFilter(

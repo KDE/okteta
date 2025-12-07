@@ -15,33 +15,33 @@ target_compile_definitions(OktetaGuiSourcesTestShim INTERFACE
 ecm_add_test(
     selectiontest.cpp
     TEST_NAME selectiontest
-    LINK_LIBRARIES OktetaGuiSourcesTestShim OktetaCore Qt5::Test
+    LINK_LIBRARIES OktetaGuiSourcesTestShim OktetaCore Qt6::Test
 )
 
 ecm_add_test(
     coordtest.cpp
     TEST_NAME coordtest
-    LINK_LIBRARIES OktetaGuiSourcesTestShim OktetaCore Qt5::Test
+    LINK_LIBRARIES OktetaGuiSourcesTestShim OktetaCore Qt6::Test
 )
 
 ecm_add_test(
     coordrangetest.cpp
     TEST_NAME coordrangetest
-    LINK_LIBRARIES OktetaGuiSourcesTestShim OktetaCore Qt5::Test
+    LINK_LIBRARIES OktetaGuiSourcesTestShim OktetaCore Qt6::Test
 )
 
 ecm_add_test(
     ${SUTDIR}/coordrangelist.cpp
     coordrangelisttest.cpp
     TEST_NAME coordrangelisttest
-    LINK_LIBRARIES OktetaGuiSourcesTestShim OktetaCore Qt5::Test
+    LINK_LIBRARIES OktetaGuiSourcesTestShim OktetaCore Qt6::Test
 )
 
 ecm_add_test(
     ${SUTDIR}/bytearraytablelayout.cpp
     bytearraytablelayouttest.cpp
     TEST_NAME bytearraytablelayouttest
-    LINK_LIBRARIES OktetaGuiSourcesTestShim OktetaCore Qt5::Test
+    LINK_LIBRARIES OktetaGuiSourcesTestShim OktetaCore Qt6::Test
 )
 
 ecm_add_test(
@@ -49,26 +49,26 @@ ecm_add_test(
     ${SUTDIR}/bytearraytablelayout.cpp
     bytearraytablecursortest.cpp
     TEST_NAME bytearraytablecursortest
-    LINK_LIBRARIES OktetaGuiSourcesTestShim OktetaCore Qt5::Test
+    LINK_LIBRARIES OktetaGuiSourcesTestShim OktetaCore Qt6::Test
 )
 
 ecm_add_test(
     ${SUTDIR}/fontscalingzoomstate.cpp
     fontscalingzoomstatetest.cpp
     TEST_NAME fontscalingzoomstatetest
-    LINK_LIBRARIES OktetaGuiSourcesTestShim Qt5::Gui Qt5::Test
+    LINK_LIBRARIES OktetaGuiSourcesTestShim Qt6::Gui Qt6::Test
 )
 
 ecm_add_test(
     abstractbytearrayviewiftest.cpp
     bytearrayrowviewabstractbytearrayviewiftest.cpp
     TEST_NAME bytearrayrowviewabstractbytearrayviewiftest
-    LINK_LIBRARIES OktetaGui Qt5::Test
+    LINK_LIBRARIES OktetaGui Qt6::Test
 )
 
 ecm_add_test(
     abstractbytearrayviewiftest.cpp
     bytearraycolumnviewabstractbytearrayviewiftest.cpp
     TEST_NAME bytearraycolumnviewabstractbytearrayviewiftest
-    LINK_LIBRARIES OktetaGui Qt5::Test
+    LINK_LIBRARIES OktetaGui Qt6::Test
 )

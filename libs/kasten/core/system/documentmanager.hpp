@@ -10,7 +10,7 @@
 // lib
 #include "kastencore_export.hpp"
 // Qt
-#include <QVector>
+#include <QList>
 #include <QObject>
 // Std
 #include <memory>
@@ -39,7 +39,7 @@ public:
     void addDocument(std::unique_ptr<AbstractDocument>&& document);
 
     void closeDocument(AbstractDocument* document);
-    void closeDocuments(const QVector<AbstractDocument*>& documents);
+    void closeDocuments(const QList<AbstractDocument*>& documents);
     void closeAll();
 // TODO: think about if a more general close( documentList, theseOrOthers ) is better, same with canCloseAllOther()
     void closeAllOther(AbstractDocument* document);
@@ -48,7 +48,7 @@ public:
     [[nodiscard]]
     bool canClose(AbstractDocument* document) const;
     [[nodiscard]]
-    bool canClose(const QVector<AbstractDocument*>& documents) const;
+    bool canClose(const QList<AbstractDocument*>& documents) const;
     [[nodiscard]]
     bool canCloseAll() const;
     [[nodiscard]]
@@ -58,7 +58,7 @@ public:
 
 public:
     [[nodiscard]]
-    QVector<AbstractDocument*> documents() const;
+    QList<AbstractDocument*> documents() const;
     [[nodiscard]]
     bool isEmpty() const;
 
@@ -72,9 +72,9 @@ public:
 
 Q_SIGNALS:
     // documents got added
-    void added(const QVector<Kasten::AbstractDocument*>& documents);
+    void added(const QList<Kasten::AbstractDocument*>& documents);
     /// documents are about to be closed, cannot be stopped
-    void closing(const QVector<Kasten::AbstractDocument*>& documents);
+    void closing(const QList<Kasten::AbstractDocument*>& documents);
 
 //     void closing( KCloseEvent* event );
 // TODO: other than QObject event gets modified by observers, take care of unsetting a close cancel

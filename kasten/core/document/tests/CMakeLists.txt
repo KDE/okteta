@@ -24,8 +24,8 @@ ecm_add_test(
         OktetaKastenCoreDocumentSourcesTestShim
         KastenCore
         OktetaCore
-        KF5::I18n
-        Qt5::Test
+        KF6::I18n
+        Qt6::Test
 )
 target_compile_definitions(bytearraydocumenttest PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")
 
@@ -46,8 +46,8 @@ ecm_add_test(
         OktetaCoreByteArrayModels
         OktetaCoreCharCodecs
         OktetaCoreValueCodecs
-        KF5::I18n
-        Qt5::Test
+        KF6::I18n
+        Qt6::Test
 )
 target_compile_definitions(bytearraydocumentfactorytest PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")
 target_include_directories(bytearraydocumentfactorytest

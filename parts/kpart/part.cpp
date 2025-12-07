@@ -7,7 +7,7 @@
 #include "part.hpp"
 
 // part
-#include "browserextension.hpp"
+#include "navigationextension.hpp"
 // Okteta Kasten controllers
 // #include <Kasten/Okteta/OverwriteOnlyControllerFactory>
 #include <Kasten/Okteta/CropControllerFactory>
@@ -72,12 +72,10 @@ OktetaPart::OktetaPart(QObject* parent,
                        Kasten::UserMessagesHandler* userMessagesHandler,
                        Kasten::ModelCodecManager* modelCodecManager,
                        Kasten::ModelCodecViewManager* modelCodecViewManager)
-    : KParts::ReadWritePart(parent)
+    : KParts::ReadWritePart(parent, metaData)
     , mModus(modus)
     , mViewProfileManager(viewProfileManager)
 {
-    setMetaData(metaData);
-
     auto* const widget = new QWidget();
     auto* const layout = new QVBoxLayout(widget);
     layout->setContentsMargins(0, 0, 0, 0);
@@ -141,14 +139,14 @@ OktetaPart::OktetaPart(QObject* parent,
 //     addTool( new PODDecoderToolView(new PODDecoderTool()) );
 //     addTool( new BookmarksToolView(new BookmarksTool()) );
 
-    // TODO: BrowserExtension might rely on existing objects (session snap while loadJob),
+    // TODO: NavigationExtension might rely on existing objects (session snap while loadJob),
     // so this hack just creates some dummies
     mDocument = std::make_unique<Kasten::ByteArrayDocument>(QString());
     auto viewProfileSynchronizer = std::make_unique<Kasten::ByteArrayViewProfileSynchronizer>(viewProfileManager);
     mByteArrayView = std::make_unique<Kasten::ByteArrayView>(mDocument.get(), std::move(viewProfileSynchronizer));
 
     if (modus == Modus::BrowserView) {
-        new OktetaBrowserExtension(this);
+        new OktetaNavigationExtension(this);
     }
 }
 

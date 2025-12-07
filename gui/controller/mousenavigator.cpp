@@ -59,7 +59,7 @@ bool MouseNavigator::handleMousePressEvent(QMouseEvent* mouseEvent)
 
         // select whole line?
         if (m_tripleClickTimer.isActive()
-            && (mouseEvent->globalPos() - mDoubleClickPoint).manhattanLength() < QApplication::startDragDistance()) {
+            && (mouseEvent->globalPosition().toPoint() - mDoubleClickPoint).manhattanLength() < QApplication::startDragDistance()) {
             m_tripleClickTimer.stop();
             const Address indexAtFirstDoubleClickLinePosition = tableLayout->indexAtFirstLinePosition(mDoubleClickLine);
             tableRanges->setSelectionStart(indexAtFirstDoubleClickLinePosition);
@@ -224,7 +224,7 @@ bool MouseNavigator::handleMouseDoubleClickEvent(QMouseEvent* mouseEvent)
 
             // as we already have a double-click maybe it is a triple-click
             m_tripleClickTimer.start(QApplication::doubleClickInterval());
-            mDoubleClickPoint = mouseEvent->globalPos();
+            mDoubleClickPoint = mouseEvent->globalPosition().toPoint();
         }
         //  else
         //    mValueEditor->goInsideByte(); TODO: make this possible again

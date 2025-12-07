@@ -56,11 +56,9 @@ OktetaPartFactory::~OktetaPartFactory() = default;
 QObject* OktetaPartFactory::create(const char* iface,
                                    QWidget* parentWidget,
                                    QObject* parent,
-                                   const QVariantList& args,
-                                   const QString& keyword)
+                                   const QVariantList& args)
 {
     Q_UNUSED(parentWidget)
-    Q_UNUSED(keyword)
 
     const OktetaPart::Modus modus =
         (args.contains(QStringLiteral("Browser/View")) ||

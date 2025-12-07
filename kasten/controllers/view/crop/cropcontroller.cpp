@@ -31,7 +31,7 @@ CropController::CropController(KXMLGUIClient* guiClient)
                                i18nc("@action:inmenu", "Crop"), this);
     m_cropAction->setObjectName(QStringLiteral("edit_crop"));
     connect(m_cropAction, &QAction::triggered, this, &CropController::crop);
-    actionCollection->setDefaultShortcut(m_cropAction, QKeySequence(Qt::CTRL | Qt::SHIFT | Qt::Key_C));
+    KActionCollection::setDefaultShortcut(m_cropAction, QKeySequence(Qt::CTRL | Qt::SHIFT | Qt::Key_C));
     m_cropAction->setEnabled(false);
 
     actionCollection->addAction(m_cropAction->objectName(), m_cropAction);

@@ -11,7 +11,7 @@ Description
 -----------
 Delivers a plugin of the type `KParts::ReadWritePart` to display and
 edit the raw data of files as byte arrays.
-The plugin also implements the `BrowserExtension`.
+The plugin also implements the `NavigationExtension`.
 
 
 Installing

@@ -116,11 +116,11 @@ void BookmarksController::setTargetModel(AbstractModel* model)
     int bookmarksCount = 0;
     if (hasViewWithBookmarks) {
         bookmarksCount = mBookmarks->bookmarksCount();
-        connect(mByteArray, SIGNAL(bookmarksAdded(QVector<Okteta::Bookmark>)),
-                SLOT(onBookmarksAdded(QVector<Okteta::Bookmark>)));
-        connect(mByteArray, SIGNAL(bookmarksRemoved(QVector<Okteta::Bookmark>)),
-                SLOT(onBookmarksRemoved(QVector<Okteta::Bookmark>)));
-        connect(mByteArray, SIGNAL(bookmarksModified(QVector<int>)),
+        connect(mByteArray, SIGNAL(bookmarksAdded(QList<Okteta::Bookmark>)),
+                SLOT(onBookmarksAdded(QList<Okteta::Bookmark>)));
+        connect(mByteArray, SIGNAL(bookmarksRemoved(QList<Okteta::Bookmark>)),
+                SLOT(onBookmarksRemoved(QList<Okteta::Bookmark>)));
+        connect(mByteArray, SIGNAL(bookmarksModified(QList<int>)),
                 SLOT(updateBookmarks()));
         connect(mByteArrayView, &ByteArrayView::cursorPositionChanged,
                 this, &BookmarksController::onCursorPositionChanged);
@@ -181,7 +181,7 @@ void BookmarksController::updateBookmarks()
                                mBookmarksActionGroup->actions());
 }
 
-void BookmarksController::onBookmarksAdded(const QVector<Okteta::Bookmark>& bookmarks)
+void BookmarksController::onBookmarksAdded(const QList<Okteta::Bookmark>& bookmarks)
 {
     Q_UNUSED(bookmarks)
     const Okteta::Address currentPosition = mByteArrayView->cursorPosition();
@@ -195,7 +195,7 @@ void BookmarksController::onBookmarksAdded(const QVector<Okteta::Bookmark>& book
     updateBookmarks();
 }
 
-void BookmarksController::onBookmarksRemoved(const QVector<Okteta::Bookmark>& bookmarks)
+void BookmarksController::onBookmarksRemoved(const QList<Okteta::Bookmark>& bookmarks)
 {
     Q_UNUSED(bookmarks)
     const Okteta::Address currentPosition = mByteArrayView->cursorPosition();
@@ -275,14 +275,14 @@ void BookmarksController::addBookmark(Okteta::Address cursorPosition, const QStr
     Okteta::Bookmark bookmark(cursorPosition);
     bookmark.setName(name);
 
-    const QVector<Okteta::Bookmark> bookmarks { bookmark };
+    const QList<Okteta::Bookmark> bookmarks { bookmark };
     mBookmarks->addBookmarks(bookmarks);
 }
 
 void BookmarksController::deleteBookmark()
 {
     const Okteta::Address cursorPosition = mByteArrayView->cursorPosition();
-    const QVector<Okteta::Bookmark> bookmarks { cursorPosition };
+    const QList<Okteta::Bookmark> bookmarks { cursorPosition };
     mBookmarks->removeBookmarks(bookmarks);
 }
 

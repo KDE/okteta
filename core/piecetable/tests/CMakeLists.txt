@@ -14,14 +14,14 @@ add_library(OktetaCoreTestPieceTableChange STATIC
 target_link_libraries(OktetaCoreTestPieceTableChange
     PUBLIC
         OktetaCorePieceTable
-        Qt5::Test
+        Qt6::Test
 )
 
 
 ########### piecetest ###############
 
 ecm_add_test( piecetest.cpp
-    LINK_LIBRARIES Qt5::Test
+    LINK_LIBRARIES Qt6::Test
 )
 target_include_directories(piecetest
     PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/../..
@@ -33,7 +33,7 @@ ecm_add_test( piecetabletest.cpp
     LINK_LIBRARIES
         OktetaCoreTestPieceTableChange
         OktetaCorePieceTable
-        Qt5::Test
+        Qt6::Test
 )
 
 ########### testpiecetablechangetest ###############
@@ -41,7 +41,7 @@ ecm_add_test( piecetabletest.cpp
 ecm_add_test( testpiecetablechangetest.cpp
     LINK_LIBRARIES
         OktetaCoreTestPieceTableChange
-        Qt5::Test
+        Qt6::Test
 )
 
 ########### testpiecetablechangeabstractpiecetablechangeiftest ###############
@@ -50,7 +50,7 @@ ecm_add_test( testpiecetablechangeabstractpiecetablechangeiftest.cpp
     LINK_LIBRARIES
         OktetaCoreTestPieceTableChange
         OktetaCorePieceTable
-        Qt5::Test
+        Qt6::Test
 )
 
 ########### insertpiecetablechangeabstractpiecetablechangeiftest ###############
@@ -59,7 +59,7 @@ ecm_add_test( insertpiecetablechangeabstractpiecetablechangeiftest.cpp
     LINK_LIBRARIES
         OktetaCoreTestPieceTableChange
         OktetaCorePieceTable
-        Qt5::Test
+        Qt6::Test
 )
 
 ########### removepiecetablechangeabstractpiecetablechangeiftest ###############
@@ -68,7 +68,7 @@ ecm_add_test( removepiecetablechangeabstractpiecetablechangeiftest.cpp
     LINK_LIBRARIES
         OktetaCoreTestPieceTableChange
         OktetaCorePieceTable
-        Qt5::Test
+        Qt6::Test
 )
 
 ########### replacepiecetablechangeabstractpiecetablechangeiftest ###############
@@ -77,7 +77,7 @@ ecm_add_test( replacepiecetablechangeabstractpiecetablechangeiftest.cpp
     LINK_LIBRARIES
         OktetaCoreTestPieceTableChange
         OktetaCorePieceTable
-        Qt5::Test
+        Qt6::Test
 )
 
 ########### swaprangespiecetablechangeabstractpiecetablechangeiftest ###############
@@ -86,7 +86,7 @@ ecm_add_test( swaprangespiecetablechangeabstractpiecetablechangeiftest.cpp
     LINK_LIBRARIES
         OktetaCoreTestPieceTableChange
         OktetaCorePieceTable
-        Qt5::Test
+        Qt6::Test
 )
 
 ########### grouppiecetablechangeabstractpiecetablechangeiftest ###############
@@ -97,7 +97,7 @@ ecm_add_test( grouppiecetablechangeabstractpiecetablechangeiftest.cpp
     LINK_LIBRARIES
         OktetaCoreTestPieceTableChange
         OktetaCorePieceTable
-        Qt5::Test
+        Qt6::Test
 )
 endif()
 
@@ -107,7 +107,7 @@ ecm_add_test( grouppiecetablechangetest.cpp
     LINK_LIBRARIES
         OktetaCoreTestPieceTableChange
         OktetaCorePieceTable
-        Qt5::Test
+        Qt6::Test
 )
 
 ########### piecetablechangehistorytest ###############
@@ -116,7 +116,7 @@ ecm_add_test( piecetablechangehistorytest.cpp
     LINK_LIBRARIES
         OktetaCoreTestPieceTableChange
         OktetaCorePieceTable
-        Qt5::Test
+        Qt6::Test
 )
 
 ########### revertablepiecetabletest ###############
@@ -124,5 +124,5 @@ ecm_add_test( piecetablechangehistorytest.cpp
 ecm_add_test( revertablepiecetabletest.cpp
     LINK_LIBRARIES
         OktetaCorePieceTable
-        Qt5::Test
+        Qt6::Test
 )

@@ -104,7 +104,6 @@ bool ByteArrayViewHtmlStreamEncoder::encodeDataToStream(QIODevice* device,
 
     // encode
     QTextStream textStream(device);
-    textStream.setCodec("UTF-8");
 
     textStream << "<html><head><meta charset=\"utf-8\"><meta name=\"generator\" content=\"Okteta ByteArrayViewHtmlStreamEncoder " OKTETAKASTENGUI_VERSION_STRING "\"></head><table>" << Qt::endl;
 

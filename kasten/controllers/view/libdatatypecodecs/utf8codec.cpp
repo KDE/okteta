@@ -12,14 +12,13 @@
 #include <utf8.hpp>
 // KF
 #include <KLocalizedString>
-// Qt
-#include <QTextCodec>
 
 namespace Okteta {
 
 Utf8Codec::Utf8Codec()
     : AbstractTypeCodec(i18nc("@label:textbox", "UTF-8"))
-    , mUtf8Codec(QTextCodec::codecForName("UTF-8"))
+    , mUtf8Decoder(QStringDecoder::Utf8)
+    , mUtf8Encoder(QStringEncoder::Utf8)
 {}
 
 Utf8Codec::~Utf8Codec() = default;
@@ -33,11 +32,12 @@ QVariant Utf8Codec::value(const PODData& data, int* byteCount) const
     const char* const originalData = (const char*)data.originalData();
     const int maxUtf8DataSize = data.size();
 
+    mUtf8Decoder.resetState();
     QString utf8;
     bool isUtf8 = false;
     *byteCount = 0;
     for (int i = 1; i <= maxUtf8DataSize; ++i) {
-        utf8 = mUtf8Codec->toUnicode(originalData, i);
+        utf8 = mUtf8Decoder.decode({originalData, i});
         if (utf8.size() == 1 && utf8[0] != replacementChar) {
             isUtf8 = true;
             *byteCount = i;
@@ -52,7 +52,8 @@ QByteArray Utf8Codec::valueToBytes(const QVariant& value) const
 {
     const QChar valueChar = value.value<Utf8>().value;
 
-    return mUtf8Codec->fromUnicode(valueChar);
+    mUtf8Encoder.resetState();
+    return mUtf8Encoder.encode(valueChar);
 }
 
 bool Utf8Codec::areEqual(const QVariant& value, QVariant& otherValue) const
