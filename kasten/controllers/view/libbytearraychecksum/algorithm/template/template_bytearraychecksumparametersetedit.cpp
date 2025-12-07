@@ -42,7 +42,7 @@ Template_ByteArrayChecksumParameterSetEdit::Template_ByteArrayChecksumParameterS
     mBitNumberEdit->setRange(0, 8);
     // start with the invalid number
     mBitNumberEdit->setValue(0);
-    connect(mBitNumberEdit, qOverload<int>(&QSpinBox::valueChanged),
+    connect(mBitNumberEdit, &QSpinBox::valueChanged,
             this, &Template_ByteArrayChecksumParameterSetEdit::onBitNumberChanged);
 
     const QString levelLabelText =

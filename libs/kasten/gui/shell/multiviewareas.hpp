@@ -41,12 +41,12 @@ public: // AbstractViewArea API
     bool hasFocus() const override;
 
 public: // AbstractGroupedViews API
-    void addViews(const QVector<AbstractView*>& views) override;
-    void removeViews(const QVector<AbstractView*>& views) override;
+    void addViews(const QList<AbstractView*>& views) override;
+    void removeViews(const QList<AbstractView*>& views) override;
     void setViewFocus(AbstractView* view) override;
 
     [[nodiscard]]
-    QVector<AbstractView*> viewList() const override;
+    QList<AbstractView*> viewList() const override;
     [[nodiscard]]
     int viewCount() const override;
     [[nodiscard]]
@@ -68,8 +68,8 @@ public: // If::ViewAreaSplitable API
     int viewAreasCount() const override;
 
 Q_SIGNALS: // If::ViewAreaSplitable API
-    void viewAreasAdded(const QVector<Kasten::AbstractViewArea*>& viewAreas) override;
-    void viewAreasRemoved(const QVector<Kasten::AbstractViewArea*>& viewAreas) override;
+    void viewAreasAdded(const QList<Kasten::AbstractViewArea*>& viewAreas) override;
+    void viewAreasRemoved(const QList<Kasten::AbstractViewArea*>& viewAreas) override;
     void viewAreaFocusChanged(Kasten::AbstractViewArea* viewArea) override;
 
 Q_SIGNALS:

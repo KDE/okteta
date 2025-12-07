@@ -84,8 +84,8 @@ public: // set/action
     void revertToVersionByIndex(int versionIndex) override;
 
 public: // Bookmarkable API
-    void addBookmarks(const QVector<Okteta::Bookmark>& bookmarks) override;
-    void removeBookmarks(const QVector<Okteta::Bookmark>& bookmarks) override;
+    void addBookmarks(const QList<Okteta::Bookmark>& bookmarks) override;
+    void removeBookmarks(const QList<Okteta::Bookmark>& bookmarks) override;
     void removeAllBookmarks() override;
     void setBookmark(unsigned int index, const Okteta::Bookmark& bookmark) override;
 
@@ -107,10 +107,10 @@ public: // ChangesDescribable API
 
 public: // ChangeHistory API
     [[nodiscard]]
-    QVector<ByteArrayChange> changes(int firstVersionIndex, int lastVersionIndex) const override;
+    QList<ByteArrayChange> changes(int firstVersionIndex, int lastVersionIndex) const override;
     [[nodiscard]]
     QByteArray initialData() const override;
-    void doChanges(const QVector<Okteta::ByteArrayChange>& changes,
+    void doChanges(const QList<Okteta::ByteArrayChange>& changes,
                    int oldVersionIndex, int newVersionIndex) override;
 
 public:
@@ -122,13 +122,13 @@ Q_SIGNALS: // Versionable signals
     void headVersionChanged(int newHeadVersionIndex) override;
 
 Q_SIGNALS: // Bookmarkable signals
-    void bookmarksAdded(const QVector<Okteta::Bookmark>& bookmarks) override;
-    void bookmarksRemoved(const QVector<Okteta::Bookmark>& bookmarks) override;
+    void bookmarksAdded(const QList<Okteta::Bookmark>& bookmarks) override;
+    void bookmarksRemoved(const QList<Okteta::Bookmark>& bookmarks) override;
     void bookmarksModified(bool modified) override;
-    void bookmarksModified(const QVector<int>& indizes) override;
+    void bookmarksModified(const QList<int>& indizes) override;
 
 Q_SIGNALS: // ChangeHistory signals
-    void changesDone(const QVector<Okteta::ByteArrayChange>& changes,
+    void changesDone(const QList<Okteta::ByteArrayChange>& changes,
                      int oldVersionIndex, int newVersionIndex) override;
 
 private:

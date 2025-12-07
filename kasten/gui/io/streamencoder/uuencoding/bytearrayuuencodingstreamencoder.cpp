@@ -111,6 +111,7 @@ void UuencodingStreamEncoderSettings::saveConfig(KConfigGroup& configGroup) cons
     configGroup.writeEntry(EncodingTypeConfigKey, encodingType);
 }
 
+const QString ByteArrayUuencodingStreamEncoder::ConfigGroupId = QStringLiteral("ByteArrayUuencodingStreamEncoder");
 
 ByteArrayUuencodingStreamEncoder::ByteArrayUuencodingStreamEncoder()
     : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "Uuencoding"), QStringLiteral("text/x-uuencode"))

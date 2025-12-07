@@ -50,7 +50,7 @@ public:
 
 public: // If::WidgetsDockable API
     [[nodiscard]]
-    QVector<ToolViewDockWidget*> dockWidgets() const override;
+    QList<ToolViewDockWidget*> dockWidgets() const override;
 
 protected Q_SLOTS: // KXmlGuiWindow API
     void saveNewToolbarConfig() override;

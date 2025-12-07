@@ -49,6 +49,7 @@ void ValuesStreamEncoderSettings::saveConfig(KConfigGroup& configGroup) const
     configGroup.writeEntry(SeparatorConfigKey, separation);
 }
 
+const QString ByteArrayValuesStreamEncoder::ConfigGroupId = QStringLiteral("ByteArrayValuesStreamEncoder");
 
 ByteArrayValuesStreamEncoder::ByteArrayValuesStreamEncoder()
     : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "Values"), QStringLiteral("text/plain"))

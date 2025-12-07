@@ -19,6 +19,8 @@
 
 namespace Kasten {
 
+const QString SearchDialog::ConfigGroupId = QStringLiteral("SearchTool");
+
 SearchDialog::SearchDialog(SearchTool* tool, QWidget* parent)
     : AbstractFindDialog(parent)
     , mTool(tool)

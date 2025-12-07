@@ -37,12 +37,12 @@ public: // AbstractViewArea API
     bool hasFocus() const;
 
 public: // AbstractGroupedViews API
-    void addViews(const QVector<AbstractView*>& views);
-    void removeViews(const QVector<AbstractView*>& views);
+    void addViews(const QList<AbstractView*>& views);
+    void removeViews(const QList<AbstractView*>& views);
     void setViewFocus(AbstractView* view);
 
     [[nodiscard]]
-    QVector<AbstractView*> viewList() const;
+    QList<AbstractView*> viewList() const;
     [[nodiscard]]
     int viewCount() const;
     [[nodiscard]]

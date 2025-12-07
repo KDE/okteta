@@ -2,10 +2,12 @@ set(SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/..)
 
 configure_file(oktetaparttest-config.hpp.in ${CMAKE_CURRENT_BINARY_DIR}/oktetaparttest-config.hpp @ONLY)
 
+configure_file(${CMAKE_CURRENT_SOURCE_DIR}/../oktetapart.json.in oktetapart.json @ONLY)
+
 # TODO: deduplicate object file generation of
 ecm_add_test(
     ${SUTDIR}/part.cpp
-    ${SUTDIR}/browserextension.cpp
+    ${SUTDIR}/navigationextension.cpp
     ${SUTDIR}/partfactory.cpp
     oktetaparttest.cpp
 
@@ -17,9 +19,9 @@ ecm_add_test(
       KastenControllers
       KastenGui
       KastenCore
-      KF5::I18n
-      KF5::Parts
-      Qt5::Test
+      KF6::I18n
+      KF6::Parts
+      Qt6::Test
 )
 
 target_include_directories(oktetaparttest PRIVATE
@@ -28,6 +30,3 @@ target_include_directories(oktetaparttest PRIVATE
 )
 
 target_compile_definitions(oktetaparttest PRIVATE TRANSLATION_DOMAIN=\"oktetapart\")
-
-kcoreaddons_desktop_to_json(oktetaparttest ${CMAKE_CURRENT_BINARY_DIR}/../oktetapart.desktop)
-

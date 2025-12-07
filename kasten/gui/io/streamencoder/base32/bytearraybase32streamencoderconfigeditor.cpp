@@ -41,7 +41,7 @@ ByteArrayBase32StreamEncoderConfigEditor::ByteArrayBase32StreamEncoderConfigEdit
     };
     mEncodingSelect->addItems(list);
     mEncodingSelect->setCurrentIndex(static_cast<int>(mSettings.encodingType));
-    connect(mEncodingSelect, qOverload<int>(&KComboBox::activated),
+    connect(mEncodingSelect, &KComboBox::activated,
             this, &ByteArrayBase32StreamEncoderConfigEditor::onSettingsChanged);
     pageLayout->addRow(encodingTypeLabel, mEncodingSelect);
 }

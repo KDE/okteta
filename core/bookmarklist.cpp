@@ -7,7 +7,7 @@
 #include "bookmarklist.hpp"
 
 // Qt
-#include <QVector>
+#include <QList>
 // Std
 #include <utility>
 
@@ -46,7 +46,7 @@ void BookmarkList::addBookmark(const Bookmark& bookmark)
     }
 }
 
-void BookmarkList::addBookmarks(const QVector<Okteta::Bookmark>& bookmarks)
+void BookmarkList::addBookmarks(const QList<Okteta::Bookmark>& bookmarks)
 {
     for (const Bookmark& bookmark : bookmarks) {
         addBookmark(bookmark);
@@ -68,7 +68,7 @@ void BookmarkList::removeBookmark(const Bookmark& bookmark)
     }
 }
 
-void BookmarkList::removeBookmarks(const QVector<Okteta::Bookmark>& bookmarks)
+void BookmarkList::removeBookmarks(const QList<Okteta::Bookmark>& bookmarks)
 {
     for (const Bookmark& bookmark : bookmarks) {
         removeBookmark(bookmark);
@@ -120,7 +120,7 @@ bool BookmarkList::adjustToSwapped(Address firstPartStart, Address secondPartSta
     while (bIt != end() && bIt->offset() < firstPartStart) {
         ++bIt;
     }
-    QVector<Okteta::Bookmark> bookmarksInFirstPart;
+    QList<Okteta::Bookmark> bookmarksInFirstPart;
     // take bookmarks from first part
     while (bIt != end() && bIt->offset() < secondPartStart) {
         bookmarksInFirstPart.append(*bIt);
@@ -147,9 +147,9 @@ bool BookmarkList::adjustToSwapped(Address firstPartStart, Address secondPartSta
     return result;
 }
 
-QVector<Okteta::Bookmark> BookmarkList::list() const
+QList<Okteta::Bookmark> BookmarkList::list() const
 {
-    QVector<Okteta::Bookmark> result;
+    QList<Okteta::Bookmark> result;
     result.reserve(size());
 
     for (const Bookmark& bookmark : *this) {

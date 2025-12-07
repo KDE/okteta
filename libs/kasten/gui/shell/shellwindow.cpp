@@ -33,7 +33,7 @@ MultiViewAreas* ShellWindow::viewArea() const
     return d->viewArea();
 }
 
-QVector<ToolViewDockWidget*> ShellWindow::dockWidgets() const
+QList<ToolViewDockWidget*> ShellWindow::dockWidgets() const
 {
     Q_D(const ShellWindow);
 
