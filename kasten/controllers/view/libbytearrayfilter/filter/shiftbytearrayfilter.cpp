@@ -14,7 +14,7 @@
 // Std
 #include <cstdlib>
 
-static constexpr char ShiftFilterConfigGroupId[] = "Shift";
+static const QString ShiftFilterConfigGroupId = QStringLiteral("Shift");
 
 // TODO: add option which bit (0/1) to insert
 static constexpr int ShiftBitsPerByte = 8;

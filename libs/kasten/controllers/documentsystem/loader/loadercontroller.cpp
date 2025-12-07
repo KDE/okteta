@@ -21,14 +21,16 @@
 
 namespace Kasten {
 
-static constexpr char CreatorConfigGroupId[] = "Recent Files";
+static const QString CreatorConfigGroupId = QStringLiteral("Recent Files");
 
 LoaderController::LoaderController(AbstractDocumentStrategy* documentStrategy,
                                    KXMLGUIClient* guiClient)
     : mDocumentStrategy(documentStrategy)
+    , mActionCollection(new KActionCollection(this))
 {
-    QAction* const openAction = KStandardAction::open(this, &LoaderController::load, this);
-    mOpenRecentAction = KStandardAction::openRecent(this, &LoaderController::loadRecent, this);
+    // adding to custom mActionCollection for KStandardAction toolbar magic
+    QAction* const openAction = KStandardAction::open(this, &LoaderController::load, mActionCollection);
+    mOpenRecentAction = KStandardAction::openRecent(this, &LoaderController::loadRecent, mActionCollection);
 
     KActionCollection* const actionCollection = guiClient->actionCollection();
     actionCollection->addAction(openAction->objectName(), openAction);
