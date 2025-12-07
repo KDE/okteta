@@ -73,8 +73,8 @@ public:
     int capacity() const;
 
 public: // Bookmarkable API
-    void addBookmarks(const QVector<Bookmark>& bookmarks);
-    void removeBookmarks(const QVector<Bookmark>& bookmarks);
+    void addBookmarks(const QList<Bookmark>& bookmarks);
+    void removeBookmarks(const QList<Bookmark>& bookmarks);
     void removeAllBookmarks();
     void setBookmark(unsigned int index, const Bookmark& bookmark);
 
@@ -174,14 +174,14 @@ inline void ByteArrayModelPrivate::setModified(bool modified)
 inline int ByteArrayModelPrivate::maxSize()      const { return mMaxSize; }
 inline int ByteArrayModelPrivate::capacity()     const { return m_capacity; }
 
-inline void ByteArrayModelPrivate::addBookmarks(const QVector<Bookmark>& bookmarks)
+inline void ByteArrayModelPrivate::addBookmarks(const QList<Bookmark>& bookmarks)
 {
     Q_Q(ByteArrayModel);
 
     m_bookmarks.addBookmarks(bookmarks);
     Q_EMIT q->bookmarksAdded(bookmarks);
 }
-inline void ByteArrayModelPrivate::removeBookmarks(const QVector<Bookmark>& bookmarks)
+inline void ByteArrayModelPrivate::removeBookmarks(const QList<Bookmark>& bookmarks)
 {
     Q_Q(ByteArrayModel);
 
@@ -193,7 +193,7 @@ inline void ByteArrayModelPrivate::removeAllBookmarks()
 {
     Q_Q(ByteArrayModel);
 
-    const QVector<Bookmark> bookmarks = m_bookmarks.list();
+    const QList<Bookmark> bookmarks = m_bookmarks.list();
     m_bookmarks.clear();
     Q_EMIT q->bookmarksRemoved(bookmarks);
 }
@@ -203,7 +203,7 @@ inline void ByteArrayModelPrivate::setBookmark(unsigned int index, const Bookmar
 
     m_bookmarks.setBookmark(index, bookmark);
 
-    const QVector<int> changedBookmarkIndizes {
+    const QList<int> changedBookmarkIndizes {
         static_cast<int>(index)
     };
     Q_EMIT q->bookmarksModified(changedBookmarkIndizes);

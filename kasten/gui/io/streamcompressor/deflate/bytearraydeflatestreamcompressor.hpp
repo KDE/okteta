@@ -77,7 +77,7 @@ class ByteArrayDeflateStreamCompressor : public AbstractByteArrayStreamCompresso
     Q_OBJECT
 
 private:
-    static constexpr char ConfigGroupId[] = "ByteArrayDeflateStreamCompressor";
+    static const QString ConfigGroupId;
 
 public:
     ByteArrayDeflateStreamCompressor();

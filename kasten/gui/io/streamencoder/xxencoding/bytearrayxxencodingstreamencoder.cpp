@@ -66,6 +66,7 @@ void XxencodingStreamEncoderSettings::saveConfig(KConfigGroup& configGroup) cons
     configGroup.writeEntry(FileNameConfigKey, fileName);
 }
 
+const QString ByteArrayXxencodingStreamEncoder::ConfigGroupId = QStringLiteral("ByteArrayXxencodingStreamEncoder");
 
 ByteArrayXxencodingStreamEncoder::ByteArrayXxencodingStreamEncoder()
     : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "Xxencoding"), QStringLiteral("text/x-xxencode"))

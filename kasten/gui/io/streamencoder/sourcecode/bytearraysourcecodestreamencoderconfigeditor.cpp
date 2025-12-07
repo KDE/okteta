@@ -47,7 +47,7 @@ ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderCo
     mItemsPerLineEdit = new QSpinBox(this);
     mItemsPerLineEdit->setMinimum(1);
     mItemsPerLineEdit->setValue(mSettings.elementsPerLine);
-    connect(mItemsPerLineEdit, qOverload<int>(&QSpinBox::valueChanged),
+    connect(mItemsPerLineEdit, &QSpinBox::valueChanged,
             this, &ByteArraySourceCodeStreamEncoderConfigEditor::onSettingsChanged);
     pageLayout->addRow(itemsPerLineLabel, mItemsPerLineEdit);
 
@@ -67,7 +67,7 @@ ByteArraySourceCodeStreamEncoderConfigEditor::ByteArraySourceCodeStreamEncoderCo
 
     mDataTypeSelect->addItems(dataTypeNameStrings);
     mDataTypeSelect->setCurrentIndex(static_cast<int>(mSettings.dataType));
-    connect(mDataTypeSelect, qOverload<int>(&KComboBox::activated),
+    connect(mDataTypeSelect, &KComboBox::activated,
             this, &ByteArraySourceCodeStreamEncoderConfigEditor::onSettingsChanged);
     pageLayout->addRow(dataTypeLabel, mDataTypeSelect);
 

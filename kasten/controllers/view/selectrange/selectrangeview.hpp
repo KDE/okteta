@@ -38,7 +38,7 @@ private:
     static constexpr bool DefaultRelativeToEnd = false;
     static constexpr SelectDirection DefaultDirection = SelectForward;
 
-    static constexpr char ConfigGroupId[] = "SelectRangeTool";
+    static const QString ConfigGroupId;
 
     static constexpr char StartOffsetCodingConfigKey[] = "StartOffsetCoding";
     static constexpr char EndOffsetCodingConfigKey[] = "EndOffsetCoding";

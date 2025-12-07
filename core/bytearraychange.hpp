@@ -74,6 +74,6 @@ inline QDataStream& operator>>(QDataStream& inStream, ByteArrayChange& change)
 
 }
 
-Q_DECLARE_TYPEINFO(Okteta::ByteArrayChange, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(Okteta::ByteArrayChange, Q_RELOCATABLE_TYPE);
 
 #endif

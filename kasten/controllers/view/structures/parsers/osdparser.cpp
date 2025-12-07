@@ -54,13 +54,12 @@ QDomDocument OsdParser::openDoc(ScriptLogger* logger) const
 QDomDocument OsdParser::openDocFromString(ScriptLogger* logger) const
 {
     Q_ASSERT(!mXmlString.isEmpty());
-    int errorLine, errorColumn;
-    QString errorMsg;
     QDomDocument doc;
-    if (!doc.setContent(mXmlString, false, &errorMsg, &errorLine, &errorColumn)) {
+    const QDomDocument::ParseResult result =  doc.setContent(mXmlString);
+    if (!result) {
         const QString errorOutput =
             QStringLiteral("Error reading XML: %1\n error line=%2\nerror column=%3")
-            .arg(errorMsg, QString::number(errorLine), QString::number(errorColumn));
+            .arg(result.errorMessage, QString::number(result.errorLine), QString::number(result.errorColumn));
         logger->error() << errorOutput;
         logger->info() << "XML was:" << mXmlString;
 
@@ -81,13 +80,12 @@ QDomDocument OsdParser::openDocFromFile(ScriptLogger* logger) const
         logger->error().nospace() << "Could not open file " << mAbsolutePath << ".";
         return {};
     }
-    int errorLine, errorColumn;
-    QString errorMsg;
     QDomDocument doc;
-    if (!doc.setContent(&file, false, &errorMsg, &errorLine, &errorColumn)) {
+    const QDomDocument::ParseResult result =  doc.setContent(&file);
+    if (!result) {
         const QString errorOutput =
             QStringLiteral("Error reading XML: %1\n error line=%2\nerror column=%3")
-            .arg(errorMsg, QString::number(errorLine), QString::number(errorColumn));
+            .arg(result.errorMessage, QString::number(result.errorLine), QString::number(result.errorColumn));
         logger->error() << errorOutput;
         logger->info() << "File was:" << mAbsolutePath;
     }

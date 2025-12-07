@@ -8,8 +8,8 @@ ecm_add_test(
     TEST_NAME char8stringvalidatortest
     LINK_LIBRARIES
         OktetaCore
-        Qt5::Gui
-        Qt5::Test
+        Qt6::Gui
+        Qt6::Test
 )
 target_include_directories(char8stringvalidatortest
     PUBLIC
