@@ -7,9 +7,10 @@ target_sources(KastenCoreTestUtil
 )
 target_link_libraries(KastenCoreTestUtil
     PUBLIC
-        Qt5::Core
+        Qt6::Core
     PRIVATE
-        Qt5::Test
+        Qt6::Core5Compat
+        Qt6::Test
 )
 
 ########### io ###############
@@ -19,7 +20,7 @@ target_link_libraries(KastenCoreTestIo
     PUBLIC
         KastenCore
     PRIVATE
-        KF5::CoreAddons
+        KF6::CoreAddons
 )
 target_sources(KastenCoreTestIo
     PRIVATE
@@ -41,7 +42,7 @@ ecm_add_test(
     TEST_NAME testdocumenttest
     LINK_LIBRARIES
         KastenCore
-        Qt5::Test
+        Qt6::Test
 )
 
 ########### testdocumentfilesynchronizertest ###############
@@ -55,7 +56,7 @@ ecm_add_test(
         KastenCoreTestIo
         KastenCoreTestUtil
         KastenCore
-        Qt5::Test
+        Qt6::Test
 )
 
 ############ testdocumentfilesynchronizerfactorytest ###############
@@ -70,7 +71,7 @@ ecm_add_test(
         KastenCoreTestIo
         KastenCoreTestUtil
         KastenCore
-        Qt5::Test
+        Qt6::Test
 )
 
 ########### documentmanagertest ###############
@@ -81,5 +82,5 @@ ecm_add_test(
     TEST_NAME documentmanagertest
     LINK_LIBRARIES
         KastenCore
-        Qt5::Test
+        Qt6::Test
 )
