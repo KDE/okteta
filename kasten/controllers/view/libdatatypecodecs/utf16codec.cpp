@@ -12,19 +12,14 @@
 #include <utf16.hpp>
 // KF
 #include <KLocalizedString>
-// Qt
-#include <QTextCodec>
-#include <QTextEncoder>
-#include <QTextDecoder>
 
 namespace Okteta {
 
 Utf16Codec::Utf16Codec()
     : AbstractTypeCodec(i18nc("@label:textbox", "UTF-16"))
+    , mUtf16Decoder(QStringConverter::Utf16, QStringConverter::Flag::ConvertInitialBom)
+    , mUtf16Encoder(QStringConverter::Utf16)
 {
-    auto* const utf16Codec = QTextCodec::codecForName("UTF-16");
-    mUtf16Encoder.reset(utf16Codec->makeEncoder(QTextCodec::IgnoreHeader));
-    mUtf16Decoder.reset(utf16Codec->makeDecoder(QTextCodec::IgnoreHeader));
 }
 
 Utf16Codec::~Utf16Codec() = default;
@@ -34,7 +29,8 @@ QVariant Utf16Codec::value(const PODData& data, int* byteCount) const
     const char* const pointer = (char*)data.pointer(2);
 
     if (pointer) {
-        const QString utf16 = mUtf16Decoder->toUnicode(pointer, 2);
+        mUtf16Decoder.resetState();
+        const QString utf16 = mUtf16Decoder.decode({pointer, 2});
         if (utf16.size() == 1 && utf16[0] != QChar(QChar::ReplacementCharacter)) {
             *byteCount = 2;
             return QVariant::fromValue<Utf16>(Utf16(utf16[0]));
@@ -48,7 +44,8 @@ QByteArray Utf16Codec::valueToBytes(const QVariant& value) const
 {
     const QChar valueChar = value.value<Utf16>().value;
 
-    return mUtf16Encoder->fromUnicode(valueChar);
+    mUtf16Encoder.resetState();
+    return mUtf16Encoder.encode(valueChar);
 }
 
 bool Utf16Codec::areEqual(const QVariant& value, QVariant& otherValue) const

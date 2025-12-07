@@ -42,7 +42,7 @@ ByteArrayIHexStreamEncoderConfigEditor::ByteArrayIHexStreamEncoderConfigEditor(B
     };
     mAddressSizeSelect->addItems(addressSizeList);
     mAddressSizeSelect->setCurrentIndex(static_cast<int>(mSettings.addressSizeId));
-    connect(mAddressSizeSelect, qOverload<int>(&KComboBox::activated),
+    connect(mAddressSizeSelect, &KComboBox::activated,
             this, &ByteArrayIHexStreamEncoderConfigEditor::onSettingsChanged);
     pageLayout->addRow(addressSizeLabel, mAddressSizeSelect);
 }

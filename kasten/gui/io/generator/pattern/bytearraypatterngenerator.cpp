@@ -92,6 +92,8 @@ void ByteArrayPatternGeneratorSettings::saveConfig(KConfigGroup& configGroup) co
 // there are two kinds of generated datam fixed size (e.g. sequence) and endless size?
 // perhaps by option fill selection? or a separate menu entry fill, which only works on selections?
 
+const QString ByteArrayPatternGenerator::ConfigGroupId = QStringLiteral("ByteArrayPatternGenerator");
+
 ByteArrayPatternGenerator::ByteArrayPatternGenerator()
     : AbstractModelDataGenerator(
         i18nc("name of the generated data", "Pattern…"),

@@ -169,6 +169,8 @@ inline void KConfigGroup::writeEntry(const char *key, const QPageSize::PageSizeI
 
 namespace Kasten {
 
+const QString PrintTool::ConfigGroupId = QStringLiteral("PrintTool");
+
 PrintTool::PrintTool(AbstractUserMessagesHandler* userMessagesHandler)
     : m_userMessagesHandler(userMessagesHandler)
 {

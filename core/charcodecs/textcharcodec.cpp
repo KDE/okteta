@@ -9,12 +9,10 @@
 // lib
 #include <character.hpp>
 #include <logging.hpp>
-// Qt
-#include <QTextCodec>
+// Std
+#include <cstring>
 
 namespace Okteta {
-
-// static const char QTextCodecWhiteSpace = 63;
 
 static constexpr struct EncodingData
 {
@@ -55,24 +53,18 @@ encodingDataList[] =
 };
 // TODO: WS2
 
-static bool is8Bit(QTextCodec* codec)
+static bool is8Bit(const char* encodingName)
 {
     bool result = false;
 
-    const QByteArray& codecName = codec->name();
     for (const auto& encodingData : encodingDataList) {
-        if (codecName.compare(encodingData.name) == 0) {
+        if (std::strcmp(encodingName, encodingData.name) == 0) {
             result = true;
             break;
         }
     }
 
     return result;
-}
-
-static QTextCodec* createLatin1()
-{
-    return QTextCodec::codecForName(encodingDataList[0].name);
 }
 
 /* heuristic seems to be doomed :(
@@ -146,24 +138,32 @@ QString TextCharCodec::nameOfEncoding( CharCoding _char )
 
 std::unique_ptr<TextCharCodec> TextCharCodec::createLocalCodec()
 {
-    QTextCodec* codec = QTextCodec::codecForLocale();
-    if (!is8Bit(codec)) {
-        codec = createLatin1();
+    const char* encodingName  = QStringConverter::nameForEncoding(QStringConverter::System);
+    if (!is8Bit(encodingName)) {
+        // fallback to Latin1;
+        encodingName = encodingDataList[0].name;
     }
-    return std::make_unique<TextCharCodec>(codec, ConstructorTag());
+    return std::make_unique<TextCharCodec>(encodingName, ConstructorTag());
 }
 
 std::unique_ptr<TextCharCodec> TextCharCodec::createCodec(const QString& codecName)
 {
     bool isOk = false;
-    QTextCodec* const codec = QTextCodec::codecForName(codecName.toLatin1());
-    if (codec) {
-        isOk = is8Bit(codec);
+    const QByteArray codecNameLatin1 = codecName.toLatin1();
+    const QStringEncoder dummyEncoder(codecNameLatin1.data());
+    const QStringDecoder dummyDecoder(codecNameLatin1.data());
+    const char* encodingName = dummyEncoder.name();
+    // QTBUG-119631 work-around: Qt sometimes not setting a name
+    if (!encodingName || std::strlen(encodingName) == 0) {
+        encodingName = codecNameLatin1.data();
+    }
+    if (dummyEncoder.isValid() && dummyDecoder.isValid()) {
+        isOk = is8Bit(encodingName);
     }
     if (!isOk) {
         return {};
     }
-    return std::make_unique<TextCharCodec>(codec, ConstructorTag());
+    return std::make_unique<TextCharCodec>(encodingName, ConstructorTag());
 }
 
 const QStringList& TextCharCodec::codecNames()
@@ -173,9 +173,14 @@ const QStringList& TextCharCodec::codecNames()
     // first call?
     if (textCodecNames.isEmpty()) {
         for (const auto& encodingData : encodingDataList) {
-            QTextCodec* const codec = QTextCodec::codecForName((encodingData.name));
-            if (codec) {
-                textCodecNames.append(QString::fromLatin1(codec->name()));
+            const QStringEncoder dummyEncoder(encodingData.name);
+            if (dummyEncoder.isValid()) {
+                QString textCodecName = QString::fromLatin1(dummyEncoder.name());
+                // QTBUG-119631 work-around: Qt sometimes not setting a name
+                if (textCodecName.isEmpty()) {
+                    textCodecName = QString::fromLatin1(encodingData.name);
+                }
+                textCodecNames.append(textCodecName);
             }
         }
     }
@@ -183,27 +188,34 @@ const QStringList& TextCharCodec::codecNames()
     return textCodecNames;
 }
 
-TextCharCodec::TextCharCodec(QTextCodec* textCodec, TextCharCodec::ConstructorTag)
-    : mCodec(textCodec)
-    , mDecoder(textCodec->makeDecoder())
-    , mEncoder(textCodec->makeEncoder())
+TextCharCodec::TextCharCodec(const char* encodingName, TextCharCodec::ConstructorTag)
+    : mDecoder(encodingName)
+    , mEncoder(encodingName)
+    , mName(QString::fromLatin1(mDecoder.name()))
 {
+    // QTBUG-119631 work-around: Qt sometimes not setting a name
+    if (mName.isEmpty()) {
+        mName = QString::fromLatin1(encodingName);
+    }
 }
 
 TextCharCodec::~TextCharCodec() = default;
 
 bool TextCharCodec::canEncode(QChar _char) const
 {
-    return mCodec->canEncode(_char);
+    mEncoder.resetState();
+    const QByteArray encoded = mEncoder.encode(QString(_char));
+    return !mEncoder.hasError();
 }
 
 bool TextCharCodec::encode(Byte* byte, QChar _char) const
 {
-    if (!mCodec->canEncode(_char)) { // TODO: do we really need the codec?
+    mEncoder.resetState();
+    const QByteArray encoded = mEncoder.encode(QString(_char));
+    if (mEncoder.hasError()) {
         return false;
     }
 
-    const QByteArray encoded = mEncoder->fromUnicode(QString(_char));
     if (encoded.size() > 0) {
         *byte = encoded.at(0);
         return true;
@@ -214,10 +226,10 @@ bool TextCharCodec::encode(Byte* byte, QChar _char) const
 
 Character TextCharCodec::decode(Byte byte) const
 {
-    // QTextCodecs "use this codepoint when input data cannot be represented in Unicode." (Qt docs)
     constexpr QChar replacementChar = QChar(QChar::ReplacementCharacter);
+    mDecoder.resetState();
     const QString string =
-        mDecoder->toUnicode(reinterpret_cast<const char*>(&byte), 1);
+        mDecoder.decode({reinterpret_cast<const char*>(&byte), 1});
     const QChar qchar = string.at(0);
     const bool isDecoded = (qchar != replacementChar);
     return {qchar, !isDecoded};
@@ -225,9 +237,12 @@ Character TextCharCodec::decode(Byte byte) const
 
 QString TextCharCodec::name() const
 {
+// not used currently due to QTBUG-119631 work-around, see above
+#if 0
     if (mName.isNull()) {
-        mName = QString::fromLatin1(mCodec->name());
+        mName = QString::fromLatin1(mDecoder.name());
     }
+#endif
 
     return mName;
 }

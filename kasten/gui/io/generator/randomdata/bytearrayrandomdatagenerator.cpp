@@ -38,6 +38,8 @@ void ByteArrayRandomDataGeneratorSettings::saveConfig(KConfigGroup& configGroup)
 // there are two kinds of generated datam fixed size (e.g. sequence) and endless size?
 // perhaps by option fill selection? or a separate menu entry fill, which only works on selections?
 
+const QString ByteArrayRandomDataGenerator::ConfigGroupId = QStringLiteral("ByteArrayRandomDataGenerator");
+
 ByteArrayRandomDataGenerator::ByteArrayRandomDataGenerator()
     : AbstractModelDataGenerator(
         i18nc("name of the generated data", "Random Data…"),

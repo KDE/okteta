@@ -46,7 +46,7 @@ void SwitchViewController::updateActions()
 {
     bool hasNext;
     bool hasPrevious;
-    const QVector<AbstractView*> viewList = mGroupedViews->viewList();
+    const QList<AbstractView*> viewList = mGroupedViews->viewList();
     if (viewList.isEmpty()) {
         hasNext = false;
         hasPrevious = false;
@@ -64,7 +64,7 @@ void SwitchViewController::updateActions()
 
 void SwitchViewController::forward()
 {
-    const QVector<AbstractView*> viewList = mGroupedViews->viewList();
+    const QList<AbstractView*> viewList = mGroupedViews->viewList();
     AbstractView* const focussedView = mGroupedViews->viewFocus();
     const int indexOfFocussedView = viewList.indexOf(focussedView);
     AbstractView* const nextView = viewList.at(indexOfFocussedView + 1);
@@ -73,7 +73,7 @@ void SwitchViewController::forward()
 
 void SwitchViewController::backward()
 {
-    const QVector<AbstractView*> viewList = mGroupedViews->viewList();
+    const QList<AbstractView*> viewList = mGroupedViews->viewList();
     AbstractView* const focussedView = mGroupedViews->viewFocus();
     const int indexOfFocussedView = viewList.indexOf(focussedView);
     AbstractView* const previousView = viewList.at(indexOfFocussedView - 1);

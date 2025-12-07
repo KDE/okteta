@@ -42,7 +42,7 @@ FilterView::FilterView(FilterTool* tool, QWidget* parent)
     auto* const filterSelectionToolBar = new QToolBar(this);
     auto* const label = new QLabel(i18nc("@label:listbox operation to use by the filter", "Operation:"), this);
     mOperationComboBox = new KComboBox(this);
-    connect(mOperationComboBox, qOverload<int>(&KComboBox::activated),
+    connect(mOperationComboBox, &KComboBox::activated,
             mTool, &FilterTool::setFilter);
 
     auto* const labelledAlgorithmComboBox = new LabelledToolBarWidget(label, mOperationComboBox, this);

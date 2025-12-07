@@ -10,7 +10,7 @@
 // lib
 #include "documentmanager.hpp"
 // Qt
-#include <QVector>
+#include <QList>
 // Std
 #include <memory>
 
@@ -38,7 +38,7 @@ public:
     void addDocument(std::unique_ptr<AbstractDocument>&& document);
 
     void closeDocument(AbstractDocument* document);
-    void closeDocuments(const QVector<AbstractDocument*>& documents);
+    void closeDocuments(const QList<AbstractDocument*>& documents);
     void closeAll();
 // TODO: think about if a more general close( documentList, theseOrOthers ) is better, same with canCloseAllOther()
     void closeAllOther(AbstractDocument* document);
@@ -47,7 +47,7 @@ public:
     [[nodiscard]]
     bool canClose(AbstractDocument* document) const;
     [[nodiscard]]
-    bool canClose(const QVector<AbstractDocument*>& documents) const;
+    bool canClose(const QList<AbstractDocument*>& documents) const;
     [[nodiscard]]
     bool canCloseAll() const;
     [[nodiscard]]
@@ -57,7 +57,7 @@ public:
 
 public:
     [[nodiscard]]
-    QVector<AbstractDocument*> documents() const;
+    QList<AbstractDocument*> documents() const;
     [[nodiscard]]
     bool isEmpty() const;
 
@@ -72,7 +72,7 @@ public:
 private:
     DocumentManager* const q_ptr;
 
-    QVector<AbstractDocument*> mList;
+    QList<AbstractDocument*> mList;
 
     // TODO: remove into own singleton
     const std::unique_ptr<DocumentCreateManager> mCreateManager;
@@ -87,7 +87,7 @@ inline DocumentCreateManager* DocumentManagerPrivate::createManager() const { re
 inline DocumentSyncManager* DocumentManagerPrivate::syncManager() const { return mSyncManager.get(); }
 inline ModelCodecManager* DocumentManagerPrivate::codecManager() const { return mCodecManager.get(); }
 
-inline QVector<AbstractDocument*> DocumentManagerPrivate::documents() const { return mList; }
+inline QList<AbstractDocument*> DocumentManagerPrivate::documents() const { return mList; }
 inline bool DocumentManagerPrivate::isEmpty() const { return mList.isEmpty(); }
 
 }

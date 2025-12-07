@@ -11,7 +11,7 @@
 #include "bytearrayviewprofile.hpp"
 // Qt
 #include <QObject>
-#include <QVector>
+#include <QList>
 #include <QDateTime>
 // Std
 #include <unordered_map>
@@ -72,7 +72,7 @@ public:
 
 public:
     [[nodiscard]]
-    QVector<ByteArrayViewProfile> viewProfiles() const;
+    QList<ByteArrayViewProfile> viewProfiles() const;
     [[nodiscard]]
     int viewProfilesCount() const;
     [[nodiscard]]
@@ -85,19 +85,19 @@ public:
     bool isViewProfileLocked(const ByteArrayViewProfile::Id& id) const;
 
 public:
-    void saveViewProfiles(QVector<ByteArrayViewProfile>& viewProfiles);
-    void removeViewProfiles(const QVector<ByteArrayViewProfile::Id>& viewProfileIds);
+    void saveViewProfiles(QList<ByteArrayViewProfile>& viewProfiles);
+    void removeViewProfiles(const QList<ByteArrayViewProfile::Id>& viewProfileIds);
     void setDefaultViewProfile(const ByteArrayViewProfile::Id& viewProfileId);
 
     [[nodiscard]]
     ByteArrayViewProfileLock createLock(const ByteArrayViewProfile::Id& viewProfileId);
 
 Q_SIGNALS:
-    void viewProfilesChanged(const QVector<Kasten::ByteArrayViewProfile>& viewProfiles);
-    void viewProfilesRemoved(const QVector<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
+    void viewProfilesChanged(const QList<Kasten::ByteArrayViewProfile>& viewProfiles);
+    void viewProfilesRemoved(const QList<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
     void defaultViewProfileChanged(const Kasten::ByteArrayViewProfile::Id& viewProfileId);
-    void viewProfilesLocked(const QVector<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
-    void viewProfilesUnlocked(const QVector<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
+    void viewProfilesLocked(const QList<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
+    void viewProfilesUnlocked(const QList<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
 
 private:
     OKTETAKASTENGUI_NO_EXPORT QString filePathOfViewProfile(const ByteArrayViewProfile::Id& viewProfileId) const;
@@ -112,7 +112,7 @@ private Q_SLOTS:
     OKTETAKASTENGUI_NO_EXPORT void onDefaultViewProfileChanged(const QString& path);
 
 private:
-    QVector<ByteArrayViewProfile> mViewProfiles;
+    QList<ByteArrayViewProfile> mViewProfiles;
 
     ByteArrayViewProfile::Id mDefaultViewProfileId;
 

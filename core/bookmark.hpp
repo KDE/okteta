@@ -68,6 +68,6 @@ inline void Bookmark::setOffset(Address offset) { mOffset = offset; }
 
 }
 
-Q_DECLARE_TYPEINFO(Okteta::Bookmark, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(Okteta::Bookmark, Q_RELOCATABLE_TYPE);
 
 #endif

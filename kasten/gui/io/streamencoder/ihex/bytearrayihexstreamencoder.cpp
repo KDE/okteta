@@ -78,6 +78,7 @@ void IHexStreamEncoderSettings::saveConfig(KConfigGroup& configGroup) const
     configGroup.writeEntry(AddressSizeConfigKey, addressSizeId);
 }
 
+const QString ByteArrayIHexStreamEncoder::ConfigGroupId = QStringLiteral("ByteArrayIntelHexStreamEncoder");
 
 void ByteArrayIHexStreamEncoder::streamLine(QTextStream& textStream,
                                             const unsigned char* line)

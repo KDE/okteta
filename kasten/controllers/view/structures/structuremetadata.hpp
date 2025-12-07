@@ -74,7 +74,7 @@ private:
 
 }
 
-Q_DECLARE_TYPEINFO(Kasten::StructureMetaData, Q_MOVABLE_TYPE);
+Q_DECLARE_TYPEINFO(Kasten::StructureMetaData, Q_RELOCATABLE_TYPE);
 Q_DECLARE_METATYPE(Kasten::StructureMetaData)
 
 #endif

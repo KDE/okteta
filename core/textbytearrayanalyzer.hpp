@@ -10,6 +10,10 @@
 // lib
 #include "oktetacore_export.hpp"
 #include "addressrange.hpp"
+// Qt
+#include <QtClassHelperMacros> // Q_DECLARE_PRIVATE
+// Q_CAST_IGNORE_ALIGN, used by Q_DECLARE_PRIVATE but without needed include
+#include <QtCompilerDetection> // IWYU pragma: keep
 // Std
 #include <memory>
 

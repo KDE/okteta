@@ -113,6 +113,8 @@ void DeflateStreamCompressorSettings::saveConfig(KConfigGroup& configGroup) cons
     configGroup.writeEntry(FormatConfigKey, formatId);
 }
 
+const QString ByteArrayDeflateStreamCompressor::ConfigGroupId = QStringLiteral("ByteArrayDeflateStreamCompressor");
+
 ByteArrayDeflateStreamCompressor::ByteArrayDeflateStreamCompressor()
     : AbstractByteArrayStreamCompressor(i18nc("name of the encoding target", "deflate"), QStringLiteral("application/zlib"))
 {

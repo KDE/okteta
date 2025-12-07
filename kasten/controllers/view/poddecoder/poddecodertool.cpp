@@ -69,6 +69,8 @@ enum PODTypes
     PODTypeCount
 };
 
+const QString PODDecoderTool::ConfigGroupId = QStringLiteral("PODDecoderTool");
+
 PODDecoderTool::PODDecoderTool(AbstractUserMessagesHandler* userMessagesHandler)
     : m_userMessagesHandler(userMessagesHandler)
     , mReadOnly(true)

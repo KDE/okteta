@@ -29,6 +29,8 @@
 
 namespace Kasten {
 
+const QString ChecksumTool::ConfigGroupId = QStringLiteral("ChecksumTool");
+
 ChecksumTool::ChecksumTool()
     : mChecksumUptodate(false)
     , mSourceByteArrayModelUptodate(false)

@@ -127,6 +127,7 @@ void Base32StreamEncoderSettings::saveConfig(KConfigGroup& configGroup) const
     configGroup.writeEntry(EncodingTypeConfigKey, encodingType);
 }
 
+const QString ByteArrayBase32StreamEncoder::ConfigGroupId = QStringLiteral("ByteArrayBase32StreamEncoder");
 
 ByteArrayBase32StreamEncoder::ByteArrayBase32StreamEncoder()
     : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "Base32"), QStringLiteral("text/x-base32"))

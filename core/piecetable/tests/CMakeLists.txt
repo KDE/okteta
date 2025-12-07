@@ -17,11 +17,11 @@ add_library(OktetaCoreTestPieceTableChange STATIC
 target_link_libraries(OktetaCoreTestPieceTableChange
     PUBLIC
         OktetaCorePieceTable
-        Qt5::Test
+        Qt6::Test
 )
 
 ecm_add_test( piecetest.cpp
-    LINK_LIBRARIES Qt5::Test
+    LINK_LIBRARIES Qt6::Test
 )
 
 ecm_add_test(
@@ -29,55 +29,55 @@ ecm_add_test(
     ${SUTDIR}/piecelist.cpp
     TEST_NAME piecelisttest
     LINK_LIBRARIES
-        Qt5::Test
+        Qt6::Test
 )
 
 ecm_add_test( piecetabletest.cpp
     LINK_LIBRARIES
         OktetaCoreTestPieceTableChange
         OktetaCorePieceTable
-        Qt5::Test
+        Qt6::Test
 )
 
 ecm_add_test( testpiecetablechangetest.cpp
     LINK_LIBRARIES
         OktetaCoreTestPieceTableChange
-        Qt5::Test
+        Qt6::Test
 )
 
 ecm_add_test( testpiecetablechangeabstractpiecetablechangeiftest.cpp
     LINK_LIBRARIES
         OktetaCoreTestPieceTableChange
         OktetaCorePieceTable
-        Qt5::Test
+        Qt6::Test
 )
 
 ecm_add_test( insertpiecetablechangeabstractpiecetablechangeiftest.cpp
     LINK_LIBRARIES
         OktetaCoreTestPieceTableChange
         OktetaCorePieceTable
-        Qt5::Test
+        Qt6::Test
 )
 
 ecm_add_test( removepiecetablechangeabstractpiecetablechangeiftest.cpp
     LINK_LIBRARIES
         OktetaCoreTestPieceTableChange
         OktetaCorePieceTable
-        Qt5::Test
+        Qt6::Test
 )
 
 ecm_add_test( replacepiecetablechangeabstractpiecetablechangeiftest.cpp
     LINK_LIBRARIES
         OktetaCoreTestPieceTableChange
         OktetaCorePieceTable
-        Qt5::Test
+        Qt6::Test
 )
 
 ecm_add_test( swaprangespiecetablechangeabstractpiecetablechangeiftest.cpp
     LINK_LIBRARIES
         OktetaCoreTestPieceTableChange
         OktetaCorePieceTable
-        Qt5::Test
+        Qt6::Test
 )
 
 # grouped changes break some assumptions and got workarounds, so disable for now
@@ -86,7 +86,7 @@ ecm_add_test( grouppiecetablechangeabstractpiecetablechangeiftest.cpp
     LINK_LIBRARIES
         OktetaCoreTestPieceTableChange
         OktetaCorePieceTable
-        Qt5::Test
+        Qt6::Test
 )
 endif()
 
@@ -94,18 +94,18 @@ ecm_add_test( grouppiecetablechangetest.cpp
     LINK_LIBRARIES
         OktetaCoreTestPieceTableChange
         OktetaCorePieceTable
-        Qt5::Test
+        Qt6::Test
 )
 
 ecm_add_test( piecetablechangehistorytest.cpp
     LINK_LIBRARIES
         OktetaCoreTestPieceTableChange
         OktetaCorePieceTable
-        Qt5::Test
+        Qt6::Test
 )
 
 ecm_add_test( revertablepiecetabletest.cpp
     LINK_LIBRARIES
         OktetaCorePieceTable
-        Qt5::Test
+        Qt6::Test
 )

@@ -42,6 +42,8 @@ void ZStdStreamCompressorSettings::saveConfig(KConfigGroup& configGroup) const
     configGroup.writeEntry(WriteFrameChecksumConfigKey, writeFrameChecksum);
 }
 
+const QString ByteArrayZStdStreamCompressor::ConfigGroupId = QStringLiteral("ByteArrayZStdStreamCompressor");
+
 ByteArrayZStdStreamCompressor::ByteArrayZStdStreamCompressor()
     : AbstractByteArrayStreamCompressor(i18nc("name of the encoding target", "ZStandard"), QStringLiteral("application/zstd"))
 {

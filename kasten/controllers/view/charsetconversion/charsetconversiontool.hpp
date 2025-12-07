@@ -49,7 +49,8 @@ public:
     };
 
 private:
-    static constexpr char ConfigGroupId[] = "CharsetConversionTool";
+    static const QString ConfigGroupId;
+
     static constexpr char OtherCharCodecNameConfigKey[] = "OtherCharCodecName";
     static constexpr char ConversionDirectionConfigKey[] = "ConversionDirection";
     static constexpr char SubstituteMissingCharsConfigKey[] = "SubstituteMissingChars";
