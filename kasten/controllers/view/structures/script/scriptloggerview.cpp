@@ -18,7 +18,7 @@
 // Std
 #include <utility>
 
-ScriptLoggerView::ScriptLoggerView(const QVector<std::shared_ptr<TopLevelDataInformation>>& topDataInfoList, QWidget* parent)
+ScriptLoggerView::ScriptLoggerView(const QList<std::shared_ptr<TopLevelDataInformation>>& topDataInfoList, QWidget* parent)
     : QWidget(parent)
     , mSelector(new KComboBox(this))
     , mView(new QTableView(this))
@@ -40,7 +40,7 @@ ScriptLoggerView::ScriptLoggerView(const QVector<std::shared_ptr<TopLevelDataInf
         mView->setModel(mList.at(0)->logger());
         mView->resizeRowsToContents();
     }
-    connect(mSelector, qOverload<int>(&KComboBox::currentIndexChanged),
+    connect(mSelector, &KComboBox::currentIndexChanged,
             this, &ScriptLoggerView::updateModel);
     auto* const layout = new QVBoxLayout();
     layout->setContentsMargins(0, 0, 0, 0);

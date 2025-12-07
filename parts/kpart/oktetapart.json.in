@@ -1,0 +1,70 @@
+{
+    "KPlugin": {
+        "Authors": [
+            {
+                "Email": "kossebau@kde.org",
+                "Name": "Friedrich W. H. Kossebau"
+            }
+        ],
+        "Copyright": "Copyright 2003-2026 Friedrich W. H. Kossebau",
+        "Icon": "okteta",
+        "License": "LGPLv2.1",
+        "MimeTypes": [
+            "application/octet-stream"
+        ],
+        "Name": "Okteta Hex Viewer",
+        "Name[ar]": "عارض أكتيتا الستة عشري",
+        "Name[bs]": "Okteta heksadekadni prikazivač",
+        "Name[ca@valencia]": "Visor hexadecimal Okteta",
+        "Name[ca]": "Visualitzador hexadecimal Okteta",
+        "Name[cs]": "Hexa prohlížeč Okteta",
+        "Name[da]": "Okteta hex-fremviser",
+        "Name[de]": "Okteta-Hexbetrachter",
+        "Name[el]": "Okteta Hex Viewer",
+        "Name[en_GB]": "Okteta Hex Viewer",
+        "Name[eo]": "Okteta Heks-Rigardilo",
+        "Name[es]": "Visor hexadecimal Okteta",
+        "Name[et]": "Okteta koodinäitaja",
+        "Name[eu]": "Okteta erakusle hamaseitarra",
+        "Name[fi]": "Okteta heksakatselin",
+        "Name[fr]": "Afficheur hexadécimal Okteta",
+        "Name[ga]": "Amharcán Heicsidheachúlach Okteta",
+        "Name[gl]": "Visor de bytes Okteta",
+        "Name[he]": "מציג הקסדצימלי Okteta",
+        "Name[hu]": "Okteta hexamegjelenítő",
+        "Name[ia]": "Visor Hexadecimal de Okteta",
+        "Name[it]": "Visore esadecimale Okteta",
+        "Name[ka]": "Okteta თექვსმეტობითში დამთვალიერებელი",
+        "Name[kk]": "Okteta оналтылықтап карау құралы",
+        "Name[km]": "កម្មវិធី​មើល​របស់​ Okteta Hex​",
+        "Name[ko]": "Okteta 16진수 뷰어",
+        "Name[mr]": "ओक्टेटा हेक्स प्रदर्शक",
+        "Name[nb]": "Okteta  hex-viser",
+        "Name[nds]": "Okteta-Hexkieker",
+        "Name[nl]": "Okteta hexweergave",
+        "Name[nn]": "Okteta heksvisar",
+        "Name[pa]": "ਓਕਟੀਟਾ ਹੈਕਸਾ ਦਰਸ਼ਕ",
+        "Name[pl]": "Przeglądarka szesnastkowa Okteta",
+        "Name[pt]": "Visualizador Hexadecimal Okteta",
+        "Name[pt_BR]": "Visualizador hexadecimal do Okteta",
+        "Name[ru]": "Шестнадцатеричный просмотрщик Okteta",
+        "Name[sk]": "Okteta Hex prehliadač",
+        "Name[sl]": "Šestnajstiški pregledovalnik Okteta",
+        "Name[sr@ijekavian]": "Хексадекадни приказивач Октете",
+        "Name[sr@ijekavianlatin]": "Heksadekadni prikazivač Oktete",
+        "Name[sr@latin]": "Heksadekadni prikazivač Oktete",
+        "Name[sr]": "Хексадекадни приказивач Октете",
+        "Name[sv]": "Okteta hexadecimalvisning",
+        "Name[tr]": "Okteta Onaltılık Görüntüleyicisi",
+        "Name[uk]": "Шістнадцятковий переглядач Okteta",
+        "Name[zh_CN]": "Okteta 十六进制查看器",
+        "Name[zh_TW]": "Okteta 十六進位碼檢視器",
+        "ServiceTypes": [
+            "KParts/ReadOnlyPart",
+            "Browser/View",
+            "KParts/ReadWritePart"
+        ],
+        "Version": "@Okteta_VERSION@",
+        "Website": "https://userbase.kde.org/Okteta"
+    }
+}

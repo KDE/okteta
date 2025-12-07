@@ -18,7 +18,7 @@
 #include <KLocalizedString>
 // Qt
 #include <QTest>
-#include <QtGlobal>
+#include <QMetaType>
 #include <QLocale>
 // Std
 #include <memory>
