@@ -53,7 +53,7 @@ What to find in which subdirectory
   collection of plugins based on the Okteta libraries
 
 [parts/kpart/](parts/kpart/):
-  plugin of the type KPart::ReadWritePart, with BrowserExtension
+  plugin of the type KPart::ReadWritePart, with NavigationExtension
 
 [program/](program/):
   a standalone hex editor program, based on the Kasten framework

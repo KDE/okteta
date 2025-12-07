@@ -104,7 +104,7 @@ ViewProfileEdit::ViewProfileEdit(QWidget* parent)
               "On"),
     };
     mLineBreakComboBox->addItems(lineBreakList);
-    connect(mLineBreakComboBox, qOverload<int>(&KComboBox::currentIndexChanged),
+    connect(mLineBreakComboBox, &KComboBox::currentIndexChanged,
             this, &ViewProfileEdit::onLineBreakIndexChanged);
     layoutBoxFormLayout->addRow(i18nc("@label:listbox", "Break lines:"), mLineBreakComboBox);
     // bytes per group

@@ -1,28 +1,37 @@
 {
     "id": "org.kde.okteta",
-    "branch": "master",
+    "branch": "work/kossebau/kf6",
     "runtime": "org.kde.Platform",
-    "runtime-version": "5.15-24.08",
+    "runtime-version": "6.10",
     "sdk": "org.kde.Sdk",
     "command": "okteta",
     "tags": ["nightly"],
     "desktop-file-name-suffix": " (Nightly)",
     "finish-args": [
         "--device=dri",
+        "--filesystem=host",
         "--share=ipc",
+        "--share=network",
         "--socket=cups",
         "--socket=wayland",
-        "--socket=x11"
+        "--socket=fallback-x11"
     ],
     "cleanup": [
-        "/include",
-        "/lib/pkgconfig"
     ],
     "modules": [
         {
             "name": "okteta",
             "buildsystem": "cmake",
-            "sources": [ { "type": "dir", "path": ".", "branch": "master" } ]
+            "config-opts": [
+                "-DCMAKE_UNITY_BUILD=ON",
+                "-DCMAKE_UNITY_BUILD_BATCH_SIZE=0",
+                "-DBUILD_TESTING=OFF",
+                "-DBUILD_DEVEL=OFF",
+                "-DBUILD_DESIGNERPLUGIN=OFF",
+                "-DBUILD_KPARTSPLUGIN=OFF",
+                "-DBUILD_DOC=OFF"
+            ],
+            "sources": [ { "type": "dir", "path": ".", "branch": "work/kossebau/kf6" } ]
         }
     ]
 }

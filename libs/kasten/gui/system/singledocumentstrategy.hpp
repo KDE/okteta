@@ -37,7 +37,7 @@ public: // AbstractDocumentStrategy API
 
 public: // const AbstractDocumentStrategy API
     [[nodiscard]]
-    QVector<AbstractDocument*> documents() const override;
+    QList<AbstractDocument*> documents() const override;
     [[nodiscard]]
     QStringList supportedRemoteTypes() const override;
 
