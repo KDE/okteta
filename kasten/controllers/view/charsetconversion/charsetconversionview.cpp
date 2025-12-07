@@ -64,7 +64,7 @@ CharsetConversionView::CharsetConversionView(CharsetConversionTool* tool,
         i18nc("@info:whatsthis",
               "Select the direction the bytes are converted, to or from the selected charset.");
     mDirectionComboBox->setWhatsThis(directionWhatsThis);
-    connect(mDirectionComboBox, qOverload<int>(&KComboBox::activated),
+    connect(mDirectionComboBox, &KComboBox::activated,
             mTool, &CharsetConversionTool::setConversionDirection);
 
     directionCharsetToolBar->addWidget(mDirectionComboBox);

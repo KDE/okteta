@@ -10,17 +10,15 @@ set(LIBOKTETAWIDGETS_REL_DIR ../kasten/gui/liboktetawidgets)
 okteta_add_library(Gui NAMESPACE Okteta
     PUBLIC
         OktetaCore
-        Qt5::Widgets
+        Qt6::Widgets
     PRIVATE
-        KF5::I18n
-        KF5::ConfigWidgets
+        KF6::I18n
+        KF6::ColorScheme
     VERSION     ${OKTETAGUI_VERSION}
     SOVERSION   ${OKTETAGUI_SO_VERSION}
     ABIVERSION  ${OKTETALIBS_ABI_VERSION}
     NO_TARGET_NAMESPACE
-    NO_VERSIONED_EXPORTED_TARGET_NAME
     NO_VERSIONED_INCLUDEDIR
-    NO_VERSIONED_PACKAGE_NAME
     KI18N_TRANSLATION_DOMAIN "liboktetagui"
 )
 
@@ -43,9 +41,9 @@ okteta_add_sublibrary(Gui NAMESPACE Okteta
     UNTESTED
     PUBLIC
         OktetaCore
-        Qt5::Widgets
+        Qt6::Widgets
     PRIVATE
-        KF5::I18n
+        KF6::I18n
     KI18N_TRANSLATION_DOMAIN "liboktetagui"
 )
 
@@ -135,7 +133,7 @@ oktetagui_sources(
 okteta_add_cmakeconfig(Gui NAMESPACE Okteta
     DEPS
         OktetaCore
-        Qt5Widgets ${Qt5_VERSION}
+        Qt6Widgets ${Qt6_VERSION}
 )
 
 okteta_add_qmakeconfig(Gui NAMESPACE Okteta
@@ -143,7 +141,7 @@ okteta_add_qmakeconfig(Gui NAMESPACE Okteta
 )
 
 okteta_add_pkgconfig(Gui NAMESPACE Okteta
-    DEPS OktetaCore Qt5Widgets
+    DEPS OktetaCore Qt6Widgets
     DESCRIPTION "Okteta Gui"
 )
 

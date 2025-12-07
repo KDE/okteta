@@ -66,8 +66,8 @@ Q_SIGNALS:
     void viewProfileChanged(const Kasten::ByteArrayViewProfile::Id& viewProfileId);
 
 private Q_SLOTS:
-    OKTETAKASTENGUI_NO_EXPORT void onViewProfilesChanged(const QVector<Kasten::ByteArrayViewProfile>& viewProfiles);
-    OKTETAKASTENGUI_NO_EXPORT void onViewProfilesRemoved(const QVector<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
+    OKTETAKASTENGUI_NO_EXPORT void onViewProfilesChanged(const QList<Kasten::ByteArrayViewProfile>& viewProfiles);
+    OKTETAKASTENGUI_NO_EXPORT void onViewProfilesRemoved(const QList<Kasten::ByteArrayViewProfile::Id>& viewProfileIds);
 
     // TODO: turn to one signal/slot with enum parameter for property and QVariant as new value
     OKTETAKASTENGUI_NO_EXPORT void onShowsNonprintingChanged();

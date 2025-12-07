@@ -49,7 +49,7 @@ class PrintTool : public QObject
     Q_OBJECT
 
 private:
-    static constexpr char ConfigGroupId[] = "PrintTool";
+    static const QString ConfigGroupId;
 
     static constexpr char PageLayoutUnitConfigKey[] = "PageLayoutUnit";
     static constexpr char PageMarginLeftConfigKey[] = "PageMarginLeft";

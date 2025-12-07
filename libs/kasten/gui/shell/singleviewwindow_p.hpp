@@ -12,7 +12,7 @@
 // Kasten core
 #include <Kasten/KastenCore>
 // Qt
-#include <QVector>
+#include <QList>
 // Std
 #include <vector>
 #include <memory>
@@ -47,7 +47,7 @@ public:
 
 public: // If::WidgetsDockable API
     [[nodiscard]]
-    QVector<ToolViewDockWidget*> dockWidgets() const;
+    QList<ToolViewDockWidget*> dockWidgets() const;
 
 private:
     [[nodiscard]]
@@ -74,11 +74,11 @@ private:
 
     const std::unique_ptr<SingleViewArea> mViewArea;
     std::vector<std::unique_ptr<AbstractXmlGuiController>> mControllers;
-    QVector<ToolViewDockWidget*> mDockWidgets;
+    QList<ToolViewDockWidget*> mDockWidgets;
     std::vector<std::unique_ptr<AbstractTool>> mTools;
 };
 
-inline QVector<ToolViewDockWidget*> SingleViewWindowPrivate::dockWidgets() const { return mDockWidgets; }
+inline QList<ToolViewDockWidget*> SingleViewWindowPrivate::dockWidgets() const { return mDockWidgets; }
 inline AbstractView* SingleViewWindowPrivate::view() const { return mView; }
 inline SingleViewArea* SingleViewWindowPrivate::viewArea() const { return mViewArea.get(); }
 

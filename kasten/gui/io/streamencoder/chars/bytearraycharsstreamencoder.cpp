@@ -112,6 +112,8 @@ void CharsStreamEncoderSettings::saveConfig(KConfigGroup& configGroup) const
     configGroup.writeEntry(EncodeModeConfigKey, encodeMode);
 }
 
+const QString ByteArrayCharsStreamEncoder::ConfigGroupId = QStringLiteral("ByteArrayCharsStreamEncoder");
+
 ByteArrayCharsStreamEncoder::ByteArrayCharsStreamEncoder()
     : AbstractByteArrayStreamEncoder(i18nc("name of the encoding target", "Characters"), QStringLiteral("text/plain"))
 {}

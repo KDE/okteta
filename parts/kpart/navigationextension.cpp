@@ -4,7 +4,7 @@
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
-#include "browserextension.hpp"
+#include "navigationextension.hpp"
 
 // part
 #include "part.hpp"
@@ -20,8 +20,8 @@
 #include <QMimeData>
 #include <QAction>
 
-OktetaBrowserExtension::OktetaBrowserExtension(OktetaPart* part)
-    : KParts::BrowserExtension(part)
+OktetaNavigationExtension::OktetaNavigationExtension(OktetaPart* part)
+    : KParts::NavigationExtension(part)
     , mPart(part)
 {
     setObjectName(QStringLiteral("oktetapartbrowserextension"));
@@ -33,7 +33,7 @@ OktetaBrowserExtension::OktetaBrowserExtension(OktetaPart* part)
     Q_EMIT enableAction("print", true);
 }
 
-void OktetaBrowserExtension::copy()
+void OktetaNavigationExtension::copy()
 {
     auto mimeData = mPart->byteArrayView()->copySelectedData();
     if (!mimeData) {
@@ -43,7 +43,7 @@ void OktetaBrowserExtension::copy()
     QApplication::clipboard()->setMimeData(mimeData.release(), QClipboard::Clipboard);
 }
 
-void OktetaBrowserExtension::print()
+void OktetaNavigationExtension::print()
 {
     QAction* const printAction = mPart->actionCollection()->action(QStringLiteral("file_print"));
     if (printAction) {
@@ -51,14 +51,14 @@ void OktetaBrowserExtension::print()
     }
 }
 
-void OktetaBrowserExtension::onSelectionChanged(bool hasSelection)
+void OktetaNavigationExtension::onSelectionChanged(bool hasSelection)
 {
     Q_EMIT enableAction("copy", hasSelection);
 }
 
-void OktetaBrowserExtension::saveState(QDataStream& stream)
+void OktetaNavigationExtension::saveState(QDataStream& stream)
 {
-    KParts::BrowserExtension::saveState(stream);
+    KParts::NavigationExtension::saveState(stream);
 
     Kasten::ByteArrayView* const view = mPart->byteArrayView();
     Kasten::ByteArrayViewProfileSynchronizer* const viewProfileSynchronizer = view->synchronizer();
@@ -90,9 +90,9 @@ void OktetaBrowserExtension::saveState(QDataStream& stream)
     ;
 }
 
-void OktetaBrowserExtension::restoreState(QDataStream& stream)
+void OktetaNavigationExtension::restoreState(QDataStream& stream)
 {
-    KParts::BrowserExtension::restoreState(stream);
+    KParts::NavigationExtension::restoreState(stream);
 
     double zoomScale;
 
@@ -164,4 +164,4 @@ void OktetaBrowserExtension::restoreState(QDataStream& stream)
 //     view->setActiveCoding( (Okteta::ByteArrayColumnView::CodingTypeId)activeCoding );
 }
 
-#include "moc_browserextension.cpp"
+#include "moc_navigationextension.cpp"

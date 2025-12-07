@@ -98,7 +98,7 @@ ByteArrayViewProfileSynchronizer::syncToRemote()
 
     mDirtyFlags = 0;
 
-    QVector<ByteArrayViewProfile> viewProfiles {
+    QList<ByteArrayViewProfile> viewProfiles {
         viewProfile
     };
     mViewProfileManager->saveViewProfiles(viewProfiles);
@@ -126,7 +126,7 @@ ByteArrayViewProfileSynchronizer::syncFromRemote()
 }
 
 void
-ByteArrayViewProfileSynchronizer::onViewProfilesChanged(const QVector<ByteArrayViewProfile>& viewProfiles)
+ByteArrayViewProfileSynchronizer::onViewProfilesChanged(const QList<ByteArrayViewProfile>& viewProfiles)
 {
     if (!mView) {
         return;
@@ -282,7 +282,7 @@ void ByteArrayViewProfileSynchronizer::connectViewSignals()
             this, &ByteArrayViewProfileSynchronizer::onViewModusChanged);
 }
 
-void ByteArrayViewProfileSynchronizer::onViewProfilesRemoved(const QVector<ByteArrayViewProfile::Id>& viewProfileIds)
+void ByteArrayViewProfileSynchronizer::onViewProfilesRemoved(const QList<ByteArrayViewProfile::Id>& viewProfileIds)
 {
     if (!mView) {
         return;

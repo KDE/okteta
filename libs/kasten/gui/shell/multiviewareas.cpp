@@ -19,7 +19,7 @@ MultiViewAreas::MultiViewAreas()
 
 MultiViewAreas::~MultiViewAreas() = default;
 
-QVector<AbstractView*> MultiViewAreas::viewList() const
+QList<AbstractView*> MultiViewAreas::viewList() const
 {
     Q_D(const MultiViewAreas);
 
@@ -82,14 +82,14 @@ void MultiViewAreas::setFocus()
     d->setFocus();
 }
 
-void MultiViewAreas::addViews(const QVector<AbstractView*>& views)
+void MultiViewAreas::addViews(const QList<AbstractView*>& views)
 {
     Q_D(MultiViewAreas);
 
     d->addViews(views);
 }
 
-void MultiViewAreas::removeViews(const QVector<AbstractView*>& views)
+void MultiViewAreas::removeViews(const QList<AbstractView*>& views)
 {
     Q_D(MultiViewAreas);
 

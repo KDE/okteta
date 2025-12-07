@@ -40,7 +40,8 @@ public:
     using Aligned64Bit = union { unsigned char Data[MaxPODSize]; double Dummy; };
 
 private:
-    static constexpr char ConfigGroupId[] = "PODDecoderTool";
+    static const QString ConfigGroupId;
+
     static constexpr char ByteOrderConfigKey[] = "ByteOrder";
     static constexpr char UnsignedAsHexConfigKey[] = "UnsignedAsHexadecimal";
 

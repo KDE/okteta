@@ -96,6 +96,8 @@ inline void KConfigGroup::writeEntry(const char *key,
 
 namespace Kasten {
 
+const QString CharsetConversionTool::ConfigGroupId = QStringLiteral("CharsetConversionTool");
+
 CharsetConversionTool::CharsetConversionTool()
 {
     setObjectName(QStringLiteral("CharsetConversion"));

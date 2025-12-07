@@ -27,7 +27,7 @@ ecm_qtdesignerplugin_widget(ByteArrayColumnView
 
 ecm_add_qtdesignerplugin(oktetadesignerplugin
     NAME OktetaWidgets
-    OUTPUT_NAME oktetawidgets
+    OUTPUT_NAME okteta${OKTETALIBS_ABI_VERSION}widgets
     WIDGETS
         ByteArrayRowView
         ByteArrayColumnView

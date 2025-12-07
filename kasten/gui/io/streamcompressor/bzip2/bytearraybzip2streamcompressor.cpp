@@ -36,6 +36,8 @@ void BZip2StreamCompressorSettings::saveConfig(KConfigGroup& configGroup) const
     configGroup.writeEntry(BlockSizeConfigKey, blockSize);
 }
 
+const QString ByteArrayBZip2StreamCompressor::ConfigGroupId = QStringLiteral("ByteArrayBZip2StreamCompressor");
+
 ByteArrayBZip2StreamCompressor::ByteArrayBZip2StreamCompressor()
     : AbstractByteArrayStreamCompressor(i18nc("name of the encoding target", "bzip2"), QStringLiteral("application/x-bzip2"))
 {

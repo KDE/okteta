@@ -79,15 +79,15 @@ StructuresManagerView::StructuresManagerView(StructuresTool* tool, QWidget* pare
 
 StructuresManagerView::~StructuresManagerView() = default;
 
-void StructuresManagerView::onGetNewStructuresClicked(const QList<KNSCore::EntryInternal>& changedEntries)
+void StructuresManagerView::onGetNewStructuresClicked(const QList<KNSCore::Entry>& changedEntries)
 {
-    for (const KNSCore::EntryInternal& e : changedEntries) {
+    for (const KNSCore::Entry& e : changedEntries) {
         qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "Changed Entry: " << e.name();
-        if (e.status() == KNS3::Entry::Installed) {
+        if (e.status() == KNSCore::Entry::Installed) {
             // new element installed
             qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "installed files:" << e.installedFiles();
         }
-        if (e.status() == KNS3::Entry::Deleted) {
+        if (e.status() == KNSCore::Entry::Deleted) {
             // element uninstalled
             qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "deleted files:" << e.uninstalledFiles();
         }

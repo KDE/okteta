@@ -8,7 +8,7 @@
 #define KASTEN_DATAINFORMATIONBASE_HPP
 
 // Qt
-#include <QtGlobal>
+#include <QtTypes>
 
 class EnumDataInformation;
 class StringDataInformation;
