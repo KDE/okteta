@@ -15,7 +15,7 @@
 // Std
 #include <array>
 
-static constexpr char Crc64ChecksumConfigGroupId[] = "CRC64";
+static const QString Crc64ChecksumConfigGroupId = QStringLiteral("CRC64");
 
 struct Crc64AlgorithmSpec
 {

@@ -17,8 +17,8 @@ target_link_libraries(OktetaKastenCoreIoSut
         KastenCore
         OktetaCore
     PRIVATE
-        KF5::I18n
-        KF5::CoreAddons
+        KF6::I18n
+        KF6::CoreAddons
 )
 target_include_directories(OktetaKastenCoreIoSut PUBLIC
     ${CMAKE_CURRENT_BINARY_DIR}/../..
@@ -50,9 +50,9 @@ ecm_add_test(
         KastenCoreTestUtil
         KastenCore
         OktetaCoreTestUtil
-        KF5::I18n
-        KF5::Bookmarks
-        Qt5::Test
+        KF6::I18n
+        KF6::Bookmarks
+        Qt6::Test
 )
 target_compile_definitions(bytearrayrawfilesynchronizertest PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")
 
@@ -70,8 +70,8 @@ ecm_add_test(
         KastenCoreTestUtil
         KastenCore
         OktetaCoreTestUtil
-        KF5::I18n
-        KF5::Bookmarks
-        Qt5::Test
+        KF6::I18n
+        KF6::Bookmarks
+        Qt6::Test
 )
 target_compile_definitions(bytearrayrawfilesynchronizerfactorytest PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")

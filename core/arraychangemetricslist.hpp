@@ -10,12 +10,12 @@
 // lib
 #include "arraychangemetrics.hpp"
 //
-#include <QVector>
+#include <QList>
 
 namespace Okteta {
 
 // TODO: do we need the invalid status?
-class ArrayChangeMetricsList : public QVector<ArrayChangeMetrics>
+class ArrayChangeMetricsList : public QList<ArrayChangeMetrics>
 {
 public:
     [[nodiscard]]

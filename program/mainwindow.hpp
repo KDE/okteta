@@ -10,7 +10,7 @@
 // Kasten gui
 #include <Kasten/ShellWindow>
 
-template <class T> class QVector;
+template <class T> class QList;
 class QMimeData;
 
 namespace Kasten {
@@ -43,7 +43,7 @@ private:
 private Q_SLOTS:
     void onDataOffered(const QMimeData* mimeData, bool& accept);
     void onDataDropped(const QMimeData* mimeData);
-    void onCloseRequest(const QVector<Kasten::AbstractView*>& views);
+    void onCloseRequest(const QList<Kasten::AbstractView*>& views);
     void onNewDocumentRequested();
 
 private:
