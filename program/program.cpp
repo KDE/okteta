@@ -50,19 +50,10 @@ namespace Kasten {
 // static constexpr char OffsetOptionId[] = "offset";
 // static constexpr char OffsetOptionShortId[] = "o";
 
-static
-int& preConstructionHookHack(int& argc)
-{
-    QCoreApplication::setAttribute(Qt::AA_EnableHighDpiScaling);
-    return argc;
-}
-
-
 OktetaProgram::OktetaProgram(int& argc, char* argv[])
-    : mApp(preConstructionHookHack(argc), argv)
+    : mApp(argc, argv)
 {
-    QApplication::setAttribute(Qt::AA_UseHighDpiPixmaps, true);
-    KLocalizedString::setApplicationDomain("okteta");
+    KLocalizedString::setApplicationDomain(QByteArrayLiteral("okteta"));
 
     OktetaAboutData aboutData;
     KAboutData::setApplicationData(aboutData);

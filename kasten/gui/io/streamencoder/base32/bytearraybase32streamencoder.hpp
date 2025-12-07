@@ -70,7 +70,7 @@ private:
     static constexpr int outputGroupLength = 8;
     static constexpr int maxOutputGroupsPerLine = outputLineLength / outputGroupLength;
 
-    static constexpr char ConfigGroupId[] = "ByteArrayBase32StreamEncoder";
+    static const QString ConfigGroupId;
 
 public:
     ByteArrayBase32StreamEncoder();

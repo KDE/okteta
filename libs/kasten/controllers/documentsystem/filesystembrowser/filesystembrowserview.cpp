@@ -26,7 +26,7 @@ FileSystemBrowserView::FileSystemBrowserView(FileSystemBrowserTool* tool, QWidge
     : QWidget(parent)
     , mTool(tool)
 {
-    QMetaObject::invokeMethod(this, "init", Qt::QueuedConnection);
+    QMetaObject::invokeMethod(this, &FileSystemBrowserView::init, Qt::QueuedConnection);
 }
 
 FileSystemBrowserView::~FileSystemBrowserView() = default;

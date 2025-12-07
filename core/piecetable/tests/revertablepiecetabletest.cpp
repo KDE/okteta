@@ -9,7 +9,7 @@
 // test object
 #include <piecetable/revertablepiecetable.hpp>
 // Qt
-#include <QVector>
+#include <QList>
 #include <QTest>
 
 namespace KPieceTable {
@@ -38,7 +38,7 @@ private:
 };
 }
 
-Q_DECLARE_METATYPE(QVector<KPieceTable::StorageDataTestData>)
+Q_DECLARE_METATYPE(QList<KPieceTable::StorageDataTestData>)
 Q_DECLARE_METATYPE(KPieceTable::AddressRange)
 
 namespace KPieceTable {
@@ -74,7 +74,7 @@ void RevertablePieceTableTest::testInit()
     QCOMPARE(pieceTable.changesCount(), 0);
     QCOMPARE(pieceTable.appliedChangesCount(), 0);
 
-    const QVector<StorageDataTestData> testData {
+    const QList<StorageDataTestData> testData {
         StorageDataTestData::valid(0, 0, Piece::OriginalStorage),
         StorageDataTestData::valid(Start, Start, Piece::OriginalStorage),
         StorageDataTestData::valid(End, End, Piece::OriginalStorage),
@@ -113,14 +113,14 @@ void RevertablePieceTableTest::testInsert_data()
     QTest::addColumn<Size>("expectedTableSize");
     QTest::addColumn<int>("expectedChangesCount");
     QTest::addColumn<int>("expectedAppliedChangesCount");
-    QTest::addColumn<QVector<StorageDataTestData>>("testData");
+    QTest::addColumn<QList<StorageDataTestData>>("testData");
 
     QTest::newRow("inserting-to-empty")
         << 0
         << 0 << Width
         << ChangeStart
         << Width << 1 << 1
-        << QVector<StorageDataTestData> {
+        << QList<StorageDataTestData> {
             StorageDataTestData::valid(0, ChangeStart, Piece::ChangeStorage),
             StorageDataTestData::valid(Width - 1, ChangeEnd, Piece::ChangeStorage),
             StorageDataTestData::invalid(Width)};
@@ -130,7 +130,7 @@ void RevertablePieceTableTest::testInsert_data()
         << 0 << Width
         << ChangeStart
         << BaseSize + Width << 1 << 1
-        << QVector<StorageDataTestData> {
+        << QList<StorageDataTestData> {
             StorageDataTestData::valid(0, ChangeStart, Piece::ChangeStorage),
             StorageDataTestData::valid(Width - 1, ChangeEnd, Piece::ChangeStorage),
             StorageDataTestData::valid(Width, 0, Piece::OriginalStorage),
@@ -142,7 +142,7 @@ void RevertablePieceTableTest::testInsert_data()
         << Start << Width
         << ChangeStart
         << BaseSize + Width << 1 << 1
-        << QVector<StorageDataTestData> {
+        << QList<StorageDataTestData> {
             StorageDataTestData::valid(Start - 1, Start - 1, Piece::OriginalStorage),
             StorageDataTestData::valid(Start, ChangeStart, Piece::ChangeStorage),
             StorageDataTestData::valid(End, ChangeEnd, Piece::ChangeStorage),
@@ -155,7 +155,7 @@ void RevertablePieceTableTest::testInsert_data()
         << BaseSize << Width
         << ChangeStart
         << BaseSize + Width << 1 << 1
-        << QVector<StorageDataTestData> {
+        << QList<StorageDataTestData> {
             StorageDataTestData::valid(BaseSize - 1, BaseSize - 1, Piece::OriginalStorage),
             StorageDataTestData::valid(BaseSize, ChangeStart, Piece::ChangeStorage),
             StorageDataTestData::valid(BaseSize + Width - 1, ChangeEnd, Piece::ChangeStorage),
@@ -171,7 +171,7 @@ void RevertablePieceTableTest::testInsert()
     QFETCH(const Size, expectedTableSize);
     QFETCH(const int, expectedChangesCount);
     QFETCH(const int, expectedAppliedChangesCount);
-    QFETCH(const QVector<StorageDataTestData>, testData);
+    QFETCH(const QList<StorageDataTestData>, testData);
 
     RevertablePieceTable pieceTable;
     pieceTable.init(initTableSize);
@@ -251,7 +251,7 @@ void RevertablePieceTableTest::testInsertMulti()
     QCOMPARE(pieceTable.appliedChangesCount(), 9);
     QCOMPARE(storageOffset, 11 * BaseSize);
 
-    QVector<StorageDataTestData> testData;
+    QList<StorageDataTestData> testData;
 
     // all borders
     // 12: begin
@@ -363,7 +363,7 @@ void RevertablePieceTableTest::testRemove_data()
     QTest::addColumn<Size>("expectedTableSize");
     QTest::addColumn<int>("expectedChangesCount");
     QTest::addColumn<int>("expectedAppliedChangesCount");
-    QTest::addColumn<QVector<StorageDataTestData>>("testData");
+    QTest::addColumn<QList<StorageDataTestData>>("testData");
 
     // removing a lot:
     const int pieceCount = 5;
@@ -380,7 +380,7 @@ void RevertablePieceTableTest::testRemove_data()
     QTest::newRow("removing-at-begin")
         << 0 << removeRange
         << BaseSize - Start << 1 << 1
-        << QVector<StorageDataTestData> {
+        << QList<StorageDataTestData> {
             StorageDataTestData::valid(0, Start, Piece::OriginalStorage),
             StorageDataTestData::valid(BaseSize - Start - 1, BaseSize - 1, Piece::OriginalStorage),
             StorageDataTestData::invalid(BaseSize - Start)};
@@ -389,7 +389,7 @@ void RevertablePieceTableTest::testRemove_data()
     QTest::newRow("removing-at-middle")
         << 0 << removeRange
         << BaseSize - Width << 1 << 1
-        << QVector<StorageDataTestData> {
+        << QList<StorageDataTestData> {
             StorageDataTestData::valid(Start - 1, Start - 1, Piece::OriginalStorage),
             StorageDataTestData::valid(Start, End + 1, Piece::OriginalStorage),
             StorageDataTestData::valid(BaseSize - Width - 1, BaseSize - 1, Piece::OriginalStorage),
@@ -399,7 +399,7 @@ void RevertablePieceTableTest::testRemove_data()
     QTest::newRow("removing-at-end")
         << 0 << removeRange
         << End + 1 << 1 << 1
-        << QVector<StorageDataTestData> {
+        << QList<StorageDataTestData> {
             StorageDataTestData::valid(End, End, Piece::OriginalStorage),
             StorageDataTestData::invalid(End + 1)};
 
@@ -407,14 +407,14 @@ void RevertablePieceTableTest::testRemove_data()
     QTest::newRow("removing-all")
         << 0 << removeRange
         << 0 << 1 << 1
-        << QVector<StorageDataTestData> {
+        << QList<StorageDataTestData> {
             StorageDataTestData::invalid(0)};
 
     removeRange = AddressRange::fromWidth(midPieceOffset + Start, Width);
     QTest::newRow("removing-inside-a-piece-in-middle")
         << pieceCount << removeRange
         << fullSize - Width << pieceCount + 1 << pieceCount + 1
-        << QVector<StorageDataTestData> {
+        << QList<StorageDataTestData> {
             StorageDataTestData::valid(midPieceOffset + Start - 1, changeStarts[mid] + Start - 1, Piece::ChangeStorage),
             StorageDataTestData::valid(midPieceOffset + Start, changeStarts[mid] + End + 1, Piece::ChangeStorage),
             StorageDataTestData::valid(fullSize - Width - 1, changeStarts[pieceCount] + BaseSize - 1, Piece::ChangeStorage),
@@ -424,7 +424,7 @@ void RevertablePieceTableTest::testRemove_data()
     QTest::newRow("removing-start-of-a-piece-in-middle")
         << pieceCount << removeRange
         << fullSize - Start << pieceCount + 1 << pieceCount + 1
-        << QVector<StorageDataTestData> {
+        << QList<StorageDataTestData> {
             StorageDataTestData::valid(midPieceOffset - 1, changeStarts[mid - 1] + BaseSize - 1, Piece::ChangeStorage),
             StorageDataTestData::valid(midPieceOffset, changeStarts[mid] + Start, Piece::ChangeStorage),
             StorageDataTestData::valid(fullSize - Start - 1, changeStarts[pieceCount] + BaseSize - 1, Piece::ChangeStorage),
@@ -434,7 +434,7 @@ void RevertablePieceTableTest::testRemove_data()
     QTest::newRow("removing-end-of-a-piece-in-middle")
         << pieceCount << removeRange
         << fullSize - (BaseSize - End - 1) << pieceCount + 1 << pieceCount + 1
-        << QVector<StorageDataTestData> {
+        << QList<StorageDataTestData> {
             StorageDataTestData::valid(midPieceOffset + End, changeStarts[mid] + End, Piece::ChangeStorage),
             StorageDataTestData::valid(midPieceOffset + End + 1, changeStarts[mid + 1], Piece::ChangeStorage),
             StorageDataTestData::valid(fullSize - (BaseSize - End - 1) - 1, changeStarts[pieceCount] + BaseSize - 1, Piece::ChangeStorage),
@@ -444,7 +444,7 @@ void RevertablePieceTableTest::testRemove_data()
     QTest::newRow("removing-whole-piece-in-middle")
         << pieceCount << removeRange
         << fullSize - BaseSize << pieceCount + 1 << pieceCount + 1
-        << QVector<StorageDataTestData> {
+        << QList<StorageDataTestData> {
             StorageDataTestData::valid(midPieceOffset - 1, changeStarts[mid - 1] + BaseSize - 1, Piece::ChangeStorage),
             StorageDataTestData::valid(midPieceOffset, changeStarts[mid + 1], Piece::ChangeStorage),
             StorageDataTestData::valid(fullSize - BaseSize - 1, changeStarts[pieceCount] + BaseSize - 1, Piece::ChangeStorage),
@@ -454,7 +454,7 @@ void RevertablePieceTableTest::testRemove_data()
     QTest::newRow("removing-whole-piece-and-start-of-next-in-middle")
         << pieceCount << removeRange
         << fullSize - BaseSize - Start << pieceCount + 1 << pieceCount + 1
-        << QVector<StorageDataTestData> {
+        << QList<StorageDataTestData> {
             StorageDataTestData::valid(midPieceOffset - 1, changeStarts[mid - 1] + BaseSize - 1, Piece::ChangeStorage),
             StorageDataTestData::valid(midPieceOffset, changeStarts[mid + 1] + Start, Piece::ChangeStorage),
             StorageDataTestData::valid(fullSize - BaseSize - Start - 1, changeStarts[pieceCount] + BaseSize - 1, Piece::ChangeStorage),
@@ -464,7 +464,7 @@ void RevertablePieceTableTest::testRemove_data()
     QTest::newRow("removing-whole-piece-and-end-of-previous-in-middle")
         << pieceCount << removeRange
         << fullSize - BaseSize - (BaseSize - End - 1) << pieceCount + 1 << pieceCount + 1
-        << QVector<StorageDataTestData> {
+        << QList<StorageDataTestData> {
             StorageDataTestData::valid(midPieceOffset - (BaseSize - End - 1) - 1, changeStarts[mid - 1] + End, Piece::ChangeStorage),
             StorageDataTestData::valid(midPieceOffset - (BaseSize - End - 1), changeStarts[mid + 1], Piece::ChangeStorage),
             StorageDataTestData::valid(fullSize - BaseSize - (BaseSize - End - 1) - 1, changeStarts[pieceCount] + BaseSize - 1, Piece::ChangeStorage),
@@ -474,7 +474,7 @@ void RevertablePieceTableTest::testRemove_data()
     QTest::newRow("removing-end-of-previous-whole-and-start-of-next-in-middle")
         << pieceCount << removeRange
         << fullSize - BaseSize - (BaseSize - End - 1) - Start << pieceCount + 1 << pieceCount + 1
-        << QVector<StorageDataTestData> {
+        << QList<StorageDataTestData> {
             StorageDataTestData::valid(midPieceOffset - (BaseSize - End - 1) - 1, changeStarts[mid - 1] + BaseSize - (BaseSize - End - 1) - 1, Piece::ChangeStorage),
             StorageDataTestData::valid(midPieceOffset - (BaseSize - End - 1), changeStarts[mid + 1] + Start, Piece::ChangeStorage),
             StorageDataTestData::valid(fullSize - BaseSize - (BaseSize - End - 1) - Start - 1, changeStarts[pieceCount] + BaseSize - 1, Piece::ChangeStorage),
@@ -484,7 +484,7 @@ void RevertablePieceTableTest::testRemove_data()
     QTest::newRow("removing-start-of-piece-at-start")
         << pieceCount << removeRange
         << fullSize - Start << pieceCount + 1 << pieceCount + 1
-        << QVector<StorageDataTestData> {
+        << QList<StorageDataTestData> {
             StorageDataTestData::valid(0, changeStarts[1] + Start, Piece::ChangeStorage),
             StorageDataTestData::valid(fullSize - Start - 1, changeStarts[pieceCount] + BaseSize - 1, Piece::ChangeStorage),
             StorageDataTestData::invalid(fullSize - Start)};
@@ -493,7 +493,7 @@ void RevertablePieceTableTest::testRemove_data()
     QTest::newRow("removing-whole-piece-at-start")
         << pieceCount << removeRange
         << fullSize - BaseSize << pieceCount + 1 << pieceCount + 1
-        << QVector<StorageDataTestData> {
+        << QList<StorageDataTestData> {
             StorageDataTestData::valid(0, changeStarts[2], Piece::ChangeStorage),
             StorageDataTestData::valid(fullSize - BaseSize - 1, changeStarts[pieceCount] + BaseSize - 1, Piece::ChangeStorage),
             StorageDataTestData::invalid(fullSize - BaseSize)};
@@ -502,7 +502,7 @@ void RevertablePieceTableTest::testRemove_data()
     QTest::newRow("removing-whole-piece-and-start-of-next-at-start")
         << pieceCount << removeRange
         << fullSize - BaseSize - Start << pieceCount + 1 << pieceCount + 1
-        << QVector<StorageDataTestData> {
+        << QList<StorageDataTestData> {
             StorageDataTestData::valid(0, changeStarts[2] + Start, Piece::ChangeStorage),
             StorageDataTestData::valid(fullSize - BaseSize - Start - 1, changeStarts[pieceCount] + BaseSize - 1, Piece::ChangeStorage),
             StorageDataTestData::invalid(fullSize - BaseSize - Start)};
@@ -511,7 +511,7 @@ void RevertablePieceTableTest::testRemove_data()
     QTest::newRow("removing-end-of-piece-at-end")
         << pieceCount << removeRange
         << fullSize - (BaseSize - End - 1) << pieceCount + 1 << pieceCount + 1
-        << QVector<StorageDataTestData> {
+        << QList<StorageDataTestData> {
             StorageDataTestData::valid(fullSize - BaseSize + End, changeStarts[pieceCount] + End, Piece::ChangeStorage),
             StorageDataTestData::invalid(fullSize - (BaseSize - End - 1))};
 
@@ -519,7 +519,7 @@ void RevertablePieceTableTest::testRemove_data()
     QTest::newRow("removing-whole-piece-at-end")
         << pieceCount << removeRange
         << fullSize - BaseSize << pieceCount + 1 << pieceCount + 1
-        << QVector<StorageDataTestData> {
+        << QList<StorageDataTestData> {
             StorageDataTestData::valid(fullSize - BaseSize - 1, changeStarts[pieceCount - 1] + BaseSize - 1, Piece::ChangeStorage),
             StorageDataTestData::invalid(fullSize - BaseSize)};
 
@@ -527,7 +527,7 @@ void RevertablePieceTableTest::testRemove_data()
     QTest::newRow("removing-whole-piece-and-end-of-previous-at-end")
         << pieceCount << removeRange
         << fullSize - BaseSize - (BaseSize - End - 1) << pieceCount + 1 << pieceCount + 1
-        << QVector<StorageDataTestData> {
+        << QList<StorageDataTestData> {
             StorageDataTestData::valid(fullSize - BaseSize - (BaseSize - End - 1) - 1, changeStarts[pieceCount - 1] + End, Piece::ChangeStorage),
             StorageDataTestData::invalid(fullSize - BaseSize - (BaseSize - End - 1))};
 
@@ -535,7 +535,7 @@ void RevertablePieceTableTest::testRemove_data()
     QTest::newRow("removing-all")
         << pieceCount << removeRange
         << 0 << pieceCount + 1 << pieceCount + 1
-        << QVector<StorageDataTestData> {
+        << QList<StorageDataTestData> {
             StorageDataTestData::invalid(0)};
 }
 
@@ -546,7 +546,7 @@ void RevertablePieceTableTest::testRemove()
     QFETCH(const Size, expectedTableSize);
     QFETCH(const int, expectedChangesCount);
     QFETCH(const int, expectedAppliedChangesCount);
-    QFETCH(const QVector<StorageDataTestData>, testData);
+    QFETCH(const QList<StorageDataTestData>, testData);
 
     RevertablePieceTable pieceTable;
     if (multiFillCount > 0) {
@@ -581,14 +581,14 @@ void RevertablePieceTableTest::testSwap_data()
 {
     QTest::addColumn<Address>("firstStart");
     QTest::addColumn<AddressRange>("secondRange");
-    QTest::addColumn<QVector<StorageDataTestData>>("testData");
+    QTest::addColumn<QList<StorageDataTestData>>("testData");
 
     const Address mid = (End + Start) / 2;
 
     AddressRange moveRange = AddressRange::fromWidth(End + 1, BaseSize - (End + 1));
     QTest::newRow("moving-end-at-begin")
         << 0 << moveRange
-        << QVector<StorageDataTestData> {
+        << QList<StorageDataTestData> {
             StorageDataTestData::valid(0, End + 1, Piece::OriginalStorage),
             StorageDataTestData::valid(BaseSize - End - 2, BaseSize - 1, Piece::OriginalStorage),
             StorageDataTestData::valid(BaseSize - End - 1, 0, Piece::OriginalStorage),
@@ -598,7 +598,7 @@ void RevertablePieceTableTest::testSwap_data()
     moveRange = AddressRange::fromWidth(End + 1, BaseSize - (End + 1));
     QTest::newRow("moving-end-at-mid")
         << Start << moveRange
-        << QVector<StorageDataTestData> {
+        << QList<StorageDataTestData> {
             StorageDataTestData::valid(Start - 1, Start - 1, Piece::OriginalStorage),
             StorageDataTestData::valid(Start, End + 1, Piece::OriginalStorage),
             StorageDataTestData::valid(Start + BaseSize - End - 2, BaseSize - 1, Piece::OriginalStorage),
@@ -609,7 +609,7 @@ void RevertablePieceTableTest::testSwap_data()
     moveRange = AddressRange::fromWidth(Start, Width);
     QTest::newRow("moving-mid-at-begin")
         << 0 << moveRange
-        << QVector<StorageDataTestData> {
+        << QList<StorageDataTestData> {
             StorageDataTestData::valid(0, Start, Piece::OriginalStorage),
             StorageDataTestData::valid(Width - 1, End, Piece::OriginalStorage),
             StorageDataTestData::valid(Width, 0, Piece::OriginalStorage),
@@ -619,7 +619,7 @@ void RevertablePieceTableTest::testSwap_data()
     moveRange = AddressRange::fromWidth(mid, End - mid + 1);
     QTest::newRow("moving-mid-at-mid")
         << Start << moveRange
-        << QVector<StorageDataTestData> {
+        << QList<StorageDataTestData> {
             StorageDataTestData::valid(Start - 1, Start - 1, Piece::OriginalStorage),
             StorageDataTestData::valid(Start, mid, Piece::OriginalStorage),
             StorageDataTestData::valid(Start + End - mid, End, Piece::OriginalStorage),
@@ -632,7 +632,7 @@ void RevertablePieceTableTest::testSwap()
 {
     QFETCH(const Address, firstStart);
     QFETCH(const AddressRange, secondRange);
-    QFETCH(const QVector<StorageDataTestData>, testData);
+    QFETCH(const QList<StorageDataTestData>, testData);
 
     RevertablePieceTable pieceTable;
     pieceTable.init(BaseSize);

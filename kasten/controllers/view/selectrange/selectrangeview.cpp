@@ -41,6 +41,8 @@ inline void KConfigGroup::writeEntry(const char *key, const Kasten::SelectRangeV
 
 namespace Kasten {
 
+const QString SelectRangeView::ConfigGroupId = QStringLiteral("SelectRangeTool");
+
 SelectRangeView::SelectRangeView(SelectRangeTool* tool, QWidget* parent)
     : AbstractToolWidget(parent)
     , mTool(tool)

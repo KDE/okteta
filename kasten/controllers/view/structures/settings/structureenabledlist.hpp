@@ -13,7 +13,8 @@
 #include <unordered_map>
 #include <vector>
 
-class QStringList;
+template <class T> class QList;
+using QStringList = QList<QString>;
 
 namespace Kasten {
 

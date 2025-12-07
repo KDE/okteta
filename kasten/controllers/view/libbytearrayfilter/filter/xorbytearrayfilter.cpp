@@ -12,7 +12,7 @@
 #include <KConfigGroup>
 #include <KLocalizedString>
 
-static constexpr char XOrFilterConfigGroupId[] = "XOR";
+static const QString XOrFilterConfigGroupId = QStringLiteral("XOR");
 
 XOrByteArrayFilter::XOrByteArrayFilter()
     : AbstractByteArrayFilter(

@@ -4,11 +4,11 @@
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
-#ifndef OKTETABROWSEREXTENSION_HPP
-#define OKTETABROWSEREXTENSION_HPP
+#ifndef OKTETANAVIGATIONEXTENSION_HPP
+#define OKTETANAVIGATIONEXTENSION_HPP
 
 // KF
-#include <KParts/BrowserExtension>
+#include <KParts/NavigationExtension>
 
 class OktetaPart;
 
@@ -16,14 +16,14 @@ class OktetaPart;
  * @short Extension for better support for embedding in browsers
  * @author Friedrich W. H. Kossebau <kossebau@kde.org>
  */
-class OktetaBrowserExtension : public KParts::BrowserExtension
+class OktetaNavigationExtension : public KParts::NavigationExtension
 {
     Q_OBJECT
 
 public:
-    explicit OktetaBrowserExtension(OktetaPart* part);
+    explicit OktetaNavigationExtension(OktetaPart* part);
 
-public: // KParts::BrowserExtension API
+public: // KParts::NavigationExtension API
     void saveState(QDataStream& stream) override;
     void restoreState(QDataStream& stream) override;
 
