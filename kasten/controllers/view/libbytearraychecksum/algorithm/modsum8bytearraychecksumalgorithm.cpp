@@ -11,7 +11,7 @@
 // KF
 #include <KLocalizedString>
 // Qt
-#include <QtGlobal>
+#include <QtTypes>
 
 ModSum8ByteArrayChecksumAlgorithm::ModSum8ByteArrayChecksumAlgorithm()
     : AbstractByteArrayChecksumAlgorithm(

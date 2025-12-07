@@ -77,7 +77,7 @@ class ByteArraySourceCodeStreamEncoder : public AbstractByteArrayStreamEncoder
     Q_OBJECT
 
 private:
-    static constexpr char ConfigGroupId[] = "ByteArraySourceCodeStreamEncoder";
+    static const QString ConfigGroupId;
 
 public:
     ByteArraySourceCodeStreamEncoder();

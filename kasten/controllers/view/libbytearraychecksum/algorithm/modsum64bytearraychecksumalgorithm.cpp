@@ -14,7 +14,7 @@
 // Qt
 #include <QtEndian>
 
-static constexpr char ModSum64ConfigGroupId[] = "ModularSum64";
+static const QString ModSum64ConfigGroupId = QStringLiteral("ModularSum64");
 
 ModSum64ByteArrayChecksumAlgorithm::ModSum64ByteArrayChecksumAlgorithm()
     : AbstractByteArrayChecksumAlgorithm(

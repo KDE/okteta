@@ -20,7 +20,7 @@ target_sources(OktetaCoreTestUtil PRIVATE
 target_link_libraries(OktetaCoreTestUtil
     PUBLIC
         OktetaCore
-        Qt5::Core
+        Qt6::Core
 )
 
 # variant for static version of OktetaCore
@@ -31,7 +31,7 @@ target_sources(OktetaCoreSourcesShimTestUtil PRIVATE
 target_link_libraries(OktetaCoreSourcesShimTestUtil
     PUBLIC
       OktetaCoreSourcesTestShim
-      Qt5::Core
+      Qt6::Core
 )
 
 ecm_add_test(
@@ -40,7 +40,7 @@ ecm_add_test(
     TEST_NAME arraychangemetricstest
     LINK_LIBRARIES
         OktetaCoreSourcesTestShim
-        Qt5::Test
+        Qt6::Test
 )
 
 
@@ -49,7 +49,7 @@ ecm_add_test(
     TEST_NAME addressrangetest
     LINK_LIBRARIES
         OktetaCoreTypes
-        Qt5::Test
+        Qt6::Test
 )
 
 
@@ -58,7 +58,8 @@ ecm_add_test(
     TEST_NAME addressrangelisttest
     LINK_LIBRARIES
         OktetaCoreTypes
-        Qt5::Test
+        Qt6::Core5Compat
+        Qt6::Test
 )
 
 
@@ -67,7 +68,7 @@ ecm_add_test(
     TEST_NAME fixedsizebytearraymodeltest
     LINK_LIBRARIES
         OktetaCoreByteArrayModels
-        Qt5::Test
+        Qt6::Test
 )
 
 
@@ -78,7 +79,7 @@ ecm_add_test(
     LINK_LIBRARIES
         OktetaCoreSourcesShimTestUtil
         OktetaCoreByteArrayModels
-        Qt5::Test
+        Qt6::Test
 )
 
 
@@ -87,7 +88,7 @@ ecm_add_test(
     TEST_NAME bytearraymodeltest
     LINK_LIBRARIES
         OktetaCore
-        Qt5::Test
+        Qt6::Test
 )
 
 
@@ -98,7 +99,7 @@ ecm_add_test(
     LINK_LIBRARIES
         OktetaCoreSourcesShimTestUtil
         OktetaCoreByteArrayModels
-        Qt5::Test
+        Qt6::Test
 )
 
 
@@ -109,7 +110,7 @@ ecm_add_test(
     LINK_LIBRARIES
         OktetaCoreSourcesShimTestUtil
         OktetaCoreByteArrayModels
-        Qt5::Test
+        Qt6::Test
 )
 
 
@@ -120,7 +121,7 @@ ecm_add_test(
     LINK_LIBRARIES
         OktetaCoreTestUtil
         OktetaCore
-        Qt5::Test
+        Qt6::Test
 )
 
 
@@ -129,7 +130,7 @@ ecm_add_test(
     TEST_NAME valuecodectest
     LINK_LIBRARIES
         OktetaCoreValueCodecs
-        Qt5::Test
+        Qt6::Test
 )
 
 
@@ -138,7 +139,7 @@ ecm_add_test(
     TEST_NAME charcodectest
     LINK_LIBRARIES
         OktetaCoreCharCodecs
-        Qt5::Test
+        Qt6::Test
 )
 
 
@@ -147,7 +148,7 @@ ecm_add_test(
     TEST_NAME textcharcodectest
     LINK_LIBRARIES
         OktetaCoreCharCodecs
-        Qt5::Test
+        Qt6::Test
 )
 
 
@@ -157,7 +158,7 @@ ecm_add_test(
     TEST_NAME textcharcodeccharcodeciftest
     LINK_LIBRARIES
         OktetaCoreCharCodecs
-        Qt5::Test
+        Qt6::Test
 )
 
 
@@ -167,7 +168,7 @@ ecm_add_test(
     TEST_NAME ebcdic1047charcodeccharcodeciftest
     LINK_LIBRARIES
         OktetaCoreCharCodecs
-        Qt5::Test
+        Qt6::Test
 )
 
 
@@ -176,7 +177,7 @@ ecm_add_test(
     TEST_NAME bookmarktest
     LINK_LIBRARIES
         OktetaCoreSourcesTestShim
-        Qt5::Test
+        Qt6::Test
 )
 
 
@@ -185,5 +186,5 @@ ecm_add_test(
     TEST_NAME bookmarklisttest
     LINK_LIBRARIES
         OktetaCoreBookmark
-        Qt5::Test
+        Qt6::Test
 )

@@ -12,7 +12,7 @@
 #include <KConfigGroup>
 #include <KLocalizedString>
 
-static constexpr char ReverseFilterConfigGroupId[] = "Reverse";
+static const QString ReverseFilterConfigGroupId = QStringLiteral("Reverse");
 
 ReverseByteArrayFilter::ReverseByteArrayFilter()
     : AbstractByteArrayFilter(

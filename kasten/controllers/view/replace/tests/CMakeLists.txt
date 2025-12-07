@@ -9,7 +9,7 @@ ecm_add_test(
         OktetaKastenControllersByteArraySearch
         OktetaKastenGui
         OktetaKastenCore
-        Qt5::Test
+        Qt6::Test
 )
 target_include_directories(replacejobtest
     PUBLIC

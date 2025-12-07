@@ -40,6 +40,8 @@ inline void KConfigGroup::writeEntry(const char *key, const Kasten::GotoOffsetVi
 
 namespace Kasten {
 
+const QString GotoOffsetView::ConfigGroupId = QStringLiteral("GotoOffsetTool");
+
 GotoOffsetView::GotoOffsetView(GotoOffsetTool* tool, QWidget* parent)
     : AbstractToolWidget(parent)
     , mTool(tool)

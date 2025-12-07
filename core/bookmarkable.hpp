@@ -12,7 +12,7 @@
 // Qt
 #include <QtPlugin>
 
-template <class T> class QVector;
+template <class T> class QList;
 
 namespace Okteta {
 
@@ -26,8 +26,8 @@ public:
     virtual ~Bookmarkable();
 
 public: // set/action
-    virtual void addBookmarks(const QVector<Okteta::Bookmark>& bookmarks) = 0;
-    virtual void removeBookmarks(const QVector<Okteta::Bookmark>& bookmarks) = 0;
+    virtual void addBookmarks(const QList<Okteta::Bookmark>& bookmarks) = 0;
+    virtual void removeBookmarks(const QList<Okteta::Bookmark>& bookmarks) = 0;
     virtual void removeAllBookmarks() = 0;
     virtual void setBookmark(unsigned int index, const Okteta::Bookmark& bookmark) = 0;
 
@@ -45,10 +45,10 @@ public: // get
     virtual unsigned int bookmarksCount() const = 0;
 
 public: // signal
-    // TODO: use also QVector<int> for added?
-    virtual void bookmarksAdded(const QVector<Okteta::Bookmark>& bookmarks) = 0;
-    virtual void bookmarksRemoved(const QVector<Okteta::Bookmark>& bookmarks) = 0;
-    virtual void bookmarksModified(const QVector<int>& indizes) = 0;
+    // TODO: use also QList<int> for added?
+    virtual void bookmarksAdded(const QList<Okteta::Bookmark>& bookmarks) = 0;
+    virtual void bookmarksRemoved(const QList<Okteta::Bookmark>& bookmarks) = 0;
+    virtual void bookmarksModified(const QList<int>& indizes) = 0;
     virtual void bookmarksModified(bool modified) = 0;
 };
 

@@ -23,9 +23,11 @@ void DocumentManagerTest::checkAdded(QSignalSpy* changedSpy, Kasten::AbstractDoc
     QCOMPARE(changedSpy->size(), 1);
     const QList<QVariant> arguments = changedSpy->takeFirst();
     QCOMPARE(arguments.size(), 1);
-    const auto documents = arguments.at(0).value<QVector<Kasten::AbstractDocument*>>();
+    const auto documents = arguments.at(0).value<QList<Kasten::AbstractDocument*>>();
     QCOMPARE(documents.size(), 1);
-    QCOMPARE(documents.at(0), document);
+    // cast to non-QObject pointer, to avoid QTest trying to access the object instance for nicer logging
+    // in the case of failures, where in our case the objects could be deleted already.
+    QCOMPARE(static_cast<void*>(documents.at(0)), static_cast<void*>(document));
 }
 
 void DocumentManagerTest::checkRemoving(QSignalSpy* changedSpy, Kasten::AbstractDocument* document)
@@ -34,14 +36,16 @@ void DocumentManagerTest::checkRemoving(QSignalSpy* changedSpy, Kasten::Abstract
     QCOMPARE(changedSpy->size(), 1);
     const QList<QVariant> arguments = changedSpy->takeFirst();
     QCOMPARE(arguments.size(), 1);
-    const auto documents = arguments.at(0).value<QVector<Kasten::AbstractDocument*>>();
+    const auto documents = arguments.at(0).value<QList<Kasten::AbstractDocument*>>();
     QCOMPARE(documents.size(), 1);
-    QCOMPARE(documents.at(0), document);
+    // cast to non-QObject pointer, to avoid QTest trying to access the object instance for nicer logging
+    // in the case of failures, where in our case the objects could be deleted already.
+    QCOMPARE(static_cast<void*>(documents.at(0)), static_cast<void*>(document));
 }
 
 void DocumentManagerTest::initTestCase()
 {
-    qRegisterMetaType<QVector<Kasten::AbstractDocument*>>("QVector<Kasten::AbstractDocument*>");
+    qRegisterMetaType<QList<Kasten::AbstractDocument*>>("QList<Kasten::AbstractDocument*>");
 }
 
 void DocumentManagerTest::testConstructor()
