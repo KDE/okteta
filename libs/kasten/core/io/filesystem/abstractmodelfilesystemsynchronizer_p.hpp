@@ -13,9 +13,6 @@
 #include <abstractmodelsynchronizer_p.hpp>
 // Qt
 #include <QDateTime>
-#include <QNetworkConfigurationManager>
-// Std
-#include <memory>
 
 class KDirWatch;
 
@@ -53,8 +50,8 @@ public:
 private:
     QDateTime mFileDateTime;
     RemoteSyncState mRemoteState = RemoteUnknown;
-    std::unique_ptr<QNetworkConfigurationManager> mNetworkConfigurationManager;
     mutable KDirWatch* mDirWatch = nullptr;
+    QMetaObject::Connection mReachabilityChangedConnection;
 
 private:
     Q_DECLARE_PUBLIC(AbstractModelFileSystemSynchronizer)

@@ -13,27 +13,32 @@ okteta_add_library(Controllers NAMESPACE Okteta Kasten
         KastenCore
     PRIVATE
         OktetaFramesPrint
-        KF5::NewStuffWidgets
-        KF5::I18n
-        KF5::ConfigWidgets
-        KF5::ItemViews
-        KF5::Completion
-        KF5::KIOCore
-        KF5::Archive
-        Qt5::PrintSupport
-        Qt5::Xml
-#         Qt5::Test # QAbstractItemModelTester
+        KF6::I18n
+        KF6::ConfigWidgets
+        KF6::ItemViews
+        KF6::ColorScheme
+        KF6::Completion
+        KF6::KIOCore
+        Qt6::PrintSupport
+        Qt6::Xml
+#         Qt6::Test # QAbstractItemModelTester
     VERSION     ${OKTETAKASTENCONTROLLERS_VERSION}
     SOVERSION   ${OKTETAKASTENCONTROLLERS_SO_VERSION}
     ABIVERSION  ${OKTETAKASTEN_ABI_VERSION} ${KASTEN_ABI_VERSION}
     NO_VERSIONED_INCLUDEDIR
-    NO_VERSIONED_PACKAGE_NAME
     REVERSE_NAMESPACE_INCLUDEDIR
     REVERSE_NAMESPACE_LIB
     NO_TARGET_NAMESPACE
-    NO_VERSIONED_EXPORTED_TARGET_NAME
     KI18N_TRANSLATION_DOMAIN "liboktetakasten"
 )
+
+if(BUILD_STRUCTURESTOOL)
+    target_link_libraries(OktetaKastenControllers
+        PRIVATE
+            KF6::Archive
+            KF6::NewStuffWidgets
+    )
+endif()
 
 ecm_qt_declare_logging_category(OktetaKastenControllers
     HEADER "checksumlogging.hpp"
@@ -69,7 +74,7 @@ oktetakastencontrollers_add_sublibrary(OktetaKastenControllersConfigEntries
     NO_EXPORTS
     PUBLIC
         OktetaKastenGui
-        KF5::ConfigCore
+        KF6::ConfigCore
 )
 
 oktetakastencontrollers_add_sublibrary(OktetaKastenControllersDataTypes
@@ -77,7 +82,7 @@ oktetakastencontrollers_add_sublibrary(OktetaKastenControllersDataTypes
     PUBLIC
         OktetaGui
     PRIVATE
-        KF5::Completion
+        KF6::Completion
 )
 
 oktetakastencontrollers_add_sublibrary(OktetaKastenControllersDataTypeCodecs
@@ -85,7 +90,7 @@ oktetakastencontrollers_add_sublibrary(OktetaKastenControllersDataTypeCodecs
     PUBLIC
         OktetaKastenControllersDataTypes
     PRIVATE
-        KF5::I18n
+        KF6::I18n
     KI18N_TRANSLATION_DOMAIN "liboktetakasten"
 )
 
@@ -100,18 +105,18 @@ oktetakastencontrollers_add_sublibrary(OktetaKastenControllersDataTypeEditors
     PUBLIC
         OktetaKastenControllersDataTypes
     PRIVATE
-        KF5::Completion
+        KF6::Completion
 )
 
 oktetakastencontrollers_add_sublibrary(OktetaKastenControllersByteArrayChecksum
     NO_EXPORTS
     PUBLIC
         OktetaCore
-        Qt5::Widgets
+        Qt6::Widgets
     PRIVATE
         OktetaKastenControllersConfigEntries
-        KF5::Completion
-        KF5::I18n
+        KF6::Completion
+        KF6::I18n
     KI18N_TRANSLATION_DOMAIN "liboktetakasten"
 )
 
@@ -119,10 +124,10 @@ oktetakastencontrollers_add_sublibrary(OktetaKastenControllersByteArrayFilter
     NO_EXPORTS
     PUBLIC
         OktetaCore
-        Qt5::Widgets
+        Qt6::Widgets
     PRIVATE
         OktetaKastenControllersConfigEntries
-        KF5::I18n
+        KF6::I18n
     KI18N_TRANSLATION_DOMAIN "liboktetakasten"
 )
 
@@ -131,7 +136,7 @@ oktetakastencontrollers_add_sublibrary(OktetaKastenControllersFindDialog
     PUBLIC
         OktetaKastenGui
     PRIVATE
-        KF5::I18n
+        KF6::I18n
     KI18N_TRANSLATION_DOMAIN "liboktetakasten"
 )
 
@@ -141,17 +146,19 @@ oktetakastencontrollers_add_sublibrary(OktetaKastenControllersByteArraySearch
         OktetaKastenControllersFindDialog
 )
 
+if(BUILD_STRUCTURESTOOL)
 oktetakastencontrollers_add_sublibrary(OktetaKastenControllersStructuresDataTypes
     NO_EXPORTS
     PUBLIC
         OktetaCore
-        KF5::ConfigGui
-        Qt5::Script
+        KF6::ConfigGui
+        Qt6::Script
     PRIVATE
         OktetaKastenControllersConfigEntries
         OktetaKastenControllersDataTypeEditors
-        KF5::Completion
-        KF5::I18n
+        KF6::ColorScheme
+        KF6::Completion
+        KF6::I18n
     KI18N_TRANSLATION_DOMAIN "liboktetakasten"
 )
 
@@ -164,6 +171,7 @@ okteta_qt_declare_logging_category(Controllers NAMESPACE Okteta Kasten
     DESCRIPTION "Okteta Structures tool"
     EXPORT OKTETA
 )
+endif()
 
 oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersConfigEntries
     SUBDIR libconfigentries
@@ -553,7 +561,7 @@ oktetakastencontrollers_sources(
         BookmarksToolView
 )
 
-
+if(BUILD_STRUCTURESTOOL)
 oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersStructuresDataTypes
     SUBDIR view/structures/datatypes
     BUILD_INCLUDEDIR
@@ -721,6 +729,7 @@ oktetakastencontrollers_sources(
         StructuresToolView
         StructureViewItemDelegate
 )
+endif()
 
 oktetakastencontrollers_sources(
     SUBDIR view/print
@@ -799,7 +808,9 @@ oktetakastencontrollers_sources(
         LabelledWidgetsToolBar
 )
 
-install(FILES view/structures/kns/okteta-structures.knsrc  DESTINATION ${KDE_INSTALL_KNSRCDIR})
+if(BUILD_STRUCTURESTOOL)
+    install(FILES view/structures/kns/okteta-structures.knsrc  DESTINATION ${KDE_INSTALL_KNSRCDIR})
+endif()
 
 set( elf_structure_FILES
     view/structures/examples/okteta/structures/elf/metadata.desktop
@@ -843,7 +854,7 @@ target_link_libraries(OktetaKastenControllersByteArrayFilterTemplates
     PUBLIC
         OktetaKastenControllersByteArrayFilter
     PRIVATE
-        KF5::I18n
+        KF6::I18n
 )
 
 add_library(OktetaKastenControllersByteArrayCheckSumTemplates STATIC)
@@ -862,7 +873,7 @@ target_link_libraries(OktetaKastenControllersByteArrayCheckSumTemplates
     PUBLIC
         OktetaKastenControllersByteArrayChecksum
     PRIVATE
-        KF5::I18n
+        KF6::I18n
 )
 
 endif()
@@ -871,5 +882,7 @@ if(BUILD_TESTING)
     add_subdirectory(view/libdatatypeeditors/tests)
     add_subdirectory(view/replace/tests)
     add_subdirectory(view/search/tests)
+    if(BUILD_STRUCTURESTOOL)
     add_subdirectory(view/structures/tests)
+    endif()
 endif()
