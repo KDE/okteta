@@ -1,7 +1,9 @@
 set(OKTETAKASTENCONTROLLERS_VERSION ${OKTETAKASTEN_LIB_VERSION})
 set(OKTETAKASTENCONTROLLERS_SO_VERSION ${OKTETAKASTEN_LIB_SOVERSION})
 
-ecm_test_set_dir_properties(DIR view PREFIX_NAME_IGNORE)
+if (BUILD_TESTING)
+    ecm_test_set_dir_properties(DIR view PREFIX_NAME_IGNORE)
+endif()
 
 okteta_add_library(Controllers NAMESPACE Okteta Kasten
     PUBLIC

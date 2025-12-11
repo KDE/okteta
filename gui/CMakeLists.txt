@@ -1,7 +1,9 @@
 set(OKTETAGUI_VERSION ${OKTETALIBS_LIB_VERSION})
 set(OKTETAGUI_SO_VERSION ${OKTETALIBS_LIB_SOVERSION})
 
-ecm_test_set_dir_properties(PREFIX_NAME "libokteta-gui")
+if (BUILD_TESTING)
+    ecm_test_set_dir_properties(PREFIX_NAME "libokteta-gui")
+endif()
 
 set(LIBOKTETAWIDGETS_REL_DIR ../kasten/gui/liboktetawidgets)
 

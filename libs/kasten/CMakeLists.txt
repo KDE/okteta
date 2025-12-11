@@ -7,7 +7,9 @@ set( KASTEN_ABI_VERSION 4 )
 set( KASTEN_LIB_SOVERSION 0 )
 set( KASTEN_LIB_VERSION ${KASTEN_VERSION} )
 
-ecm_test_set_dir_properties(PREFIX_NAME "libkasten")
+if (BUILD_TESTING)
+    ecm_test_set_dir_properties(PREFIX_NAME "libkasten")
+endif()
 
 add_subdirectory( core )
 add_subdirectory( gui )

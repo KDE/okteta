@@ -1,7 +1,9 @@
 set(OKTETAKASTENGUI_VERSION ${OKTETAKASTEN_LIB_VERSION})
 set(OKTETAKASTENGUI_SO_VERSION ${OKTETAKASTEN_LIB_SOVERSION})
 
-ecm_test_set_dir_properties(DIR liboktetawidgets PREFIX_NAME "oktetawidgets")
+if (BUILD_TESTING)
+    ecm_test_set_dir_properties(DIR liboktetawidgets PREFIX_NAME "oktetawidgets")
+endif()
 
 okteta_add_library(Gui NAMESPACE Okteta Kasten
     PUBLIC
