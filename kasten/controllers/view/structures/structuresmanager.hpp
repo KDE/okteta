@@ -11,9 +11,6 @@
 #include "structuredefinitionfile.hpp"
 // KF
 #include <KSharedConfig>
-// Qt
-#include <QStringList>
-#include <QDir>
 // Std
 #include <map>
 #include <memory>
@@ -46,7 +43,6 @@ private:
 
 private:
     std::map<QString, std::unique_ptr<StructureDefinitionFile>> mDefs;
-    QStringList mLoadedFiles;
     KSharedConfig::Ptr mConfig;
 };
 
