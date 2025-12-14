@@ -10,8 +10,6 @@
 #define KASTEN_STRUCTURESMANAGER_HPP
 
 #include "structuredefinitionfile.hpp"
-// Qt
-#include <QDir>
 // KF
 #include <KSharedConfig>
 #include <KPluginInfo>
