@@ -34,7 +34,6 @@ void StructuresManager::reloadPaths()
 {
     qDeleteAll(mDefs);
     mDefs.clear();
-    mLoadedFiles.clear();
     QStringList paths;
     const QStringList structuresDirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation,
                                                                  QStringLiteral("okteta/structures"), QStandardPaths::LocateDirectory);
