@@ -6,20 +6,20 @@
 # Jeff Huang <s8321414@gmail.com>, 2016.
 # pan93412 <pan93412@gmail.com>, 2018, 2019.
 # Frank Weng (a.k.a. Franklin) <franklin at goodhorse dot idv dot tw>, 2008, 2009, 2010.
-# SPDX-FileCopyrightText: 2024 Kisaragi Hiu <mail@kisaragi-hiu.com>
+# SPDX-FileCopyrightText: 2024, 2025 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 09:01+0000\n"
-"PO-Revision-Date: 2024-02-05 18:25+0900\n"
+"PO-Revision-Date: 2025-12-21 07:39+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.01.95\n"
+"X-Generator: Lokalize 25.11.70\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #, kde-format
@@ -38,52 +38,43 @@ msgid "Okteta"
 msgstr "Okteta"
 
 #: about.cpp:17
-#, fuzzy, kde-format
-#| msgid "Hex editor"
+#, kde-format
 msgctxt "@info"
 msgid "Hex editor"
 msgstr "十六進位資料編輯器"
 
 #: about.cpp:19
-#, fuzzy, kde-format
-#| msgid "2006-%1 Friedrich W. H. Kossebau"
+#, kde-format
 msgctxt "@info"
 msgid "2006-%1 Friedrich W. H. Kossebau"
 msgstr "2006-%1 Friedrich W. H. Kossebau"
 
 #: about.cpp:20
-#, fuzzy, kde-format
-#| msgid "Edit the raw data of files"
+#, kde-format
 msgctxt "@info"
 msgid "Edit the raw data of files"
 msgstr "編輯檔案的原始資料"
 
 #: about.cpp:25
-#, fuzzy, kde-format
-#| msgid "Friedrich W. H. Kossebau"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Friedrich W. H. Kossebau"
 msgstr "Friedrich W. H. Kossebau"
 
 #: about.cpp:26
-#, fuzzy, kde-format
-#| msgid "Author"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Author"
 msgstr "作者"
 
 #: about.cpp:28
-#, fuzzy, kde-format
-#| msgctxt "Author"
-#| msgid "Alexander Richardson"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Alexander Richardson"
 msgstr "Alexander Richardson"
 
 #: about.cpp:29
-#, fuzzy, kde-format
-#| msgctxt "Task description"
-#| msgid "Structures tool"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Structures tool"
 msgstr "結構工具"
@@ -108,8 +99,7 @@ msgid "Main Toolbar"
 msgstr "主工具列"
 
 #: program.cpp:89
-#, fuzzy, kde-format
-#| msgid "File(s) to load."
+#, kde-format
 msgctxt "@info"
 msgid "File(s) to load."
-msgstr "要載入的檔案"
+msgstr "要載入的檔案。"

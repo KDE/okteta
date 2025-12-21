@@ -5,20 +5,20 @@
 # Frank Weng (a.k.a. Franklin) <franklin at goodhorse dot idv dot tw>, 2008, 2009, 2010.
 # Franklin Weng <franklin@mail.everfocus.com.tw>, 2008.
 # pan93412 <pan93412@gmail.com>, 2019.
-# SPDX-FileCopyrightText: 2024 Kisaragi Hiu <mail@kisaragi-hiu.com>
+# SPDX-FileCopyrightText: 2024, 2025 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 09:01+0000\n"
-"PO-Revision-Date: 2024-05-09 06:42+0900\n"
+"PO-Revision-Date: 2025-12-21 07:57+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 24.04.70\n"
+"X-Generator: Lokalize 25.11.70\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: controllers/document/modified/modifiedbarcontroller.cpp:74
@@ -149,12 +149,10 @@ msgid "Documents"
 msgstr "文件"
 
 #: controllers/documentsystem/documentsbrowser/documentsview.cpp:49
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Documents"
+#, kde-format
 msgctxt "@info"
 msgid "No documents"
-msgstr "文件"
+msgstr "沒有文件"
 
 #: controllers/documentsystem/filesystembrowser/filesystembrowsertool.cpp:30
 #: controllers/documentsystem/filesystembrowser/filesystembrowsertoolviewfactory.cpp:22

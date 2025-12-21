@@ -12,14 +12,14 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 09:01+0000\n"
-"PO-Revision-Date: 2025-11-24 20:50+0900\n"
+"PO-Revision-Date: 2025-12-21 07:57+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 26.03.70\n"
+"X-Generator: Lokalize 25.11.70\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #, kde-format
@@ -3326,35 +3326,35 @@ msgstr "序列已插入"
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "bzip2"
-msgstr ""
+msgstr "bzip2"
 
 #: gui/io/streamcompressor/bzip2/bytearraybzip2streamcompressorconfigeditor.cpp:29
 #, kde-format
 msgctxt "@label:spinbox bzip2 "
 msgid "Block size:"
-msgstr ""
+msgstr "區塊大小："
 
 #: gui/io/streamcompressor/bzip2/bytearraybzip2streamcompressorconfigeditor.cpp:47
 #, kde-format
 msgid "%1 kB"
-msgstr ""
+msgstr "%1 kB"
 
 #: gui/io/streamcompressor/bzip2/bzip2compressionstream.cpp:33
 #, kde-format
 msgid "Internal bzip2 error: %1"
-msgstr ""
+msgstr "內部 bzip2 錯誤：%1"
 
 #: gui/io/streamcompressor/bzip2/bzip2compressionstream.cpp:47
 #, kde-format
 msgid "Error code %1"
-msgstr ""
+msgstr "錯誤代碼 %1"
 
 #: gui/io/streamcompressor/bzip2/bzip2compressionstream.cpp:66
 #: gui/io/streamcompressor/deflate/deflatecompressionstream.cpp:69
 #: gui/io/streamcompressor/gzip/gzipcompressionstream.cpp:71
 #, kde-format
 msgid "Internal zlib error when compressing: %1"
-msgstr ""
+msgstr "壓縮時發生內部 zlib 錯誤：%1"
 
 #: gui/io/streamcompressor/bzip2/bzip2compressionstream.cpp:75
 #: gui/io/streamcompressor/deflate/deflatecompressionstream.cpp:79
@@ -3363,13 +3363,13 @@ msgstr ""
 #: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:91
 #, kde-format
 msgid "Error writing to output: %1"
-msgstr ""
+msgstr "寫入輸出時發生錯誤：%1"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressor.cpp:117
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "deflate"
-msgstr ""
+msgstr "deflate"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:29
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:31
@@ -3377,166 +3377,150 @@ msgstr ""
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Compression level:"
-msgstr ""
+msgstr "壓縮級別："
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:33
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:35
 #: gui/io/streamcompressor/zstd/bytearrayzstdstreamcompressorconfigeditor.cpp:32
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Set as Default"
+#, kde-format
 msgctxt "@item:inmenu compression level"
 msgid "Default"
-msgstr "設為預設(&S)"
+msgstr "預設"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:41
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:43
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Compression strategy:"
-msgstr ""
+msgstr "壓縮方法："
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:46
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:48
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Set as Default"
+#, kde-format
 msgctxt "@item:inmenu compression strategy"
 msgid "Default"
-msgstr "設為預設(&S)"
+msgstr "預設"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:48
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:50
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Filter"
+#, kde-format
 msgctxt "@item:inmenu compression strategy"
 msgid "Filter"
-msgstr "過濾器(&F)"
+msgstr "過濾器"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:50
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:52
 #, kde-format
 msgctxt "@item:inmenu compression strategy"
 msgid "Huffman Encoding Only"
-msgstr ""
+msgstr "僅 Huffman 編碼"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:52
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:54
-#, fuzzy, kde-format
-#| msgctxt "name of the encoding target"
-#| msgid "Uuencoding"
+#, kde-format
 msgctxt "@item:inmenu compression strategy"
 msgid "Run-Length Encoding"
-msgstr "Uuencoding"
+msgstr "運行長度編碼"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:54
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:56
 #, kde-format
 msgctxt "@item:inmenu compression strategy"
 msgid "Fixed Huffman Encoding"
-msgstr ""
+msgstr "固定 Huffman 編碼"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:65
 #, kde-format
 msgctxt "@option:check Create deflate stream without headers or footers"
 msgid "Create raw variant:"
-msgstr ""
+msgstr "建立原始變種："
 
 #: gui/io/streamcompressor/deflate/deflatecompressionstream.cpp:32
 #: gui/io/streamcompressor/gzip/gzipcompressionstream.cpp:34
 #: gui/io/streamcompressor/gzip/gzipcompressionstream.cpp:112
 #, kde-format
 msgid "Internal zlib error: %1"
-msgstr ""
+msgstr "內部 zlib 錯誤：%1"
 
 #: gui/io/streamcompressor/deflate/deflatecompressionstream.cpp:50
 #: gui/io/streamcompressor/gzip/gzipcompressionstream.cpp:52
 #, kde-format
 msgid "Unknown zlib error, code %1"
-msgstr ""
+msgstr "不明 zlib 錯誤，代碼 %1"
 
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressor.cpp:90
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "gzip"
-msgstr ""
+msgstr "gzip"
 
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:65
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "File Info"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "File name:"
-msgstr "檔案資訊"
+msgstr "檔案名稱："
 
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:77
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Comment:"
-msgstr ""
+msgstr "註解："
 
 #: gui/io/streamcompressor/iodevicebytearrayoutput.cpp:19
 #, kde-format
 msgid "Error writing to underlying device: %1"
-msgstr ""
+msgstr "寫入底層裝置時發生錯誤：%1"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressor.cpp:116
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "xz"
-msgstr ""
+msgstr "xz"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:29
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Compression preset level:"
-msgstr ""
+msgstr "壓縮預設級別："
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:33
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Set as Default"
+#, kde-format
 msgctxt "@item:inmenu compression preset level"
 msgid "Default"
-msgstr "設為預設(&S)"
+msgstr "預設"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:42
 #, kde-format
 msgctxt "@option:check Use extreme variant of compression preset level"
 msgid "Use extreme variant:"
-msgstr ""
+msgstr "使用極端變種："
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:52
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Integrity check:"
-msgstr ""
+msgstr "完整性檢查："
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:57
-#, fuzzy, kde-format
-#| msgctxt "There is no storage location assigned to yet."
-#| msgid "[None]"
+#, kde-format
 msgctxt "@item:inmenu integrity check"
 msgid "None"
-msgstr "【無】"
+msgstr "無"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:59
 #, kde-format
 msgctxt "@item:inmenu integrity check"
 msgid "CRC32"
-msgstr ""
+msgstr "CRC32"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:61
 #, kde-format
 msgctxt "@item:inmenu integrity check"
 msgid "CRC64"
-msgstr ""
+msgstr "CRC64"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:63
-#, fuzzy, kde-format
-#| msgctxt "name of the hash algorithm"
-#| msgid "SHA-256"
+#, kde-format
 msgctxt "@item:inmenu integrity check"
 msgid "SHA-256"
 msgstr "SHA-256"
@@ -3544,57 +3528,57 @@ msgstr "SHA-256"
 #: gui/io/streamcompressor/xz/xzcompressionstream.cpp:28
 #, kde-format
 msgid "Could not initialize lzma stream."
-msgstr ""
+msgstr "無法初始化 lzma 串流。"
 
 #: gui/io/streamcompressor/xz/xzcompressionstream.cpp:46
 #, kde-format
 msgid "Unknown lzma error, code %1"
-msgstr ""
+msgstr "不明 lama 錯誤，代碼 %1"
 
 #: gui/io/streamcompressor/xz/xzcompressionstream.cpp:65
 #, kde-format
 msgid "Internal lzma error when compressing: %1"
-msgstr ""
+msgstr "壓縮時發生內部 lzma 錯誤：%1"
 
 #: gui/io/streamcompressor/zstd/bytearrayzstdstreamcompressor.cpp:46
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "ZStandard"
-msgstr ""
+msgstr "ZStandard"
 
 #: gui/io/streamcompressor/zstd/bytearrayzstdstreamcompressorconfigeditor.cpp:39
 #, kde-format
 msgctxt "@option:check"
 msgid "Content size in frame header:"
-msgstr ""
+msgstr "框架標頭的內容大小："
 
 #: gui/io/streamcompressor/zstd/bytearrayzstdstreamcompressorconfigeditor.cpp:47
 #, kde-format
 msgctxt "@option:check"
 msgid "Content checksum at frame end:"
-msgstr ""
+msgstr "框架結尾的內容檢查碼："
 
 #: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:24
 #, kde-format
 msgid "Could not create zstd stream context."
-msgstr ""
+msgstr "無法建立 zstd 串流內文。"
 
 #: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:29
 #: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:35
 #: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:43
 #, kde-format
 msgid "Internal zstd error on setup: %1"
-msgstr ""
+msgstr "啟動時發生內部 zstd 錯誤：%1"
 
 #: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:65
 #, kde-format
 msgid "Unknown zstd error, code %1"
-msgstr ""
+msgstr "不明 zstd 錯誤，代碼 %1"
 
 #: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:84
 #, kde-format
 msgid "Internal zstd error when compressing: %1"
-msgstr ""
+msgstr "壓縮時發生內部 zstd 錯誤：%1"
 
 #: gui/io/streamencoder/base32/bytearraybase32streamencoder.cpp:132
 #, kde-format
@@ -3656,42 +3640,34 @@ msgstr "字元"
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Non-printable encode mode:"
-msgstr ""
+msgstr "不可列印字元的編碼模式："
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:36
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@label:textbox byte to use for chars which are not part of the target "
-#| "charset"
-#| msgid "Substitute byte:"
+#, kde-format
 msgctxt "@item:inmenu encode mode"
 msgid "Substitute"
-msgstr "替換位元組："
+msgstr "替換"
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:38
 #, kde-format
 msgctxt "@item:inmenu encode mode"
 msgid "Escape C-Style"
-msgstr ""
+msgstr "以 C 風格進行跳脫"
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:51
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Encoding for escaped chars:"
-msgstr ""
+msgstr "跳脫後字元的編碼"
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:55
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip column contains the value in hexadecimal format"
-#| msgid "Hexadecimal"
+#, kde-format
 msgctxt "@item:inmenu escape value encoding"
 msgid "Hexadecimal"
 msgstr "十六進位"
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:57
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip column contains the value in octal format"
-#| msgid "Octal"
+#, kde-format
 msgctxt "@item:inmenu escape value encoding"
 msgid "Octal"
 msgstr "八進位"
@@ -3825,13 +3801,13 @@ msgstr "區隔："
 #, kde-format
 msgctxt "@label:textbox substring which prefixes each value"
 msgid "Prefix:"
-msgstr ""
+msgstr "前綴："
 
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:68
 #, kde-format
 msgctxt "@label:textbox substring which postfixes each value"
 msgid "Postfix:"
-msgstr ""
+msgstr "後綴："
 
 #: gui/io/streamencoder/viewhtml/bytearrayviewhtmlstreamencoder.cpp:34
 #, kde-format

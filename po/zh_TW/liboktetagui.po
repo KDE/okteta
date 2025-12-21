@@ -3,19 +3,20 @@
 #
 # Franklin Weng <franklin@mail.everfocus.com.tw>, 2010.
 # pan93412 <pan93412@gmail.com>, 2019.
+# SPDX-FileCopyrightText: 2025 Kisaragi Hiu <mail@kisaragi-hiu.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 09:01+0000\n"
-"PO-Revision-Date: 2019-02-23 21:22+0800\n"
-"Last-Translator: pan93412 <pan93412@gmail.com>\n"
-"Language-Team: Chinese <zh-l10n@lists.linux.org.tw>\n"
+"PO-Revision-Date: 2025-12-21 07:58+0900\n"
+"Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
+"Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
 "Language: zh_TW\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 18.12.2\n"
+"X-Generator: Lokalize 25.11.70\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
 
 #: controller/clipboardcontroller.cpp:76
@@ -52,20 +53,16 @@ msgstr "復原(&U)"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Re&do"
-msgstr "重作(&D)"
+msgstr "重做(&D)"
 
 #: controller/valueeditor.cpp:237
-#, fuzzy, kde-format
-#| msgctxt "name of the change"
-#| msgid "Insert"
+#, kde-format
 msgctxt "@item name of the change"
 msgid "Insert"
 msgstr "插入"
 
 #: controller/valueeditor.cpp:276
-#, fuzzy, kde-format
-#| msgctxt "name of the change"
-#| msgid "Replace"
+#, kde-format
 msgctxt "@item name of the change"
 msgid "Replace"
 msgstr "取代"
