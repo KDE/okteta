@@ -94,8 +94,8 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(const QStringList& selected, 
                     if (avail->text(0) != pluginName) {
                         continue;
                     }
-                    for (int i = 0; i < avail->childCount(); i++) {
-                        QTreeWidgetItem* selStruct = avail->child(i);
+                    for (int c = 0; c < avail->childCount(); ++c) {
+                        QTreeWidgetItem* selStruct = avail->child(c);
                         auto* item = new QTreeWidgetItem(mTreeSelected,
                                                          QStringList { selStruct->text(0), pluginName });
                         mTreeSelected->addTopLevelItem(item);
