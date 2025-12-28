@@ -61,7 +61,6 @@ private:
     QHash<PrimitiveDataType, PrimitiveDataInformation*> basic;
     SignedBitfieldDataInformation* signedBitfield;
     UnsignedBitfieldDataInformation* unsignedBitfield;
-    BoolBitfieldDataInformation* boolBitfield;
     // TODO enum
 //     Okteta::Byte* data;
 //     QScopedPointer<Okteta::ByteArrayModel> model;
@@ -123,7 +122,6 @@ void PrimitiveDataInformationTest::initTestCase()
         basic.insert(type, PrimitiveFactory::newInstance(QStringLiteral("prim"), type, lwc));
         type = static_cast<PrimitiveDataType>(static_cast<int>(type) + 1);
     }
-    boolBitfield = new BoolBitfieldDataInformation(QStringLiteral("bitfield"), 24);
     unsignedBitfield = new UnsignedBitfieldDataInformation(QStringLiteral("bitfield"), 24);
     signedBitfield = new SignedBitfieldDataInformation(QStringLiteral("bitfield"), 24);
 }
@@ -574,7 +572,6 @@ void PrimitiveDataInformationTest::cleanupTestCase()
     qDeleteAll(basic);
     delete signedBitfield;
     delete unsignedBitfield;
-    delete boolBitfield;
 }
 
 QTEST_GUILESS_MAIN(PrimitiveDataInformationTest)
