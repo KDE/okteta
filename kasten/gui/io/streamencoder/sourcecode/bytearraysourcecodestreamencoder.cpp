@@ -107,13 +107,6 @@ static constexpr int SizeOfPrimitiveDataType[primitiveDataTypeCount] =
 inline QString decimalFormattedNumberPlaceHolder() { return QStringLiteral("%1"); }
 inline QString hexadecimalFormattedNumberPlaceHolder() { return QStringLiteral("0x%1"); }
 
-using TextStreamFunction = QTextStream& (*)(QTextStream&);
-#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
-constexpr TextStreamFunction endl = Qt::endl;
-#else
-constexpr TextStreamFunction endl = ::endl;
-#endif
-
 SourceCodeStreamEncoderSettings::SourceCodeStreamEncoderSettings() = default;
 
 bool SourceCodeStreamEncoderSettings::operator==(const SourceCodeStreamEncoderSettings& other) const
@@ -171,6 +164,13 @@ bool ByteArraySourceCodeStreamEncoder::encodeDataToStream(QIODevice* device,
                                                           const Okteta::AddressRange& range)
 {
     Q_UNUSED(byteArrayView)
+
+    using TextStreamFunction = QTextStream& (*)(QTextStream&);
+#if QT_VERSION >= QT_VERSION_CHECK(5, 15, 0)
+    constexpr TextStreamFunction endl = Qt::endl;
+#else
+    constexpr TextStreamFunction endl = ::endl;
+#endif
 
     bool success = true;
 
