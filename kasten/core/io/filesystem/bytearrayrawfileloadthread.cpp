@@ -40,7 +40,8 @@ void ByteArrayRawFileLoadThread::run()
         // allocate working memory
         QByteArray data;
         data.resize(fileSize);
-        bool success = (data.size() == fileSize);
+        // TODO: QByteArray::resize now rather throws an exception if the memory cannot be allocated, catch it
+        success = (data.size() == fileSize);
 
         if (success) {
             QDataStream inStream(mFile);
