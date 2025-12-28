@@ -191,7 +191,7 @@ void AbstractColumnFrameRenderer::renderFrame(QPainter* painter, int frameIndex)
                     break;
                 }
 
-                auto it = columnRenderers.cbegin();
+                it = columnRenderers.cbegin();
                 columnRenderer = *it;
                 painter->translate(columnRenderer->x(), d->mLineHeight);
 

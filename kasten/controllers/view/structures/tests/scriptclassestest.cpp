@@ -366,19 +366,19 @@ void ScriptClassesTest::testReplaceObject()
     QScriptValue structUpdate = eng->evaluate(QStringLiteral(
                                                   "(function() { this.first.datatype = int32(); this.first.name = \"changed\"; })"));
     QVERIFY(structUpdate.isFunction());
-    StructureDataInformation* const structData = main->childAt(0)->asStruct();
-    QVERIFY(structData);
-    structData->setUpdateFunc(structUpdate);
-    QCOMPARE(structData->name(), QStringLiteral("innerStruct"));
+    StructureDataInformation* const innerStructData = main->childAt(0)->asStruct();
+    QVERIFY(innerStructData);
+    innerStructData->setUpdateFunc(structUpdate);
+    QCOMPARE(innerStructData->name(), QStringLiteral("innerStruct"));
 
     // array changes its own type, this is the critical one
     // access it again after changing to ensure it was set properly
     QScriptValue arrayUpdate = eng->evaluate(QStringLiteral(
                                                  "(function() { this.datatype = float(); this.name = \"changedToFloat\"; })"));
-    ArrayDataInformation* const arrayData = main->childAt(1)->asArray();
-    arrayData->setUpdateFunc(arrayUpdate);
+    ArrayDataInformation* const innerArrayData = main->childAt(1)->asArray();
+    innerArrayData->setUpdateFunc(arrayUpdate);
 
-    QVERIFY(arrayData);
+    QVERIFY(innerArrayData);
     QScriptValue pointerTargetUpdate = eng->evaluate(QStringLiteral(
                                                          "(function() { this.datatype = array(int8(), 5); this.parent.name = \"changedToArrayPointer\"; })"));
     PointerDataInformation* const ptrData = main->childAt(2)->asPointer();
@@ -390,19 +390,19 @@ void ScriptClassesTest::testReplaceObject()
     main->setUpdateFunc(unionUpdate);
 
     // now just call update
-    QCOMPARE(structData->childCount(), 2U);
-    QCOMPARE((int)structData->childAt(0)->asPrimitive()->type(), (int)PrimitiveDataType::UInt8);
-    QCOMPARE(structData->childAt(0)->name(), QStringLiteral("first"));
-    QCOMPARE(structData->childAt(1)->name(), QStringLiteral("second"));
-    top.scriptHandler()->updateDataInformation(structData);
+    QCOMPARE(innerStructData->childCount(), 2U);
+    QCOMPARE((int)innerStructData->childAt(0)->asPrimitive()->type(), (int)PrimitiveDataType::UInt8);
+    QCOMPARE(innerStructData->childAt(0)->name(), QStringLiteral("first"));
+    QCOMPARE(innerStructData->childAt(1)->name(), QStringLiteral("second"));
+    top.scriptHandler()->updateDataInformation(innerStructData);
     // now structdata should have different children
-    QCOMPARE(structData->childCount(), 2U);
-    QCOMPARE((int)structData->childAt(0)->asPrimitive()->type(), (int)PrimitiveDataType::Int32); // different now
-    QCOMPARE(structData->childAt(0)->name(), QStringLiteral("changed")); // different now
-    QCOMPARE(structData->childAt(1)->name(), QStringLiteral("second")); // still the same
+    QCOMPARE(innerStructData->childCount(), 2U);
+    QCOMPARE((int)innerStructData->childAt(0)->asPrimitive()->type(), (int)PrimitiveDataType::Int32); // different now
+    QCOMPARE(innerStructData->childAt(0)->name(), QStringLiteral("changed")); // different now
+    QCOMPARE(innerStructData->childAt(1)->name(), QStringLiteral("second")); // still the same
 
-    QCOMPARE(arrayData->name(), QStringLiteral("innerArray"));
-    top.scriptHandler()->updateDataInformation(arrayData);
+    QCOMPARE(innerArrayData->name(), QStringLiteral("innerArray"));
+    top.scriptHandler()->updateDataInformation(innerArrayData);
     QVERIFY(main->childAt(1)->hasBeenUpdated());
     QVERIFY(main->childAt(1)->isPrimitive());
     QCOMPARE(main->childAt(1)->name(), QStringLiteral("changedToFloat"));

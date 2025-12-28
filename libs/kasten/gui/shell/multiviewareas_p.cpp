@@ -114,10 +114,10 @@ void MultiViewAreasPrivate::onViewsRemoved()
         return;
     }
 
-    auto* const viewArea = qobject_cast<TabbedViews*>(q->sender());
+    auto* const removingViewArea = qobject_cast<TabbedViews*>(q->sender());
 
-    if (viewArea->viewCount() == 0) {
-        QWidget* const viewAreaWidget = viewArea->widget();
+    if (removingViewArea->viewCount() == 0) {
+        QWidget* const viewAreaWidget = removingViewArea->widget();
         auto* const baseSplitter = static_cast<QSplitter*>(viewAreaWidget->parentWidget());
 
         const int index = baseSplitter->indexOf(viewAreaWidget);
@@ -136,8 +136,8 @@ void MultiViewAreasPrivate::onViewsRemoved()
             baseOfBaseSplitter->setSizes(baseOfBaseSplitterSizes);
         }
 
-        const auto it = std::find_if(mViewAreaList.begin(), mViewAreaList.end(), [viewArea](const auto& area){
-            return (area.get() == viewArea);
+        const auto it = std::find_if(mViewAreaList.begin(), mViewAreaList.end(), [removingViewArea](const auto& area){
+            return (area.get() == removingViewArea);
         });
         if (it != mViewAreaList.end()) {
             // remove from list, but keep alive a bit more, deleted nelow finally
@@ -145,11 +145,11 @@ void MultiViewAreasPrivate::onViewsRemoved()
             mViewAreaList.erase(it);
         }
 
-        if (mCurrentInlineToolViewArea == viewArea) {
+        if (mCurrentInlineToolViewArea == removingViewArea) {
             mCurrentInlineToolViewArea = nullptr;
         }
 
-        if (mCurrentViewArea == viewArea) {
+        if (mCurrentViewArea == removingViewArea) {
             // search for the previous widget which is the next or the previous, using index
             while (true) {
                 auto* const splitter = qobject_cast<QSplitter*>(otherWidget);
@@ -168,10 +168,10 @@ void MultiViewAreasPrivate::onViewsRemoved()
             }
         }
 
-        const QVector<AbstractViewArea*> viewAreas { viewArea };
+        const QVector<AbstractViewArea*> viewAreas { removingViewArea };
         Q_EMIT q->viewAreasRemoved(viewAreas);
 
-        delete viewArea;
+        delete removingViewArea;
     }
 }
 

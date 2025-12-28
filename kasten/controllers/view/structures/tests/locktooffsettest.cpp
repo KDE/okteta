@@ -31,7 +31,7 @@ private:
     std::unique_ptr<TopLevelDataInformation> newStructure(Okteta::AbstractByteArrayModel* lastModel, Okteta::Address lastReadOffset);
 
 private:
-    Okteta::ByteArrayModel* model;
+    Okteta::ByteArrayModel* model1;
     Okteta::ByteArrayModel* model2;
 };
 
@@ -77,13 +77,13 @@ const std::array<unsigned char, 128> testData2 =
 
 void LockToOffsetTest::initTestCase()
 {
-    model = new Okteta::ByteArrayModel(testData);
+    model1 = new Okteta::ByteArrayModel(testData);
     model2 = new Okteta::ByteArrayModel(testData2);
 }
 
 void LockToOffsetTest::cleanupTestCase()
 {
-    delete model;
+    delete model1;
     delete model2;
 }
 
@@ -134,46 +134,46 @@ void LockToOffsetTest::testReadingNecessary_data()
     Okteta::ArrayChangeMetricsList noChanges;
 
     std::unique_ptr<TopLevelDataInformation> top = newStructure(nullptr, 5);
-    addRow("new model, same offset, no changes", std::move(top), 5, model, noChanges, true);
+    addRow("new model, same offset, no changes", std::move(top), 5, model1, noChanges, true);
 
-    top = newStructure(model, 5);
-    addRow("same model, different offset, no changes", std::move(top), 6, model, noChanges, true);
+    top = newStructure(model1, 5);
+    addRow("same model, different offset, no changes", std::move(top), 6, model1, noChanges, true);
 
-    top = newStructure(model, 5);
-    addRow("same model, same offset, no changes", std::move(top), 5, model, noChanges, false);
+    top = newStructure(model1, 5);
+    addRow("same model, same offset, no changes", std::move(top), 5, model1, noChanges, false);
 
-    top = newStructure(model, 5);
-    top->lockPositionToOffset(5, model);
-    addRow("same model, same offset (because of locking), no changes", std::move(top), 50, model, noChanges, false);
+    top = newStructure(model1, 5);
+    top->lockPositionToOffset(5, model1);
+    addRow("same model, same offset (because of locking), no changes", std::move(top), 50, model1, noChanges, false);
 
-    top = newStructure(model, 5);
+    top = newStructure(model1, 5);
     top->newModelActivated(model2);
     addRow("different model, same offset, no changes", std::move(top), 5, model2, noChanges, true);
 
-    top = newStructure(model, TopLevelDataInformation::INVALID_OFFSET);
+    top = newStructure(model1, TopLevelDataInformation::INVALID_OFFSET);
     addRow("same model, invalid offset before, no changes", std::move(top), 5, model2, noChanges, true);
 
-    top = newStructure(model, 5);
-    addRow("same model, same offset, changes before", std::move(top), 5, model, oneReplacement(0, 4, 4), false);
+    top = newStructure(model1, 5);
+    addRow("same model, same offset, changes before", std::move(top), 5, model1, oneReplacement(0, 4, 4), false);
 
-    top = newStructure(model, 5);
-    addRow("same model, same offset, changes before (right until start)", std::move(top), 5, model, oneReplacement(0, 5, 5), false);
+    top = newStructure(model1, 5);
+    addRow("same model, same offset, changes before (right until start)", std::move(top), 5, model1, oneReplacement(0, 5, 5), false);
 
-    top = newStructure(model, 5);
-    addRow("same model, same offset, changes before (1 byte removed!)", std::move(top), 5, model, oneReplacement(0, 5, 4), true);
+    top = newStructure(model1, 5);
+    addRow("same model, same offset, changes before (1 byte removed!)", std::move(top), 5, model1, oneReplacement(0, 5, 4), true);
 
-    top = newStructure(model, 5);
-    addRow("same model, same offset, changes before (1 byte added!)", std::move(top), 5, model, oneReplacement(0, 1, 2), true);
+    top = newStructure(model1, 5);
+    addRow("same model, same offset, changes before (1 byte added!)", std::move(top), 5, model1, oneReplacement(0, 1, 2), true);
 
-    top = newStructure(model, 5);
-    addRow("same model, same offset, changes 2 bytes after (1 byte removed!)", std::move(top), 5, model, oneReplacement(16, 5, 4), false);
-    top = newStructure(model, 5);
-    addRow("same model, same offset, changes 1 byte after (1 byte removed!)", std::move(top), 5, model, oneReplacement(15, 5, 4), false);
+    top = newStructure(model1, 5);
+    addRow("same model, same offset, changes 2 bytes after (1 byte removed!)", std::move(top), 5, model1, oneReplacement(16, 5, 4), false);
+    top = newStructure(model1, 5);
+    addRow("same model, same offset, changes 1 byte after (1 byte removed!)", std::move(top), 5, model1, oneReplacement(15, 5, 4), false);
 
-    top = newStructure(model, 5);
-    addRow("same model, same offset, changes 2 bytes after (1 byte added!)", std::move(top), 5, model, oneReplacement(16, 1, 2), false);
-    top = newStructure(model, 5);
-    addRow("same model, same offset, changes 1 byte after (1 byte added!)", std::move(top), 5, model, oneReplacement(15, 1, 2), false);
+    top = newStructure(model1, 5);
+    addRow("same model, same offset, changes 2 bytes after (1 byte added!)", std::move(top), 5, model1, oneReplacement(16, 1, 2), false);
+    top = newStructure(model1, 5);
+    addRow("same model, same offset, changes 1 byte after (1 byte added!)", std::move(top), 5, model1, oneReplacement(15, 1, 2), false);
 
 }
 

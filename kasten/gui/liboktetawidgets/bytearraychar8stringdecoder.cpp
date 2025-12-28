@@ -198,10 +198,10 @@ ByteArrayChar8StringDecoder::CodeState ByteArrayChar8StringDecoder::doDecode(QBy
             int value = 0;
             int digitPos = 0;
             // look at first and check if to expect 2 or 3 digits
-            const int digitValue = valueFromOctalDigit(character);
-            if (digitValue != -1) {
-                value = digitValue;
-                if (digitValue > 3) {
+            const int firstDigitValue = valueFromOctalDigit(character);
+            if (firstDigitValue != -1) {
+                value = firstDigitValue;
+                if (firstDigitValue > 3) {
                     maxDigitSize = 2;
                 }
                 const int potentialDigitSize = std::min(maxDigitSize, stringSize - pos);

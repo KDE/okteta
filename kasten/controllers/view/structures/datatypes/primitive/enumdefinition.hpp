@@ -60,7 +60,7 @@ public:
 
 public:
     [[nodiscard]]
-    static std::map<AllPrimitiveTypes, QString> parseEnumValues(const QScriptValue& val,
+    static std::map<AllPrimitiveTypes, QString> parseEnumValues(const QScriptValue& object,
                                                                 const LoggerWithContext& logger, PrimitiveDataType type = PrimitiveDataType::UInt64);
     /** @return a pair containing the converted value. A default constructed pair means error! */
     [[nodiscard]]

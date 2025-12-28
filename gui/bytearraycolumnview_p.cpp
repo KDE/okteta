@@ -732,8 +732,8 @@ void ByteArrayColumnViewPrivate::updateChanged()
             // only one line?
             if (changedRange.start().line() == changedRange.end().line()) {
                 const LinePositionRange changedPositions(changedRange.start().pos(), changedRange.end().pos());
-                for (auto* const column : dirtyColumns) {
-                    const PixelXRange xPixels = column->xsOfLinePositionsInclSpaces(changedPositions);
+                for (auto* const dirtyColumn : dirtyColumns) {
+                    const PixelXRange xPixels = dirtyColumn->xsOfLinePositionsInclSpaces(changedPositions);
 
                     q->viewport()->update(xPixels.start() - xOffset, cy, xPixels.width(), lineHeight);
                 }
@@ -742,8 +742,8 @@ void ByteArrayColumnViewPrivate::updateChanged()
             else {
                 // first line
                 const LinePositionRange firstChangedPositions(changedRange.start().pos(), fullPositions.end());
-                for (auto* const column : dirtyColumns) {
-                    const PixelXRange XPixels = column->xsOfLinePositionsInclSpaces(firstChangedPositions);
+                for (auto* const dirtyColumn : dirtyColumns) {
+                    const PixelXRange XPixels = dirtyColumn->xsOfLinePositionsInclSpaces(firstChangedPositions);
 
                     q->viewport()->update(XPixels.start() - xOffset, cy, XPixels.width(), lineHeight);
                 }
@@ -751,8 +751,8 @@ void ByteArrayColumnViewPrivate::updateChanged()
                 // at least one full line?
                 for (int l = changedRange.start().line() + 1; l < changedRange.end().line(); ++l) {
                     cy += lineHeight;
-                    for (auto* const column : dirtyColumns) {
-                        const PixelXRange XPixels = column->xsOfLinePositionsInclSpaces(fullPositions);
+                    for (auto* const dirtyColumn : dirtyColumns) {
+                        const PixelXRange XPixels = dirtyColumn->xsOfLinePositionsInclSpaces(fullPositions);
 
                         q->viewport()->update(XPixels.start() - xOffset, cy, XPixels.width(), lineHeight);
                     }
@@ -761,8 +761,8 @@ void ByteArrayColumnViewPrivate::updateChanged()
                 // last line
                 cy += lineHeight;
                 const LinePositionRange lastChangedPositions(fullPositions.start(), changedRange.end().pos());
-                for (auto* const column : dirtyColumns) {
-                    const PixelXRange XPixels = column->xsOfLinePositionsInclSpaces(lastChangedPositions);
+                for (auto* const dirtyColumn : dirtyColumns) {
+                    const PixelXRange XPixels = dirtyColumn->xsOfLinePositionsInclSpaces(lastChangedPositions);
 
                     q->viewport()->update(XPixels.start() - xOffset, cy, XPixels.width(), lineHeight);
                 }

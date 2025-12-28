@@ -14,12 +14,12 @@
 // Std
 #include <limits>
 
-std::map<AllPrimitiveTypes, QString> EnumDefinition::parseEnumValues(const QScriptValue& val,
+std::map<AllPrimitiveTypes, QString> EnumDefinition::parseEnumValues(const QScriptValue& object,
                                                                      const LoggerWithContext& logger, PrimitiveDataType type)
 {
     std::map<AllPrimitiveTypes, QString> enumValues;
 
-    QScriptValueIterator it(val);
+    QScriptValueIterator it(object);
     while (it.hasNext()) {
         it.next();
         QScriptValue val = it.value();

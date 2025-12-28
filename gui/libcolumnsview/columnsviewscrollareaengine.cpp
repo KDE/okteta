@@ -62,13 +62,13 @@ void ColumnsViewScrollAreaEngine::renderColumns(QPainter* painter, int cx, int c
                     column->renderColumn(painter, dirtyXs, dirtyYs);
                 }
 
-                PixelY cy = dirtyLines.start() * LineHeight;
+                const PixelY dirtyLinesY = dirtyLines.start() * LineHeight;
                 // qCDebug(LOG_OKTETA_GUI)<<"Dirty lines: "<<dirtyLines.start()<<"-"<<dirtyLines.end();
                 // starting painting with the first line
                 Line line = dirtyLines.start();
                 auto it = dirtyColumns.cbegin();
                 AbstractColumnRenderer* column = *it;
-                painter->translate(column->x(), cy);
+                painter->translate(column->x(), dirtyLinesY);
 
                 while (true) {
                     column->renderFirstLine(painter, dirtyXs, line);
@@ -104,9 +104,10 @@ void ColumnsViewScrollAreaEngine::renderColumns(QPainter* painter, int cx, int c
                     }
                     painter->translate(-column->x(), 0);
                 }
-                cy = dirtyLines.end() * LineHeight;
+                // reset y translation
+                const PixelY lastDirtyLinesY = dirtyLines.end() * LineHeight;
 
-                painter->translate(0, -cy);
+                painter->translate(0, -lastDirtyLinesY);
             }
         }
 

@@ -346,7 +346,7 @@ void AbstractByteArrayModelIfTest::testRemoveBytes()
     checkContentsReplaced(removeRange, 0);
 }
 
-static constexpr Size insertSize = 10;
+static constexpr Size defaultInsertSize = 10;
 
 struct KTestData
 {
@@ -362,7 +362,7 @@ std::unique_ptr<KTestData> AbstractByteArrayModelIfTest::prepareTestInsert() con
 {
     Size size = mByteArrayModel->size();
 
-    auto testData = std::make_unique<KTestData>(size + 3 * insertSize, insertSize);
+    auto testData = std::make_unique<KTestData>(size + 3 * defaultInsertSize, defaultInsertSize);
 
     // prepare insertData
     textureByteArrayModel(&testData->insertData, 10, 99);
@@ -388,7 +388,7 @@ void AbstractByteArrayModelIfTest::testInsertAtBegin()
     AddressRange insertRange(0, -1);
     clearSignalSpys();
 
-    Size inserted = mByteArrayModel->insertBytes(insertRange.start(), data->insertData.rawData(), insertSize);
+    Size inserted = mByteArrayModel->insertBytes(insertRange.start(), data->insertData.rawData(), defaultInsertSize);
     insertRange.setEndByWidth(inserted);
 
     QCOMPARE(data->insertData.compare(*mByteArrayModel, insertRange, 0), 0);
@@ -411,7 +411,7 @@ void AbstractByteArrayModelIfTest::testInsertAtMid()
     AddressRange insertRange(size / 2, -1);
     clearSignalSpys();
 
-    Size inserted = mByteArrayModel->insertBytes(insertRange.start(), data->insertData.rawData(), insertSize);
+    Size inserted = mByteArrayModel->insertBytes(insertRange.start(), data->insertData.rawData(), defaultInsertSize);
     insertRange.setEndByWidth(inserted);
 
     QCOMPARE(data->copy.compare(*mByteArrayModel, 0, insertRange.start(), 0), 0);
@@ -437,7 +437,7 @@ void AbstractByteArrayModelIfTest::testInsertAtEnd()
     AddressRange insertRange(size, -1);
     clearSignalSpys();
 
-    Size inserted = mByteArrayModel->insertBytes(insertRange.start(), data->insertData.rawData(), insertSize);
+    Size inserted = mByteArrayModel->insertBytes(insertRange.start(), data->insertData.rawData(), defaultInsertSize);
     insertRange.setEndByWidth(inserted);
 
 //   list( mByteArrayModel, "mByteArrayModel" );
