@@ -327,13 +327,13 @@ void ColumnsView::renderColumns(QPainter* painter, int cx, int cy, int cw, int c
                     column->renderColumn(painter, dirtyXs, dirtyYs);
                 }
 
-                PixelY cy = dirtyLines.start() * d->LineHeight;
+                const PixelY dirtyLinesY = dirtyLines.start() * d->LineHeight;
                 // qCDebug(LOG_OKTETA_GUI)<<"Dirty lines: "<<dirtyLines.start()<<"-"<<dirtyLines.end();
                 // starting painting with the first line
                 Line line = dirtyLines.start();
                 auto it = dirtyColumns.constBegin();
                 AbstractColumnRenderer* column = *it;
-                painter->translate(column->x(), cy);
+                painter->translate(column->x(), dirtyLinesY);
 
                 while (true) {
                     column->renderFirstLine(painter, dirtyXs, line);
@@ -369,9 +369,10 @@ void ColumnsView::renderColumns(QPainter* painter, int cx, int cy, int cw, int c
                     }
                     painter->translate(-column->x(), 0);
                 }
-                cy = dirtyLines.end() * d->LineHeight;
+                // reset y translation
+                const PixelY lastDirtyLinesY = dirtyLines.end() * d->LineHeight;
 
-                painter->translate(0, -cy);
+                painter->translate(0, -lastDirtyLinesY);
             }
         }
 
