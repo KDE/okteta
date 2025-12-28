@@ -117,10 +117,10 @@ void MultiViewAreasPrivate::onViewsRemoved()
         return;
     }
 
-    auto* viewArea = qobject_cast<TabbedViews*>(q->sender());
+    auto* const removingViewArea = qobject_cast<TabbedViews*>(q->sender());
 
-    if (viewArea->viewCount() == 0) {
-        QWidget* viewAreaWidget = viewArea->widget();
+    if (removingViewArea->viewCount() == 0) {
+        QWidget* const viewAreaWidget = removingViewArea->widget();
         auto* baseSplitter = static_cast<QSplitter*>(viewAreaWidget->parentWidget());
 
         const int index = baseSplitter->indexOf(viewAreaWidget);
@@ -139,13 +139,13 @@ void MultiViewAreasPrivate::onViewsRemoved()
             baseOfBaseSplitter->setSizes(baseOfBaseSplitterSizes);
         }
 
-        mViewAreaList.removeOne(viewArea);
+        mViewAreaList.removeOne(removingViewArea);
 
-        if (mCurrentInlineToolViewArea == viewArea) {
+        if (mCurrentInlineToolViewArea == removingViewArea) {
             mCurrentInlineToolViewArea = nullptr;
         }
 
-        if (mCurrentViewArea == viewArea) {
+        if (mCurrentViewArea == removingViewArea) {
             // search for the previous widget which is the next or the previous, using index
             while (true) {
                 auto* splitter = qobject_cast<QSplitter*>(otherWidget);
@@ -164,10 +164,10 @@ void MultiViewAreasPrivate::onViewsRemoved()
             }
         }
 
-        const QVector<AbstractViewArea*> viewAreas { viewArea };
+        const QVector<AbstractViewArea*> viewAreas { removingViewArea };
         emit q->viewAreasRemoved(viewAreas);
 
-        delete viewArea;
+        delete removingViewArea;
     }
 }
 
