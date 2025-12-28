@@ -29,7 +29,7 @@ private:
     TopLevelDataInformation* newStructure(Okteta::AbstractByteArrayModel* lastModel, Okteta::Address lastReadOffset);
 
 private:
-    Okteta::ByteArrayModel* model;
+    Okteta::ByteArrayModel* model1;
     Okteta::ByteArrayModel* model2;
 };
 
@@ -75,15 +75,15 @@ const unsigned char testData2[128] =
 
 void LockToOffsetTest::initTestCase()
 {
-    model = new Okteta::ByteArrayModel(testData, sizeof(testData));
-    model->setAutoDelete(false);
+    model1 = new Okteta::ByteArrayModel(testData, sizeof(testData));
+    model1->setAutoDelete(false);
     model2 = new Okteta::ByteArrayModel(testData2, sizeof(testData2));
     model2->setAutoDelete(false);
 }
 
 void LockToOffsetTest::cleanupTestCase()
 {
-    delete model;
+    delete model1;
     delete model2;
 }
 
@@ -128,46 +128,46 @@ void LockToOffsetTest::testReadingNecessary_data()
     Okteta::ArrayChangeMetricsList noChanges;
 
     TopLevelDataInformation* top = newStructure(nullptr, 5);
-    addRow("new model, same offset, no changes", top, 5, model, noChanges, true);
+    addRow("new model, same offset, no changes", top, 5, model1, noChanges, true);
 
-    top = newStructure(model, 5);
-    addRow("same model, different offset, no changes", top, 6, model, noChanges, true);
+    top = newStructure(model1, 5);
+    addRow("same model, different offset, no changes", top, 6, model1, noChanges, true);
 
-    top = newStructure(model, 5);
-    addRow("same model, same offset, no changes", top, 5, model, noChanges, false);
+    top = newStructure(model1, 5);
+    addRow("same model, same offset, no changes", top, 5, model1, noChanges, false);
 
-    top = newStructure(model, 5);
-    top->lockPositionToOffset(5, model);
-    addRow("same model, same offset (because of locking), no changes", top, 50, model, noChanges, false);
+    top = newStructure(model1, 5);
+    top->lockPositionToOffset(5, model1);
+    addRow("same model, same offset (because of locking), no changes", top, 50, model1, noChanges, false);
 
-    top = newStructure(model, 5);
+    top = newStructure(model1, 5);
     top->newModelActivated(model2);
     addRow("different model, same offset, no changes", top, 5, model2, noChanges, true);
 
-    top = newStructure(model, TopLevelDataInformation::INVALID_OFFSET);
+    top = newStructure(model1, TopLevelDataInformation::INVALID_OFFSET);
     addRow("same model, invalid offset before, no changes", top, 5, model2, noChanges, true);
 
-    top = newStructure(model, 5);
-    addRow("same model, same offset, changes before", top, 5, model, oneReplacement(0, 4, 4), false);
+    top = newStructure(model1, 5);
+    addRow("same model, same offset, changes before", top, 5, model1, oneReplacement(0, 4, 4), false);
 
-    top = newStructure(model, 5);
-    addRow("same model, same offset, changes before (right until start)", top, 5, model, oneReplacement(0, 5, 5), false);
+    top = newStructure(model1, 5);
+    addRow("same model, same offset, changes before (right until start)", top, 5, model1, oneReplacement(0, 5, 5), false);
 
-    top = newStructure(model, 5);
-    addRow("same model, same offset, changes before (1 byte removed!)", top, 5, model, oneReplacement(0, 5, 4), true);
+    top = newStructure(model1, 5);
+    addRow("same model, same offset, changes before (1 byte removed!)", top, 5, model1, oneReplacement(0, 5, 4), true);
 
-    top = newStructure(model, 5);
-    addRow("same model, same offset, changes before (1 byte added!)", top, 5, model, oneReplacement(0, 1, 2), true);
+    top = newStructure(model1, 5);
+    addRow("same model, same offset, changes before (1 byte added!)", top, 5, model1, oneReplacement(0, 1, 2), true);
 
-    top = newStructure(model, 5);
-    addRow("same model, same offset, changes 2 bytes after (1 byte removed!)", top, 5, model, oneReplacement(16, 5, 4), false);
-    top = newStructure(model, 5);
-    addRow("same model, same offset, changes 1 byte after (1 byte removed!)", top, 5, model, oneReplacement(15, 5, 4), false);
+    top = newStructure(model1, 5);
+    addRow("same model, same offset, changes 2 bytes after (1 byte removed!)", top, 5, model1, oneReplacement(16, 5, 4), false);
+    top = newStructure(model1, 5);
+    addRow("same model, same offset, changes 1 byte after (1 byte removed!)", top, 5, model1, oneReplacement(15, 5, 4), false);
 
-    top = newStructure(model, 5);
-    addRow("same model, same offset, changes 2 bytes after (1 byte added!)", top, 5, model, oneReplacement(16, 1, 2), false);
-    top = newStructure(model, 5);
-    addRow("same model, same offset, changes 1 byte after (1 byte added!)", top, 5, model, oneReplacement(15, 1, 2), false);
+    top = newStructure(model1, 5);
+    addRow("same model, same offset, changes 2 bytes after (1 byte added!)", top, 5, model1, oneReplacement(16, 1, 2), false);
+    top = newStructure(model1, 5);
+    addRow("same model, same offset, changes 1 byte after (1 byte added!)", top, 5, model1, oneReplacement(15, 1, 2), false);
 
 }
 
