@@ -78,8 +78,8 @@ AbstractDocument* ByteArrayDocumentFactory::createFromData(const QMimeData* mime
             auto* const valueCodec = Okteta::ValueCodec::createCodec(Okteta::HexadecimalCoding);
 
             Okteta::ByteArrayValueStringDecoder valueStringDecoder(valueCodec);
-            const Okteta::ByteArrayValueStringDecoder::CodeState evalResult = valueStringDecoder.decode(&bytes, text);
-            if (evalResult != Okteta::ByteArrayValueStringDecoder::CodeAcceptable) {
+            const Okteta::ByteArrayValueStringDecoder::CodeState valuesEvalResult = valueStringDecoder.decode(&bytes, text);
+            if (valuesEvalResult != Okteta::ByteArrayValueStringDecoder::CodeAcceptable) {
                 bytes.clear();
             }
 
@@ -90,8 +90,8 @@ AbstractDocument* ByteArrayDocumentFactory::createFromData(const QMimeData* mime
             if (bytes.isEmpty()) {
                 Okteta::ByteArrayChar8StringDecoder char8StringDecoder;
                 int usedTextSize = -1;
-                const Okteta::ByteArrayChar8StringDecoder::CodeState evalResult = char8StringDecoder.decode(&bytes, text, 0, -1, &usedTextSize);
-                if ((evalResult != Okteta::ByteArrayChar8StringDecoder::CodeAcceptable) ||
+                const Okteta::ByteArrayChar8StringDecoder::CodeState charEvalResult = char8StringDecoder.decode(&bytes, text, 0, -1, &usedTextSize);
+                if ((charEvalResult != Okteta::ByteArrayChar8StringDecoder::CodeAcceptable) ||
                     (usedTextSize != text.size())) {
                     bytes.clear();
                 }
