@@ -44,7 +44,7 @@ public:
     const QString& name() const;
     void setValues(const QMap<AllPrimitiveTypes, QString>& newValues);
 
-    static QMap<AllPrimitiveTypes, QString> parseEnumValues(const QScriptValue& val,
+    static QMap<AllPrimitiveTypes, QString> parseEnumValues(const QScriptValue& object,
                                                             const LoggerWithContext& logger, PrimitiveDataType type = PrimitiveDataType::UInt64);
     /** @return a pair containing the converted value. A default constructed pair means error! */
     static QPair<AllPrimitiveTypes, QString> convertToEnumEntry(const QString& name, const QVariant& value,

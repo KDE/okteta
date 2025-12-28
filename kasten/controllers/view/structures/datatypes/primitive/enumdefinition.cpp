@@ -14,12 +14,12 @@
 
 #include "../../script/scriptlogger.hpp"
 
-QMap<AllPrimitiveTypes, QString> EnumDefinition::parseEnumValues(const QScriptValue& val,
+QMap<AllPrimitiveTypes, QString> EnumDefinition::parseEnumValues(const QScriptValue& object,
                                                                  const LoggerWithContext& logger, PrimitiveDataType type)
 {
     QMap<AllPrimitiveTypes, QString> enumValues;
 
-    QScriptValueIterator it(val);
+    QScriptValueIterator it(object);
     while (it.hasNext()) {
         it.next();
         QScriptValue val = it.value();
