@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 09:01+0000\n"
+"POT-Creation-Date: 2025-12-29 02:01+0000\n"
 "PO-Revision-Date: 2025-10-12 13:39+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -3235,19 +3235,19 @@ msgctxt "origin of the byte array"
 msgid "Created from data."
 msgstr "데이터에서 생성됨."
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:54
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:55
 #, kde-format
 msgctxt "destination of the byte array"
 msgid "Loaded from file."
 msgstr "파일에서 불러옴."
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:61
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:62
 #: core/io/filesystem/bytearrayrawfilereloadthread.cpp:53
 #, kde-format
 msgid "There is not enough free working memory to load this file."
 msgstr "이 파일을 불러올 수 있는 메모리가 부족합니다."
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:64
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:65
 #: core/io/filesystem/bytearrayrawfilereloadthread.cpp:56
 #, kde-format
 msgid "Support to load files larger than 2 GiB has not yet been implemented."

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 09:01+0000\n"
+"POT-Creation-Date: 2025-12-29 02:01+0000\n"
 "PO-Revision-Date: 2008-08-05 22:28+0200\n"
 "Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
 "Language-Team: Occitan (lengadocian) <ubuntu-l10n-oci@lists.ubuntu.com>\n"
@@ -3437,19 +3437,19 @@ msgctxt "origin of the byte array"
 msgid "Created from data."
 msgstr ""
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:54
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:55
 #, kde-format
 msgctxt "destination of the byte array"
 msgid "Loaded from file."
 msgstr ""
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:61
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:62
 #: core/io/filesystem/bytearrayrawfilereloadthread.cpp:53
 #, kde-format
 msgid "There is not enough free working memory to load this file."
 msgstr ""
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:64
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:65
 #: core/io/filesystem/bytearrayrawfilereloadthread.cpp:56
 #, kde-format
 msgid "Support to load files larger than 2 GiB has not yet been implemented."

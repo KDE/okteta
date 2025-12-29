@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 09:01+0000\n"
+"POT-Creation-Date: 2025-12-29 02:01+0000\n"
 "PO-Revision-Date: 2025-09-01 19:26+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -3282,20 +3282,20 @@ msgctxt "origin of the byte array"
 msgid "Created from data."
 msgstr "Skapad från data."
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:54
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:55
 #, kde-format
 msgctxt "destination of the byte array"
 msgid "Loaded from file."
 msgstr "Inläst från fil."
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:61
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:62
 #: core/io/filesystem/bytearrayrawfilereloadthread.cpp:53
 #, kde-format
 msgid "There is not enough free working memory to load this file."
 msgstr ""
 "Det finns inte tillräckligt med ledigt arbetsminne för att läsa in filen."
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:64
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:65
 #: core/io/filesystem/bytearrayrawfilereloadthread.cpp:56
 #, kde-format
 msgid "Support to load files larger than 2 GiB has not yet been implemented."

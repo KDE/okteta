@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 09:01+0000\n"
+"POT-Creation-Date: 2025-12-29 02:01+0000\n"
 "PO-Revision-Date: 2025-09-01 08:41-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -3306,19 +3306,19 @@ msgctxt "origin of the byte array"
 msgid "Created from data."
 msgstr "Criado a partir dos dados."
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:54
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:55
 #, kde-format
 msgctxt "destination of the byte array"
 msgid "Loaded from file."
 msgstr "Carregado do arquivo."
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:61
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:62
 #: core/io/filesystem/bytearrayrawfilereloadthread.cpp:53
 #, kde-format
 msgid "There is not enough free working memory to load this file."
 msgstr "Não existe memória suficiente para carregar este arquivo."
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:64
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:65
 #: core/io/filesystem/bytearrayrawfilereloadthread.cpp:56
 #, kde-format
 msgid "Support to load files larger than 2 GiB has not yet been implemented."
