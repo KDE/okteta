@@ -312,7 +312,7 @@ public:
     QMimeData* selectionAsMimeData() const;
 
 public: // modification access
-    void pasteData(const QMimeData* data);
+    void pasteData(const QMimeData* mimeData);
     /** removes the selected data, takes care of the cursor */
     void removeSelectedData();
     /** inserts */
@@ -348,7 +348,7 @@ public: // modification access
     void placeCursor(const QPoint& point);
 
 public:
-    bool canReadData(const QMimeData* data) const;
+    bool canReadData(const QMimeData* mimeData) const;
 
 public: // zooming
     void zoomIn(int pointInc);

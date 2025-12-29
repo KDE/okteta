@@ -262,9 +262,9 @@ QMimeData* ByteArrayView::copySelectedData() const
     return mWidget->selectionAsMimeData();
 }
 
-void ByteArrayView::insertData(const QMimeData* data)
+void ByteArrayView::insertData(const QMimeData* mimeData)
 {
-    mWidget->pasteData(data);
+    mWidget->pasteData(mimeData);
 }
 
 QMimeData* ByteArrayView::cutSelectedData()
@@ -279,9 +279,9 @@ void ByteArrayView::deleteSelectedData()
     mWidget->removeSelectedData();
 }
 
-bool ByteArrayView::canReadData(const QMimeData* data) const
+bool ByteArrayView::canReadData(const QMimeData* mimeData) const
 {
-    return mWidget->canReadData(data);
+    return mWidget->canReadData(mimeData);
 }
 
 void ByteArrayView::onSelectionChanged(const Okteta::AddressRange& selection)

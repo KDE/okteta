@@ -88,10 +88,10 @@ Q_SIGNALS:
     void selectedDataChanged(const Kasten::AbstractModelSelection* modelSelection) override;
 
 public: // If::SelectedDataWriteable API
-    void insertData(const QMimeData* data) override;
+    void insertData(const QMimeData* mimeData) override;
     QMimeData* cutSelectedData() override;
     void deleteSelectedData() override;
-    bool canReadData(const QMimeData* data) const override;
+    bool canReadData(const QMimeData* mimeData) const override;
 
 public: // cursor API
     void setCursorPosition(Okteta::Address cursorPosition);

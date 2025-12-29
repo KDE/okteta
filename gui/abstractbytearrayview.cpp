@@ -189,16 +189,16 @@ AddressRange AbstractByteArrayView::marking() const
     return d->marking();
 }
 
-void AbstractByteArrayView::pasteData(const QMimeData* data)
+void AbstractByteArrayView::pasteData(const QMimeData* mimeData)
 {
     Q_D(AbstractByteArrayView);
-    d->pasteData(data);
+    d->pasteData(mimeData);
 }
 
-bool AbstractByteArrayView::canReadData(const QMimeData* data) const
+bool AbstractByteArrayView::canReadData(const QMimeData* mimeData) const
 {
     Q_D(const AbstractByteArrayView);
-    return d->canReadData(data);
+    return d->canReadData(mimeData);
 }
 
 void AbstractByteArrayView::cut()

@@ -66,11 +66,11 @@ public:
     void setSelection(Address start, Address end);
     void selectAll(bool selectAll);
     void removeSelectedData();
-    void pasteData(const QMimeData* data);
+    void pasteData(const QMimeData* mimeData);
     void insert(const QByteArray& byteArray);
     bool hasSelectedData() const;
     QMimeData* selectionAsMimeData() const;
-    bool canReadData(const QMimeData* data) const;
+    bool canReadData(const QMimeData* mimeData) const;
     AddressRange selection() const;
 
     void setMarking(const AddressRange& marking);

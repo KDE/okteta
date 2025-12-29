@@ -159,9 +159,9 @@ QMimeData* ByteArrayJanusView::selectionAsMimeData() const
     return mView->selectionAsMimeData();
 }
 
-void ByteArrayJanusView::pasteData(const QMimeData* data)
+void ByteArrayJanusView::pasteData(const QMimeData* mimeData)
 {
-    mView->pasteData(data);
+    mView->pasteData(mimeData);
 }
 
 void ByteArrayJanusView::removeSelectedData()
@@ -169,9 +169,9 @@ void ByteArrayJanusView::removeSelectedData()
     mView->removeSelectedData();
 }
 
-bool ByteArrayJanusView::canReadData(const QMimeData* data) const
+bool ByteArrayJanusView::canReadData(const QMimeData* mimeData) const
 {
-    return mView->canReadData(data);
+    return mView->canReadData(mimeData);
 }
 
 void ByteArrayJanusView::setCursorPosition(Address cursorPosition)

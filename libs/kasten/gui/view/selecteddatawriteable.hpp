@@ -30,12 +30,12 @@ public:
 
 public: // operate
     // TODO: inserting works on selection if available
-    virtual void insertData(const QMimeData* data) = 0;
+    virtual void insertData(const QMimeData* mimeData) = 0;
     virtual QMimeData* cutSelectedData() = 0;
     virtual void deleteSelectedData() = 0;
 
 public:
-    virtual bool canReadData(const QMimeData* data) const = 0;
+    virtual bool canReadData(const QMimeData* mimeData) const = 0;
 };
 
 inline SelectedDataWriteable::~SelectedDataWriteable() = default;

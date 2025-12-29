@@ -212,8 +212,8 @@ protected:
 protected:
     void removeSelectedData();
     void insert(const QByteArray& data);
-    void pasteData(const QMimeData* data);
-    bool canReadData(const QMimeData* data) const;
+    void pasteData(const QMimeData* mimeData);
+    bool canReadData(const QMimeData* mimeData) const;
 
 protected: // clipboard interaction
     void cutToClipboard(QClipboard::Mode mode = QClipboard::Clipboard);
