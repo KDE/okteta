@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesdk-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 16:19+0000\n"
+"POT-Creation-Date: 2025-12-29 03:23+0000\n"
 "PO-Revision-Date: 2024-10-18 01:30+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -3066,19 +3066,19 @@ msgctxt "origin of the byte array"
 msgid "Created from data."
 msgstr "Veriden oluşturuldu."
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:55
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:56
 #, kde-format
 msgctxt "destination of the byte array"
 msgid "Loaded from file."
 msgstr "Dosyadan yükle."
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:64
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:65
 #: core/io/filesystem/bytearrayrawfilereloadthread.cpp:55
 #, kde-format
 msgid "There is not enough free working memory to load this file."
 msgstr "Bu dosyayı yüklemek için yeterli çalışma belleği yok."
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:67
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:68
 #: core/io/filesystem/bytearrayrawfilereloadthread.cpp:58
 #, kde-format
 msgid "Support to load files larger than 2 GiB has not yet been implemented."
@@ -3256,7 +3256,7 @@ msgctxt "@item:inmenu address size"
 msgid "8-bit"
 msgstr "8 bit"
 
-#: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoder.cpp:145
+#: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoder.cpp:138
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "C Array"

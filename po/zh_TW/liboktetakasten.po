@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 16:19+0000\n"
+"POT-Creation-Date: 2025-12-29 03:23+0000\n"
 "PO-Revision-Date: 2025-11-24 20:50+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -2987,19 +2987,19 @@ msgctxt "origin of the byte array"
 msgid "Created from data."
 msgstr "已從資料建立。"
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:55
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:56
 #, kde-format
 msgctxt "destination of the byte array"
 msgid "Loaded from file."
 msgstr "從檔案載入。"
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:64
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:65
 #: core/io/filesystem/bytearrayrawfilereloadthread.cpp:55
 #, kde-format
 msgid "There is not enough free working memory to load this file."
 msgstr "沒有足夠的記憶體載入此檔案。"
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:67
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:68
 #: core/io/filesystem/bytearrayrawfilereloadthread.cpp:58
 #, kde-format
 msgid "Support to load files larger than 2 GiB has not yet been implemented."
@@ -3175,7 +3175,7 @@ msgctxt "@item:inmenu address size"
 msgid "8-bit"
 msgstr "8 位元"
 
-#: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoder.cpp:145
+#: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoder.cpp:138
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "C Array"
