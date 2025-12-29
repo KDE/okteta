@@ -20,7 +20,7 @@ class ScriptLoggerView : public QWidget
     Q_OBJECT
 
 public:
-    explicit ScriptLoggerView(const TopLevelDataInformation::List& data, QWidget* parent = nullptr);
+    explicit ScriptLoggerView(const TopLevelDataInformation::List& topDataInfoList, QWidget* parent = nullptr);
     ~ScriptLoggerView() override;
 
 private Q_SLOTS:
