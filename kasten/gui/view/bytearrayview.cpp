@@ -202,9 +202,9 @@ std::unique_ptr<QMimeData> ByteArrayView::copySelectedData() const
     return mWidget->selectedBytesAsMimeData();
 }
 
-void ByteArrayView::insertData(const QMimeData* data)
+void ByteArrayView::insertData(const QMimeData* mimeData)
 {
-    mWidget->insertBytesFromMimeData(data);
+    mWidget->insertBytesFromMimeData(mimeData);
 }
 
 std::unique_ptr<QMimeData> ByteArrayView::cutSelectedData()
@@ -219,9 +219,9 @@ void ByteArrayView::deleteSelectedData()
     mWidget->removeSelectedBytes();
 }
 
-bool ByteArrayView::canInsertData(const QMimeData* data) const
+bool ByteArrayView::canInsertData(const QMimeData* mimeData) const
 {
-    return mWidget->canInsertBytesFromMimeData(data);
+    return mWidget->canInsertBytesFromMimeData(mimeData);
 }
 
 bool ByteArrayView::canCutSelectedData() const

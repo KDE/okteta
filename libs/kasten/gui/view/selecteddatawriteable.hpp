@@ -30,14 +30,14 @@ public:
 
 public: // operate
     // TODO: inserting works on selection if available
-    virtual void insertData(const QMimeData* data) = 0;
+    virtual void insertData(const QMimeData* mimeData) = 0;
     [[nodiscard]]
     virtual std::unique_ptr<QMimeData> cutSelectedData() = 0;
     virtual void deleteSelectedData() = 0;
 
 public: // get
     [[nodiscard]]
-    virtual bool canInsertData(const QMimeData* data) const = 0;
+    virtual bool canInsertData(const QMimeData* mimeData) const = 0;
     // reports principle ability to cut selecteed data if there is some, also if currently there is none
     // TODO; does that make sense, or should be changed to also match only if there is selected data?
     [[nodiscard]]

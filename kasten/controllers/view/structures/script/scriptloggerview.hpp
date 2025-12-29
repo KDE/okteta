@@ -21,7 +21,7 @@ class ScriptLoggerView : public QWidget
     Q_OBJECT
 
 public:
-    explicit ScriptLoggerView(const QVector<std::shared_ptr<TopLevelDataInformation>>& data, QWidget* parent = nullptr);
+    explicit ScriptLoggerView(const QVector<std::shared_ptr<TopLevelDataInformation>>& topDataInfoList, QWidget* parent = nullptr);
     ~ScriptLoggerView() override;
 
 private Q_SLOTS:

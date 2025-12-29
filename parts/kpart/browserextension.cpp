@@ -35,12 +35,12 @@ OktetaBrowserExtension::OktetaBrowserExtension(OktetaPart* part)
 
 void OktetaBrowserExtension::copy()
 {
-    auto data = mPart->byteArrayView()->copySelectedData();
-    if (!data) {
+    auto mimeData = mPart->byteArrayView()->copySelectedData();
+    if (!mimeData) {
         return;
     }
 
-    QApplication::clipboard()->setMimeData(data.release(), QClipboard::Clipboard);
+    QApplication::clipboard()->setMimeData(mimeData.release(), QClipboard::Clipboard);
 }
 
 void OktetaBrowserExtension::print()

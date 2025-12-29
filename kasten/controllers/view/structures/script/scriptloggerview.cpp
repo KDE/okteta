@@ -17,11 +17,11 @@
 // Std
 #include <utility>
 
-ScriptLoggerView::ScriptLoggerView(const QVector<std::shared_ptr<TopLevelDataInformation>>& data, QWidget* parent)
+ScriptLoggerView::ScriptLoggerView(const QVector<std::shared_ptr<TopLevelDataInformation>>& topDataInfoList, QWidget* parent)
     : QWidget(parent)
     , mSelector(new KComboBox(this))
     , mView(new QTableView(this))
-    , mList(data)
+    , mList(topDataInfoList)
 {
     for (const auto& info : std::as_const(mList)) {
         mSelector->addItem(info->objectName());

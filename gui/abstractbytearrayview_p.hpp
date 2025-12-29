@@ -280,9 +280,9 @@ protected:
 protected:
     void removeSelectedBytes();
     void insertBytes(const QByteArray& bytes);
-    void insertBytesFromMimeData(const QMimeData* data);
+    void insertBytesFromMimeData(const QMimeData* mimeData);
     [[nodiscard]]
-    bool canInsertBytesFromMimeData(const QMimeData* data) const;
+    bool canInsertBytesFromMimeData(const QMimeData* mimeData) const;
 
 protected: // clipboard interaction
     void cutToClipboard(QClipboard::Mode mode = QClipboard::Clipboard);

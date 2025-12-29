@@ -84,29 +84,29 @@ void ClipboardController::setTargetModel(AbstractModel* model)
 
 void ClipboardController::cut()
 {
-    auto data = mMimeDataControl->cutSelectedData();
-    if (!data) {
+    auto mimeData = mMimeDataControl->cutSelectedData();
+    if (!mimeData) {
         return;
     }
 
-    QApplication::clipboard()->setMimeData(data.release(), QClipboard::Clipboard);
+    QApplication::clipboard()->setMimeData(mimeData.release(), QClipboard::Clipboard);
 }
 
 void ClipboardController::copy()
 {
-    auto data = mSelectionControl->copySelectedData();
-    if (!data) {
+    auto mimeData = mSelectionControl->copySelectedData();
+    if (!mimeData) {
         return;
     }
 
-    QApplication::clipboard()->setMimeData(data.release(), QClipboard::Clipboard);
+    QApplication::clipboard()->setMimeData(mimeData.release(), QClipboard::Clipboard);
 }
 
 void ClipboardController::paste()
 {
-    const QMimeData* const data = QApplication::clipboard()->mimeData(QClipboard::Clipboard);
+    const QMimeData* const mimeData = QApplication::clipboard()->mimeData(QClipboard::Clipboard);
 
-    mMimeDataControl->insertData(data);
+    mMimeDataControl->insertData(mimeData);
 }
 
 void ClipboardController::onReadOnlyChanged(bool isReadOnly)

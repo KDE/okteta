@@ -74,7 +74,7 @@ protected: // API to be implemented
     virtual void rememberCurrentSettings();
 
 private Q_SLOTS:
-    void onSearchDataChanged(const QByteArray& data);
+    void onSearchDataChanged(const QByteArray& searchData);
     void onSearchDataFormatChanged(int index);
     void onSelectedToggled(bool checked);
     void forwardFindButtonClicked();

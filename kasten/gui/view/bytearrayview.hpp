@@ -118,12 +118,12 @@ Q_SIGNALS:
     void selectedDataChanged(const Kasten::AbstractModelSelection* modelSelection) override;
 
 public: // If::SelectedDataWriteable API
-    void insertData(const QMimeData* data) override;
+    void insertData(const QMimeData* mimeData) override;
     [[nodiscard]]
     std::unique_ptr<QMimeData> cutSelectedData() override;
     void deleteSelectedData() override;
     [[nodiscard]]
-    bool canInsertData(const QMimeData* data) const override;
+    bool canInsertData(const QMimeData* mimeData) const override;
     [[nodiscard]]
     bool canCutSelectedData() const override;
 Q_SIGNALS:

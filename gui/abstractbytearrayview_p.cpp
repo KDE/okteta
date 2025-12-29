@@ -809,9 +809,9 @@ void AbstractByteArrayViewPrivate::pasteFromClipboard(QClipboard::Mode mode)
     insertBytesFromMimeData(data);
 }
 
-void AbstractByteArrayViewPrivate::insertBytesFromMimeData(const QMimeData* data)
+void AbstractByteArrayViewPrivate::insertBytesFromMimeData(const QMimeData* mimeData)
 {
-    if (!data || data->formats().isEmpty()) {
+    if (!mimeData || mimeData->formats().isEmpty()) {
         return;
     }
 
@@ -823,12 +823,12 @@ void AbstractByteArrayViewPrivate::insertBytesFromMimeData(const QMimeData* data
     // would need the movement of the encoders into the core library
     QByteArray byteArray;
     const QString dataFormatName = octetStreamFormatName();
-    if (data->hasFormat(dataFormatName)) {
-        byteArray = data->data(dataFormatName);
+    if (mimeData->hasFormat(dataFormatName)) {
+        byteArray = mimeData->data(dataFormatName);
     } else {
         // try to parse any encoding in text
-        if (data->hasText()) {
-            const QString text = data->text();
+        if (mimeData->hasText()) {
+            const QString text = mimeData->text();
             if (activeCoding() == AbstractByteArrayView::CharCodingId) {
                 ByteArrayChar8StringDecoder char8StringDecoder;
                 char8StringDecoder.setCharCodec(charCodingName());
@@ -848,8 +848,8 @@ void AbstractByteArrayViewPrivate::insertBytesFromMimeData(const QMimeData* data
         }
         // nothing decoded (for now empty -> failed)? fall back to raw data of first format
         if (byteArray.isEmpty()) {
-            const QString firstDataFormatName = data->formats()[0];
-            byteArray = data->data(firstDataFormatName);
+            const QString firstDataFormatName = mimeData->formats()[0];
+            byteArray = mimeData->data(firstDataFormatName);
         }
     }
 
@@ -858,9 +858,9 @@ void AbstractByteArrayViewPrivate::insertBytesFromMimeData(const QMimeData* data
     }
 }
 
-bool AbstractByteArrayViewPrivate::canInsertBytesFromMimeData(const QMimeData* data) const
+bool AbstractByteArrayViewPrivate::canInsertBytesFromMimeData(const QMimeData* mimeData) const
 {
-    Q_UNUSED(data)
+    Q_UNUSED(mimeData)
     // taking all for now, see comment in insertBytesFromMimeData above
     return true;// data->hasFormat( OctetStreamFormatName );
 }

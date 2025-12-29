@@ -128,6 +128,12 @@ ecm_set_disabled_deprecation_versions(
     KF 5.100
 )
 
+if(CMAKE_CXX_COMPILER_ID MATCHES "Clang")
+    # Not setting for GNU due to too many warnings related to private members of base classes or around lambdas
+    # see e.g. https://gcc.gnu.org/bugzilla/show_bug.cgi?id=56556 or https://gcc.gnu.org/bugzilla/show_bug.cgi?id=79328
+    string(APPEND CMAKE_CXX_FLAGS " -Wshadow")
+endif()
+
 # helper libs
 add_subdirectory( libs )
 if( BUILD_DESKTOPPROGRAM )

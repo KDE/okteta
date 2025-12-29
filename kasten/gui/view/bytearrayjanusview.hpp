@@ -73,14 +73,14 @@ public:
     void setSelection(Address start, Address end);
     void selectAll(bool selectAll);
     void removeSelectedBytes();
-    void insertBytesFromMimeData(const QMimeData* data);
+    void insertBytesFromMimeData(const QMimeData* mimeData);
     void insertBytes(const QByteArray& byteArray);
     [[nodiscard]]
     bool hasSelectedBytes() const;
     [[nodiscard]]
     std::unique_ptr<QMimeData> selectedBytesAsMimeData() const;
     [[nodiscard]]
-    bool canInsertBytesFromMimeData(const QMimeData* data) const;
+    bool canInsertBytesFromMimeData(const QMimeData* mimeData) const;
     [[nodiscard]]
     AddressRange selection() const;
 

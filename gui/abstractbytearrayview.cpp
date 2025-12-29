@@ -172,16 +172,16 @@ AddressRange AbstractByteArrayView::marking() const
     return d->marking();
 }
 
-void AbstractByteArrayView::insertBytesFromMimeData(const QMimeData* data)
+void AbstractByteArrayView::insertBytesFromMimeData(const QMimeData* mimeData)
 {
     Q_D(AbstractByteArrayView);
-    d->insertBytesFromMimeData(data);
+    d->insertBytesFromMimeData(mimeData);
 }
 
-bool AbstractByteArrayView::canInsertBytesFromMimeData(const QMimeData* data) const
+bool AbstractByteArrayView::canInsertBytesFromMimeData(const QMimeData* mimeData) const
 {
     Q_D(const AbstractByteArrayView);
-    return d->canInsertBytesFromMimeData(data);
+    return d->canInsertBytesFromMimeData(mimeData);
 }
 
 void AbstractByteArrayView::cut()

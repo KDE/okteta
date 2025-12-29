@@ -314,10 +314,10 @@ public:
 
 public:
     [[nodiscard]]
-    virtual bool canInsertBytesFromMimeData(const QMimeData* data) const;
+    virtual bool canInsertBytesFromMimeData(const QMimeData* mimeData) const;
 
 public: // modification access
-    virtual void insertBytesFromMimeData(const QMimeData* data);
+    virtual void insertBytesFromMimeData(const QMimeData* mimeData);
     /** removes the selected data, takes care of the cursor */
     void removeSelectedBytes();
     /** inserts */

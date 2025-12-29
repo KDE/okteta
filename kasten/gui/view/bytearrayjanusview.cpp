@@ -155,9 +155,9 @@ std::unique_ptr<QMimeData> ByteArrayJanusView::selectedBytesAsMimeData() const
     return mView->selectedBytesAsMimeData();
 }
 
-void ByteArrayJanusView::insertBytesFromMimeData(const QMimeData* data)
+void ByteArrayJanusView::insertBytesFromMimeData(const QMimeData* mimeData)
 {
-    mView->insertBytesFromMimeData(data);
+    mView->insertBytesFromMimeData(mimeData);
 }
 
 void ByteArrayJanusView::removeSelectedBytes()
@@ -165,9 +165,9 @@ void ByteArrayJanusView::removeSelectedBytes()
     mView->removeSelectedBytes();
 }
 
-bool ByteArrayJanusView::canInsertBytesFromMimeData(const QMimeData* data) const
+bool ByteArrayJanusView::canInsertBytesFromMimeData(const QMimeData* mimeData) const
 {
-    return mView->canInsertBytesFromMimeData(data);
+    return mView->canInsertBytesFromMimeData(mimeData);
 }
 
 void ByteArrayJanusView::setCursorPosition(Address cursorPosition)

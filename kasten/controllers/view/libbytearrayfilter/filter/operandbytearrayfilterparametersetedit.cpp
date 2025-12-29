@@ -94,9 +94,9 @@ void OperandByteArrayFilterParameterSetEdit::rememberCurrentSettings()
     mOperandEdit->rememberCurrentByteArray();
 }
 
-void OperandByteArrayFilterParameterSetEdit::onInputChanged(const QByteArray& data)
+void OperandByteArrayFilterParameterSetEdit::onInputChanged(const QByteArray& input)
 {
-    Q_EMIT validityChanged(!data.isEmpty());
+    Q_EMIT validityChanged(!input.isEmpty());
 }
 
 #include "moc_operandbytearrayfilterparametersetedit.cpp"
