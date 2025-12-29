@@ -921,7 +921,7 @@ bool AbstractByteArrayViewPrivate::canReadData(const QMimeData* mimeData) const
     return true;// data->hasFormat( OctetStreamFormatName );
 }
 
-void AbstractByteArrayViewPrivate::insert(const QByteArray& data)
+void AbstractByteArrayViewPrivate::insert(const QByteArray& byteArray)
 {
     Q_Q(AbstractByteArrayView);
 
@@ -932,17 +932,17 @@ void AbstractByteArrayViewPrivate::insert(const QByteArray& data)
             // replacing the selection:
             // we restrict the replacement to the minimum length of selection and input
             AddressRange selection = mTableRanges->removeSelection();
-            selection.restrictEndByWidth(data.size());
+            selection.restrictEndByWidth(byteArray.size());
             insertionOffset = selection.start();
-            lengthOfInserted = mByteArrayModel->replace(selection, reinterpret_cast<const Byte*>(data.constData()), selection.width());
+            lengthOfInserted = mByteArrayModel->replace(selection, reinterpret_cast<const Byte*>(byteArray.constData()), selection.width());
         } else {
             const Size length = mTableLayout->length();
             if (!isCursorBehind() && length > 0) {
                 // replacing the normal data, at least until the end
-                AddressRange insertRange = AddressRange::fromWidth(cursorPosition(), data.size());
+                AddressRange insertRange = AddressRange::fromWidth(cursorPosition(), byteArray.size());
                 insertRange.restrictEndTo(length - 1);
                 insertionOffset = insertRange.start();
-                lengthOfInserted = mByteArrayModel->replace(insertRange, reinterpret_cast<const Byte*>(data.constData()), insertRange.width());
+                lengthOfInserted = mByteArrayModel->replace(insertRange, reinterpret_cast<const Byte*>(byteArray.constData()), insertRange.width());
             } else {
                 lengthOfInserted = 0;
             }
@@ -952,10 +952,10 @@ void AbstractByteArrayViewPrivate::insert(const QByteArray& data)
             // replacing the selection
             const AddressRange selection = mTableRanges->removeSelection();
             insertionOffset = selection.start();
-            lengthOfInserted = mByteArrayModel->replace(selection, data);
+            lengthOfInserted = mByteArrayModel->replace(selection, byteArray);
         } else {
             insertionOffset = cursorPosition();
-            lengthOfInserted = mByteArrayModel->insert(insertionOffset, data);
+            lengthOfInserted = mByteArrayModel->insert(insertionOffset, byteArray);
         }
     }
     // if inserting ourself we want to place the cursor at the end of the inserted data

@@ -36,7 +36,7 @@ public: // AbstractByteArrayFilterParameterSetEdit API
     void rememberCurrentSettings() override;
 
 private Q_SLOTS:
-    void onInputChanged(const QByteArray& data);
+    void onInputChanged(const QByteArray& input);
 
 private:
     Okteta::ByteArrayComboBox* mOperandEdit;

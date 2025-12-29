@@ -234,9 +234,9 @@ void AbstractFindDialog::onSearchDataFormatChanged(int index)
     WholeWordsCheckBox->setEnabled(false);  // isCharCoding ); TODO: not implemented!
 }
 
-void AbstractFindDialog::onSearchDataChanged(const QByteArray& data)
+void AbstractFindDialog::onSearchDataChanged(const QByteArray& searchData)
 {
-    FindButton->setEnabled(!data.isEmpty());
+    FindButton->setEnabled(!searchData.isEmpty());
 }
 
 void AbstractFindDialog::forwardFindButtonClicked()

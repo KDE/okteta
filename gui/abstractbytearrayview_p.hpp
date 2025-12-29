@@ -211,7 +211,7 @@ protected:
 
 protected:
     void removeSelectedData();
-    void insert(const QByteArray& data);
+    void insert(const QByteArray& byteArray);
     void pasteData(const QMimeData* mimeData);
     bool canReadData(const QMimeData* mimeData) const;
 

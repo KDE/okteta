@@ -26,7 +26,7 @@ private Q_SLOTS: // test functions
     void testReplace();
 
 private:
-    void compare(const Okteta::PieceTableByteArrayModel* byteArrayModel, const QByteArray& data);
+    void compare(const Okteta::PieceTableByteArrayModel* byteArrayModel, const QByteArray& expectedData);
 };
 
 #endif
