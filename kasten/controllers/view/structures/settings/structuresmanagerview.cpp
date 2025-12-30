@@ -44,6 +44,8 @@ StructuresManagerView::StructuresManagerView(Kasten::StructuresTool* tool, QWidg
     auto* buttonsLayout = new QHBoxLayout();
     pageLayout->addLayout(buttonsLayout);
 
+    buttonsLayout->addStretch();
+
     mAdvancedSelectionButton = new QPushButton(QIcon::fromTheme(QStringLiteral("configure")), i18n("Advanced Selection..."), this);
     connect(mAdvancedSelectionButton, &QPushButton::clicked, this, &StructuresManagerView::advancedSelection);
     buttonsLayout->addWidget(mAdvancedSelectionButton);
