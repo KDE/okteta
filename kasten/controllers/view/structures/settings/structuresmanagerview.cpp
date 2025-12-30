@@ -44,6 +44,10 @@ StructuresManagerView::StructuresManagerView(Kasten::StructuresTool* tool, QWidg
     auto* buttonsLayout = new QHBoxLayout();
     pageLayout->addLayout(buttonsLayout);
 
+    mAdvancedSelectionButton = new QPushButton(QIcon::fromTheme(QStringLiteral("configure")), i18n("Advanced Selection..."), this);
+    connect(mAdvancedSelectionButton, &QPushButton::clicked, this, &StructuresManagerView::advancedSelection);
+    buttonsLayout->addWidget(mAdvancedSelectionButton);
+
     // silence deprecation warning
     // porting away would need new dep on library KNSWidgets
     QT_WARNING_PUSH
@@ -55,10 +59,6 @@ StructuresManagerView::StructuresManagerView(Kasten::StructuresTool* tool, QWidg
     connect(mGetNewStructuresButton, &KNS3::Button::dialogFinished,
             this, &StructuresManagerView::onGetNewStructuresClicked);
     buttonsLayout->addWidget(mGetNewStructuresButton);
-
-    mAdvancedSelectionButton = new QPushButton(QIcon::fromTheme(QStringLiteral("configure")), i18n("Advanced Selection..."), this);
-    connect(mAdvancedSelectionButton, &QPushButton::clicked, this, &StructuresManagerView::advancedSelection);
-    buttonsLayout->addWidget(mAdvancedSelectionButton);
 }
 
 StructuresManagerView::~StructuresManagerView() = default;
