@@ -6,13 +6,13 @@
 # obsoleteman <tulliana@gmail.com>, 2008-2009,2012.
 # Volkan Gezer <volkangezer@gmail.com>, 2014.
 # Kaan Ozdincer <kaanozdincer@gmail.com>, 2014.
-# SPDX-FileCopyrightText: 2022, 2023, 2024 Emir SARI <emir_sari@icloud.com>
+# SPDX-FileCopyrightText: 2022, 2023, 2024, 2025 Emir SARI <emir_sari@icloud.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: kdesdk-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 16:19+0000\n"
-"PO-Revision-Date: 2024-10-18 02:07+0300\n"
+"PO-Revision-Date: 2025-02-14 08:58+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n > 1);\n"
-"X-Generator: Lokalize 24.11.70\n"
+"X-Generator: Lokalize 25.03.70\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -40,42 +40,55 @@ msgid "Okteta"
 msgstr "Okteta"
 
 #: about.cpp:19
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@info"
+#| msgid "Hex editor"
 msgid "Hex editor"
 msgstr "Onaltılık Düzenleyicisi"
 
 #: about.cpp:21
 #, fuzzy, kde-format
-#| msgid "Friedrich W. H. Kossebau"
+#| msgctxt "@info"
+#| msgid "2006-%1 Friedrich W. H. Kossebau"
 msgid "2006-%1 Friedrich W. H. Kossebau"
-msgstr "Friedrich W. H. Kossebau"
+msgstr "2006–%1 Friedrich W. H. Kossebau"
 
 #: about.cpp:22
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@info"
+#| msgid "Edit the raw data of files"
 msgid "Edit the raw data of files"
-msgstr "Dosyaların ham verisini düzenle"
+msgstr "Dosyaların ham verisini düzenleyin"
 
 #: about.cpp:27
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@info:credit"
+#| msgid "Friedrich W. H. Kossebau"
 msgid "Friedrich W. H. Kossebau"
 msgstr "Friedrich W. H. Kossebau"
 
 #: about.cpp:28
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@info:credit"
+#| msgid "Author"
 msgid "Author"
 msgstr "Yazar"
 
 #: about.cpp:30
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@info:credit"
+#| msgid "Alexander Richardson"
 msgctxt "Author"
 msgid "Alexander Richardson"
 msgstr "Alexander Richardson"
 
 #: about.cpp:31
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@info:credit"
+#| msgid "Structures tool"
 msgctxt "Task description"
 msgid "Structures tool"
-msgstr "Yapı aracı"
+msgstr "Yapılar aracı"
 
 #. i18n: ectx: Menu (permission)
 #: oktetaui.rc:15
@@ -97,11 +110,8 @@ msgid "Main Toolbar"
 msgstr "Ana Araç Çubuğu"
 
 #: program.cpp:91
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@info"
+#| msgid "File(s) to load."
 msgid "File(s) to load."
 msgstr "Yüklenecek dosya(lar)."
-
-#, fuzzy
-#~| msgid "Copyright 2006-2017 Friedrich W. H. Kossebau"
-#~ msgid "SPDX-FileCopyrightText: 2006-2020 Friedrich W. H. Kossebau "
-#~ msgstr "Telif Hakkı 2006-2017 Friedrich W. H. Kossebau"
