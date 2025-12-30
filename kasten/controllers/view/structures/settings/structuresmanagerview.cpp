@@ -41,19 +41,17 @@ StructuresManagerView::StructuresManagerView(Kasten::StructuresTool* tool, QWidg
     // buttons
     auto* const buttonsLayout = new QHBoxLayout();
 
-    mGetNewStructuresButton = new KNSWidgets::Button(i18nc("@action:button", "Get New Structures…"),
-                                                     QStringLiteral("okteta-structures.knsrc"), this);
-    connect(mGetNewStructuresButton, &KNSWidgets::Button::dialogFinished,
-            this, &StructuresManagerView::onGetNewStructuresClicked);
-    buttonsLayout->addWidget(mGetNewStructuresButton);
+    buttonsLayout->addStretch();
 
     mAdvancedSelectionButton = new QPushButton(QIcon::fromTheme(QStringLiteral("configure")), i18nc("@action:button", "Advanced Selection…"), this);
     connect(mAdvancedSelectionButton, &QPushButton::clicked, this, &StructuresManagerView::advancedSelection);
     buttonsLayout->addWidget(mAdvancedSelectionButton);
 
-    pageLayout->addLayout(buttonsLayout);
-
-    mStructuresSelector->setStructures(mTool->manager()->structureDefs());
+    mGetNewStructuresButton = new KNSWidgets::Button(i18nc("@action:button", "Get New Structures…"),
+                                                     QStringLiteral("okteta-structures.knsrc"), this);
+    connect(mGetNewStructuresButton, &KNSWidgets::Button::dialogFinished,
+            this, &StructuresManagerView::onGetNewStructuresClicked);
+    buttonsLayout->addWidget(mGetNewStructuresButton);
 }
 
 StructuresManagerView::~StructuresManagerView() = default;
