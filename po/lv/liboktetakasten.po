@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-29 03:23+0000\n"
+"POT-Creation-Date: 2025-12-31 03:54+0000\n"
 "PO-Revision-Date: 2010-01-09 18:03+0200\n"
 "Last-Translator: Viesturs Zarins <viesturs.zarins@mii.lu.lv>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -2275,23 +2275,23 @@ msgctxt "@info:label"
 msgid "Used structures:"
 msgstr "Lietotās struktūras:"
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:52
+#: controllers/view/structures/settings/structuresmanagerview.cpp:49
+#, kde-format
+msgid "Advanced Selection..."
+msgstr ""
+
+#: controllers/view/structures/settings/structuresmanagerview.cpp:58
 #, fuzzy, kde-format
 #| msgid "Structures"
 msgid "Get New Structures..."
 msgstr "Struktūras"
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:59
-#, kde-format
-msgid "Advanced Selection..."
-msgstr ""
-
-#: controllers/view/structures/settings/structuresmanagerview.cpp:181
+#: controllers/view/structures/settings/structuresmanagerview.cpp:183
 #, kde-format
 msgid "Structure Definitions"
 msgstr "Struktūras definīcijas"
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:184
+#: controllers/view/structures/settings/structuresmanagerview.cpp:186
 #, fuzzy, kde-format
 #| msgid "Structure Definitions"
 msgid "Dynamic Structure Definitions"

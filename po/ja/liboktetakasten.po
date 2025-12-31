@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-29 03:23+0000\n"
+"POT-Creation-Date: 2025-12-31 03:54+0000\n"
 "PO-Revision-Date: 2011-04-08 21:21-0700\n"
 "Last-Translator: Fumiaki Okushi <okushi@kde.gr.jp>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -2158,24 +2158,24 @@ msgctxt "@info:label"
 msgid "Used structures:"
 msgstr "使用した構造体:"
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:52
+#: controllers/view/structures/settings/structuresmanagerview.cpp:49
+#, kde-format
+msgid "Advanced Selection..."
+msgstr ""
+
+#: controllers/view/structures/settings/structuresmanagerview.cpp:58
 #, fuzzy, kde-format
 #| msgctxt "@option:check"
 #| msgid "&Selected bytes"
 msgid "Get New Structures..."
 msgstr "選択したバイトのみ(&S)"
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:59
-#, kde-format
-msgid "Advanced Selection..."
-msgstr ""
-
-#: controllers/view/structures/settings/structuresmanagerview.cpp:181
+#: controllers/view/structures/settings/structuresmanagerview.cpp:183
 #, kde-format
 msgid "Structure Definitions"
 msgstr ""
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:184
+#: controllers/view/structures/settings/structuresmanagerview.cpp:186
 #, kde-format
 msgid "Dynamic Structure Definitions"
 msgstr ""

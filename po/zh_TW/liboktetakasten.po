@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-29 03:23+0000\n"
+"POT-Creation-Date: 2025-12-31 03:54+0000\n"
 "PO-Revision-Date: 2025-11-24 20:50+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -2095,22 +2095,22 @@ msgctxt "@info:label"
 msgid "Used structures:"
 msgstr "已使用結構："
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:52
-#, kde-format
-msgid "Get New Structures..."
-msgstr "取得新結構..."
-
-#: controllers/view/structures/settings/structuresmanagerview.cpp:59
+#: controllers/view/structures/settings/structuresmanagerview.cpp:49
 #, kde-format
 msgid "Advanced Selection..."
 msgstr "進階選取..."
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:181
+#: controllers/view/structures/settings/structuresmanagerview.cpp:58
+#, kde-format
+msgid "Get New Structures..."
+msgstr "取得新結構..."
+
+#: controllers/view/structures/settings/structuresmanagerview.cpp:183
 #, kde-format
 msgid "Structure Definitions"
 msgstr "結構定義"
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:184
+#: controllers/view/structures/settings/structuresmanagerview.cpp:186
 #, kde-format
 msgid "Dynamic Structure Definitions"
 msgstr "動態結構定義"

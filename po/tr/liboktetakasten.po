@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesdk-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-29 03:23+0000\n"
+"POT-Creation-Date: 2025-12-31 03:54+0000\n"
 "PO-Revision-Date: 2025-08-31 17:45+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -2189,26 +2189,26 @@ msgctxt "@info:label"
 msgid "Used structures:"
 msgstr "Kullanılan yapılar:"
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:52
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Get New Structures…"
-msgid "Get New Structures..."
-msgstr "Yeni Yapıları Al…"
-
-#: controllers/view/structures/settings/structuresmanagerview.cpp:59
+#: controllers/view/structures/settings/structuresmanagerview.cpp:49
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "Advanced Selection…"
 msgid "Advanced Selection..."
 msgstr "Gelişmiş Seçim…"
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:181
+#: controllers/view/structures/settings/structuresmanagerview.cpp:58
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "Get New Structures…"
+msgid "Get New Structures..."
+msgstr "Yeni Yapıları Al…"
+
+#: controllers/view/structures/settings/structuresmanagerview.cpp:183
 #, kde-format
 msgid "Structure Definitions"
 msgstr "Yapı Tanımlamaları"
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:184
+#: controllers/view/structures/settings/structuresmanagerview.cpp:186
 #, kde-format
 msgid "Dynamic Structure Definitions"
 msgstr "Devingen Yapı Tanımları"

@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-29 03:23+0000\n"
+"POT-Creation-Date: 2025-12-31 03:54+0000\n"
 "PO-Revision-Date: 2020-01-11 13:24-0300\n"
 "Last-Translator: André Marcelo Alvarenga <alvarenga@kde.org>\n"
 "Language-Team: Portuguese <kde-i18n-pt_BR@kde.org>\n"
@@ -2177,22 +2177,22 @@ msgctxt "@info:label"
 msgid "Used structures:"
 msgstr "Estruturas usadas:"
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:52
-#, kde-format
-msgid "Get New Structures..."
-msgstr "Baixar novas estruturas..."
-
-#: controllers/view/structures/settings/structuresmanagerview.cpp:59
+#: controllers/view/structures/settings/structuresmanagerview.cpp:49
 #, kde-format
 msgid "Advanced Selection..."
 msgstr "Seleção avançada..."
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:181
+#: controllers/view/structures/settings/structuresmanagerview.cpp:58
+#, kde-format
+msgid "Get New Structures..."
+msgstr "Baixar novas estruturas..."
+
+#: controllers/view/structures/settings/structuresmanagerview.cpp:183
 #, kde-format
 msgid "Structure Definitions"
 msgstr "Definições de estruturas"
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:184
+#: controllers/view/structures/settings/structuresmanagerview.cpp:186
 #, kde-format
 msgid "Dynamic Structure Definitions"
 msgstr "Definições de estruturas dinâmicas"
