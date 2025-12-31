@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-29 02:01+0000\n"
+"POT-Creation-Date: 2025-12-31 02:21+0000\n"
 "PO-Revision-Date: 2010-01-09 18:03+0200\n"
 "Last-Translator: Viesturs Zarins <viesturs.zarins@mii.lu.lv>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -2493,19 +2493,19 @@ msgctxt "@info:tooltip"
 msgid "About"
 msgstr ""
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:44
-#, fuzzy, kde-format
-#| msgid "Structures"
-msgctxt "@action:button"
-msgid "Get New Structures…"
-msgstr "Struktūras"
-
-#: controllers/view/structures/settings/structuresmanagerview.cpp:50
+#: controllers/view/structures/settings/structuresmanagerview.cpp:46
 #, fuzzy, kde-format
 #| msgid "Structure Definitions"
 msgctxt "@action:button"
 msgid "Advanced Selection…"
 msgstr "Struktūras definīcijas"
+
+#: controllers/view/structures/settings/structuresmanagerview.cpp:50
+#, fuzzy, kde-format
+#| msgid "Structures"
+msgctxt "@action:button"
+msgid "Get New Structures…"
+msgstr "Struktūras"
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:26
 #, fuzzy, kde-format

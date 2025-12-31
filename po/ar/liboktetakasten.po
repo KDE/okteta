@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-29 02:01+0000\n"
+"POT-Creation-Date: 2025-12-31 02:21+0000\n"
 "PO-Revision-Date: 2025-09-25 18:03+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -2346,17 +2346,17 @@ msgctxt "@info:tooltip"
 msgid "About"
 msgstr "عن"
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:44
-#, kde-format
-msgctxt "@action:button"
-msgid "Get New Structures…"
-msgstr "احصل على هياكل جديدة…"
-
-#: controllers/view/structures/settings/structuresmanagerview.cpp:50
+#: controllers/view/structures/settings/structuresmanagerview.cpp:46
 #, kde-format
 msgctxt "@action:button"
 msgid "Advanced Selection…"
 msgstr "تحديد متقدم…"
+
+#: controllers/view/structures/settings/structuresmanagerview.cpp:50
+#, kde-format
+msgctxt "@action:button"
+msgid "Get New Structures…"
+msgstr "احصل على هياكل جديدة…"
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:26
 #, kde-format

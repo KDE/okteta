@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-29 02:01+0000\n"
+"POT-Creation-Date: 2025-12-31 02:21+0000\n"
 "PO-Revision-Date: 2013-09-08 07:05+0900\n"
 "Last-Translator: Gheyret Kenji <gheyret@gmail.com>\n"
 "Language-Team: Uyghur Computer Science Association <UKIJ@yahoogroups.com>\n"
@@ -2287,18 +2287,18 @@ msgctxt "@info:tooltip"
 msgid "About"
 msgstr ""
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:44
+#: controllers/view/structures/settings/structuresmanagerview.cpp:46
+#, kde-format
+msgctxt "@action:button"
+msgid "Advanced Selection…"
+msgstr ""
+
+#: controllers/view/structures/settings/structuresmanagerview.cpp:50
 #, fuzzy, kde-format
 #| msgid "Structures"
 msgctxt "@action:button"
 msgid "Get New Structures…"
 msgstr "قۇرۇلمىلار"
-
-#: controllers/view/structures/settings/structuresmanagerview.cpp:50
-#, kde-format
-msgctxt "@action:button"
-msgid "Advanced Selection…"
-msgstr ""
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:26
 #, kde-format

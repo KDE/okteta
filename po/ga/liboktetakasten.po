@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: playground-utils/okteta.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-29 02:01+0000\n"
+"POT-Creation-Date: 2025-12-31 02:21+0000\n"
 "PO-Revision-Date: 2007-11-05 08:28-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -2445,19 +2445,19 @@ msgctxt "@info:tooltip"
 msgid "About"
 msgstr ""
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:44
-#, fuzzy, kde-format
-#| msgid "Get New Structures..."
-msgctxt "@action:button"
-msgid "Get New Structures…"
-msgstr "Faigh Struchtúir Nua..."
-
-#: controllers/view/structures/settings/structuresmanagerview.cpp:50
+#: controllers/view/structures/settings/structuresmanagerview.cpp:46
 #, fuzzy, kde-format
 #| msgid "Structure Definitions"
 msgctxt "@action:button"
 msgid "Advanced Selection…"
 msgstr "Sainmhínithe ar Struchtúir"
+
+#: controllers/view/structures/settings/structuresmanagerview.cpp:50
+#, fuzzy, kde-format
+#| msgid "Get New Structures..."
+msgctxt "@action:button"
+msgid "Get New Structures…"
+msgstr "Faigh Struchtúir Nua..."
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:26
 #, fuzzy, kde-format

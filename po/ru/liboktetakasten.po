@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: khexedit\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-29 02:01+0000\n"
+"POT-Creation-Date: 2025-12-31 02:21+0000\n"
 "PO-Revision-Date: 2022-10-12 16:05+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
@@ -2430,19 +2430,19 @@ msgctxt "@info:tooltip"
 msgid "About"
 msgstr ""
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:44
-#, fuzzy, kde-format
-#| msgid "Get New Structures..."
-msgctxt "@action:button"
-msgid "Get New Structures…"
-msgstr "Загрузить структуры данных..."
-
-#: controllers/view/structures/settings/structuresmanagerview.cpp:50
+#: controllers/view/structures/settings/structuresmanagerview.cpp:46
 #, fuzzy, kde-format
 #| msgid "Advanced Selection..."
 msgctxt "@action:button"
 msgid "Advanced Selection…"
 msgstr "Расширенный выбор..."
+
+#: controllers/view/structures/settings/structuresmanagerview.cpp:50
+#, fuzzy, kde-format
+#| msgid "Get New Structures..."
+msgctxt "@action:button"
+msgid "Get New Structures…"
+msgstr "Загрузить структуры данных..."
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:26
 #, kde-format

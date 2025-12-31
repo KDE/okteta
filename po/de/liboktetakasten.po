@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-29 02:01+0000\n"
+"POT-Creation-Date: 2025-12-31 02:21+0000\n"
 "PO-Revision-Date: 2023-08-13 16:27+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -2396,19 +2396,19 @@ msgctxt "@info:tooltip"
 msgid "About"
 msgstr "Über"
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:44
-#, fuzzy, kde-format
-#| msgid "Get New Structures..."
-msgctxt "@action:button"
-msgid "Get New Structures…"
-msgstr "Neue Strukturen holen ..."
-
-#: controllers/view/structures/settings/structuresmanagerview.cpp:50
+#: controllers/view/structures/settings/structuresmanagerview.cpp:46
 #, fuzzy, kde-format
 #| msgid "Advanced Selection..."
 msgctxt "@action:button"
 msgid "Advanced Selection…"
 msgstr "Erweiterte Auswahl ..."
+
+#: controllers/view/structures/settings/structuresmanagerview.cpp:50
+#, fuzzy, kde-format
+#| msgid "Get New Structures..."
+msgctxt "@action:button"
+msgid "Get New Structures…"
+msgstr "Neue Strukturen holen ..."
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:26
 #, kde-format

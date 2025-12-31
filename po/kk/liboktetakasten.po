@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-29 02:01+0000\n"
+"POT-Creation-Date: 2025-12-31 02:21+0000\n"
 "PO-Revision-Date: 2013-06-21 06:20+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -2383,19 +2383,19 @@ msgctxt "@info:tooltip"
 msgid "About"
 msgstr ""
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:44
-#, fuzzy, kde-format
-#| msgid "Get New Structures..."
-msgctxt "@action:button"
-msgid "Get New Structures…"
-msgstr "Жаңа құрылымдарын алу..."
-
-#: controllers/view/structures/settings/structuresmanagerview.cpp:50
+#: controllers/view/structures/settings/structuresmanagerview.cpp:46
 #, fuzzy, kde-format
 #| msgid "Advanced Selection..."
 msgctxt "@action:button"
 msgid "Advanced Selection…"
 msgstr "Жетелеген таңдау..."
+
+#: controllers/view/structures/settings/structuresmanagerview.cpp:50
+#, fuzzy, kde-format
+#| msgid "Get New Structures..."
+msgctxt "@action:button"
+msgid "Get New Structures…"
+msgstr "Жаңа құрылымдарын алу..."
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:26
 #, fuzzy, kde-format

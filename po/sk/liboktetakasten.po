@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-29 02:01+0000\n"
+"POT-Creation-Date: 2025-12-31 02:21+0000\n"
 "PO-Revision-Date: 2023-12-06 19:12+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -2377,19 +2377,19 @@ msgctxt "@info:tooltip"
 msgid "About"
 msgstr "O aplikácii"
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:44
-#, fuzzy, kde-format
-#| msgid "Get New Structures..."
-msgctxt "@action:button"
-msgid "Get New Structures…"
-msgstr "Získať nové štruktúry..."
-
-#: controllers/view/structures/settings/structuresmanagerview.cpp:50
+#: controllers/view/structures/settings/structuresmanagerview.cpp:46
 #, fuzzy, kde-format
 #| msgid "Advanced Selection..."
 msgctxt "@action:button"
 msgid "Advanced Selection…"
 msgstr "Pokročilý výber..."
+
+#: controllers/view/structures/settings/structuresmanagerview.cpp:50
+#, fuzzy, kde-format
+#| msgid "Get New Structures..."
+msgctxt "@action:button"
+msgid "Get New Structures…"
+msgstr "Získať nové štruktúry..."
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:26
 #, kde-format

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-29 02:01+0000\n"
+"POT-Creation-Date: 2025-12-31 02:21+0000\n"
 "PO-Revision-Date: 2025-08-31 07:21+0200\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
@@ -2344,17 +2344,17 @@ msgctxt "@info:tooltip"
 msgid "About"
 msgstr "O programu"
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:44
-#, kde-format
-msgctxt "@action:button"
-msgid "Get New Structures…"
-msgstr "Dobi nove strukture…"
-
-#: controllers/view/structures/settings/structuresmanagerview.cpp:50
+#: controllers/view/structures/settings/structuresmanagerview.cpp:46
 #, kde-format
 msgctxt "@action:button"
 msgid "Advanced Selection…"
 msgstr "Napredni izbor…"
+
+#: controllers/view/structures/settings/structuresmanagerview.cpp:50
+#, kde-format
+msgctxt "@action:button"
+msgid "Get New Structures…"
+msgstr "Dobi nove strukture…"
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:26
 #, kde-format

@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-29 02:01+0000\n"
+"POT-Creation-Date: 2025-12-31 02:21+0000\n"
 "PO-Revision-Date: 2010-03-02 15:30+0100\n"
 "Last-Translator: Marko Dimjasevic <marko@dimjasevic.net>\n"
 "Language-Team: Croatian <kde-croatia-list@lists.sourceforge.net>\n"
@@ -2264,16 +2264,16 @@ msgctxt "@info:tooltip"
 msgid "About"
 msgstr ""
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:44
+#: controllers/view/structures/settings/structuresmanagerview.cpp:46
 #, kde-format
 msgctxt "@action:button"
-msgid "Get New Structures…"
+msgid "Advanced Selection…"
 msgstr ""
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:50
 #, kde-format
 msgctxt "@action:button"
-msgid "Advanced Selection…"
+msgid "Get New Structures…"
 msgstr ""
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:26
