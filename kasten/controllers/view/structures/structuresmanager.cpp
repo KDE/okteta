@@ -38,7 +38,8 @@ void StructuresManager::reloadPaths()
     const QStringList structuresDirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation,
                                                                  QStringLiteral("okteta/structures"), QStandardPaths::LocateDirectory);
     for (const QString& structuresDir : structuresDirs) {
-        const QStringList entries = QDir(structuresDir).entryList(QDir::Dirs);
+        // for backward-compat also scan for desktop files in the toplevel dir (".")
+        const QStringList entries = QDir(structuresDir).entryList(QDir::Dirs | QDir::NoDotDot);
         for (const QString& e : entries) {
             const QString structureBasePath = structuresDir + QLatin1Char('/') + e;
             const QStringList desktopFiles =
