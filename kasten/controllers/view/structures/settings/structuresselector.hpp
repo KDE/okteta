@@ -4,8 +4,8 @@
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
-#ifndef STRUCTURESSELECTOR_HPP
-#define STRUCTURESSELECTOR_HPP
+#ifndef KASTEN_STRUCTURESSELECTOR_HPP
+#define KASTEN_STRUCTURESSELECTOR_HPP
 
 // tool
 #include <structuremetadata.hpp>
@@ -21,8 +21,8 @@ class KCategoryDrawer;
 class QLineEdit;
 
 namespace Kasten {
+
 class StructureDefinitionFile;
-}
 class StructuresSelectionSortFilterProxyModel;
 class StructuresSelectionModel;
 class StructureItemDelegate;
@@ -38,7 +38,7 @@ public:
     ~StructuresSelector() override;
 
 public:
-    void setStructures(const std::map<QString, std::unique_ptr<Kasten::StructureDefinitionFile>>& structureDefs);
+    void setStructures(const std::map<QString, std::unique_ptr<StructureDefinitionFile>>& structureDefs);
     void setEnabledStructures(const QStringList& enabledStructures);
 
     [[nodiscard]]
@@ -58,5 +58,7 @@ private:
     KCategoryDrawer* m_categoryDrawer;
     StructureItemDelegate* m_structureDelegate;
 };
+
+}
 
 #endif

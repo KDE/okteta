@@ -25,6 +25,7 @@
 #include <QDesktopServices>
 #include <QUrl>
 
+namespace Kasten {
 
 AboutStructureDialog::AboutStructureDialog(const StructureMetaData& structureMetaData, QWidget* parent)
     : QDialog(parent)
@@ -133,6 +134,8 @@ void AboutStructureDialog::emailAuthor()
 {
     const QUrl mailToUrl(QLatin1String("mailto:") + m_structureMetaData.authorEmailAddress());
     QDesktopServices::openUrl(mailToUrl);
+}
+
 }
 
 #include "moc_aboutstructuredialog.cpp"

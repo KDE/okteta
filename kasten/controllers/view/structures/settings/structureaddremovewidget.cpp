@@ -34,7 +34,9 @@ constexpr int OnlyOneRowColumn = 0;
 
 }
 
-StructureAddRemoveWidget::StructureAddRemoveWidget(const std::map<QString, std::unique_ptr<Kasten::StructureDefinitionFile>>& structureDefs,
+namespace Kasten {
+
+StructureAddRemoveWidget::StructureAddRemoveWidget(const std::map<QString, std::unique_ptr<StructureDefinitionFile>>& structureDefs,
                                                    const StructureEnabledList& enabledList,
                                                    QWidget* parent)
     : QWidget(parent)
@@ -99,7 +101,7 @@ StructureAddRemoveWidget::StructureAddRemoveWidget(const std::map<QString, std::
             if (it == structureDefs.end()) {
                 continue;
             }
-            const std::unique_ptr<Kasten::StructureDefinitionFile>& def = it->second;
+            const std::unique_ptr<StructureDefinitionFile>& def = it->second;
             const auto structureNames = def->structureNames();
             const bool isOnlyOne = (structureNames.size() == 1);
             for (const QString& structure : structureNames) {
@@ -131,7 +133,7 @@ QStringList StructureAddRemoveWidget::values() const
     return enabledStructures;
 }
 
-void StructureAddRemoveWidget::buildAvailableList(const std::map<QString, std::unique_ptr<Kasten::StructureDefinitionFile>>& structureDefs,
+void StructureAddRemoveWidget::buildAvailableList(const std::map<QString, std::unique_ptr<StructureDefinitionFile>>& structureDefs,
                                                   const StructureEnabledList& enabledList)
 {
     QList<QTreeWidgetItem*> availableItems;
@@ -223,6 +225,8 @@ void StructureAddRemoveWidget::moveDown()
     if (firstIndex != -1) {
         mTreeSelected->setCurrentItem(mTreeSelected->topLevelItem(firstIndex));
     }
+}
+
 }
 
 #include "moc_structureaddremovewidget.cpp"

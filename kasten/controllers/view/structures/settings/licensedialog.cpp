@@ -19,6 +19,7 @@
 // Std
 #include <cmath>
 
+namespace Kasten {
 
 LicenseDialog::LicenseDialog(const KAboutLicense& license, QWidget* parent)
     : QDialog(parent)
@@ -53,6 +54,8 @@ LicenseDialog::LicenseDialog(const KAboutLicense& license, QWidget* parent)
     const int someDialogHeight = metrics.height() * 30;
 
     resize(sizeHint().expandedTo(QSize(idealDialogWidth, someDialogHeight)));
+}
+
 }
 
 #include "moc_licensedialog.cpp"

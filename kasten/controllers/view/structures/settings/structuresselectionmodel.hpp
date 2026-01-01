@@ -4,8 +4,8 @@
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
-#ifndef STRUCTURESSELECTIONMODEL_HPP
-#define STRUCTURESSELECTIONMODEL_HPP
+#ifndef KASTEN_STRUCTURESSELECTIONMODEL_HPP
+#define KASTEN_STRUCTURESSELECTIONMODEL_HPP
 
 // tool
 #include "structureenabledlist.hpp"
@@ -18,8 +18,9 @@
 #include <vector>
 
 namespace Kasten {
+
 class StructureDefinitionFile;
-}
+
 class StructuresSelectionModel : public QAbstractListModel
 {
     Q_OBJECT
@@ -43,7 +44,7 @@ public:
     int rowCount(const QModelIndex& parent = QModelIndex()) const override;
 
 public:
-    void setStructures(const std::map<QString, std::unique_ptr<Kasten::StructureDefinitionFile>>& structureDefs);
+    void setStructures(const std::map<QString, std::unique_ptr<StructureDefinitionFile>>& structureDefs);
     void setEnabledStructures(const QStringList& enabledStructures);
     [[nodiscard]]
     QStringList enabledStructures() const;
@@ -57,5 +58,7 @@ private:
     std::vector<StructureMetaData> m_metaDataList;
     StructureEnabledList m_enabledList;
 };
+
+}
 
 #endif

@@ -17,6 +17,8 @@
 #include <unordered_map>
 #include <algorithm>
 
+namespace Kasten {
+
 StructuresSelectionModel::StructuresSelectionModel(QObject* parent)
     : QAbstractListModel(parent)
 {
@@ -24,7 +26,7 @@ StructuresSelectionModel::StructuresSelectionModel(QObject* parent)
 
 StructuresSelectionModel::~StructuresSelectionModel() = default;
 
-void StructuresSelectionModel::setStructures(const std::map<QString, std::unique_ptr<Kasten::StructureDefinitionFile>>& structureDefs)
+void StructuresSelectionModel::setStructures(const std::map<QString, std::unique_ptr<StructureDefinitionFile>>& structureDefs)
 {
     // KCategorizedView at least with KF 5.95 fails to handle replacement in one go
     // so split up
@@ -142,6 +144,8 @@ int StructuresSelectionModel::rowCount(const QModelIndex& parent) const
     }
 
     return 0;
+}
+
 }
 
 #include "moc_structuresselectionmodel.cpp"

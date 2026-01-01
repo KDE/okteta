@@ -13,16 +13,17 @@
 // Qt
 #include <QWidget>
 
-class StructuresSelector;
-class QPushButton;
-
 namespace KNSWidgets {
 class Button;
 }
+
+class QPushButton;
+
 namespace Kasten {
+
 class StructuresManager;
+class StructuresSelector;
 class StructuresTool;
-}
 
 class StructuresManagerView : public QWidget
 {
@@ -30,7 +31,7 @@ class StructuresManagerView : public QWidget
     Q_PROPERTY(QStringList values READ values WRITE setValues NOTIFY changed USER true)
 
 public:
-    explicit StructuresManagerView(Kasten::StructuresTool* tool, QWidget* parent = nullptr);
+    explicit StructuresManagerView(StructuresTool* tool, QWidget* parent = nullptr);
 
     ~StructuresManagerView() override;
 
@@ -50,11 +51,13 @@ private Q_SLOTS:
     void setEnabledStructures(const QStringList& enabledStructures);
 
 private:
-    Kasten::StructuresTool* const mTool;
+    StructuresTool* const mTool;
 
     KNSWidgets::Button* mGetNewStructuresButton;
     QPushButton* mAdvancedSelectionButton;
     StructuresSelector* mStructuresSelector = nullptr;
 };
+
+}
 
 #endif

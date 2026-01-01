@@ -14,6 +14,8 @@ namespace {
 inline QString wildCard() { return QStringLiteral("*"); }
 }
 
+namespace Kasten {
+
 void StructureEnabledList::setEnabledStructures(const QStringList& enabledStructures)
 {
     m_enabledList.clear();
@@ -83,4 +85,6 @@ QStringList StructureEnabledList::toQStringList() const
         }
     }
     return enabledStructures;
+}
+
 }

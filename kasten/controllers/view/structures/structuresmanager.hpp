@@ -15,9 +15,10 @@
 #include <map>
 #include <memory>
 
-class StructureMetaData;
 
 namespace Kasten {
+
+class StructureMetaData;
 
 class StructuresManager
 {

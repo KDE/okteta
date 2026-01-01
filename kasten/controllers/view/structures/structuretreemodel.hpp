@@ -14,6 +14,7 @@ class DataInformationBase;
 class DataInformation;
 
 namespace Kasten {
+
 class StructuresTool;
 
 class StructureTreeModel : public QAbstractItemModel

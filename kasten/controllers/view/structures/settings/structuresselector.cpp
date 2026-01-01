@@ -18,6 +18,8 @@
 #include <QLineEdit>
 #include <QVBoxLayout>
 
+namespace Kasten {
+
 StructuresSelector::StructuresSelector(QWidget* parent)
     : QWidget(parent)
 {
@@ -68,7 +70,7 @@ StructuresSelector::~StructuresSelector()
     delete m_listView;
 }
 
-void StructuresSelector::setStructures(const std::map<QString, std::unique_ptr<Kasten::StructureDefinitionFile>>& structureDefs)
+void StructuresSelector::setStructures(const std::map<QString, std::unique_ptr<StructureDefinitionFile>>& structureDefs)
 {
     m_structuresModel->setStructures(structureDefs);
     m_soirtFilterProxyModel->sort(0);
@@ -87,6 +89,8 @@ QStringList StructuresSelector::enabledStructures() const
 const StructureEnabledList& StructuresSelector::enabledList() const
 {
     return m_structuresModel->enabledList();
+}
+
 }
 
 #include "moc_structuresselector.cpp"

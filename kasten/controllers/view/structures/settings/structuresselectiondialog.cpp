@@ -16,7 +16,9 @@
 #include <QDialogButtonBox>
 #include <QVBoxLayout>
 
-StructuresSelectionDialog::StructuresSelectionDialog(const std::map<QString, std::unique_ptr<Kasten::StructureDefinitionFile>>& structureDefs,
+namespace Kasten {
+
+StructuresSelectionDialog::StructuresSelectionDialog(const std::map<QString, std::unique_ptr<StructureDefinitionFile>>& structureDefs,
                                                      const StructureEnabledList& enabledList,
                                                      QWidget* parent)
     : QDialog(parent)
@@ -53,6 +55,8 @@ void StructuresSelectionDialog::onFinished(int result)
     qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "selected " << enabledStructures;
 
     Q_EMIT structuresAccepted(enabledStructures);
+}
+
 }
 
 #include "moc_structuresselectiondialog.cpp"

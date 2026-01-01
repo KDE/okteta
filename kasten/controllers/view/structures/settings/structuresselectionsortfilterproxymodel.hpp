@@ -4,14 +4,15 @@
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
-#ifndef STRUCTURESSELECTIONSORTFILTERPROXYMODEL_HPP
-#define STRUCTURESSELECTIONSORTFILTERPROXYMODEL_HPP
+#ifndef KASTEN_STRUCTURESSELECTIONSORTFILTERPROXYMODEL_HPP
+#define KASTEN_STRUCTURESSELECTIONSORTFILTERPROXYMODEL_HPP
 
 // KF
 #include <KCategorizedSortFilterProxyModel>
 // Qt
 #include <QCollator>
 
+namespace Kasten {
 
 class StructuresSelectionSortFilterProxyModel : public KCategorizedSortFilterProxyModel
 {
@@ -34,5 +35,7 @@ private:
     QCollator m_collator;
     QString m_filterString;
 };
+
+}
 
 #endif

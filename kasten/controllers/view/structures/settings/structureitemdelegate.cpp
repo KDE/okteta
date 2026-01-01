@@ -23,6 +23,7 @@
 // Std
 #include <algorithm>
 
+namespace {
 static QFont nameFont(const QFont& font)
 {
     QFont nameFont(font);
@@ -30,6 +31,9 @@ static QFont nameFont(const QFont& font)
 
     return nameFont;
 }
+}
+
+namespace Kasten {
 
 StructureItemDelegate::StructureItemDelegate(QAbstractItemView* itemView, QObject* parent)
     : KWidgetItemDelegate(itemView, parent)
@@ -261,6 +265,8 @@ void StructureItemDelegate::handleCheckClicked(bool checked)
     auto* const model = const_cast<QAbstractItemModel *>(index.model());
 
     model->setData(index, checked, Qt::CheckStateRole);
+}
+
 }
 
 #include "moc_structureitemdelegate.cpp"

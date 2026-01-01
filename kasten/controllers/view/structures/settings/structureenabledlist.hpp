@@ -4,8 +4,8 @@
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
-#ifndef STRUCTUREENABLEDLIST_HPP
-#define STRUCTUREENABLEDLIST_HPP
+#ifndef KASTEN_STRUCTUREENABLEDLIST_HPP
+#define KASTEN_STRUCTUREENABLEDLIST_HPP
 
 // Qt
 #include <QString>
@@ -14,6 +14,8 @@
 #include <vector>
 
 class QStringList;
+
+namespace Kasten {
 
 class StructureEnabledData
 {
@@ -80,6 +82,8 @@ inline std::vector<StructureEnabledData>::const_iterator StructureEnabledList::b
 inline std::vector<StructureEnabledData>::const_iterator StructureEnabledList::end() const
 {
     return m_enabledList.end();
+}
+
 }
 
 #endif

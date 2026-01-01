@@ -14,6 +14,8 @@
 
 class KConfigSkeletonItem;
 
+namespace Kasten {
+
 class StructureViewSettingsWidget : public QWidget
 {
     Q_OBJECT
@@ -35,5 +37,7 @@ private Q_SLOTS:
 private:
     Ui_StructureViewSettingsWidget ui;
 };
+
+}
 
 #endif

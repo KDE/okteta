@@ -24,7 +24,9 @@
 #include <QVBoxLayout>
 #include <QSizePolicy>
 
-StructuresManagerView::StructuresManagerView(Kasten::StructuresTool* tool, QWidget* parent)
+namespace Kasten {
+
+StructuresManagerView::StructuresManagerView(StructuresTool* tool, QWidget* parent)
     : QWidget(parent)
     , mTool(tool)
 {
@@ -100,6 +102,8 @@ void StructuresManagerView::advancedSelection()
 void StructuresManagerView::setEnabledStructures(const QStringList& enabledStructures)
 {
     mStructuresSelector->setEnabledStructures(enabledStructures);;
+}
+
 }
 
 #include "moc_structuresmanagerview.cpp"

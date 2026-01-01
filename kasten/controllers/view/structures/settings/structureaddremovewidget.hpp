@@ -18,8 +18,8 @@ class QLabel;
 class QTreeWidget;
 
 namespace Kasten {
+
 class StructureDefinitionFile;
-}
 class StructureEnabledList;
 
 class StructureAddRemoveWidget : public QWidget
@@ -27,7 +27,7 @@ class StructureAddRemoveWidget : public QWidget
     Q_OBJECT
 
 public:
-    explicit StructureAddRemoveWidget(const std::map<QString, std::unique_ptr<Kasten::StructureDefinitionFile>>& structureDefs,
+    explicit StructureAddRemoveWidget(const std::map<QString, std::unique_ptr<StructureDefinitionFile>>& structureDefs,
                                       const StructureEnabledList& enabledList, QWidget* parent = nullptr);
     ~StructureAddRemoveWidget() override;
 
@@ -42,7 +42,7 @@ private Q_SLOTS:
     void moveDown();
 
 private:
-    void buildAvailableList(const std::map<QString, std::unique_ptr<Kasten::StructureDefinitionFile>>& structureDefs,
+    void buildAvailableList(const std::map<QString, std::unique_ptr<StructureDefinitionFile>>& structureDefs,
                             const StructureEnabledList& enabledList);
     void appendEnabledStructureItem(const QString& id, const QString& structure, bool isOnlyOne);
 
@@ -59,5 +59,7 @@ private:
     QPushButton* mUpButton;
     QPushButton* mDownButton;
 };
+
+}
 
 #endif // KASTEN_STRUCTUREADDREMOVEWIDGET_HPP

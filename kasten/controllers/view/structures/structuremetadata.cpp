@@ -15,6 +15,8 @@
 // Qt
 #include <QSharedData>
 
+namespace Kasten {
+
 class StructureMetaDataPrivate : public QSharedData
 {
 public:
@@ -159,4 +161,6 @@ QString StructureMetaData::entryPath() const
 const KAboutLicense& StructureMetaData::license() const
 {
     return d->license;
+}
+
 }

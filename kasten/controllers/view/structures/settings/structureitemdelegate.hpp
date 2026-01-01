@@ -4,14 +4,16 @@
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
-#ifndef STRUCTUREITEMDELEGATE_HPP
-#define STRUCTUREITEMDELEGATE_HPP
+#ifndef KASTEN_STRUCTUREITEMDELEGATE_HPP
+#define KASTEN_STRUCTUREITEMDELEGATE_HPP
 
 // KF
 #include <KWidgetItemDelegate>
 
 class QCheckBox;
 class QPushButton;
+
+namespace Kasten {
 
 class StructureItemDelegate : public KWidgetItemDelegate
 {
@@ -50,5 +52,7 @@ private:
     std::unique_ptr<QCheckBox> m_sampleCheckBox;
     std::unique_ptr<QPushButton> m_sampleAboutButton;
 };
+
+}
 
 #endif

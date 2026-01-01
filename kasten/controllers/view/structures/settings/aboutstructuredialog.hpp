@@ -4,13 +4,15 @@
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
-#ifndef ABOUTSTRUCTUREDIALOG_HPP
-#define ABOUTSTRUCTUREDIALOG_HPP
+#ifndef KASTEN_ABOUTSTRUCTUREDIALOG_HPP
+#define KASTEN_ABOUTSTRUCTUREDIALOG_HPP
 
 // tool
 #include <structuremetadata.hpp>
 // Qt
 #include <QDialog>
+
+namespace Kasten {
 
 class AboutStructureDialog : public QDialog
 {
@@ -26,5 +28,7 @@ private:
 private:
     const StructureMetaData m_structureMetaData;
 };
+
+}
 
 #endif

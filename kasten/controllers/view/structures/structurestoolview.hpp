@@ -13,6 +13,7 @@
 #include <memory>
 
 namespace Kasten {
+
 class StructureView;
 class StructuresTool;
 

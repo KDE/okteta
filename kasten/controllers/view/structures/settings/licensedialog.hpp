@@ -4,13 +4,15 @@
     SPDX-License-Identifier: LGPL-2.1-only OR LGPL-3.0-only OR LicenseRef-KDE-Accepted-LGPL
 */
 
-#ifndef LICENSEDIALOG_HPP
-#define LICENSEDIALOG_HPP
+#ifndef KASTEN_LICENSEDIALOG_HPP
+#define KASTEN_LICENSEDIALOG_HPP
 
 // Qt
 #include <QDialog>
 
 class KAboutLicense;
+
+namespace Kasten {
 
 class LicenseDialog : public QDialog
 {
@@ -19,5 +21,7 @@ class LicenseDialog : public QDialog
 public:
     LicenseDialog(const KAboutLicense& license, QWidget* parent);
 };
+
+}
 
 #endif

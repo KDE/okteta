@@ -9,6 +9,8 @@
 // tool
 #include "structuresselectionmodel.hpp"
 
+namespace Kasten {
+
 StructuresSelectionSortFilterProxyModel::StructuresSelectionSortFilterProxyModel(QObject* parent)
     : KCategorizedSortFilterProxyModel(parent)
 {
@@ -59,4 +61,6 @@ bool StructuresSelectionSortFilterProxyModel::subSortLessThan(const QModelIndex&
     const int difference = m_collator.compare(leftName, rightName);
 
     return (difference < 0);
+}
+
 }

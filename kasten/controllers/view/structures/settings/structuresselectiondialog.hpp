@@ -14,19 +14,20 @@
 #include <map>
 #include <memory>
 
+class QStringList;
+
 namespace Kasten {
+
 class StructureDefinitionFile;
-}
 class StructureAddRemoveWidget;
 class StructureEnabledList;
-class QStringList;
 
 class StructuresSelectionDialog : public QDialog
 {
     Q_OBJECT
 
 public:
-    explicit StructuresSelectionDialog(const std::map<QString, std::unique_ptr<Kasten::StructureDefinitionFile>>& structureDefs,
+    explicit StructuresSelectionDialog(const std::map<QString, std::unique_ptr<StructureDefinitionFile>>& structureDefs,
                                        const StructureEnabledList& enabledList,
                                        QWidget* parent = nullptr);
 
@@ -40,5 +41,6 @@ private:
     StructureAddRemoveWidget* m_structureAddRemoveWidget;
 };
 
-#endif
+}
 
+#endif
