@@ -34,7 +34,6 @@ OktetaPartFactory::OktetaPartFactory()
     , mModelCodecViewManager(std::make_unique<Kasten::ModelCodecViewManager>())
     , mModelCodecManager(std::make_unique<Kasten::ModelCodecManager>())
 {
-
     auto streamEncoderList = Kasten::ByteArrayStreamEncoderFactory::createStreamEncoders();
 
     auto dataGeneratorList = Kasten::ByteArrayDataGeneratorFactory::createDataGenerators();

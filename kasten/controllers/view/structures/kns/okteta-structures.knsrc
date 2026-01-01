@@ -2,5 +2,5 @@
 ProvidersUrl=https://autoconfig.kde.org/ocs/providers.xml
 ContentWarning=Executables
 Categories=Okteta Structure Definition
-Uncompress=archive
+Uncompress=always
 TargetDir=okteta/structures
