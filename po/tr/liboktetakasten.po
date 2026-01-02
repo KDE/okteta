@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdesdk-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-31 02:21+0000\n"
+"POT-Creation-Date: 2026-01-02 02:21+0000\n"
 "PO-Revision-Date: 2025-08-31 17:45+0300\n"
 "Last-Translator: Emir SARI <emir_sari@îcloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
@@ -2253,31 +2253,31 @@ msgctxt "@title:column"
 msgid "Message"
 msgstr "İleti"
 
-#: controllers/view/structures/settings/aboutstructuredialog.cpp:34
+#: controllers/view/structures/settings/aboutstructuredialog.cpp:35
 #, kde-format
 msgctxt "@title:window"
 msgid "About %1"
 msgstr "%1 Hakkında"
 
-#: controllers/view/structures/settings/aboutstructuredialog.cpp:42
+#: controllers/view/structures/settings/aboutstructuredialog.cpp:43
 #, kde-format
 msgctxt "Version version-number"
 msgid "Version %1"
 msgstr "Sürüm %1"
 
-#: controllers/view/structures/settings/aboutstructuredialog.cpp:79
-#: controllers/view/structures/settings/aboutstructuredialog.cpp:84
+#: controllers/view/structures/settings/aboutstructuredialog.cpp:80
+#: controllers/view/structures/settings/aboutstructuredialog.cpp:85
 #, kde-format
 msgid "License: %1"
 msgstr "Lisans: %1"
 
-#: controllers/view/structures/settings/aboutstructuredialog.cpp:90
+#: controllers/view/structures/settings/aboutstructuredialog.cpp:91
 #, kde-format
 msgctxt "@title:tab"
 msgid "About"
 msgstr "Hakkında"
 
-#: controllers/view/structures/settings/aboutstructuredialog.cpp:105
+#: controllers/view/structures/settings/aboutstructuredialog.cpp:106
 #, kde-format
 msgctxt "@info:tooltip Send an email to the author"
 msgid ""
@@ -2287,65 +2287,65 @@ msgstr ""
 "Yazara e-posta gönder\n"
 "%1"
 
-#: controllers/view/structures/settings/aboutstructuredialog.cpp:114
+#: controllers/view/structures/settings/aboutstructuredialog.cpp:115
 #, kde-format
 msgctxt "@title:tab"
 msgid "Author"
 msgstr "Yazar"
 
-#: controllers/view/structures/settings/licensedialog.cpp:27
+#: controllers/view/structures/settings/licensedialog.cpp:28
 #, kde-format
 msgctxt "@title:window"
 msgid "License Agreement"
 msgstr "Lisans Antlaşması"
 
-#: controllers/view/structures/settings/structureaddremovewidget.cpp:46
+#: controllers/view/structures/settings/structureaddremovewidget.cpp:48
 #, kde-format
 msgctxt "@info:label"
 msgid "Installed structures:"
 msgstr "Kurulu yapılar:"
 
-#: controllers/view/structures/settings/structureaddremovewidget.cpp:56
+#: controllers/view/structures/settings/structureaddremovewidget.cpp:58
 #, kde-format
 msgctxt "@info:label"
 msgid "Used structures:"
 msgstr "Kullanılan yapılar:"
 
-#: controllers/view/structures/settings/structureitemdelegate.cpp:113
+#: controllers/view/structures/settings/structureitemdelegate.cpp:117
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "About"
 msgstr "Hakkında"
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:46
+#: controllers/view/structures/settings/structuresmanagerview.cpp:48
 #, kde-format
 msgctxt "@action:button"
 msgid "Advanced Selection…"
 msgstr "Gelişmiş Seçim…"
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:50
+#: controllers/view/structures/settings/structuresmanagerview.cpp:52
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Structures…"
 msgstr "Yeni Yapıları Al…"
 
-#: controllers/view/structures/settings/structuresselectiondialog.cpp:26
+#: controllers/view/structures/settings/structuresselectiondialog.cpp:28
 #, kde-format
 msgctxt "@title:window"
 msgid "Advanced Structures Selection"
 msgstr "Gelişmiş Yapılar Seçimi…"
 
-#: controllers/view/structures/settings/structuresselectionmodel.cpp:104
+#: controllers/view/structures/settings/structuresselectionmodel.cpp:106
 #, kde-format
 msgid "Dynamic Structure Definitions"
 msgstr "Devingen Yapı Tanımları"
 
-#: controllers/view/structures/settings/structuresselectionmodel.cpp:106
+#: controllers/view/structures/settings/structuresselectionmodel.cpp:108
 #, kde-format
 msgid "Structure Definitions"
 msgstr "Yapı Tanımlamaları"
 
-#: controllers/view/structures/settings/structuresselector.cpp:38
+#: controllers/view/structures/settings/structuresselector.cpp:40
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Search…"
@@ -2448,25 +2448,25 @@ msgctxt "@item:inlistbox"
 msgid "Little endian"
 msgstr "Küçük son haneli"
 
-#: controllers/view/structures/settings/structureviewsettingswidget.cpp:48
+#: controllers/view/structures/settings/structureviewsettingswidget.cpp:50
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Binary"
 msgstr "İkili"
 
-#: controllers/view/structures/settings/structureviewsettingswidget.cpp:49
+#: controllers/view/structures/settings/structureviewsettingswidget.cpp:51
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Octal"
 msgstr "Sekizli"
 
-#: controllers/view/structures/settings/structureviewsettingswidget.cpp:50
+#: controllers/view/structures/settings/structureviewsettingswidget.cpp:52
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Decimal"
 msgstr "Ondalık"
 
-#: controllers/view/structures/settings/structureviewsettingswidget.cpp:51
+#: controllers/view/structures/settings/structureviewsettingswidget.cpp:53
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Hexadecimal"

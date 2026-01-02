@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-31 02:21+0000\n"
+"POT-Creation-Date: 2026-01-02 02:21+0000\n"
 "PO-Revision-Date: 2025-09-01 18:53+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -2304,31 +2304,31 @@ msgctxt "@title:column"
 msgid "Message"
 msgstr "Message"
 
-#: controllers/view/structures/settings/aboutstructuredialog.cpp:34
+#: controllers/view/structures/settings/aboutstructuredialog.cpp:35
 #, kde-format
 msgctxt "@title:window"
 msgid "About %1"
 msgstr "À propos de %1"
 
-#: controllers/view/structures/settings/aboutstructuredialog.cpp:42
+#: controllers/view/structures/settings/aboutstructuredialog.cpp:43
 #, kde-format
 msgctxt "Version version-number"
 msgid "Version %1"
 msgstr "Version %1"
 
-#: controllers/view/structures/settings/aboutstructuredialog.cpp:79
-#: controllers/view/structures/settings/aboutstructuredialog.cpp:84
+#: controllers/view/structures/settings/aboutstructuredialog.cpp:80
+#: controllers/view/structures/settings/aboutstructuredialog.cpp:85
 #, kde-format
 msgid "License: %1"
 msgstr "Licence : %1"
 
-#: controllers/view/structures/settings/aboutstructuredialog.cpp:90
+#: controllers/view/structures/settings/aboutstructuredialog.cpp:91
 #, kde-format
 msgctxt "@title:tab"
 msgid "About"
 msgstr "À propos"
 
-#: controllers/view/structures/settings/aboutstructuredialog.cpp:105
+#: controllers/view/structures/settings/aboutstructuredialog.cpp:106
 #, kde-format
 msgctxt "@info:tooltip Send an email to the author"
 msgid ""
@@ -2338,65 +2338,65 @@ msgstr ""
 "Envoyer un courriel à l'auteur\n"
 "%1"
 
-#: controllers/view/structures/settings/aboutstructuredialog.cpp:114
+#: controllers/view/structures/settings/aboutstructuredialog.cpp:115
 #, kde-format
 msgctxt "@title:tab"
 msgid "Author"
 msgstr "Auteur"
 
-#: controllers/view/structures/settings/licensedialog.cpp:27
+#: controllers/view/structures/settings/licensedialog.cpp:28
 #, kde-format
 msgctxt "@title:window"
 msgid "License Agreement"
 msgstr "Accord de licence"
 
-#: controllers/view/structures/settings/structureaddremovewidget.cpp:46
+#: controllers/view/structures/settings/structureaddremovewidget.cpp:48
 #, kde-format
 msgctxt "@info:label"
 msgid "Installed structures:"
 msgstr "Structures installées :"
 
-#: controllers/view/structures/settings/structureaddremovewidget.cpp:56
+#: controllers/view/structures/settings/structureaddremovewidget.cpp:58
 #, kde-format
 msgctxt "@info:label"
 msgid "Used structures:"
 msgstr "Structures utilisées :"
 
-#: controllers/view/structures/settings/structureitemdelegate.cpp:113
+#: controllers/view/structures/settings/structureitemdelegate.cpp:117
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "About"
 msgstr "À propos"
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:46
+#: controllers/view/structures/settings/structuresmanagerview.cpp:48
 #, kde-format
 msgctxt "@action:button"
 msgid "Advanced Selection…"
 msgstr "Sélection avancée..."
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:50
+#: controllers/view/structures/settings/structuresmanagerview.cpp:52
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Structures…"
 msgstr "Obtenir de nouvelles structures..."
 
-#: controllers/view/structures/settings/structuresselectiondialog.cpp:26
+#: controllers/view/structures/settings/structuresselectiondialog.cpp:28
 #, kde-format
 msgctxt "@title:window"
 msgid "Advanced Structures Selection"
 msgstr "Sélection de structures avancée"
 
-#: controllers/view/structures/settings/structuresselectionmodel.cpp:104
+#: controllers/view/structures/settings/structuresselectionmodel.cpp:106
 #, kde-format
 msgid "Dynamic Structure Definitions"
 msgstr "Définitions de structures dynamiques"
 
-#: controllers/view/structures/settings/structuresselectionmodel.cpp:106
+#: controllers/view/structures/settings/structuresselectionmodel.cpp:108
 #, kde-format
 msgid "Structure Definitions"
 msgstr "Définitions de structures"
 
-#: controllers/view/structures/settings/structuresselector.cpp:38
+#: controllers/view/structures/settings/structuresselector.cpp:40
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Search…"
@@ -2506,25 +2506,25 @@ msgctxt "@item:inlistbox"
 msgid "Little endian"
 msgstr "Petit-boutiste"
 
-#: controllers/view/structures/settings/structureviewsettingswidget.cpp:48
+#: controllers/view/structures/settings/structureviewsettingswidget.cpp:50
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Binary"
 msgstr "Binaire"
 
-#: controllers/view/structures/settings/structureviewsettingswidget.cpp:49
+#: controllers/view/structures/settings/structureviewsettingswidget.cpp:51
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Octal"
 msgstr "Octal"
 
-#: controllers/view/structures/settings/structureviewsettingswidget.cpp:50
+#: controllers/view/structures/settings/structureviewsettingswidget.cpp:52
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Decimal"
 msgstr "Décimal"
 
-#: controllers/view/structures/settings/structureviewsettingswidget.cpp:51
+#: controllers/view/structures/settings/structureviewsettingswidget.cpp:53
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Hexadecimal"
