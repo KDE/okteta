@@ -50,7 +50,7 @@ public:
     bool isValid() const;
 
 private:
-    KPluginInfo mPluginInfo;
+    const KPluginInfo mPluginInfo;
     QScopedPointer<AbstractStructureParser> mParser;
 };
 
