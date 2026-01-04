@@ -30,15 +30,18 @@ private Q_SLOTS:
     void testOldUninstallation();
 
 private:
-    QString createTar(const QString& id,
-                      const QString metadataFileName, const QByteArray& metadataContent,
-                      const QString osdFileName, const QByteArray& osdFileContent);
-    QString createZip(const QString& id,
-                      const QString metadataFileName, const QByteArray& metadataContent,
-                      const QString osdFileName, const QByteArray& osdFileContent);
-    QString createDir(const QString& id,
-                      const QString metadataFileName, const QByteArray& metadataContent,
-                      const QString osdFileName, const QByteArray& osdFileContent);
+    void createTar(QString& path,
+                   const QString& id,
+                   const QString metadataFileName, const QByteArray& metadataContent,
+                   const QString osdFileName, const QByteArray& osdFileContent);
+    void createZip(QString& path,
+                   const QString& id,
+                   const QString metadataFileName, const QByteArray& metadataContent,
+                   const QString osdFileName, const QByteArray& osdFileContent);
+    void createDir(QString& path,
+                   const QString& id,
+                   const QString metadataFileName, const QByteArray& metadataContent,
+                   const QString osdFileName, const QByteArray& osdFileContent);
 
     void deploySubdirFiles(const QString& id,
                            const QString metadataFileName, const QByteArray& metadataContent,
@@ -73,67 +76,65 @@ const QByteArray osdFileContentTemplate = QByteArrayLiteral(
 );
 
 
-QString StructuresManagerTest::createTar(const QString& id,
-                                         const QString metadataFileName, const QByteArray& metadataContent,
-                                         const QString osdFileName, const QByteArray& osdFileContent)
+void StructuresManagerTest::createTar(QString& path,
+                                      const QString& id,
+                                      const QString metadataFileName, const QByteArray& metadataContent,
+                                      const QString osdFileName, const QByteArray& osdFileContent)
 {
     const QString name = id + QLatin1String(".tgz");
 
-    const QString path = m_temporaryDir.filePath(name);
+    path = m_temporaryDir.filePath(name);
 
     KTar archive(path);
 
-    archive.open(QIODevice::WriteOnly);
+    QVERIFY(archive.open(QIODevice::WriteOnly));
 
     archive.writeFile(metadataFileName, metadataContent);
     archive.writeFile(osdFileName, osdFileContent);
 
     archive.close();
-
-    return path;
 }
 
-QString StructuresManagerTest::createZip(const QString& id,
-                                         const QString metadataFileName, const QByteArray& metadataContent,
-                                         const QString osdFileName, const QByteArray& osdFileContent)
+void StructuresManagerTest::createZip(QString& path,
+                                      const QString& id,
+                                      const QString metadataFileName, const QByteArray& metadataContent,
+                                      const QString osdFileName, const QByteArray& osdFileContent)
 {
     const QString name = id + QLatin1String(".zip");
 
-    const QString path = m_temporaryDir.filePath(name);
+    path = m_temporaryDir.filePath(name);
 
     KZip archive(path);
 
-    archive.open(QIODevice::WriteOnly);
+    QVERIFY(archive.open(QIODevice::WriteOnly));
 
     archive.writeFile(metadataFileName, metadataContent);
     archive.writeFile(osdFileName, osdFileContent);
 
     archive.close();
-
-    return path;
 }
 
-QString StructuresManagerTest::createDir(const QString& id,
-                                         const QString metadataFileName, const QByteArray& metadataContent,
-                                         const QString osdFileName, const QByteArray& osdFileContent)
+void StructuresManagerTest::createDir(QString& path,
+                                      const QString& id,
+                                      const QString metadataFileName, const QByteArray& metadataContent,
+                                      const QString osdFileName, const QByteArray& osdFileContent)
 {
     const QString name = id;
 
     QDir parentDir(m_temporaryDir.path());
-    parentDir.mkdir(name);
-    const QString path = parentDir.absoluteFilePath(name);;
+    QVERIFY(parentDir.mkdir(name));
+    path = parentDir.absoluteFilePath(name);;
 
     QFile metadataFile(m_temporaryDir.filePath(metadataFileName));
-    metadataFile.open(QIODevice::WriteOnly);
+    QVERIFY(metadataFile.open(QIODevice::WriteOnly));
     metadataFile.write(metadataContent);
     metadataFile.close();
 
     QFile osdFile(m_temporaryDir.filePath(osdFileName));
-    osdFile.open(QIODevice::WriteOnly);
+    QVERIFY(osdFile.open(QIODevice::WriteOnly));
     osdFile.write(osdFileContent);
     osdFile.close();
-
-    return path;
+;
 }
 
 void StructuresManagerTest::deploySubdirFiles(const QString& id,
@@ -147,12 +148,12 @@ void StructuresManagerTest::deploySubdirFiles(const QString& id,
     const QString path = structuresRootDir.absoluteFilePath(name);;
 
     QFile metadataFile(structuresRootDir.filePath(metadataFileName));
-    metadataFile.open(QIODevice::WriteOnly);
+    QVERIFY(metadataFile.open(QIODevice::WriteOnly));
     metadataFile.write(metadataContent);
     metadataFile.close();
 
     QFile osdFile(structuresRootDir.filePath(osdFileName));
-    osdFile.open(QIODevice::WriteOnly);
+    QVERIFY(osdFile.open(QIODevice::WriteOnly));
     osdFile.write(osdFileContent);
     osdFile.close();
 }
@@ -164,12 +165,12 @@ void StructuresManagerTest::deployToplevelFiles(const QString metadataFileName, 
     structuresRootDir.mkpath(QStringLiteral("."));
 
     QFile metadataFile(structuresRootDir.filePath(metadataFileName));
-    metadataFile.open(QIODevice::WriteOnly);
+    QVERIFY(metadataFile.open(QIODevice::WriteOnly));
     metadataFile.write(metadataContent);
     metadataFile.close();
 
     QFile osdFile(structuresRootDir.filePath(osdFileName));
-    osdFile.open(QIODevice::WriteOnly);
+    QVERIFY(osdFile.open(QIODevice::WriteOnly));
     osdFile.write(osdFileContent);
     osdFile.close();
 }
@@ -193,7 +194,8 @@ void StructuresManagerTest::testInstallationRoundtrip_data()
         const QByteArray metadataContent = QByteArray(desktopFileContentTemplate).replace("%1", id.toLatin1());
         const QString osdFileName = id + QLatin1String("/main.osd");
 
-        const QString archivePath = createTar(id, metadataFileName, metadataContent, osdFileName, osdFileContentTemplate);
+        QString archivePath;
+        createTar(archivePath, id, metadataFileName, metadataContent, osdFileName, osdFileContentTemplate);
 
         QTest::newRow("tar-empty") << id << archivePath << true;
         QTest::newRow("tar-filled") << id << archivePath << false;
@@ -204,7 +206,8 @@ void StructuresManagerTest::testInstallationRoundtrip_data()
         const QByteArray metadataContent = QByteArray(desktopFileContentTemplate).replace("%1", id.toLatin1());
         const QString osdFileName = id + QLatin1Char('/') + id + QLatin1String(".osd");
 
-        const QString archivePath = createTar(id, metadataFileName, metadataContent, osdFileName, osdFileContentTemplate);
+        QString archivePath;
+        createTar(archivePath, id, metadataFileName, metadataContent, osdFileName, osdFileContentTemplate);
 
         QTest::newRow("oldtar-empty") << id << archivePath << true;
         QTest::newRow("oldtar-filled") << id << archivePath << false;
@@ -215,7 +218,8 @@ void StructuresManagerTest::testInstallationRoundtrip_data()
         const QByteArray metadataContent = QByteArray(desktopFileContentTemplate).replace("%1", id.toLatin1());
         const QString osdFileName = id + QLatin1String("/main.osd");
 
-        const QString archivePath = createZip(id, metadataFileName, metadataContent, osdFileName, osdFileContentTemplate);
+        QString archivePath;
+        createZip(archivePath, id, metadataFileName, metadataContent, osdFileName, osdFileContentTemplate);
 
         QTest::newRow("zip-empty") << id << archivePath << true;
         QTest::newRow("zip-filled") << id << archivePath << false;
@@ -226,7 +230,8 @@ void StructuresManagerTest::testInstallationRoundtrip_data()
         const QByteArray metadataContent = QByteArray(desktopFileContentTemplate).replace("%1", id.toLatin1());
         const QString osdFileName = id + QLatin1Char('/') + id + QLatin1String(".osd");
 
-        const QString archivePath = createZip(id, metadataFileName, metadataContent, osdFileName, osdFileContentTemplate);
+        QString archivePath;
+        createZip(archivePath, id, metadataFileName, metadataContent, osdFileName, osdFileContentTemplate);
 
         QTest::newRow("oldzip-empty") << id << archivePath << true;
         QTest::newRow("oldzip-filled") << id << archivePath << false;
@@ -237,7 +242,8 @@ void StructuresManagerTest::testInstallationRoundtrip_data()
         const QByteArray metadataContent = QByteArray(desktopFileContentTemplate).replace("%1", id.toLatin1());
         const QString osdFileName = id + QLatin1String("/main.osd");
 
-        const QString archivePath = createDir(id, metadataFileName, metadataContent, osdFileName, osdFileContentTemplate);
+        QString archivePath;
+        createDir(archivePath, id, metadataFileName, metadataContent, osdFileName, osdFileContentTemplate);
 
         QTest::newRow("dir-empty") << id << archivePath << true;
         QTest::newRow("dir-filled") << id << archivePath << false;
