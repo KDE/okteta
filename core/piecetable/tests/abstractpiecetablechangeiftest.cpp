@@ -58,7 +58,7 @@ void AbstractPieceTableChangeIfTest::testRevertApply()
 
     // do change which creates this
     changePieceTable(&pieceTable);
-    mPieceTableChange->revert(&pieceTable);
+    std::ignore = mPieceTableChange->revert(&pieceTable);
 
     QCOMPARE(pieceTable.size(), BaseSize);
     for (int i = 0; i < BaseSize; ++i) {
@@ -72,8 +72,8 @@ void AbstractPieceTableChangeIfTest::testRevertApply()
     }
 
     // now replay changes
-    mPieceTableChange->apply(&pieceTable);
-    mPieceTableChange->revert(&pieceTable);
+    std::ignore = mPieceTableChange->apply(&pieceTable);
+    std::ignore = mPieceTableChange->revert(&pieceTable);
 
     QCOMPARE(pieceTable.size(), BaseSize);
     for (Address i = 0; i < BaseSize; ++i) {
