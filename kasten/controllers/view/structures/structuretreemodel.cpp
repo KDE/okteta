@@ -168,7 +168,7 @@ QMimeData* StructureTreeModel::mimeData(const QModelIndexList& indexes) const
 
     const QModelIndex index = indexes.first();
 
-    auto* const item = index.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
+    const auto* const item = index.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
 
     auto mimeData = std::make_unique<QMimeData>();
 

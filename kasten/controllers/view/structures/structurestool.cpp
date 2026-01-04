@@ -418,7 +418,7 @@ void StructuresTool::lockStructure(const QModelIndex& idx)
     if (!mByteArrayModel || !idx.isValid()) {
         return;
     }
-    auto* const data = idx.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
+    const auto* const data = idx.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
     if (!data) {
         return;
     }
@@ -434,7 +434,7 @@ void StructuresTool::unlockStructure(const QModelIndex& idx)
     if (!mByteArrayModel || !idx.isValid()) {
         return;
     }
-    auto* const data = idx.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
+    const auto* const data = idx.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
     if (!data) {
         return;
     }
@@ -458,7 +458,7 @@ bool StructuresTool::isStructureLocked(const QModelIndex& idx) const
     if (!mByteArrayModel || !idx.isValid()) {
         return false;
     }
-    auto* const data = idx.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
+    const auto* const data = idx.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
     if (!data) {
         return false;
     }

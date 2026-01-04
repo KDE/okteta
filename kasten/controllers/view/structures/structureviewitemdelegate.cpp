@@ -41,7 +41,7 @@ void StructureViewItemDelegate::setModelData(QWidget* editor, QAbstractItemModel
     if (!index.isValid()) {
         return;
     }
-    auto* const data = index.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
+    const auto* const data = index.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
     if (!data) {
         return;
     }
