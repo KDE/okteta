@@ -15,10 +15,13 @@
 #include <map>
 #include <memory>
 
+class QUrl;
 
 namespace Kasten {
 
 class StructureMetaData;
+class StructureInstallJob;
+class StructureUninstallJob;
 
 class StructuresManager
 {
@@ -28,6 +31,12 @@ public:
 
 public:
     void reloadPaths();
+
+    [[nodiscard]]
+    StructureInstallJob* installStructureFromFile(const QUrl& structureFileUrl);
+
+    [[nodiscard]]
+    StructureUninstallJob* uninstallStructure(const QString& structureId);
 
 public:
     [[nodiscard]]
@@ -39,8 +48,14 @@ public:
     [[nodiscard]]
     StructureDefinitionFile* definition(const QString& pluginName) const;
 
+    [[nodiscard]]
+    static QStringList installableMimeTypes();
+
+    [[nodiscard]]
+    static QString userStructuresRootDir();
+
 private:
-    void addStructDef(const StructureMetaData& metaData);
+    void addStructDef(const StructureMetaData& metaData, StructureDefinitionFile::Location location);
 
 private:
     std::map<QString, std::unique_ptr<StructureDefinitionFile>> mDefs;

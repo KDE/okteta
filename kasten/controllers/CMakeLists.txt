@@ -19,6 +19,7 @@ okteta_add_library(Controllers NAMESPACE Okteta Kasten
         KF5::ItemViews
         KF5::Completion
         KF5::KIOCore
+        KF5::Archive
         Qt5::PrintSupport
         Qt5::Xml
 #         Qt5::Test # QAbstractItemModelTester
@@ -709,6 +710,8 @@ oktetakastencontrollers_sources(
         StructuresToolFactory
         StructuresToolViewFactory
     PRIVATE
+        StructureInstallJob
+        StructureUninstallJob
         StructuresManager
         StructuresTool
         StructureTreeModel

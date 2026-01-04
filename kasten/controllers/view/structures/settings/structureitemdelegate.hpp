@@ -28,12 +28,16 @@ public:
     [[nodiscard]]
     QSize sizeHint(const QStyleOptionViewItem& option, const QModelIndex& index) const override;
 
+Q_SIGNALS:
+    void uninstallStructureRequested(const QModelIndex& index);
+
 protected:
     [[nodiscard]]
     QList<QWidget*> createItemWidgets(const QModelIndex& index) const override;
     void updateItemWidgets(const QList<QWidget*> widgets, const QStyleOptionViewItem& option, const QPersistentModelIndex& index) const override;
 
 private Q_SLOTS:
+    void handleUninstallClicked();
     void handleAboutClicked();
     void handleCheckClicked(bool checked);
 
@@ -44,13 +48,15 @@ private:
     };
     void layoutItem(const QStyleOptionViewItem& option,
                     const QModelIndex& index,
-                    QRect* checkBoxRect, QRect* iconRect, QRect* textRect, QRect* aboutButtonRect,
+                    QRect* checkBoxRect, QRect* iconRect, QRect* textRect,
+                    QRect* aboutButtonRect, QRect* uninstallButtonRect,
+                    int* buttonHSpacing,
                     int* focusFrameHMarginToUpdate,
                     LayoutMode layoutMode) const;
 
 private:
     std::unique_ptr<QCheckBox> m_sampleCheckBox;
-    std::unique_ptr<QPushButton> m_sampleAboutButton;
+    std::unique_ptr<QPushButton> m_sampleButton;
 };
 
 }

@@ -28,7 +28,9 @@ class StructuresSelectionModel : public QAbstractListModel
 public:
     enum Roles {
         MetaDataRole = Qt::UserRole,
+        IdRole,
         CommentRole,
+        UninstallableRole,
     };
 
 public:

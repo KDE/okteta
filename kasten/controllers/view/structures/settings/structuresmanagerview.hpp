@@ -47,14 +47,21 @@ Q_SIGNALS:
 
 private Q_SLOTS:
     void onGetNewStructuresClicked(const QList<KNSCore::EntryInternal>& changedEntries);
+    void selectStructureFile();
+    void installStructureFromFile(const QUrl& url);
+    void uninstallStructure(const QString& id);
     void advancedSelection();
     void setEnabledStructures(const QStringList& enabledStructures);
+
+private:
+    void resetLoadedStructures();
 
 private:
     StructuresTool* const mTool;
 
     KNSWidgets::Button* mGetNewStructuresButton;
     QPushButton* mAdvancedSelectionButton;
+    QPushButton* m_installStructureButton;
     StructuresSelector* mStructuresSelector = nullptr;
 };
 

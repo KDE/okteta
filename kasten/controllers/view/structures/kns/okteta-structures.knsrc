@@ -4,3 +4,4 @@ ContentWarning=Executables
 Categories=Okteta Structure Definition
 Uncompress=always
 TargetDir=okteta/structures
+RemoveDeadEntries=true

@@ -88,6 +88,7 @@ find_package(Qt5 ${REQUIRED_QT_VERSION} CONFIG REQUIRED
 set(ADDITIONAL_REQUIRED_KF_COMPONENTS)
 if( BUILD_OKTETAKASTENLIBS )
     list(APPEND ADDITIONAL_REQUIRED_KF_COMPONENTS
+        Archive
         Bookmarks
         Completion
         ItemViews

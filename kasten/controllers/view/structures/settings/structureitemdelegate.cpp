@@ -38,9 +38,9 @@ namespace Kasten {
 StructureItemDelegate::StructureItemDelegate(QAbstractItemView* itemView, QObject* parent)
     : KWidgetItemDelegate(itemView, parent)
     , m_sampleCheckBox(new QCheckBox)
-    , m_sampleAboutButton(new QPushButton)
+    , m_sampleButton(new QPushButton)
 {
-    m_sampleAboutButton->setIcon(QIcon::fromTheme(QStringLiteral("configure"))); // only for getting size matters
+    m_sampleButton->setIcon(QIcon::fromTheme(QStringLiteral("configure"))); // only for getting size matters
 }
 
 StructureItemDelegate::~StructureItemDelegate() = default;
@@ -54,7 +54,7 @@ void StructureItemDelegate::paint(QPainter* painter, const QStyleOptionViewItem&
 
     QRect iconRect;
     QRect textRect;
-    layoutItem(option, index, nullptr, &iconRect, &textRect, nullptr, nullptr, LayoutForActualSize);
+    layoutItem(option, index, nullptr, &iconRect, &textRect, nullptr, nullptr, nullptr, nullptr, LayoutForActualSize);
 
     painter->save();
 
@@ -96,18 +96,18 @@ QSize StructureItemDelegate::sizeHint(const QStyleOptionViewItem& option, const 
     QRect iconRect;
     QRect textRect;
     QRect aboutButtonRect;
+    QRect uninstallButtonRect;
     int focusFrameHMargin;
-    layoutItem(option, index, &checkBoxRect, &iconRect, &textRect, &aboutButtonRect, &focusFrameHMargin, LayoutForSizeHint);
+    int buttonHSpacing;
+    layoutItem(option, index, &checkBoxRect, &iconRect, &textRect, &aboutButtonRect, &uninstallButtonRect, &buttonHSpacing, &focusFrameHMargin, LayoutForSizeHint);
 
-    const int width = checkBoxRect.width() + iconRect.width() + textRect.width() + aboutButtonRect.width() + 8 * focusFrameHMargin;
+    const int width = checkBoxRect.width() + iconRect.width() + textRect.width() + aboutButtonRect.width() + uninstallButtonRect.width() + buttonHSpacing + 8 * focusFrameHMargin;
     const int height = std::max(checkBoxRect.height(), std::max(iconRect.height(), std::max(textRect.height(), aboutButtonRect.height()))) + 2 * focusFrameHMargin;
     return {width, height};
 }
 
 QList<QWidget*> StructureItemDelegate::createItemWidgets(const QModelIndex& index) const
 {
-    Q_UNUSED(index)
-
     auto* const enabledCheckBox = new QCheckBox;
     connect(enabledCheckBox, &QAbstractButton::clicked,
             this, &StructureItemDelegate::handleCheckClicked);
@@ -118,6 +118,14 @@ QList<QWidget*> StructureItemDelegate::createItemWidgets(const QModelIndex& inde
     connect(aboutButton, &QAbstractButton::clicked,
             this, &StructureItemDelegate::handleAboutClicked);
 
+    auto* const uninstallButton = new QPushButton;
+    uninstallButton->setIcon(QIcon::fromTheme(QStringLiteral("edit-delete")));
+    const bool isUninstallable = index.data(StructuresSelectionModel::UninstallableRole).toBool();
+    uninstallButton->setToolTip(isUninstallable ? i18nc("@info:tooltip", "Uninstall") : i18nc("@info:tooltip", "Can not be uninstalled."));
+    uninstallButton->setEnabled(isUninstallable);
+    connect(uninstallButton, &QAbstractButton::clicked,
+            this, &StructureItemDelegate::handleUninstallClicked);
+
     const QList<QEvent::Type> blockedEventTypes {
         QEvent::MouseButtonPress,
         QEvent::MouseButtonRelease,
@@ -127,10 +135,12 @@ QList<QWidget*> StructureItemDelegate::createItemWidgets(const QModelIndex& inde
     };
     setBlockedEventTypes(enabledCheckBox, blockedEventTypes);
     setBlockedEventTypes(aboutButton, blockedEventTypes);
+    setBlockedEventTypes(uninstallButton, blockedEventTypes);
 
     const QList<QWidget*> widgetList {
         enabledCheckBox,
         aboutButton,
+        uninstallButton,
     };
 
     return widgetList;
@@ -142,7 +152,8 @@ void StructureItemDelegate::updateItemWidgets(const QList<QWidget*> widgets,
 {
     QRect checkBoxRect;
     QRect aboutButtonRect;
-    layoutItem(option, index, &checkBoxRect, nullptr, nullptr, &aboutButtonRect, nullptr, LayoutForActualSize);
+    QRect uninstallButtonRect;
+    layoutItem(option, index, &checkBoxRect, nullptr, nullptr, &aboutButtonRect, &uninstallButtonRect, nullptr, nullptr, LayoutForActualSize);
 
     // check box
     auto* const checkBox = static_cast<QCheckBox*>(widgets[0]);
@@ -154,9 +165,15 @@ void StructureItemDelegate::updateItemWidgets(const QList<QWidget*> widgets,
     aboutButton->resize(aboutButtonRect.size());
     aboutButton->move(aboutButtonRect.topLeft());
 
+    // uninstall button
+    auto* const uninstallButton = static_cast<QPushButton *>(widgets[2]);
+    uninstallButton->resize(uninstallButtonRect.size());
+    uninstallButton->move(uninstallButtonRect.topLeft());
+
     if (!index.isValid()) {
         checkBox->setVisible(false);
         aboutButton->setVisible(false);
+        uninstallButton->setVisible(false);
     } else {
         checkBox->setChecked(index.data(Qt::CheckStateRole).toBool());
     }
@@ -168,19 +185,25 @@ void StructureItemDelegate::layoutItem(const QStyleOptionViewItem& option,
                                        QRect* iconRectToUpdate,
                                        QRect* textRectToUpdate,
                                        QRect* aboutButtonRectToUpdate,
+                                       QRect* uninstallButtonRectToUpdate,
+                                       int* buttonHSpacingToUpdate,
                                        int* focusFrameHMarginToUpdate,
                                        LayoutMode layoutMode) const
 {
     const QWidget* const widget = option.widget;
     QStyle* const style = widget ? widget->style() : QApplication::style();
     // "+ 1" as used in QItemDelegate
+    const int buttonHSpacing = style->pixelMetric(QStyle::PM_LayoutHorizontalSpacing, &option, widget);
+    if (buttonHSpacingToUpdate) {
+        *buttonHSpacingToUpdate = buttonHSpacing;
+    }
     const int focusFrameHMargin = style->pixelMetric(QStyle::PM_FocusFrameHMargin, &option, widget) + 1;
     if (focusFrameHMarginToUpdate) {
         *focusFrameHMarginToUpdate = focusFrameHMargin;
     }
 
     const QSize checkBoxSize = m_sampleCheckBox->sizeHint();
-    const QSize aboutButtonSize = m_sampleAboutButton->sizeHint();
+    const QSize buttonSize = m_sampleButton->sizeHint();
     const int marginedTop = option.rect.top() + focusFrameHMargin;
     const int marginedHeight = option.rect.height() - 2 * focusFrameHMargin;
     // KWidgetItemDelegate::updateItemWidgets(...) docs say:
@@ -209,12 +232,22 @@ void StructureItemDelegate::layoutItem(const QStyleOptionViewItem& option,
         *iconRectToUpdate = iconRect;
     }
 
-    const int aboutButtonXOffset = option.rect.left() + ((option.direction == Qt::LeftToRight) ?
-        (option.rect.width() - aboutButtonSize.width() - focusFrameHMargin) :
-        focusFrameHMargin);
-    const int aboutButtonYOffset = marginedTop + (marginedHeight - aboutButtonSize.height()) / 2;
+    const int buttonYOffset = marginedTop + (marginedHeight - buttonSize.height()) / 2;
 
-    const QRect aboutButtonRect(QPoint(aboutButtonXOffset, aboutButtonYOffset), aboutButtonSize);
+    const int uninstallButtonXOffset = option.rect.left() + ((option.direction == Qt::LeftToRight) ?
+        (option.rect.width() - buttonSize.width() - focusFrameHMargin) :
+        focusFrameHMargin);
+
+    const QRect uninstallButtonRect(QPoint(uninstallButtonXOffset, buttonYOffset), buttonSize);
+    if (uninstallButtonRectToUpdate) {
+        *uninstallButtonRectToUpdate = uninstallButtonRect.translated(widgetTranslation);
+    }
+
+    const int aboutButtonXOffset = (option.direction == Qt::LeftToRight) ?
+        (uninstallButtonRect.left() - buttonSize.width() - buttonHSpacing) :
+        (uninstallButtonRect.right() + buttonHSpacing);
+
+    const QRect aboutButtonRect(QPoint(aboutButtonXOffset, buttonYOffset), buttonSize);
     if (aboutButtonRectToUpdate) {
         *aboutButtonRectToUpdate = aboutButtonRect.translated(widgetTranslation);
     }
@@ -253,6 +286,16 @@ void StructureItemDelegate::handleAboutClicked()
 
     auto* const aboutDialog = new AboutStructureDialog(metaData, itemView());
     aboutDialog->show();
+}
+
+void StructureItemDelegate::handleUninstallClicked()
+{
+    const QModelIndex index = focusedIndex();
+    if (!index.isValid()) {
+        return;
+    }
+
+    Q_EMIT uninstallStructureRequested(index);
 }
 
 void StructureItemDelegate::handleCheckClicked(bool checked)

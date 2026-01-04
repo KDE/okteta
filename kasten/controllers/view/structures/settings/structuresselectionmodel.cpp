@@ -8,6 +8,7 @@
 
 // tool
 #include <structuredefinitionfile.hpp>
+#include <structuresmanager.hpp>
 // KF
 #include <KCategorizedSortFilterProxyModel>
 #include <KLocalizedString>
@@ -101,6 +102,10 @@ QVariant StructuresSelectionModel::data(const QModelIndex &index, int role) cons
             return m_enabledList.isEnabled(metaData.id());
         case MetaDataRole:
             return QVariant::fromValue(metaData);
+        case IdRole:
+            return metaData.id();
+        case UninstallableRole:
+            return metaData.entryPath().startsWith(StructuresManager::userStructuresRootDir());
         case KCategorizedSortFilterProxyModel::CategoryDisplayRole:
             if (metaData.categoryId() == QLatin1String("structure/js")) {
                 return i18n("Dynamic Structure Definitions");

@@ -11,13 +11,19 @@
 #include "structuresselectiondialog.hpp"
 #include "structuresselector.hpp"
 #include <structuresmanager.hpp>
+#include <structureinstalljob.hpp>
+#include <structureuninstalljob.hpp>
 #include <structurestool.hpp>
 #include <structureslogging.hpp>
 // KF
 #include <KConfigDialogManager>
 #include <KLocalizedString>
 #include <KNSWidgets/Button>
+#include <KStandardGuiItem>
+#include <KMessageBox>
 // Qt
+#include <QApplication>
+#include <QFileDialog>
 #include <QPushButton>
 #include <QListWidgetItem>
 #include <QHBoxLayout>
@@ -37,6 +43,8 @@ StructuresManagerView::StructuresManagerView(StructuresTool* tool, QWidget* pare
     mStructuresSelector = new StructuresSelector(this);
     connect(mStructuresSelector, &StructuresSelector::enabledStructuresChanged,
             this, &StructuresManagerView::changed);
+    connect(mStructuresSelector, &StructuresSelector::uninstallStructureRequested,
+            this, &StructuresManagerView::uninstallStructure);
 
     pageLayout->addWidget(mStructuresSelector);
 
@@ -49,11 +57,19 @@ StructuresManagerView::StructuresManagerView(StructuresTool* tool, QWidget* pare
     connect(mAdvancedSelectionButton, &QPushButton::clicked, this, &StructuresManagerView::advancedSelection);
     buttonsLayout->addWidget(mAdvancedSelectionButton);
 
+    m_installStructureButton = new QPushButton(QIcon::fromTheme(QStringLiteral("document-import")), i18nc("@action:button", "Install from File…"), this);
+    connect(m_installStructureButton, &QPushButton::clicked, this, &StructuresManagerView::selectStructureFile);
+    buttonsLayout->addWidget(m_installStructureButton);
+
     mGetNewStructuresButton = new KNSWidgets::Button(i18nc("@action:button", "Get New Structures…"),
                                                      QStringLiteral("okteta-structures.knsrc"), this);
     connect(mGetNewStructuresButton, &KNSWidgets::Button::dialogFinished,
             this, &StructuresManagerView::onGetNewStructuresClicked);
     buttonsLayout->addWidget(mGetNewStructuresButton);
+
+    pageLayout->addLayout(buttonsLayout);
+
+    mStructuresSelector->setStructures(mTool->manager()->structureDefs());
 }
 
 StructuresManagerView::~StructuresManagerView() = default;
@@ -75,7 +91,76 @@ void StructuresManagerView::onGetNewStructuresClicked(const QList<KNSCore::Entry
     if (!changedEntries.isEmpty()) {
         qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES) << "installed structures changed ->  rebuilding list of installed structures";
         mTool->manager()->reloadPaths();
-        mStructuresSelector->setStructures(mTool->manager()->structureDefs());
+        resetLoadedStructures();
+    }
+}
+
+// TODO: also support DnD of urls onto list view
+void StructuresManagerView::selectStructureFile()
+{
+    auto* const dialog = new QFileDialog(QApplication::activeWindow());
+    dialog->setAttribute(Qt::WA_DeleteOnClose, true);
+    dialog->setFileMode(QFileDialog::ExistingFile);
+    dialog->setMimeTypeFilters(StructuresManager::installableMimeTypes());
+    connect(dialog, &QFileDialog::urlSelected, this, &StructuresManagerView::installStructureFromFile);
+    dialog->open();
+}
+
+void StructuresManagerView::installStructureFromFile(const QUrl& structureFileUrl)
+{
+    StructureInstallJob* const installJob = mTool->manager()->installStructureFromFile(structureFileUrl);
+
+    // TODO: make async
+    const bool success = installJob->exec();
+
+    if (success) {
+        resetLoadedStructures();
+    } else {
+        KMessageBox::error(this,
+            installJob->errorString(),
+            i18nc("@title:window", "Structure Installation"),
+            KMessageBox::Notify
+        );
+    }
+}
+
+void StructuresManagerView::uninstallStructure(const QString& id)
+{
+    StructureDefinitionFile* const definition = mTool->manager()->definition(id);
+
+    if (!definition) {
+        // TODO: warning, should not happen
+        return;
+    }
+
+    const QString structureName = definition->metaData().name();
+
+    const KGuiItem uninstallGuiItem(i18nc("@action:button", "Uninstall"), QStringLiteral("edit-delete"));
+
+    const int remove = KMessageBox::warningContinueCancel(this,
+        i18n("Do you want to uninstall \"%1\"?", structureName),
+        i18nc("@title:window", "Structure Uninstallation"),
+        uninstallGuiItem,KStandardGuiItem::cancel(),
+        QStringLiteral("warningUninstallStructure")
+    );
+
+    if (remove != KMessageBox::Continue) {
+        return;
+    }
+
+    StructureUninstallJob* const uninstallJob = mTool->manager()->uninstallStructure(id);
+
+    // TODO: make async
+    const bool success = uninstallJob->exec();
+
+    if (success) {
+        resetLoadedStructures();
+    } else {
+        KMessageBox::error(this,
+            uninstallJob->errorString(),
+            i18nc("@title:window", "Structure Uninstallation"),
+            KMessageBox::Notify
+        );
     }
 }
 
@@ -102,6 +187,11 @@ void StructuresManagerView::advancedSelection()
 void StructuresManagerView::setEnabledStructures(const QStringList& enabledStructures)
 {
     mStructuresSelector->setEnabledStructures(enabledStructures);;
+}
+
+void StructuresManagerView::resetLoadedStructures()
+{
+    mStructuresSelector->setStructures(mTool->manager()->structureDefs());
 }
 
 }

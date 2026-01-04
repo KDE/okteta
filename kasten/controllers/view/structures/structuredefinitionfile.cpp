@@ -21,20 +21,27 @@
 
 namespace Kasten {
 
-StructureDefinitionFile::StructureDefinitionFile(const StructureMetaData& metaData)
+StructureDefinitionFile::StructureDefinitionFile(const StructureMetaData& metaData, Location location)
     : mMetaData(metaData)
+    , m_location(location)
 {
-    const QFileInfo tmp(mMetaData.entryPath());
-    const QString absoluteDir = tmp.absolutePath();
+    const QString absoluteDir = mMetaData.entryPath();
 
     const QString categoryId = mMetaData.categoryId();
     if (categoryId == QLatin1String("structure/js")) {
         const QString filename = absoluteDir + QLatin1String("/main.js");
         mParser = std::make_unique<ScriptFileParser>(mMetaData.id(), filename);
     } else if (categoryId == QLatin1String("structure")) {
-        // by default use main.osd, only if it doesn't exist fall back to old behaviour
-        QString filename = absoluteDir + QLatin1String("/main.osd");
-        if (!QFile::exists(filename)) {
+        QString filename;
+        // by default in subdirs use main.osd, only if it doesn't exist fall back to old behaviour,
+        // for top-level dir files always assume old behaviour
+        if (m_location == Location::SubDir) {
+            filename = absoluteDir + QLatin1String("/main.osd");
+            if (!QFile::exists(filename)) {
+                filename.clear();
+            }
+        }
+        if (filename.isEmpty()) {
             filename = absoluteDir + QLatin1Char('/') + mMetaData.id() + QLatin1String(".osd");
         }
         mParser = std::make_unique<OsdParser>(mMetaData.id(), filename);
@@ -44,6 +51,11 @@ StructureDefinitionFile::StructureDefinitionFile(const StructureMetaData& metaDa
 }
 
 StructureDefinitionFile::~StructureDefinitionFile() = default;
+
+StructureDefinitionFile::Location StructureDefinitionFile::location() const
+{
+    return m_location;
+}
 
 StructureMetaData StructureDefinitionFile::metaData() const
 {

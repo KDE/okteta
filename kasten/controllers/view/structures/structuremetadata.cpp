@@ -14,6 +14,7 @@
 #include <KAboutData>
 // Qt
 #include <QSharedData>
+#include <QFileInfo>
 
 namespace Kasten {
 
@@ -56,7 +57,10 @@ StructureMetaData::StructureMetaData(const QString& filename)
         return;
     }
 
-    d->entryPath = filename;
+    const QFileInfo fileInfo(filename);
+    const QString absoluteDir = fileInfo.absolutePath();
+
+    d->entryPath = absoluteDir;
 
     d->name = file.readName();
     d->comment = file.readComment();

@@ -53,6 +53,8 @@ StructuresSelector::StructuresSelector(QWidget* parent)
     m_listView->setAlternatingRowColors(true);
 
     m_structureDelegate = new StructureItemDelegate(m_listView, this);
+    connect(m_structureDelegate, &StructureItemDelegate::uninstallStructureRequested,
+            this, &StructuresSelector::onUninstallStructureRequested);
     m_listView->setItemDelegate(m_structureDelegate);
 
     m_listView->setMouseTracking(true);
@@ -89,6 +91,17 @@ QStringList StructuresSelector::enabledStructures() const
 const StructureEnabledList& StructuresSelector::enabledList() const
 {
     return m_structuresModel->enabledList();
+}
+
+void StructuresSelector::onUninstallStructureRequested(const QModelIndex& index)
+{
+    const QString id = index.data(StructuresSelectionModel::IdRole).toString();
+
+    if (id.isEmpty()) {
+        return;
+    }
+
+    Q_EMIT uninstallStructureRequested(id);
 }
 
 }

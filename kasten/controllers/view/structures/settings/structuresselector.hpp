@@ -19,6 +19,7 @@ class KCategorizedView;
 class KCategoryDrawer;
 
 class QLineEdit;
+class QModelIndex;
 
 namespace Kasten {
 
@@ -48,6 +49,10 @@ public:
 
 Q_SIGNALS:
     void enabledStructuresChanged();
+    void uninstallStructureRequested(const QString& id);
+
+private Q_SLOTS:
+    void onUninstallStructureRequested(const QModelIndex& index);
 
 private:
     StructuresSelectionModel* m_structuresModel;

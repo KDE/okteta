@@ -31,12 +31,18 @@ namespace Kasten {
 class StructureDefinitionFile
 {
 public:
+    enum class Location {
+        ToplevelDir,
+        SubDir,
+    };
+
+public:
     /**
      * This class uses lazy parsing
      * @param info the information about this structure definition
      *      (passed by value so nothing bad can happen)
      */
-    explicit StructureDefinitionFile(const StructureMetaData& metaData);
+    explicit StructureDefinitionFile(const StructureMetaData& metaData, Location location);
     StructureDefinitionFile(const StructureDefinitionFile&) = delete;
     StructureDefinitionFile(StructureDefinitionFile&&) = delete;
 
@@ -56,9 +62,12 @@ public:
     StructureMetaData metaData() const;
     [[nodiscard]]
     bool isValid() const;
+    [[nodiscard]]
+    Location location() const;
 
 private:
     const StructureMetaData mMetaData;
+    const Location m_location;
     std::unique_ptr<AbstractStructureParser> mParser;
 };
 
