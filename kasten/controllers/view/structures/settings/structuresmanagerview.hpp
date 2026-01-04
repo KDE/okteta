@@ -48,7 +48,7 @@ Q_SIGNALS:
 private Q_SLOTS:
     void onGetNewStructuresClicked(const QList<KNSCore::EntryInternal>& changedEntries);
     void selectStructureFile();
-    void installStructureFromFile(const QUrl& url);
+    void installStructuresFromFiles(const QList<QUrl>& structureFileUrls);
     void uninstallStructure(const QString& id);
     void advancedSelection();
     void setEnabledStructures(const QStringList& enabledStructures);

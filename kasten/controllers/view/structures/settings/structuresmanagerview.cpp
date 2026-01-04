@@ -57,7 +57,7 @@ StructuresManagerView::StructuresManagerView(StructuresTool* tool, QWidget* pare
     connect(mAdvancedSelectionButton, &QPushButton::clicked, this, &StructuresManagerView::advancedSelection);
     buttonsLayout->addWidget(mAdvancedSelectionButton);
 
-    m_installStructureButton = new QPushButton(QIcon::fromTheme(QStringLiteral("document-import")), i18nc("@action:button", "Install from File…"), this);
+    m_installStructureButton = new QPushButton(QIcon::fromTheme(QStringLiteral("document-import")), i18nc("@action:button", "Install from File(s)…"), this);
     connect(m_installStructureButton, &QPushButton::clicked, this, &StructuresManagerView::selectStructureFile);
     buttonsLayout->addWidget(m_installStructureButton);
 
@@ -100,27 +100,34 @@ void StructuresManagerView::selectStructureFile()
 {
     auto* const dialog = new QFileDialog(QApplication::activeWindow());
     dialog->setAttribute(Qt::WA_DeleteOnClose, true);
-    dialog->setFileMode(QFileDialog::ExistingFile);
+    dialog->setFileMode(QFileDialog::ExistingFiles);
     dialog->setMimeTypeFilters(StructuresManager::installableMimeTypes());
-    connect(dialog, &QFileDialog::urlSelected, this, &StructuresManagerView::installStructureFromFile);
+    connect(dialog, &QFileDialog::urlsSelected, this, &StructuresManagerView::installStructuresFromFiles);
     dialog->open();
 }
 
-void StructuresManagerView::installStructureFromFile(const QUrl& structureFileUrl)
+void StructuresManagerView::installStructuresFromFiles(const QList<QUrl>& structureFileUrls)
 {
-    StructureInstallJob* const installJob = mTool->manager()->installStructureFromFile(structureFileUrl);
+    bool anySuccess = false;
+    for (const auto& structureFileUrl : structureFileUrls) {
+        StructureInstallJob* const installJob = mTool->manager()->installStructureFromFile(structureFileUrl);
 
-    // TODO: make async
-    const bool success = installJob->exec();
+        // TODO: make async
+        const bool success = installJob->exec();
 
-    if (success) {
+        if (success) {
+            // TODO: highlight and scroll to new structures or display a message about them
+            anySuccess = true;
+        } else {
+            KMessageBox::error(this,
+                xi18n("Installing from <filename>%1</filename> failed:\n\n%2", structureFileUrl.toDisplayString(QUrl::PreferLocalFile), installJob->errorString()),
+                i18nc("@title:window", "Structure Installation"),
+                KMessageBox::Notify
+            );
+        }
+    }
+    if (anySuccess) {
         resetLoadedStructures();
-    } else {
-        KMessageBox::error(this,
-            installJob->errorString(),
-            i18nc("@title:window", "Structure Installation"),
-            KMessageBox::Notify
-        );
     }
 }
 
