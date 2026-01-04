@@ -46,8 +46,6 @@ public:
     QVector<TopLevelDataInformation*> structures() const;
     QStringList structureNames() const;
     TopLevelDataInformation* structure(const QString& name) const;
-    /** @return the absolute path to the directory containing the .desktop file */
-    QString absolutePath() const;
     KPluginInfo pluginInfo() const;
     bool isValid() const;
 
