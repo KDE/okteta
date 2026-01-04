@@ -20,6 +20,7 @@ class KCategoryDrawer;
 
 class QLineEdit;
 class QModelIndex;
+class QMimeData;
 
 namespace Kasten {
 
@@ -50,6 +51,13 @@ public:
 Q_SIGNALS:
     void enabledStructuresChanged();
     void uninstallStructureRequested(const QString& id);
+    void dataOffered(const QMimeData* mimeData, bool& isAccepted);
+    void dataDropped(const QMimeData* mimeData);
+
+protected:
+    void dragEnterEvent(QDragEnterEvent* event) override;
+    void dragMoveEvent(QDragMoveEvent* event) override;
+    void dropEvent(QDropEvent* event) override;
 
 private Q_SLOTS:
     void onUninstallStructureRequested(const QModelIndex& index);

@@ -17,12 +17,16 @@
 // Qt
 #include <QLineEdit>
 #include <QVBoxLayout>
+#include <QDragEnterEvent>
+#include <QDragMoveEvent>
 
 namespace Kasten {
 
 StructuresSelector::StructuresSelector(QWidget* parent)
     : QWidget(parent)
 {
+    setAcceptDrops(true);
+
     auto* const layout = new QVBoxLayout(this);
     layout->setContentsMargins(0, 0, 0, 0);
 
@@ -102,6 +106,43 @@ void StructuresSelector::onUninstallStructureRequested(const QModelIndex& index)
     }
 
     Q_EMIT uninstallStructureRequested(id);
+}
+
+void StructuresSelector::dragEnterEvent(QDragEnterEvent* event)
+{
+    bool isAccepted = false;
+    const QMimeData* const mimeData = event->mimeData();
+
+    Q_EMIT dataOffered(mimeData, isAccepted);
+
+    if (isAccepted) {
+        event->setAccepted(true);
+        return;
+    }
+
+    QWidget::dragEnterEvent(event);
+}
+
+void StructuresSelector::dragMoveEvent(QDragMoveEvent* event)
+{
+    bool isAccepted = false;
+    const QMimeData* const mimeData = event->mimeData();
+
+    Q_EMIT dataOffered(mimeData, isAccepted);
+
+    if (isAccepted) {
+        event->setAccepted(true);
+        return;
+    }
+
+    QWidget::dragMoveEvent(event);
+}
+
+void StructuresSelector::dropEvent(QDropEvent* event)
+{
+    const QMimeData* const mimeData = event->mimeData();
+
+    Q_EMIT dataDropped(mimeData);
 }
 
 }

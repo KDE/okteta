@@ -29,6 +29,7 @@
 #include <QHBoxLayout>
 #include <QVBoxLayout>
 #include <QSizePolicy>
+#include <QMimeData>
 
 namespace Kasten {
 
@@ -45,6 +46,10 @@ StructuresManagerView::StructuresManagerView(StructuresTool* tool, QWidget* pare
             this, &StructuresManagerView::changed);
     connect(mStructuresSelector, &StructuresSelector::uninstallStructureRequested,
             this, &StructuresManagerView::uninstallStructure);
+    connect(mStructuresSelector, &StructuresSelector::dataOffered,
+            this, &StructuresManagerView::onDataOffered);
+    connect(mStructuresSelector, &StructuresSelector::dataDropped,
+            this, &StructuresManagerView::onDataDropped);
 
     pageLayout->addWidget(mStructuresSelector);
 
@@ -95,7 +100,6 @@ void StructuresManagerView::onGetNewStructuresClicked(const QList<KNSCore::Entry
     }
 }
 
-// TODO: also support DnD of urls onto list view
 void StructuresManagerView::selectStructureFile()
 {
     auto* const dialog = new QFileDialog(QApplication::activeWindow());
@@ -199,6 +203,18 @@ void StructuresManagerView::setEnabledStructures(const QStringList& enabledStruc
 void StructuresManagerView::resetLoadedStructures()
 {
     mStructuresSelector->setStructures(mTool->manager()->structureDefs());
+}
+
+void StructuresManagerView::onDataOffered(const QMimeData* mimeData, bool& isAccepted)
+{
+    isAccepted = mimeData->hasUrls();
+}
+
+void StructuresManagerView::onDataDropped(const QMimeData* mimeData)
+{
+    const QList<QUrl> urls = mimeData->urls();
+
+    installStructuresFromFiles(urls);
 }
 
 }

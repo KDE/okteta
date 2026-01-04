@@ -18,6 +18,7 @@ class Button;
 }
 
 class QPushButton;
+class QMimeData;
 
 namespace Kasten {
 
@@ -52,6 +53,8 @@ private Q_SLOTS:
     void uninstallStructure(const QString& id);
     void advancedSelection();
     void setEnabledStructures(const QStringList& enabledStructures);
+    void onDataOffered(const QMimeData* mimeData, bool& isAccepted);
+    void onDataDropped(const QMimeData* mimeData);
 
 private:
     void resetLoadedStructures();
