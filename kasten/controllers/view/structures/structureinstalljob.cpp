@@ -22,6 +22,7 @@ namespace Kasten {
 bool StructureInstallJob::exec()
 {
     if (m_structureFileUrl.isEmpty()) {
+        deleteLater();
         return false;
     }
 
@@ -51,6 +52,7 @@ bool StructureInstallJob::exec()
                 i18n("Unknown error (0)");
 
             m_errorString = i18n("Downloading failed: %1", errorString);
+            deleteLater();
             return false;
         }
         workFilePath = tmpUrl.toLocalFile();
