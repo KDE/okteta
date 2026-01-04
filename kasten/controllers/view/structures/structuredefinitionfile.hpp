@@ -38,7 +38,7 @@ public:
     explicit StructureDefinitionFile(const KPluginInfo& info);
     StructureDefinitionFile(const StructureDefinitionFile&) = delete;
 
-    virtual ~StructureDefinitionFile();
+    ~StructureDefinitionFile();
 
     StructureDefinitionFile& operator=(const StructureDefinitionFile&) = delete;
 
