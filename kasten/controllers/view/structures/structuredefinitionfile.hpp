@@ -40,7 +40,7 @@ public:
     StructureDefinitionFile(const StructureDefinitionFile&) = delete;
     StructureDefinitionFile(StructureDefinitionFile&&) = delete;
 
-    virtual ~StructureDefinitionFile();
+    ~StructureDefinitionFile();
 
     StructureDefinitionFile& operator=(const StructureDefinitionFile&) = delete;
     StructureDefinitionFile& operator=(StructureDefinitionFile&&) = delete;
@@ -52,16 +52,13 @@ public:
     QStringList structureNames() const;
     [[nodiscard]]
     std::unique_ptr<TopLevelDataInformation> structure(const QString& name) const;
-    /** @return the absolute path to the directory containing the .desktop file */
-    [[nodiscard]]
-    QString absolutePath() const;
     [[nodiscard]]
     StructureMetaData metaData() const;
     [[nodiscard]]
     bool isValid() const;
 
 private:
-    StructureMetaData mMetaData;
+    const StructureMetaData mMetaData;
     std::unique_ptr<AbstractStructureParser> mParser;
 };
 
