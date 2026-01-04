@@ -38,8 +38,13 @@ bool StructureInstallJob::exec()
     // need to download first?
     if (!m_structureFileUrl.isLocalFile()) {
         // create filesystem instance of the temporary file, will be cleaned on object destruction
-        tmpFile.open();
+        const bool tmpFileSuccess = tmpFile.open();
         tmpFile.close();
+        if (!tmpFileSuccess) {
+            m_errorString = tmpFile.errorString();
+            deleteLater();
+            return false;
+        }
 
         // TODO: support also remote dirs
         // download file into temporary file
@@ -55,24 +60,28 @@ bool StructureInstallJob::exec()
             deleteLater();
             return false;
         }
-        workFilePath = tmpUrl.toLocalFile();
+        workFilePath = tmpFile.fileName();
     } else {
         workFilePath = m_structureFileUrl.toLocalFile();
     }
 
     bool success = false;
+
     QDir workFilePathDir(workFilePath);
     // handle either directory or archive file selected
     if (workFilePathDir.exists()) {
         // TODO. move validation checks
         if (workFilePathDir.exists(QStringLiteral("metadata.desktop")) ||
             workFilePathDir.exists(workFilePathDir.dirName() +  QLatin1String(".desktop"))) {
-            KIO::CopyJob* const job = KIO::copy(QUrl::fromLocalFile(workFilePath), QUrl::fromLocalFile(userStructuresRootDir));
+            KIO::CopyJob* const copyJob = KIO::copy(QUrl::fromLocalFile(workFilePath), QUrl::fromLocalFile(userStructuresRootDir));
             // TODO error handling
             // TODO make async
-            success = job->exec();
+            success = copyJob->exec();
+            if (!success) {
+                m_errorString = copyJob->errorString();
+            }
         } else {
-            m_errorString = i18n("Structure archive is invalid.");
+            m_errorString = i18n("The structure archive is invalid.");
         }
     } else {
         const QMimeType mimeType = QMimeDatabase().mimeTypeForFile(workFilePath);
@@ -81,26 +90,38 @@ bool StructureInstallJob::exec()
             std::unique_ptr<KArchive>(std::make_unique<KZip>(workFilePath)) :
             std::unique_ptr<KArchive>(std::make_unique<KTar>(workFilePath));
 
-        structureArchive->open(QIODevice::ReadOnly);
+        bool archiveSuccess = structureArchive->open(QIODevice::ReadOnly);
+        if (archiveSuccess) {
+            const KArchiveDirectory* const structureDir = structureArchive->directory();
+            const QStringList toplevelEntries = structureDir->entries();
 
-        const KArchiveDirectory* const structureDir = structureArchive->directory();
-        const QStringList toplevelEntries = structureDir->entries();
+            // support multi-structure archive
+            for (const QString& entry : toplevelEntries) {
+                // TODO. move validation checks
+                archiveSuccess =
+                    (structureDir->entry(entry + QLatin1String("/metadata.desktop")) != nullptr) ||
+                    (structureDir->entry(entry + QLatin1Char('/') + entry + QLatin1String(".desktop")) != nullptr);
 
-        // support multi-structure archive
-        for (const QString& entry : toplevelEntries) {
-            // TODO. move validation checks
-            if ((structureDir->entry(entry + QLatin1String("/metadata.desktop")) == nullptr) &&
-                (structureDir->entry(entry + QLatin1Char('/') + entry + QLatin1String(".desktop")) == nullptr)) {
-                m_errorString = i18n("Structure archive is invalid.");
-                break;
+                if (!archiveSuccess) {
+                    m_errorString = i18n("The structure archive is invalid.");
+                    break;
+                }
+
+                // TODO: would overwrite existing files in existing dir
+                // better query before, or check if same id and this upgrade/downgrade?
+                archiveSuccess = structureDir->copyTo(userStructuresRootDir);
+                if (!archiveSuccess) {
+                    break;
+                }
             }
-
-            // TODO: would overwrite existing files in existing dir
-            // better query before, or check if same id and this upgrade/downgrade?
-            success = structureDir->copyTo(userStructuresRootDir);
+            // TODO: in case of one failure, uninstall those which did not fail again?
+            structureArchive->close();
         }
-        // TODO: in case of one failure, uninstall those which did not fail again?
-        structureArchive->close();
+        if (archiveSuccess){
+            success = true;
+        } else if (m_errorString.isEmpty()) {
+            m_errorString = structureArchive->errorString();
+        }
     }
 
     if (success) {
