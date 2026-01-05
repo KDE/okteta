@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 16:19+0000\n"
+"POT-Creation-Date: 2025-12-31 03:54+0000\n"
 "PO-Revision-Date: 2013-02-19 20:33+0100\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -2157,22 +2157,22 @@ msgctxt "@info:label"
 msgid "Used structures:"
 msgstr "Brukte strukturer:"
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:52
-#, kde-format
-msgid "Get New Structures..."
-msgstr "Hent nye strukturer …"
-
-#: controllers/view/structures/settings/structuresmanagerview.cpp:59
+#: controllers/view/structures/settings/structuresmanagerview.cpp:49
 #, kde-format
 msgid "Advanced Selection..."
 msgstr "Avansert utvalg …"
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:181
+#: controllers/view/structures/settings/structuresmanagerview.cpp:58
+#, kde-format
+msgid "Get New Structures..."
+msgstr "Hent nye strukturer …"
+
+#: controllers/view/structures/settings/structuresmanagerview.cpp:183
 #, kde-format
 msgid "Structure Definitions"
 msgstr "Strukturdefinisjoner"
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:184
+#: controllers/view/structures/settings/structuresmanagerview.cpp:186
 #, kde-format
 msgid "Dynamic Structure Definitions"
 msgstr "Dynamiske strukturdefinisjoner"
@@ -3063,19 +3063,19 @@ msgctxt "origin of the byte array"
 msgid "Created from data."
 msgstr "Opprettet fra data."
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:55
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:56
 #, kde-format
 msgctxt "destination of the byte array"
 msgid "Loaded from file."
 msgstr "Lastet fra fil."
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:64
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:65
 #: core/io/filesystem/bytearrayrawfilereloadthread.cpp:55
 #, kde-format
 msgid "There is not enough free working memory to load this file."
 msgstr "Det er ikke nok ledig arbeidsminne til å laste inn denne fila."
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:67
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:68
 #: core/io/filesystem/bytearrayrawfilereloadthread.cpp:58
 #, kde-format
 msgid "Support to load files larger than 2 GiB has not yet been implemented."
@@ -3253,7 +3253,7 @@ msgctxt "@item:inmenu address size"
 msgid "8-bit"
 msgstr "8-bit"
 
-#: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoder.cpp:145
+#: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoder.cpp:138
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "C Array"
