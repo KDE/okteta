@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-02 02:21+0000\n"
+"POT-Creation-Date: 2026-01-05 02:23+0000\n"
 "PO-Revision-Date: 2025-09-01 18:53+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: French <French <kde-francophone@kde.org>>\n"
@@ -2368,17 +2368,69 @@ msgctxt "@info:tooltip"
 msgid "About"
 msgstr "À propos"
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:48
+#: controllers/view/structures/settings/structureitemdelegate.cpp:124
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Uninstall"
+msgstr ""
+
+#: controllers/view/structures/settings/structureitemdelegate.cpp:124
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Can not be uninstalled."
+msgstr ""
+
+#: controllers/view/structures/settings/structuresmanagerview.cpp:61
 #, kde-format
 msgctxt "@action:button"
 msgid "Advanced Selection…"
 msgstr "Sélection avancée..."
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:52
+#: controllers/view/structures/settings/structuresmanagerview.cpp:65
+#, kde-format
+msgctxt "@action:button"
+msgid "Install from File(s)…"
+msgstr ""
+
+#: controllers/view/structures/settings/structuresmanagerview.cpp:69
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Structures…"
 msgstr "Obtenir de nouvelles structures..."
+
+#: controllers/view/structures/settings/structuresmanagerview.cpp:127
+#, kde-kuit-format
+msgid ""
+"Installing from <filename>%1</filename> failed:\n"
+"\n"
+"%2"
+msgstr ""
+
+#: controllers/view/structures/settings/structuresmanagerview.cpp:128
+#, fuzzy, kde-format
+#| msgid "Structure Definitions"
+msgctxt "@title:window"
+msgid "Structure Installation"
+msgstr "Définitions de structures"
+
+#: controllers/view/structures/settings/structuresmanagerview.cpp:149
+#, kde-format
+msgctxt "@action:button"
+msgid "Uninstall"
+msgstr ""
+
+#: controllers/view/structures/settings/structuresmanagerview.cpp:152
+#, kde-format
+msgid "Do you want to uninstall \"%1\"?"
+msgstr ""
+
+#: controllers/view/structures/settings/structuresmanagerview.cpp:153
+#: controllers/view/structures/settings/structuresmanagerview.cpp:172
+#, fuzzy, kde-format
+#| msgid "Structure Definitions"
+msgctxt "@title:window"
+msgid "Structure Uninstallation"
+msgstr "Définitions de structures"
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:28
 #, kde-format
@@ -2386,17 +2438,17 @@ msgctxt "@title:window"
 msgid "Advanced Structures Selection"
 msgstr "Sélection de structures avancée"
 
-#: controllers/view/structures/settings/structuresselectionmodel.cpp:106
+#: controllers/view/structures/settings/structuresselectionmodel.cpp:111
 #, kde-format
 msgid "Dynamic Structure Definitions"
 msgstr "Définitions de structures dynamiques"
 
-#: controllers/view/structures/settings/structuresselectionmodel.cpp:108
+#: controllers/view/structures/settings/structuresselectionmodel.cpp:113
 #, kde-format
 msgid "Structure Definitions"
 msgstr "Définitions de structures"
 
-#: controllers/view/structures/settings/structuresselector.cpp:40
+#: controllers/view/structures/settings/structuresselector.cpp:44
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Search…"
@@ -2598,6 +2650,25 @@ msgstr "Afficher les valeurs numériques des caractères"
 #, kde-format
 msgid "Character value:"
 msgstr "Valeur du caractère :"
+
+#: controllers/view/structures/structureinstalljob.cpp:57
+#, fuzzy, kde-format
+#| msgid "Unknown zlib error, code %1"
+msgid "Unknown error (0)"
+msgstr "Erreur inconnue de « zlib ». Code %1"
+
+#: controllers/view/structures/structureinstalljob.cpp:59
+#, fuzzy, kde-format
+#| msgctxt "not all values in this structure are as they should be"
+#| msgid "Validation failed: \"%1\""
+msgid "Downloading failed: %1"
+msgstr "La validation a échoué : « %1 »"
+
+#: controllers/view/structures/structureinstalljob.cpp:84
+#: controllers/view/structures/structureinstalljob.cpp:106
+#, kde-format
+msgid "The structure archive is invalid."
+msgstr ""
 
 #: controllers/view/structures/structurestool.cpp:72
 #: controllers/view/structures/structurestoolviewfactory.cpp:27

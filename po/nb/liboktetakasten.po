@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 09:01+0000\n"
+"POT-Creation-Date: 2026-01-02 02:21+0000\n"
 "PO-Revision-Date: 2013-02-19 20:33+0100\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -2250,31 +2250,31 @@ msgctxt "@title:column"
 msgid "Message"
 msgstr "Melding"
 
-#: controllers/view/structures/settings/aboutstructuredialog.cpp:34
+#: controllers/view/structures/settings/aboutstructuredialog.cpp:35
 #, kde-format
 msgctxt "@title:window"
 msgid "About %1"
 msgstr ""
 
-#: controllers/view/structures/settings/aboutstructuredialog.cpp:42
+#: controllers/view/structures/settings/aboutstructuredialog.cpp:43
 #, kde-format
 msgctxt "Version version-number"
 msgid "Version %1"
 msgstr ""
 
-#: controllers/view/structures/settings/aboutstructuredialog.cpp:79
-#: controllers/view/structures/settings/aboutstructuredialog.cpp:84
+#: controllers/view/structures/settings/aboutstructuredialog.cpp:80
+#: controllers/view/structures/settings/aboutstructuredialog.cpp:85
 #, kde-format
 msgid "License: %1"
 msgstr ""
 
-#: controllers/view/structures/settings/aboutstructuredialog.cpp:90
+#: controllers/view/structures/settings/aboutstructuredialog.cpp:91
 #, kde-format
 msgctxt "@title:tab"
 msgid "About"
 msgstr ""
 
-#: controllers/view/structures/settings/aboutstructuredialog.cpp:105
+#: controllers/view/structures/settings/aboutstructuredialog.cpp:106
 #, kde-format
 msgctxt "@info:tooltip Send an email to the author"
 msgid ""
@@ -2282,65 +2282,65 @@ msgid ""
 "%1"
 msgstr ""
 
-#: controllers/view/structures/settings/aboutstructuredialog.cpp:114
+#: controllers/view/structures/settings/aboutstructuredialog.cpp:115
 #, kde-format
 msgctxt "@title:tab"
 msgid "Author"
 msgstr ""
 
-#: controllers/view/structures/settings/licensedialog.cpp:27
+#: controllers/view/structures/settings/licensedialog.cpp:28
 #, kde-format
 msgctxt "@title:window"
 msgid "License Agreement"
 msgstr ""
 
-#: controllers/view/structures/settings/structureaddremovewidget.cpp:46
+#: controllers/view/structures/settings/structureaddremovewidget.cpp:48
 #, kde-format
 msgctxt "@info:label"
 msgid "Installed structures:"
 msgstr "Installerte strukturer:"
 
-#: controllers/view/structures/settings/structureaddremovewidget.cpp:56
+#: controllers/view/structures/settings/structureaddremovewidget.cpp:58
 #, kde-format
 msgctxt "@info:label"
 msgid "Used structures:"
 msgstr "Brukte strukturer:"
 
-#: controllers/view/structures/settings/structureitemdelegate.cpp:113
+#: controllers/view/structures/settings/structureitemdelegate.cpp:117
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "About"
 msgstr ""
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:44
-#, kde-format
-msgctxt "@action:button"
-msgid "Get New Structures…"
-msgstr ""
-
-#: controllers/view/structures/settings/structuresmanagerview.cpp:50
+#: controllers/view/structures/settings/structuresmanagerview.cpp:48
 #, kde-format
 msgctxt "@action:button"
 msgid "Advanced Selection…"
 msgstr ""
 
-#: controllers/view/structures/settings/structuresselectiondialog.cpp:26
+#: controllers/view/structures/settings/structuresmanagerview.cpp:52
+#, kde-format
+msgctxt "@action:button"
+msgid "Get New Structures…"
+msgstr ""
+
+#: controllers/view/structures/settings/structuresselectiondialog.cpp:28
 #, kde-format
 msgctxt "@title:window"
 msgid "Advanced Structures Selection"
 msgstr ""
 
-#: controllers/view/structures/settings/structuresselectionmodel.cpp:104
+#: controllers/view/structures/settings/structuresselectionmodel.cpp:106
 #, kde-format
 msgid "Dynamic Structure Definitions"
 msgstr "Dynamiske strukturdefinisjoner"
 
-#: controllers/view/structures/settings/structuresselectionmodel.cpp:106
+#: controllers/view/structures/settings/structuresselectionmodel.cpp:108
 #, kde-format
 msgid "Structure Definitions"
 msgstr "Strukturdefinisjoner"
 
-#: controllers/view/structures/settings/structuresselector.cpp:38
+#: controllers/view/structures/settings/structuresselector.cpp:40
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Search…"
@@ -2439,25 +2439,25 @@ msgctxt "@item:inlistbox"
 msgid "Little endian"
 msgstr "Little endian"
 
-#: controllers/view/structures/settings/structureviewsettingswidget.cpp:48
+#: controllers/view/structures/settings/structureviewsettingswidget.cpp:50
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Binary"
 msgstr "Binær"
 
-#: controllers/view/structures/settings/structureviewsettingswidget.cpp:49
+#: controllers/view/structures/settings/structureviewsettingswidget.cpp:51
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Octal"
 msgstr "Oktal"
 
-#: controllers/view/structures/settings/structureviewsettingswidget.cpp:50
+#: controllers/view/structures/settings/structureviewsettingswidget.cpp:52
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Decimal"
 msgstr "Desimal"
 
-#: controllers/view/structures/settings/structureviewsettingswidget.cpp:51
+#: controllers/view/structures/settings/structureviewsettingswidget.cpp:53
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Hexadecimal"
@@ -3274,19 +3274,19 @@ msgctxt "origin of the byte array"
 msgid "Created from data."
 msgstr "Opprettet fra data."
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:54
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:55
 #, kde-format
 msgctxt "destination of the byte array"
 msgid "Loaded from file."
 msgstr "Lastet fra fil."
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:61
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:62
 #: core/io/filesystem/bytearrayrawfilereloadthread.cpp:53
 #, kde-format
 msgid "There is not enough free working memory to load this file."
 msgstr "Det er ikke nok ledig arbeidsminne til å laste inn denne fila."
 
-#: core/io/filesystem/bytearrayrawfileloadthread.cpp:64
+#: core/io/filesystem/bytearrayrawfileloadthread.cpp:65
 #: core/io/filesystem/bytearrayrawfilereloadthread.cpp:56
 #, kde-format
 msgid "Support to load files larger than 2 GiB has not yet been implemented."

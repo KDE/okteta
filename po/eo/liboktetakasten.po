@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-02 02:21+0000\n"
+"POT-Creation-Date: 2026-01-05 02:23+0000\n"
 "PO-Revision-Date: 2025-02-15 14:15+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -2336,17 +2336,69 @@ msgctxt "@info:tooltip"
 msgid "About"
 msgstr "Pri"
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:48
+#: controllers/view/structures/settings/structureitemdelegate.cpp:124
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Uninstall"
+msgstr ""
+
+#: controllers/view/structures/settings/structureitemdelegate.cpp:124
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Can not be uninstalled."
+msgstr ""
+
+#: controllers/view/structures/settings/structuresmanagerview.cpp:61
 #, kde-format
 msgctxt "@action:button"
 msgid "Advanced Selection…"
 msgstr "Altnivela Elekto…"
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:52
+#: controllers/view/structures/settings/structuresmanagerview.cpp:65
+#, kde-format
+msgctxt "@action:button"
+msgid "Install from File(s)…"
+msgstr ""
+
+#: controllers/view/structures/settings/structuresmanagerview.cpp:69
 #, kde-format
 msgctxt "@action:button"
 msgid "Get New Structures…"
 msgstr "Akiri Novajn Strukturojn…"
+
+#: controllers/view/structures/settings/structuresmanagerview.cpp:127
+#, kde-kuit-format
+msgid ""
+"Installing from <filename>%1</filename> failed:\n"
+"\n"
+"%2"
+msgstr ""
+
+#: controllers/view/structures/settings/structuresmanagerview.cpp:128
+#, fuzzy, kde-format
+#| msgid "Structure Definitions"
+msgctxt "@title:window"
+msgid "Structure Installation"
+msgstr "Strukturaj Difinoj"
+
+#: controllers/view/structures/settings/structuresmanagerview.cpp:149
+#, kde-format
+msgctxt "@action:button"
+msgid "Uninstall"
+msgstr ""
+
+#: controllers/view/structures/settings/structuresmanagerview.cpp:152
+#, kde-format
+msgid "Do you want to uninstall \"%1\"?"
+msgstr ""
+
+#: controllers/view/structures/settings/structuresmanagerview.cpp:153
+#: controllers/view/structures/settings/structuresmanagerview.cpp:172
+#, fuzzy, kde-format
+#| msgid "Structure Definitions"
+msgctxt "@title:window"
+msgid "Structure Uninstallation"
+msgstr "Strukturaj Difinoj"
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:28
 #, kde-format
@@ -2354,17 +2406,17 @@ msgctxt "@title:window"
 msgid "Advanced Structures Selection"
 msgstr "Altnivela Elekto de Strukturoj"
 
-#: controllers/view/structures/settings/structuresselectionmodel.cpp:106
+#: controllers/view/structures/settings/structuresselectionmodel.cpp:111
 #, kde-format
 msgid "Dynamic Structure Definitions"
 msgstr "Dinamika Struktura Difinoj"
 
-#: controllers/view/structures/settings/structuresselectionmodel.cpp:108
+#: controllers/view/structures/settings/structuresselectionmodel.cpp:113
 #, kde-format
 msgid "Structure Definitions"
 msgstr "Strukturaj Difinoj"
 
-#: controllers/view/structures/settings/structuresselector.cpp:40
+#: controllers/view/structures/settings/structuresselector.cpp:44
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Search…"
@@ -2550,6 +2602,24 @@ msgstr "Montri nombran valoron de signoj"
 #, kde-format
 msgid "Character value:"
 msgstr "Signa valoro:"
+
+#: controllers/view/structures/structureinstalljob.cpp:57
+#, kde-format
+msgid "Unknown error (0)"
+msgstr ""
+
+#: controllers/view/structures/structureinstalljob.cpp:59
+#, fuzzy, kde-format
+#| msgctxt "not all values in this structure are as they should be"
+#| msgid "Validation failed: \"%1\""
+msgid "Downloading failed: %1"
+msgstr "Valimigo malsukcesis: \"%1\""
+
+#: controllers/view/structures/structureinstalljob.cpp:84
+#: controllers/view/structures/structureinstalljob.cpp:106
+#, kde-format
+msgid "The structure archive is invalid."
+msgstr ""
 
 #: controllers/view/structures/structurestool.cpp:72
 #: controllers/view/structures/structurestoolviewfactory.cpp:27

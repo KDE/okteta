@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-02 02:21+0000\n"
+"POT-Creation-Date: 2026-01-05 02:23+0000\n"
 "PO-Revision-Date: 2020-01-03 20:25+0200\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -2377,19 +2377,71 @@ msgctxt "@info:tooltip"
 msgid "About"
 msgstr ""
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:48
+#: controllers/view/structures/settings/structureitemdelegate.cpp:124
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Uninstall"
+msgstr ""
+
+#: controllers/view/structures/settings/structureitemdelegate.cpp:124
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Can not be uninstalled."
+msgstr ""
+
+#: controllers/view/structures/settings/structuresmanagerview.cpp:61
 #, fuzzy, kde-format
 #| msgid "Advanced Selection..."
 msgctxt "@action:button"
 msgid "Advanced Selection…"
 msgstr "Täiustatud valik..."
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:52
+#: controllers/view/structures/settings/structuresmanagerview.cpp:65
+#, kde-format
+msgctxt "@action:button"
+msgid "Install from File(s)…"
+msgstr ""
+
+#: controllers/view/structures/settings/structuresmanagerview.cpp:69
 #, fuzzy, kde-format
 #| msgid "Get New Structures..."
 msgctxt "@action:button"
 msgid "Get New Structures…"
 msgstr "Hangi uusi struktuure..."
+
+#: controllers/view/structures/settings/structuresmanagerview.cpp:127
+#, kde-kuit-format
+msgid ""
+"Installing from <filename>%1</filename> failed:\n"
+"\n"
+"%2"
+msgstr ""
+
+#: controllers/view/structures/settings/structuresmanagerview.cpp:128
+#, fuzzy, kde-format
+#| msgid "Structure Definitions"
+msgctxt "@title:window"
+msgid "Structure Installation"
+msgstr "Struktuuri definitsioonid"
+
+#: controllers/view/structures/settings/structuresmanagerview.cpp:149
+#, kde-format
+msgctxt "@action:button"
+msgid "Uninstall"
+msgstr ""
+
+#: controllers/view/structures/settings/structuresmanagerview.cpp:152
+#, kde-format
+msgid "Do you want to uninstall \"%1\"?"
+msgstr ""
+
+#: controllers/view/structures/settings/structuresmanagerview.cpp:153
+#: controllers/view/structures/settings/structuresmanagerview.cpp:172
+#, fuzzy, kde-format
+#| msgid "Structure Definitions"
+msgctxt "@title:window"
+msgid "Structure Uninstallation"
+msgstr "Struktuuri definitsioonid"
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:28
 #, kde-format
@@ -2397,17 +2449,17 @@ msgctxt "@title:window"
 msgid "Advanced Structures Selection"
 msgstr "Täiustatud struktuuride valik"
 
-#: controllers/view/structures/settings/structuresselectionmodel.cpp:106
+#: controllers/view/structures/settings/structuresselectionmodel.cpp:111
 #, kde-format
 msgid "Dynamic Structure Definitions"
 msgstr "Dünaamilised struktuuri definitsioonid"
 
-#: controllers/view/structures/settings/structuresselectionmodel.cpp:108
+#: controllers/view/structures/settings/structuresselectionmodel.cpp:113
 #, kde-format
 msgid "Structure Definitions"
 msgstr "Struktuuri definitsioonid"
 
-#: controllers/view/structures/settings/structuresselector.cpp:40
+#: controllers/view/structures/settings/structuresselector.cpp:44
 #, fuzzy, kde-format
 #| msgctxt "@title"
 #| msgid "Search"
@@ -2595,6 +2647,24 @@ msgstr "Märkide arvväärtuste näitamine"
 #, kde-format
 msgid "Character value:"
 msgstr "Märgi väärtus:"
+
+#: controllers/view/structures/structureinstalljob.cpp:57
+#, kde-format
+msgid "Unknown error (0)"
+msgstr ""
+
+#: controllers/view/structures/structureinstalljob.cpp:59
+#, fuzzy, kde-format
+#| msgctxt "not all values in this structure are as they should be"
+#| msgid "Validation failed: \"%1\""
+msgid "Downloading failed: %1"
+msgstr "Valideerimine nurjus: \"%1\""
+
+#: controllers/view/structures/structureinstalljob.cpp:84
+#: controllers/view/structures/structureinstalljob.cpp:106
+#, kde-format
+msgid "The structure archive is invalid."
+msgstr ""
 
 #: controllers/view/structures/structurestool.cpp:72
 #: controllers/view/structures/structurestoolviewfactory.cpp:27
