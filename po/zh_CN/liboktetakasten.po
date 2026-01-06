@@ -2303,11 +2303,10 @@ msgid ""
 msgstr ""
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:128
-#, fuzzy, kde-format
-#| msgid "Structure Definitions"
+#, kde-format
 msgctxt "@title:window"
 msgid "Structure Installation"
-msgstr "结构定义"
+msgstr ""
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:149
 #, kde-format
@@ -2322,11 +2321,10 @@ msgstr ""
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:153
 #: controllers/view/structures/settings/structuresmanagerview.cpp:172
-#, fuzzy, kde-format
-#| msgid "Structure Definitions"
+#, kde-format
 msgctxt "@title:window"
 msgid "Structure Uninstallation"
-msgstr "结构定义"
+msgstr ""
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:28
 #, kde-format
@@ -2533,11 +2531,9 @@ msgid "Unknown error (0)"
 msgstr ""
 
 #: controllers/view/structures/structureinstalljob.cpp:59
-#, fuzzy, kde-format
-#| msgctxt "not all values in this structure are as they should be"
-#| msgid "Validation failed: \"%1\""
+#, kde-format
 msgid "Downloading failed: %1"
-msgstr "校验失败：“%1”"
+msgstr ""
 
 #: controllers/view/structures/structureinstalljob.cpp:84
 #: controllers/view/structures/structureinstalljob.cpp:106

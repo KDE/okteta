@@ -1,17 +1,17 @@
 # Spanish translations for liboktetakasten.po package.
-# Copyright (C) 2009-2025 This file is copyright:
+# Copyright (C) 2009-2026 This file is copyright:
 # This file is distributed under the same license as the okteta package.
 #
-# SPDX-FileCopyrightText: 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2018, 2019, 2020, 2022, 2023, 2025 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2018, 2019, 2020, 2022, 2023 Eloy Cuadra <ecuadra@eloihr.net>
 # SPDX-FileCopyrightText: 2011 Ricardo Varas Santana <ricardoivaras@gmail.com>
 # SPDX-FileCopyrightText: 2013 Javier Viñal <fjvinal@gmail.com>
-# SPDX-FileCopyrightText: 2024, 2025 Sofía Priego <spriego@darksylvania.net>
+# SPDX-FileCopyrightText: 2024, 2025, 2026 Sofía Priego <spriego@darksylvania.net>
 msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-05 02:23+0000\n"
-"PO-Revision-Date: 2025-08-31 19:06+0100\n"
+"PO-Revision-Date: 2026-01-06 01:49+0100\n"
 "Last-Translator: Sofía Priego <spriego@darksylvania.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.08.0\n"
+"X-Generator: Lokalize 25.12.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -2351,13 +2351,13 @@ msgstr "Acerca de"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Uninstall"
-msgstr ""
+msgstr "Desinstalar"
 
 #: controllers/view/structures/settings/structureitemdelegate.cpp:124
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Can not be uninstalled."
-msgstr ""
+msgstr "No se puede desinstalar."
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:61
 #, kde-format
@@ -2369,7 +2369,7 @@ msgstr "Selección avanzada…"
 #, kde-format
 msgctxt "@action:button"
 msgid "Install from File(s)…"
-msgstr ""
+msgstr "Instalar desde los archivos…"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:69
 #, kde-format
@@ -2384,32 +2384,33 @@ msgid ""
 "\n"
 "%2"
 msgstr ""
+"La instalación desde <filename>%1</filename> ha fallado:\n"
+"\n"
+"%2"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:128
-#, fuzzy, kde-format
-#| msgid "Structure Definitions"
+#, kde-format
 msgctxt "@title:window"
 msgid "Structure Installation"
-msgstr "Definiciones de estructuras"
+msgstr "Instalación de estructura"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:149
 #, kde-format
 msgctxt "@action:button"
 msgid "Uninstall"
-msgstr ""
+msgstr "Desinstalar"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:152
 #, kde-format
 msgid "Do you want to uninstall \"%1\"?"
-msgstr ""
+msgstr "¿Desea desinstalar «%1»?"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:153
 #: controllers/view/structures/settings/structuresmanagerview.cpp:172
-#, fuzzy, kde-format
-#| msgid "Structure Definitions"
+#, kde-format
 msgctxt "@title:window"
 msgid "Structure Uninstallation"
-msgstr "Definiciones de estructuras"
+msgstr "Desinstalación de estructura"
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:28
 #, kde-format
@@ -2619,23 +2620,20 @@ msgid "Character value:"
 msgstr "Valor del carácter:"
 
 #: controllers/view/structures/structureinstalljob.cpp:57
-#, fuzzy, kde-format
-#| msgid "Unknown zlib error, code %1"
+#, kde-format
 msgid "Unknown error (0)"
-msgstr "Error desconocido de zlib. Código %1"
+msgstr "Error desconocido (0)"
 
 #: controllers/view/structures/structureinstalljob.cpp:59
-#, fuzzy, kde-format
-#| msgctxt "not all values in this structure are as they should be"
-#| msgid "Validation failed: \"%1\""
+#, kde-format
 msgid "Downloading failed: %1"
-msgstr "Ha fallado la validación: «%1»"
+msgstr "La descarga ha fallado: %1"
 
 #: controllers/view/structures/structureinstalljob.cpp:84
 #: controllers/view/structures/structureinstalljob.cpp:106
 #, kde-format
 msgid "The structure archive is invalid."
-msgstr ""
+msgstr "El archivo de la estructura no es válido."
 
 #: controllers/view/structures/structurestool.cpp:72
 #: controllers/view/structures/structurestoolviewfactory.cpp:27

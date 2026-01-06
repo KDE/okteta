@@ -4,14 +4,14 @@
 #
 # Rinse de Vries <rinsedevries@kde.nl>, 2008.
 # Kristof Bal <kristof.bal@gmail.com>, 2008.
-# SPDX-FileCopyrightText: 2008, 2023, 2024, 2025 Freek de Kruijf <freekdekruijf@kde.nl>
+# SPDX-FileCopyrightText: 2008, 2023, 2024, 2025, 2026 Freek de Kruijf <freekdekruijf@kde.nl>
 # Freek de Kruijf <freekdekruijf@kde.nl>, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2018, 2019, 2020, 2022, 2023.
 msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-05 02:23+0000\n"
-"PO-Revision-Date: 2025-08-31 21:18+0200\n"
+"PO-Revision-Date: 2026-01-05 12:09+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -19,13 +19,13 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.08.0\n"
+"X-Generator: Lokalize 25.12.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
 msgstr ""
-"Rinse de Vries - 2008,Kristof Bal - 2008-2009,Freek de Kruijf - 2022 t/m 2025"
+"Rinse de Vries - 2008,Kristof Bal - 2008-2009,Freek de Kruijf - 2022 t/m 2026"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
@@ -2339,13 +2339,13 @@ msgstr "Info over"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Uninstall"
-msgstr ""
+msgstr "Installatie ongedaan maken"
 
 #: controllers/view/structures/settings/structureitemdelegate.cpp:124
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Can not be uninstalled."
-msgstr ""
+msgstr "Installatie kan niet ongedaan gemaakt worden."
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:61
 #, kde-format
@@ -2357,7 +2357,7 @@ msgstr "Geavanceerde selectie…"
 #, kde-format
 msgctxt "@action:button"
 msgid "Install from File(s)…"
-msgstr ""
+msgstr "Uit bestand(en) installeren…"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:69
 #, kde-format
@@ -2372,32 +2372,33 @@ msgid ""
 "\n"
 "%2"
 msgstr ""
+"Installeren uit <filename>%1</filename> is mislukt:\n"
+"\n"
+"%2"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:128
-#, fuzzy, kde-format
-#| msgid "Structure Definitions"
+#, kde-format
 msgctxt "@title:window"
 msgid "Structure Installation"
-msgstr "Structuurdefinities"
+msgstr "Structuurinstallatie"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:149
 #, kde-format
 msgctxt "@action:button"
 msgid "Uninstall"
-msgstr ""
+msgstr "Installatie ongedaan maken"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:152
 #, kde-format
 msgid "Do you want to uninstall \"%1\"?"
-msgstr ""
+msgstr "Wilt u de installatie van \"%1\" ongedaan maken?"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:153
 #: controllers/view/structures/settings/structuresmanagerview.cpp:172
-#, fuzzy, kde-format
-#| msgid "Structure Definitions"
+#, kde-format
 msgctxt "@title:window"
 msgid "Structure Uninstallation"
-msgstr "Structuurdefinities"
+msgstr "Ongedaan maken van installatie van structuur"
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:28
 #, kde-format
@@ -2615,23 +2616,20 @@ msgid "Character value:"
 msgstr "Tekenwaarde:"
 
 #: controllers/view/structures/structureinstalljob.cpp:57
-#, fuzzy, kde-format
-#| msgid "Unknown zlib error, code %1"
+#, kde-format
 msgid "Unknown error (0)"
-msgstr "Onbekende zlib-fout, code %1"
+msgstr "Onbekende fout (0)"
 
 #: controllers/view/structures/structureinstalljob.cpp:59
-#, fuzzy, kde-format
-#| msgctxt "not all values in this structure are as they should be"
-#| msgid "Validation failed: \"%1\""
+#, kde-format
 msgid "Downloading failed: %1"
-msgstr "Validatie is mislukt: \"%1\""
+msgstr "Het downloaden is mislukt: %1"
 
 #: controllers/view/structures/structureinstalljob.cpp:84
 #: controllers/view/structures/structureinstalljob.cpp:106
 #, kde-format
 msgid "The structure archive is invalid."
-msgstr ""
+msgstr "Het structuurarchief is ongeldig."
 
 #: controllers/view/structures/structurestool.cpp:72
 #: controllers/view/structures/structurestoolviewfactory.cpp:27

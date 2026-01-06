@@ -3,13 +3,13 @@
 # This file is distributed under the license LGPL version 2.1 or
 # version 3 or later versions approved by the membership of KDE e.V.
 #
-# Yuri Chornoivan <yurchor@ukr.net>, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2018, 2019, 2020, 2022, 2023, 2024, 2025.
+# Yuri Chornoivan <yurchor@ukr.net>, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2018, 2019, 2020, 2022, 2023, 2024, 2025, 2026.
 msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-05 02:23+0000\n"
-"PO-Revision-Date: 2025-08-31 19:52+0300\n"
+"PO-Revision-Date: 2026-01-05 07:51+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -2362,13 +2362,13 @@ msgstr "Про програму"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Uninstall"
-msgstr ""
+msgstr "Вилучити"
 
 #: controllers/view/structures/settings/structureitemdelegate.cpp:124
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Can not be uninstalled."
-msgstr ""
+msgstr "Не може бути вилучено."
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:61
 #, kde-format
@@ -2380,7 +2380,7 @@ msgstr "Додаткові можливості позначення…"
 #, kde-format
 msgctxt "@action:button"
 msgid "Install from File(s)…"
-msgstr ""
+msgstr "Встановити з файлів…"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:69
 #, kde-format
@@ -2395,32 +2395,33 @@ msgid ""
 "\n"
 "%2"
 msgstr ""
+"Не вдалося встановити з <filename>%1</filename>:\n"
+"\n"
+"%2"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:128
-#, fuzzy, kde-format
-#| msgid "Structure Definitions"
+#, kde-format
 msgctxt "@title:window"
 msgid "Structure Installation"
-msgstr "Визначення структур"
+msgstr "Встановлення структури"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:149
 #, kde-format
 msgctxt "@action:button"
 msgid "Uninstall"
-msgstr ""
+msgstr "Вилучити"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:152
 #, kde-format
 msgid "Do you want to uninstall \"%1\"?"
-msgstr ""
+msgstr "Хочете вилучити «%1»?"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:153
 #: controllers/view/structures/settings/structuresmanagerview.cpp:172
-#, fuzzy, kde-format
-#| msgid "Structure Definitions"
+#, kde-format
 msgctxt "@title:window"
 msgid "Structure Uninstallation"
-msgstr "Визначення структур"
+msgstr "Вилучення структури"
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:28
 #, kde-format
@@ -2637,23 +2638,20 @@ msgid "Character value:"
 msgstr "Значення символу:"
 
 #: controllers/view/structures/structureinstalljob.cpp:57
-#, fuzzy, kde-format
-#| msgid "Unknown zlib error, code %1"
+#, kde-format
 msgid "Unknown error (0)"
-msgstr "Невідома помилка zlib, код %1"
+msgstr "Невідома помилка (0)"
 
 #: controllers/view/structures/structureinstalljob.cpp:59
-#, fuzzy, kde-format
-#| msgctxt "not all values in this structure are as they should be"
-#| msgid "Validation failed: \"%1\""
+#, kde-format
 msgid "Downloading failed: %1"
-msgstr "Спроба перевірки зазнала невдачі: «%1»"
+msgstr "Не вдалося отримати: %1"
 
 #: controllers/view/structures/structureinstalljob.cpp:84
 #: controllers/view/structures/structureinstalljob.cpp:106
 #, kde-format
 msgid "The structure archive is invalid."
-msgstr ""
+msgstr "Архів структури є некоректним."
 
 #: controllers/view/structures/structurestool.cpp:72
 #: controllers/view/structures/structurestoolviewfactory.cpp:27
