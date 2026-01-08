@@ -297,7 +297,7 @@ inline bool DataInformation::isTopLevel() const
 
 inline void DataInformation::setParent(DataInformationBase* newParent)
 {
-    Q_CHECK_PTR(newParent);
+    Q_ASSERT(newParent);
     mParent = newParent;
 }
 

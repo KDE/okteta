@@ -29,7 +29,7 @@ QWidget* FloatDataInformationMethods::staticCreateEditWidget(QWidget* parent)
 QVariant FloatDataInformationMethods::staticDataFromWidget(const QWidget* w)
 {
     const auto* spin = qobject_cast<const QDoubleSpinBox*> (w);
-    Q_CHECK_PTR(spin);
+    Q_ASSERT(spin);
     if (spin) {
         return ((float) spin->value());
     }
@@ -39,7 +39,7 @@ QVariant FloatDataInformationMethods::staticDataFromWidget(const QWidget* w)
 void FloatDataInformationMethods::staticSetWidgetData(float value, QWidget* w)
 {
     auto* spin = qobject_cast<QDoubleSpinBox*> (w);
-    Q_CHECK_PTR(spin);
+    Q_ASSERT(spin);
     if (spin) {
         spin->setValue(value);
     }

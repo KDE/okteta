@@ -21,7 +21,7 @@ namespace ScriptValueConverter {
 DataInformation* convert(const QScriptValue& value, const QString& name, ScriptLogger* logger,
                          DataInformation* parent)
 {
-    // TODO Q_CHECK_PTR(parent)
+    // TODO Q_ASSERT(parent)
     const ParserInfo info(name, logger, parent, value.engine());
     return toDataInformation(value, info); // could be NULL
 }
@@ -29,7 +29,7 @@ DataInformation* convert(const QScriptValue& value, const QString& name, ScriptL
 QVector<DataInformation*> convertValues(const QScriptValue& value, ScriptLogger* logger,
                                         DataInformation* parent)
 {
-    // TODO Q_CHECK_PTR(parent);
+    // TODO Q_ASSERT(parent);
     QVector<DataInformation*> ret;
     QScriptValueIterator it(value);
     const bool isArray = value.isArray();

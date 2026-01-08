@@ -60,7 +60,7 @@ QVariant BoolBitfieldDataInformation::dataFromWidget(const QWidget* w) const
         return box->currentIndex();
     }
     const auto* spin = qobject_cast<const UIntSpinBox*>(w);
-    Q_CHECK_PTR(spin);
+    Q_ASSERT(spin);
     if (spin) {
         return spin->value();
     }

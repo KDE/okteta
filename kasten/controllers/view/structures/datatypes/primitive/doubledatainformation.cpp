@@ -26,7 +26,7 @@ QWidget* DoubleDataInformationMethods::staticCreateEditWidget(QWidget* parent)
 QVariant DoubleDataInformationMethods::staticDataFromWidget(const QWidget* w)
 {
     const auto* spin = qobject_cast<const QDoubleSpinBox*> (w);
-    Q_CHECK_PTR(spin);
+    Q_ASSERT(spin);
     if (spin) {
         return spin->value();
     }
@@ -36,7 +36,7 @@ QVariant DoubleDataInformationMethods::staticDataFromWidget(const QWidget* w)
 void DoubleDataInformationMethods::staticSetWidgetData(double value, QWidget* w)
 {
     auto* spin = qobject_cast<QDoubleSpinBox*> (w);
-    Q_CHECK_PTR(spin);
+    Q_ASSERT(spin);
     if (spin) {
         spin->setValue(value);
     }

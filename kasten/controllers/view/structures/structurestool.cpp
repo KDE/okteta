@@ -300,7 +300,7 @@ Okteta::Address StructuresTool::startAddress(const TopLevelDataInformation* data
 
 Okteta::AddressRange StructuresTool::dataRange(const DataInformation* data) const
 {
-    Q_CHECK_PTR(data->topLevelDataInformation());
+    Q_ASSERT(data->topLevelDataInformation());
     const Okteta::Address baseAddress = startAddress(data->topLevelDataInformation());
     // FIXME support range of partial bytes
     int length = data->size() / 8;
@@ -398,7 +398,7 @@ void StructuresTool::unlockStructure(const QModelIndex& idx)
         return;
     }
     TopLevelDataInformation* top = data->topLevelDataInformation();
-    Q_CHECK_PTR(top);
+    Q_ASSERT(top);
 
     const bool wasMarked = mIsStructureMarked;
     if (wasMarked) {
