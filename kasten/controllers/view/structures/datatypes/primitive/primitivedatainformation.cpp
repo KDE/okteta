@@ -23,7 +23,6 @@ PrimitiveDataInformationWrapper::PrimitiveDataInformationWrapper(const QString& 
     : PrimitiveDataInformation(name, parent)
     , mValue(valueType)
 {
-    Q_CHECK_PTR(valueType);
     mValue->setParent(this);
 
 }

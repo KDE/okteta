@@ -163,7 +163,6 @@ void StructuresManagerView::rebuildPluginSelectorEntries()
 
     // XXX is there any way to clear the plugins selector?
     auto* layoutObj = qobject_cast<QBoxLayout*>(layout());
-    Q_CHECK_PTR(layoutObj);
     if (mStructuresSelector) {
         layoutObj->removeWidget(mStructuresSelector);
         delete mStructuresSelector;

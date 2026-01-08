@@ -16,7 +16,6 @@ AbstractArrayData::AbstractArrayData(DataInformation* childType, ArrayDataInform
     : mParent(parent)
     , mChildType(childType)
 {
-    Q_CHECK_PTR(childType);
     mChildType->setParent(parent);
 }
 
@@ -31,7 +30,6 @@ void AbstractArrayData::setParent(ArrayDataInformation* parent)
 
 AbstractArrayData* AbstractArrayData::newArrayData(uint length, DataInformation* type, ArrayDataInformation* parent)
 {
-    Q_CHECK_PTR(type);
     if (!type->isPrimitive()) {
         return new ComplexArrayData(length, type, parent);
     }

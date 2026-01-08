@@ -57,7 +57,6 @@ QVariant BoolBitfieldDataInformation::dataFromWidget(const QWidget* w) const
 {
     if (width() == 1) {
         const auto* box = qobject_cast<const KComboBox*>(w);
-        Q_CHECK_PTR(box);
         return box->currentIndex();
     }
     const auto* spin = qobject_cast<const UIntSpinBox*>(w);
@@ -72,7 +71,6 @@ void BoolBitfieldDataInformation::setWidgetData(QWidget* w) const
 {
     if (width() == 1) {
         auto* box = qobject_cast<KComboBox*>(w);
-        Q_CHECK_PTR(box);
         box->setCurrentIndex((mValue.value<quint64>() == 0) ? 0 : 1);
         return;
     }

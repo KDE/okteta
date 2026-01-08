@@ -135,7 +135,6 @@ qint64 TaggedUnionDataInformation::readData(const Okteta::AbstractByteArrayModel
     Q_ASSERT(mHasBeenUpdated);
     // update must have been called prior to reading
     TopLevelDataInformation* top = topLevelDataInformation();
-    Q_CHECK_PTR(top);
 
     const QVector<DataInformation*>& oldChildren = currentChildren();
 

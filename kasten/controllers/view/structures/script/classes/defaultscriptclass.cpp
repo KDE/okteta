@@ -124,8 +124,6 @@ QScriptValue DefaultScriptClass::property(const QScriptValue& object, const QScr
         return data->wasAbleToRead();
     }
     if (name == s_parent) {
-        Q_CHECK_PTR(data->parent());
-        // parent() cannot be null
         if (data->parent()->isTopLevel()) {
             return engine()->nullValue();
         }
@@ -167,7 +165,6 @@ QScriptValue DefaultScriptClass::property(const QScriptValue& object, const QScr
 void DefaultScriptClass::setDataType(const QScriptValue& value, DataInformation* data)
 {
     DataInformation* thisObj = toDataInformation(engine()->currentContext()->thisObject());
-    Q_CHECK_PTR(thisObj);
     const bool isThisObj = thisObj == data;
     // this object always has mHasBeenUpdated set just before calling updateFunc, so in that case it is okay
     if (data->hasBeenUpdated() && !isThisObj) {
@@ -184,9 +181,7 @@ void DefaultScriptClass::setDataType(const QScriptValue& value, DataInformation*
     }
 
     DataInformationBase* parent = data->parent();
-    Q_CHECK_PTR(parent);
     TopLevelDataInformation* top = data->topLevelDataInformation();
-    Q_CHECK_PTR(top);
     // only if parent is toplevel, struct or union, can we replace
     bool replaced = false;
     if (parent->isTopLevel()) {
@@ -350,7 +345,6 @@ DefaultscriptClassIterator::DefaultscriptClassIterator(const QScriptValue& objec
     , mClass(cls)
 {
     DataInformation* data = DefaultScriptClass::toDataInformation(object);
-    Q_CHECK_PTR(data);
     mData = data;
 }
 

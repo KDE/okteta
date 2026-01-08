@@ -62,8 +62,6 @@ bool StructureDataInformation::readChildren(const QVector<DataInformation*>& chi
                                             const Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining,
                                             quint8* bitOffset, qint64* readBitsPtr, TopLevelDataInformation* top)
 {
-    Q_CHECK_PTR(top);
-    Q_CHECK_PTR(readBitsPtr);
     Q_ASSERT(*readBitsPtr >= 0); // otherwise we failed before
     qint64 readBits = *readBitsPtr;
     // prevent overflow

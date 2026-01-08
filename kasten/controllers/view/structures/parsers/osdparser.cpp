@@ -52,7 +52,6 @@ QDomDocument OsdParser::openDoc(ScriptLogger* logger) const
 
 QDomDocument OsdParser::openDocFromString(ScriptLogger* logger) const
 {
-    Q_CHECK_PTR(logger);
     Q_ASSERT(!mXmlString.isEmpty());
     int errorLine, errorColumn;
     QString errorMsg;
@@ -71,7 +70,6 @@ QDomDocument OsdParser::openDocFromString(ScriptLogger* logger) const
 
 QDomDocument OsdParser::openDocFromFile(ScriptLogger* logger) const
 {
-    Q_CHECK_PTR(logger);
     QFileInfo fileInfo(mAbsolutePath);
     if (!fileInfo.exists()) {
         logger->error() << "File" << mAbsolutePath << "does not exist!";

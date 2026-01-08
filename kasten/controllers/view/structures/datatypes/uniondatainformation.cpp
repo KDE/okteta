@@ -45,7 +45,6 @@ qint64 UnionDataInformation::readData(const Okteta::AbstractByteArrayModel* inpu
 {
     Q_ASSERT(mHasBeenUpdated); // update must have been called prior to reading
     TopLevelDataInformation* top = topLevelDataInformation();
-    Q_CHECK_PTR(top);
 
     qint64 readBits = 0;
     const quint8 originalBitOffset = *bitOffset;

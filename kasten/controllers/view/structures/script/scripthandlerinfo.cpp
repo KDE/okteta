@@ -25,7 +25,6 @@ ScriptHandlerInfo::ScriptHandlerInfo(QScriptEngine* engine, ScriptLogger* logger
     , mPointerClass(new PointerScriptClass(engine, this))
     , mLogger(logger)
 {
-    Q_CHECK_PTR(mLogger);
 }
 
 ScriptHandlerInfo::~ScriptHandlerInfo() = default;

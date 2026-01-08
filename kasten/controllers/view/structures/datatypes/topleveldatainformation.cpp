@@ -43,7 +43,6 @@ TopLevelDataInformation::TopLevelDataInformation(DataInformation* data, ScriptLo
     , mValid(!data->isDummy())
     , mChildDataChanged(false)
 {
-    Q_CHECK_PTR(mData);
     mData->setParent(this);
     setObjectName(mData->name());
 

@@ -186,7 +186,6 @@ void DataInformationWithChildren::appendChild(DataInformation* newChild, bool em
 bool DataInformationWithChildren::replaceChildAt(unsigned int index, DataInformation* newChild)
 {
     Q_ASSERT(index < uint(mChildren.size()));
-    Q_CHECK_PTR(newChild);
     if (index >= uint(mChildren.size())) {
         return false;
     }

@@ -82,7 +82,6 @@ bool StructUnionScriptClass::additionalPropertyFlags(const DataInformation* data
     uint count = data->childCount();
     for (uint i = 0; i < count; ++i) {
         DataInformation* child = data->childAt(i);
-        Q_CHECK_PTR(child);
         if (objName == child->name()) {
             *flags |= QScriptValue::ReadOnly;
             return true;
@@ -95,8 +94,6 @@ bool StructUnionScriptClass::additionalPropertyFlags(const DataInformation* data
 QScriptValue StructUnionScriptClass::additionalProperty(const DataInformation* data, const QScriptString& name, uint id)
 {
     const auto* dataW = static_cast<const DataInformationWithChildren*>(data);
-    // do a dynamic cast in debug mode to ensure the static cast was valid
-    Q_CHECK_PTR(dynamic_cast<const DataInformationWithChildren*>(dataW));
 
     if (id != 0) {
         quint32 pos = id - 1;
@@ -107,7 +104,6 @@ QScriptValue StructUnionScriptClass::additionalProperty(const DataInformation* d
                                                           QStringLiteral("Attempting to access struct index %1, but length is %2").arg(
                                                               QString::number(pos), QString::number(data->childCount())));
         }
-        Q_CHECK_PTR(data->childAt(pos));
         return data->childAt(pos)->toScriptValue(engine(), mHandlerInfo);
     }
     if (name == s_childCount) {
@@ -124,7 +120,6 @@ QScriptValue StructUnionScriptClass::additionalProperty(const DataInformation* d
     uint count = data->childCount();
     for (uint i = 0; i < count; ++i) {
         DataInformation* child = data->childAt(i);
-        Q_CHECK_PTR(child);
         if (objName == child->name()) {
             return child->toScriptValue(engine(), mHandlerInfo);
         }
@@ -135,9 +130,6 @@ QScriptValue StructUnionScriptClass::additionalProperty(const DataInformation* d
 bool StructUnionScriptClass::setAdditionalProperty(DataInformation* data, const QScriptString& name, uint, const QScriptValue& value)
 {
     auto* dataW = static_cast<DataInformationWithChildren*>(data);
-    // do a dynamic cast in debug mode to ensure the static cast was valid
-    Q_CHECK_PTR(dynamic_cast<DataInformationWithChildren*>(dataW));
-
     if (name == s_children) {
         dataW->setChildren(value);
         return true;
@@ -203,9 +195,6 @@ QScriptValue StructUnionScriptClass::StructUnion_proto_setChildren(QScriptContex
         return eng->undefinedValue();
     }
     auto* dataW = static_cast<DataInformationWithChildren*>(data);
-    // do a dynamic cast in debug mode to ensure the static cast was valid
-    Q_CHECK_PTR(dynamic_cast<DataInformationWithChildren*>(dataW));
-
     dataW->setChildren(ctx->argument(0));
     return eng->undefinedValue();
 }

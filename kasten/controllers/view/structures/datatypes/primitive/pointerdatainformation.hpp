@@ -78,7 +78,6 @@ inline DataInformation* PointerDataInformation::pointerTarget() const
 
 inline void PointerDataInformation::setPointerTarget(DataInformation* target)
 {
-    Q_CHECK_PTR(target);
     mPointerTarget.reset(target);
     mPointerTarget->setParent(this);
 }

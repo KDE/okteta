@@ -76,7 +76,6 @@ QString DataInformation::valueStringImpl() const
 
 BitCount64 DataInformation::positionInFile(Okteta::Address start) const
 {
-    Q_CHECK_PTR(mParent);
     if (mParent->isTopLevel()) {
         return start * 8; // this is the root of the structure
 
@@ -87,7 +86,6 @@ BitCount64 DataInformation::positionInFile(Okteta::Address start) const
 
 DataInformation* DataInformation::mainStructure()
 {
-    Q_CHECK_PTR(mParent);
     if (mParent->isTopLevel()) {
         return this;
     }
@@ -251,7 +249,6 @@ DataInformation* DataInformation::child(const QString& name) const
 
 TopLevelDataInformation* DataInformation::topLevelDataInformation() const
 {
-    Q_CHECK_PTR(mParent);
     if (mParent->isTopLevel()) {
         return mParent->asTopLevel();
     }
@@ -261,7 +258,6 @@ TopLevelDataInformation* DataInformation::topLevelDataInformation() const
 
 int DataInformation::row() const
 {
-    Q_CHECK_PTR(mParent);
     if (mParent->isTopLevel()) {
         return mParent->asTopLevel()->indexOf(this);
     }

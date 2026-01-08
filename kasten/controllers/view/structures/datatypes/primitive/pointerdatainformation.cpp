@@ -26,8 +26,6 @@ PointerDataInformation::PointerDataInformation(const QString& name, DataInformat
     : PrimitiveDataInformationWrapper(name, valueType, parent)
     , mPointerTarget(childType), mPointerScale(pointerScale)
 {
-    Q_CHECK_PTR(childType);
-
     if (interpretFunction.isValid() && interpretFunction.isFunction()) {
         setInterpreterFunction(interpretFunction);
     }
@@ -134,7 +132,6 @@ DataInformation* PointerDataInformation::childAt(uint index) const
 
 bool PointerDataInformation::setPointerType(DataInformation* type)
 {
-    Q_CHECK_PTR(type);
     if (!type->isPrimitive()) {
         logError() << "New pointer type is not primitive!";
         return false;

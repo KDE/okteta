@@ -31,7 +31,6 @@ ArrayDataInformation::ArrayDataInformation(const QString& name, uint length, Dat
                   << ". Setting it to" << MAX_LEN << "instead";
         length = MAX_LEN;
     }
-    Q_CHECK_PTR(childType);
     childType->setParent(this);
     mData.reset(AbstractArrayData::newArrayData(length, childType, this));
 }
@@ -63,7 +62,6 @@ bool ArrayDataInformation::setArrayLength(uint newLength)
 
 void ArrayDataInformation::setArrayType(DataInformation* newChildType)
 {
-    Q_CHECK_PTR(newChildType);
     if (newChildType->isPrimitive() && newChildType->asPrimitive()->type() == mData->primitiveType()) {
         // there is no need to change the type
         logInfo() << "New and old child type are identical, skipping: " << mData->primitiveType();

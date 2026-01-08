@@ -37,7 +37,6 @@ inline QVariant CharDataInformationMethods::staticToQVariant(quint8 value)
 
 inline quint8 CharDataInformationMethods::fromVariant(const QVariant& value, bool* ok)
 {
-    Q_CHECK_PTR(ok);
     quint32 tmp = value.toUInt(ok);
     quint8 result = quint8(tmp);
     if (tmp != quint32(result)) {

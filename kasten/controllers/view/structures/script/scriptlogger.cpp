@@ -94,7 +94,6 @@ QVariant ScriptLogger::headerData(int section, Qt::Orientation orientation, int 
 
 QDebug ScriptLogger::log(LogLevel level, const DataInformation* origin)
 {
-    Q_CHECK_PTR(origin);
     if (origin->loggedData() < level) {
         origin->setLoggedData(level);
     }

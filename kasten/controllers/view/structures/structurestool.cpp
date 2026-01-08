@@ -141,7 +141,6 @@ bool StructuresTool::setData(const QVariant& value, int role, DataInformation* i
     if (role != Qt::EditRole) {
         return false;
     }
-    Q_CHECK_PTR(item);
 
     TopLevelDataInformation* topLevel = item->topLevelDataInformation();
     const Okteta::Address structureStart = startAddress(topLevel);
@@ -217,7 +216,6 @@ DataInformation* StructuresTool::childAt(int idx) const
 
 void StructuresTool::addChildItem(TopLevelDataInformation* child)
 {
-    Q_CHECK_PTR(child);
     child->setParent(this);
     if (child->isValid()) {
         child->setIndex(mData.size());

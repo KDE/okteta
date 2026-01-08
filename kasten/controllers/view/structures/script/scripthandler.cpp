@@ -41,8 +41,6 @@ ScriptHandlerInfo* ScriptHandler::handlerInfo()
 
 void ScriptHandler::validateData(DataInformation* data)
 {
-    Q_CHECK_PTR(data);
-
     if (data->hasBeenValidated()) {
         return;
     }
@@ -83,7 +81,6 @@ void ScriptHandler::validateData(DataInformation* data)
 
 void ScriptHandler::updateDataInformation(DataInformation* data)
 {
-    Q_CHECK_PTR(data);
     // check if has an update function:
     Q_ASSERT(!data->hasBeenUpdated());
     QScriptValue updateFunc = data->updateFunc();
