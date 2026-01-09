@@ -44,7 +44,6 @@ TopLevelDataInformation::TopLevelDataInformation(DataInformation* data, ScriptLo
     , mChildDataChanged(false)
 {
     mData->setParent(this);
-    setObjectName(mData->name());
 
     if (!mLogger) {
         mLogger.reset(new ScriptLogger());

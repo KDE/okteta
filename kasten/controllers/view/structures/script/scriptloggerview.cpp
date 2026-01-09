@@ -14,6 +14,7 @@
 #include <QVBoxLayout>
 
 #include "scriptlogger.hpp"
+#include "../datatypes/datainformation.hpp"
 
 ScriptLoggerView::ScriptLoggerView(const TopLevelDataInformation::List& topDataInfoList, QWidget* parent)
     : QWidget(parent)
@@ -22,7 +23,7 @@ ScriptLoggerView::ScriptLoggerView(const TopLevelDataInformation::List& topDataI
     , mList(topDataInfoList)
 {
     for (const auto& info : qAsConst(mList)) {
-        mSelector->addItem(info->objectName());
+        mSelector->addItem(info->actualDataInformation()->name());
     }
 
     mView->setShowGrid(false);
