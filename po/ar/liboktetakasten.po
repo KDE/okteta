@@ -2,7 +2,7 @@
 # This file is distributed under the same license as the PACKAGE package.
 # Youness BOUTYOUR <niceboy@linuxac.org>, 2008.
 # Youness BOUTYOUR <niceboy120@gmail.com>, 2008.
-# SPDX-FileCopyrightText: 2010, 2025 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
+# SPDX-FileCopyrightText: 2010, 2025, 2026 Zayed Al-Saidi <zayed.alsaidi@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
