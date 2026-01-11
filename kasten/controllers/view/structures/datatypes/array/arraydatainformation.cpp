@@ -46,7 +46,7 @@ ArrayDataInformation::ArrayDataInformation(const ArrayDataInformation& d)
 
 ArrayDataInformation::~ArrayDataInformation() = default;
 
-bool ArrayDataInformation::setArrayLength(uint newLength)
+void ArrayDataInformation::setArrayLength(uint newLength)
 {
     if (newLength > MAX_LEN) {
         logWarn() << QStringLiteral("new array length is too large (%1), limiting to (%2)")
@@ -57,7 +57,6 @@ bool ArrayDataInformation::setArrayLength(uint newLength)
     topLevelDataInformation()->_childCountAboutToChange(this, oldLength, newLength);
     mData->setLength(newLength);
     topLevelDataInformation()->_childCountChanged(this, oldLength, newLength);
-    return true;
 }
 
 void ArrayDataInformation::setArrayType(DataInformation* newChildType)

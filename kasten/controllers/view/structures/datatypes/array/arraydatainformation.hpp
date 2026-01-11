@@ -61,7 +61,7 @@ public:
 
     bool isArray() const override;
 
-    bool setArrayLength(uint newLength);
+    void setArrayLength(uint newLength);
     /** Sets the new array type
      * @param newChildtype the new type (ownership is always taken, do not use anymore after this call!)
      */
