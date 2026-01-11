@@ -2530,7 +2530,7 @@ msgstr ""
 #: controllers/view/structures/structureinstalljob.cpp:57
 #, kde-format
 msgid "Unknown error (0)"
-msgstr ""
+msgstr "Neznámá chyba (0)"
 
 #: controllers/view/structures/structureinstalljob.cpp:59
 #, fuzzy, kde-format
