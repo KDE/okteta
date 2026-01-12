@@ -26,7 +26,6 @@ inline PrimitiveArrayData<type>::PrimitiveArrayData(unsigned int initialLength, 
     , mDummy(parent)
 {
     Q_ASSERT(childType->type() == type);
-    mData.reserve(initialLength);
     mData.resize(initialLength);
     mDummy.setWasAbleToRead(true);
 }
