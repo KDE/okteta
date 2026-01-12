@@ -54,7 +54,7 @@ void ScriptHandler::validateData(DataInformation* data)
     if (validationFunc.isValid()) {
         QScriptValue result = callFunction(validationFunc, data, ScriptHandlerInfo::Mode::Validating);
         if (result.isError()) {
-            mTopLevel->logger()->error(data) << "Error occurred while validating element: "
+            mTopLevel->logger()->error(data) << "Error occurred while validating element:"
                                              << result.toString();
             data->setValidationError(QStringLiteral("Error occurred in validation: ")
                                      + result.toString());
@@ -89,7 +89,7 @@ void ScriptHandler::updateDataInformation(DataInformation* data)
         QString context = data->fullObjectPath(); // we mustn't use data after updateFunc.call(), save context
         QScriptValue result = callFunction(updateFunc, data, ScriptHandlerInfo::Mode::Updating);
         if (result.isError()) {
-            mTopLevel->logger()->error(context) << "Error occurred while updating element: "
+            mTopLevel->logger()->error(context) << "Error occurred while updating element:"
                                                 << result.toString();
         }
         if (mEngine->hasUncaughtException()) {
@@ -116,7 +116,7 @@ void ScriptHandler::updateLength(ArrayDataInformation* array)
         if (value.isValid) {
             array->setArrayLength(value.value);
         } else {
-            array->logError() << "Length function did not return a valid number! Result was: " << result.toString();
+            array->logError() << "Length function did not return a valid number. Result was:" << result.toString();
         }
     }
 }

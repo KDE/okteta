@@ -56,7 +56,7 @@ qint64 UnionDataInformation::readData(const Okteta::AbstractByteArrayModel* inpu
         top->scriptHandler()->updateDataInformation(next);
         DataInformation* newNext = mChildren.at(i);
         if (next != newNext) {
-            logInfo() << "Child at index " << i << " was replaced.";
+            logInfo() << "Child at index" << i << "was replaced.";
             top->setChildDataChanged();
         }
         // bit offset always has to be reset to original value

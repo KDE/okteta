@@ -98,8 +98,8 @@ QScriptValue StructUnionScriptClass::additionalProperty(const DataInformation* d
     if (id != 0) {
         quint32 pos = id - 1;
         if (pos >= data->childCount()) {
-            dataW->logError() << "attempting to access out of bounds child: index was" << pos
-                              << ", maximum is" << (data->childCount() - 1);
+            dataW->logError().nospace() << "Attempting to access out of bounds child: index was " << pos
+                              << ", maximum is " << (data->childCount() - 1) << ".";
             return engine()->currentContext()->throwError(QScriptContext::RangeError,
                                                           QStringLiteral("Attempting to access struct index %1, but length is %2").arg(
                                                               QString::number(pos), QString::number(data->childCount())));
@@ -110,7 +110,7 @@ QScriptValue StructUnionScriptClass::additionalProperty(const DataInformation* d
         return dataW->childCount();
     }
     if (name == s_children) {
-        dataW->logError() << "attempting to read read-only property" << s_children.toString();
+        dataW->logError() << "Attempting to read read-only property:" << s_children.toString();
         return engine()->undefinedValue();
     }
     // TODO is this necessary, will there be any way a child has no id set?

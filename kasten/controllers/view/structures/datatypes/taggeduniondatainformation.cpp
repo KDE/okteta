@@ -113,11 +113,11 @@ int TaggedUnionDataInformation::determineSelection(TopLevelDataInformation* top)
             }
             // number is valid -> there must be exactly one field
             if (mChildren.size() != 1) {
-                logError() << "Alternative number" << i << "is not valid. SelectIf is number, but there is not exactly one child!";
+                logError() << "Alternative number" << i << "is not valid. SelectIf is number, but there is not exactly one child.";
                 continue;
             }
             if (!mChildren.at(0)->isPrimitive()) {
-                logError() << "Alternative number" << i << "is not valid. SelectIf is number, but only child is not primitive!";
+                logError() << "Alternative number" << i << "is not valid. SelectIf is number, but only child is not primitive.";
                 continue;
             }
             if (mChildren.at(0)->asPrimitive()->value() == number.value) {

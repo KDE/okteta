@@ -21,8 +21,8 @@ EnumDataInformation::EnumDataInformation(const QString& name, PrimitiveDataInfor
     , mEnum(enumDef)
 {
     if (enumDef->type() != type->type()) {
-        logWarn() << "incompatible types in definition and value: "
-                  << enumDef->type() << "and " << type->type();
+        logWarn().nospace() << "Incompatible types in definition and value: '"
+                  << enumDef->type() << "' and '" << type->type() << "'.";
     }
     mValue->setParent(this);
 }

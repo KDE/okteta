@@ -28,8 +28,8 @@ ArrayDataInformation::ArrayDataInformation(const QString& name, uint length, Dat
         setLengthFunction(lengthFunction);
     }
     if (length > MAX_LEN) {
-        logger.warn(this) << length << "exceeds maximum length of" << MAX_LEN
-                          << ". Setting it to" << MAX_LEN << "instead";
+        logger.warn(this).nospace() << length << " exceeds maximum length of " << MAX_LEN
+                          << ". Setting it to " << MAX_LEN << " instead.";
         length = MAX_LEN;
     }
     childType->setParent(this);
@@ -50,8 +50,7 @@ ArrayDataInformation::~ArrayDataInformation() = default;
 void ArrayDataInformation::setArrayLength(uint newLength)
 {
     if (newLength > MAX_LEN) {
-        logWarn() << QStringLiteral("new array length is too large (%1), limiting to (%2)")
-            .arg(QString::number(newLength), QString::number(MAX_LEN));
+        logWarn().nospace() << "New array length is too large (" << newLength << "), limiting to " << MAX_LEN << ".";
         newLength = MAX_LEN;
     }
     uint oldLength = mData->length();
@@ -67,7 +66,7 @@ void ArrayDataInformation::setArrayType(DataInformation* newChildType)
 {
     if (newChildType->isPrimitive() && newChildType->asPrimitive()->type() == mData->primitiveType()) {
         // there is no need to change the type
-        logInfo() << "New and old child type are identical, skipping: " << mData->primitiveType();
+        logInfo() << "New and old child type are identical, skipping:" << mData->primitiveType();
         delete newChildType;
         return;
     }
@@ -133,8 +132,8 @@ qint64 ArrayDataInformation::readData(const Okteta::AbstractByteArrayModel* inpu
 {
     if (*bitOffset != 0) {
         // TODO remove this, it will probably cause issues
-        logWarn() << "bit offset != 0 (" << *bitOffset << "), adding padding,"
-            " arrays always start at full bytes";
+        logWarn().nospace() << "Bit offset != 0 (" << *bitOffset << "), adding padding,"
+            " arrays always start at full bytes.";
         bitsRemaining &= BitCount64(~7); // unset lower 3 bits to make it divisible by 8
         address++;
     }
@@ -152,8 +151,8 @@ bool ArrayDataInformation::setChildData(uint row, const QVariant& value, Okteta:
                                         Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset)
 {
     if (bitOffset != 0) {
-        logWarn() << "bit offset != 0 (" << bitOffset << "), adding padding,"
-            " arrays always start at full bytes";
+        logWarn().nospace() << "Bit offset != 0 (" << bitOffset << "), adding padding,"
+            " arrays always start at full bytes.";
         bitsRemaining -= bitOffset;
         address++;
     }

@@ -94,7 +94,7 @@ void TopLevelDataInformation::read(const Okteta::AbstractByteArrayModel* input, 
     const DataInformation* oldData = mData.data();
     mScriptHandler->updateDataInformation(mData.data()); // unlikely that this is useful, but maybe someone needs it
     if (mData.data() != oldData) {
-        mLogger->info() << "Main element was replaced!";
+        mLogger->info() << "Main element was replaced.";
     }
     mData->readData(input, address, remainingBits, &bitOffset);
 

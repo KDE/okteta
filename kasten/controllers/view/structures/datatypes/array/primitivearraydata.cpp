@@ -137,15 +137,15 @@ bool PrimitiveArrayData<type>::setChildData(uint row, const QVariant& value, Okt
     Q_ASSERT(value.isValid());
     Q_ASSERT(bitsRemaining % 8 == 0);
     if (sizeof(T) * 8 > bitsRemaining) {
-        this->mParent->logInfo() << " not enough bits remaining ("
-                                 << bitsRemaining << ") need " << (sizeof(T) * 8);
+        this->mParent->logInfo().nospace() << "Not enough bits remaining ("
+                                 << bitsRemaining << "), need " << (sizeof(T) * 8);
         return false;
     }
     const QSysInfo::Endian byteOrder = mChildType->effectiveByteOrder();
     bool ok = false;
     T convertedVal = DisplayClass::fromVariant(value, &ok);
     if (!ok) {
-        this->mParent->logWarn() << "could not convert" << value << "to" << type;
+        this->mParent->logWarn().nospace() << "Could not convert '" << value << "' to '" << type << "'.";
         return false;
     }
     qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES)

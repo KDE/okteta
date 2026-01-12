@@ -46,7 +46,7 @@ bool BasicPrimitiveDataInformation<T, C>::setData(const QVariant& value,
     bool ok;
     T valToWrite = C::fromVariant(value, &ok);
     if (!ok) {
-        logError() << "Failed to convert" << value << "to" << C::staticType();
+        logError().nospace() << "Failed to convert '" << value << "' to '" << C::staticType() << "'.";
         return false;
     }
     AllPrimitiveTypes newVal(oldVal);

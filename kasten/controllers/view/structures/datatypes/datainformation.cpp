@@ -152,7 +152,7 @@ void DataInformation::setAdditionalFunction(AdditionalData::AdditionalDataType e
         return;
     }
     if (!value.isFunction()) {
-        logError() << "cannot set" << name << "since" << value.toString() << "is not a function!";
+        logError().nospace() << "Cannot set '" << name << "' since '" << value.toString() << "' is not a function.";
         return;
     }
     mAdditionalData.set(entry, QVariant::fromValue(value));
@@ -301,7 +301,7 @@ QScriptValue DataInformation::toScriptValue(TopLevelDataInformation* top)
 QString DataInformation::customToString(const QScriptValue& func) const
 {
     if (!wasAbleToRead()) {
-        logError() << "Attempting to call custom to string function, but element could not be read";
+        logError() << "Attempting to call custom to string function, but element could not be read.";
         return valueStringImpl();
     }
     Q_ASSERT(func.isFunction());

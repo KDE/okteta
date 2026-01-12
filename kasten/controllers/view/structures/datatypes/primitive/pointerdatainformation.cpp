@@ -133,7 +133,7 @@ DataInformation* PointerDataInformation::childAt(uint index) const
 bool PointerDataInformation::setPointerType(DataInformation* type)
 {
     if (!type->isPrimitive()) {
-        logError() << "New pointer type is not primitive!";
+        logError() << "New pointer type is not primitive.";
         return false;
     }
     PrimitiveDataInformation* prim = type->asPrimitive();
@@ -178,7 +178,7 @@ quint64 PointerDataInformation::interpret(Okteta::Address start) const
 
     ParsedNumber<quint64> value = ParserUtils::uint64FromScriptValue(result);
     if (!value.isValid) {
-        logError() << "Pointer interpreter function did not return a valid number! Result was: " << result.toString();
+        logError() << "Pointer interpreter function did not return a valid number. Result was:" << result.toString();
         return 0;
     } else {
         return value.value;

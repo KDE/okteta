@@ -132,7 +132,7 @@ int ComplexArrayData::indexOf(const DataInformation* const data) const
         }
     }
 
-    mParent->logWarn() << data->fullObjectPath() << "is not a valid child!";
+    mParent->logWarn() << data->fullObjectPath() << "is not a valid child.";
     Q_ASSERT(false); // should never land here
     return -1;
 }

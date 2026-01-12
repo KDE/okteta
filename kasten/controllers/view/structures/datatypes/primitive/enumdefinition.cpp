@@ -94,7 +94,7 @@ QPair<AllPrimitiveTypes, QString> EnumDefinition::convertToEnumEntry(const QStri
         minValue = std::numeric_limits<qint64>::min();
         break;
     default:
-        logger.warn() << type << "is an invalid type for an enumeration, no values were parsed";
+        logger.warn().nospace() << "'" << type << "' is an invalid type for an enumeration, no values were parsed.";
         return {};
     }
 
@@ -107,8 +107,8 @@ QPair<AllPrimitiveTypes, QString> EnumDefinition::convertToEnumEntry(const QStri
         if (num <= 9007199254740991.0) {
             intValue = qint64(num);
         } else {
-            logger.warn() << "The value" << num << "in enum" << name
-                          << " is larger than the biggest double value that can represent"
+            logger.warn().nospace() << "The value '" << num << "' in enum '" << name
+                          << "' is larger than the biggest double value that can represent"
                 " any smaller integer exactly, skipping it.\n"
                 "Write the value as a string so it can be converted"
                 "to an integer exactly.";
@@ -128,7 +128,7 @@ QPair<AllPrimitiveTypes, QString> EnumDefinition::convertToEnumEntry(const QStri
         }
         if (!ok) {
             const auto msgTemplate =
-                QStringLiteral("Could not convert '%1' to an enum constant, name was: %2");
+                QStringLiteral("Could not convert '%1' to an enum constant, name was '%2'.");
             QString errMessage = QString(msgTemplate).arg(valueString, name);
             logger.warn() << errMessage;
             return {};
@@ -137,7 +137,7 @@ QPair<AllPrimitiveTypes, QString> EnumDefinition::convertToEnumEntry(const QStri
     quint64 asUnsigned = intValue.value<quint64>();
     if (asUnsigned > maxValue) {
         QString errMessage = QStringLiteral(
-            "Enumerator %1: %2 is larger than the maximum possible for type %3 (%4)");
+            "Enumerator '%1': %2 is larger than the maximum possible for type '%3' (%4).");
         errMessage = errMessage.arg(name, QString::number(asUnsigned),
                                     PrimitiveType::standardTypeName(type), QString::number(maxValue));
         logger.warn() << errMessage;
@@ -146,7 +146,7 @@ QPair<AllPrimitiveTypes, QString> EnumDefinition::convertToEnumEntry(const QStri
     qint64 asSigned = intValue.value<qint64>();
     if (minValue != 0 && asSigned < minValue) {
         QString errMessage = QStringLiteral(
-            "Enumerator %1: %2 is smaller than the minimum possible for type %3 (%4)");
+            "Enumerator '%1': %2 is smaller than the minimum possible for type '%3' (%4).");
         errMessage = errMessage.arg(name, QString::number(asSigned),
                                     PrimitiveType::standardTypeName(type), QString::number(minValue));
         logger.warn() << errMessage;

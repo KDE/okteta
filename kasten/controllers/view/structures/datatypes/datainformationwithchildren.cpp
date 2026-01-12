@@ -143,7 +143,7 @@ void DataInformationWithChildren::setChildren(const QVector<DataInformation*>& n
 void DataInformationWithChildren::setChildren(const QScriptValue& children)
 {
     if (children.isNull() || children.isUndefined()) {
-        logError() << "attempting to set children to null/undefined.";
+        logError() << "Attempting to set children to null/undefined.";
         return;
     }
     QVector<DataInformation*> convertedVals =

@@ -179,7 +179,7 @@ DataInformation::DataInformationEndianness ParserUtils::byteOrderFromString(cons
         return DataInformation::DataInformationEndianness::EndiannessInherit;
     }
 
-    logger.warn().nospace() << "Unrecognized byte order '" << string << "', defaulting to 'inherit'";
+    logger.warn().nospace() << "Unrecognized byte order '" << string << "', defaulting to 'inherit'.";
     return DataInformation::DataInformationEndianness::EndiannessInherit;
 }
 
@@ -282,7 +282,7 @@ StringDataInformation::StringType ParserUtils::toStringEncoding(const QString& s
             return StringDataInformation::StringType::UTF32_BE;
         }
     }
-    logger.warn() << "Unrecognized string encoding: " << enc;
+    logger.warn() << "Unrecognized string encoding:" << enc;
     return StringDataInformation::StringType::InvalidEncoding;
 }
 
