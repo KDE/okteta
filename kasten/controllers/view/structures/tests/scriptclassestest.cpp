@@ -176,7 +176,8 @@ void ScriptClassesTest::initTestCase()
                     << pair("type", QScriptValue::Undeletable);
     std::sort(arrayProperties.begin(), arrayProperties.end());
     arrayData = new ArrayDataInformation(QStringLiteral("array"), 20,
-                                         PrimitiveFactory::newInstance(QStringLiteral("inner"), PrimitiveDataType::Int32, lwc));
+                                         PrimitiveFactory::newInstance(QStringLiteral("inner"), PrimitiveDataType::Int32, lwc),
+                                         lwc);
     arrayDataTop.reset(
         new TopLevelDataInformation(arrayData, nullptr, ScriptEngineInitializer::newEngine()));
 

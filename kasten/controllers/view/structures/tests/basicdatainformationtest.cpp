@@ -274,10 +274,10 @@ void BasicDataInformationTest::initTestCase()
                   << PrimitiveFactory::newInstance(QStringLiteral("prim2"), PrimitiveDataType::UInt64, lwc);
     unionWithChildren = new UnionDataInformation(QStringLiteral("unionWithChildren"), unionChildren);
 
-    emptyPrimitiveArray = new ArrayDataInformation(QStringLiteral("emptyPrimitiveArray"), 0, PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc));
-    emptyComplexArray = new ArrayDataInformation(QStringLiteral("emptyComplexArray"), 0, structWithChildren->clone());
-    primitiveArrayWithChildren = new ArrayDataInformation(QStringLiteral("primitiveArrayWithChildren"), 2, PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc));
-    complexArrayWithChildren = new ArrayDataInformation(QStringLiteral("complexArrayWithChildren"), 2, structWithChildren->clone());
+    emptyPrimitiveArray = new ArrayDataInformation(QStringLiteral("emptyPrimitiveArray"), 0, PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc), lwc);
+    emptyComplexArray = new ArrayDataInformation(QStringLiteral("emptyComplexArray"), 0, structWithChildren->clone(), lwc);
+    primitiveArrayWithChildren = new ArrayDataInformation(QStringLiteral("primitiveArrayWithChildren"), 2, PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc), lwc);
+    complexArrayWithChildren = new ArrayDataInformation(QStringLiteral("complexArrayWithChildren"), 2, structWithChildren->clone(), lwc);
 
     QMap<AllPrimitiveTypes, QString> enumVals;
     enumVals[1] = QStringLiteral("one");

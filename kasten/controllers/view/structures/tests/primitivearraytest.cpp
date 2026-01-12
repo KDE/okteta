@@ -201,7 +201,8 @@ void PrimitiveArrayTest::testReadCustomizedPrimitiveInternal()
 
     auto* dataInf = new ArrayDataInformation(QStringLiteral("values"),
                                              endianModel->size() / sizeof(T),
-                                             primInfo);
+                                             primInfo,
+                                             lwc);
     QScopedPointer<TopLevelDataInformation> top(new TopLevelDataInformation(dataInf, nullptr, engine));
 
     QCOMPARE(dataInf->childCount(), uint(ENDIAN_SIZE / sizeof(T)));
@@ -240,8 +241,9 @@ void PrimitiveArrayTest::testReadPrimitiveInternal()
 {
     LoggerWithContext lwc(nullptr, QString());
     auto* dataInf = new ArrayDataInformation(QStringLiteral("values"),
-                                                             model->size() / sizeof(T),
-                                                             PrimitiveFactory::newInstance(QStringLiteral("value"), primType, lwc));
+                                             model->size() / sizeof(T),
+                                             PrimitiveFactory::newInstance(QStringLiteral("value"), primType, lwc),
+                                             lwc);
     dataInf->setByteOrder(CURRENT_BYTE_ORDER);
     QScopedPointer<TopLevelDataInformation> top(new TopLevelDataInformation(dataInf, nullptr,
                                                                             ScriptEngineInitializer::newEngine()));

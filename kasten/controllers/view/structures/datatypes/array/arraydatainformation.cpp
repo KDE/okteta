@@ -19,6 +19,7 @@
 #include "primitivearraydata.hpp"
 
 ArrayDataInformation::ArrayDataInformation(const QString& name, uint length, DataInformation* childType,
+                                           const LoggerWithContext& logger,
                                            DataInformation* parent, const QScriptValue& lengthFunction)
     : DataInformationWithDummyChildren(name, parent)
 {
@@ -27,8 +28,8 @@ ArrayDataInformation::ArrayDataInformation(const QString& name, uint length, Dat
         setLengthFunction(lengthFunction);
     }
     if (length > MAX_LEN) {
-        logWarn() << length << "exceeds maximum length of" << MAX_LEN
-                  << ". Setting it to" << MAX_LEN << "instead";
+        logger.warn(this) << length << "exceeds maximum length of" << MAX_LEN
+                          << ". Setting it to" << MAX_LEN << "instead";
         length = MAX_LEN;
     }
     childType->setParent(this);

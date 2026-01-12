@@ -16,6 +16,7 @@
 #include <QScriptValue>
 
 class AbstractArrayData;
+struct LoggerWithContext;
 
 class ArrayDataInformation : public DataInformationWithDummyChildren
 {
@@ -28,6 +29,7 @@ public:
      *  length should be > 0
      */
     ArrayDataInformation(const QString& name, uint length, DataInformation* childType,
+                         const LoggerWithContext& logger,
                          DataInformation* parent = nullptr, const QScriptValue& lengthFuntion = QScriptValue());
     ~ArrayDataInformation() override;
 

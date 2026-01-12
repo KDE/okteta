@@ -190,10 +190,12 @@ ArrayDataInformation* DataInformationFactory::newArray(const ArrayParsedData& pd
     }
     const ParsedNumber<uint> fixedLength = ParserUtils::uintFromScriptValue(pd.length);
     if (fixedLength.isValid) {
-        return new ArrayDataInformation(pd.name, fixedLength.value, pd.arrayType, pd.parent, QScriptValue());
+        LoggerWithContext lwc(pd.logger, pd.context());
+        return new ArrayDataInformation(pd.name, fixedLength.value, pd.arrayType, lwc, pd.parent, QScriptValue());
     }
     if (pd.length.isFunction()) {
-        return new ArrayDataInformation(pd.name, 0, pd.arrayType, pd.parent, pd.length);
+        LoggerWithContext lwc(pd.logger, pd.context());
+        return new ArrayDataInformation(pd.name, 0, pd.arrayType, lwc, pd.parent, pd.length);
     }
 
     // neither integer nor function, must be a string containing the name of another element.
@@ -213,7 +215,8 @@ ArrayDataInformation* DataInformationFactory::newArray(const ArrayParsedData& pd
         return nullptr;
     }
     QScriptValue lengthFunction = ParserUtils::functionSafeEval(pd.engine, lengthFunctionString);
-    return new ArrayDataInformation(pd.name, 0, pd.arrayType, pd.parent, lengthFunction);
+    LoggerWithContext lwc(pd.logger, pd.context());
+    return new ArrayDataInformation(pd.name, 0, pd.arrayType, lwc, pd.parent, lengthFunction);
 }
 
 StringDataInformation* DataInformationFactory::newString(const StringParsedData& pd)

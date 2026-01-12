@@ -45,7 +45,7 @@ void ArrayDataInformationTest::initTestCase()
     LoggerWithContext lwc(nullptr, QString());
 
     primitive = new ArrayDataInformation(QStringLiteral("primitives"), 0,
-                                         PrimitiveFactory::newInstance(QStringLiteral("child"), PrimitiveDataType::UInt32, lwc));
+                                         PrimitiveFactory::newInstance(QStringLiteral("child"), PrimitiveDataType::UInt32, lwc), lwc);
     primitiveSize = 32;
     primitiveTop = new TopLevelDataInformation(primitive);
 
@@ -72,7 +72,7 @@ void ArrayDataInformationTest::initTestCase()
     auto* structs = new StructureDataInformation(QStringLiteral("vals"), structsChildren);
 
     complexSize = 64;
-    complex = new ArrayDataInformation(QStringLiteral("complex"), 0, structs);
+    complex = new ArrayDataInformation(QStringLiteral("complex"), 0, structs, lwc);
     complexTop = new TopLevelDataInformation(complex);
 
     QCOMPARE(complex->isArray(), true);
