@@ -54,6 +54,9 @@ void ArrayDataInformation::setArrayLength(uint newLength)
         newLength = MAX_LEN;
     }
     uint oldLength = mData->length();
+    if (oldLength == newLength) {
+        return;
+    }
     topLevelDataInformation()->_childCountAboutToChange(this, oldLength, newLength);
     mData->setLength(newLength);
     topLevelDataInformation()->_childCountChanged(this, oldLength, newLength);
