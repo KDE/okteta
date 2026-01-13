@@ -34,7 +34,8 @@ public:
     void validateData(DataInformation* data);
     /** The pointer may be changed while updating, CHECK AS SOON AS FUNCTION RETURNS! */
     void updateDataInformation(DataInformation* data);
-    void updateLength(ArrayDataInformation* array);
+    /** @returns @c true if the length is set by a script function, otherwise @false */
+    bool updateLength(ArrayDataInformation* array);
     QString customToString(const DataInformation* data, const QScriptValue& func);
 
     QScriptEngine* engine() const;

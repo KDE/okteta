@@ -55,12 +55,20 @@ ArrayDataInformation::~ArrayDataInformation() = default;
 void ArrayDataInformation::setArrayLength(uint newLength)
 {
     uint newSupportedLength = newLength;
-    if (newLength > MAX_LEN) {
+    const uint oldLength = mData->length();
+    if (newSupportedLength > MAX_LEN) {
+        if (oldLength == newLength) {
+            // do not repeat warning, but keep warning state set
+            const ScriptLogger::LogLevel warningLevel = ScriptLogger::LogWarning;
+            if (loggedData() < warningLevel) {
+                setLoggedData(warningLevel);
+            }
+            return;
+        }
+
         logWarn().nospace() << "New array length is too large (" << newLength << "), limiting to " << MAX_LEN << ".";
         newSupportedLength = MAX_LEN;
-    }
-    uint oldLength = mData->length();
-    if (oldLength == newLength) {
+    } else if (oldLength == newLength) {
         return;
     }
 
@@ -148,7 +156,15 @@ qint64 ArrayDataInformation::readData(const Okteta::AbstractByteArrayModel* inpu
     }
 
     // update the length of the array
-    topLevelDataInformation()->scriptHandler()->updateLength(this);
+    if (!topLevelDataInformation()->scriptHandler()->updateLength(this)) {
+        // fixed length, update state for any previous log warning about non-supported length
+        if (mData->supportedLength() < mData->length()) {
+            const ScriptLogger::LogLevel warningLevel = ScriptLogger::LogWarning;
+            if (loggedData() < warningLevel) {
+                setLoggedData(warningLevel);
+            }
+        }
+    }
 
     // FIXME do not add this padding
     qint64 ret = mData->readData(input, address, bitsRemaining);

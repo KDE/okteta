@@ -100,7 +100,7 @@ void ScriptHandler::updateDataInformation(DataInformation* data)
     }
 }
 
-void ScriptHandler::updateLength(ArrayDataInformation* array)
+bool ScriptHandler::updateLength(ArrayDataInformation* array)
 {
     QScriptValue lengthFunc = array->lengthFunction();
     if (lengthFunc.isValid()) {
@@ -118,7 +118,9 @@ void ScriptHandler::updateLength(ArrayDataInformation* array)
         } else {
             array->logError() << "Length function did not return a valid number. Result was:" << result.toString();
         }
+        return true;
     }
+    return false;
 }
 
 QString ScriptHandler::customToString(const DataInformation* data, const QScriptValue& func)
