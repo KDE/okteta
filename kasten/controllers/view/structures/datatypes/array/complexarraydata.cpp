@@ -20,13 +20,14 @@
 // Std
 #include <utility>
 
-ComplexArrayData::ComplexArrayData(unsigned int initialLength,
+ComplexArrayData::ComplexArrayData(unsigned int supportedLength, uint length,
                                    std::unique_ptr<DataInformation>&& data,
                                    ArrayDataInformation* parent)
     : AbstractArrayData(std::move(data), parent)
+    , m_length(length)
 {
-    mChildren.reserve(initialLength);
-    appendChildren(0, initialLength);
+    mChildren.reserve(supportedLength);
+    appendChildren(0, supportedLength);
 }
 
 ComplexArrayData::~ComplexArrayData() = default;
@@ -42,14 +43,16 @@ void ComplexArrayData::appendChildren(uint from, uint to)
     }
 }
 
-void ComplexArrayData::setLength(uint newLength)
+void ComplexArrayData::setLength(uint supportedLength, uint length)
 {
+    m_length = length;
+
     uint oldLength = mChildren.size();
-    if (newLength > oldLength) {
-        mChildren.reserve(newLength);
-        appendChildren(oldLength, newLength);
-    } else if (newLength < oldLength) {   // XXX maybe keep some cached
-        mChildren.resize(newLength);
+    if (supportedLength > oldLength) {
+        mChildren.reserve(supportedLength);
+        appendChildren(oldLength, supportedLength);
+    } else if (supportedLength < oldLength) {   // XXX maybe keep some cached
+        mChildren.resize(supportedLength);
     }
     // else nothing to do, length stays the same
 }
@@ -72,6 +75,11 @@ QVariant ComplexArrayData::dataAt(uint index, int column, int role)
 
 unsigned int ComplexArrayData::length() const
 {
+    return m_length;
+}
+
+unsigned int ComplexArrayData::supportedLength() const
+{
     return mChildren.size();
 }
 
@@ -93,7 +101,7 @@ BitCount32 ComplexArrayData::size() const
 QString ComplexArrayData::typeName() const
 {
     QString type = mChildType->typeName();
-    return i18nc("type name, then array length", "%1[%2]", type, QString::number(length()));
+    return i18nc("type name, then array length", "%1[%2]", type, QString::number(supportedLength()));
 }
 
 QString ComplexArrayData::valueString() const
@@ -132,7 +140,7 @@ int ComplexArrayData::indexOf(const DataInformation* const data) const
         }
     }
 
-    mParent->logWarn() << data->fullObjectPath() << "is not a valid child!";
+    mParent->logWarn() << data->fullObjectPath() << "is not a valid child.";
     Q_ASSERT(false); // should never land here
     return -1;
 }
@@ -140,7 +148,7 @@ int ComplexArrayData::indexOf(const DataInformation* const data) const
 QScriptValue ComplexArrayData::toScriptValue(uint index, QScriptEngine* engine,
                                              ScriptHandlerInfo* handlerInfo)
 {
-    Q_ASSERT(index < length());
+    Q_ASSERT(index < supportedLength());
     return mChildren[index]->toScriptValue(engine, handlerInfo);
 }
 
@@ -176,31 +184,31 @@ PrimitiveDataType ComplexArrayData::primitiveType() const
 
 BitCount32 ComplexArrayData::sizeAt(uint index) const
 {
-    Q_ASSERT(index < length());
+    Q_ASSERT(index < supportedLength());
     return mChildren[index]->size();
 }
 
 Qt::ItemFlags ComplexArrayData::childFlags(int index, int column, bool fileLoaded) const
 {
-    Q_ASSERT(index >= 0 && uint(index) < length());
+    Q_ASSERT(index >= 0 && uint(index) < supportedLength());
     return mChildren[index]->flags(column, fileLoaded);
 }
 
 QWidget* ComplexArrayData::createChildEditWidget(uint index, QWidget* parent) const
 {
-    Q_ASSERT(index < length());
+    Q_ASSERT(index < supportedLength());
     return mChildren[index]->createEditWidget(parent);
 }
 
 QVariant ComplexArrayData::dataFromChildWidget(uint index, const QWidget* w) const
 {
-    Q_ASSERT(index < length());
+    Q_ASSERT(index < supportedLength());
     return mChildren[index]->dataFromWidget(w);
 
 }
 
 void ComplexArrayData::setChildWidgetData(uint index, QWidget* w) const
 {
-    Q_ASSERT(index < length());
+    Q_ASSERT(index < supportedLength());
     mChildren[index]->setWidgetData(w);
 }

@@ -8,6 +8,7 @@
 
 // lib
 #include "scriptlogger.hpp"
+#include <datainformation.hpp>
 // KF
 #include <KComboBox>
 // Qt
@@ -24,7 +25,7 @@ ScriptLoggerView::ScriptLoggerView(const QVector<std::shared_ptr<TopLevelDataInf
     , mList(topDataInfoList)
 {
     for (const auto& info : std::as_const(mList)) {
-        mSelector->addItem(info->objectName());
+        mSelector->addItem(info->actualDataInformation()->name());
     }
 
     mView->setShowGrid(false);

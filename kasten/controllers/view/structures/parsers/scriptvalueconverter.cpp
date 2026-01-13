@@ -22,7 +22,7 @@ namespace ScriptValueConverter {
 std::unique_ptr<DataInformation> convert(const QScriptValue& value, const QString& name, ScriptLogger* logger,
                                          DataInformation* parent)
 {
-    // TODO Q_CHECK_PTR(parent)
+    // TODO Q_ASSERT(parent)
     const ParserInfo info(name, logger, parent, value.engine());
     return toDataInformation(value, info); // could be NULL
 }
@@ -30,7 +30,7 @@ std::unique_ptr<DataInformation> convert(const QScriptValue& value, const QStrin
 std::vector<std::unique_ptr<DataInformation>> convertValues(const QScriptValue& value, ScriptLogger* logger,
                                                             DataInformation* parent)
 {
-    // TODO Q_CHECK_PTR(parent);
+    // TODO Q_ASSERT(parent);
     std::vector<std::unique_ptr<DataInformation>> ret;
     QScriptValueIterator it(value);
     const bool isArray = value.isArray();

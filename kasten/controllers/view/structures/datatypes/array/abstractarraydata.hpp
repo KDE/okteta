@@ -43,8 +43,10 @@ public:
 
 public: // API to implement
     [[nodiscard]]
+    virtual unsigned int supportedLength() const = 0;
+    [[nodiscard]]
     virtual unsigned int length() const = 0;
-    virtual void setLength(uint newLength) = 0;
+    virtual void setLength(uint supportedLength, uint length) = 0;
 
     [[nodiscard]]
     virtual QString typeName() const = 0;
@@ -98,7 +100,7 @@ public:
 public:
     /** Takes ownership over @p type ! */
     [[nodiscard]]
-    static std::unique_ptr<AbstractArrayData> newArrayData(uint length,
+    static std::unique_ptr<AbstractArrayData> newArrayData(uint supportedLength, uint length,
                                                            std::unique_ptr<DataInformation>&& type,
                                                            ArrayDataInformation* parent);
 protected: // API to implement:

@@ -64,7 +64,6 @@ inline QVariant SIntDataInformationMethods<T>::staticToQVariant(T value)
 template <typename T>
 inline T SIntDataInformationMethods<T>::fromVariant(const QVariant& value, bool* ok)
 {
-    Q_CHECK_PTR(ok);
     qint64 val = value.toLongLong(ok);
     T result = T(val);
     if (val != qint64(result)) {

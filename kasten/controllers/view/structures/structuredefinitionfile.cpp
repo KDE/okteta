@@ -69,13 +69,11 @@ bool StructureDefinitionFile::isValid() const
 
 std::vector<std::unique_ptr<TopLevelDataInformation>> StructureDefinitionFile::structures() const
 {
-    Q_CHECK_PTR(mParser);
     return mParser->parseStructures();
 }
 
 std::unique_ptr<TopLevelDataInformation> StructureDefinitionFile::structure(const QString& name) const
 {
-    Q_CHECK_PTR(mParser);
     std::vector<std::unique_ptr<TopLevelDataInformation>> list = mParser->parseStructures();
     std::unique_ptr<TopLevelDataInformation> ret;
     for (auto& info : list) {
@@ -93,7 +91,6 @@ std::unique_ptr<TopLevelDataInformation> StructureDefinitionFile::structure(cons
 
 QStringList StructureDefinitionFile::structureNames() const
 {
-    Q_CHECK_PTR(mParser);
     return mParser->parseStructureNames();
 }
 

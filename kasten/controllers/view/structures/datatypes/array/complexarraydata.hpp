@@ -20,15 +20,17 @@ class ComplexArrayData : public AbstractArrayData
 {
 public:
     /** Takes ownership of @p data !*/
-    ComplexArrayData(unsigned int initialLength,
+    ComplexArrayData(unsigned int supportedLength, uint length,
                      std::unique_ptr<DataInformation>&& data,
                      ArrayDataInformation* parent);
     ~ComplexArrayData() override;
 
 public: // AbstractArrayData API
     [[nodiscard]]
+    unsigned int supportedLength() const override;
+    [[nodiscard]]
     unsigned int length() const override;
-    void setLength(uint newLength) override;
+    void setLength(uint supportedLength, uint length) override;
 
     [[nodiscard]]
     QString typeName() const override;
@@ -79,6 +81,7 @@ private:
 
 private:
     std::vector<std::unique_ptr<DataInformation>> mChildren;
+    uint m_length = 0;
 };
 
 #endif // KASTEN_COMPLEXARRAYDATA_HPP

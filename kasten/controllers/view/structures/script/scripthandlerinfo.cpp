@@ -25,7 +25,6 @@ ScriptHandlerInfo::ScriptHandlerInfo(QScriptEngine* engine, ScriptLogger* logger
     , mBitfieldClass(std::make_unique<BitfieldScriptClass>(engine, this))
     , mPointerClass(std::make_unique<PointerScriptClass>(engine, this))
 {
-    Q_CHECK_PTR(mLogger);
 }
 
 ScriptHandlerInfo::~ScriptHandlerInfo() = default;

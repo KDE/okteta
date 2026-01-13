@@ -104,11 +104,11 @@ int TaggedUnionDataInformation::determineSelection(TopLevelDataInformation* top)
             }
             // number is valid -> there must be exactly one field
             if (mChildren.size() != 1) {
-                logError() << "Alternative number" << i << "is not valid. SelectIf is number, but there is not exactly one child!";
+                logError() << "Alternative number" << i << "is not valid. SelectIf is number, but there is not exactly one child.";
                 continue;
             }
             if (!mChildren.front()->isPrimitive()) {
-                logError() << "Alternative number" << i << "is not valid. SelectIf is number, but only child is not primitive!";
+                logError() << "Alternative number" << i << "is not valid. SelectIf is number, but only child is not primitive.";
                 continue;
             }
             if (mChildren.front()->asPrimitive()->value() == number.value) {
@@ -126,7 +126,6 @@ qint64 TaggedUnionDataInformation::readData(const Okteta::AbstractByteArrayModel
     Q_ASSERT(mHasBeenUpdated);
     // update must have been called prior to reading
     TopLevelDataInformation* const top = topLevelDataInformation();
-    Q_CHECK_PTR(top);
 
     const std::vector<std::unique_ptr<DataInformation>>& oldChildren = currentChildren();
 

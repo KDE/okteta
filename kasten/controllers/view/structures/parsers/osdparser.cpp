@@ -53,14 +53,13 @@ QDomDocument OsdParser::openDoc(ScriptLogger* logger) const
 
 QDomDocument OsdParser::openDocFromString(ScriptLogger* logger) const
 {
-    Q_CHECK_PTR(logger);
     Q_ASSERT(!mXmlString.isEmpty());
     int errorLine, errorColumn;
     QString errorMsg;
     QDomDocument doc;
     if (!doc.setContent(mXmlString, false, &errorMsg, &errorLine, &errorColumn)) {
         const QString errorOutput =
-            QStringLiteral("error reading XML: %1\n error line=%2\nerror column=%3")
+            QStringLiteral("Error reading XML: %1\n error line=%2\nerror column=%3")
             .arg(errorMsg, QString::number(errorLine), QString::number(errorColumn));
         logger->error() << errorOutput;
         logger->info() << "XML was:" << mXmlString;
@@ -72,16 +71,14 @@ QDomDocument OsdParser::openDocFromString(ScriptLogger* logger) const
 
 QDomDocument OsdParser::openDocFromFile(ScriptLogger* logger) const
 {
-    Q_CHECK_PTR(logger);
     QFileInfo fileInfo(mAbsolutePath);
     if (!fileInfo.exists()) {
-        logger->error() << "File" << mAbsolutePath << "does not exist!";
+        logger->error().nospace() << "File " << mAbsolutePath << " does not exist.";
         return {};
     }
     QFile file(fileInfo.absoluteFilePath());
     if (!file.open(QIODevice::ReadOnly)) {
-        const QString errorOutput = QLatin1String("Could not open file ") + mAbsolutePath;
-        logger->error() << errorOutput;
+        logger->error().nospace() << "Could not open file " << mAbsolutePath << ".";
         return {};
     }
     int errorLine, errorColumn;
@@ -89,7 +86,7 @@ QDomDocument OsdParser::openDocFromFile(ScriptLogger* logger) const
     QDomDocument doc;
     if (!doc.setContent(&file, false, &errorMsg, &errorLine, &errorColumn)) {
         const QString errorOutput =
-            QStringLiteral("error reading XML: %1\n error line=%2\nerror column=%3")
+            QStringLiteral("Error reading XML: %1\n error line=%2\nerror column=%3")
             .arg(errorMsg, QString::number(errorLine), QString::number(errorColumn));
         logger->error() << errorOutput;
         logger->info() << "File was:" << mAbsolutePath;
@@ -121,7 +118,7 @@ QStringList OsdParser::parseStructureNames() const
         } else if (tag == TYPE_ENUMDEF()) {
             // skip enum defs
         } else {
-            rootLogger->error(QString()).nospace() << "Unknown tag name in plugin " << mPluginName << " :"
+            rootLogger->error(QString()).nospace() << "Unknown tag name in plugin '" << mPluginName << "' : "
                                                    << tag;
         }
     }
@@ -145,7 +142,7 @@ std::vector<std::unique_ptr<TopLevelDataInformation>> OsdParser::parseStructures
 
     QDomElement rootElem = document.firstChildElement(QStringLiteral("data"));
     if (rootElem.isNull()) {
-        rootLogger->error() << "Missing top level <data> element!";
+        rootLogger->error() << "Missing top level <data> element.";
         structures.emplace_back(std::make_unique<TopLevelDataInformation>(
                                 std::make_unique<DummyDataInformation>(nullptr, fileInfo.fileName()), std::move(rootLogger), nullptr, fileInfo));
         return structures;
@@ -179,7 +176,7 @@ std::vector<std::unique_ptr<TopLevelDataInformation>> OsdParser::parseStructures
             if (!offset.isValid) {
                 data->logError() << "Default lock offset is not a valid number:" << offset.string;
             } else {
-                data->logInfo() << "Default lock offset is " << offset.string;
+                data->logInfo() << "Default lock offset is:" << offset.string;
                 topData->setDefaultLockOffset(offset.value);
             }
         }
@@ -216,7 +213,7 @@ std::vector<std::shared_ptr<EnumDefinition>> OsdParser::parseEnums(const QDomEle
 
             QString name = readProperty(child, PROPERTY_NAME());
             if (name.isEmpty()) {
-                lwc.warn() << "Entry is missing name, skipping it!";
+                lwc.warn() << "Entry is missing name, skipping it.";
                 continue;
             }
             QString value = readProperty(child, PROPERTY_VALUE());
@@ -229,7 +226,7 @@ std::vector<std::shared_ptr<EnumDefinition>> OsdParser::parseEnums(const QDomEle
 
         // now add this enum to the list of enums
         if (defs.empty()) {
-            lwc.error() << "Enum definition contains no valid elements!";
+            lwc.error() << "Enum definition contains no valid elements.";
         } else {
             ret.emplace_back(std::make_shared<EnumDefinition>(std::move(defs), enumName, type));
         }
@@ -245,7 +242,7 @@ std::unique_ptr<ArrayDataInformation> OsdParser::arrayFromXML(const QDomElement&
     ArrayParsedData apd(info);
     QString lengthStr = readProperty(xmlElem, PROPERTY_LENGTH());
     if (lengthStr.isEmpty()) {
-        info.error() << "No array length specified!";
+        info.error() << "No array length specified.";
         return {};
     }
     // must wrap in parentheses, cannot just evaluate. See https://bugreports.qt-project.org/browse/QTBUG-5757
@@ -266,7 +263,7 @@ std::unique_ptr<ArrayDataInformation> OsdParser::arrayFromXML(const QDomElement&
         if (typeParser.hasNext()) {
             apd.arrayType = typeParser.next();
             if (typeParser.hasNext()) {
-                info.error() << "More than one possible type for array!";
+                info.error() << "More than one possible type for array.";
                 apd.arrayType.reset();
                 return {};
             }
@@ -293,7 +290,7 @@ std::unique_ptr<DataInformation> OsdParser::parseType(const QDomElement& xmlElem
         LoggerWithContext lwc(info.logger, info.context() + name);
         auto ret = PrimitiveFactory::newInstance(name, typeAttribute, lwc);
         if (!ret) {
-            info.error() << typeAttribute << "is not a valid type identifier";
+            info.error() << "Not a valid type identifier:" << typeAttribute;
         }
         return ret;
     }
@@ -304,12 +301,12 @@ std::unique_ptr<DataInformation> OsdParser::parseType(const QDomElement& xmlElem
         return nullptr;
     }
     if (!toParse.nextSiblingElement().isNull()) {
-        info.warn() << "<type> element has more than one child!";
+        info.warn() << "<type> element has more than one child.";
     }
     // TODO have this newInfo code only in one location
     std::unique_ptr<DataInformation> ret = parseChildElement(toParse, info, name);
     if (!ret) {
-        info.error() << "Failed to parse element defined in <type>";
+        info.error() << "Failed to parse element defined in <type>.";
     }
     return ret;
 }
@@ -326,7 +323,7 @@ std::unique_ptr<PointerDataInformation> OsdParser::pointerFromXML(const QDomElem
     if (childElement.isNull()) {
         childElement = xmlElem.firstChildElement();
         if (childElement.isNull()) {
-            info.error() << "Pointer target is missing! Please add a <target> child element.";
+            info.error() << "Pointer target is missing. Please add a <target> child element.";
             return {};
         }
         if (childElement != xmlElem.lastChildElement()) {
@@ -382,7 +379,7 @@ std::unique_ptr<EnumDataInformation> OsdParser::enumFromXML(const QDomElement& x
     }
     epd.enumDef = findEnum(epd.enumName, info);
     if (!epd.enumDef) {
-        info.error().nospace() << "Enum definition '" << epd.enumName << "' does not exist!";
+        info.error() << "Enum definition does not exist:" << epd.enumName ;
         return {};
     }
 
@@ -436,7 +433,7 @@ std::unique_ptr<DataInformation> OsdParser::parseElement(const QDomElement& elem
         // use the type tag as a primitive type
         data = PrimitiveFactory::newInstance(info.name, tag, lwc);
         if (!data) {
-            info.error() << "Cannot parse unknown tag: " << tag;
+            info.error() << "Cannot parse unknown tag:" << tag;
         }
     }
 
@@ -467,7 +464,7 @@ std::shared_ptr<EnumDefinition> OsdParser::findEnum(const QString& defName, cons
         }
     }
 
-    info.error() << "Could not find enum definition with name" << defName;
+    info.error().nospace() << "Could not find enum definition with name '" << defName << "'.";
     return {};
 }
 
@@ -500,7 +497,7 @@ std::unique_ptr<TaggedUnionDataInformation> OsdParser::taggedUnionFromXML(const 
     // now handle alternatives
     QDomElement alternatives = xmlElem.firstChildElement(PROPERTY_ALTERNATIVES());
     if (alternatives.isNull()) {
-        info.error() << "Missing <alternatives> element, tagged union cannot exist without at least one alternative";
+        info.error() << "Missing <alternatives> element, tagged union cannot exist without at least one alternative.";
         return {};
     }
 
@@ -546,7 +543,7 @@ std::unique_ptr<DataInformation> OsdChildrenParser::next()
         mElem = mElem.nextSiblingElement();
     }
     if (mElem.isNull()) {
-        mInfo.warn() << "Reached end of fields, but next() was requested!";
+        mInfo.warn() << "Reached end of fields, but next() was requested.";
         return {};
     }
     std::unique_ptr<DataInformation> ret = OsdParser::parseElement(mElem, mInfo);
@@ -575,7 +572,7 @@ SingleElementOsdChildrenParser::SingleElementOsdChildrenParser(const OsdParserIn
     : OsdChildrenParser(info, element)
 {
     if (mElem.isNull()) {
-        info.warn() << "Null Element passed to child parser!";
+        info.warn() << "Null element passed to child parser.";
     }
 }
 

@@ -22,15 +22,15 @@
 #include <utility>
 
 template <PrimitiveDataType type>
-inline PrimitiveArrayData<type>::PrimitiveArrayData(unsigned int initialLength,
+inline PrimitiveArrayData<type>::PrimitiveArrayData(unsigned int supportedLength, unsigned int length,
                                                     std::unique_ptr<PrimitiveDataInformation>&& childType,
                                                     ArrayDataInformation* parent)
     : AbstractArrayData(std::move(childType), parent)
+    , m_length(length)
     , mDummy(parent)
 {
     Q_ASSERT(static_cast<PrimitiveDataInformation*>(this->childType())->type() == type);
-    mData.reserve(initialLength);
-    mData.resize(initialLength);
+    mData.resize(supportedLength);
     mDummy.setWasAbleToRead(true);
 }
 
@@ -48,7 +48,7 @@ qint64 PrimitiveArrayData<type>::readData(const Okteta::AbstractByteArrayModel* 
     // therefore we use std::numeric_limits::max()
     quint32 maxRemaining32 = (maxRemaining > std::numeric_limits<quint32>::max()
                               ? std::numeric_limits<quint32>::max() : quint32(maxRemaining));
-    const quint32 maxNumItems = std::min(this->length(), maxRemaining32);
+    const quint32 maxNumItems = std::min(this->supportedLength(), maxRemaining32);
     if (maxNumItems == 0) {
         return -1; // reached EOF
     }
@@ -59,7 +59,9 @@ qint64 PrimitiveArrayData<type>::readData(const Okteta::AbstractByteArrayModel* 
         this->readDataNonNativeOrder(maxNumItems, input, address);
     }
     this->mNumReadValues = maxNumItems;
-    return maxNumItems * sizeof(T) * 8;
+
+    const quint32 maxFullNumItems = qMin(this->length(), maxRemaining32);
+    return maxFullNumItems * sizeof(T) * 8;
 }
 
 // TODO: add a compare API to AbstractByteArrayModel
@@ -83,7 +85,7 @@ void PrimitiveArrayData<type>::readDataNativeOrder(uint numItems,
                                                    const Okteta::AbstractByteArrayModel* input,
                                                    Okteta::Address address)
 {
-    Q_ASSERT(numItems <= length());
+    Q_ASSERT(numItems <= supportedLength());
     const Okteta::Size numBytes = numItems * sizeof(T);
     Q_ASSERT(input->size() >= numBytes + address);
     auto* const vectorBytes = reinterpret_cast<Okteta::Byte*>(this->mData.data());
@@ -118,7 +120,7 @@ void PrimitiveArrayData<type>::readDataNonNativeOrder(uint numItems,
                                                       const Okteta::AbstractByteArrayModel* input,
                                                       Okteta::Address address)
 {
-    Q_ASSERT(numItems <= length());
+    Q_ASSERT(numItems <= supportedLength());
     const uint numBytes = numItems * sizeof(T);
     Q_ASSERT(uint(input->size()) >= numBytes + address);
     auto* const vectorBytes = reinterpret_cast<Okteta::Byte*>(this->mData.data());
@@ -137,19 +139,19 @@ template <PrimitiveDataType type>
 bool PrimitiveArrayData<type>::setChildData(uint row, const QVariant& value, Okteta::AbstractByteArrayModel* out,
                                             Okteta::Address address, BitCount64 bitsRemaining)
 {
-    Q_ASSERT(row < length());
+    Q_ASSERT(row < supportedLength());
     Q_ASSERT(value.isValid());
     Q_ASSERT(bitsRemaining % 8 == 0);
     if (sizeof(T) * 8 > bitsRemaining) {
-        this->mParent->logInfo() << " not enough bits remaining ("
-                                 << bitsRemaining << ") need " << (sizeof(T) * 8);
+        this->mParent->logInfo().nospace() << "Not enough bits remaining ("
+                                 << bitsRemaining << "), need " << (sizeof(T) * 8);
         return false;
     }
     const QSysInfo::Endian byteOrder = mChildType->effectiveByteOrder();
     bool ok = false;
     T convertedVal = DisplayClass::fromVariant(value, &ok);
     if (!ok) {
-        this->mParent->logWarn() << "could not convert" << value << "to" << type;
+        this->mParent->logWarn().nospace() << "Could not convert '" << value << "' to '" << type << "'.";
         return false;
     }
     qCDebug(LOG_KASTEN_OKTETA_CONTROLLERS_STRUCTURES)
@@ -209,7 +211,7 @@ void PrimitiveArrayData<PrimitiveDataType::Double>::writeOneItem(double value, O
 template <PrimitiveDataType type>
 void PrimitiveArrayData<type>::activateIndex(uint index)
 {
-    Q_ASSERT(index < length());
+    Q_ASSERT(index < supportedLength());
     // invalidate all previous references
     SafeReferenceHolder::instance.invalidateAll(mChildType.get());
     mChildType->mWasAbleToRead = mNumReadValues > index;
@@ -221,7 +223,7 @@ void PrimitiveArrayData<type>::activateIndex(uint index)
 template <PrimitiveDataType type>
 QVariant PrimitiveArrayData<type>::dataAt(uint index, int column, int role)
 {
-    Q_ASSERT(index < length());
+    Q_ASSERT(index < supportedLength());
     if (role == Qt::DisplayRole) {
         if (column == DataInformation::ColumnName) {
             return nameAt(index);
@@ -309,7 +311,7 @@ QScriptValue PrimitiveArrayData<type>::toScriptValue(uint index, QScriptEngine* 
 template <PrimitiveDataType type>
 QWidget* PrimitiveArrayData<type>::createChildEditWidget(uint index, QWidget* parent) const
 {
-    Q_ASSERT(index < length());
+    Q_ASSERT(index < supportedLength());
     Q_UNUSED(index)
     return DisplayClass::staticCreateEditWidget(parent);
 }
@@ -317,7 +319,7 @@ QWidget* PrimitiveArrayData<type>::createChildEditWidget(uint index, QWidget* pa
 template <PrimitiveDataType type>
 QVariant PrimitiveArrayData<type>::dataFromChildWidget(uint index, const QWidget* w) const
 {
-    Q_ASSERT(index < length());
+    Q_ASSERT(index < supportedLength());
     Q_UNUSED(index)
     return DisplayClass::staticDataFromWidget(w);
 }
@@ -325,7 +327,7 @@ QVariant PrimitiveArrayData<type>::dataFromChildWidget(uint index, const QWidget
 template <PrimitiveDataType type>
 void PrimitiveArrayData<type>::setChildWidgetData(uint index, QWidget* w) const
 {
-    Q_ASSERT(index < length());
+    Q_ASSERT(index < supportedLength());
     Q_UNUSED(index)
     DisplayClass::staticSetWidgetData(mData[index], w);
 }
@@ -334,8 +336,9 @@ template <>
 QString PrimitiveArrayData<PrimitiveDataType::Char>::valueString() const
 {
     QString result;
-    result.reserve(length());
-    for (uint index = 0; index < length(); ++index) {
+    const uint size = supportedLength();
+    result.reserve(size);
+    for (uint index = 0; index < size; ++index) {
         QChar qchar(mData[index], 0);
         if (!qchar.isPrint()) {
             qchar = QChar(QChar::ReplacementCharacter);

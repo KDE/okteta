@@ -23,7 +23,7 @@ std::unique_ptr<AbstractBitfieldDataInformation> DataInformationFactory::newBitf
         if (pd.width.string.isEmpty()) {
             pd.error() << "Bitfield is missing width.";
         } else {
-            pd.error() << "Width of bitfield is not a valid number: " << pd.width.string;
+            pd.error() << "Width of bitfield is not a valid number:" << pd.width.string;
         }
         return {};
     }
@@ -43,7 +43,7 @@ std::unique_ptr<AbstractBitfieldDataInformation> DataInformationFactory::newBitf
     } else if (type == QLatin1String("signed")) {
         bitf = std::make_unique<SignedBitfieldDataInformation>(pd.name, pd.width.value, pd.parent);
     } else {
-        pd.error() << "invalid bitfield type attribute given:" << type;
+        pd.error() << "Invalid bitfield type attribute given:" << type;
         return {};
     }
     return bitf;
@@ -52,13 +52,13 @@ std::unique_ptr<AbstractBitfieldDataInformation> DataInformationFactory::newBitf
 std::unique_ptr<PrimitiveDataInformation> DataInformationFactory::newPrimitive(const PrimitiveParsedData& pd)
 {
     if (pd.type.isEmpty()) {
-        pd.error() << "Type of primitive not specified, cannot create it!";
+        pd.error() << "Type of primitive not specified, cannot create it.";
         return {};
     }
     LoggerWithContext lwc(pd.logger, pd.context());
     PrimitiveDataType primitiveType = PrimitiveFactory::typeStringToType(pd.type, lwc);
     if (primitiveType == PrimitiveDataType::Invalid || primitiveType == PrimitiveDataType::Bitfield) {
-        pd.error() << "Unrecognized primitive type: " << pd.type;
+        pd.error() << "Unrecognized primitive type:" << pd.type;
         return {};
     }
     return PrimitiveFactory::newInstance(pd.name, primitiveType, lwc, pd.parent);
@@ -71,7 +71,7 @@ std::unique_ptr<T> newEnumOrFlags(const EnumParsedData& pd)
     LoggerWithContext lwc(pd.logger, pd.context() + QLatin1String(" (type)"));
     const PrimitiveDataType primitiveType = PrimitiveFactory::typeStringToType(pd.type, lwc);
     if (primitiveType == PrimitiveDataType::Invalid || primitiveType == PrimitiveDataType::Bitfield) {
-        pd.error() << "Unrecognized enum type: " << pd.type;
+        pd.error() << "Unrecognized enum type:" << pd.type;
         return  {};
     }
     if (primitiveType == PrimitiveDataType::Float || primitiveType == PrimitiveDataType::Double) {
@@ -83,20 +83,20 @@ std::unique_ptr<T> newEnumOrFlags(const EnumParsedData& pd)
         std::map<AllPrimitiveTypes, QString> enumValues =
             EnumDefinition::parseEnumValues(pd.enumValuesObject, lwc, primitiveType);
         if (enumValues.empty()) {
-            pd.error() << "No enum values specified!";
+            pd.error() << "No enum values specified.";
             return nullptr;
         }
         definition = std::make_shared<EnumDefinition>(std::move(enumValues), pd.enumName, primitiveType);
     }
     if (definition->type() != primitiveType) {
-        pd.error().nospace() << "Enum type (" << definition->type() << ") and value type (" << primitiveType
-                             << ") do not match!";
+        pd.error().nospace() << "Enum type '" << definition->type() << "' and value type '" << primitiveType
+                             << "' do not match.";
         return {};
     }
     auto primData = PrimitiveFactory::newInstance(pd.name, primitiveType, lwc);
     // TODO allow bitfields?
     if (!primData) {
-        pd.error() << "Could not create a value object for this enum!";
+        pd.error() << "Could not create a value object for this enum.";
         return nullptr;
     }
     return std::make_unique<T>(pd.name, std::move(primData), definition, pd.parent);
@@ -137,7 +137,7 @@ QString generateLengthFunction(DataInformation* current, DataInformation* last, 
         if (childName == elemName) {
             QString function = QLatin1String("function() { return this.parent.") + currentString
                                + elemName + QLatin1String(".value; }");
-            info.info() << "Found element for dynamic array length: " << child->fullObjectPath()
+            info.info().nospace() << "Found element for dynamic array length: " << child->fullObjectPath()
                         << ", resulting function is: " << function;
             return function;
         }
@@ -182,39 +182,42 @@ std::unique_ptr<FlagDataInformation> DataInformationFactory::newFlags(const Enum
 std::unique_ptr<ArrayDataInformation> DataInformationFactory::newArray(ArrayParsedData& pd)
 {
     if (!pd.arrayType) {
-        pd.error() << "Failed to parse array type!";
+        pd.error() << "Failed to parse array type.";
         return {};
     }
     if (!pd.length.isValid()) {
-        pd.error() << "No array length specified!";
+        pd.error() << "No array length specified.";
         return {};
     }
     const ParsedNumber<uint> fixedLength = ParserUtils::uintFromScriptValue(pd.length);
     if (fixedLength.isValid) {
-        return std::make_unique<ArrayDataInformation>(pd.name, fixedLength.value, std::move(pd.arrayType), pd.parent, QScriptValue());
+        LoggerWithContext lwc(pd.logger, pd.context());
+        return std::make_unique<ArrayDataInformation>(pd.name, fixedLength.value, std::move(pd.arrayType), lwc, pd.parent, QScriptValue());
     }
     if (pd.length.isFunction()) {
-        return std::make_unique<ArrayDataInformation>(pd.name, 0, std::move(pd.arrayType), pd.parent, pd.length);
+        LoggerWithContext lwc(pd.logger, pd.context());
+        return std::make_unique<ArrayDataInformation>(pd.name, 0, std::move(pd.arrayType), lwc, pd.parent, pd.length);
     }
 
     // neither integer nor function, must be a string containing the name of another element.
     const QString lengthStr = pd.length.toString();
     if (!pd.parent) {
-        pd.error() << "Toplevel array has length depending on other field (" << lengthStr
-                    << "). This is not possible.";
+        pd.error().nospace() << "Toplevel array has length depending on other field '" << lengthStr
+                    << "'. This is not possible.";
         return {};
     }
     if (lengthStr.contains(QLatin1Char('.'))) {
-        pd.error() << "Referenced array length element (" << lengthStr << ") contains '.', this is not allowed!";
+        pd.error().nospace() << "Referenced array length element '" << lengthStr << "' contains '.', this is not allowed.";
         return {}; // TODO maybe add possible shorthand length="this.parent.length"
     }
     QString lengthFunctionString = generateLengthFunction(pd.parent, nullptr, lengthStr, QString(), pd);
     if (lengthFunctionString.isEmpty()) {
-        pd.error() << "Could not find element " << lengthStr << " referenced as array length!";
+        pd.error().nospace() << "Could not find element '" << lengthStr << "' referenced as array length.";
         return {};
     }
     QScriptValue lengthFunction = ParserUtils::functionSafeEval(pd.engine, lengthFunctionString);
-    return std::make_unique<ArrayDataInformation>(pd.name, 0, std::move(pd.arrayType), pd.parent, lengthFunction);
+    LoggerWithContext lwc(pd.logger, pd.context());
+    return std::make_unique<ArrayDataInformation>(pd.name, 0, std::move(pd.arrayType), lwc, pd.parent, lengthFunction);
 }
 
 std::unique_ptr<StringDataInformation> DataInformationFactory::newString(const StringParsedData& pd)
@@ -267,11 +270,11 @@ bool DataInformationFactory::commonInitialization(DataInformation* data, const C
     data->setByteOrder(pd.endianness);
 
     if (data->name().isEmpty()) {
-        pd.warn() << "Name is empty!";
+        pd.warn() << "Name is empty.";
     }
     if (pd.updateFunc.isValid()) {
         if (!pd.updateFunc.isFunction()) {
-            pd.error() << "Update function is not a function: " << pd.updateFunc.toString();
+            pd.error() << "Update function is not a function:" << pd.updateFunc.toString();
             return false;
         }
 
@@ -279,7 +282,7 @@ bool DataInformationFactory::commonInitialization(DataInformation* data, const C
     }
     if (pd.validationFunc.isValid()) {
         if (!pd.validationFunc.isFunction()) {
-            pd.error() << "Validation function is not a function: " << pd.validationFunc.toString();
+            pd.error() << "Validation function is not a function:" << pd.validationFunc.toString();
             return false;
         }
 
@@ -287,7 +290,7 @@ bool DataInformationFactory::commonInitialization(DataInformation* data, const C
     }
     if (pd.toStringFunc.isValid()) {
         if (!pd.toStringFunc.isFunction()) {
-            pd.error() << "To string function is not a function: " << pd.toStringFunc.toString();
+            pd.error() << "To string function is not a function:" << pd.toStringFunc.toString();
             return false;
         }
 
@@ -303,26 +306,26 @@ bool DataInformationFactory::commonInitialization(DataInformation* data, const C
 std::unique_ptr<PointerDataInformation> DataInformationFactory::newPointer(PointerParsedData& pd)
 {
     if (!pd.pointerTarget) {
-        pd.error() << "Missing pointer target";
+        pd.error() << "Missing pointer target.";
         return {};
     }
     if (!pd.valueType) {
-        pd.error() << "Missing pointer type";
+        pd.error() << "Missing pointer type.";
         return {};
     }
     if (!pd.valueType->isPrimitive()) {
-        pd.error() << "Bad pointer type, only unsigned integers are allowed";
+        pd.error() << "Bad pointer type, only unsigned integers are allowed.";
         return {};
     }
     if (pd.interpretFunc.isValid() && !pd.interpretFunc.isFunction()) {
-        pd.error() << "Bad pointer interpretation, only functions are allowed";
+        pd.error() << "Bad pointer interpretation, only functions are allowed.";
         return {};
     }
     DataInformation* const valueType = pd.valueType.release();
     auto primValue = std::unique_ptr<PrimitiveDataInformation>(valueType->asPrimitive());
     if (!(primValue->type() == PrimitiveDataType::UInt8 || primValue->type() == PrimitiveDataType::UInt16
           || primValue->type() == PrimitiveDataType::UInt32 || primValue->type() == PrimitiveDataType::UInt64)) {
-        pd.error() << "Bad pointer type, only unsigned integers are allowed"; // TODO offsets (signed int + bitfields)
+        pd.error() << "Bad pointer type, only unsigned integers are allowed."; // TODO offsets (signed int + bitfields)
         return {};
     }
     return std::make_unique<PointerDataInformation>(pd.name,
@@ -357,13 +360,13 @@ std::unique_ptr<TaggedUnionDataInformation> DataInformationFactory::newTaggedUni
         if (!fi.selectIf.isFunction()) {
             ParsedNumber<quint64> number = ParserUtils::uint64FromScriptValue(fi.selectIf);
             if (!number.isValid) {
-                pd.error() << "Alternative number" << i << "is not valid. SelectIf is neither function nor number!";
+                pd.error().nospace() << "Alternative number '" << i << "' is not valid. SelectIf is neither function nor number.";
                 alternativesValid = false;
             }
             // number is valid -> there must be exactly one field
             if (tagged->childCount() != 1) {
-                pd.error() << "Alternative number" << i << "is not valid. SelectIf is number,"
-                    " but there is not exactly one child!";
+                pd.error().nospace() << "Alternative number '" << i << "' is not valid. SelectIf is number,"
+                    " but there is not exactly one child.";
                 alternativesValid = false;
             }
         }
@@ -373,7 +376,7 @@ std::unique_ptr<TaggedUnionDataInformation> DataInformationFactory::newTaggedUni
             if (next) {
                 children.emplace_back(std::move(next));
             } else {
-                pd.error() << "Alternative number" << i << "has an invalid field!";
+                pd.error().nospace() << "Alternative number '" << i << "' has an invalid field.";
                 alternativesValid = false;
             }
         }

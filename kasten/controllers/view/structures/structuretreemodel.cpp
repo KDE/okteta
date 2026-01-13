@@ -268,7 +268,7 @@ bool StructureTreeModel::hasChildren(const QModelIndex& parent) const
 
 QModelIndex StructureTreeModel::findItemInModel(DataInformationBase* data) const
 {
-    Q_CHECK_PTR(data);
+    Q_ASSERT(data);
     if (!data || data->isTopLevel()) {
         return {}; // invalid object
     }

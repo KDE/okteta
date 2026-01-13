@@ -77,7 +77,7 @@ template <typename T>
 inline QVariant SIntDataInformationMethods<T>::staticDataFromWidget(const QWidget* w)
 {
     const auto* const spin = qobject_cast<const Okteta::SIntSpinBox*>(w);
-    Q_CHECK_PTR(spin);
+    Q_ASSERT(spin);
     if (spin) {
         return spin->value();
     }
@@ -90,7 +90,7 @@ template <typename T>
 inline void SIntDataInformationMethods<T>::staticSetWidgetData(T value, QWidget* w)
 {
     auto* const spin = qobject_cast<Okteta::SIntSpinBox*>(w);
-    Q_CHECK_PTR(spin);
+    Q_ASSERT(spin);
     if (spin) {
         spin->setValue(value);
     }

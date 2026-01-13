@@ -226,7 +226,8 @@ void ScriptClassesTest::initTestCase()
     });
     std::sort(arrayProperties.begin(), arrayProperties.end());
     auto managedArrayData = std::make_unique<ArrayDataInformation>(QStringLiteral("array"), 20,
-                                                                   PrimitiveFactory::newInstance(QStringLiteral("inner"), PrimitiveDataType::Int32, lwc));
+                                                                   PrimitiveFactory::newInstance(QStringLiteral("inner"), PrimitiveDataType::Int32, lwc),
+                                                                   lwc);
     arrayData = managedArrayData.get();
     arrayDataTop = std::make_unique<TopLevelDataInformation>(std::move(managedArrayData), nullptr, ScriptEngineInitializer::newEngine());
 

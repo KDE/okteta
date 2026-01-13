@@ -82,7 +82,7 @@ bool StringDataInformation::setChildData(uint row, const QVariant& value, Okteta
     Q_UNUSED(address)
     Q_UNUSED(bitsRemaining)
     Q_UNUSED(bitOffset)
-    logWarn() << "setChildData not implemented yet!";
+    logWarn() << "setChildData not implemented yet.";
     return false;
 }
 
@@ -91,8 +91,8 @@ qint64 StringDataInformation::readData(const Okteta::AbstractByteArrayModel* inp
 {
     Q_ASSERT(mHasBeenUpdated); // update must have been called prior to reading
     if (*bitOffset != 0) {
-        logWarn() << "while reading string bit offset was: " << *bitOffset
-                  << ", adding padding and continuing at next byte (address=" << address << ")";
+        logWarn().nospace() << "While reading a string the bit offset was " << *bitOffset
+                  << ", adding padding and continuing at next byte (address=" << address << ").";
         bitsRemaining -= 8 - *bitOffset;
         *bitOffset = 0;
         address += 1;

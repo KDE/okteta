@@ -104,7 +104,6 @@ inline DataInformation* PointerDataInformation::pointerTarget() const
 
 inline void PointerDataInformation::setPointerTarget(std::unique_ptr<DataInformation>&& pointerTarget)
 {
-    Q_CHECK_PTR(pointerTarget);
     mPointerTarget = std::move(pointerTarget);
     mPointerTarget->setParent(this);
 }

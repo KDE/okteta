@@ -75,7 +75,6 @@ QString DataInformation::valueStringImpl() const
 
 BitCount64 DataInformation::positionInFile(Okteta::Address start) const
 {
-    Q_CHECK_PTR(mParent);
     if (mParent->isTopLevel()) {
         return start * 8; // this is the root of the structure
 
@@ -86,7 +85,6 @@ BitCount64 DataInformation::positionInFile(Okteta::Address start) const
 
 DataInformation* DataInformation::mainStructure()
 {
-    Q_CHECK_PTR(mParent);
     if (mParent->isTopLevel()) {
         return this;
     }
@@ -153,7 +151,7 @@ void DataInformation::setAdditionalFunction(AdditionalData::AdditionalDataType e
         return;
     }
     if (!value.isFunction()) {
-        logError() << "cannot set" << name << "since" << value.toString() << "is not a function!";
+        logError().nospace() << "Cannot set '" << name << "' since '" << value.toString() << "' is not a function.";
         return;
     }
     mAdditionalData.set(entry, QVariant::fromValue(value));
@@ -288,7 +286,6 @@ DataInformation* DataInformation::child(const QString& name) const
 
 TopLevelDataInformation* DataInformation::topLevelDataInformation() const
 {
-    Q_CHECK_PTR(mParent);
     if (mParent->isTopLevel()) {
         return mParent->asTopLevel();
     }
@@ -298,7 +295,6 @@ TopLevelDataInformation* DataInformation::topLevelDataInformation() const
 
 int DataInformation::row() const
 {
-    Q_CHECK_PTR(mParent);
     if (mParent->isTopLevel()) {
         return mParent->asTopLevel()->indexOf(this);
     }
@@ -342,7 +338,7 @@ QScriptValue DataInformation::toScriptValue(TopLevelDataInformation* top)
 QString DataInformation::customToString(const QScriptValue& func) const
 {
     if (!wasAbleToRead()) {
-        logError() << "Attempting to call custom to string function, but element could not be read";
+        logError() << "Attempting to call custom to string function, but element could not be read.";
         return valueStringImpl();
     }
     Q_ASSERT(func.isFunction());

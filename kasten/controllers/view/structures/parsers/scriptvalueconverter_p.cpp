@@ -23,7 +23,7 @@ namespace ScriptValueConverter {
 std::unique_ptr<DataInformation> toDataInformation(const QScriptValue& value, const ParserInfo& oldInfo)
 {
     if (!value.isValid()) {
-        oldInfo.error() << "invalid value passed!";
+        oldInfo.error() << "Invalid value passed.";
         return {};
     }
     ParserInfo info(oldInfo);
@@ -35,23 +35,23 @@ std::unique_ptr<DataInformation> toDataInformation(const QScriptValue& value, co
     // check function array and date, since they are objects too
     if (value.isRegExp()) {
         // apparently regexp is a function
-        info.error() << "Cannot convert a RegExp object to DataInformation!";
+        info.error() << "Cannot convert a RegExp object to DataInformation.";
         return {};
     }
     if (value.isFunction()) {
-        info.error() << "Cannot convert a Function object to DataInformation!";
+        info.error() << "Cannot convert a Function object to DataInformation.";
         return {};
     }
     if (value.isArray()) {
-        info.error() << "Cannot convert a Array object to DataInformation!";
+        info.error() << "Cannot convert a Array object to DataInformation.";
         return {};
     }
     if (value.isDate()) {
-        info.error() << "Cannot convert a Date object to DataInformation!";
+        info.error() << "Cannot convert a Date object to DataInformation.";
         return {};
     }
     if (value.isError()) {
-        info.error() << "Cannot convert a Error object to DataInformation!";
+        info.error() << "Cannot convert a Error object to DataInformation.";
         return {};
     }
     // variant and qobject are also object types, however they cannot appear from user code, no need to check
@@ -63,15 +63,15 @@ std::unique_ptr<DataInformation> toDataInformation(const QScriptValue& value, co
     }
     if (!value.isObject()) {
         if (value.isBool()) {
-            info.error() << "Cannot convert Boolean to DataInformation!";
+            info.error() << "Cannot convert Boolean to DataInformation.";
         } else if (value.isNull()) {
-            info.error() << "Cannot convert null to DataInformation!";
+            info.error() << "Cannot convert null to DataInformation.";
         } else if (value.isUndefined()) {
-            info.error() << "Cannot convert undefined to DataInformation!";
+            info.error() << "Cannot convert undefined to DataInformation.";
         } else if (value.isNumber()) {
-            info.error() << "Cannot convert Number to DataInformation!";
+            info.error() << "Cannot convert Number to DataInformation.";
         } else {
-            info.error() << "Cannot convert object of unknown type to DataInformation!";
+            info.error() << "Cannot convert object of unknown type to DataInformation.";
         }
 
         return {}; // no point trying to convert
@@ -79,7 +79,7 @@ std::unique_ptr<DataInformation> toDataInformation(const QScriptValue& value, co
 
     QString type = value.property(PROPERTY_INTERNAL_TYPE()).toString();
     if (type.isEmpty()) {
-        info.error() << "Cannot convert object since type of object could not be determined!";
+        info.error() << "Cannot convert object since type of object could not be determined.";
         return {};
     }
     std::unique_ptr<DataInformation> returnVal;
@@ -225,7 +225,7 @@ std::unique_ptr<TaggedUnionDataInformation> toTaggedUnion(const QScriptValue& va
     TaggedUnionParsedData tpd(info);
     QScriptValue alternatives = value.property(PROPERTY_ALTERNATIVES());
     if (!alternatives.isArray()) {
-        info.error() << "Alternatives must be an array!";
+        info.error() << "Alternatives must be an array.";
         return nullptr;
     }
     int length = alternatives.property(PROPERTY_LENGTH()).toInt32();

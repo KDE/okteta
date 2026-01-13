@@ -84,7 +84,6 @@ bool StructUnionScriptClass::additionalPropertyFlags(const DataInformation* data
     uint count = data->childCount();
     for (uint i = 0; i < count; ++i) {
         DataInformation* const child = data->childAt(i);
-        Q_CHECK_PTR(child);
         if (objName == child->name()) {
             *flags |= QScriptValue::ReadOnly;
             return true;
@@ -97,26 +96,23 @@ bool StructUnionScriptClass::additionalPropertyFlags(const DataInformation* data
 QScriptValue StructUnionScriptClass::additionalProperty(const DataInformation* data, const QScriptString& name, uint id)
 {
     const auto* const dataW = static_cast<const DataInformationWithChildren*>(data);
-    // do a dynamic cast in debug mode to ensure the static cast was valid
-    Q_CHECK_PTR(dynamic_cast<const DataInformationWithChildren*>(dataW));
 
     if (id != 0) {
         quint32 pos = id - 1;
         if (pos >= data->childCount()) {
-            dataW->logError() << "attempting to access out of bounds child: index was" << pos
-                              << ", maximum is" << (data->childCount() - 1);
+            dataW->logError().nospace() << "Attempting to access out of bounds child: index was " << pos
+                              << ", maximum is " << (data->childCount() - 1) << ".";
             return engine()->currentContext()->throwError(QScriptContext::RangeError,
                                                           QStringLiteral("Attempting to access struct index %1, but length is %2").arg(
                                                               QString::number(pos), QString::number(data->childCount())));
         }
-        Q_CHECK_PTR(data->childAt(pos));
         return data->childAt(pos)->toScriptValue(engine(), handlerInfo());
     }
     if (name == s_childCount) {
         return dataW->childCount();
     }
     if (name == s_children) {
-        dataW->logError() << "attempting to read read-only property" << s_children.toString();
+        dataW->logError() << "Attempting to read read-only property:" << s_children.toString();
         return engine()->undefinedValue();
     }
     // TODO is this necessary, will there be any way a child has no id set?
@@ -126,7 +122,6 @@ QScriptValue StructUnionScriptClass::additionalProperty(const DataInformation* d
     uint count = data->childCount();
     for (uint i = 0; i < count; ++i) {
         DataInformation* const child = data->childAt(i);
-        Q_CHECK_PTR(child);
         if (objName == child->name()) {
             return child->toScriptValue(engine(), handlerInfo());
         }
@@ -137,9 +132,6 @@ QScriptValue StructUnionScriptClass::additionalProperty(const DataInformation* d
 bool StructUnionScriptClass::setAdditionalProperty(DataInformation* data, const QScriptString& name, uint, const QScriptValue& value)
 {
     auto* const dataW = static_cast<DataInformationWithChildren*>(data);
-    // do a dynamic cast in debug mode to ensure the static cast was valid
-    Q_CHECK_PTR(dynamic_cast<DataInformationWithChildren*>(dataW));
-
     if (name == s_children) {
         dataW->setChildren(value);
         return true;
@@ -205,9 +197,6 @@ QScriptValue StructUnionScriptClass::StructUnion_proto_setChildren(QScriptContex
         return eng->undefinedValue();
     }
     auto* const dataW = static_cast<DataInformationWithChildren*>(data);
-    // do a dynamic cast in debug mode to ensure the static cast was valid
-    Q_CHECK_PTR(dynamic_cast<DataInformationWithChildren*>(dataW));
-
     dataW->setChildren(ctx->argument(0));
     return eng->undefinedValue();
 }

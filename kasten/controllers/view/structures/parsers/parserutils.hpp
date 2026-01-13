@@ -38,7 +38,6 @@ struct ParserInfo
         , parent(parent)
         , engine(engine)
     {
-        Q_CHECK_PTR(logger);
     }
     inline ParserInfo(const ParserInfo& i) = default;
     inline ~ParserInfo() = default;

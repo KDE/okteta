@@ -60,7 +60,7 @@ PrimitiveDataType typeStringToType(const QString& string, const LoggerWithContex
     if (typeStr == QLatin1String("double")) {
         return PrimitiveDataType::Double;
     }
-    logger.warn() << typeStr << "does not name a valid primitive type";
+    logger.warn().nospace() << "'" << typeStr << "' does not name a valid primitive type.";
     return PrimitiveDataType::Invalid; // just return a default value
 }
 std::unique_ptr<PrimitiveDataInformation> newInstance(const QString& name, PrimitiveDataType type,
@@ -99,7 +99,7 @@ std::unique_ptr<PrimitiveDataInformation> newInstance(const QString& name, Primi
     case PrimitiveDataType::Double:
         return std::make_unique<PrimitiveInfo<PrimitiveDataType::Double>::Class>(name, parent);
     default:
-        logger.error().nospace() << "could not convert '" << type << "' to a primitive type";
+        logger.error().nospace() << "Could not convert '" << type << "' to a primitive type.";
         return {}; // invalid type
     }
 }

@@ -42,8 +42,6 @@ ScriptHandlerInfo* ScriptHandler::handlerInfo()
 
 void ScriptHandler::validateData(DataInformation* data)
 {
-    Q_CHECK_PTR(data);
-
     if (data->hasBeenValidated()) {
         return;
     }
@@ -57,7 +55,7 @@ void ScriptHandler::validateData(DataInformation* data)
     if (validationFunc.isValid()) {
         QScriptValue result = callFunction(validationFunc, data, ScriptHandlerInfo::Mode::Validating);
         if (result.isError()) {
-            mTopLevel->logger()->error(data) << "Error occurred while validating element: "
+            mTopLevel->logger()->error(data) << "Error occurred while validating element:"
                                              << result.toString();
             data->setValidationError(QStringLiteral("Error occurred in validation: ")
                                      + result.toString());
@@ -84,7 +82,6 @@ void ScriptHandler::validateData(DataInformation* data)
 
 void ScriptHandler::updateDataInformation(DataInformation* data)
 {
-    Q_CHECK_PTR(data);
     // check if has an update function:
     Q_ASSERT(!data->hasBeenUpdated());
     QScriptValue updateFunc = data->updateFunc();
@@ -93,7 +90,7 @@ void ScriptHandler::updateDataInformation(DataInformation* data)
         QString context = data->fullObjectPath(); // we mustn't use data after updateFunc.call(), save context
         QScriptValue result = callFunction(updateFunc, data, ScriptHandlerInfo::Mode::Updating);
         if (result.isError()) {
-            mTopLevel->logger()->error(context) << "Error occurred while updating element: "
+            mTopLevel->logger()->error(context) << "Error occurred while updating element:"
                                                 << result.toString();
         }
         if (mEngine->hasUncaughtException()) {
@@ -104,7 +101,7 @@ void ScriptHandler::updateDataInformation(DataInformation* data)
     }
 }
 
-void ScriptHandler::updateLength(ArrayDataInformation* array)
+bool ScriptHandler::updateLength(ArrayDataInformation* array)
 {
     QScriptValue lengthFunc = array->lengthFunction();
     if (lengthFunc.isValid()) {
@@ -118,11 +115,13 @@ void ScriptHandler::updateLength(ArrayDataInformation* array)
         }
         ParsedNumber<uint> value = ParserUtils::uintFromScriptValue(result);
         if (value.isValid) {
-            std::ignore = array->setArrayLength(value.value);
+            array->setArrayLength(value.value);
         } else {
-            array->logError() << "Length function did not return a valid number! Result was: " << result.toString();
+            array->logError() << "Length function did not return a valid number. Result was:" << result.toString();
         }
+        return true;
     }
+    return false;
 }
 
 QString ScriptHandler::customToString(const DataInformation* data, const QScriptValue& func)

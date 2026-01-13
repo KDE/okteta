@@ -64,7 +64,7 @@ template <typename T>
 inline QVariant UIntDataInformationMethods<T>::staticDataFromWidget(const QWidget* w)
 {
     const auto* const spin = qobject_cast<const Okteta::UIntSpinBox*>(w);
-    Q_CHECK_PTR(spin);
+    Q_ASSERT(spin);
     if (spin) {
         return {spin->value()};
     }
@@ -76,7 +76,7 @@ template <typename T>
 inline void UIntDataInformationMethods<T>::staticSetWidgetData(T value, QWidget* w)
 {
     auto* const spin = qobject_cast<Okteta::UIntSpinBox*>(w);
-    Q_CHECK_PTR(spin);
+    Q_ASSERT(spin);
     if (spin) {
         spin->setValue(value);
     }

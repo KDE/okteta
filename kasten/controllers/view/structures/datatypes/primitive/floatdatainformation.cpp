@@ -26,7 +26,7 @@ QWidget* FloatDataInformationMethods::staticCreateEditWidget(QWidget* parent)
 QVariant FloatDataInformationMethods::staticDataFromWidget(const QWidget* w)
 {
     const auto* const editor = qobject_cast<const Okteta::Float32Editor*>(w);
-    Q_CHECK_PTR(editor);
+    Q_ASSERT(editor);
     if (editor) {
         return editor->data().value;
     }
@@ -36,7 +36,7 @@ QVariant FloatDataInformationMethods::staticDataFromWidget(const QWidget* w)
 void FloatDataInformationMethods::staticSetWidgetData(float value, QWidget* w)
 {
     auto* const editor = qobject_cast<Okteta::Float32Editor*>(w);
-    Q_CHECK_PTR(editor);
+    Q_ASSERT(editor);
     if (editor) {
         editor->setData(value);
     }

@@ -100,9 +100,9 @@ QScriptValue PrimitiveScriptClass::additionalProperty(const DataInformation* dat
         QScriptValue callee = engine()->currentContext()->thisObject();
         DataInformation* const cause = toDataInformation(callee);
         if (cause) {
-            pData->logError() << "Attempting to read from uninitialized value. Callee was " << cause->fullObjectPath();
+            pData->logError() << "Attempting to read from uninitialized value. Callee was:" << cause->fullObjectPath();
         } else {
-            pData->logError() << "Attempting to read from uninitialized value. Callee could not be determined";
+            pData->logError() << "Attempting to read from uninitialized value. Callee could not be determined.";
         }
         return engine()->undefinedValue();
     }

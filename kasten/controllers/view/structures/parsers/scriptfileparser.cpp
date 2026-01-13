@@ -68,7 +68,7 @@ QScriptValue ScriptFileParser::loadScriptValue(ScriptLogger* logger, QScriptEngi
 {
     QFile scriptFile(mAbsolutePath);
     if (!scriptFile.open(QIODevice::ReadOnly)) {
-        logger->error() << "Could not open file " << mAbsolutePath;
+        logger->error().nospace() << "Could not open file " << mAbsolutePath << ".";
         return {};
     }
 
@@ -81,21 +81,21 @@ QScriptValue ScriptFileParser::loadScriptValue(ScriptLogger* logger, QScriptEngi
         QScriptSyntaxCheckResult syntaxError = QScriptEngine::checkSyntax(contents);
         if (syntaxError.state() == QScriptSyntaxCheckResult::Error) {
             // give a detailed syntax error message
-            logger->error() << "Syntax error in script: " << syntaxError.errorMessage();
-            logger->error() << "Line number: " << syntaxError.errorLineNumber()
-                            << "Column:" << syntaxError.errorColumnNumber();
+            logger->error() << "Syntax error in script:" << syntaxError.errorMessage();
+            logger->error() << "Line number:" << syntaxError.errorLineNumber()
+                            << "column:" << syntaxError.errorColumnNumber();
         } else {
             // just print the generic exception message
-            logger->error() << "Error evaluating script: " << engine->uncaughtException().toString();
-            logger->error() << "Line number: " << engine->uncaughtExceptionLineNumber();
-            logger->error() << "Backtrace: " << engine->uncaughtExceptionBacktrace();
+            logger->error() << "Error evaluating script:" << engine->uncaughtException().toString();
+            logger->error() << "Line number:" << engine->uncaughtExceptionLineNumber();
+            logger->error() << "Backtrace:" << engine->uncaughtExceptionBacktrace();
         }
         return {};
     }
     QScriptValue obj = engine->globalObject();
     QScriptValue initMethod = obj.property(QStringLiteral("init"));
     if (!initMethod.isFunction()) {
-        logger->error() << "Script has no 'init' function! Cannot evaluate script!";
+        logger->error() << "Script has no 'init' function. Cannot evaluate script.";
         return {};
     }
 

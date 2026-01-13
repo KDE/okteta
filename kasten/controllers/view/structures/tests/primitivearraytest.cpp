@@ -190,7 +190,8 @@ void PrimitiveArrayTest::testReadCustomizedPrimitiveInternal()
 
     auto managedDataInf = std::make_unique<ArrayDataInformation>(QStringLiteral("values"),
                                                                  endianModel->size() / sizeof(T),
-                                                                 std::move(primInfo));
+                                                                 std::move(primInfo),
+                                                                 lwc);
     ArrayDataInformation* const dataInf = managedDataInf.get();
     const auto top = std::make_unique<TopLevelDataInformation>(std::move(managedDataInf), nullptr, std::move(engine));
 
@@ -231,7 +232,8 @@ void PrimitiveArrayTest::testReadPrimitiveInternal()
     LoggerWithContext lwc(nullptr, QString());
     auto managedDataInf = std::make_unique<ArrayDataInformation>(QStringLiteral("values"),
                                                                  model->size() / sizeof(T),
-                                                                 PrimitiveFactory::newInstance(QStringLiteral("value"), primType, lwc));
+                                                                 PrimitiveFactory::newInstance(QStringLiteral("value"), primType, lwc),
+                                                                 lwc);
     managedDataInf->setByteOrder(CURRENT_BYTE_ORDER);
     ArrayDataInformation* const dataInf = managedDataInf.get();
     const auto top = std::make_unique<TopLevelDataInformation>(std::move(managedDataInf), nullptr, ScriptEngineInitializer::newEngine());

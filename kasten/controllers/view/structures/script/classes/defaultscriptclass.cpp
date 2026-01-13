@@ -83,7 +83,7 @@ QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& o
     Q_ASSERT(mode != ScriptHandlerInfo::Mode::None);
     DataInformation* const data = toDataInformation(object);
     if (!data) {
-        mHandlerInfo->logger()->error() << "could not cast data from" << object.data().toString();
+        mHandlerInfo->logger()->error().nospace() << "Could not cast data from '" << object.data().toString() << "'.";
         std::ignore = engine()->currentContext()->throwError(QScriptContext::ReferenceError,
                                                              QStringLiteral("Attempting to access an invalid object"));
         return {};
@@ -108,7 +108,7 @@ QScriptClass::QueryFlags DefaultScriptClass::queryProperty(const QScriptValue& o
         return flags;
     }
 
-    data->logError() << "could not find property with name" << name.toString();
+    data->logError() << "Could not find property with name" << name.toString();
     std::ignore = engine()->currentContext()->throwError(QScriptContext::ReferenceError,
                                                          QLatin1String("Could not find property with name ") + name.toString());
     return {};
@@ -119,7 +119,7 @@ QScriptValue DefaultScriptClass::property(const QScriptValue& object, const QScr
     Q_ASSERT(mHandlerInfo->mode() != ScriptHandlerInfo::Mode::None);
     DataInformation* const data = toDataInformation(object);
     if (!data) {
-        mHandlerInfo->logger()->error() << "could not cast data from" << object.data().toString();
+        mHandlerInfo->logger()->error().nospace() << "Could not cast data from '" << object.data().toString() << ".";
         return engine()->currentContext()->throwError(QScriptContext::ReferenceError,
                                                       QStringLiteral("Attempting to access an invalid object"));
     }
@@ -130,8 +130,6 @@ QScriptValue DefaultScriptClass::property(const QScriptValue& object, const QScr
         return data->wasAbleToRead();
     }
     if (name == s_parent) {
-        Q_CHECK_PTR(data->parent());
-        // parent() cannot be null
         if (data->parent()->isTopLevel()) {
             return engine()->nullValue();
         }
@@ -165,7 +163,7 @@ QScriptValue DefaultScriptClass::property(const QScriptValue& object, const QScr
     if (other.isValid()) {
         return other;
     }
-    data->logError() << "could not find property with name" << name.toString();
+    data->logError() << "Could not find property with name" << name.toString();
     return engine()->currentContext()->throwError(QScriptContext::ReferenceError,
                                                   QLatin1String("Cannot read property ") + name.toString());
 }
@@ -173,27 +171,24 @@ QScriptValue DefaultScriptClass::property(const QScriptValue& object, const QScr
 void DefaultScriptClass::setDataType(const QScriptValue& value, DataInformation* data)
 {
     DataInformation* const thisObj = toDataInformation(engine()->currentContext()->thisObject());
-    Q_CHECK_PTR(thisObj);
     const bool isThisObj = thisObj == data;
     // this object always has mHasBeenUpdated set just before calling updateFunc, so in that case it is okay
     if (data->hasBeenUpdated() && !isThisObj) {
         // this element has already been updated (and probably read, replacing it could cause crazy errors
         data->logError() << "Attempting to replace an already updated object. This could cause errors."
-            "Current this object: " << (thisObj ? thisObj->fullObjectPath() : QString());
+            " Current this object:" << (thisObj ? thisObj->fullObjectPath() : QString());
         return;
     }
     // change the type of the underlying object
     std::unique_ptr<DataInformation> newType = ScriptValueConverter::convert(value, data->name(), data->logger(), data);
     if (!newType) {
-        data->logError() << "Failed to set new type, could not convert value!";
+        data->logError() << "Failed to set new type, could not convert value.";
         return;
     }
 
     DataInformation* const rawNewType = newType.get();
     DataInformationBase* const parent = data->parent();
-    Q_CHECK_PTR(parent);
     TopLevelDataInformation* const top = data->topLevelDataInformation();
-    Q_CHECK_PTR(top);
     // only if parent is toplevel, struct or union, can we replace
     bool replaced = false;
     if (parent->isTopLevel()) {
@@ -207,7 +202,7 @@ void DefaultScriptClass::setDataType(const QScriptValue& value, DataInformation*
         Q_ASSERT(uint(index) < stru->childCount());
         replaced = stru->replaceChildAt(index, std::move(newType));
         if (!replaced) {
-            stru->logError() << "failed to replace child at index" << index;
+            stru->logError() << "Failed to replace child at index:" << index;
         }
     } else if (parent->isUnion()) {
         UnionDataInformation* const un = parent->asUnion();
@@ -216,7 +211,7 @@ void DefaultScriptClass::setDataType(const QScriptValue& value, DataInformation*
         Q_ASSERT(uint(index) < un->childCount());
         replaced = un->replaceChildAt(index, std::move(newType));
         if (!replaced) {
-            un->logError() << "failed to replace child at index" << index;
+            un->logError() << "Failed to replace child at index: " << index;
         }
     } else if (parent->isPointer()) {
         parent->asPointer()->setPointerTarget(std::move(newType));
@@ -241,7 +236,7 @@ void DefaultScriptClass::setProperty(QScriptValue& object, const QScriptString& 
     Q_ASSERT(mode != ScriptHandlerInfo::Mode::None);
     DataInformation* const data = toDataInformation(object);
     if (!data) {
-        mHandlerInfo->logger()->error() << "could not cast data from" << object.data().toString();
+        mHandlerInfo->logger()->error().nospace() << "Could not cast data from '" << object.data().toString() << "'.";
         std::ignore = engine()->currentContext()->throwError(QScriptContext::ReferenceError,
                                                              QStringLiteral("Attempting to access an invalid object"));
         return;
@@ -249,19 +244,19 @@ void DefaultScriptClass::setProperty(QScriptValue& object, const QScriptString& 
     if (mode == ScriptHandlerInfo::Mode::Validating) {
         // only way write access is allowed is when validating: valid and validationError
         if (data->hasBeenValidated()) {
-            data->logError() << "Cannot modify this object, it has already been validated!";
+            data->logError() << "Cannot modify this object, it has already been validated.";
         } else if (name == s_valid) {
             data->mValidationSuccessful = value.toBool();
         } else if (name == s_validationError) {
             data->setValidationError(value.toString());
         } else {
-            data->logError() << "Cannot write to property" << name.toString() << "while validating!";
+            data->logError().nospace() << "Cannot write to property '" << name.toString() << "' while validating.";
         }
         return;
     }
 
     if (mode != ScriptHandlerInfo::Mode::Updating) {
-        data->logError() << "Writing to property" << name.toString() << "is only allowed when updating.";
+        data->logError().nospace() << "Writing to property '" << name.toString() << "' is only allowed when updating.";
         return;
     }
     Q_ASSERT(mode == ScriptHandlerInfo::Mode::Updating);
@@ -291,7 +286,7 @@ void DefaultScriptClass::setProperty(QScriptValue& object, const QScriptString& 
         if (setAdditional) {
             return;
         }
-        data->logError() << "could not set property with name" << name.toString();
+        data->logError().nospace() << "Could not set property with name '" << name.toString() << "'.";
         std::ignore = engine()->currentContext()->throwError(QScriptContext::ReferenceError,
                                                              QLatin1String("Cannot write property ") + name.toString());
     }
@@ -304,7 +299,7 @@ QScriptValue::PropertyFlags DefaultScriptClass::propertyFlags(const QScriptValue
     Q_ASSERT(mode != ScriptHandlerInfo::Mode::None);
     DataInformation* const data = toDataInformation(object);
     if (!data) {
-        mHandlerInfo->logger()->error() << "could not cast data from" << object.data().toString();
+        mHandlerInfo->logger()->error().nospace() << "Could not cast data from '" << object.data().toString() << "'.";
         std::ignore = engine()->currentContext()->throwError(QScriptContext::ReferenceError,
                                                              QStringLiteral("Attempting to access an invalid object"));
         return {};
@@ -326,7 +321,7 @@ QScriptValue::PropertyFlags DefaultScriptClass::propertyFlags(const QScriptValue
     if (additionalPropertyFlags(data, name, id, &result)) {
         return result; // is a child element
     }
-    data->logError() << "could not find flags for property with name" << name.toString();
+    data->logError().nospace() << "Could not find flags for property with name '" << name.toString() << "'.";
     return {};
 }
 
@@ -355,7 +350,6 @@ DefaultscriptClassIterator::DefaultscriptClassIterator(const QScriptValue& objec
     , mClass(cls)
 {
     DataInformation* const data = DefaultScriptClass::toDataInformation(object);
-    Q_CHECK_PTR(data);
     mData = data;
 }
 

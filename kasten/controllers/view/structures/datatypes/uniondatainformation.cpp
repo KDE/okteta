@@ -49,7 +49,6 @@ qint64 UnionDataInformation::readData(const Okteta::AbstractByteArrayModel* inpu
 {
     Q_ASSERT(mHasBeenUpdated); // update must have been called prior to reading
     TopLevelDataInformation* const top = topLevelDataInformation();
-    Q_CHECK_PTR(top);
 
     qint64 readBits = 0;
     const quint8 originalBitOffset = *bitOffset;
@@ -61,7 +60,7 @@ qint64 UnionDataInformation::readData(const Okteta::AbstractByteArrayModel* inpu
         top->scriptHandler()->updateDataInformation(next);
         DataInformation* const newNext = mChildren[i].get();
         if (next != newNext) {
-            logInfo() << "Child at index " << i << " was replaced.";
+            logInfo() << "Child at index" << i << "was replaced.";
             top->setChildDataChanged();
         }
         // bit offset always has to be reset to original value

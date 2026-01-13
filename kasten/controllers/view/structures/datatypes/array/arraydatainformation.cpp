@@ -20,6 +20,7 @@
 
 ArrayDataInformation::ArrayDataInformation(const QString& name, uint length,
                                            std::unique_ptr<DataInformation>&& childType,
+                                           const LoggerWithContext& logger,
                                            DataInformation* parent, const QScriptValue& lengthFunction)
     : DataInformationWithDummyChildren(name, parent)
 {
@@ -27,64 +28,88 @@ ArrayDataInformation::ArrayDataInformation(const QString& name, uint length,
         Q_ASSERT(lengthFunction.isFunction());
         setLengthFunction(lengthFunction);
     }
-    if (length > MAX_LEN) {
-        logWarn() << length << "exceeds maximum length of" << MAX_LEN
-                  << ". Setting it to" << MAX_LEN << "instead";
-        length = MAX_LEN;
-    }
-    Q_CHECK_PTR(childType);
+    const bool isLengthNotSupported = (length > MAX_LEN);
+    const uint supportedLength = isLengthNotSupported ? MAX_LEN : length;
+
     childType->setParent(this);
-    mData = AbstractArrayData::newArrayData(length, std::move(childType), this);
+
+    mData = AbstractArrayData::newArrayData(supportedLength, length, std::move(childType), this);
+
+    if (isLengthNotSupported) {
+        if (mData->isComplex()) {
+            logger.warn(this).nospace() << "Array length " << length << " is larger than the maximal supported, limiting to " << MAX_LEN << ".";
+        } else {
+            logger.warn(this).nospace() << "Array length " << length << " is larger than the maximal supported, limiting displayed elements to " << MAX_LEN << ".";
+        }
+    }
 }
 
 ArrayDataInformation::ArrayDataInformation(const ArrayDataInformation& d)
     : DataInformationWithDummyChildren(d)
     , mData(nullptr)
 {
-    uint length = d.mData->length();
+    const uint supportedLength = d.mData->supportedLength();
+    const uint length = d.mData->length();
     DataInformation* const childType = d.mData->childType();
-    mData = AbstractArrayData::newArrayData(length, childType->clone(), this);
+    mData = AbstractArrayData::newArrayData(supportedLength, length, childType->clone(), this);
 }
 
 ArrayDataInformation::~ArrayDataInformation() = default;
 
-bool ArrayDataInformation::setArrayLength(uint newLength)
+void ArrayDataInformation::setArrayLength(uint newLength)
 {
-    if (newLength > MAX_LEN) {
-        logWarn() << QStringLiteral("new array length is too large (%1), limiting to (%2)")
-            .arg(QString::number(newLength), QString::number(MAX_LEN));
-        newLength = MAX_LEN;
+    uint newSupportedLength = newLength;
+    const uint oldLength = mData->length();
+    if (newSupportedLength > MAX_LEN) {
+        if (oldLength == newLength) {
+            // do not repeat warning, but keep warning state set
+            const ScriptLogger::LogLevel warningLevel = ScriptLogger::LogWarning;
+            if (loggedData() < warningLevel) {
+                setLoggedData(warningLevel);
+            }
+            return;
+        }
+
+        if (mData->isComplex()) {
+            logWarn().nospace() << "New array length " << newLength << " is larger than the maximal supported, limiting to " << MAX_LEN << ".";
+        } else {
+            logWarn().nospace() << "New array length " << newLength << " is larger than the maximal supported, limiting displayed elements to " << MAX_LEN << ".";
+        }
+
+        newSupportedLength = MAX_LEN;
+    } else if (oldLength == newLength) {
+        return;
     }
-    uint oldLength = mData->length();
-    topLevelDataInformation()->_childCountAboutToChange(this, oldLength, newLength);
-    mData->setLength(newLength);
-    topLevelDataInformation()->_childCountChanged(this, oldLength, newLength);
-    return true;
+
+    const uint oldSupportedLength = mData->supportedLength();
+    topLevelDataInformation()->_childCountAboutToChange(this, oldSupportedLength, newSupportedLength);
+    mData->setLength(newSupportedLength, newLength);
+    topLevelDataInformation()->_childCountChanged(this, oldSupportedLength, newSupportedLength);
 }
 
 void ArrayDataInformation::setArrayType(std::unique_ptr<DataInformation>&& newChildType)
 {
-    Q_CHECK_PTR(newChildType);
     if (newChildType->isPrimitive() && newChildType->asPrimitive()->type() == mData->primitiveType()) {
         // there is no need to change the type
-        logInfo() << "New and old child type are identical, skipping: " << mData->primitiveType();
+        logInfo() << "New and old child type are identical, skipping:" << mData->primitiveType();
         return;
     }
     newChildType->setParent(this);
-    uint len = mData->length();
+    const uint supportedLength = mData->supportedLength();
+    const uint length = mData->length();
     TopLevelDataInformation* const topLevel = topLevelDataInformation();
-    if (len > 0) {
+    if (supportedLength > 0) {
         // first create with length of 0, then change length to actual length (to ensure model is correct)
-        topLevel->_childCountAboutToChange(this, len, 0);
-        mData = AbstractArrayData::newArrayData(0, std::move(newChildType), this);
-        topLevel->_childCountChanged(this, len, 0);
+        topLevel->_childCountAboutToChange(this, supportedLength, 0);
+        mData = AbstractArrayData::newArrayData(0, 0, std::move(newChildType), this);
+        topLevel->_childCountChanged(this, supportedLength, 0);
 
-        topLevel->_childCountAboutToChange(this, 0, len);
-        mData->setLength(len);
-        topLevel->_childCountChanged(this, 0, len);
+        topLevel->_childCountAboutToChange(this, 0, supportedLength);
+        mData->setLength(supportedLength, length);
+        topLevel->_childCountChanged(this, 0, supportedLength);
     } else {
         // no need to emit the signals, which cause expensive model update
-        mData = AbstractArrayData::newArrayData(len, std::move(newChildType), this);
+        mData = AbstractArrayData::newArrayData(0, 0, std::move(newChildType), this);
         // only the type of the array changed -> emit that this has changed data
         topLevel->setChildDataChanged();
     }
@@ -97,7 +122,7 @@ QScriptValue ArrayDataInformation::childType() const
 
 QVariant ArrayDataInformation::childData(int row, int column, int role) const
 {
-    Q_ASSERT(uint(row) < mData->length());
+    Q_ASSERT(uint(row) < mData->supportedLength());
     return mData->dataAt(row, column, role);
 }
 
@@ -132,14 +157,22 @@ qint64 ArrayDataInformation::readData(const Okteta::AbstractByteArrayModel* inpu
 {
     if (*bitOffset != 0) {
         // TODO remove this, it will probably cause issues
-        logWarn() << "bit offset != 0 (" << *bitOffset << "), adding padding,"
-            " arrays always start at full bytes";
+        logWarn().nospace() << "Bit offset != 0 (" << *bitOffset << "), adding padding,"
+            " arrays always start at full bytes.";
         bitsRemaining &= BitCount64(~7); // unset lower 3 bits to make it divisible by 8
         address++;
     }
 
     // update the length of the array
-    topLevelDataInformation()->scriptHandler()->updateLength(this);
+    if (!topLevelDataInformation()->scriptHandler()->updateLength(this)) {
+        // fixed length, update state for any previous log warning about non-supported length
+        if (mData->supportedLength() < mData->length()) {
+            const ScriptLogger::LogLevel warningLevel = ScriptLogger::LogWarning;
+            if (loggedData() < warningLevel) {
+                setLoggedData(warningLevel);
+            }
+        }
+    }
 
     // FIXME do not add this padding
     qint64 ret = mData->readData(input, address, bitsRemaining);
@@ -151,8 +184,8 @@ bool ArrayDataInformation::setChildData(uint row, const QVariant& value, Okteta:
                                         Okteta::Address address, BitCount64 bitsRemaining, quint8 bitOffset)
 {
     if (bitOffset != 0) {
-        logWarn() << "bit offset != 0 (" << bitOffset << "), adding padding,"
-            " arrays always start at full bytes";
+        logWarn().nospace() << "Bit offset != 0 (" << bitOffset << "), adding padding,"
+            " arrays always start at full bytes.";
         bitsRemaining -= bitOffset;
         address++;
     }
@@ -204,7 +237,7 @@ DataInformation* ArrayDataInformation::childAt(unsigned int idx) const
 
 unsigned int ArrayDataInformation::childCount() const
 {
-    return mData->length();
+    return mData->supportedLength();
 }
 
 QString ArrayDataInformation::childTypeName(uint index) const

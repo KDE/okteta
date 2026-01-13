@@ -72,8 +72,8 @@ QScriptValue ArrayScriptClass::additionalProperty(const DataInformation* data, c
     if (id != 0) {
         quint32 pos = id - 1;
         if (pos >= data->childCount()) {
-            aData->logError() << "attempting to access out of bounds child: index was" << pos
-                              << ", length is" << data->childCount();
+            aData->logError().nospace() << "Attempting to access out of bounds child: index was " << pos
+                              << ", length is " << data->childCount();
             return engine()->currentContext()->throwError(QScriptContext::RangeError,
                                                           QStringLiteral("Attempting to access array index %1, but length is %2").arg(
                                                               QString::number(pos), QString::number(data->childCount())));
@@ -88,7 +88,7 @@ QScriptValue ArrayScriptClass::additionalProperty(const DataInformation* data, c
         return aData->childType();
     }
     if (name == s_childType) {
-        aData->logWarn() << "Using property 'childType' is deprecated, use the new name 'type' instead";
+        aData->logWarn() << "Using property 'childType' is deprecated, use the new name 'type' instead.";
         return aData->childType();
     }
     return {};
@@ -103,17 +103,17 @@ bool ArrayScriptClass::setAdditionalProperty(DataInformation* data, const QScrip
         } else {
             ParsedNumber<uint> newLength = ParserUtils::uintFromScriptValue(value);
             if (!newLength.isValid) {
-                aData->logError() << "new length of array is invalid:" << newLength.string;
-                std::ignore = aData->setArrayLength(0);
+                aData->logError() << "New length of array is invalid:" << newLength.string;
+                aData->setArrayLength(0);
             } else {
-                std::ignore = aData->setArrayLength(newLength.value);
+                aData->setArrayLength(newLength.value);
             }
         }
         return true;
     }
     if (name == s_type || name == s_childType) {
         if (name == s_childType) {
-            aData->logWarn() << "Using property 'childType' is deprecated, use the new name 'type' instead";
+            aData->logWarn() << "Using property 'childType' is deprecated, use the new name 'type' instead.";
         }
 
         std::unique_ptr<DataInformation> newChildType = ScriptValueConverter::convert(value, aData->name(), aData->logger(), aData);

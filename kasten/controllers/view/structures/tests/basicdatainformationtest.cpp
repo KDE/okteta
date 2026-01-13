@@ -288,10 +288,10 @@ void BasicDataInformationTest::initTestCase()
     unionWithChildren = std::make_unique<UnionDataInformation>(QStringLiteral("unionWithChildren"), std::move(unionChildren));
 
     emptyPrimitiveArray = std::make_unique<ArrayDataInformation>(QStringLiteral("emptyPrimitiveArray"), 0,
-                                                                 PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc));
-    emptyComplexArray = std::make_unique<ArrayDataInformation>(QStringLiteral("emptyComplexArray"), 0, structWithChildren->clone());
-    primitiveArrayWithChildren = std::make_unique<ArrayDataInformation>(QStringLiteral("primitiveArrayWithChildren"), 2, PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc));
-    complexArrayWithChildren = std::make_unique<ArrayDataInformation>(QStringLiteral("complexArrayWithChildren"), 2, structWithChildren->clone());
+                                                                 PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc), lwc);
+    emptyComplexArray = std::make_unique<ArrayDataInformation>(QStringLiteral("emptyComplexArray"), 0, structWithChildren->clone(), lwc);
+    primitiveArrayWithChildren = std::make_unique<ArrayDataInformation>(QStringLiteral("primitiveArrayWithChildren"), 2, PrimitiveFactory::newInstance(QStringLiteral("prim"), PrimitiveDataType::UInt32, lwc), lwc);
+    complexArrayWithChildren = std::make_unique<ArrayDataInformation>(QStringLiteral("complexArrayWithChildren"), 2, structWithChildren->clone(), lwc);
 
     std::map<AllPrimitiveTypes, QString> enumVals {
         {1, QStringLiteral("one")},

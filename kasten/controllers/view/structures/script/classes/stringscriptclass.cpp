@@ -118,7 +118,7 @@ bool StringScriptClass::setAdditionalProperty(DataInformation* data, const QScri
             if (result.isValid) {
                 sData->setMaxCharCount(result.value);
             } else {
-                sData->logError() << "Could not set maximum char count, invalid argument: " << value.toString();
+                sData->logError() << "Could not set maximum char count, invalid argument:" << value.toString();
             }
         }
         return true;
@@ -132,7 +132,7 @@ bool StringScriptClass::setAdditionalProperty(DataInformation* data, const QScri
             if (result.isValid) {
                 sData->setMaxByteCount(result.value);
             } else {
-                sData->logError() << "Could not set maximum byte count, invalid argument: " << value.toString();
+                sData->logError() << "Could not set maximum byte count, invalid argument:" << value.toString();
             }
         }
         return true;
@@ -146,8 +146,8 @@ bool StringScriptClass::setAdditionalProperty(DataInformation* data, const QScri
                 QString str = value.toString();
                 // we don't handle surrogate pairs, if you want to set that use a number instead.
                 if (str.length() != 1) {
-                    sData->logError() << "Setting termination char: expected one char or a code point number"
-                        ", got a string with length " << str.length();
+                    sData->logError().nospace() << "Setting termination char: expected one char or a code point number"
+                        ", got a string with length " << str.length() << ".";
                 } else {
                     sData->setTerminationCodePoint(str[0].unicode());
                 }

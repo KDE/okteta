@@ -45,7 +45,7 @@ void ArrayDataInformationTest::initTestCase()
     LoggerWithContext lwc(nullptr, QString());
 
     auto managedPrimitive = std::make_unique<ArrayDataInformation>(QStringLiteral("primitives"), 0,
-                                                                   PrimitiveFactory::newInstance(QStringLiteral("child"), PrimitiveDataType::UInt32, lwc));
+                                                                   PrimitiveFactory::newInstance(QStringLiteral("child"), PrimitiveDataType::UInt32, lwc), lwc);
     primitive = managedPrimitive.get();
     primitiveSize = 32;
     primitiveTop = std::make_unique<TopLevelDataInformation>(std::move(managedPrimitive));
@@ -73,7 +73,7 @@ void ArrayDataInformationTest::initTestCase()
     auto structs = std::make_unique<StructureDataInformation>(QStringLiteral("vals"), std::move(structsChildren));
 
     complexSize = 64;
-    auto managedComplex = std::make_unique<ArrayDataInformation>(QStringLiteral("complex"), 0, std::move(structs));
+    auto managedComplex = std::make_unique<ArrayDataInformation>(QStringLiteral("complex"), 0, std::move(structs), lwc);
     complex = managedComplex.get();
     complexTop = std::make_unique<TopLevelDataInformation>(std::move(managedComplex));
 
@@ -106,7 +106,7 @@ void ArrayDataInformationTest::testResizeHelper(ArrayDataInformation* array, Top
     QFETCH(bool, insertCalled);
     QFETCH(bool, removeCalled);
 
-    std::ignore = array->setArrayLength(newsize);
+    array->setArrayLength(newsize);
     QCOMPARE(array->length(), postsize);
     if (insertCalled) {
         QCOMPARE(spyAboutToInsert.size(), 1);

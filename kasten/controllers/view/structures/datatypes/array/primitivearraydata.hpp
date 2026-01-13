@@ -24,15 +24,17 @@ public:
     using DisplayClass = typename PrimitiveInfo<type>::Methods;
 
 public:
-    explicit PrimitiveArrayData(unsigned int initialLength,
+    explicit PrimitiveArrayData(unsigned int supportedLength, unsigned int length,
                                 std::unique_ptr<PrimitiveDataInformation>&& childType,
                                 ArrayDataInformation* parent);
     ~PrimitiveArrayData() override;
 
 public: // AbstractArrayData API
     [[nodiscard]]
+    unsigned int supportedLength() const override;
+    [[nodiscard]]
     unsigned int length() const override;
-    void setLength(uint newLength) override;
+    void setLength(uint supportedLength, uint length) override;
 
     [[nodiscard]]
     QString typeName() const override;
@@ -101,6 +103,7 @@ protected:
 
 protected:
     std::vector<T> mData;
+    uint m_length = 0;
     uint mNumReadValues = 0; // the number of values read before EOF
     DummyDataInformation mDummy;
 };
@@ -113,14 +116,14 @@ inline BitCount64 PrimitiveArrayData<type>::offset(const DataInformation* data) 
 {
     Q_ASSERT(data->isDummy());
     const uint index = data->asDummy()->dummyIndex();
-    Q_ASSERT(index < length());
+    Q_ASSERT(index < supportedLength());
     return index * sizeof(T) * 8;
 }
 
 template <PrimitiveDataType type>
 inline DataInformation* PrimitiveArrayData<type>::childAt(unsigned int idx)
 {
-    Q_ASSERT(idx < length());
+    Q_ASSERT(idx < supportedLength());
     Q_UNUSED(idx)
     mDummy.setDummyIndex(idx);
     mDummy.setName(QString::number(idx));
@@ -133,22 +136,29 @@ inline void PrimitiveArrayData<type>::setNewParentForChildren()
 }
 
 template <PrimitiveDataType type>
-inline unsigned int PrimitiveArrayData<type>::length() const
+inline unsigned int PrimitiveArrayData<type>::supportedLength() const
 {
     return mData.size();
 }
 
 template <PrimitiveDataType type>
-inline BitCount32 PrimitiveArrayData<type>::size() const
+inline unsigned int PrimitiveArrayData<type>::length() const
 {
-    return mData.size() * sizeof(T) * 8;
+    return m_length;
 }
 
 template <PrimitiveDataType type>
-void PrimitiveArrayData<type>::setLength(uint newLength)
+inline BitCount32 PrimitiveArrayData<type>::size() const
 {
-    mData.resize(newLength);
+    return m_length * sizeof(T) * 8;
+}
+
+template <PrimitiveDataType type>
+void PrimitiveArrayData<type>::setLength(uint supportedLength, uint length)
+{
+    mData.resize(supportedLength);
     mData.shrink_to_fit();
+    m_length = length;
 }
 
 template <PrimitiveDataType type>

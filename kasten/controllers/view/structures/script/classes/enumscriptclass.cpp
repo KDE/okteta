@@ -54,7 +54,7 @@ bool EnumScriptClass::setAdditionalProperty(DataInformation* data, const QScript
         std::map<AllPrimitiveTypes, QString> newValues = EnumDefinition::parseEnumValues(value,
                                                                                          LoggerWithContext(pData->logger(), pData->fullObjectPath()), pData->type());
         if (newValues.empty()) {
-            pData->logWarn() << "attempting to set empty list of enum values!";
+            pData->logWarn() << "Attempting to set empty list of enum values.";
         }
         pData->setEnumValues(std::move(newValues));
         return true;

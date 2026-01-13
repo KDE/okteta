@@ -30,8 +30,6 @@ PointerDataInformation::PointerDataInformation(const QString& name,
     , mPointerTarget(std::move(pointerTarget))
     , mPointerScale(pointerScale)
 {
-    Q_CHECK_PTR(mPointerTarget);
-
     if (interpretFunction.isValid() && interpretFunction.isFunction()) {
         setInterpreterFunction(interpretFunction);
     }
@@ -138,9 +136,8 @@ DataInformation* PointerDataInformation::childAt(uint index) const
 
 bool PointerDataInformation::setPointerType(std::unique_ptr<DataInformation>&& type)
 {
-    Q_CHECK_PTR(type);
     if (!type->isPrimitive()) {
-        logError() << "New pointer type is not primitive!";
+        logError() << "New pointer type is not primitive.";
         return false;
     }
     DataInformation* const pointerType = type.release();
@@ -180,13 +177,13 @@ quint64 PointerDataInformation::interpret(Okteta::Address start) const
                                                 const_cast<DataInformation*>(asDataInformation()),
                                                 ScriptHandlerInfo::Mode::InterpretingPointer);
     if (result.isError()) {
-        logError() << "interpretFunc caused an error:" << result.toString();
+        logError() << "InterpretFunc caused an error:" << result.toString();
         return 0;
     }
 
     ParsedNumber<quint64> value = ParserUtils::uint64FromScriptValue(result);
     if (!value.isValid) {
-        logError() << "Pointer interpreter function did not return a valid number! Result was: " << result.toString();
+        logError() << "Pointer interpreter function did not return a valid number. Result was:" << result.toString();
         return 0;
     }
     return value.value;

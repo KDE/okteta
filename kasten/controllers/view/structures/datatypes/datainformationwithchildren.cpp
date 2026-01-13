@@ -140,7 +140,7 @@ void DataInformationWithChildren::setChildren(std::vector<std::unique_ptr<DataIn
 void DataInformationWithChildren::setChildren(const QScriptValue& children)
 {
     if (children.isNull() || children.isUndefined()) {
-        logError() << "attempting to set children to null/undefined.";
+        logError() << "Attempting to set children to null/undefined.";
         return;
     }
     std::vector<std::unique_ptr<DataInformation>> convertedVals =
@@ -183,7 +183,6 @@ void DataInformationWithChildren::appendChild(std::unique_ptr<DataInformation>&&
 bool DataInformationWithChildren::replaceChildAt(unsigned int index, std::unique_ptr<DataInformation>&& newChild)
 {
     Q_ASSERT(index < mChildren.size());
-    Q_CHECK_PTR(newChild);
     if (index >= mChildren.size()) {
         return false;
     }
@@ -244,8 +243,6 @@ bool DataInformationWithChildren::readChildren(const std::vector<std::unique_ptr
                                                const Okteta::AbstractByteArrayModel* input, Okteta::Address address, BitCount64 bitsRemaining,
                                                quint8* bitOffset, qint64* readBitsPtr, TopLevelDataInformation* top)
 {
-    Q_CHECK_PTR(top);
-    Q_CHECK_PTR(readBitsPtr);
     Q_ASSERT(*readBitsPtr >= 0); // otherwise we failed before
 
     qint64 readBits = *readBitsPtr;

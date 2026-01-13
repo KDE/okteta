@@ -22,10 +22,9 @@ EnumDataInformation::EnumDataInformation(const QString& name,
     : PrimitiveDataInformationWrapper(name, std::move(type), parent)
     , mEnum(enumDef)
 {
-    Q_CHECK_PTR(mValue);
     if (enumDef->type() != mValue->type()) {
-        logWarn() << "incompatible types in definition and value: "
-                  << enumDef->type() << "and " << mValue->type();
+        logWarn().nospace() << "Incompatible types in definition and value: '"
+                  << enumDef->type() << "' and '" << mValue->type() << "'.";
     }
     mValue->setParent(this);
 }
@@ -55,14 +54,12 @@ QWidget* EnumDataInformation::createEditWidget(QWidget* parent) const
 QVariant EnumDataInformation::dataFromWidget(const QWidget* w) const
 {
     const auto* const box = qobject_cast<const KComboBox*>(w);
-    Q_CHECK_PTR(box);
     return box->currentData();
 }
 
 void EnumDataInformation::setWidgetData(QWidget* w) const
 {
     auto* const box = qobject_cast<KComboBox*>(w);
-    Q_CHECK_PTR(box);
     const int dataIndex = box->findData(mValue->valueToQVariant());
     if (dataIndex != -1) {
         box->setCurrentIndex(dataIndex);

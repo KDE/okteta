@@ -26,7 +26,7 @@ QWidget* DoubleDataInformationMethods::staticCreateEditWidget(QWidget* parent)
 QVariant DoubleDataInformationMethods::staticDataFromWidget(const QWidget* w)
 {
     const auto* const editor = qobject_cast<const Okteta::Float64Editor*>(w);
-    Q_CHECK_PTR(editor);
+    Q_ASSERT(editor);
     if (editor) {
         return editor->data().value;
     }
@@ -36,7 +36,7 @@ QVariant DoubleDataInformationMethods::staticDataFromWidget(const QWidget* w)
 void DoubleDataInformationMethods::staticSetWidgetData(double value, QWidget* w)
 {
     auto* const editor = qobject_cast<Okteta::Float64Editor*>(w);
-    Q_CHECK_PTR(editor);
+    Q_ASSERT(editor);
     if (editor) {
         editor->setData(value);
     }

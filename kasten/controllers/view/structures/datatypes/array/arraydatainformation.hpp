@@ -17,6 +17,7 @@
 #include <memory>
 
 class AbstractArrayData;
+struct LoggerWithContext;
 
 class ArrayDataInformation : public DataInformationWithDummyChildren
 {
@@ -30,6 +31,7 @@ public:
      */
     ArrayDataInformation(const QString& name, uint length,
                          std::unique_ptr<DataInformation>&& childType,
+                         const LoggerWithContext& logger,
                          DataInformation* parent = nullptr, const QScriptValue& lengthFunction = QScriptValue());
     ~ArrayDataInformation() override;
 
@@ -92,8 +94,7 @@ public: // DataInformationBase API
 public:
     [[nodiscard]]
     uint length() const;
-    [[nodiscard]]
-    bool setArrayLength(uint newLength);
+    void setArrayLength(uint newLength);
     /** Sets the new array type
      * @param newChildtype the new type (ownership is always taken, do not use anymore after this call!)
      */

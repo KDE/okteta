@@ -128,6 +128,14 @@ public:
     LoggerWithContext& operator=(LoggerWithContext&&) = delete;
 
 public:
+    // TODO: DataInformation arg variants added for ArrayDataInformation, makes context purposeless, rework?
+    [[nodiscard]]
+    inline QDebug info(const DataInformation* origin) const { return logger ? logger->info(origin) : qDebug(); }
+    [[nodiscard]]
+    inline QDebug warn(const DataInformation* origin) const { return logger ? logger->warn(origin) : qWarning(); }
+    [[nodiscard]]
+    inline QDebug error(const DataInformation* origin) const { return logger ? logger->error(origin) : qWarning(); }
+
     [[nodiscard]]
     inline QDebug info() const { return logger ? logger->info(context) : qDebug(); }
     [[nodiscard]]

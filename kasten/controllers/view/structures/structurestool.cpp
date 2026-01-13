@@ -150,7 +150,6 @@ bool StructuresTool::setData(const QVariant& value, int role, DataInformation* i
     if (role != Qt::EditRole) {
         return false;
     }
-    Q_CHECK_PTR(item);
 
     TopLevelDataInformation* const topLevel = item->topLevelDataInformation();
     const Okteta::Address structureStart = startAddress(topLevel);
@@ -228,7 +227,6 @@ DataInformation* StructuresTool::childAt(int idx) const
 
 void StructuresTool::addChildItem(std::unique_ptr<TopLevelDataInformation>&& child)
 {
-    Q_CHECK_PTR(child);
     child->setParent(this);
     if (child->isValid()) {
         child->setIndex(mData.size());
@@ -320,7 +318,6 @@ Okteta::Address StructuresTool::startAddress(const TopLevelDataInformation* data
 
 QString StructuresTool::dataAddressAsString(const DataInformation* data) const
 {
-    Q_CHECK_PTR(data->topLevelDataInformation());
     const Okteta::Address baseAddress = startAddress(data->topLevelDataInformation());
     const auto dataOffset = static_cast<Okteta::Address>(data->positionInFile(baseAddress) / 8);
 
@@ -341,7 +338,7 @@ QString StructuresTool::dataAddressAsString(const DataInformation* data) const
 
 Okteta::AddressRange StructuresTool::dataRange(const DataInformation* data) const
 {
-    Q_CHECK_PTR(data->topLevelDataInformation());
+    Q_ASSERT(data->topLevelDataInformation());
     const Okteta::Address baseAddress = startAddress(data->topLevelDataInformation());
     // FIXME support range of partial bytes
     int length = data->size() / 8;
@@ -439,7 +436,7 @@ void StructuresTool::unlockStructure(const QModelIndex& idx)
         return;
     }
     TopLevelDataInformation* const top = data->topLevelDataInformation();
-    Q_CHECK_PTR(top);
+    Q_ASSERT(top);
 
     const bool wasMarked = mIsStructureMarked;
     if (wasMarked) {

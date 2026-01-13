@@ -32,9 +32,7 @@ TopLevelDataInformation::TopLevelDataInformation(std::unique_ptr<DataInformation
     , mValid(!mData->isDummy())
     , mChildDataChanged(false)
 {
-    Q_CHECK_PTR(mData);
     mData->setParent(this);
-    setObjectName(mData->name());
 
     if (!mLogger) {
         mLogger = std::make_unique<ScriptLogger>();
@@ -86,7 +84,7 @@ void TopLevelDataInformation::read(const Okteta::AbstractByteArrayModel* input, 
     const DataInformation* const oldData = mData.get();
     mScriptHandler->updateDataInformation(mData.get()); // unlikely that this is useful, but maybe someone needs it
     if (mData.get() != oldData) {
-        mLogger->info() << "Main element was replaced!";
+        mLogger->info() << "Main element was replaced.";
     }
     mData->readData(input, address, remainingBits, &bitOffset);
 
