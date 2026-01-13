@@ -28,16 +28,19 @@ ArrayDataInformation::ArrayDataInformation(const QString& name, uint length, Dat
         setLengthFunction(lengthFunction);
     }
     const bool isLengthNotSupported = (length > MAX_LEN);
-    if (isLengthNotSupported) {
-        logger.warn(this).nospace() << length << " exceeds maximum length of " << MAX_LEN
-                          << ". Setting it to " << MAX_LEN << " instead.";
-    }
     const uint supportedLength = isLengthNotSupported ? MAX_LEN : length;
 
     childType->setParent(this);
 
     mData.reset(AbstractArrayData::newArrayData(supportedLength, length, childType, this));
 
+    if (isLengthNotSupported) {
+        if (mData->isComplex()) {
+            logger.warn(this).nospace() << "Array length " << length << " is larger than the maximal supported, limiting to " << MAX_LEN << ".";
+        } else {
+            logger.warn(this).nospace() << "Array length " << length << " is larger than the maximal supported, limiting displayed elements to " << MAX_LEN << ".";
+        }
+    }
 }
 
 ArrayDataInformation::ArrayDataInformation(const ArrayDataInformation& d)
@@ -66,7 +69,12 @@ void ArrayDataInformation::setArrayLength(uint newLength)
             return;
         }
 
-        logWarn().nospace() << "New array length is too large (" << newLength << "), limiting to " << MAX_LEN << ".";
+        if (mData->isComplex()) {
+            logWarn().nospace() << "New array length " << newLength << " is larger than the maximal supported, limiting to " << MAX_LEN << ".";
+        } else {
+            logWarn().nospace() << "New array length " << newLength << " is larger than the maximal supported, limiting displayed elements to " << MAX_LEN << ".";
+        }
+
         newSupportedLength = MAX_LEN;
     } else if (oldLength == newLength) {
         return;
