@@ -27,39 +27,47 @@ ArrayDataInformation::ArrayDataInformation(const QString& name, uint length, Dat
         Q_ASSERT(lengthFunction.isFunction());
         setLengthFunction(lengthFunction);
     }
-    if (length > MAX_LEN) {
+    const bool isLengthNotSupported = (length > MAX_LEN);
+    if (isLengthNotSupported) {
         logger.warn(this).nospace() << length << " exceeds maximum length of " << MAX_LEN
                           << ". Setting it to " << MAX_LEN << " instead.";
-        length = MAX_LEN;
     }
+    const uint supportedLength = isLengthNotSupported ? MAX_LEN : length;
+
     childType->setParent(this);
-    mData.reset(AbstractArrayData::newArrayData(length, childType, this));
+
+    mData.reset(AbstractArrayData::newArrayData(supportedLength, length, childType, this));
+
 }
 
 ArrayDataInformation::ArrayDataInformation(const ArrayDataInformation& d)
     : DataInformationWithDummyChildren(d)
     , mData(nullptr)
 {
-    uint length = d.mData->length();
+    const uint supportedLength = d.mData->supportedLength();
+    const uint length = d.mData->length();
     DataInformation* childType = d.mData.data()->childType();
-    mData.reset(AbstractArrayData::newArrayData(length, childType->clone(), this));
+    mData.reset(AbstractArrayData::newArrayData(supportedLength, length, childType->clone(), this));
 }
 
 ArrayDataInformation::~ArrayDataInformation() = default;
 
 void ArrayDataInformation::setArrayLength(uint newLength)
 {
+    uint newSupportedLength = newLength;
     if (newLength > MAX_LEN) {
         logWarn().nospace() << "New array length is too large (" << newLength << "), limiting to " << MAX_LEN << ".";
-        newLength = MAX_LEN;
+        newSupportedLength = MAX_LEN;
     }
     uint oldLength = mData->length();
     if (oldLength == newLength) {
         return;
     }
-    topLevelDataInformation()->_childCountAboutToChange(this, oldLength, newLength);
-    mData->setLength(newLength);
-    topLevelDataInformation()->_childCountChanged(this, oldLength, newLength);
+
+    const uint oldSupportedLength = mData->supportedLength();
+    topLevelDataInformation()->_childCountAboutToChange(this, oldSupportedLength, newSupportedLength);
+    mData->setLength(newSupportedLength, newLength);
+    topLevelDataInformation()->_childCountChanged(this, oldSupportedLength, newSupportedLength);
 }
 
 void ArrayDataInformation::setArrayType(DataInformation* newChildType)
@@ -71,20 +79,21 @@ void ArrayDataInformation::setArrayType(DataInformation* newChildType)
         return;
     }
     newChildType->setParent(this);
-    uint len = mData->length();
+    const uint supportedLength = mData->supportedLength();
+    const uint length = mData->length();
     TopLevelDataInformation* topLevel = topLevelDataInformation();
-    if (len > 0) {
+    if (supportedLength > 0) {
         // first create with length of 0, then change length to actual length (to ensure model is correct)
-        topLevel->_childCountAboutToChange(this, len, 0);
-        mData.reset(AbstractArrayData::newArrayData(0, newChildType, this));
-        topLevel->_childCountChanged(this, len, 0);
+        topLevel->_childCountAboutToChange(this, supportedLength, 0);
+        mData.reset(AbstractArrayData::newArrayData(0, 0, newChildType, this));
+        topLevel->_childCountChanged(this, supportedLength, 0);
 
-        topLevel->_childCountAboutToChange(this, 0, len);
-        mData->setLength(len);
-        topLevel->_childCountChanged(this, 0, len);
+        topLevel->_childCountAboutToChange(this, 0, supportedLength);
+        mData->setLength(supportedLength, length);
+        topLevel->_childCountChanged(this, 0, supportedLength);
     } else {
         // no need to emit the signals, which cause expensive model update
-        mData.reset(AbstractArrayData::newArrayData(len, newChildType, this));
+        mData.reset(AbstractArrayData::newArrayData(0, 0, newChildType, this));
         // only the type of the array changed -> emit that this has changed data
         topLevel->setChildDataChanged();
     }
@@ -97,7 +106,7 @@ QScriptValue ArrayDataInformation::childType() const
 
 QVariant ArrayDataInformation::childData(int row, int column, int role) const
 {
-    Q_ASSERT(uint(row) < mData->length());
+    Q_ASSERT(uint(row) < mData->supportedLength());
     return mData->dataAt(row, column, role);
 }
 
@@ -204,7 +213,7 @@ DataInformation* ArrayDataInformation::childAt(unsigned int idx) const
 
 unsigned int ArrayDataInformation::childCount() const
 {
-    return mData->length();
+    return mData->supportedLength();
 }
 
 QString ArrayDataInformation::childTypeName(uint index) const

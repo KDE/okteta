@@ -20,14 +20,15 @@ class ComplexArrayData : public AbstractArrayData
 {
 public:
     /** Takes ownership of @p data !*/
-    ComplexArrayData(unsigned int initialLength, DataInformation* data, ArrayDataInformation* parent);
+    ComplexArrayData(unsigned int supportedLength, uint length, DataInformation* data, ArrayDataInformation* parent);
     ~ComplexArrayData() override;
 
 public:
     QVariant dataAt(uint index, int column, int role) override;
 
+    unsigned int supportedLength() const override;
     unsigned int length() const override;
-    void setLength(uint newLength) override;
+    void setLength(uint supportedLength, uint length) override;
     BitCount32 size() const override;
 
     QString typeName() const override;
@@ -60,6 +61,7 @@ private:
 
 private:
     QVector<DataInformation*> mChildren;
+    uint m_length = 0;
 };
 
 #endif // KASTEN_COMPLEXARRAYDATA_HPP

@@ -44,8 +44,9 @@ public:
     DataInformation* childType() const;
 
     virtual QVariant dataAt(uint index, int column, int role) = 0;
+    virtual unsigned int supportedLength() const = 0;
     virtual unsigned int length() const = 0;
-    virtual void setLength(uint newLength) = 0;
+    virtual void setLength(uint supportedLength, uint length) = 0;
 
     virtual QString typeName() const = 0;
     virtual QString valueString() const = 0;
@@ -73,7 +74,7 @@ public:
     virtual void setChildWidgetData(uint index, QWidget* w) const = 0;
 
     /** Takes ownership over @p type ! */
-    static AbstractArrayData* newArrayData(uint length, DataInformation* type, ArrayDataInformation* parent);
+    static AbstractArrayData* newArrayData(uint supportedLength, uint length, DataInformation* type, ArrayDataInformation* parent);
 
 protected:
     virtual void setNewParentForChildren() = 0;
