@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-31 03:54+0000\n"
+"POT-Creation-Date: 2026-01-14 03:31+0000\n"
 "PO-Revision-Date: 2025-11-24 20:50+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -1626,7 +1626,7 @@ msgid ""
 "last selected is marked and shown in the view."
 msgstr "如果您按下<interface>跳到</interface>按鍵，字串會標記並顯示在檢視中。"
 
-#: controllers/view/structures/datatypes/array/complexarraydata.cpp:96
+#: controllers/view/structures/datatypes/array/complexarraydata.cpp:105
 #, kde-format
 msgctxt "type name, then array length"
 msgid "%1[%2]"
@@ -1644,13 +1644,13 @@ msgctxt "number of bytes, then number of bits"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:201
+#: controllers/view/structures/datatypes/datainformation.cpp:199
 #, kde-format
 msgctxt "invalid value (End of file reached)"
 msgid "<EOF reached>"
 msgstr "<到達檔案結尾>"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:214
+#: controllers/view/structures/datatypes/datainformation.cpp:212
 #, kde-format
 msgid ""
 "Name: %1\n"
@@ -1665,7 +1665,7 @@ msgstr ""
 "型態：%3\n"
 "大小：%4"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:217
+#: controllers/view/structures/datatypes/datainformation.cpp:215
 #, kde-format
 msgid ""
 "Name: %1\n"
@@ -1684,21 +1684,21 @@ msgstr ""
 "\n"
 "%5"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:229
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:211
+#: controllers/view/structures/datatypes/datainformation.cpp:227
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:210
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed."
 msgstr "確認失敗。"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:232
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:214
+#: controllers/view/structures/datatypes/datainformation.cpp:230
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:213
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed: \"%1\""
 msgstr "確認失敗：\"%1\""
 
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:216
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:215
 #, kde-format
 msgid ""
 "Name: %2\n"
@@ -1725,7 +1725,7 @@ msgstr[0] ""
 "\n"
 "%6"
 
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:221
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:220
 #, kde-format
 msgid ""
 "Name: %2\n"
@@ -1766,7 +1766,7 @@ msgctxt "boolean value"
 msgid "true"
 msgstr "真"
 
-#: controllers/view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.cpp:92
+#: controllers/view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.cpp:90
 #, kde-format
 msgctxt "Data type"
 msgid "boolean bitfield (%1 bit wide)"
@@ -1793,19 +1793,19 @@ msgctxt "boolean value with actual value"
 msgid "true (%1)"
 msgstr "真 (%1)"
 
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:41
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:80
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:40
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:77
 #, kde-format
 msgid "%1 (value not in enum)"
 msgstr "%1（數值不在列舉中）"
 
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:49
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:77
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:48
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:74
 #, kde-format
 msgid "%1 (%2)"
 msgstr "%1（%2）"
 
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:87
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:84
 #, kde-format
 msgctxt ""
 "Displayed in the type column. first comes the name of the enum, then the "
@@ -1826,7 +1826,7 @@ msgctxt ""
 msgid "flag %1 (%2)"
 msgstr "旗標 %1（%2）"
 
-#: controllers/view/structures/datatypes/primitive/pointerdatainformation.cpp:115
+#: controllers/view/structures/datatypes/primitive/pointerdatainformation.cpp:113
 #, kde-format
 msgctxt "memory pointer with underlying type"
 msgid "%1 pointer"
@@ -2059,8 +2059,8 @@ msgctxt "data type in C/C++, then name"
 msgid "union %1"
 msgstr "union %1"
 
-#: controllers/view/structures/parsers/osdparser.cpp:119
-#: controllers/view/structures/parsers/osdparser.cpp:201
+#: controllers/view/structures/parsers/osdparser.cpp:116
+#: controllers/view/structures/parsers/osdparser.cpp:198
 #, kde-format
 msgid "<invalid name>"
 msgstr "<不合法的名稱>"
@@ -2105,12 +2105,12 @@ msgstr "進階選取..."
 msgid "Get New Structures..."
 msgstr "取得新結構..."
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:183
+#: controllers/view/structures/settings/structuresmanagerview.cpp:182
 #, kde-format
 msgid "Structure Definitions"
 msgstr "結構定義"
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:186
+#: controllers/view/structures/settings/structuresmanagerview.cpp:185
 #, kde-format
 msgid "Dynamic Structure Definitions"
 msgstr "動態結構定義"
@@ -2305,19 +2305,19 @@ msgctxt "@title:window"
 msgid "Structures"
 msgstr "結構"
 
-#: controllers/view/structures/structurestool.cpp:192
+#: controllers/view/structures/structurestool.cpp:191
 #, kde-format
 msgctxt "name of a data structure"
 msgid "Name"
 msgstr "名稱"
 
-#: controllers/view/structures/structurestool.cpp:194
+#: controllers/view/structures/structurestool.cpp:193
 #, kde-format
 msgctxt "type of a data structure"
 msgid "Type"
 msgstr "型態"
 
-#: controllers/view/structures/structurestool.cpp:196
+#: controllers/view/structures/structurestool.cpp:195
 #, kde-format
 msgctxt "value of a data structure (primitive type)"
 msgid "Value"

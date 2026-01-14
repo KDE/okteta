@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-12-31 03:54+0000\n"
+"POT-Creation-Date: 2026-01-14 03:31+0000\n"
 "PO-Revision-Date: 2025-02-16 10:59+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -1654,7 +1654,7 @@ msgstr ""
 "Painaessasi tästä viimeksi valittu merkkijonot merkitään ja näytetään "
 "näkymässä."
 
-#: controllers/view/structures/datatypes/array/complexarraydata.cpp:96
+#: controllers/view/structures/datatypes/array/complexarraydata.cpp:105
 #, kde-format
 msgctxt "type name, then array length"
 msgid "%1[%2]"
@@ -1673,13 +1673,13 @@ msgctxt "number of bytes, then number of bits"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:201
+#: controllers/view/structures/datatypes/datainformation.cpp:199
 #, kde-format
 msgctxt "invalid value (End of file reached)"
 msgid "<EOF reached>"
 msgstr "<EOF saavutettu>"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:214
+#: controllers/view/structures/datatypes/datainformation.cpp:212
 #, kde-format
 msgid ""
 "Name: %1\n"
@@ -1694,7 +1694,7 @@ msgstr ""
 "Tyyppi: %3\n"
 "Koko: %4"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:217
+#: controllers/view/structures/datatypes/datainformation.cpp:215
 #, kde-format
 msgid ""
 "Name: %1\n"
@@ -1713,21 +1713,21 @@ msgstr ""
 "\n"
 "%5"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:229
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:211
+#: controllers/view/structures/datatypes/datainformation.cpp:227
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:210
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed."
 msgstr "Validointi epäonnistui."
 
-#: controllers/view/structures/datatypes/datainformation.cpp:232
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:214
+#: controllers/view/structures/datatypes/datainformation.cpp:230
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:213
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed: \"%1\""
 msgstr "Validointi epäonnistui: ”%1”"
 
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:216
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:215
 #, kde-format
 msgid ""
 "Name: %2\n"
@@ -1762,7 +1762,7 @@ msgstr[1] ""
 "\n"
 " %6"
 
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:221
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:220
 #, kde-format
 msgid ""
 "Name: %2\n"
@@ -1810,7 +1810,7 @@ msgctxt "boolean value"
 msgid "true"
 msgstr "tosi"
 
-#: controllers/view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.cpp:92
+#: controllers/view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.cpp:90
 #, kde-format
 msgctxt "Data type"
 msgid "boolean bitfield (%1 bit wide)"
@@ -1840,19 +1840,19 @@ msgctxt "boolean value with actual value"
 msgid "true (%1)"
 msgstr "tosi (%1)"
 
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:41
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:80
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:40
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:77
 #, kde-format
 msgid "%1 (value not in enum)"
 msgstr "%1 (arvo ei luettelotyypissä)"
 
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:49
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:77
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:48
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:74
 #, kde-format
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:87
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:84
 #, kde-format
 msgctxt ""
 "Displayed in the type column. first comes the name of the enum, then the "
@@ -1873,7 +1873,7 @@ msgctxt ""
 msgid "flag %1 (%2)"
 msgstr "lippu %1 (%2)"
 
-#: controllers/view/structures/datatypes/primitive/pointerdatainformation.cpp:115
+#: controllers/view/structures/datatypes/primitive/pointerdatainformation.cpp:113
 #, kde-format
 msgctxt "memory pointer with underlying type"
 msgid "%1 pointer"
@@ -2106,8 +2106,8 @@ msgctxt "data type in C/C++, then name"
 msgid "union %1"
 msgstr "union %1"
 
-#: controllers/view/structures/parsers/osdparser.cpp:119
-#: controllers/view/structures/parsers/osdparser.cpp:201
+#: controllers/view/structures/parsers/osdparser.cpp:116
+#: controllers/view/structures/parsers/osdparser.cpp:198
 #, kde-format
 msgid "<invalid name>"
 msgstr "<virheellinen nimi>"
@@ -2152,12 +2152,12 @@ msgstr "Tarkempi valinta…"
 msgid "Get New Structures..."
 msgstr "Hae uusia rakenteita…"
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:183
+#: controllers/view/structures/settings/structuresmanagerview.cpp:182
 #, kde-format
 msgid "Structure Definitions"
 msgstr "Rakennemääritelmät"
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:186
+#: controllers/view/structures/settings/structuresmanagerview.cpp:185
 #, kde-format
 msgid "Dynamic Structure Definitions"
 msgstr "Dynaamiset rakennemääritelmät"
@@ -2357,19 +2357,19 @@ msgctxt "@title:window"
 msgid "Structures"
 msgstr "Rakenteet"
 
-#: controllers/view/structures/structurestool.cpp:192
+#: controllers/view/structures/structurestool.cpp:191
 #, kde-format
 msgctxt "name of a data structure"
 msgid "Name"
 msgstr "Nimi"
 
-#: controllers/view/structures/structurestool.cpp:194
+#: controllers/view/structures/structurestool.cpp:193
 #, kde-format
 msgctxt "type of a data structure"
 msgid "Type"
 msgstr "Tyyppi"
 
-#: controllers/view/structures/structurestool.cpp:196
+#: controllers/view/structures/structurestool.cpp:195
 #, kde-format
 msgctxt "value of a data structure (primitive type)"
 msgid "Value"
