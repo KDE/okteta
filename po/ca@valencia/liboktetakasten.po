@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-05 02:23+0000\n"
+"POT-Creation-Date: 2026-01-14 02:04+0000\n"
 "PO-Revision-Date: 2026-01-05 09:32+0100\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -1894,7 +1894,7 @@ msgid_plural "%1 strings extracted."
 msgstr[0] "S'ha extret 1 cadena."
 msgstr[1] "S'han extret %1 cadenes."
 
-#: controllers/view/structures/datatypes/array/complexarraydata.cpp:96
+#: controllers/view/structures/datatypes/array/complexarraydata.cpp:104
 #, kde-format
 msgctxt "type name, then array length"
 msgid "%1[%2]"
@@ -1913,33 +1913,33 @@ msgctxt "number of bytes, then number of bits"
 msgid "%1 %2"
 msgstr "%1 %2"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:203
+#: controllers/view/structures/datatypes/datainformation.cpp:201
 #, kde-format
 msgctxt "invalid value (End of file reached)"
 msgid "<EOF reached>"
 msgstr "<S'ha arribat al final del fitxer>"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:232
+#: controllers/view/structures/datatypes/datainformation.cpp:230
 #, kde-format
 msgid "Name:"
 msgstr "Nom:"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:233
+#: controllers/view/structures/datatypes/datainformation.cpp:231
 #, kde-format
 msgid "Type:"
 msgstr "Tipus:"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:234
+#: controllers/view/structures/datatypes/datainformation.cpp:232
 #, kde-format
 msgid "Value:"
 msgstr "Valor:"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:235
+#: controllers/view/structures/datatypes/datainformation.cpp:233
 #, kde-format
 msgid "Size:"
 msgstr "Mida:"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:241
+#: controllers/view/structures/datatypes/datainformation.cpp:239
 #, kde-format
 msgctxt "size (elements)"
 msgid "%2 (%1 child)"
@@ -1947,15 +1947,15 @@ msgid_plural "%2 (%1 children)"
 msgstr[0] "%2 (%1 fill)"
 msgstr[1] "%2 (%1 fills)"
 
-#: controllers/view/structures/datatypes/datainformation.cpp:266
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:208
+#: controllers/view/structures/datatypes/datainformation.cpp:264
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:207
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed."
 msgstr "No s'ha pogut validar."
 
-#: controllers/view/structures/datatypes/datainformation.cpp:269
-#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:211
+#: controllers/view/structures/datatypes/datainformation.cpp:267
+#: controllers/view/structures/datatypes/datainformationwithchildren.cpp:210
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed: \"%1\""
@@ -1982,7 +1982,7 @@ msgctxt "boolean value"
 msgid "true"
 msgstr "cert"
 
-#: controllers/view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.cpp:93
+#: controllers/view/structures/datatypes/primitive/bitfield/boolbitfielddatainformation.cpp:91
 #, kde-format
 msgctxt "Data type"
 msgid "boolean bitfield (%1 bit wide)"
@@ -2012,19 +2012,19 @@ msgctxt "boolean value with actual value"
 msgid "true (%1)"
 msgstr "cert (%1)"
 
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:43
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:80
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:42
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:77
 #, kde-format
 msgid "%1 (value not in enum)"
 msgstr "%1 (el valor no és a una enumeració)"
 
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:49
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:77
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:48
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:74
 #, kde-format
 msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
-#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:87
+#: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:84
 #, kde-format
 msgctxt ""
 "Displayed in the type column. first comes the name of the enum, then the "
@@ -2045,7 +2045,7 @@ msgctxt ""
 msgid "flag %1 (%2)"
 msgstr "indicador %1 (%2)"
 
-#: controllers/view/structures/datatypes/primitive/pointerdatainformation.cpp:119
+#: controllers/view/structures/datatypes/primitive/pointerdatainformation.cpp:117
 #, kde-format
 msgctxt "memory pointer with underlying type"
 msgid "%1 pointer"
@@ -2262,8 +2262,8 @@ msgctxt "data type in C/C++, then name"
 msgid "union %1"
 msgstr "unió %1"
 
-#: controllers/view/structures/parsers/osdparser.cpp:120
-#: controllers/view/structures/parsers/osdparser.cpp:202
+#: controllers/view/structures/parsers/osdparser.cpp:117
+#: controllers/view/structures/parsers/osdparser.cpp:199
 #, kde-format
 msgid "<invalid name>"
 msgstr "<nom no vàlid>"
@@ -2650,25 +2650,25 @@ msgctxt "@title:window"
 msgid "Structures"
 msgstr "Estructures"
 
-#: controllers/view/structures/structurestool.cpp:201
+#: controllers/view/structures/structurestool.cpp:200
 #, kde-format
 msgctxt "name of a data structure"
 msgid "Name"
 msgstr "Nom"
 
-#: controllers/view/structures/structurestool.cpp:203
+#: controllers/view/structures/structurestool.cpp:202
 #, kde-format
 msgctxt "type of a data structure"
 msgid "Type"
 msgstr "Tipus"
 
-#: controllers/view/structures/structurestool.cpp:205
+#: controllers/view/structures/structurestool.cpp:204
 #, kde-format
 msgctxt "value of a data structure (primitive type)"
 msgid "Value"
 msgstr "Valor"
 
-#: controllers/view/structures/structurestool.cpp:207
+#: controllers/view/structures/structurestool.cpp:206
 #, kde-format
 msgctxt "size of a data structure"
 msgid "Size"
