@@ -103,6 +103,7 @@ GenericName[ug]=ئون ئالتىلىك تەھرىرلىگۈچ
 GenericName[uk]=Шістнадцятковий редактор
 GenericName[zh_CN]=十六进制编辑器
 GenericName[zh_TW]=十六進位資料編輯器
+Keywords=binary;octal;hexadecimal;bit;byte;
 Icon=okteta
 Exec=okteta %U
 X-DocPath=okteta/index.html
