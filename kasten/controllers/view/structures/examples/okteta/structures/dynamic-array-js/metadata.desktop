@@ -4,7 +4,19 @@ Type=Service
 ServiceTypes=KPluginInfo
 
 Name=Testing dynamic length arrays (JS)
+Name[ca]=Proves de matrius de longitud dinàmica (JS)
+Name[nl]=Dynamische lengte arrays worden getest (JS)
+Name[pt_BR]=Testar as listas de tamanho dinâmico (JS)
+Name[sl]=Preizkušanje polj dinamične dolžine (JS)
+Name[tr]=Hareketli uzunluk dizilişleri sınanıyor (JS)
+Name[uk]=Тестування масивів зі змінною розмірністю (JS)
 Comment=A test structure for dynamic arrays (JS)
+Comment[ca]=Una estructura de proves per a matrius dinàmiques (JS)
+Comment[nl]=Een teststructuur voor dynamische arrays (JS)
+Comment[pt_BR]=Uma estrutura de testes para listas dinâmicas (JS)
+Comment[sl]=Preizkusna struktura za dinamična polja (JS)
+Comment[tr]=Hareketli uzunluk dizilişleri için bir sınama yapısı (JS)
+Comment[uk]=Тестова структура для динамічних масивів (JS)
 
 X-KDE-PluginInfo-Author=Alex Richardson
 X-KDE-PluginInfo-Email=alex.richardson@gmx.de
