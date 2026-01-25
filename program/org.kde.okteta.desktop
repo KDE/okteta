@@ -111,6 +111,7 @@ Keywords[es]=binario;octal;hexadecimal;bit;byte;
 Keywords[fr]=binaire ; octal ; hexadécimal ; bit ; octet ;
 Keywords[it]=binario;ottale;esadecimale;bit;byte;
 Keywords[nl]=binair;octaal;hexadecimaal;bit;byte;
+Keywords[pl]=binarny;ósemkowy;szesnastkowy;bit;bajt;
 Keywords[pt_BR]=binário;octal;hexadecimal;bit;byte;
 Keywords[sl]=binarno;oktalno,heksadecimalno;bit;byte;
 Keywords[tr]=binary;octal;hexadecimal;bit;byte;ikili;sekizlik;onaltılık;bayt;
