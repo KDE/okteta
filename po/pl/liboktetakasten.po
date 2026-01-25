@@ -8,22 +8,23 @@
 # Michał Lachowski <michal@lachowski.info>, 2010.
 # Michał Zając <michal.zajac@gmail.com>, 2010.
 # Artur Chłond <eugenewolfe@o2.pl>, 2011.
-# SPDX-FileCopyrightText: 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2021, 2022, 2023, 2024, 2025 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+# SPDX-FileCopyrightText: 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2021, 2022, 2023, 2024, 2025, 2026 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-14 03:31+0000\n"
-"PO-Revision-Date: 2025-02-15 11:19+0100\n"
+"PO-Revision-Date: 2026-01-24 11:05+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
-"Language-Team: Polish <kde-i18n-doc@kde.org>\n"
+"Language-Team: pl\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 25.08.2\n"
 
 #: controllers/document/info/documentinfotool.cpp:47
 #: controllers/document/info/documentinfotoolviewfactory.cpp:24
@@ -515,7 +516,7 @@ msgstr "Wybierz algorytm do obliczenia sumy sprawdzającej."
 #, kde-format
 msgctxt "@action:button calculate the checksum"
 msgid "&Calculate"
-msgstr "&Oblicz"
+msgstr "Obli&cz"
 
 #: controllers/view/checksum/checksumview.cpp:83
 #, kde-format
@@ -1639,7 +1640,7 @@ msgstr "Filtr:"
 #: controllers/view/stringsextract/stringsextractview.cpp:85
 #, kde-format
 msgid "Enter a term to limit the list."
-msgstr "Tu wprowadź filtr dla listy."
+msgstr "Wpisz wyrażenie, aby odfiltrować listę."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:138
 #, kde-format
@@ -2193,7 +2194,7 @@ msgstr "Używane struktury:"
 #: controllers/view/structures/settings/structuresmanagerview.cpp:49
 #, kde-format
 msgid "Advanced Selection..."
-msgstr "Rozszerzone zaznaczanie..."
+msgstr "Rozbudowane zaznaczanie…"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:58
 #, kde-format
@@ -2607,7 +2608,7 @@ msgstr "Liczba bajtów na wiersz..."
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Set Bytes per Group..."
-msgstr "Liczba bajtów na grupę..."
+msgstr "Liczba bajtów na grupę…"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:105
 #, kde-format
@@ -2884,7 +2885,7 @@ msgstr "Znak dla bajtów nieokreślonych:"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage View Profiles..."
-msgstr "Zarządzanie profilami widoku..."
+msgstr "Zarządzanie profilami widoku…"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:36
 #, kde-format
@@ -3377,7 +3378,7 @@ msgstr "Kodowanie wartości:"
 #, kde-format
 msgctxt "@label:textbox substring which separates the values"
 msgid "Separation:"
-msgstr "Odstęp:"
+msgstr "Oddzielenie:"
 
 #: gui/io/streamencoder/viewtext/bytearrayviewtextstreamencoder.cpp:38
 #, kde-format
