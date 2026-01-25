@@ -8,22 +8,23 @@
 # Michał Lachowski <michal@lachowski.info>, 2010.
 # Michał Zając <michal.zajac@gmail.com>, 2010.
 # Artur Chłond <eugenewolfe@o2.pl>, 2011.
-# SPDX-FileCopyrightText: 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2021, 2022, 2023, 2024, 2025 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+# SPDX-FileCopyrightText: 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2021, 2022, 2023, 2024, 2025, 2026 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-01-14 02:04+0000\n"
-"PO-Revision-Date: 2025-02-15 11:19+0100\n"
+"PO-Revision-Date: 2026-01-24 11:05+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
-"Language-Team: Polish <kde-i18n-doc@kde.org>\n"
+"Language-Team: pl\n"
 "Language: pl\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
+"X-Generator: Lokalize 25.08.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -159,12 +160,10 @@ msgid "No bookmarks"
 msgstr "Brak zakładek"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:88
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu create a new view profile"
-#| msgid "Create New…"
+#, kde-format
 msgctxt "@action"
 msgid "Create New"
-msgstr "Utwórz nowy…"
+msgstr "Utwórz nowy"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:90
 #, kde-format
@@ -183,12 +182,10 @@ msgstr ""
 "położenia kursora."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:102
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Delete"
+#, kde-format
 msgctxt "@action"
 msgid "Delete"
-msgstr "&Usuń"
+msgstr "Usuń"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:104
 #, kde-format
@@ -205,12 +202,10 @@ msgstr ""
 "Jeśli wciśniesz ten przycisk, wszystkie zaznaczone zakładki zostaną usunięte."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:117
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Go to Offset…"
+#, kde-format
 msgctxt "@action"
 msgid "Go to Offset"
-msgstr "&Przejdź do przesunięcia…"
+msgstr "Przejdź do przesunięcia"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:119
 #, kde-format
@@ -232,7 +227,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action"
 msgid "Rename"
-msgstr ""
+msgstr "Zmień nazwę"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:131
 #, kde-format
@@ -253,22 +248,18 @@ msgstr ""
 #: controllers/view/bookmarks/bookmarksview.cpp:142
 #: controllers/view/stringsextract/stringsextractview.cpp:191
 #: controllers/view/structures/structureview.cpp:381
-#, fuzzy, kde-format
-#| msgctxt "@title:column offset of the bookmark"
-#| msgid "Offset"
+#, kde-format
 msgctxt "@action"
 msgid "Copy Offset"
-msgstr "Przesunięcie"
+msgstr "Skopiuj przesunięcie"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:144
 #: controllers/view/stringsextract/stringsextractview.cpp:193
 #: controllers/view/structures/structureview.cpp:383
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Copies the selected strings to the clipboard."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the offset to the clipboard."
-msgstr "Kopiuje wybrane ciągi do schowka."
+msgstr "Kopiuje przesunięcie do schowka."
 
 #: controllers/view/bytetable/bytetablemodel.cpp:137
 #: controllers/view/info/statistictablemodel.cpp:160
@@ -591,7 +582,7 @@ msgstr "Wybierz algorytm do obliczenia sumy sprawdzającej."
 #, kde-format
 msgctxt "@action:button calculate the checksum"
 msgid "&Calculate"
-msgstr "&Oblicz"
+msgstr "Obli&cz"
 
 #: controllers/view/checksum/checksumview.cpp:81
 #, kde-format
@@ -1493,9 +1484,7 @@ msgstr "Edytuj"
 
 #: controllers/view/poddecoder/podtableview.cpp:270
 #: controllers/view/structures/structureview.cpp:390
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to select a range"
-#| msgid "Select"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Select"
 msgstr "Wybierz"
@@ -1816,7 +1805,7 @@ msgstr "Filtr:"
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter a term to limit the list."
-msgstr "Tu wprowadź filtr dla listy."
+msgstr "Wpisz wyrażenie, aby odfiltrować listę."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:145
 #, kde-format
@@ -1863,20 +1852,16 @@ msgstr ""
 "ostatnio wybranego ciągu i pokazanie go w widoku."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:198
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to select a range"
-#| msgid "Select"
+#, kde-format
 msgctxt "@action"
 msgid "Select"
 msgstr "Wybierz"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:200
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Shows the selected string in the view."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Selects the selected string in the view."
-msgstr "Wyświetla wybrany ciąg w widoku."
+msgstr "Zaznacza wybrany ciąg w widoku."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:344
 #, kde-format
@@ -2359,13 +2344,13 @@ msgstr "O programie"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Uninstall"
-msgstr ""
+msgstr "Usuń"
 
 #: controllers/view/structures/settings/structureitemdelegate.cpp:124
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Can not be uninstalled."
-msgstr ""
+msgstr "Nie można usunąć."
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:61
 #, kde-format
@@ -2377,7 +2362,7 @@ msgstr "Rozszerzone zaznaczanie…"
 #, kde-format
 msgctxt "@action:button"
 msgid "Install from File(s)…"
-msgstr ""
+msgstr "Wgraj z pliku…"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:69
 #, kde-format
@@ -2392,32 +2377,33 @@ msgid ""
 "\n"
 "%2"
 msgstr ""
+"Nie udało się wgrać z <filename>%1</filename>:\n"
+"\n"
+"%2"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:128
-#, fuzzy, kde-format
-#| msgid "Structure Definitions"
+#, kde-format
 msgctxt "@title:window"
 msgid "Structure Installation"
-msgstr "Definicje struktur"
+msgstr "Wgrywanie struktury"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:149
 #, kde-format
 msgctxt "@action:button"
 msgid "Uninstall"
-msgstr ""
+msgstr "Usuń"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:152
 #, kde-format
 msgid "Do you want to uninstall \"%1\"?"
-msgstr ""
+msgstr "Czy na pewno usunąć \"%1\"?"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:153
 #: controllers/view/structures/settings/structuresmanagerview.cpp:172
-#, fuzzy, kde-format
-#| msgid "Structure Definitions"
+#, kde-format
 msgctxt "@title:window"
 msgid "Structure Uninstallation"
-msgstr "Definicje struktur"
+msgstr "Usuwanie struktury"
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:28
 #, kde-format
@@ -2626,20 +2612,18 @@ msgstr "Wartości znaków:"
 #: controllers/view/structures/structureinstalljob.cpp:57
 #, kde-format
 msgid "Unknown error (0)"
-msgstr ""
+msgstr "Nieznany błąd (0)"
 
 #: controllers/view/structures/structureinstalljob.cpp:59
-#, fuzzy, kde-format
-#| msgctxt "not all values in this structure are as they should be"
-#| msgid "Validation failed: \"%1\""
+#, kde-format
 msgid "Downloading failed: %1"
-msgstr "Błąd podczas sprawdzania: \"%1\""
+msgstr "Nie udało się pobrać: %1"
 
 #: controllers/view/structures/structureinstalljob.cpp:84
 #: controllers/view/structures/structureinstalljob.cpp:106
 #, kde-format
 msgid "The structure archive is invalid."
-msgstr ""
+msgstr "Archiwum struktury jest nieprawidłowe."
 
 #: controllers/view/structures/structurestool.cpp:72
 #: controllers/view/structures/structurestoolviewfactory.cpp:27
@@ -3502,35 +3486,35 @@ msgstr "Wstawiono ciąg"
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "bzip2"
-msgstr ""
+msgstr "bzip2"
 
 #: gui/io/streamcompressor/bzip2/bytearraybzip2streamcompressorconfigeditor.cpp:29
 #, kde-format
 msgctxt "@label:spinbox bzip2 "
 msgid "Block size:"
-msgstr ""
+msgstr "Rozmiar bloku:"
 
 #: gui/io/streamcompressor/bzip2/bytearraybzip2streamcompressorconfigeditor.cpp:47
 #, kde-format
 msgid "%1 kB"
-msgstr ""
+msgstr "%1 kB"
 
 #: gui/io/streamcompressor/bzip2/bzip2compressionstream.cpp:33
 #, kde-format
 msgid "Internal bzip2 error: %1"
-msgstr ""
+msgstr "Wewnętrzny błąd bzip2: %1"
 
 #: gui/io/streamcompressor/bzip2/bzip2compressionstream.cpp:47
 #, kde-format
 msgid "Error code %1"
-msgstr ""
+msgstr "Kod błędu %1"
 
 #: gui/io/streamcompressor/bzip2/bzip2compressionstream.cpp:66
 #: gui/io/streamcompressor/deflate/deflatecompressionstream.cpp:69
 #: gui/io/streamcompressor/gzip/gzipcompressionstream.cpp:71
 #, kde-format
 msgid "Internal zlib error when compressing: %1"
-msgstr ""
+msgstr "Błąd wewnętrzny zlib podczas pakowania: %1"
 
 #: gui/io/streamcompressor/bzip2/bzip2compressionstream.cpp:75
 #: gui/io/streamcompressor/deflate/deflatecompressionstream.cpp:79
@@ -3539,15 +3523,13 @@ msgstr ""
 #: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:91
 #, kde-format
 msgid "Error writing to output: %1"
-msgstr ""
+msgstr "Błąd podczas zapisywania na wyjście: %1"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressor.cpp:117
-#, fuzzy, kde-format
-#| msgctxt "@title:window prompt for iterative replacement"
-#| msgid "Replace"
+#, kde-format
 msgctxt "name of the encoding target"
 msgid "deflate"
-msgstr "Zastąp"
+msgstr "wypompowanie"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:29
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:31
@@ -3555,166 +3537,150 @@ msgstr "Zastąp"
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Compression level:"
-msgstr ""
+msgstr "Poziom spakowania:"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:33
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:35
 #: gui/io/streamcompressor/zstd/bytearrayzstdstreamcompressorconfigeditor.cpp:32
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Set as Default"
+#, kde-format
 msgctxt "@item:inmenu compression level"
 msgid "Default"
-msgstr "U&staw jako domyślny"
+msgstr "Domyślne"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:41
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:43
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Compression strategy:"
-msgstr ""
+msgstr "Strategia pakowania:"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:46
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:48
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Set as Default"
+#, kde-format
 msgctxt "@item:inmenu compression strategy"
 msgid "Default"
-msgstr "U&staw jako domyślny"
+msgstr "Domyślne"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:48
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:50
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Filter"
+#, kde-format
 msgctxt "@item:inmenu compression strategy"
 msgid "Filter"
-msgstr "&Filtruj"
+msgstr "Filtr"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:50
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:52
 #, kde-format
 msgctxt "@item:inmenu compression strategy"
 msgid "Huffman Encoding Only"
-msgstr ""
+msgstr "Tylko kodowanie Huffmana"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:52
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:54
-#, fuzzy, kde-format
-#| msgctxt "name of the encoding target"
-#| msgid "Uuencoding"
+#, kde-format
 msgctxt "@item:inmenu compression strategy"
 msgid "Run-Length Encoding"
-msgstr "Uuencoding"
+msgstr "Kodowanie długości bieżącej"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:54
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:56
 #, kde-format
 msgctxt "@item:inmenu compression strategy"
 msgid "Fixed Huffman Encoding"
-msgstr ""
+msgstr "Stałe kodowanie Huffmana"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:65
 #, kde-format
 msgctxt "@option:check Create deflate stream without headers or footers"
 msgid "Create raw variant:"
-msgstr ""
+msgstr "Utwórz nieprzetworzony wariant:"
 
 #: gui/io/streamcompressor/deflate/deflatecompressionstream.cpp:32
 #: gui/io/streamcompressor/gzip/gzipcompressionstream.cpp:34
 #: gui/io/streamcompressor/gzip/gzipcompressionstream.cpp:112
 #, kde-format
 msgid "Internal zlib error: %1"
-msgstr ""
+msgstr "Błąd wewnętrzny zlib: %1"
 
 #: gui/io/streamcompressor/deflate/deflatecompressionstream.cpp:50
 #: gui/io/streamcompressor/gzip/gzipcompressionstream.cpp:52
 #, kde-format
 msgid "Unknown zlib error, code %1"
-msgstr ""
+msgstr "Nieznany błąd zlib, kod %1"
 
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressor.cpp:90
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "gzip"
-msgstr ""
+msgstr "gzip"
 
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:65
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "File Info"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "File name:"
-msgstr "Szczegóły pliku"
+msgstr "Nazwa pliku:"
 
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:77
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Comment:"
-msgstr ""
+msgstr "Komentarz:"
 
 #: gui/io/streamcompressor/iodevicebytearrayoutput.cpp:19
 #, kde-format
 msgid "Error writing to underlying device: %1"
-msgstr ""
+msgstr "Błąd podczas zapisywania na urządzenie: %1"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressor.cpp:116
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "xz"
-msgstr ""
+msgstr "xz"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:29
 #, kde-format
 msgctxt "@label:spinbox"
 msgid "Compression preset level:"
-msgstr ""
+msgstr "Poziom pakowania z nastawy:"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:33
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Set as Default"
+#, kde-format
 msgctxt "@item:inmenu compression preset level"
 msgid "Default"
-msgstr "U&staw jako domyślny"
+msgstr "Domyślne"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:42
 #, kde-format
 msgctxt "@option:check Use extreme variant of compression preset level"
 msgid "Use extreme variant:"
-msgstr ""
+msgstr "Użyj wariantu ekstremalnego:"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:52
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Integrity check:"
-msgstr ""
+msgstr "Sprawdzanie spójności:"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:57
-#, fuzzy, kde-format
-#| msgctxt "@item There are no windows."
-#| msgid "None."
+#, kde-format
 msgctxt "@item:inmenu integrity check"
 msgid "None"
-msgstr "Brak."
+msgstr "Brak"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:59
 #, kde-format
 msgctxt "@item:inmenu integrity check"
 msgid "CRC32"
-msgstr ""
+msgstr "CRC-32"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:61
 #, kde-format
 msgctxt "@item:inmenu integrity check"
 msgid "CRC64"
-msgstr ""
+msgstr "CRC-32"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:63
-#, fuzzy, kde-format
-#| msgctxt "name of the hash algorithm"
-#| msgid "SHA-256"
+#, kde-format
 msgctxt "@item:inmenu integrity check"
 msgid "SHA-256"
 msgstr "SHA-256"
@@ -3722,57 +3688,57 @@ msgstr "SHA-256"
 #: gui/io/streamcompressor/xz/xzcompressionstream.cpp:28
 #, kde-format
 msgid "Could not initialize lzma stream."
-msgstr ""
+msgstr "Nie można przygotować strumienia lzma."
 
 #: gui/io/streamcompressor/xz/xzcompressionstream.cpp:46
 #, kde-format
 msgid "Unknown lzma error, code %1"
-msgstr ""
+msgstr "Nieznany błąd lzma, kod %1"
 
 #: gui/io/streamcompressor/xz/xzcompressionstream.cpp:65
 #, kde-format
 msgid "Internal lzma error when compressing: %1"
-msgstr ""
+msgstr "Błąd wewnętrzny lzma podczas pakowania: %1"
 
 #: gui/io/streamcompressor/zstd/bytearrayzstdstreamcompressor.cpp:46
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "ZStandard"
-msgstr ""
+msgstr "ZStandard"
 
 #: gui/io/streamcompressor/zstd/bytearrayzstdstreamcompressorconfigeditor.cpp:39
 #, kde-format
 msgctxt "@option:check"
 msgid "Content size in frame header:"
-msgstr ""
+msgstr "Rozmiar treści w nagłówku ramki:"
 
 #: gui/io/streamcompressor/zstd/bytearrayzstdstreamcompressorconfigeditor.cpp:47
 #, kde-format
 msgctxt "@option:check"
 msgid "Content checksum at frame end:"
-msgstr ""
+msgstr "Suma sprawdzająca treść na końcu ramki:"
 
 #: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:24
 #, kde-format
 msgid "Could not create zstd stream context."
-msgstr ""
+msgstr "Nie można utworzyć kontekstu strumienia zstd."
 
 #: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:29
 #: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:35
 #: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:43
 #, kde-format
 msgid "Internal zstd error on setup: %1"
-msgstr ""
+msgstr "Błąd wewnętrzny zstd podczas ustawiania: %1"
 
 #: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:65
 #, kde-format
 msgid "Unknown zstd error, code %1"
-msgstr ""
+msgstr "Nieznany błąd zstd, kod %1"
 
 #: gui/io/streamcompressor/zstd/zstdcompressionstream.cpp:84
 #, kde-format
 msgid "Internal zstd error when compressing: %1"
-msgstr ""
+msgstr "Błąd wewnętrzny zstd podczas pakowania: %1"
 
 #: gui/io/streamencoder/base32/bytearraybase32streamencoder.cpp:132
 #, kde-format
@@ -3831,46 +3797,37 @@ msgid "Characters"
 msgstr "Znaki"
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:32
-#, fuzzy, kde-format
-#| msgid "Show Non-printable:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Non-printable encode mode:"
-msgstr "Wyświetl niedrukowane:"
+msgstr "Tryb kodowania ze znakami niedrukowalnymi:"
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:36
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@label:textbox byte to use for chars which are not part of the target "
-#| "charset"
-#| msgid "Substitute byte:"
+#, kde-format
 msgctxt "@item:inmenu encode mode"
 msgid "Substitute"
-msgstr "Podmień bajtem:"
+msgstr "Podmień"
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:38
 #, kde-format
 msgctxt "@item:inmenu encode mode"
 msgid "Escape C-Style"
-msgstr ""
+msgstr "Znaki sterujące jak w C"
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:51
 #, kde-format
 msgctxt "@label:listbox"
 msgid "Encoding for escaped chars:"
-msgstr ""
+msgstr "Kodowanie znaków sterujących:"
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:55
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip column contains the value in hexadecimal format"
-#| msgid "Hexadecimal"
+#, kde-format
 msgctxt "@item:inmenu escape value encoding"
 msgid "Hexadecimal"
 msgstr "Szesnastkowe"
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:57
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip column contains the value in octal format"
-#| msgid "Octal"
+#, kde-format
 msgctxt "@item:inmenu escape value encoding"
 msgid "Octal"
 msgstr "Ósemkowe"
@@ -3998,19 +3955,19 @@ msgstr "Kodowanie wartości:"
 #, kde-format
 msgctxt "@label:textbox substring which separates the values"
 msgid "Separation:"
-msgstr "Odstęp:"
+msgstr "Oddzielenie:"
 
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:57
 #, kde-format
 msgctxt "@label:textbox substring which prefixes each value"
 msgid "Prefix:"
-msgstr ""
+msgstr "Przedrostek:"
 
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:68
 #, kde-format
 msgctxt "@label:textbox substring which postfixes each value"
 msgid "Postfix:"
-msgstr ""
+msgstr "Przyrostek:"
 
 #: gui/io/streamencoder/viewhtml/bytearrayviewhtmlstreamencoder.cpp:34
 #, kde-format
