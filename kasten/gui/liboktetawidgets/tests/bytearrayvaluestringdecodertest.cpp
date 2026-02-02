@@ -68,22 +68,22 @@ void ByteArrayValueStringDecoderTest::testDecode_data()
         << QStringLiteral("00FFF0") << Okteta::HexadecimalCoding
         << Okteta::ByteArrayValueStringDecoder::CodeAcceptable << QByteArrayLiteral("\0\xff\xf0");
     QTest::newRow("000102030405-hex-spaced-fullvalues")
-        << QStringLiteral("00 01\t02\r03\n04\t\r\n 05") << Okteta::HexadecimalCoding
+        << QStringLiteral("00 01\t02\r03\n04\t\r\n\u2028 05") << Okteta::HexadecimalCoding
         << Okteta::ByteArrayValueStringDecoder::CodeAcceptable << QByteArrayLiteral("\0\x01\x02\x03\x04\x05");
     QTest::newRow("000102030405-decimal-spaced-mixedfullvalues")
-        << QStringLiteral("000 1\t02\r003\n4\t\r\n 05") << Okteta::DecimalCoding
+        << QStringLiteral("000 1\t02\r003\n4\t\r\n\u2028 05") << Okteta::DecimalCoding
         << Okteta::ByteArrayValueStringDecoder::CodeAcceptable << QByteArrayLiteral("\0\x01\x02\x03\x04\x05");
     QTest::newRow("00FFF0-hex-badlyspaced")
         << QStringLiteral("00FF F0") << Okteta::HexadecimalCoding
         << Okteta::ByteArrayValueStringDecoder::CodeInvalid << QByteArrayLiteral("\0\xff");
     QTest::newRow("00FFF0-hex-leadingspaces")
-        << QStringLiteral("\t\r\n 00FFF0") << Okteta::HexadecimalCoding
+        << QStringLiteral("\t\r\n\u2028 00FFF0") << Okteta::HexadecimalCoding
         << Okteta::ByteArrayValueStringDecoder::CodeAcceptable << QByteArrayLiteral("\0\xff\xf0");
     QTest::newRow("00FFF0-hex-trailingspaces")
-        << QStringLiteral("00FFF0\t\r\n ") << Okteta::HexadecimalCoding
+        << QStringLiteral("00FFF0\t\r\n\u2028 ") << Okteta::HexadecimalCoding
         << Okteta::ByteArrayValueStringDecoder::CodeAcceptable << QByteArrayLiteral("\0\xff\xf0");
     QTest::newRow("000102030405-decimal-leadingtrailinginternalspaced-mixedfullvalues")
-        << QStringLiteral("\t\r\n 000 1\t02\r003\n4\t\r\n 05\t\r\n ") << Okteta::DecimalCoding
+        << QStringLiteral("\t\r\n\u2028 000 1\t02\r003\n4\t\r\n\u2028 05\t\r\n\u2028 ") << Okteta::DecimalCoding
         << Okteta::ByteArrayValueStringDecoder::CodeAcceptable << QByteArrayLiteral("\0\x01\x02\x03\x04\x05");
 }
 
