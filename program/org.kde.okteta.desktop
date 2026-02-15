@@ -114,6 +114,7 @@ Keywords[ko]=이진;팔진;십육진;2진;8진;16진;비트;바이트;
 Keywords[nl]=binair;octaal;hexadecimaal;bit;byte;
 Keywords[pl]=binarny;ósemkowy;szesnastkowy;bit;bajt;
 Keywords[pt_BR]=binário;octal;hexadecimal;bit;byte;
+Keywords[ru]=binary;octal;hexadecimal;bit;byte;двоичный;восьмеричный;шестнадцатеричный;бит;байт;
 Keywords[sl]=binarno;oktalno;heksadecimalno;bit;byte;
 Keywords[tr]=binary;octal;hexadecimal;bit;byte;ikili;sekizlik;onaltılık;bayt;
 Keywords[uk]=binary;octal;hexadecimal;bit;byte;двійковий;бінарний;вісімковий;шістнадцятковий;біт;байт;
