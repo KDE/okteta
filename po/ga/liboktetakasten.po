@@ -66,12 +66,10 @@ msgid "[None]"
 msgstr "[Gan suíomh]"
 
 #: controllers/document/overwriteonly/overwriteonlycontroller.cpp:23
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Overwrite only"
+#, kde-format
 msgctxt "@option:check"
 msgid "Overwrite only"
-msgstr "Forscríobh amháin"
+msgstr ""
 
 #: controllers/view/bookmarks/bookmarklistmodel.cpp:126
 #, kde-format
@@ -286,12 +284,10 @@ msgstr[3] "Ionsádh %1 mBeart"
 msgstr[4] "Ionsádh %1 Beart"
 
 #: controllers/view/bytetable/bytetableview.cpp:82
-#, fuzzy, kde-format
-#| msgctxt "@label:spinbox number of bytes to insert"
-#| msgid "Number:"
+#, kde-format
 msgctxt "@label:spinbox number of bytes to insert"
 msgid "Number (bytes):"
-msgstr "Uimhir:"
+msgstr ""
 
 #: controllers/view/bytetable/bytetableview.cpp:90
 #, kde-format
@@ -429,21 +425,13 @@ msgid "Converts the bytes in the selected range."
 msgstr "Tiontaíonn sé seo na bearta sa raon roghnaithe."
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:174
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:whatsthis"
-#| msgid ""
-#| "If you press the <interface>Filter</interface> button, the operation you "
-#| "selected above is executed for the bytes in the selected range with the "
-#| "given options."
+#, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press the <interface>Convert</interface> button, all bytes in the "
 "selected range will be replaced by bytes which represent the same character "
 "in the selected target charset."
 msgstr ""
-"Má bhrúnn tú an cnaipe <interface>Scag</interface>, cuirfear an oibríocht a "
-"roghnaigh tú thuas i bhfeidhm ar na bearta sa raon roghnaithe leis na "
-"roghanna a thug tú."
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:220
 #, kde-format
@@ -475,9 +463,6 @@ msgid "1 byte substituted."
 msgid_plural "%1 bytes substituted."
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:241
 #, kde-format
@@ -518,21 +503,13 @@ msgid "Calculate the checksum for the bytes in the selected range."
 msgstr "Ríomh an tsuim sheiceála le haghaidh na mbeart sa raon roghnaithe."
 
 #: controllers/view/checksum/checksumview.cpp:85
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:whatsthis"
-#| msgid ""
-#| "If you press the <interface>Update</interface> button, the list will be "
-#| "updated to all strings which are contained in the selected range and have "
-#| "the set minimum length."
+#, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press the <interface>Calculate</interface> button, the list will be "
 "updated to all strings which are contained in the selected range and have "
 "the set minimum length."
 msgstr ""
-"Má bhrúnn tú an cnaipe <interface>Nuashonraigh</interface>, nuashonrófar an "
-"liosta sa chaoi go mbeidh gach teaghrán sa raon roghnaithe atá níos faide ná "
-"an fad íosta ann."
 
 #: controllers/view/filter/filtertool.cpp:67
 #: controllers/view/filter/filtertoolviewfactory.cpp:24
@@ -756,12 +733,10 @@ msgid "CRC-32"
 msgstr "CRC-32"
 
 #: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumalgorithm.cpp:82
-#, fuzzy, kde-format
-#| msgctxt "name of the checksum algorithm, Cyclic Redundancy Check 32"
-#| msgid "CRC-32"
+#, kde-format
 msgctxt "name of the checksum algorithm, Cyclic Redundancy Check 64"
 msgid "CRC-64"
-msgstr "CRC-32"
+msgstr ""
 
 #. i18nc("@item:inlistbox", "Custom"));
 #: controllers/view/libbytearraychecksum/algorithm/crc64bytearraychecksumparametersetedit.cpp:29
@@ -912,16 +887,12 @@ msgid "operand AND data"
 msgstr "oibreann AGUS sonraí"
 
 #: controllers/view/libbytearrayfilter/filter/invertbytearrayfilter.cpp:19
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "name of the filter; it switches all bits from 0 to 1 and 1 to 0 "
-#| "respectivly, so 01111110 becomes 10000001"
-#| msgid "INVERT data"
+#, kde-format
 msgctxt ""
 "name of the filter; it switches all bits from 0 to 1 and 1 to 0 "
 "respectively, so 01111110 becomes 10000001"
 msgid "INVERT data"
-msgstr "INBHÉARTAIGH sonraí"
+msgstr ""
 
 #: controllers/view/libbytearrayfilter/filter/operandbytearrayfilterparametersetedit.cpp:31
 #, kde-format
@@ -996,12 +967,10 @@ msgid "ROTATE data"
 msgstr "ROTHLAIGH sonraí"
 
 #: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp:36
-#, fuzzy, kde-format
-#| msgctxt "@label:spinbox number of bytes the movement is done within"
-#| msgid "&Group size:"
+#, kde-format
 msgctxt "@label:spinbox number of bytes the movement is done within"
 msgid "&Group size (bytes):"
-msgstr "Méid &ghrúpa:"
+msgstr ""
 
 #: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp:39
 #, kde-format
@@ -1016,12 +985,10 @@ msgid "Control the number of bytes within which each movement is made."
 msgstr "Roghnaigh líon na mbeart atá i ngach grúpa a ndéantar rothlú ann."
 
 #: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp:57
-#, fuzzy, kde-format
-#| msgctxt "@label:spinbox width (in number of bits) the bits are moved"
-#| msgid "S&hift width:"
+#, kde-format
 msgctxt "@label:spinbox width (in number of bits) the bits are moved"
 msgid "S&hift width (bits):"
-msgstr "Leit&head aistrithe:"
+msgstr ""
 
 #: controllers/view/libbytearrayfilter/filter/rotatebytearrayfilterparametersetedit.cpp:60
 #, kde-format
@@ -1532,12 +1499,10 @@ msgid "Search"
 msgstr "Cuardach"
 
 #: controllers/view/selectrange/selectrangecontroller.cpp:33
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Select range..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Select Range..."
-msgstr "&Roghnaigh raon..."
+msgstr ""
 
 #: controllers/view/selectrange/selectrangetool.cpp:61
 #, kde-format
@@ -1570,19 +1535,12 @@ msgid "Select the range."
 msgstr "Roghnaigh an raon."
 
 #: controllers/view/selectrange/selectrangeview.cpp:144
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:whatsthis"
-#| msgid ""
-#| "If you press the <interface>Go</interface> button, the cursor will be "
-#| "moved in the document to or, on your option, by the offset you entered "
-#| "above."
+#, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press the <interface>Select</interface> button, the cursor will be "
 "moved in the document to or, on your option, by the offset you entered above."
 msgstr ""
-"Má bhrúnn tú an cnaipe <interface>Téigh</interface>, bogfar an cúrsóir go "
-"dtí (nó, más mian leat de réir) an fritháireamh a d'iontráil tú thuas."
 
 #: controllers/view/stringsextract/containedstringtablemodel.cpp:98
 #, kde-format
@@ -1630,21 +1588,13 @@ msgid ""
 msgstr ""
 
 #: controllers/view/stringsextract/stringsextractview.cpp:71
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:whatsthis"
-#| msgid ""
-#| "If you press the <interface>Update</interface> button, the list will be "
-#| "updated to all strings which are contained in the selected range and have "
-#| "the set minimum length."
+#, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press the <interface>Extract</interface> button, the selected range "
 "is searched for all strings which have the set minimum length. This strings "
 "found will be listed in the view below."
 msgstr ""
-"Má bhrúnn tú an cnaipe <interface>Nuashonraigh</interface>, nuashonrófar an "
-"liosta sa chaoi go mbeidh gach teaghrán sa raon roghnaithe atá níos faide ná "
-"an fad íosta ann."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:81
 #, kde-format
@@ -1795,9 +1745,6 @@ msgid_plural ""
 " %6"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
 
 #: controllers/view/structures/datatypes/datainformationwithchildren.cpp:220
 #, kde-format
@@ -1875,9 +1822,6 @@ msgid "boolean bitfield (%1 bit wide)"
 msgid_plural "boolean bitfield (%1 bits wide)"
 msgstr[0] ""
 msgstr[1] ""
-msgstr[2] ""
-msgstr[3] ""
-msgstr[4] ""
 
 #: controllers/view/structures/datatypes/primitive/bitfield/signedbitfielddatainformation.cpp:94
 #, kde-format
@@ -1920,13 +1864,12 @@ msgid "%1 (%2)"
 msgstr "%1 (%2)"
 
 #: controllers/view/structures/datatypes/primitive/enumdatainformation.cpp:84
-#, fuzzy, kde-format
-#| msgid "enum (%1)"
+#, kde-format
 msgctxt ""
 "Displayed in the type column. first comes the name of the enum, then the "
 "underlying type (e.g. uint32)"
 msgid "enum %1 (%2)"
-msgstr "enum (%1)"
+msgstr ""
 
 #: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:75
 #, kde-format
@@ -1934,13 +1877,12 @@ msgid "0x%1 (no matching flags)"
 msgstr ""
 
 #: controllers/view/structures/datatypes/primitive/flagdatainformation.cpp:105
-#, fuzzy, kde-format
-#| msgid "%1 (%2)"
+#, kde-format
 msgctxt ""
 "Displayed in the type column. first comes the name of the enum, then the "
 "underlying type (e.g. uint32)"
 msgid "flag %1 (%2)"
-msgstr "%1 (%2)"
+msgstr ""
 
 #: controllers/view/structures/datatypes/primitive/pointerdatainformation.cpp:113
 #, kde-format
@@ -2065,16 +2007,14 @@ msgid "ASCII string"
 msgstr "Teaghrán ASCII"
 
 #: controllers/view/structures/datatypes/strings/ebcdicstringdata.cpp:137
-#, fuzzy, kde-format
-#| msgid "ASCII char"
+#, kde-format
 msgid "EBCDIC char"
-msgstr "Carachtar ASCII"
+msgstr ""
 
 #: controllers/view/structures/datatypes/strings/ebcdicstringdata.cpp:147
-#, fuzzy, kde-format
-#| msgid "ASCII string"
+#, kde-format
 msgid "EBCDIC string"
-msgstr "Teaghrán ASCII"
+msgstr ""
 
 #: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:130
 #, kde-format
@@ -2179,11 +2119,9 @@ msgstr "union %1"
 
 #: controllers/view/structures/parsers/osdparser.cpp:116
 #: controllers/view/structures/parsers/osdparser.cpp:198
-#, fuzzy, kde-format
-#| msgctxt "invalid value (out of range)"
-#| msgid "<invalid>"
+#, kde-format
 msgid "<invalid name>"
-msgstr "<neamhbhailí>"
+msgstr ""
 
 #: controllers/view/structures/script/scriptlogger.cpp:83
 #, kde-format
@@ -2236,11 +2174,10 @@ msgid "Dynamic Structure Definitions"
 msgstr ""
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:26
-#, fuzzy, kde-format
-#| msgid "Structure Definitions"
+#, kde-format
 msgctxt "@title:window"
 msgid "Advanced Structures Selection"
-msgstr "Sainmhínithe ar Struchtúir"
+msgstr ""
 
 #. i18n: ectx: tooltip, entry (UnsignedDisplayBase), group (ValueDisplay)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:9
@@ -2265,11 +2202,10 @@ msgstr ""
 
 #. i18n: ectx: tooltip, entry (ShowCharNumericalValue), group (ValueDisplay)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:21
-#, fuzzy, kde-format
-#| msgid "Show numerical value of chars"
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Whether to show the numerical value of chars"
-msgstr "Taispeáin luach uimhriúil na gcarachtar"
+msgstr ""
 
 #. i18n: ectx: tooltip, entry (LocaleAwareFloatFormatting), group (ValueDisplay)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:25
@@ -2311,79 +2247,66 @@ msgstr ""
 
 #. i18n: ectx: label, entry (ByteOrder), group (StructureSettings)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:47
-#, fuzzy, kde-format
-#| msgid "Byte Order:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Byte order"
-msgstr "Ord na mBeart:"
+msgstr ""
 
 #. i18n: ectx: label, entry (ByteOrder), group (StructureSettings)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:49
-#, fuzzy, kde-format
-#| msgctxt "@item:inlistbox"
-#| msgid "Big-endian"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Big endian"
-msgstr "Mórcheannach"
+msgstr ""
 
 #. i18n: ectx: label, entry (ByteOrder), group (StructureSettings)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:50
-#, fuzzy, kde-format
-#| msgctxt "@item:inlistbox"
-#| msgid "Little-endian"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Little endian"
-msgstr "Caolcheannach"
+msgstr ""
 
 #: controllers/view/structures/settings/structureviewsettingswidget.cpp:49
-#, fuzzy, kde-format
-#| msgid "Binary"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Binary"
-msgstr "Dénártha"
+msgstr ""
 
 #: controllers/view/structures/settings/structureviewsettingswidget.cpp:50
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip column contains the value in octal format"
-#| msgid "Octal"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Octal"
-msgstr "Ochtnártha"
+msgstr ""
 
 #: controllers/view/structures/settings/structureviewsettingswidget.cpp:51
-#, fuzzy, kde-format
-#| msgid "Decimal"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Decimal"
-msgstr "Deachúil"
+msgstr ""
 
 #: controllers/view/structures/settings/structureviewsettingswidget.cpp:52
-#, fuzzy, kde-format
-#| msgid "Hexadecimal"
+#, kde-format
 msgctxt "@item:inlistbox"
 msgid "Hexadecimal"
-msgstr "Heicsidheachúlach"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, byteOrderLabel)
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:32
-#, fuzzy, kde-format
-#| msgid "Byte Order:"
+#, kde-format
 msgid "Byte order:"
-msgstr "Ord na mBeart:"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ByteOrder)
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:46
-#, fuzzy, kde-format
-#| msgid "Big Endian"
+#, kde-format
 msgid "Big endian"
-msgstr "Mórcheannach"
+msgstr ""
 
 #. i18n: ectx: property (text), item, widget (KComboBox, kcfg_ByteOrder)
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:51
-#, fuzzy, kde-format
-#| msgid "Little Endian"
+#, kde-format
 msgid "Little endian"
-msgstr "Caolcheannach"
+msgstr ""
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShortTypeNames)
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:59
@@ -2531,11 +2454,10 @@ msgid "Lock selected structure to current offset."
 msgstr ""
 
 #: controllers/view/structures/structureview.cpp:291
-#, fuzzy, kde-format
-#| msgid "Structure Definitions"
+#, kde-format
 msgctxt "@title:window"
 msgid "Structures Script Console"
-msgstr "Sainmhínithe ar Struchtúir"
+msgstr ""
 
 #: controllers/view/viewconfig/bytespergroupdialog.cpp:33
 #: controllers/view/viewprofiles/viewprofileedit.cpp:115
@@ -2726,28 +2648,22 @@ msgid "View Profile"
 msgstr "Próifíl Amhairc"
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:48
-#, fuzzy, kde-format
-#| msgctxt "@title:menu create a new view profile"
-#| msgid "Create new..."
+#, kde-format
 msgctxt "@action:inmenu create a new view profile"
 msgid "Create New..."
-msgstr "Cruthaigh próifíl nua..."
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:56
-#, fuzzy, kde-format
-#| msgctxt "@title:menu save changed to the view profile to the base profile"
-#| msgid "Save changes"
+#, kde-format
 msgctxt "@action:inmenu save changed to the view profile to the base profile"
 msgid "Save Changes"
-msgstr "Sábháil athruithe"
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:64
-#, fuzzy, kde-format
-#| msgctxt "@title:menu reset settings back to those of the saved base profile"
-#| msgid "Reset changes"
+#, kde-format
 msgctxt "@action:inmenu reset settings back to those of the saved base profile"
 msgid "Reset Changes"
-msgstr "Athshocraigh athruithe"
+msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:188
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:180
@@ -2946,19 +2862,13 @@ msgid "Opens an editor for a new view profile."
 msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:68
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:whatsthis"
-#| msgid ""
-#| "If you press the <interface>Edit...</interface> button, an editor will be "
-#| "opened for the view profile you selected in the list."
+#, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press the <interface>Create new...</interface> button, an editor is "
 "opened where you can create and edit a new view profile. The values will be "
 "based on the ones of the view profile you selected in the list."
 msgstr ""
-"Má bhrúnn tú an cnaipe <interface>Eagar...</interface>, osclófar eagarthóir "
-"leis an bpróifíl a roghnaigh tú ón liosta."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:77
 #, kde-format
@@ -2995,18 +2905,12 @@ msgid "Sets the selected view profile as default for all views."
 msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:95
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:whatsthis"
-#| msgid ""
-#| "If you press the <interface>Edit...</interface> button, an editor will be "
-#| "opened for the view profile you selected in the list."
+#, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press the <interface>Set as Default</interface> button, the view "
 "profile you selected in the list is set as default for all views."
 msgstr ""
-"Má bhrúnn tú an cnaipe <interface>Eagar...</interface>, osclófar eagarthóir "
-"leis an bpróifíl a roghnaigh tú ón liosta."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:102
 #, kde-format
@@ -3021,18 +2925,12 @@ msgid "Deletes the selected view profile."
 msgstr ""
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:107
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:whatsthis"
-#| msgid ""
-#| "If you press the <interface>Edit...</interface> button, an editor will be "
-#| "opened for the view profile you selected in the list."
+#, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press the <interface>Delete</interface> button, the view profile you "
 "selected in the list is deleted."
 msgstr ""
-"Má bhrúnn tú an cnaipe <interface>Eagar...</interface>, osclófar eagarthóir "
-"leis an bpróifíl a roghnaigh tú ón liosta."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:174
 #, kde-format
@@ -3219,20 +3117,16 @@ msgid "RandomData inserted."
 msgstr "Ionsádh sonraí randamacha."
 
 #: gui/io/generator/randomdata/bytearrayrandomdatageneratorconfigeditor.cpp:33
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "Size [bytes]: "
+#, kde-format
 msgctxt "@label:spinbox size of the bytearray to generate"
 msgid "&Size (bytes):"
-msgstr "Méid [bearta]: "
+msgstr ""
 
 #: gui/io/generator/randomdata/bytearrayrandomdatageneratorconfigeditor.cpp:41
-#, fuzzy, kde-format
-#| msgctxt "@info:whatsthis"
-#| msgid "Enter the size of the byte to generate."
+#, kde-format
 msgctxt "@info:whatsthis"
 msgid "Enter the size of the bytearray to generate."
-msgstr "Iontráil méid an bhirt le giniúint."
+msgstr ""
 
 #: gui/io/generator/randomdata/bytearrayrandomdatageneratorconfigeditor.cpp:51
 #, kde-format
@@ -3500,475 +3394,3 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
-
-#~ msgid "Show Non-printable:"
-#~ msgstr "Taispeáin Carachtair Neamhghrafacha:"
-
-#~ msgid " byte"
-#~ msgid_plural " bytes"
-#~ msgstr[0] " bheart"
-#~ msgstr[1] " bheart"
-#~ msgstr[2] " bheart"
-#~ msgstr[3] " mbeart"
-#~ msgstr[4] " beart"
-
-#~ msgid " bit"
-#~ msgid_plural " bits"
-#~ msgstr[0] " ghiotán"
-#~ msgstr[1] " ghiotán"
-#~ msgstr[2] " ghiotán"
-#~ msgstr[3] " ngiotán"
-#~ msgstr[4] " giotán"
-
-#~ msgctxt "advertizer in the footer of the printed page"
-#~ msgid "Okteta, built on KDE4"
-#~ msgstr "Okteta, tógtha ar KDE4"
-
-#~ msgid "&lt;invalid name&gt;"
-#~ msgstr "&lt;ainm neamhbhailí&gt;"
-
-#~ msgctxt "@label:spinbox number of bytes which are grouped"
-#~ msgid "Per Group:"
-#~ msgstr "Sa Ghrúpa:"
-
-#~ msgctxt "@label:spinbox size of the bytes to generate"
-#~ msgid "&Size:"
-#~ msgstr "&Méid:"
-
-#~ msgctxt "Data type"
-#~ msgid "float"
-#~ msgstr "float"
-
-#~ msgctxt "Data type"
-#~ msgid "double"
-#~ msgstr "double"
-
-#~ msgctxt "Data type"
-#~ msgid "char"
-#~ msgstr "char"
-
-#~ msgid "*.osd|Okteta structure definition files (*.osd)"
-#~ msgstr "*.osd|Comhaid sainmhínithe struchtúir de chuid Okteta (*.osd)"
-
-#~ msgctxt "@title:window Do import the structure definitions"
-#~ msgid "Import Structure Definitions"
-#~ msgstr "Iompórtáil Sainmhínithe Struchtúir"
-
-#~ msgctxt "@title:window Do export the structure definition"
-#~ msgid "Export Structure Definition"
-#~ msgstr "Iompórtáil Sainmhíniú Struchtúir"
-
-#~ msgid "Error"
-#~ msgstr "Earráid"
-
-#~ msgid "You do not have permission to delete that structure definition."
-#~ msgstr "Níl cead agat an sainmhíniú struchtúir sin a scriosadh."
-
-#~ msgid "Structures"
-#~ msgstr "Struchtúir"
-
-#~ msgctxt "@option:check set the view into overwrite mode"
-#~ msgid "Set Overwrite Mode"
-#~ msgstr "Socraigh an Mód Forscríofa"
-
-#~ msgctxt "@option:check set the view into insert mode"
-#~ msgid "Set Insert Mode"
-#~ msgstr "Socraigh an Mód Ionsáite"
-
-#~ msgid "Empty array"
-#~ msgstr "Eagar folamh"
-
-#~ msgctxt "subelem type then array name and length"
-#~ msgid "%1[%2] (%3)"
-#~ msgstr "%1[%2] (%3)"
-
-#~ msgctxt "Data type"
-#~ msgid "int"
-#~ msgstr "int"
-
-#~ msgctxt "Data type"
-#~ msgid "short"
-#~ msgstr "short"
-
-#~ msgctxt "Data type"
-#~ msgid "long"
-#~ msgstr "long"
-
-#~ msgctxt "Data type"
-#~ msgid "byte"
-#~ msgstr "byte"
-
-#~ msgctxt "@info:tooltip"
-#~ msgid "Warning: Byte Array has been modified since last update."
-#~ msgstr "Rabhadh: Athraíodh an t-eagar ón nuashonrú is déanaí."
-
-#~ msgctxt "@title:window"
-#~ msgid "Byte Table"
-#~ msgstr "Tábla Beart"
-
-#~ msgctxt "name of the encoding target"
-#~ msgid "C Array..."
-#~ msgstr "Eagar C..."
-
-#~ msgctxt "name of the encoding target"
-#~ msgid "Values..."
-#~ msgstr "Luachanna..."
-
-#~ msgctxt "name of the encoding target"
-#~ msgid "Plain Text"
-#~ msgstr "Gnáth-Théacs"
-
-#~ msgctxt "@label:textbox"
-#~ msgid "Replacing bytes:"
-#~ msgstr "Bearta ionadaithe:"
-
-#~ msgid "&Go to"
-#~ msgstr "Téigh &go"
-
-#~ msgctxt "@action:button update the statistic of the byte frequency"
-#~ msgid "&Update"
-#~ msgstr "N&uashonraigh"
-
-#~ msgctxt "@action:button update the list of strings extracted"
-#~ msgid "&Update"
-#~ msgstr "N&uashonraigh"
-
-#~ msgctxt "@title:window"
-#~ msgid "Insert Pattern"
-#~ msgstr "Ionsáigh Patrún"
-
-#~ msgctxt "@action:button"
-#~ msgid "&Insert"
-#~ msgstr "&Ionsáigh"
-
-#~ msgctxt "@info:tooltip"
-#~ msgid "Insert the pattern"
-#~ msgstr "Ionsáigh an patrún"
-
-#~ msgctxt "@info:whatsthis"
-#~ msgid ""
-#~ "If you press the <interface>Insert</interface> button, the pattern you "
-#~ "entered above is inserted in the byte array at the cursor position."
-#~ msgstr ""
-#~ "Má bhrúnn tú an cnaipe <interface>Ionsáigh</interface>, ionsáfar an "
-#~ "patrún a d'iontráil tú thuas san eagar beart ag ionad an chúrsóra."
-
-#~ msgctxt "@title:group"
-#~ msgid "Insert"
-#~ msgstr "Ionsáigh"
-
-#~ msgctxt "@item:inlistbox coding of offset in the hexadecimal format"
-#~ msgid "Hexadecimal"
-#~ msgstr "Heicsidheachúlach"
-
-#~ msgctxt "@item:inlistbox coding of offset in the decimal format"
-#~ msgid "Decimal"
-#~ msgstr "Deachúlach"
-
-#~ msgctxt "@label:listbox"
-#~ msgid "Fo&rmat:"
-#~ msgstr "Fo&rmáid:"
-
-#~ msgctxt ""
-#~ "@item:inlistbox coding of the bytes as values in the hexadecimal format"
-#~ msgid "Hexadecimal"
-#~ msgstr "Heicsidheachúlach"
-
-#~ msgctxt ""
-#~ "@item:inlistbox coding of the bytes as values in the decimal format"
-#~ msgid "Decimal"
-#~ msgstr "Deachúil"
-
-#~ msgctxt "@item:inlistbox coding of the bytes as values in the binary format"
-#~ msgid "Binary"
-#~ msgstr "Dénártha"
-
-#~ msgctxt "@item:inlistbox coding of the bytes as characters with the values"
-#~ msgid "Character(s)"
-#~ msgstr "Carachta(i)r"
-
-#~ msgctxt "@info:tooltip"
-#~ msgid "Updates the byte frequency statistics."
-#~ msgstr "Nuashonraíonn sé staitisticí a bhaineann le minicíocht na mbeart."
-
-#~ msgctxt "@info:tooltip"
-#~ msgid "Executes the filter."
-#~ msgstr "Ritheann sé seo an scagaire."
-
-#~ msgid "File(s) to load"
-#~ msgstr "Comha(i)d le luchtú"
-
-#~ msgctxt "@title:menu"
-#~ msgid "Permissions"
-#~ msgstr "Ceadanna"
-
-#~ msgctxt "@title:menu"
-#~ msgid "Insert"
-#~ msgstr "Ionsáigh"
-
-#~ msgid "&Windows"
-#~ msgstr "&Fuinneoga"
-
-#~ msgid "Main Toolbar"
-#~ msgstr "Príomhbharra Uirlisí"
-
-#~ msgctxt "NAME OF TRANSLATORS"
-#~ msgid "Your names"
-#~ msgstr "Kevin Scannell"
-
-#~ msgctxt "EMAIL OF TRANSLATORS"
-#~ msgid "Your emails"
-#~ msgstr "kscanne@gmail.com"
-
-#~ msgid "Okteta"
-#~ msgstr "Okteta"
-
-#~ msgid "KDE byte editor"
-#~ msgstr "Eagarthóir beart KDE"
-
-#~ msgid "Copyright 2006-2009 Friedrich W. H. Kossebau"
-#~ msgstr "Cóipcheart 2006-2009 Friedrich W. H. Kossebau"
-
-#~ msgid "Friedrich W. H. Kossebau"
-#~ msgstr "Friedrich W. H. Kossebau"
-
-#~ msgid "Author"
-#~ msgstr "Údar"
-
-#~ msgctxt "@title:window"
-#~ msgid "Info"
-#~ msgstr "Eolas"
-
-#~ msgctxt "@title:menu"
-#~ msgid "Import"
-#~ msgstr "Iompórtáil"
-
-#~ msgid "Conversion &Field"
-#~ msgstr "&Réimse Tiontaithe"
-
-#~ msgid "Searc&h Bar"
-#~ msgstr "&Barra Cuardaigh"
-
-#~ msgctxt "@info"
-#~ msgid "Problem while saving to local filesystem."
-#~ msgstr "Tharla earráid le linn sábhála sa chóras comhad logánta."
-
-#~ msgctxt "@info"
-#~ msgid "Problem while synching with local filesystem."
-#~ msgstr "Tharla earráid agus sioncrónú leis an gcóras comhad logánta."
-
-#~ msgctxt "@info"
-#~ msgid "Problem while loading from local filesystem."
-#~ msgstr "Tharla earráid le linn luchtaithe ón chóras comhad logánta."
-
-#~ msgctxt "@info"
-#~ msgid ""
-#~ "There is already a file at<nl/><filename>%1</filename>.<nl/>Overwrite?"
-#~ msgstr "Tá comhad ann cheana<nl/><filename>%1</filename>.<nl/>Forscríobh?"
-
-#~ msgctxt "@title:window"
-#~ msgid "Close"
-#~ msgstr "Dún"
-
-#~ msgctxt "@info \"%title\" has been modified."
-#~ msgid ""
-#~ "<filename>%1</filename> has been modified.<nl/>Do you want to save your "
-#~ "changes or discard them?"
-#~ msgstr ""
-#~ "Athraíodh <filename>%1</filename>.<nl/>An bhfuil fonn ort do chuid "
-#~ "athruithe a shábháil?"
-
-#~ msgctxt "@info \"%title\" has been modified."
-#~ msgid ""
-#~ "<filename>%1</filename> has been modified.<nl/>Do you want to discard "
-#~ "your changes?"
-#~ msgstr ""
-#~ "Athraíodh <filename>%1</filename>.<nl/>An bhfuil fonn ort do chuid "
-#~ "athruithe a chaitheamh uait?"
-
-#~ msgctxt "@title:window"
-#~ msgid "Copy As"
-#~ msgstr "Cóipeáil Mar"
-
-#~ msgctxt "@action:button"
-#~ msgid "&Copy to clipboard"
-#~ msgstr "&Cóipeáil go dtí an ghearrthaisce"
-
-#~ msgctxt "@info:tooltip"
-#~ msgid "Copy the selected data to the clipboard."
-#~ msgstr "Cóipeáil na sonraí roghnaithe go dtí an ghearrthaisce."
-
-#~ msgctxt "@info:whatsthis"
-#~ msgid ""
-#~ "If you press the <interface>Copy to clipboard</interface> button, the "
-#~ "selected data will be copied to the clipboard with the settings you "
-#~ "entered above."
-#~ msgstr ""
-#~ "Má bhrúnn tú an cnaipe <interface>Cóipeáil go dtí an ghearrthaisce</"
-#~ "interface>, cóipeálfar na sonraí roghnaithe go dtí an ghearrthaisce de "
-#~ "réir na socruithe a d'iontráil tú thuas."
-
-#~ msgctxt "@title:menu"
-#~ msgid "Copy As"
-#~ msgstr "Cóipeáil Mar"
-
-#~ msgctxt "@item There are no encoders."
-#~ msgid "Not available."
-#~ msgstr "Níl ar fáil."
-
-#~ msgctxt "@title:menu"
-#~ msgid "Export"
-#~ msgstr "Easpórtáil"
-
-#~ msgctxt "@item There are no exporters."
-#~ msgid "Not available."
-#~ msgstr "Níl ar fáil."
-
-#~ msgctxt "@info:tooltip"
-#~ msgid "Export the selected data to a file."
-#~ msgstr "Easpórtáil na sonraí roghnaithe go comhad."
-
-#~ msgid "Zoom"
-#~ msgstr "Súmáil"
-
-#~ msgctxt "zoom-factor (percentage)"
-#~ msgid "%1%"
-#~ msgstr "%1%"
-
-#~ msgid "&Fit to Width"
-#~ msgstr "&Oiriúnaigh don Leithead"
-
-#~ msgid "&Fit to Height"
-#~ msgstr "&Oiriúnaigh don Airde"
-
-#~ msgid "&Fit to Size"
-#~ msgstr "Oiriúnaigh go dtí an &Mhéid"
-
-#~ msgctxt "@info:tooltip"
-#~ msgid "Zoom: %1%"
-#~ msgstr "Súmáil: %1%"
-
-#~ msgctxt "@action:inmenu"
-#~ msgid "Undo"
-#~ msgstr "Cealaigh"
-
-#~ msgctxt "@action:inmenu"
-#~ msgid "Redo"
-#~ msgstr "Athdhéan"
-
-#~ msgctxt "@action Undo: [change]"
-#~ msgid "Undo: %1"
-#~ msgstr "Cealaigh: %1"
-
-#~ msgctxt "@action Redo: [change]"
-#~ msgid "Redo: %1"
-#~ msgstr "Athdhéan: %1"
-
-#~ msgctxt "@title:column description of the change"
-#~ msgid "Title"
-#~ msgstr "Teideal"
-
-#~ msgctxt "@info:tooltip"
-#~ msgid "Title of the document"
-#~ msgstr "Teideal na cáipéise"
-
-#~ msgctxt "@title:window"
-#~ msgid "Documents"
-#~ msgstr "Cáipéisí"
-
-#~ msgctxt "@title:window"
-#~ msgid "Filesystem"
-#~ msgstr "Córas comhad"
-
-#~ msgctxt "@item There are no windows."
-#~ msgid "None."
-#~ msgstr "Gan fuinneog."
-
-#~ msgctxt "@title:window"
-#~ msgid "Versions"
-#~ msgstr "Leaganacha"
-
-#~ msgctxt "@title:column Id of the version"
-#~ msgid "Id"
-#~ msgstr "Aitheantas"
-
-#~ msgctxt "@info:tooltip"
-#~ msgid "Id of the version"
-#~ msgstr "Aitheantas an leagain"
-
-#~ msgctxt "@info:tooltip"
-#~ msgid "Description of what changed"
-#~ msgstr "Cur síos ar an athrú"
-
-#~ msgctxt "@option:check set the document to read-only"
-#~ msgid "Set Read-only"
-#~ msgstr "Socraigh Inléite Amháin"
-
-#~ msgctxt "@option:check set the document to read-write"
-#~ msgid "Set Read-write"
-#~ msgstr "Socraigh Inléite-inscríofa"
-
-#~ msgctxt "@option:check the document is read-write"
-#~ msgid "Read-write"
-#~ msgstr "Inléite-inscríofa"
-
-#~ msgctxt "@option:check the document is read-only"
-#~ msgid "Read-only"
-#~ msgstr "Inléite amháin"
-
-#~ msgctxt "@title:window"
-#~ msgid "Go to Offset"
-#~ msgstr "Téigh go dtí an Fritháireamh"
-
-# "eagar" ambiguous, ugh
-#~ msgid "Edit files as an array of bytes"
-#~ msgstr "Cuir comhaid in eagar mar eagar beart"
-
-#~ msgctxt "@item:inlistbox cding of the bytes as values in the octal format"
-#~ msgid "Octal"
-#~ msgstr "Ochtnártha"
-
-#~ msgctxt "@title:menu"
-#~ msgid "&Resize Style"
-#~ msgstr "&Stíl Athraithe Méid"
-
-#~ msgctxt "@item:inmenu"
-#~ msgid "&No Resize"
-#~ msgstr "&Ná hAthraigh Méid"
-
-#~ msgctxt "@item:inmenu"
-#~ msgid "&Lock Groups"
-#~ msgstr "Cuir Grúpaí Faoi Gh&las"
-
-#~ msgctxt "@item:inmenu"
-#~ msgid "&Full Size Usage"
-#~ msgstr "Úsáid &Lánmhéide"
-
-#~ msgctxt "@info:status the statistic is not uptodate"
-#~ msgid "Warning: not up-to-date"
-#~ msgstr "Rabhadh: nach suas le dáta iad"
-
-#~ msgctxt "@info:tooltip"
-#~ msgid "Warning: byte array has been modified since last update."
-#~ msgstr "Rabhadh: athraíodh an t-eagar ón nuashonrú is déanaí."
-
-#~ msgctxt "@info"
-#~ msgid "<nl/>End of byte array reached.<nl/>Continue from the beginning?"
-#~ msgstr "<nl/>Sroicheadh deireadh an eagair.<nl/>Lean ar aghaidh ón tús?"
-
-#~ msgctxt "@info"
-#~ msgid "<nl/>Beginning of byte array reached.<nl/>Continue from the end?"
-#~ msgstr "<nl/>Sroicheadh tús an eagair.<nl/>Lean ar aghaidh ón deireadh?"
-
-#~ msgctxt "@info"
-#~ msgid ""
-#~ "There is already a file at <nl/><filename>%1</filename>.<nl/>Overwrite?"
-#~ msgstr "Tá comhad ann cheana <nl/><filename>%1</filename>.<nl/>Forscríobh?"
-
-#~ msgctxt "@title:menu"
-#~ msgid "Copy as"
-#~ msgstr "Cóipeáil mar"
-
-#~ msgctxt "@item:inmenu"
-#~ msgid "&Both Columns"
-#~ msgstr "Colúin &Araon"
