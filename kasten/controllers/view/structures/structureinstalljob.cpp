@@ -117,7 +117,7 @@ bool StructureInstallJob::exec()
                 // TODO. move validation checks
                 const std::array<std::function<QString()>, 2> desktopFileNameGenerators = {
                     []() { return QStringLiteral("/metadata.desktop"); },
-                    [entry]() { return entry + QLatin1String(".desktop"); },
+                    [entry]() { return QString(entry + QLatin1String(".desktop")); },
                 };
                 QString desktopFileName;
                 for (auto& desktopFileNameGenerator : desktopFileNameGenerators) {
