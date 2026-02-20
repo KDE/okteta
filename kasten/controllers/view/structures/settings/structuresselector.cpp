@@ -87,6 +87,21 @@ void StructuresSelector::setEnabledStructures(const QStringList& enabledStructur
     m_structuresModel->setEnabledStructures(enabledStructures);
 }
 
+void StructuresSelector::selectAndFocusStructure(const QString& id)
+{
+    const QModelIndex index = m_structuresModel->indexByStructureId(id);
+    const QModelIndex sortedIndex = m_sortFilterProxyModel->mapFromSource(index);
+    if (!sortedIndex.isValid()) {
+        return;
+    }
+
+    const QItemSelection selection = QItemSelection(sortedIndex, sortedIndex);
+    m_listView->selectionModel()->select(selection, QItemSelectionModel::Select);
+
+    m_listView->scrollTo(sortedIndex);
+    m_listView->setFocus();
+}
+
 QStringList StructuresSelector::enabledStructures() const
 {
     return m_structuresModel->enabledStructures();

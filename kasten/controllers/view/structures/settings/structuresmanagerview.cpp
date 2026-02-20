@@ -113,6 +113,8 @@ void StructuresManagerView::selectStructureFile()
 void StructuresManagerView::installStructuresFromFiles(const QList<QUrl>& structureFileUrls)
 {
     bool anySuccess = false;
+    // cache the last installed structure id and focus it in the view
+    QString id;
     for (const auto& structureFileUrl : structureFileUrls) {
         StructureInstallJob* const installJob = mTool->manager()->installStructureFromFile(structureFileUrl);
 
@@ -120,8 +122,8 @@ void StructuresManagerView::installStructuresFromFiles(const QList<QUrl>& struct
         const bool success = installJob->exec();
 
         if (success) {
-            // TODO: highlight and scroll to new structures or display a message about them
             anySuccess = true;
+            id = installJob->structureId();
         } else {
             KMessageBox::error(this,
                 xi18n("Installing from <filename>%1</filename> failed:\n\n%2", structureFileUrl.toDisplayString(QUrl::PreferLocalFile), installJob->errorString()),
@@ -132,6 +134,8 @@ void StructuresManagerView::installStructuresFromFiles(const QList<QUrl>& struct
     }
     if (anySuccess) {
         resetLoadedStructures();
+        // TODO: only focus, or highlight or display a message about them?
+        mStructuresSelector->selectAndFocusStructure(id);
     }
 }
 

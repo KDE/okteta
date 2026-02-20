@@ -52,6 +52,8 @@ public:
     QStringList enabledStructures() const;
     [[nodiscard]]
     const StructureEnabledList& enabledList() const;
+    [[nodiscard]]
+    QModelIndex indexByStructureId(const QString& id) const;
 
 Q_SIGNALS:
     void enabledStructuresChanged();

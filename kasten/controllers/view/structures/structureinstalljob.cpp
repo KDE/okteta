@@ -16,6 +16,9 @@
 // Qt
 #include <QMimeDatabase>
 #include <QTemporaryFile>
+// Std
+#include <array>
+#include <functional>
 
 namespace Kasten {
 
@@ -32,6 +35,7 @@ bool StructureInstallJob::exec()
     QDir(userStructuresRootDir).mkpath(QStringLiteral("."));
 
     QString workFilePath;
+    QString desktopFileSubPath;
 
     QTemporaryFile tmpFile;
 
@@ -70,15 +74,28 @@ bool StructureInstallJob::exec()
     QDir workFilePathDir(workFilePath);
     // handle either directory or archive file selected
     if (workFilePathDir.exists()) {
+        const std::array<std::function<QString()>, 2> desktopFileNameGenerators = {
+            []() { return QStringLiteral("metadata.desktop"); },
+            [&workFilePathDir]() { return QString(workFilePathDir.dirName() +  QLatin1String(".desktop")); },
+        };
+        QString desktopFileName;
+        for (auto& desktopFileNameGenerator : desktopFileNameGenerators) {
+            const QString triedDesktopFileName = desktopFileNameGenerator();
+            if (workFilePathDir.exists(triedDesktopFileName)) {
+                desktopFileName = triedDesktopFileName;
+                break;
+            }
+        }
         // TODO. move validation checks
-        if (workFilePathDir.exists(QStringLiteral("metadata.desktop")) ||
-            workFilePathDir.exists(workFilePathDir.dirName() +  QLatin1String(".desktop"))) {
+        if (!desktopFileName.isEmpty()) {
             KIO::CopyJob* const copyJob = KIO::copy(QUrl::fromLocalFile(workFilePath), QUrl::fromLocalFile(userStructuresRootDir));
             // TODO error handling
             // TODO make async
             success = copyJob->exec();
             if (!success) {
                 m_errorString = copyJob->errorString();
+            } else {
+                desktopFileSubPath = workFilePathDir.dirName() + QLatin1Char('/') + desktopFileName;
             }
         } else {
             m_errorString = i18n("The structure archive is invalid.");
@@ -98,9 +115,18 @@ bool StructureInstallJob::exec()
             // support multi-structure archive
             for (const QString& entry : toplevelEntries) {
                 // TODO. move validation checks
-                archiveSuccess =
-                    (structureDir->entry(entry + QLatin1String("/metadata.desktop")) != nullptr) ||
-                    (structureDir->entry(entry + QLatin1Char('/') + entry + QLatin1String(".desktop")) != nullptr);
+                const std::array<std::function<QString()>, 2> desktopFileNameGenerators = {
+                    []() { return QStringLiteral("/metadata.desktop"); },
+                    [entry]() { return entry + QLatin1String(".desktop"); },
+                };
+                QString desktopFileName;
+                for (auto& desktopFileNameGenerator : desktopFileNameGenerators) {
+                    desktopFileName = desktopFileNameGenerator();
+                    archiveSuccess = (structureDir->entry(entry + QLatin1Char('/') + desktopFileName) != nullptr);
+                    if (archiveSuccess) {
+                        break;
+                    }
+                }
 
                 if (!archiveSuccess) {
                     m_errorString = i18n("The structure archive is invalid.");
@@ -113,6 +139,7 @@ bool StructureInstallJob::exec()
                 if (!archiveSuccess) {
                     break;
                 }
+                desktopFileSubPath = entry + QLatin1Char('/') + desktopFileName;
             }
             // TODO: in case of one failure, uninstall those which did not fail again?
             structureArchive->close();
@@ -125,6 +152,8 @@ bool StructureInstallJob::exec()
     }
 
     if (success) {
+        StructureMetaData structure(userStructuresRootDir + QLatin1Char('/') + desktopFileSubPath);
+        m_structureId = structure.id();
         // TODO: rather have StructuresManager listen to success signal
         m_structuresManager->reloadPaths();
     }

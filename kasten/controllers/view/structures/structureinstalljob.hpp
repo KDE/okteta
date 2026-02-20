@@ -33,12 +33,15 @@ public:
 
     [[nodiscard]]
     QString errorString() const;
+    [[nodiscard]]
+    QString structureId() const;
 
 private:
     StructuresManager* const m_structuresManager;
     const QUrl m_structureFileUrl;
 
     QString m_errorString;
+    QString m_structureId;
 };
 
 inline StructureInstallJob::StructureInstallJob(StructuresManager* structuresManager, const QUrl& structureFileUrl)
@@ -49,6 +52,11 @@ inline StructureInstallJob::StructureInstallJob(StructuresManager* structuresMan
 inline QString StructureInstallJob::errorString() const
 {
     return m_errorString;
+}
+
+inline QString StructureInstallJob::structureId() const
+{
+    return m_structureId;
 }
 
 }

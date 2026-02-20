@@ -42,6 +42,7 @@ public:
 public:
     void setStructures(const std::map<QString, std::unique_ptr<StructureDefinitionFile>>& structureDefs);
     void setEnabledStructures(const QStringList& enabledStructures);
+    void selectAndFocusStructure(const QString& id);
 
     [[nodiscard]]
     QStringList enabledStructures() const;

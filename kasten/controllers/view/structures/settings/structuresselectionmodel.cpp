@@ -17,6 +17,7 @@
 // Std
 #include <unordered_map>
 #include <algorithm>
+#include <iterator>
 
 namespace Kasten {
 
@@ -62,6 +63,18 @@ QStringList StructuresSelectionModel::enabledStructures() const
 const StructureEnabledList& StructuresSelectionModel::enabledList() const
 {
     return m_enabledList;
+}
+
+QModelIndex StructuresSelectionModel::indexByStructureId(const QString& id) const
+{
+    const auto it = std::find_if(m_metaDataList.cbegin(), m_metaDataList.cend(), [id](const auto& metaData) {
+        return (metaData.id() == id);
+    });
+    if (it == m_metaDataList.cend()) {
+        return {};
+    }
+    const int row = std::distance(m_metaDataList.cbegin(), it);
+    return index(row, 0);
 }
 
 void StructuresSelectionModel::setEnabledStructures(const QStringList& enabledStructures)
