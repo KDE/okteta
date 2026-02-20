@@ -64,7 +64,7 @@ private Q_SLOTS:
 
 private:
     StructuresSelectionModel* m_structuresModel;
-    StructuresSelectionSortFilterProxyModel* m_soirtFilterProxyModel;
+    StructuresSelectionSortFilterProxyModel* m_sortFilterProxyModel;
 
     QLineEdit* m_lineEdit;
     KCategorizedView* m_listView;

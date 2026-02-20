@@ -34,16 +34,16 @@ StructuresSelector::StructuresSelector(QWidget* parent)
     m_structuresModel = new StructuresSelectionModel(this);
     connect(m_structuresModel, &StructuresSelectionModel::enabledStructuresChanged,
             this, &StructuresSelector::enabledStructuresChanged);
-    m_soirtFilterProxyModel = new StructuresSelectionSortFilterProxyModel(this);
-    m_soirtFilterProxyModel->setCategorizedModel(true);
-    m_soirtFilterProxyModel->setSourceModel(m_structuresModel);
+    m_sortFilterProxyModel = new StructuresSelectionSortFilterProxyModel(this);
+    m_sortFilterProxyModel->setCategorizedModel(true);
+    m_sortFilterProxyModel->setSourceModel(m_structuresModel);
 
     // search field
     m_lineEdit = new QLineEdit(this);
     m_lineEdit->setClearButtonEnabled(true);
     m_lineEdit->setPlaceholderText(i18nc("@info:placeholder", "Search…"));
     connect(m_lineEdit, &QLineEdit::textChanged,
-            m_soirtFilterProxyModel, &StructuresSelectionSortFilterProxyModel::setFilterString);
+            m_sortFilterProxyModel, &StructuresSelectionSortFilterProxyModel::setFilterString);
 
     layout->addWidget(m_lineEdit);
 
@@ -53,7 +53,7 @@ StructuresSelector::StructuresSelector(QWidget* parent)
     m_listView->setVerticalScrollMode(QListView::ScrollPerPixel);
     m_listView->setAlternatingRowColors(true);
     m_listView->setCategoryDrawer(m_categoryDrawer);
-    m_listView->setModel(m_soirtFilterProxyModel);
+    m_listView->setModel(m_sortFilterProxyModel);
     m_listView->setAlternatingRowColors(true);
 
     m_structureDelegate = new StructureItemDelegate(m_listView, this);
@@ -79,7 +79,7 @@ StructuresSelector::~StructuresSelector()
 void StructuresSelector::setStructures(const std::map<QString, std::unique_ptr<StructureDefinitionFile>>& structureDefs)
 {
     m_structuresModel->setStructures(structureDefs);
-    m_soirtFilterProxyModel->sort(0);
+    m_sortFilterProxyModel->sort(0);
 }
 
 void StructuresSelector::setEnabledStructures(const QStringList& enabledStructures)
