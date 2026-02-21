@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-14 02:04+0000\n"
+"POT-Creation-Date: 2026-02-21 02:11+0000\n"
 "PO-Revision-Date: 2023-08-13 16:27+0200\n"
 "Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -2428,7 +2428,7 @@ msgctxt "@action:button"
 msgid "Get New Structures…"
 msgstr "Neue Strukturen holen ..."
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:127
+#: controllers/view/structures/settings/structuresmanagerview.cpp:129
 #, kde-kuit-format
 msgid ""
 "Installing from <filename>%1</filename> failed:\n"
@@ -2436,26 +2436,26 @@ msgid ""
 "%2"
 msgstr ""
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:128
+#: controllers/view/structures/settings/structuresmanagerview.cpp:130
 #, fuzzy, kde-format
 #| msgid "Structure Definitions"
 msgctxt "@title:window"
 msgid "Structure Installation"
 msgstr "Strukturdefinitionen"
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:149
+#: controllers/view/structures/settings/structuresmanagerview.cpp:153
 #, kde-format
 msgctxt "@action:button"
 msgid "Uninstall"
 msgstr ""
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:152
+#: controllers/view/structures/settings/structuresmanagerview.cpp:156
 #, kde-format
 msgid "Do you want to uninstall \"%1\"?"
 msgstr ""
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:153
-#: controllers/view/structures/settings/structuresmanagerview.cpp:172
+#: controllers/view/structures/settings/structuresmanagerview.cpp:157
+#: controllers/view/structures/settings/structuresmanagerview.cpp:176
 #, fuzzy, kde-format
 #| msgid "Structure Definitions"
 msgctxt "@title:window"
@@ -2468,12 +2468,12 @@ msgctxt "@title:window"
 msgid "Advanced Structures Selection"
 msgstr "Erweiterte Strukturen-Auswahl"
 
-#: controllers/view/structures/settings/structuresselectionmodel.cpp:111
+#: controllers/view/structures/settings/structuresselectionmodel.cpp:124
 #, kde-format
 msgid "Dynamic Structure Definitions"
 msgstr "Dynamische Strukturdefinitionen"
 
-#: controllers/view/structures/settings/structuresselectionmodel.cpp:113
+#: controllers/view/structures/settings/structuresselectionmodel.cpp:126
 #, kde-format
 msgid "Structure Definitions"
 msgstr "Strukturdefinitionen"
@@ -2679,20 +2679,20 @@ msgstr "Numerische Werte von Zeichen anzeigen"
 msgid "Character value:"
 msgstr "Zeichenwert:"
 
-#: controllers/view/structures/structureinstalljob.cpp:57
+#: controllers/view/structures/structureinstalljob.cpp:61
 #, kde-format
 msgid "Unknown error (0)"
 msgstr ""
 
-#: controllers/view/structures/structureinstalljob.cpp:59
+#: controllers/view/structures/structureinstalljob.cpp:63
 #, fuzzy, kde-format
 #| msgctxt "not all values in this structure are as they should be"
 #| msgid "Validation failed: \"%1\""
 msgid "Downloading failed: %1"
 msgstr "Die Überprüfung ist fehlgeschlagen: „%1“"
 
-#: controllers/view/structures/structureinstalljob.cpp:84
-#: controllers/view/structures/structureinstalljob.cpp:106
+#: controllers/view/structures/structureinstalljob.cpp:101
+#: controllers/view/structures/structureinstalljob.cpp:132
 #, kde-format
 msgid "The structure archive is invalid."
 msgstr ""

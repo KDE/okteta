@@ -14,7 +14,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-14 02:04+0000\n"
+"POT-Creation-Date: 2026-02-21 02:11+0000\n"
 "PO-Revision-Date: 2026-01-24 11:05+0100\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: pl\n"
@@ -2370,7 +2370,7 @@ msgctxt "@action:button"
 msgid "Get New Structures…"
 msgstr "Pobierz nowe struktury…"
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:127
+#: controllers/view/structures/settings/structuresmanagerview.cpp:129
 #, kde-kuit-format
 msgid ""
 "Installing from <filename>%1</filename> failed:\n"
@@ -2381,25 +2381,25 @@ msgstr ""
 "\n"
 "%2"
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:128
+#: controllers/view/structures/settings/structuresmanagerview.cpp:130
 #, kde-format
 msgctxt "@title:window"
 msgid "Structure Installation"
 msgstr "Wgrywanie struktury"
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:149
+#: controllers/view/structures/settings/structuresmanagerview.cpp:153
 #, kde-format
 msgctxt "@action:button"
 msgid "Uninstall"
 msgstr "Usuń"
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:152
+#: controllers/view/structures/settings/structuresmanagerview.cpp:156
 #, kde-format
 msgid "Do you want to uninstall \"%1\"?"
 msgstr "Czy na pewno usunąć \"%1\"?"
 
-#: controllers/view/structures/settings/structuresmanagerview.cpp:153
-#: controllers/view/structures/settings/structuresmanagerview.cpp:172
+#: controllers/view/structures/settings/structuresmanagerview.cpp:157
+#: controllers/view/structures/settings/structuresmanagerview.cpp:176
 #, kde-format
 msgctxt "@title:window"
 msgid "Structure Uninstallation"
@@ -2411,12 +2411,12 @@ msgctxt "@title:window"
 msgid "Advanced Structures Selection"
 msgstr "Wybór rozbudowanych struktur"
 
-#: controllers/view/structures/settings/structuresselectionmodel.cpp:111
+#: controllers/view/structures/settings/structuresselectionmodel.cpp:124
 #, kde-format
 msgid "Dynamic Structure Definitions"
 msgstr "Definicje struktur dynamicznych"
 
-#: controllers/view/structures/settings/structuresselectionmodel.cpp:113
+#: controllers/view/structures/settings/structuresselectionmodel.cpp:126
 #, kde-format
 msgid "Structure Definitions"
 msgstr "Definicje struktur"
@@ -2609,18 +2609,18 @@ msgstr "Pokaż liczbowe wartości znaków"
 msgid "Character value:"
 msgstr "Wartości znaków:"
 
-#: controllers/view/structures/structureinstalljob.cpp:57
+#: controllers/view/structures/structureinstalljob.cpp:61
 #, kde-format
 msgid "Unknown error (0)"
 msgstr "Nieznany błąd (0)"
 
-#: controllers/view/structures/structureinstalljob.cpp:59
+#: controllers/view/structures/structureinstalljob.cpp:63
 #, kde-format
 msgid "Downloading failed: %1"
 msgstr "Nie udało się pobrać: %1"
 
-#: controllers/view/structures/structureinstalljob.cpp:84
-#: controllers/view/structures/structureinstalljob.cpp:106
+#: controllers/view/structures/structureinstalljob.cpp:101
+#: controllers/view/structures/structureinstalljob.cpp:132
 #, kde-format
 msgid "The structure archive is invalid."
 msgstr "Archiwum struktury jest nieprawidłowe."
