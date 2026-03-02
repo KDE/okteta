@@ -175,6 +175,7 @@ CharsetConversionView::CharsetConversionView(CharsetConversionTool* tool, QWidge
                         "all bytes in the selected range "
                         "will be replaced by bytes which represent the same character "
                         "in the selected target charset."));
+    mConvertAction->setEnabled(mTool->isApplyable());
     baseLayout->addWidget(actionToolBar);
     baseLayout->addStretch();
 
