@@ -177,6 +177,7 @@ CharsetConversionView::CharsetConversionView(CharsetConversionTool* tool,
                         "will be replaced by bytes which represent the same character "
                         "in the selected target charset."));
     mConvertAction->setPriority(QAction::HighPriority);
+    mConvertAction->setEnabled(mTool->isApplyable());
 
     baseLayout->addWidget(actionToolBar);
     baseLayout->addStretch();
