@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-14 03:31+0000\n"
+"POT-Creation-Date: 2026-03-03 03:58+0000\n"
 "PO-Revision-Date: 2020-01-03 11:29+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
@@ -449,13 +449,13 @@ msgstr ""
 "in het geselecteerde bereik worden vervangen door bytes die hetzelfde teken "
 "representeert in de geselecteerde doeltekenset."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:220
+#: controllers/view/charsetconversion/charsetconversionview.cpp:221
 #, kde-format
 msgctxt "@info"
 msgid "No bytes converted."
 msgstr "Geen bytes geconverteerd."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:221
+#: controllers/view/charsetconversion/charsetconversionview.cpp:222
 #, kde-format
 msgctxt "@info"
 msgid "1 byte converted."
@@ -463,13 +463,13 @@ msgid_plural "%1 bytes converted."
 msgstr[0] "1 byte geconverteerd."
 msgstr[1] "%1 bytes geconverteerd."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:231
+#: controllers/view/charsetconversion/charsetconversionview.cpp:232
 #, kde-format
 msgctxt "@info"
 msgid "No bytes substituted."
 msgstr "Geen bytes vervangen."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:232
+#: controllers/view/charsetconversion/charsetconversionview.cpp:233
 #, kde-format
 msgctxt "@info"
 msgid "1 byte substituted."
@@ -477,7 +477,7 @@ msgid_plural "%1 bytes substituted."
 msgstr[0] "1 byte vervangen."
 msgstr[1] "%1 bytes vervangen."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:241
+#: controllers/view/charsetconversion/charsetconversionview.cpp:242
 #, kde-format
 msgctxt "@info"
 msgid ""

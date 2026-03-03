@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-14 03:31+0000\n"
+"POT-Creation-Date: 2026-03-03 03:58+0000\n"
 "PO-Revision-Date: 2025-09-01 18:53+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: \n"
@@ -466,13 +466,13 @@ msgstr ""
 "octets situés dans l'intervalle sélectionné seront remplacés par les octets "
 "représentant le même caractère dans le jeu de caractères sélectionné."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:220
+#: controllers/view/charsetconversion/charsetconversionview.cpp:221
 #, kde-format
 msgctxt "@info"
 msgid "No bytes converted."
 msgstr "Pas d'octets à convertir."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:221
+#: controllers/view/charsetconversion/charsetconversionview.cpp:222
 #, kde-format
 msgctxt "@info"
 msgid "1 byte converted."
@@ -480,13 +480,13 @@ msgid_plural "%1 bytes converted."
 msgstr[0] "Un octet converti."
 msgstr[1] "%1 octets convertis."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:231
+#: controllers/view/charsetconversion/charsetconversionview.cpp:232
 #, kde-format
 msgctxt "@info"
 msgid "No bytes substituted."
 msgstr "Pas d'octets substitués."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:232
+#: controllers/view/charsetconversion/charsetconversionview.cpp:233
 #, kde-format
 msgctxt "@info"
 msgid "1 byte substituted."
@@ -494,7 +494,7 @@ msgid_plural "%1 bytes substituted."
 msgstr[0] "Un octet substitué."
 msgstr[1] "%1 octets substitués."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:241
+#: controllers/view/charsetconversion/charsetconversionview.cpp:242
 #, kde-format
 msgctxt "@info"
 msgid ""

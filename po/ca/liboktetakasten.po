@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-01-14 03:31+0000\n"
+"POT-Creation-Date: 2026-03-03 03:58+0000\n"
 "PO-Revision-Date: 2025-07-06 11:18+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -457,13 +457,13 @@ msgstr ""
 "l'interval seleccionat seran substituïts pels bytes que representen el "
 "mateix caràcter en el joc de caràcters de destinació seleccionat."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:220
+#: controllers/view/charsetconversion/charsetconversionview.cpp:221
 #, kde-format
 msgctxt "@info"
 msgid "No bytes converted."
 msgstr "No s'ha convertit cap byte."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:221
+#: controllers/view/charsetconversion/charsetconversionview.cpp:222
 #, kde-format
 msgctxt "@info"
 msgid "1 byte converted."
@@ -471,13 +471,13 @@ msgid_plural "%1 bytes converted."
 msgstr[0] "S'ha convertit 1 byte."
 msgstr[1] "S'han convertit %1 bytes."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:231
+#: controllers/view/charsetconversion/charsetconversionview.cpp:232
 #, kde-format
 msgctxt "@info"
 msgid "No bytes substituted."
 msgstr "No s'ha substituït cap byte."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:232
+#: controllers/view/charsetconversion/charsetconversionview.cpp:233
 #, kde-format
 msgctxt "@info"
 msgid "1 byte substituted."
@@ -485,7 +485,7 @@ msgid_plural "%1 bytes substituted."
 msgstr[0] "S'ha substituït 1 byte."
 msgstr[1] "S'han substituït %1 bytes."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:241
+#: controllers/view/charsetconversion/charsetconversionview.cpp:242
 #, kde-format
 msgctxt "@info"
 msgid ""
