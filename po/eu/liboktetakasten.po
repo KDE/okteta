@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-21 02:11+0000\n"
+"POT-Creation-Date: 2026-03-03 02:20+0000\n"
 "PO-Revision-Date: 2020-03-21 21:45+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -533,13 +533,13 @@ msgstr ""
 "<interface>Eguneratu</interface> botoia sakatzen baduzu, byte maiztasunaren "
 "estatistika eguneratzen da."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:223
+#: controllers/view/charsetconversion/charsetconversionview.cpp:224
 #, kde-format
 msgctxt "@info"
 msgid "No bytes converted."
 msgstr "Ez da byterik bihurtu."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:224
+#: controllers/view/charsetconversion/charsetconversionview.cpp:225
 #, kde-format
 msgctxt "@info"
 msgid "1 byte converted."
@@ -547,13 +547,13 @@ msgid_plural "%1 bytes converted."
 msgstr[0] "Byte 1 bihurtu da."
 msgstr[1] "%1 byte bihurtu dira."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:234
+#: controllers/view/charsetconversion/charsetconversionview.cpp:235
 #, kde-format
 msgctxt "@info"
 msgid "No bytes substituted."
 msgstr "Ez da byterik ordezkatu."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:235
+#: controllers/view/charsetconversion/charsetconversionview.cpp:236
 #, kde-format
 msgctxt "@info"
 msgid "1 byte substituted."
@@ -561,7 +561,7 @@ msgid_plural "%1 bytes substituted."
 msgstr[0] "Byte 1 ordezkatu da."
 msgstr[1] "%1 byte ordezkatu dira."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:243
+#: controllers/view/charsetconversion/charsetconversionview.cpp:244
 #, kde-format
 msgctxt "@info"
 msgid ""
