@@ -134,10 +134,12 @@ void BookmarksView::onBookmarkSelectionChanged()
 
     // TODO: selectionModel->selectedIndexes() is a expensive operation,
     // but with Qt 4.4.3 hasSelection() has the flaw to return true with a current index
-    const bool hasSelection = !selectionModel->selectedIndexes().isEmpty();
+    const QModelIndexList selectedRows = selectionModel->selectedRows();
+    const bool hasSelection = !selectedRows.isEmpty();
     mDeleteBookmarksAction->setEnabled(hasSelection);
-
-    const bool bookmarkSelected = selectionModel->isSelected(selectionModel->currentIndex());
+    const bool bookmarkSelected =
+        (selectedRows.size() == 1) &&
+        selectionModel->isSelected(selectionModel->currentIndex());
     mRenameBookmarkAction->setEnabled(bookmarkSelected);
     mGotoBookmarkAction->setEnabled(bookmarkSelected);
 }
