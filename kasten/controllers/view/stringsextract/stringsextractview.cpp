@@ -231,10 +231,13 @@ void StringsExtractView::onStringSelectionChanged()
 
     // TODO: selectionModel->selectedIndexes() is a expensive operation,
     // but with Qt 4.4.3 hasSelection() has the flaw to return true with a current index
-    const bool hasSelection = !selectionModel->selectedIndexes().isEmpty();
+    const QModelIndexList selectedRows = selectionModel->selectedRows();
+    const bool hasSelection = !selectedRows.isEmpty();
     mCopyAction->setEnabled(hasSelection);
 
-    const bool stringSelected = selectionModel->isSelected(selectionModel->currentIndex());
+    const bool stringSelected =
+        (selectedRows.size() == 1) &&
+        selectionModel->isSelected(selectionModel->currentIndex());
     const bool canHighlightString = mTool->canHighlightString();
     mGotoAction->setEnabled(canHighlightString && stringSelected);
 }
