@@ -13,6 +13,7 @@
 #include <QWidget>
 
 class QTreeView;
+class QSortFilterProxyModel;
 class QAction;
 class QModelIndex;
 
@@ -44,6 +45,7 @@ private:
     BookmarksTool* mTool;
 
     BookmarkListModel* mBookmarkListModel;
+    QSortFilterProxyModel* m_sortProxyModel;
 
     QTreeView* mBookmarkListView;
     QAction* mCreateBookmarkAction;

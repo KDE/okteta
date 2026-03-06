@@ -21,6 +21,7 @@
 #include <QVBoxLayout>
 #include <QTreeView>
 #include <QHeaderView>
+#include <QSortFilterProxyModel>
 #include <QIcon>
 
 namespace Kasten {
@@ -38,6 +39,10 @@ BookmarksView::BookmarksView(BookmarksTool* tool, QWidget* parent)
     baseLayout->setSpacing(0);
 
     // bookmarks list
+    m_sortProxyModel = new QSortFilterProxyModel(this);
+    m_sortProxyModel->setDynamicSortFilter(true);
+    m_sortProxyModel->setSourceModel(mBookmarkListModel);
+
     mBookmarkListView = new QTreeView(this);
     mBookmarkListView->setObjectName(QStringLiteral("BookmarkListView"));
     mBookmarkListView->setRootIsDecorated(false);
@@ -45,7 +50,8 @@ BookmarksView::BookmarksView(BookmarksTool* tool, QWidget* parent)
     mBookmarkListView->setUniformRowHeights(true);
     mBookmarkListView->setAllColumnsShowFocus(true);
     mBookmarkListView->setSelectionMode(QAbstractItemView::ExtendedSelection);
-    mBookmarkListView->setModel(mBookmarkListModel);
+    mBookmarkListView->setSortingEnabled(true);
+    mBookmarkListView->setModel(m_sortProxyModel);
     mBookmarkListView->header()->setSectionResizeMode(QHeaderView::Interactive);
     connect(mBookmarkListView, &QTreeView::doubleClicked,
             this, &BookmarksView::onBookmarkDoubleClicked);
@@ -114,10 +120,11 @@ BookmarksView::~BookmarksView() = default;
 
 void BookmarksView::onBookmarkDoubleClicked(const QModelIndex& index)
 {
-    const int column = index.column();
+    const QModelIndex bookmarkIndex = m_sortProxyModel->mapToSource(index);
+    const int column = bookmarkIndex.column();
     const bool isOffsetColum = (column == BookmarkListModel::OffsetColumnId);
     if (isOffsetColum) {
-        mTool->gotoBookmark(mBookmarkListModel->bookmark(index));
+        mTool->gotoBookmark(mBookmarkListModel->bookmark(bookmarkIndex));
     }
 }
 
@@ -139,9 +146,10 @@ void BookmarksView::onCreateBookmarkButtonClicked()
 {
     const Okteta::Bookmark bookmark = mTool->createBookmark();
     if (bookmark.isValid()) {
-        const QModelIndex index = mBookmarkListModel->index(bookmark, BookmarkListModel::TitleColumnId);
-        if (index.isValid()) {
-            mBookmarkListView->edit(index);
+        const QModelIndex bookmarkIndex = mBookmarkListModel->index(bookmark, BookmarkListModel::TitleColumnId);
+        const QModelIndex sortedIndex = m_sortProxyModel->mapFromSource(bookmarkIndex);
+        if (sortedIndex.isValid()) {
+            mBookmarkListView->edit(sortedIndex);
         }
     }
 }
@@ -152,8 +160,9 @@ void BookmarksView::onDeleteBookmarkButtonClicked()
 
     QVector<Okteta::Bookmark> bookmarksToBeDeleted;
     bookmarksToBeDeleted.reserve(selectedRows.size());
-    for (const QModelIndex& index : selectedRows) {
-        const Okteta::Bookmark& bookmark = mBookmarkListModel->bookmark(index);
+    for (const QModelIndex& sortedIndex : selectedRows) {
+        const QModelIndex bookmarkIndex = m_sortProxyModel->mapToSource(sortedIndex);
+        const Okteta::Bookmark& bookmark = mBookmarkListModel->bookmark(bookmarkIndex);
         bookmarksToBeDeleted.append(bookmark);
     }
 
@@ -162,15 +171,16 @@ void BookmarksView::onDeleteBookmarkButtonClicked()
 
 void BookmarksView::onGotoBookmarkButtonClicked()
 {
-    const QModelIndex index = mBookmarkListView->selectionModel()->currentIndex();
-    if (index.isValid()) {
-        mTool->gotoBookmark(mBookmarkListModel->bookmark(index));
+    const QModelIndex sortedIndex = mBookmarkListView->selectionModel()->currentIndex();
+    const QModelIndex bookmarkIndex = m_sortProxyModel->mapToSource(sortedIndex);
+    if (bookmarkIndex.isValid()) {
+        mTool->gotoBookmark(mBookmarkListModel->bookmark(bookmarkIndex));
     }
 }
 
 void BookmarksView::onRenameBookmarkButtonClicked()
 {
-    QModelIndex index = mBookmarkListView->selectionModel()->currentIndex();
+    const QModelIndex index = mBookmarkListView->selectionModel()->currentIndex();
     const QModelIndex nameIndex = index.sibling(index.row(), BookmarkListModel::TitleColumnId);
     if (nameIndex.isValid()) {
         mBookmarkListView->edit(nameIndex);
