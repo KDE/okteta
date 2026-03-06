@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-21 02:11+0000\n"
+"POT-Creation-Date: 2026-03-03 02:20+0000\n"
 "PO-Revision-Date: 2013-02-19 20:33+0100\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -505,13 +505,13 @@ msgstr ""
 "det markerte området erstattet med byter som gjengir det samme tegnet i det "
 "valgte mål-tegnsettet."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:223
+#: controllers/view/charsetconversion/charsetconversionview.cpp:224
 #, kde-format
 msgctxt "@info"
 msgid "No bytes converted."
 msgstr "Ingen byter konvertert."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:224
+#: controllers/view/charsetconversion/charsetconversionview.cpp:225
 #, kde-format
 msgctxt "@info"
 msgid "1 byte converted."
@@ -519,13 +519,13 @@ msgid_plural "%1 bytes converted."
 msgstr[0] "1 byte konvertert."
 msgstr[1] "%1 byter konvertert."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:234
+#: controllers/view/charsetconversion/charsetconversionview.cpp:235
 #, kde-format
 msgctxt "@info"
 msgid "No bytes substituted."
 msgstr "Ingen byter erstattet."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:235
+#: controllers/view/charsetconversion/charsetconversionview.cpp:236
 #, kde-format
 msgctxt "@info"
 msgid "1 byte substituted."
@@ -533,7 +533,7 @@ msgid_plural "%1 bytes substituted."
 msgstr[0] "1 byte erstattet."
 msgstr[1] "%1 byter erstattet."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:243
+#: controllers/view/charsetconversion/charsetconversionview.cpp:244
 #, kde-format
 msgctxt "@info"
 msgid ""

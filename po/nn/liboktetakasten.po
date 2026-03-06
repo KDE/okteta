@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-02-21 02:11+0000\n"
+"POT-Creation-Date: 2026-03-03 02:20+0000\n"
 "PO-Revision-Date: 2023-08-10 18:12+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -504,13 +504,13 @@ msgstr ""
 "det merkte området bytte ut med byte-verdiar som representerer same teikn i "
 "den valde målteiknkodinga."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:223
+#: controllers/view/charsetconversion/charsetconversionview.cpp:224
 #, kde-format
 msgctxt "@info"
 msgid "No bytes converted."
 msgstr "Ingen byte-verdiar vart konverterte."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:224
+#: controllers/view/charsetconversion/charsetconversionview.cpp:225
 #, kde-format
 msgctxt "@info"
 msgid "1 byte converted."
@@ -518,13 +518,13 @@ msgid_plural "%1 bytes converted."
 msgstr[0] "1 byte-verdi vart konvertert."
 msgstr[1] "%1 byte-verdiar vart konverterte."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:234
+#: controllers/view/charsetconversion/charsetconversionview.cpp:235
 #, kde-format
 msgctxt "@info"
 msgid "No bytes substituted."
 msgstr "Ingen byte-verdiar vart bytte ut."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:235
+#: controllers/view/charsetconversion/charsetconversionview.cpp:236
 #, kde-format
 msgctxt "@info"
 msgid "1 byte substituted."
@@ -532,7 +532,7 @@ msgid_plural "%1 bytes substituted."
 msgstr[0] "1 byte-verdi vart bytt ut."
 msgstr[1] "%1 byte-verdiar vart bytte ut."
 
-#: controllers/view/charsetconversion/charsetconversionview.cpp:243
+#: controllers/view/charsetconversion/charsetconversionview.cpp:244
 #, kde-format
 msgctxt "@info"
 msgid ""
