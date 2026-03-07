@@ -387,7 +387,7 @@ void StructureView::onCustomContextMenuRequested(QPoint pos)
         menu->addAction(copyOffsetAction);
 
         auto* const selectAction = new QAction(QIcon::fromTheme(QStringLiteral("select-rectangular")),
-                                               i18nc("@action:inmenu", "Select"), menu);
+                                               i18nc("@action:inmenu", "Select in View"), menu);
         connect(selectAction, &QAction::triggered,
                 this, &StructureView::selectBytesInView);
         selectAction->setData(index);

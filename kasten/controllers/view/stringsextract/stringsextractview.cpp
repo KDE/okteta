@@ -195,7 +195,7 @@ StringsExtractView::StringsExtractView(StringsExtractTool* tool,
             this, &StringsExtractView::onCopyOffsetTriggered);
 
     mSelectAction = new QAction(QIcon::fromTheme(QStringLiteral("select-rectangular")),
-                                i18nc("@action", "Select"), this);
+                                i18nc("@action:inmenu", "Select in View"), this);
     mSelectAction->setToolTip(i18nc("@info:tooltip",
                                     "Selects the selected string in the view."));
     connect(mSelectAction, &QAction::triggered,
