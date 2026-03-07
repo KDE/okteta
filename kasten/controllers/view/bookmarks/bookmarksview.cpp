@@ -54,9 +54,10 @@ BookmarksView::BookmarksView(BookmarksTool* tool, QWidget* parent)
     mBookmarkListView->setAllColumnsShowFocus(true);
     mBookmarkListView->setSelectionMode(QAbstractItemView::ExtendedSelection);
     mBookmarkListView->setSortingEnabled(true);
-    mBookmarkListView->setModel(m_sortProxyModel);
     mBookmarkListView->header()->setSectionResizeMode(QHeaderView::Interactive);
     mBookmarkListView->setContextMenuPolicy(Qt::CustomContextMenu);
+    mBookmarkListView->setModel(m_sortProxyModel);
+    mBookmarkListView->sortByColumn(BookmarkListModel::OffsetColumnId, Qt::AscendingOrder);
     connect(mBookmarkListView, &QTreeView::doubleClicked,
             this, &BookmarksView::onBookmarkDoubleClicked);
     connect(mBookmarkListView->selectionModel(),
