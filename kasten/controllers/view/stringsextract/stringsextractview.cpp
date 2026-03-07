@@ -238,12 +238,19 @@ void StringsExtractView::onCustomContextMenuRequested(QPoint pos)
     auto* const menu = new QMenu(this);
     menu->setAttribute(Qt::WA_DeleteOnClose);
 
-    menu->addAction(mGotoAction);
-    menu->addSeparator();
+    const QModelIndexList selectedRows = mContainedStringTableView->selectionModel()->selectedRows();
+    const bool isOneSelected = (selectedRows.size() == 1);
+
+    if (isOneSelected) {
+        menu->addAction(mGotoAction);
+        menu->addSeparator();
+    }
     menu->addAction(mCopyAction);
-    menu->addAction(mCopyOffsetAction);
-    menu->addSeparator();
-    menu->addAction(mSelectAction);
+    if (isOneSelected) {
+        menu->addAction(mCopyOffsetAction);
+        menu->addSeparator();
+        menu->addAction(mSelectAction);
+    }
 
     menu->popup(mContainedStringTableView->viewport()->mapToGlobal(pos));
 }
@@ -316,10 +323,13 @@ void StringsExtractView::onStringSelectionChanged()
 
     // TODO: selectionModel->selectedIndexes() is a expensive operation,
     // but with Qt 4.4.3 hasSelection() has the flaw to return true with a current index
-    const bool hasSelection = !selectionModel->selectedIndexes().isEmpty();
+    const QModelIndexList selectedRows = selectionModel->selectedRows();
+    const bool hasSelection = !selectedRows.isEmpty();
     mCopyAction->setEnabled(hasSelection);
 
-    const bool stringSelected = selectionModel->isSelected(selectionModel->currentIndex());
+    const bool stringSelected =
+        (selectedRows.size() == 1) &&
+        selectionModel->isSelected(selectionModel->currentIndex());
     const bool canHighlightString = mTool->canHighlightString();
     const bool isStringToMarkOrSelect = (canHighlightString && stringSelected);
     mGotoAction->setEnabled(isStringToMarkOrSelect);

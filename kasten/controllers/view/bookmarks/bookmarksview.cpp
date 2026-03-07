@@ -23,6 +23,7 @@
 #include <QHBoxLayout>
 #include <QTreeView>
 #include <QHeaderView>
+#include <QSortFilterProxyModel>
 #include <QIcon>
 #include <QMenu>
 
@@ -41,6 +42,10 @@ BookmarksView::BookmarksView(BookmarksTool* tool, QWidget* parent)
     baseLayout->setSpacing(0);
 
     // bookmarks list
+    m_sortProxyModel = new QSortFilterProxyModel(this);
+    m_sortProxyModel->setDynamicSortFilter(true);
+    m_sortProxyModel->setSourceModel(mBookmarkListModel);
+
     mBookmarkListView = new QTreeView(this);
     mBookmarkListView->setObjectName(QStringLiteral("BookmarkListView"));
     mBookmarkListView->setRootIsDecorated(false);
@@ -48,7 +53,8 @@ BookmarksView::BookmarksView(BookmarksTool* tool, QWidget* parent)
     mBookmarkListView->setUniformRowHeights(true);
     mBookmarkListView->setAllColumnsShowFocus(true);
     mBookmarkListView->setSelectionMode(QAbstractItemView::ExtendedSelection);
-    mBookmarkListView->setModel(mBookmarkListModel);
+    mBookmarkListView->setSortingEnabled(true);
+    mBookmarkListView->setModel(m_sortProxyModel);
     mBookmarkListView->header()->setSectionResizeMode(QHeaderView::Interactive);
     mBookmarkListView->setContextMenuPolicy(Qt::CustomContextMenu);
     connect(mBookmarkListView, &QTreeView::doubleClicked,
@@ -156,10 +162,11 @@ void BookmarksView::updateEmptyListOverlayLabel()
 
 void BookmarksView::onBookmarkDoubleClicked(const QModelIndex& index)
 {
-    const int column = index.column();
+    const QModelIndex bookmarkIndex = m_sortProxyModel->mapToSource(index);
+    const int column = bookmarkIndex.column();
     const bool isOffsetColum = (column == BookmarkListModel::OffsetColumnId);
     if (isOffsetColum) {
-        mTool->gotoBookmark(mBookmarkListModel->bookmark(index));
+        mTool->gotoBookmark(mBookmarkListModel->bookmark(bookmarkIndex));
     }
 }
 
@@ -171,16 +178,20 @@ void BookmarksView::onCustomContextMenuRequested(QPoint pos)
     const QModelIndex index = mBookmarkListView->indexAt(pos);
 
     if (index.isValid()) {
-        menu->addAction(mGotoBookmarkAction);
-        menu->addAction(mRenameBookmarkAction);
-        menu->addSeparator();
-        menu->addAction(mCopyOffsetAction);
-        menu->addSeparator();
-        menu->addAction(mDeleteBookmarksAction);
-        menu->addSeparator();
-    }
+        const QModelIndexList selectedRows = mBookmarkListView->selectionModel()->selectedRows();
+        const bool isOneSelected = (selectedRows.size() == 1);
 
-    menu->addAction(mCreateBookmarkAction);
+        if (isOneSelected) {
+            menu->addAction(mGotoBookmarkAction);
+            menu->addAction(mRenameBookmarkAction);
+            menu->addSeparator();
+            menu->addAction(mCopyOffsetAction);
+            menu->addSeparator();
+        }
+        menu->addAction(mDeleteBookmarksAction);
+    } else {
+        menu->addAction(mCreateBookmarkAction);
+    }
 
     menu->popup(mBookmarkListView->viewport()->mapToGlobal(pos));
 }
@@ -191,10 +202,12 @@ void BookmarksView::onBookmarkSelectionChanged()
 
     // TODO: selectionModel->selectedIndexes() is a expensive operation,
     // but with Qt 4.4.3 hasSelection() has the flaw to return true with a current index
-    const bool hasSelection = !selectionModel->selectedIndexes().isEmpty();
+    const QModelIndexList selectedRows = selectionModel->selectedRows();
+    const bool hasSelection = !selectedRows.isEmpty();
     mDeleteBookmarksAction->setEnabled(hasSelection);
-
-    const bool bookmarkSelected = selectionModel->isSelected(selectionModel->currentIndex());
+    const bool bookmarkSelected =
+        (selectedRows.size() == 1) &&
+        selectionModel->isSelected(selectionModel->currentIndex());
     mRenameBookmarkAction->setEnabled(bookmarkSelected);
     mGotoBookmarkAction->setEnabled(bookmarkSelected);
 }
@@ -203,9 +216,10 @@ void BookmarksView::onCreateBookmarkButtonClicked()
 {
     const Okteta::Bookmark bookmark = mTool->createBookmark();
     if (bookmark.isValid()) {
-        const QModelIndex index = mBookmarkListModel->index(bookmark, BookmarkListModel::TitleColumnId);
-        if (index.isValid()) {
-            mBookmarkListView->edit(index);
+        const QModelIndex bookmarkIndex = mBookmarkListModel->index(bookmark, BookmarkListModel::TitleColumnId);
+        const QModelIndex sortedIndex = m_sortProxyModel->mapFromSource(bookmarkIndex);
+        if (sortedIndex.isValid()) {
+            mBookmarkListView->edit(sortedIndex);
         }
     }
 }
@@ -216,8 +230,9 @@ void BookmarksView::onDeleteBookmarkButtonClicked()
 
     QVector<Okteta::Bookmark> bookmarksToBeDeleted;
     bookmarksToBeDeleted.reserve(selectedRows.size());
-    for (const QModelIndex& index : selectedRows) {
-        const Okteta::Bookmark& bookmark = mBookmarkListModel->bookmark(index);
+    for (const QModelIndex& sortedIndex : selectedRows) {
+        const QModelIndex bookmarkIndex = m_sortProxyModel->mapToSource(sortedIndex);
+        const Okteta::Bookmark& bookmark = mBookmarkListModel->bookmark(bookmarkIndex);
         bookmarksToBeDeleted.append(bookmark);
     }
 
@@ -226,15 +241,16 @@ void BookmarksView::onDeleteBookmarkButtonClicked()
 
 void BookmarksView::onGotoBookmarkButtonClicked()
 {
-    const QModelIndex index = mBookmarkListView->selectionModel()->currentIndex();
-    if (index.isValid()) {
-        mTool->gotoBookmark(mBookmarkListModel->bookmark(index));
+    const QModelIndex sortedIndex = mBookmarkListView->selectionModel()->currentIndex();
+    const QModelIndex bookmarkIndex = m_sortProxyModel->mapToSource(sortedIndex);
+    if (bookmarkIndex.isValid()) {
+        mTool->gotoBookmark(mBookmarkListModel->bookmark(bookmarkIndex));
     }
 }
 
 void BookmarksView::onRenameBookmarkButtonClicked()
 {
-    QModelIndex index = mBookmarkListView->selectionModel()->currentIndex();
+    const QModelIndex index = mBookmarkListView->selectionModel()->currentIndex();
     const QModelIndex nameIndex = index.sibling(index.row(), BookmarkListModel::TitleColumnId);
     if (nameIndex.isValid()) {
         mBookmarkListView->edit(nameIndex);

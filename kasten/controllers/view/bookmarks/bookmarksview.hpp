@@ -12,6 +12,7 @@
 
 class QTreeView;
 class QLabel;
+class QSortFilterProxyModel;
 class QAction;
 class QModelIndex;
 
@@ -48,6 +49,7 @@ private:
     BookmarksTool* const mTool;
 
     BookmarkListModel* mBookmarkListModel;
+    QSortFilterProxyModel* m_sortProxyModel;
 
     QTreeView* mBookmarkListView;
     QLabel* m_emptyListOverlayLabel;
