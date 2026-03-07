@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-03 02:20+0000\n"
+"POT-Creation-Date: 2026-03-07 02:08+0000\n"
 "PO-Revision-Date: 2023-12-06 19:12+0100\n"
 "Last-Translator: Roman Paholik <wizzardsk@gmail.com>\n"
 "Language-Team: Slovak <kde-sk@linux.sk>\n"
@@ -153,7 +153,7 @@ msgctxt "@title:window"
 msgid "Bookmarks"
 msgstr "Záložky"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:65
+#: controllers/view/bookmarks/bookmarksview.cpp:72
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Bookmarks"
@@ -161,7 +161,7 @@ msgctxt "@info"
 msgid "No bookmarks"
 msgstr "Záložky"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:88
+#: controllers/view/bookmarks/bookmarksview.cpp:95
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu create a new view profile"
 #| msgid "Create New..."
@@ -169,13 +169,13 @@ msgctxt "@action"
 msgid "Create New"
 msgstr "Vytvoriť nový..."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:90
+#: controllers/view/bookmarks/bookmarksview.cpp:97
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Creates a new bookmark for the current cursor position."
 msgstr "Vytvorí novú záložku na aktuálnej pozícii kurzora."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:92
+#: controllers/view/bookmarks/bookmarksview.cpp:99
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -185,7 +185,7 @@ msgstr ""
 "Ak stlačíte toto tlačidlo, vytvorí sa nová záložku na aktuálnej pozícii "
 "kurzora."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:102
+#: controllers/view/bookmarks/bookmarksview.cpp:109
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "&Delete"
@@ -193,20 +193,20 @@ msgctxt "@action"
 msgid "Delete"
 msgstr "O&dstrániť"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:104
+#: controllers/view/bookmarks/bookmarksview.cpp:111
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Deletes all the selected bookmarks."
 msgstr "Zmaže všetky vybrané záložky."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:106
+#: controllers/view/bookmarks/bookmarksview.cpp:113
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press this button, all bookmarks which are selected will be deleted."
 msgstr "Ak stlačíte toto tlačidlo, zmažú sa všetky vybrané záložky."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:117
+#: controllers/view/bookmarks/bookmarksview.cpp:124
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "&Go to Offset..."
@@ -214,13 +214,13 @@ msgctxt "@action"
 msgid "Go to Offset"
 msgstr "Choď na ofset(&G)..."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:119
+#: controllers/view/bookmarks/bookmarksview.cpp:126
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Moves the cursor to the selected bookmark."
 msgstr "Presunie kurzor na vybranú záložku."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:121
+#: controllers/view/bookmarks/bookmarksview.cpp:128
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -229,19 +229,19 @@ msgid ""
 msgstr ""
 "Ak stlačíte toto tlačidlo, presunie sa kurzor na naposledy vybranú záložku."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:129
+#: controllers/view/bookmarks/bookmarksview.cpp:136
 #, kde-format
 msgctxt "@action"
 msgid "Rename"
 msgstr ""
 
-#: controllers/view/bookmarks/bookmarksview.cpp:131
+#: controllers/view/bookmarks/bookmarksview.cpp:138
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enables renaming of the selected bookmark."
 msgstr "Povolí premenovanie vybranej záložky."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:133
+#: controllers/view/bookmarks/bookmarksview.cpp:140
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -249,7 +249,7 @@ msgid ""
 "can be edited."
 msgstr "Ak stlačíte toto tlačidlo, môžete zmeniť meno vybranej záložky."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:142
+#: controllers/view/bookmarks/bookmarksview.cpp:149
 #: controllers/view/stringsextract/stringsextractview.cpp:191
 #: controllers/view/structures/structureview.cpp:381
 #, fuzzy, kde-format
@@ -259,7 +259,7 @@ msgctxt "@action"
 msgid "Copy Offset"
 msgstr "Ofset"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:144
+#: controllers/view/bookmarks/bookmarksview.cpp:151
 #: controllers/view/stringsextract/stringsextractview.cpp:193
 #: controllers/view/structures/structureview.cpp:383
 #, fuzzy, kde-format
@@ -1900,7 +1900,7 @@ msgctxt "@info:tooltip"
 msgid "Selects the selected string in the view."
 msgstr "Zobrazí vybraný reťazec."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:344
+#: controllers/view/stringsextract/stringsextractview.cpp:354
 #, fuzzy, kde-format
 #| msgctxt "@info"
 #| msgid "No bytes converted."
@@ -1908,7 +1908,7 @@ msgctxt "@info"
 msgid "No strings extracted."
 msgstr "Žiadne bajty neskonvertované."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:345
+#: controllers/view/stringsextract/stringsextractview.cpp:355
 #, kde-format
 msgctxt "@info"
 msgid "1 string extracted."

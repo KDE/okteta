@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-03 02:20+0000\n"
+"POT-Creation-Date: 2026-03-07 02:08+0000\n"
 "PO-Revision-Date: 2025-09-01 19:26+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
@@ -146,25 +146,25 @@ msgctxt "@title:window"
 msgid "Bookmarks"
 msgstr "Bokmärken"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:65
+#: controllers/view/bookmarks/bookmarksview.cpp:72
 #, kde-format
 msgctxt "@info"
 msgid "No bookmarks"
 msgstr "Inga bokmärken"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:88
+#: controllers/view/bookmarks/bookmarksview.cpp:95
 #, kde-format
 msgctxt "@action"
 msgid "Create New"
 msgstr "Skapa ny"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:90
+#: controllers/view/bookmarks/bookmarksview.cpp:97
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Creates a new bookmark for the current cursor position."
 msgstr "Skapar ett nytt bokmärke för nuvarande markörposition."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:92
+#: controllers/view/bookmarks/bookmarksview.cpp:99
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -174,38 +174,38 @@ msgstr ""
 "Om du klickar på knappen skapas ett nytt bokmärke för nuvarande "
 "markörposition."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:102
+#: controllers/view/bookmarks/bookmarksview.cpp:109
 #, kde-format
 msgctxt "@action"
 msgid "Delete"
 msgstr "Ta bort"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:104
+#: controllers/view/bookmarks/bookmarksview.cpp:111
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Deletes all the selected bookmarks."
 msgstr "Tar bort alla markerade bokmärken."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:106
+#: controllers/view/bookmarks/bookmarksview.cpp:113
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press this button, all bookmarks which are selected will be deleted."
 msgstr "Om du klickar på knappen tas alla bokmärken som är markerade bort."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:117
+#: controllers/view/bookmarks/bookmarksview.cpp:124
 #, kde-format
 msgctxt "@action"
 msgid "Go to Offset"
 msgstr "Gå till position"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:119
+#: controllers/view/bookmarks/bookmarksview.cpp:126
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Moves the cursor to the selected bookmark."
 msgstr "Flyttar markören till valt bokmärke."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:121
+#: controllers/view/bookmarks/bookmarksview.cpp:128
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -215,19 +215,19 @@ msgstr ""
 "Om du klickar på knappen flyttas markören till positionen för det bokmärke "
 "som senast markerades."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:129
+#: controllers/view/bookmarks/bookmarksview.cpp:136
 #, kde-format
 msgctxt "@action"
 msgid "Rename"
 msgstr "Byt namn"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:131
+#: controllers/view/bookmarks/bookmarksview.cpp:138
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enables renaming of the selected bookmark."
 msgstr "Möjliggör namnbyte av det markerade bokmärket."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:133
+#: controllers/view/bookmarks/bookmarksview.cpp:140
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -237,7 +237,7 @@ msgstr ""
 "Om du klickar på knappen kan namnet på det bokmärke som senast markerades "
 "redigeras."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:142
+#: controllers/view/bookmarks/bookmarksview.cpp:149
 #: controllers/view/stringsextract/stringsextractview.cpp:191
 #: controllers/view/structures/structureview.cpp:381
 #, kde-format
@@ -245,7 +245,7 @@ msgctxt "@action"
 msgid "Copy Offset"
 msgstr "Kopiera position"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:144
+#: controllers/view/bookmarks/bookmarksview.cpp:151
 #: controllers/view/stringsextract/stringsextractview.cpp:193
 #: controllers/view/structures/structureview.cpp:383
 #, kde-format
@@ -1848,13 +1848,13 @@ msgctxt "@info:tooltip"
 msgid "Selects the selected string in the view."
 msgstr "Markerar den valda strängen i vyn."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:344
+#: controllers/view/stringsextract/stringsextractview.cpp:354
 #, kde-format
 msgctxt "@info"
 msgid "No strings extracted."
 msgstr "Inga strängar extraherade."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:345
+#: controllers/view/stringsextract/stringsextractview.cpp:355
 #, kde-format
 msgctxt "@info"
 msgid "1 string extracted."

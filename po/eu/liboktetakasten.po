@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-03 02:20+0000\n"
+"POT-Creation-Date: 2026-03-07 02:08+0000\n"
 "PO-Revision-Date: 2020-03-21 21:45+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -154,7 +154,7 @@ msgctxt "@title:window"
 msgid "Bookmarks"
 msgstr "Laster-markak"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:65
+#: controllers/view/bookmarks/bookmarksview.cpp:72
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Bookmarks"
@@ -162,7 +162,7 @@ msgctxt "@info"
 msgid "No bookmarks"
 msgstr "Laster-markak"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:88
+#: controllers/view/bookmarks/bookmarksview.cpp:95
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu create a new view profile"
 #| msgid "Create New..."
@@ -170,13 +170,13 @@ msgctxt "@action"
 msgid "Create New"
 msgstr "Sortu... berria"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:90
+#: controllers/view/bookmarks/bookmarksview.cpp:97
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Creates a new bookmark for the current cursor position."
 msgstr "Laster-marka berri bat sortzen du kurtsorearen uneko kokalekurako."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:92
+#: controllers/view/bookmarks/bookmarksview.cpp:99
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -186,7 +186,7 @@ msgstr ""
 "Botoi hau sakatzen baduzu, laster-marka berri bat sortuko da kurtsorearen "
 "uneko kokalekurako."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:102
+#: controllers/view/bookmarks/bookmarksview.cpp:109
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "&Delete"
@@ -194,13 +194,13 @@ msgctxt "@action"
 msgid "Delete"
 msgstr "E&zabatu"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:104
+#: controllers/view/bookmarks/bookmarksview.cpp:111
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Deletes all the selected bookmarks."
 msgstr "Hautatutako laster-marka guztiak ezabatzen ditu."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:106
+#: controllers/view/bookmarks/bookmarksview.cpp:113
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -209,7 +209,7 @@ msgstr ""
 "Botoi hau sakatzen baduzu, hautatuta dauden laster-marka guztiak ezabatuko "
 "dira."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:117
+#: controllers/view/bookmarks/bookmarksview.cpp:124
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "&Go to Offset..."
@@ -217,13 +217,13 @@ msgctxt "@action"
 msgid "Go to Offset"
 msgstr "&Joan ... desplazamendura"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:119
+#: controllers/view/bookmarks/bookmarksview.cpp:126
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Moves the cursor to the selected bookmark."
 msgstr "Kurtsorea hautatutako laster-markara eramaten du."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:121
+#: controllers/view/bookmarks/bookmarksview.cpp:128
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -233,19 +233,19 @@ msgstr ""
 "Botoi hau sakatzen baduzu, kurtsorea hautatu den azken laster-markako "
 "kokalekura mugituko da."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:129
+#: controllers/view/bookmarks/bookmarksview.cpp:136
 #, kde-format
 msgctxt "@action"
 msgid "Rename"
 msgstr ""
 
-#: controllers/view/bookmarks/bookmarksview.cpp:131
+#: controllers/view/bookmarks/bookmarksview.cpp:138
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enables renaming of the selected bookmark."
 msgstr "Hautatutako laster-marka berrizendatzea gaitzen du."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:133
+#: controllers/view/bookmarks/bookmarksview.cpp:140
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -255,7 +255,7 @@ msgstr ""
 "Botoi hau sakatzen baduzu, hautatutako azken laster-markaren izena editatu "
 "daiteke."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:142
+#: controllers/view/bookmarks/bookmarksview.cpp:149
 #: controllers/view/stringsextract/stringsextractview.cpp:191
 #: controllers/view/structures/structureview.cpp:381
 #, fuzzy, kde-format
@@ -265,7 +265,7 @@ msgctxt "@action"
 msgid "Copy Offset"
 msgstr "Jatorri-aldaketa"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:144
+#: controllers/view/bookmarks/bookmarksview.cpp:151
 #: controllers/view/stringsextract/stringsextractview.cpp:193
 #: controllers/view/structures/structureview.cpp:383
 #, fuzzy, kde-format
@@ -1936,7 +1936,7 @@ msgctxt "@info:tooltip"
 msgid "Selects the selected string in the view."
 msgstr "Ikuspegian hautatutako karaktere-katea erakusten du."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:344
+#: controllers/view/stringsextract/stringsextractview.cpp:354
 #, fuzzy, kde-format
 #| msgctxt "@info"
 #| msgid "No bytes converted."
@@ -1944,7 +1944,7 @@ msgctxt "@info"
 msgid "No strings extracted."
 msgstr "Ez da byterik bihurtu."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:345
+#: controllers/view/stringsextract/stringsextractview.cpp:355
 #, kde-format
 msgctxt "@info"
 msgid "1 string extracted."

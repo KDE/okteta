@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-03 02:20+0000\n"
+"POT-Creation-Date: 2026-03-07 02:08+0000\n"
 "PO-Revision-Date: 2024-11-01 14:15+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -153,13 +153,13 @@ msgctxt "@title:window"
 msgid "Bookmarks"
 msgstr "Bookmarks"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:65
+#: controllers/view/bookmarks/bookmarksview.cpp:72
 #, kde-format
 msgctxt "@info"
 msgid "No bookmarks"
 msgstr "No bookmarks"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:88
+#: controllers/view/bookmarks/bookmarksview.cpp:95
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu create a new view profile"
 #| msgid "Create New…"
@@ -167,13 +167,13 @@ msgctxt "@action"
 msgid "Create New"
 msgstr "Create New…"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:90
+#: controllers/view/bookmarks/bookmarksview.cpp:97
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Creates a new bookmark for the current cursor position."
 msgstr "Creates a new bookmark for the current cursor position."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:92
+#: controllers/view/bookmarks/bookmarksview.cpp:99
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -183,7 +183,7 @@ msgstr ""
 "If you press this button, a new bookmark will be created for the current "
 "cursor position."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:102
+#: controllers/view/bookmarks/bookmarksview.cpp:109
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "&Delete"
@@ -191,13 +191,13 @@ msgctxt "@action"
 msgid "Delete"
 msgstr "&Delete"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:104
+#: controllers/view/bookmarks/bookmarksview.cpp:111
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Deletes all the selected bookmarks."
 msgstr "Deletes all the selected bookmarks."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:106
+#: controllers/view/bookmarks/bookmarksview.cpp:113
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -205,7 +205,7 @@ msgid ""
 msgstr ""
 "If you press this button, all bookmarks which are selected will be deleted."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:117
+#: controllers/view/bookmarks/bookmarksview.cpp:124
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "&Go to Offset…"
@@ -213,13 +213,13 @@ msgctxt "@action"
 msgid "Go to Offset"
 msgstr "&Go to Offset…"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:119
+#: controllers/view/bookmarks/bookmarksview.cpp:126
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Moves the cursor to the selected bookmark."
 msgstr "Moves the cursor to the selected bookmark."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:121
+#: controllers/view/bookmarks/bookmarksview.cpp:128
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -229,19 +229,19 @@ msgstr ""
 "If you press this button, the cursor is moved to the position of the "
 "bookmark which has been last selected."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:129
+#: controllers/view/bookmarks/bookmarksview.cpp:136
 #, kde-format
 msgctxt "@action"
 msgid "Rename"
 msgstr ""
 
-#: controllers/view/bookmarks/bookmarksview.cpp:131
+#: controllers/view/bookmarks/bookmarksview.cpp:138
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enables renaming of the selected bookmark."
 msgstr "Enables renaming of the selected bookmark."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:133
+#: controllers/view/bookmarks/bookmarksview.cpp:140
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -251,7 +251,7 @@ msgstr ""
 "If you press this button, the name of the bookmark which was last selected "
 "can be edited."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:142
+#: controllers/view/bookmarks/bookmarksview.cpp:149
 #: controllers/view/stringsextract/stringsextractview.cpp:191
 #: controllers/view/structures/structureview.cpp:381
 #, fuzzy, kde-format
@@ -261,7 +261,7 @@ msgctxt "@action"
 msgid "Copy Offset"
 msgstr "Offset"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:144
+#: controllers/view/bookmarks/bookmarksview.cpp:151
 #: controllers/view/stringsextract/stringsextractview.cpp:193
 #: controllers/view/structures/structureview.cpp:383
 #, fuzzy, kde-format
@@ -1892,13 +1892,13 @@ msgctxt "@info:tooltip"
 msgid "Selects the selected string in the view."
 msgstr "Shows the selected string in the view."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:344
+#: controllers/view/stringsextract/stringsextractview.cpp:354
 #, kde-format
 msgctxt "@info"
 msgid "No strings extracted."
 msgstr "No strings extracted."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:345
+#: controllers/view/stringsextract/stringsextractview.cpp:355
 #, kde-format
 msgctxt "@info"
 msgid "1 string extracted."

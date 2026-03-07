@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-03 02:20+0000\n"
+"POT-Creation-Date: 2026-03-07 02:08+0000\n"
 "PO-Revision-Date: 2026-02-03 23:47+0100\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
@@ -145,25 +145,25 @@ msgctxt "@title:window"
 msgid "Bookmarks"
 msgstr "책갈피"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:65
+#: controllers/view/bookmarks/bookmarksview.cpp:72
 #, kde-format
 msgctxt "@info"
 msgid "No bookmarks"
 msgstr "책갈피 없음"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:88
+#: controllers/view/bookmarks/bookmarksview.cpp:95
 #, kde-format
 msgctxt "@action"
 msgid "Create New"
 msgstr "새로 만들기"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:90
+#: controllers/view/bookmarks/bookmarksview.cpp:97
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Creates a new bookmark for the current cursor position."
 msgstr "현재 커서 위치를 기억하는 책갈피를 만듭니다."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:92
+#: controllers/view/bookmarks/bookmarksview.cpp:99
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -171,38 +171,38 @@ msgid ""
 "cursor position."
 msgstr "이 단추를 누르면 현재 커서 위치를 기억하는 책갈피를 만듭니다."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:102
+#: controllers/view/bookmarks/bookmarksview.cpp:109
 #, kde-format
 msgctxt "@action"
 msgid "Delete"
 msgstr "삭제"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:104
+#: controllers/view/bookmarks/bookmarksview.cpp:111
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Deletes all the selected bookmarks."
 msgstr "모든 선택한 책갈피를 삭제합니다."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:106
+#: controllers/view/bookmarks/bookmarksview.cpp:113
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press this button, all bookmarks which are selected will be deleted."
 msgstr "이 단추를 누르면 선택한 모든 책갈피를 삭제합니다."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:117
+#: controllers/view/bookmarks/bookmarksview.cpp:124
 #, kde-format
 msgctxt "@action"
 msgid "Go to Offset"
 msgstr "위치로 이동"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:119
+#: controllers/view/bookmarks/bookmarksview.cpp:126
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Moves the cursor to the selected bookmark."
 msgstr "선택한 책갈피로 커서를 이동합니다."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:121
+#: controllers/view/bookmarks/bookmarksview.cpp:128
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -210,19 +210,19 @@ msgid ""
 "bookmark which has been last selected."
 msgstr "이 단추를 누르면 마지막으로 선택한 책갈피 위치로 커서를 이동합니다."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:129
+#: controllers/view/bookmarks/bookmarksview.cpp:136
 #, kde-format
 msgctxt "@action"
 msgid "Rename"
 msgstr "이름 바꾸기"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:131
+#: controllers/view/bookmarks/bookmarksview.cpp:138
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enables renaming of the selected bookmark."
 msgstr "선택한 책갈피의 이름 변경을 활성화합니다."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:133
+#: controllers/view/bookmarks/bookmarksview.cpp:140
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -230,7 +230,7 @@ msgid ""
 "can be edited."
 msgstr "이 단추를 누르면 마지막으로 선택한 책갈피를 편집합니다."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:142
+#: controllers/view/bookmarks/bookmarksview.cpp:149
 #: controllers/view/stringsextract/stringsextractview.cpp:191
 #: controllers/view/structures/structureview.cpp:381
 #, kde-format
@@ -238,7 +238,7 @@ msgctxt "@action"
 msgid "Copy Offset"
 msgstr "위치 복사"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:144
+#: controllers/view/bookmarks/bookmarksview.cpp:151
 #: controllers/view/stringsextract/stringsextractview.cpp:193
 #: controllers/view/structures/structureview.cpp:383
 #, kde-format
@@ -1815,13 +1815,13 @@ msgctxt "@info:tooltip"
 msgid "Selects the selected string in the view."
 msgstr "보기에서 선택한 문자열을 선택합니다."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:344
+#: controllers/view/stringsextract/stringsextractview.cpp:354
 #, kde-format
 msgctxt "@info"
 msgid "No strings extracted."
 msgstr "추출한 문자열이 없습니다."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:345
+#: controllers/view/stringsextract/stringsextractview.cpp:355
 #, kde-format
 msgctxt "@info"
 msgid "1 string extracted."
