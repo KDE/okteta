@@ -95,6 +95,7 @@ inline DataInformation* PrimitiveArrayData<type>::childAt(unsigned int idx)
     Q_ASSERT(idx < supportedLength());
     mDummy.setDummyIndex(idx);
     mDummy.setName(QString::number(idx));
+    mDummy.setWasAbleToRead(mNumReadValues > idx);
     return &mDummy;
 }
 

@@ -29,7 +29,6 @@ inline PrimitiveArrayData<type>::PrimitiveArrayData(unsigned int supportedLength
 {
     Q_ASSERT(childType->type() == type);
     mData.resize(supportedLength);
-    mDummy.setWasAbleToRead(true);
 }
 
 template <PrimitiveDataType type>
@@ -223,10 +222,14 @@ void PrimitiveArrayData<type>::activateIndex(uint index)
     Q_ASSERT(index < supportedLength());
     // invalidate all previous references
     SafeReferenceHolder::instance.invalidateAll(mChildType.data());
-    mChildType->mWasAbleToRead = mNumReadValues > index;
+
+    const bool wasAbleToRead = (mNumReadValues > index);
+
     mChildType->asPrimitive()->setValue(mData.at(index));
     mChildType->setName(QString::number(index));
+    mChildType->mWasAbleToRead = wasAbleToRead;
     mDummy.setDummyIndex(index);
+    mDummy.setWasAbleToRead(wasAbleToRead);
 }
 
 template <PrimitiveDataType type>
