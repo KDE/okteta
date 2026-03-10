@@ -216,6 +216,7 @@ void PrimitiveArrayData<PrimitiveDataType::Double>::writeOneItem(double value, O
     PrimitiveArrayData<PrimitiveDataType::UInt64>::writeOneItem(un.intVal, addr, out, endianness);
 }
 
+// TODO: make more obvious what the difference to childAt() is
 template <PrimitiveDataType type>
 void PrimitiveArrayData<type>::activateIndex(uint index)
 {
@@ -224,11 +225,14 @@ void PrimitiveArrayData<type>::activateIndex(uint index)
     SafeReferenceHolder::instance.invalidateAll(mChildType.data());
 
     const bool wasAbleToRead = (mNumReadValues > index);
+    const QString name = QString::number(index);
 
     mChildType->asPrimitive()->setValue(mData.at(index));
-    mChildType->setName(QString::number(index));
+    mChildType->setName(name);
     mChildType->mWasAbleToRead = wasAbleToRead;
+
     mDummy.setDummyIndex(index);
+    mDummy.setName(name);
     mDummy.setWasAbleToRead(wasAbleToRead);
 }
 
