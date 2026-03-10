@@ -89,11 +89,11 @@ bool PrimitiveArrayData<type>::readDataNativeOrder(uint numItems,
     auto* vectorBytes = reinterpret_cast<Okteta::Byte*>(this->mData.data());
     const bool isDataDifferent = !isDataEqualNativeOrder(input, address, numBytes, vectorBytes);
     if (isDataDifferent) {
+        const Okteta::Size numCopied = input->copyTo(vectorBytes, address, numItems * sizeof(T));
+        Q_ASSERT(numCopied == numBytes);
+        Q_UNUSED(numCopied)
         mParent->topLevelDataInformation()->setChildDataChanged();
     }
-    const Okteta::Size numCopied = input->copyTo(vectorBytes, address, numItems * sizeof(T));
-    Q_ASSERT(numCopied == numBytes);
-    Q_UNUSED(numCopied)
     return isDataDifferent;
 }
 
@@ -127,11 +127,11 @@ bool PrimitiveArrayData<type>::readDataNonNativeOrder(uint numItems,
     const bool isDataDifferent = !isDataEqualNonNativeOrder(input, address, numBytes, vectorBytes, sizeof(T));
     if (isDataDifferent) {
         mParent->topLevelDataInformation()->setChildDataChanged();
-    }
-    for (uint itemOffs = 0; itemOffs < numBytes; itemOffs += sizeof(T)) {
-        // the compiler should unroll this loop
-        for (uint byte = 0; byte < sizeof(T); byte++) {
-            vectorBytes[itemOffs + byte] = input->byte(address + itemOffs + (sizeof(T) - byte - 1));
+        for (uint itemOffs = 0; itemOffs < numBytes; itemOffs += sizeof(T)) {
+            // the compiler should unroll this loop
+            for (uint byte = 0; byte < sizeof(T); byte++) {
+                vectorBytes[itemOffs + byte] = input->byte(address + itemOffs + (sizeof(T) - byte - 1));
+            }
         }
     }
     return isDataDifferent;
