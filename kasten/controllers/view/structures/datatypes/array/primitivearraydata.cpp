@@ -79,7 +79,7 @@ bool isDataEqualNativeOrder(const Okteta::AbstractByteArrayModel* byteArrayModel
 }
 
 template <PrimitiveDataType type>
-void PrimitiveArrayData<type>::readDataNativeOrder(uint numItems,
+bool PrimitiveArrayData<type>::readDataNativeOrder(uint numItems,
                                                    const Okteta::AbstractByteArrayModel* input,
                                                    Okteta::Address address)
 {
@@ -87,12 +87,14 @@ void PrimitiveArrayData<type>::readDataNativeOrder(uint numItems,
     const Okteta::Size numBytes = numItems * sizeof(T);
     Q_ASSERT(input->size() >= numBytes + address);
     auto* vectorBytes = reinterpret_cast<Okteta::Byte*>(this->mData.data());
-    if (!isDataEqualNativeOrder(input, address, numBytes, vectorBytes)) {
+    const bool isDataDifferent = !isDataEqualNativeOrder(input, address, numBytes, vectorBytes);
+    if (isDataDifferent) {
         mParent->topLevelDataInformation()->setChildDataChanged();
     }
     const Okteta::Size numCopied = input->copyTo(vectorBytes, address, numItems * sizeof(T));
     Q_ASSERT(numCopied == numBytes);
     Q_UNUSED(numCopied)
+    return isDataDifferent;
 }
 
 // TODO: see isDataEqualNativeOrder
@@ -114,7 +116,7 @@ bool isDataEqualNonNativeOrder(const Okteta::AbstractByteArrayModel* byteArrayMo
 }
 
 template <PrimitiveDataType type>
-void PrimitiveArrayData<type>::readDataNonNativeOrder(uint numItems,
+bool PrimitiveArrayData<type>::readDataNonNativeOrder(uint numItems,
                                                       const Okteta::AbstractByteArrayModel* input,
                                                       Okteta::Address address)
 {
@@ -122,7 +124,8 @@ void PrimitiveArrayData<type>::readDataNonNativeOrder(uint numItems,
     const uint numBytes = numItems * sizeof(T);
     Q_ASSERT(uint(input->size()) >= numBytes + address);
     auto* vectorBytes = reinterpret_cast<Okteta::Byte*>(this->mData.data());
-    if (!isDataEqualNonNativeOrder(input, address, numBytes, vectorBytes, sizeof(T))) {
+    const bool isDataDifferent = !isDataEqualNonNativeOrder(input, address, numBytes, vectorBytes, sizeof(T));
+    if (isDataDifferent) {
         mParent->topLevelDataInformation()->setChildDataChanged();
     }
     for (uint itemOffs = 0; itemOffs < numBytes; itemOffs += sizeof(T)) {
@@ -131,6 +134,7 @@ void PrimitiveArrayData<type>::readDataNonNativeOrder(uint numItems,
             vectorBytes[itemOffs + byte] = input->byte(address + itemOffs + (sizeof(T) - byte - 1));
         }
     }
+    return isDataDifferent;
 }
 
 template <PrimitiveDataType type>

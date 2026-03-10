@@ -66,9 +66,9 @@ protected:
     /** sets mChildType and mDummy as @p index, which must have been checked before calling this method!! */
     void activateIndex(uint index);
     /** reads @p numItems items from the input, sizes must have been checked before calling this method!! */
-    void readDataNativeOrder(uint numItems, const Okteta::AbstractByteArrayModel* input, Okteta::Address addr);
+    bool readDataNativeOrder(uint numItems, const Okteta::AbstractByteArrayModel* input, Okteta::Address addr);
     /** reads @p numItems items from the input, sizes must have been checked before calling this method!! */
-    void readDataNonNativeOrder(uint numItems, const Okteta::AbstractByteArrayModel* input, Okteta::Address addr);
+    bool readDataNonNativeOrder(uint numItems, const Okteta::AbstractByteArrayModel* input, Okteta::Address addr);
     void setNewParentForChildren() override;
 
     QVector<T> mData;
