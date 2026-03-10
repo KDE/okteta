@@ -37,8 +37,12 @@ qint64 PrimitiveArrayData<type>::readData(const Okteta::AbstractByteArrayModel* 
                                           BitCount64 bitsRemaining)
 {
     Q_ASSERT(bitsRemaining % 8 == 0);
+    const uint oldNumReadValues = mNumReadValues;
     if (this->length() == 0) {
         this->mNumReadValues = 0;
+        if (oldNumReadValues != mNumReadValues) {
+            mParent->topLevelDataInformation()->setChildDataChanged();
+        }
         return 0; // no need to read anything
     }
     // integer division -> gives us the desired result, limited by the number of items in this array
@@ -50,13 +54,16 @@ qint64 PrimitiveArrayData<type>::readData(const Okteta::AbstractByteArrayModel* 
     const quint32 maxNumItems = qMin(this->supportedLength(), maxRemaining32);
     this->mNumReadValues = maxNumItems;
     if (maxNumItems == 0) {
+        if (oldNumReadValues != mNumReadValues) {
+            mParent->topLevelDataInformation()->setChildDataChanged();
+        }
         return -1; // reached EOF
     }
     const QSysInfo::Endian byteOrder = mChildType->effectiveByteOrder();
     const bool isDataDifferent = (byteOrder == QSysInfo::ByteOrder) ?
         this->readDataNativeOrder(maxNumItems, input, address) :
         this->readDataNonNativeOrder(maxNumItems, input, address);
-    if (isDataDifferent) {
+    if (isDataDifferent || (oldNumReadValues != mNumReadValues)) {
         mParent->topLevelDataInformation()->setChildDataChanged();
     }
 
