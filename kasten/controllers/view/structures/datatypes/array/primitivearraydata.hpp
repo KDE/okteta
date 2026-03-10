@@ -93,7 +93,6 @@ template <PrimitiveDataType type>
 inline DataInformation* PrimitiveArrayData<type>::childAt(unsigned int idx)
 {
     Q_ASSERT(idx < supportedLength());
-    Q_UNUSED(idx)
     mDummy.setDummyIndex(idx);
     mDummy.setName(QString::number(idx));
     return &mDummy;
