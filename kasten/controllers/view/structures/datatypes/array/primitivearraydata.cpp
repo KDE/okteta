@@ -51,10 +51,11 @@ qint64 PrimitiveArrayData<type>::readData(const Okteta::AbstractByteArrayModel* 
         return -1; // reached EOF
     }
     const QSysInfo::Endian byteOrder = mChildType->effectiveByteOrder();
-    if (byteOrder == QSysInfo::ByteOrder) {
-        this->readDataNativeOrder(maxNumItems, input, address);
-    } else {
+    const bool isDataDifferent = (byteOrder == QSysInfo::ByteOrder) ?
+        this->readDataNativeOrder(maxNumItems, input, address) :
         this->readDataNonNativeOrder(maxNumItems, input, address);
+    if (isDataDifferent) {
+        mParent->topLevelDataInformation()->setChildDataChanged();
     }
     this->mNumReadValues = maxNumItems;
 
@@ -92,7 +93,6 @@ bool PrimitiveArrayData<type>::readDataNativeOrder(uint numItems,
         const Okteta::Size numCopied = input->copyTo(vectorBytes, address, numItems * sizeof(T));
         Q_ASSERT(numCopied == numBytes);
         Q_UNUSED(numCopied)
-        mParent->topLevelDataInformation()->setChildDataChanged();
     }
     return isDataDifferent;
 }
@@ -126,7 +126,6 @@ bool PrimitiveArrayData<type>::readDataNonNativeOrder(uint numItems,
     auto* vectorBytes = reinterpret_cast<Okteta::Byte*>(this->mData.data());
     const bool isDataDifferent = !isDataEqualNonNativeOrder(input, address, numBytes, vectorBytes, sizeof(T));
     if (isDataDifferent) {
-        mParent->topLevelDataInformation()->setChildDataChanged();
         for (uint itemOffs = 0; itemOffs < numBytes; itemOffs += sizeof(T)) {
             // the compiler should unroll this loop
             for (uint byte = 0; byte < sizeof(T); byte++) {
