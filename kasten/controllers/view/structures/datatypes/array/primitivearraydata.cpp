@@ -38,6 +38,7 @@ qint64 PrimitiveArrayData<type>::readData(const Okteta::AbstractByteArrayModel* 
 {
     Q_ASSERT(bitsRemaining % 8 == 0);
     if (this->length() == 0) {
+        this->mNumReadValues = 0;
         return 0; // no need to read anything
     }
     // integer division -> gives us the desired result, limited by the number of items in this array
@@ -47,6 +48,7 @@ qint64 PrimitiveArrayData<type>::readData(const Okteta::AbstractByteArrayModel* 
     quint32 maxRemaining32 = (maxRemaining > std::numeric_limits<quint32>::max()
                               ? std::numeric_limits<quint32>::max() : quint32(maxRemaining));
     const quint32 maxNumItems = qMin(this->supportedLength(), maxRemaining32);
+    this->mNumReadValues = maxNumItems;
     if (maxNumItems == 0) {
         return -1; // reached EOF
     }
@@ -57,7 +59,6 @@ qint64 PrimitiveArrayData<type>::readData(const Okteta::AbstractByteArrayModel* 
     if (isDataDifferent) {
         mParent->topLevelDataInformation()->setChildDataChanged();
     }
-    this->mNumReadValues = maxNumItems;
 
     const quint32 maxFullNumItems = qMin(this->length(), maxRemaining32);
     return maxFullNumItems * sizeof(T) * 8;
