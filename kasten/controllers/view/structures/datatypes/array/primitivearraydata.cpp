@@ -31,7 +31,6 @@ inline PrimitiveArrayData<type>::PrimitiveArrayData(unsigned int supportedLength
 {
     Q_ASSERT(static_cast<PrimitiveDataInformation*>(this->childType())->type() == type);
     mData.resize(supportedLength);
-    mDummy.setWasAbleToRead(true);
 }
 
 template <PrimitiveDataType type>
@@ -39,7 +38,12 @@ qint64 PrimitiveArrayData<type>::readData(const Okteta::AbstractByteArrayModel* 
                                           BitCount64 bitsRemaining)
 {
     Q_ASSERT(bitsRemaining % 8 == 0);
+    const uint oldNumReadValues = mNumReadValues;
     if (this->length() == 0) {
+        this->mNumReadValues = 0;
+        if (oldNumReadValues != mNumReadValues) {
+            mParent->topLevelDataInformation()->setChildDataChanged();
+        }
         return 0; // no need to read anything
     }
     // integer division -> gives us the desired result, limited by the number of items in this array
@@ -49,16 +53,20 @@ qint64 PrimitiveArrayData<type>::readData(const Okteta::AbstractByteArrayModel* 
     quint32 maxRemaining32 = (maxRemaining > std::numeric_limits<quint32>::max()
                               ? std::numeric_limits<quint32>::max() : quint32(maxRemaining));
     const quint32 maxNumItems = std::min(this->supportedLength(), maxRemaining32);
+    this->mNumReadValues = maxNumItems;
     if (maxNumItems == 0) {
+        if (oldNumReadValues != mNumReadValues) {
+            mParent->topLevelDataInformation()->setChildDataChanged();
+        }
         return -1; // reached EOF
     }
     const QSysInfo::Endian byteOrder = mChildType->effectiveByteOrder();
-    if (byteOrder == QSysInfo::ByteOrder) {
-        this->readDataNativeOrder(maxNumItems, input, address);
-    } else {
+    const bool isDataDifferent = (byteOrder == QSysInfo::ByteOrder) ?
+        this->readDataNativeOrder(maxNumItems, input, address) :
         this->readDataNonNativeOrder(maxNumItems, input, address);
+    if (isDataDifferent || (oldNumReadValues != mNumReadValues)) {
+        mParent->topLevelDataInformation()->setChildDataChanged();
     }
-    this->mNumReadValues = maxNumItems;
 
     const quint32 maxFullNumItems = qMin(this->length(), maxRemaining32);
     return maxFullNumItems * sizeof(T) * 8;
@@ -81,7 +89,7 @@ bool isDataEqualNativeOrder(const Okteta::AbstractByteArrayModel* byteArrayModel
 }
 
 template <PrimitiveDataType type>
-void PrimitiveArrayData<type>::readDataNativeOrder(uint numItems,
+bool PrimitiveArrayData<type>::readDataNativeOrder(uint numItems,
                                                    const Okteta::AbstractByteArrayModel* input,
                                                    Okteta::Address address)
 {
@@ -89,12 +97,13 @@ void PrimitiveArrayData<type>::readDataNativeOrder(uint numItems,
     const Okteta::Size numBytes = numItems * sizeof(T);
     Q_ASSERT(input->size() >= numBytes + address);
     auto* const vectorBytes = reinterpret_cast<Okteta::Byte*>(this->mData.data());
-    if (!isDataEqualNativeOrder(input, address, numBytes, vectorBytes)) {
-        mParent->topLevelDataInformation()->setChildDataChanged();
+    const bool isDataDifferent = !isDataEqualNativeOrder(input, address, numBytes, vectorBytes);
+    if (isDataDifferent) {
+        const Okteta::Size numCopied = input->copyTo(vectorBytes, address, numItems * sizeof(T));
+        Q_ASSERT(numCopied == numBytes);
+        Q_UNUSED(numCopied)
     }
-    const Okteta::Size numCopied = input->copyTo(vectorBytes, address, numItems * sizeof(T));
-    Q_ASSERT(numCopied == numBytes);
-    Q_UNUSED(numCopied)
+    return isDataDifferent;
 }
 
 // TODO: see isDataEqualNativeOrder
@@ -116,7 +125,7 @@ bool isDataEqualNonNativeOrder(const Okteta::AbstractByteArrayModel* byteArrayMo
 }
 
 template <PrimitiveDataType type>
-void PrimitiveArrayData<type>::readDataNonNativeOrder(uint numItems,
+bool PrimitiveArrayData<type>::readDataNonNativeOrder(uint numItems,
                                                       const Okteta::AbstractByteArrayModel* input,
                                                       Okteta::Address address)
 {
@@ -124,15 +133,16 @@ void PrimitiveArrayData<type>::readDataNonNativeOrder(uint numItems,
     const uint numBytes = numItems * sizeof(T);
     Q_ASSERT(uint(input->size()) >= numBytes + address);
     auto* const vectorBytes = reinterpret_cast<Okteta::Byte*>(this->mData.data());
-    if (!isDataEqualNonNativeOrder(input, address, numBytes, vectorBytes, sizeof(T))) {
-        mParent->topLevelDataInformation()->setChildDataChanged();
-    }
-    for (uint itemOffs = 0; itemOffs < numBytes; itemOffs += sizeof(T)) {
-        // the compiler should unroll this loop
-        for (uint byte = 0; byte < sizeof(T); ++byte) {
-            vectorBytes[itemOffs + byte] = input->byte(address + itemOffs + (sizeof(T) - byte - 1));
+    const bool isDataDifferent = !isDataEqualNonNativeOrder(input, address, numBytes, vectorBytes, sizeof(T));
+    if (isDataDifferent) {
+        for (uint itemOffs = 0; itemOffs < numBytes; itemOffs += sizeof(T)) {
+            // the compiler should unroll this loop
+            for (uint byte = 0; byte < sizeof(T); ++byte) {
+                vectorBytes[itemOffs + byte] = input->byte(address + itemOffs + (sizeof(T) - byte - 1));
+            }
         }
     }
+    return isDataDifferent;
 }
 
 template <PrimitiveDataType type>
@@ -208,16 +218,24 @@ void PrimitiveArrayData<PrimitiveDataType::Double>::writeOneItem(double value, O
     PrimitiveArrayData<PrimitiveDataType::UInt64>::writeOneItem(un.intVal, addr, out, endianness);
 }
 
+// TODO: make more obvious what the difference to childAt() is
 template <PrimitiveDataType type>
 void PrimitiveArrayData<type>::activateIndex(uint index)
 {
     Q_ASSERT(index < supportedLength());
     // invalidate all previous references
     SafeReferenceHolder::instance.invalidateAll(mChildType.get());
-    mChildType->mWasAbleToRead = mNumReadValues > index;
+
+    const bool wasAbleToRead = (mNumReadValues > index);
+    const QString name = QString::number(index);
+
     mChildType->asPrimitive()->setValue(mData[index]);
-    mChildType->setName(QString::number(index));
+    mChildType->setName(name);
+    mChildType->mWasAbleToRead = wasAbleToRead;
+
     mDummy.setDummyIndex(index);
+    mDummy.setName(name);
+    mDummy.setWasAbleToRead(wasAbleToRead);
 }
 
 template <PrimitiveDataType type>
