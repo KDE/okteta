@@ -176,7 +176,7 @@ qint64 ArrayDataInformation::readData(const Okteta::AbstractByteArrayModel* inpu
 
     // FIXME do not add this padding
     qint64 ret = mData->readData(input, address, bitsRemaining);
-    mWasAbleToRead = ret >= 0; // if ret is -1 reading failed
+    mWasAbleToRead = (ret == mData->size());
     return ret;
 }
 
