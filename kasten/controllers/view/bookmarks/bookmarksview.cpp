@@ -12,6 +12,7 @@
 // Okteta core
 #include <Okteta/Bookmark>
 // KF
+#include <KActionMenu>
 #include <KLocalizedString>
 // Qt
 #include <QApplication>
@@ -37,6 +38,59 @@ BookmarksView::BookmarksView(BookmarksTool* tool, QWidget* parent)
     connect(mBookmarkListModel, &BookmarkListModel::modelReset,
             this, &BookmarksView::onBookmarkSelectionChanged);
 
+    // actions
+    mCreateBookmarkAction = new QAction(QIcon::fromTheme(QStringLiteral("bookmark-new")),
+                                        i18nc("@action", "Create New"), this);
+    mCreateBookmarkAction->setToolTip(i18nc("@info:tooltip",
+                                            "Creates a new bookmark for the current cursor position."));
+    mCreateBookmarkAction->setWhatsThis(i18nc("@info:whatsthis",
+                                              "If you press this button, a new bookmark will be created "
+                                              "for the current cursor position."));
+    mCreateBookmarkAction->setEnabled(mTool->canCreateBookmark());
+    connect(mTool, &BookmarksTool::canCreateBookmarkChanged,
+            mCreateBookmarkAction, &QAction::setEnabled);
+    connect(mCreateBookmarkAction, &QAction::triggered,
+            this, &BookmarksView::onCreateBookmarkButtonClicked);
+
+    mDeleteBookmarksAction =new QAction(QIcon::fromTheme(QStringLiteral("edit-delete")),
+                                        i18nc("@action", "Delete"), this);
+    mDeleteBookmarksAction->setToolTip(i18nc("@info:tooltip",
+                                             "Deletes all the selected bookmarks."));
+    mDeleteBookmarksAction->setWhatsThis(i18nc("@info:whatsthis",
+                                               "If you press this button, all bookmarks which are "
+                                               "selected will be deleted."));
+    connect(mDeleteBookmarksAction, &QAction::triggered,
+            this, &BookmarksView::onDeleteBookmarkButtonClicked);
+
+    mGotoBookmarkAction = new QAction(QIcon::fromTheme(QStringLiteral("go-jump")),
+                                      i18nc("@action", "Go to Offset"), this);
+    mGotoBookmarkAction->setToolTip(i18nc("@info:tooltip",
+                                          "Moves the cursor to the selected bookmark."));
+    mGotoBookmarkAction->setWhatsThis(i18nc("@info:whatsthis",
+                                            "If you press this button, the cursor is moved to the position "
+                                            "of the bookmark which has been last selected."));
+    mGotoBookmarkAction->setPriority(QAction::HighPriority);
+    connect(mGotoBookmarkAction, &QAction::triggered,
+            this, &BookmarksView::onGotoBookmarkButtonClicked);
+
+    mRenameBookmarkAction =new QAction(QIcon::fromTheme(QStringLiteral("edit-rename")),
+                                       i18nc("@action", "Rename"), this);
+    mRenameBookmarkAction->setToolTip(i18nc("@info:tooltip",
+                                            "Enables renaming of the selected bookmark."));
+    mRenameBookmarkAction->setWhatsThis(i18nc("@info:whatsthis",
+                                              "If you press this button, the name of the bookmark "
+                                              "which was last selected can be edited."));
+    connect(mRenameBookmarkAction, &QAction::triggered,
+            this, &BookmarksView::onRenameBookmarkButtonClicked);
+
+    mCopyOffsetAction = new QAction(QIcon::fromTheme(QStringLiteral("edit-copy")),
+                                    i18nc("@action", "Copy Offset"), this);
+    mCopyOffsetAction->setToolTip(i18nc("@info:tooltip",
+                                        "Copies the offset to the clipboard."));
+    connect(mCopyOffsetAction, &QAction::triggered,
+            this, &BookmarksView::onCopyOffsetTriggered);
+
+    // UI content
     auto* const baseLayout = new QVBoxLayout(this);
     baseLayout->setContentsMargins(0, 0, 0, 0);
     baseLayout->setSpacing(0);
@@ -88,69 +142,30 @@ BookmarksView::BookmarksView(BookmarksTool* tool, QWidget* parent)
 
     baseLayout->addWidget(mBookmarkListView, 10);
 
-    // actions TODO: make this view work like the filebrowser, with actions on top?
+    // toolbar TODO: make this view work like the filebrowser, with actions on top?
     auto* const actionsToolBar = new QToolBar(this);
+    actionsToolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
 
-    mCreateBookmarkAction = new QAction(QIcon::fromTheme(QStringLiteral("bookmark-new")),
-                                        i18nc("@action", "Create New"), this);
-    mCreateBookmarkAction->setToolTip(i18nc("@info:tooltip",
-                                            "Creates a new bookmark for the current cursor position."));
-    mCreateBookmarkAction->setWhatsThis(i18nc("@info:whatsthis",
-                                              "If you press this button, a new bookmark will be created "
-                                              "for the current cursor position."));
-    mCreateBookmarkAction->setEnabled(mTool->canCreateBookmark());
-    connect(mTool, &BookmarksTool::canCreateBookmarkChanged,
-            mCreateBookmarkAction, &QAction::setEnabled);
-    connect(mCreateBookmarkAction, &QAction::triggered,
-            this, &BookmarksView::onCreateBookmarkButtonClicked);
     actionsToolBar->addAction(mCreateBookmarkAction);
-
-    mDeleteBookmarksAction =new QAction(QIcon::fromTheme(QStringLiteral("edit-delete")),
-                                        i18nc("@action", "Delete"), this);
-    mDeleteBookmarksAction->setToolTip(i18nc("@info:tooltip",
-                                             "Deletes all the selected bookmarks."));
-    mDeleteBookmarksAction->setWhatsThis(i18nc("@info:whatsthis",
-                                               "If you press this button, all bookmarks which are "
-                                               "selected will be deleted."));
-    connect(mDeleteBookmarksAction, &QAction::triggered,
-            this, &BookmarksView::onDeleteBookmarkButtonClicked);
-    actionsToolBar->addAction(mDeleteBookmarksAction);
 
     auto* const stretcher = new QWidget(this);
     stretcher->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     actionsToolBar->addWidget(stretcher);
 
-    mGotoBookmarkAction = new QAction(QIcon::fromTheme(QStringLiteral("go-jump")),
-                                      i18nc("@action", "Go to Offset"), this);
-    mGotoBookmarkAction->setToolTip(i18nc("@info:tooltip",
-                                          "Moves the cursor to the selected bookmark."));
-    mGotoBookmarkAction->setWhatsThis(i18nc("@info:whatsthis",
-                                            "If you press this button, the cursor is moved to the position "
-                                            "of the bookmark which has been last selected."));
-    mGotoBookmarkAction->setPriority(QAction::HighPriority);
-    connect(mGotoBookmarkAction, &QAction::triggered,
-            this, &BookmarksView::onGotoBookmarkButtonClicked);
     actionsToolBar->addAction(mGotoBookmarkAction);
 
-    mRenameBookmarkAction =new QAction(QIcon::fromTheme(QStringLiteral("edit-rename")),
-                                       i18nc("@action", "Rename"), this);
-    mRenameBookmarkAction->setToolTip(i18nc("@info:tooltip",
-                                            "Enables renaming of the selected bookmark."));
-    mRenameBookmarkAction->setWhatsThis(i18nc("@info:whatsthis",
-                                              "If you press this button, the name of the bookmark "
-                                              "which was last selected can be edited."));
-    connect(mRenameBookmarkAction, &QAction::triggered,
-            this, &BookmarksView::onRenameBookmarkButtonClicked);
-    actionsToolBar->addAction(mRenameBookmarkAction);
+    auto* const menu = new KActionMenu(QIcon::fromTheme(QStringLiteral("overflow-menu")), QString(), this);
+    menu->setPopupMode(QToolButton::InstantPopup);
+    menu->addAction(mRenameBookmarkAction);
+    menu->addSeparator();
+    menu->addAction(mCopyOffsetAction);
+    menu->addSeparator();
+    menu->addAction(mDeleteBookmarksAction);
+    actionsToolBar->addAction(menu);
 
     baseLayout->addWidget(actionsToolBar);
 
-    mCopyOffsetAction = new QAction(QIcon::fromTheme(QStringLiteral("edit-copy")),
-                                    i18nc("@action", "Copy Offset"), this);
-    mCopyOffsetAction->setToolTip(i18nc("@info:tooltip",
-                                        "Copies the offset to the clipboard."));
-    connect(mCopyOffsetAction, &QAction::triggered,
-            this, &BookmarksView::onCopyOffsetTriggered);
+    // init state
     onBookmarkSelectionChanged();
 }
 
@@ -209,8 +224,9 @@ void BookmarksView::onBookmarkSelectionChanged()
     const bool bookmarkSelected =
         (selectedRows.size() == 1) &&
         selectionModel->isSelected(selectionModel->currentIndex());
-    mRenameBookmarkAction->setEnabled(bookmarkSelected);
     mGotoBookmarkAction->setEnabled(bookmarkSelected);
+    mRenameBookmarkAction->setEnabled(bookmarkSelected);
+    mCopyOffsetAction->setEnabled(bookmarkSelected);
 }
 
 void BookmarksView::onCreateBookmarkButtonClicked()
