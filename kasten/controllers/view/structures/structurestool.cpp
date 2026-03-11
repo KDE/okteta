@@ -407,6 +407,15 @@ void StructuresTool::unlockStructure(const QModelIndex& idx)
     top->unlockPosition(mByteArrayModel);
     // now read from the current position:
     top->read(mByteArrayModel, mCursorIndex, Okteta::ArrayChangeMetricsList(), true);
+    if (mCurrentItemDataChanged) {
+        for (int i = 0; i < mData.size(); ++i) {
+            if (mData.at(i).get() == top) {
+                emit dataChanged(i, top->actualDataInformation());
+                break;
+            }
+        }
+        mCurrentItemDataChanged = false;
+    }
     if (wasMarked) {
         mark(idx); // we have to change the marked range, otherwise it stays at the previous locked offset
     }
