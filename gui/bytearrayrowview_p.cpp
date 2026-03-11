@@ -756,6 +756,10 @@ void ByteArrayRowViewPrivate::ensureVisible(const ByteArrayRowColumnRenderer& co
 {
     Q_Q(ByteArrayRowView);
 
+    if (!coord.isValid()) {
+        return;
+    }
+
     const QRect byteRect = column.byteRect(coord);
 
     const PixelXRange byteXs = PixelXRange::fromWidth(byteRect.x(), byteRect.width());

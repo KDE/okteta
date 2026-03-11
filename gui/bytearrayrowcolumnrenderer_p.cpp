@@ -449,6 +449,10 @@ QRect ByteArrayRowColumnRendererPrivate::byteRect(Coord coord) const
 {
     Q_Q(const ByteArrayRowColumnRenderer);
 
+    if (!coord.isValid()) {
+        return {};
+    }
+
     const PixelY lineHeight = q->lineHeight();
     const int x = xOfLinePosition(coord.pos());
     const int y = lineHeight * coord.line();
@@ -464,6 +468,10 @@ QRect ByteArrayRowColumnRendererPrivate::byteRect(Coord coord) const
 QRect ByteArrayRowColumnRendererPrivate::byteRect(Coord coord, AbstractByteArrayView::CodingTypeId codingId) const
 {
     Q_Q(const ByteArrayRowColumnRenderer);
+
+    if (!coord.isValid()) {
+        return {};
+    }
 
     const int x = xOfLinePosition(coord.pos());
     const int y = q->lineHeight() * coord.line() + yOfCodingId(codingId);

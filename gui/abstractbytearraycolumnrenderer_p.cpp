@@ -326,6 +326,10 @@ QRect AbstractByteArrayColumnRendererPrivate::byteRect(Coord coord) const
 {
     Q_Q(const AbstractByteArrayColumnRenderer);
 
+    if (!coord.isValid()) {
+        return {};
+    }
+
     const PixelY  lineHeight = q->lineHeight();
     const int x = xOfLinePosition(coord.pos());
     const int y = lineHeight * coord.line();
