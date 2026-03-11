@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-07 02:08+0000\n"
+"POT-Creation-Date: 2026-03-11 02:11+0000\n"
 "PO-Revision-Date: 2024-11-01 14:15+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -1503,13 +1503,14 @@ msgid "Edit"
 msgstr "Edit"
 
 #: controllers/view/poddecoder/podtableview.cpp:270
+#: controllers/view/stringsextract/stringsextractview.cpp:198
 #: controllers/view/structures/structureview.cpp:390
 #, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to select a range"
-#| msgid "Select"
+#| msgctxt "@info:status offset value not available"
+#| msgid "Selection: -"
 msgctxt "@action:inmenu"
-msgid "Select"
-msgstr "Select"
+msgid "Select in View"
+msgstr "Selection: -"
 
 #: controllers/view/print/printtool.cpp:282
 #: controllers/view/print/printtool.cpp:312
@@ -1875,14 +1876,6 @@ msgid ""
 msgstr ""
 "If you press the <interface>Go to</interface> button, the string which was "
 "last selected is marked and shown in the view."
-
-#: controllers/view/stringsextract/stringsextractview.cpp:198
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to select a range"
-#| msgid "Select"
-msgctxt "@action"
-msgid "Select"
-msgstr "Select"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:200
 #, fuzzy, kde-format
@@ -4132,6 +4125,20 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
+
+#, fuzzy
+#~| msgctxt "@title:window of the tool to select a range"
+#~| msgid "Select"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Select"
+#~ msgstr "Select"
+
+#, fuzzy
+#~| msgctxt "@title:window of the tool to select a range"
+#~| msgid "Select"
+#~ msgctxt "@action"
+#~ msgid "Select"
+#~ msgstr "Select"
 
 #~ msgctxt "name of the change"
 #~ msgid "Crop"

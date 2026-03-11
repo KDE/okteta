@@ -16,7 +16,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-07 02:08+0000\n"
+"POT-Creation-Date: 2026-03-11 02:11+0000\n"
 "PO-Revision-Date: 2026-01-06 13:28+0100\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: \n"
@@ -1510,11 +1510,14 @@ msgid "Edit"
 msgstr "Modifier"
 
 #: controllers/view/poddecoder/podtableview.cpp:270
+#: controllers/view/stringsextract/stringsextractview.cpp:198
 #: controllers/view/structures/structureview.cpp:390
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@info:status offset value not available"
+#| msgid "Selection: -"
 msgctxt "@action:inmenu"
-msgid "Select"
-msgstr "Sélectionner"
+msgid "Select in View"
+msgstr "Sélection : -"
 
 #: controllers/view/print/printtool.cpp:282
 #: controllers/view/print/printtool.cpp:312
@@ -1885,12 +1888,6 @@ msgid ""
 msgstr ""
 "Si vous cliquez sur le bouton <interface>Aller</interface>, la dernière "
 "chaine de caractères sélectionnée est marquée et affichée dans la vue."
-
-#: controllers/view/stringsextract/stringsextractview.cpp:198
-#, kde-format
-msgctxt "@action"
-msgid "Select"
-msgstr "Sélectionner"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:200
 #, kde-format
@@ -4095,6 +4092,14 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Select"
+#~ msgstr "Sélectionner"
+
+#~ msgctxt "@action"
+#~ msgid "Select"
+#~ msgstr "Sélectionner"
 
 #~ msgctxt "name of the change"
 #~ msgid "Crop"

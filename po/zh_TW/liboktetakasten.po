@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-07 02:08+0000\n"
+"POT-Creation-Date: 2026-03-11 02:11+0000\n"
 "PO-Revision-Date: 2025-12-21 07:57+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -1434,11 +1434,14 @@ msgid "Edit"
 msgstr "編輯"
 
 #: controllers/view/poddecoder/podtableview.cpp:270
+#: controllers/view/stringsextract/stringsextractview.cpp:198
 #: controllers/view/structures/structureview.cpp:390
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@info:status offset value not available"
+#| msgid "Selection: -"
 msgctxt "@action:inmenu"
-msgid "Select"
-msgstr "選取"
+msgid "Select in View"
+msgstr "選擇區： -"
 
 #: controllers/view/print/printtool.cpp:282
 #: controllers/view/print/printtool.cpp:312
@@ -1790,12 +1793,6 @@ msgid ""
 "If you press the <interface>Go to</interface> button, the string which was "
 "last selected is marked and shown in the view."
 msgstr "如果您按下<interface>跳到</interface>按鍵，字串會標記並顯示在檢視中。"
-
-#: controllers/view/stringsextract/stringsextractview.cpp:198
-#, kde-format
-msgctxt "@action"
-msgid "Select"
-msgstr "選取"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:200
 #, kde-format
@@ -3961,6 +3958,14 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
+
+#~ msgctxt "@action:inmenu"
+#~ msgid "Select"
+#~ msgstr "選取"
+
+#~ msgctxt "@action"
+#~ msgid "Select"
+#~ msgstr "選取"
 
 #~ msgid "C&opy"
 #~ msgstr "複製(&O)"

@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-07 02:08+0000\n"
+"POT-Creation-Date: 2026-03-11 02:11+0000\n"
 "PO-Revision-Date: 2011-04-08 21:21-0700\n"
 "Last-Translator: Fumiaki Okushi <okushi@kde.gr.jp>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -1499,13 +1499,14 @@ msgid "Edit"
 msgstr ""
 
 #: controllers/view/poddecoder/podtableview.cpp:270
+#: controllers/view/stringsextract/stringsextractview.cpp:198
 #: controllers/view/structures/structureview.cpp:390
 #, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to select a range"
-#| msgid "Select"
+#| msgctxt "@info:status offset value not available"
+#| msgid "Selection: -"
 msgctxt "@action:inmenu"
-msgid "Select"
-msgstr "選択"
+msgid "Select in View"
+msgstr "選択: -"
 
 #: controllers/view/print/printtool.cpp:282
 #: controllers/view/print/printtool.cpp:312
@@ -1869,14 +1870,6 @@ msgid ""
 msgstr ""
 "<interface>移動</interface>ボタンを押すと、最後に選択した文字列がビューに表示"
 "されます。"
-
-#: controllers/view/stringsextract/stringsextractview.cpp:198
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to select a range"
-#| msgid "Select"
-msgctxt "@action"
-msgid "Select"
-msgstr "選択"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:200
 #, fuzzy, kde-format
@@ -4261,6 +4254,20 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
+
+#, fuzzy
+#~| msgctxt "@title:window of the tool to select a range"
+#~| msgid "Select"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Select"
+#~ msgstr "選択"
+
+#, fuzzy
+#~| msgctxt "@title:window of the tool to select a range"
+#~| msgid "Select"
+#~ msgctxt "@action"
+#~ msgid "Select"
+#~ msgstr "選択"
 
 #~ msgid "C&opy"
 #~ msgstr "コピー(&O)"

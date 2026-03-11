@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-07 02:08+0000\n"
+"POT-Creation-Date: 2026-03-11 02:11+0000\n"
 "PO-Revision-Date: 2013-06-21 06:20+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -1521,13 +1521,14 @@ msgid "Edit"
 msgstr "&Өзгерту...."
 
 #: controllers/view/poddecoder/podtableview.cpp:270
+#: controllers/view/stringsextract/stringsextractview.cpp:198
 #: controllers/view/structures/structureview.cpp:390
 #, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to select a range"
-#| msgid "Select"
+#| msgctxt "@info:status offset value not available"
+#| msgid "Selection: -"
 msgctxt "@action:inmenu"
-msgid "Select"
-msgstr "Таңдау"
+msgid "Select in View"
+msgstr "Таңдауы: -"
 
 #: controllers/view/print/printtool.cpp:282
 #: controllers/view/print/printtool.cpp:312
@@ -1895,14 +1896,6 @@ msgid ""
 msgstr ""
 "<interface>Аттау</interface> батырмасын басқанда соңғы таңдалған жолдары "
 "белгіленеді де өрісінде көрсетіледі."
-
-#: controllers/view/stringsextract/stringsextractview.cpp:198
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to select a range"
-#| msgid "Select"
-msgctxt "@action"
-msgid "Select"
-msgstr "Таңдау"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:200
 #, fuzzy, kde-format
@@ -4202,6 +4195,20 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
+
+#, fuzzy
+#~| msgctxt "@title:window of the tool to select a range"
+#~| msgid "Select"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Select"
+#~ msgstr "Таңдау"
+
+#, fuzzy
+#~| msgctxt "@title:window of the tool to select a range"
+#~| msgid "Select"
+#~ msgctxt "@action"
+#~ msgid "Select"
+#~ msgstr "Таңдау"
 
 #~ msgid "C&opy"
 #~ msgstr "К&өшіріп алу"

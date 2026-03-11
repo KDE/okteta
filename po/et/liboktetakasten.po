@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-07 02:08+0000\n"
+"POT-Creation-Date: 2026-03-11 02:11+0000\n"
 "PO-Revision-Date: 2020-01-03 20:25+0200\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -1510,13 +1510,14 @@ msgid "Edit"
 msgstr "&Muuda..."
 
 #: controllers/view/poddecoder/podtableview.cpp:270
+#: controllers/view/stringsextract/stringsextractview.cpp:198
 #: controllers/view/structures/structureview.cpp:390
 #, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to select a range"
-#| msgid "Select"
+#| msgctxt "@info:status offset value not available"
+#| msgid "Selection: -"
 msgctxt "@action:inmenu"
-msgid "Select"
-msgstr "Valimine"
+msgid "Select in View"
+msgstr "Valik: -"
 
 #: controllers/view/print/printtool.cpp:282
 #: controllers/view/print/printtool.cpp:312
@@ -1883,14 +1884,6 @@ msgid ""
 msgstr ""
 "Nuppu <interface>Mine</interface> vajutades märgitakse string, mis oli "
 "viimati valitud, ja seda näidatakse vaates."
-
-#: controllers/view/stringsextract/stringsextractview.cpp:198
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to select a range"
-#| msgid "Select"
-msgctxt "@action"
-msgid "Select"
-msgstr "Valimine"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:200
 #, fuzzy, kde-format
@@ -4184,6 +4177,20 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
+
+#, fuzzy
+#~| msgctxt "@title:window of the tool to select a range"
+#~| msgid "Select"
+#~ msgctxt "@action:inmenu"
+#~ msgid "Select"
+#~ msgstr "Valimine"
+
+#, fuzzy
+#~| msgctxt "@title:window of the tool to select a range"
+#~| msgid "Select"
+#~ msgctxt "@action"
+#~ msgid "Select"
+#~ msgstr "Valimine"
 
 #~ msgid "C&opy"
 #~ msgstr "K&opeeri"
