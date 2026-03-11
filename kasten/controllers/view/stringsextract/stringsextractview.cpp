@@ -15,6 +15,7 @@
 #include <Kasten/AbstractUserMessagesHandler>
 #include <Kasten/UserNotification>
 // KF
+#include <KActionMenu>
 #include <KLocalizedString>
 // Qt
 #include <QMenu>
@@ -46,6 +47,42 @@ StringsExtractView::StringsExtractView(StringsExtractTool* tool,
     , mTool(tool)
     , m_userMessagesHandler(userMessagseHandler)
 {
+    // list actions
+    mCopyAction = new QAction(QIcon::fromTheme(QStringLiteral("edit-copy")),
+                              i18nc("@action:button", "Copy"), this);
+    mCopyAction->setToolTip(i18nc("@info:tooltip",
+                                  "Copies the selected strings to the clipboard."));
+    mCopyAction->setWhatsThis(xi18nc("@info:whatsthis",
+                                     "If you press the <interface>Copy</interface> button, all strings you selected "
+                                     "in the list are copied to the clipboard."));
+    connect(mCopyAction, &QAction::triggered,
+            this, &StringsExtractView::onCopyButtonClicked);
+
+    mGotoAction = new QAction(QIcon::fromTheme(QStringLiteral("go-jump")),
+                              i18nc("@action:button", "Show"), this);
+    mGotoAction->setToolTip(i18nc("@info:tooltip",
+                                  "Shows the selected string in the view."));
+    mGotoAction->setWhatsThis(xi18nc("@info:whatsthis",
+                                     "If you press the <interface>Go to</interface> button, the string which was last "
+                                     "selected is marked and shown in the view."));
+    connect(mGotoAction, &QAction::triggered,
+            this, &StringsExtractView::onGotoButtonClicked);
+
+    mCopyOffsetAction = new QAction(QIcon::fromTheme(QStringLiteral("edit-copy")),
+                                    i18nc("@action", "Copy Offset"), this);
+    mCopyOffsetAction->setToolTip(i18nc("@info:tooltip",
+                                        "Copies the offset to the clipboard."));
+    connect(mCopyOffsetAction, &QAction::triggered,
+            this, &StringsExtractView::onCopyOffsetTriggered);
+
+    mSelectAction = new QAction(QIcon::fromTheme(QStringLiteral("select-rectangular")),
+                                i18nc("@action:inmenu", "Select in View"), this);
+    mSelectAction->setToolTip(i18nc("@info:tooltip",
+                                    "Selects the selected string in the view."));
+    connect(mSelectAction, &QAction::triggered,
+            this, &StringsExtractView::onSelectStringTriggered);
+
+    // UI content
     auto* const baseLayout = new QVBoxLayout(this);
     baseLayout->setContentsMargins(0, 0, 0, 0);
     baseLayout->setSpacing(0);
@@ -155,57 +192,34 @@ StringsExtractView::StringsExtractView(StringsExtractTool* tool,
 
     baseLayout->addWidget(mContainedStringTableView, 10);
 
-    // actions
+    // toolbar
     auto* const actionsToolBar = new QToolBar(this);
     actionsToolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
 
-    mCopyAction = new QAction(QIcon::fromTheme(QStringLiteral("edit-copy")),
-                              i18nc("@action:button", "Copy"), this);
-    mCopyAction->setToolTip(i18nc("@info:tooltip",
-                                  "Copies the selected strings to the clipboard."));
-    mCopyAction->setWhatsThis(xi18nc("@info:whatsthis",
-                                     "If you press the <interface>Copy</interface> button, all strings you selected "
-                                     "in the list are copied to the clipboard."));
-    connect(mCopyAction, &QAction::triggered,
-            this, &StringsExtractView::onCopyButtonClicked);
     actionsToolBar->addAction(mCopyAction);
 
     auto* const actionsStretcher = new QWidget(this);
     actionsStretcher->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     actionsToolBar->addWidget(actionsStretcher);
 
-    mGotoAction = new QAction(QIcon::fromTheme(QStringLiteral("go-jump")),
-                              i18nc("@action:button", "Show"), this);
-    mGotoAction->setToolTip(i18nc("@info:tooltip",
-                                  "Shows the selected string in the view."));
-    mGotoAction->setWhatsThis(xi18nc("@info:whatsthis",
-                                     "If you press the <interface>Go to</interface> button, the string which was last "
-                                     "selected is marked and shown in the view."));
-    connect(mGotoAction, &QAction::triggered,
-            this, &StringsExtractView::onGotoButtonClicked);
     actionsToolBar->addAction(mGotoAction);
+
+    auto* const menu = new KActionMenu(QIcon::fromTheme(QStringLiteral("overflow-menu")), QString(), this);
+    menu->setPopupMode(QToolButton::InstantPopup);
+    menu->addAction(mCopyOffsetAction);
+    menu->addSeparator();
+    menu->addAction(mSelectAction);
+    actionsToolBar->addAction(menu);
 
     baseLayout->addWidget(actionsToolBar);
 
-    mCopyOffsetAction = new QAction(QIcon::fromTheme(QStringLiteral("edit-copy")),
-                                    i18nc("@action", "Copy Offset"), this);
-    mCopyOffsetAction->setToolTip(i18nc("@info:tooltip",
-                                        "Copies the offset to the clipboard."));
-    connect(mCopyOffsetAction, &QAction::triggered,
-            this, &StringsExtractView::onCopyOffsetTriggered);
-
-    mSelectAction = new QAction(QIcon::fromTheme(QStringLiteral("select-rectangular")),
-                                i18nc("@action:inmenu", "Select in View"), this);
-    mSelectAction->setToolTip(i18nc("@info:tooltip",
-                                    "Selects the selected string in the view."));
-    connect(mSelectAction, &QAction::triggered,
-            this, &StringsExtractView::onSelectStringTriggered);
     connect(mTool, &StringsExtractTool::uptodateChanged, this, &StringsExtractView::onStringsUptodateChanged);
     connect(mTool, &StringsExtractTool::isApplyableChanged, this, &StringsExtractView::onApplyableChanged);
     connect(mTool, &StringsExtractTool::extractionDone,
             this, &StringsExtractView::onExtractionDone);
     connect(mTool, &StringsExtractTool::canHighlightStringChanged, this, &StringsExtractView::onCanHighlightStringChanged);
 
+    // init state
     onStringSelectionChanged();
 }
 
@@ -334,6 +348,7 @@ void StringsExtractView::onStringSelectionChanged()
     const bool isStringToMarkOrSelect = (canHighlightString && stringSelected);
     mGotoAction->setEnabled(isStringToMarkOrSelect);
     mSelectAction->setEnabled(isStringToMarkOrSelect);
+    mCopyOffsetAction->setEnabled(isStringToMarkOrSelect);
 }
 
 void StringsExtractView::onStringDoubleClicked(const QModelIndex& index)
