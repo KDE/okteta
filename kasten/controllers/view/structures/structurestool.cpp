@@ -409,7 +409,7 @@ void StructuresTool::unlockStructure(const QModelIndex& idx)
     top->read(mByteArrayModel, mCursorIndex, Okteta::ArrayChangeMetricsList(), true);
     if (mCurrentItemDataChanged) {
         for (int i = 0; i < mData.size(); ++i) {
-            if (mData.at(i).get() == top) {
+            if (mData.at(i).data() == top) {
                 emit dataChanged(i, top->actualDataInformation());
                 break;
             }
