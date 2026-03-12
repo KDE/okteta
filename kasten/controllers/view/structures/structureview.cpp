@@ -21,6 +21,7 @@
 #include <structuresmanagerview.hpp>
 #include <structureaddremovewidget.hpp>
 // KF
+#include <KActionMenu>
 #include <KStandardAction>
 #include <KLocalizedString>
 #include <KConfigDialog>
@@ -50,6 +51,59 @@ StructureView::StructureView(StructuresTool* tool, QWidget* parent)
     , mTool(tool)
     , mDelegate(new StructureViewItemDelegate(this))
 {
+    // actions
+    mValidateAction = new QAction(QIcon::fromTheme(QStringLiteral("document-sign")),
+                                  i18nc("@action", "Validate"), this);
+    mValidateAction->setToolTip(i18nc("@info:tooltip", "Validate all structures."));
+    mValidateAction->setEnabled(false); // no point validating without file open
+    // TODO also disable the button if the structure has no validatable members
+    connect(mValidateAction, &QAction::triggered,
+            mTool, &StructuresTool::validateAllStructures);
+
+    mLockStructureAction = new QAction(this);
+    mLockStructureAction->setCheckable(true);
+    mLockStructureAction->setChecked(false);
+    mLockStructureAction->setEnabled(false);
+    onLockButtonToggled(false);
+    connect(mLockStructureAction, &QAction::triggered,
+            this, &StructureView::onLockButtonClicked);
+    connect(mLockStructureAction, &QAction::toggled,
+            this, &StructureView::onLockButtonToggled);
+
+    mScriptConsoleAction = new QAction(QIcon::fromTheme(QStringLiteral("utilities-terminal")),
+                                       i18nc("@action", "Script Console"), this);
+    mScriptConsoleAction->setToolTip(i18nc("@info:tooltip", "Open script console."));
+    connect(mScriptConsoleAction, &QAction::triggered,
+            this, &StructureView::openScriptConsole);
+
+    mSettingsAction = new QAction(QIcon::fromTheme(QStringLiteral("configure")),
+                                  i18nc("@action", "Settings"), this);
+    mSettingsAction->setToolTip(i18nc("@info:tooltip", "Open settings."));
+    connect(mSettingsAction, &QAction::triggered,
+            this, &StructureView::openSettingsDlg);
+
+    m_editAction = new QAction(QIcon::fromTheme(QStringLiteral("document-edit")),
+                               i18nc("@action:inmenu", "Edit"), this);
+    connect(m_editAction, &QAction::triggered,
+            this, &StructureView::editData);
+
+    // TODO: split into explicit "Copy As Data" and "Copy As Text"
+    m_copyAction = KStandardAction::copy(this, &StructureView::copyToClipboard,  this);
+    m_copyAction->setShortcut(QKeySequence());
+
+    m_copyOffsetAction = new QAction(QIcon::fromTheme(QStringLiteral("edit-copy")),
+                                     i18nc("@action", "Copy Offset"), this);
+    m_copyOffsetAction->setToolTip(i18nc("@info:tooltip",
+                                         "Copies the offset to the clipboard."));
+    connect(m_copyOffsetAction, &QAction::triggered,
+            this, &StructureView::copyOffsetToClipboard);
+
+    m_selectAction = new QAction(QIcon::fromTheme(QStringLiteral("select-rectangular")),
+                                 i18nc("@action:inmenu", "Select in View"), this);
+    connect(m_selectAction, &QAction::triggered,
+            this, &StructureView::selectBytesInView);
+
+    // UI content
     auto* const baseLayout = new QVBoxLayout(this);
     setLayout(baseLayout);
     baseLayout->setContentsMargins(0, 0, 0, 0);
@@ -57,6 +111,8 @@ StructureView::StructureView(StructuresTool* tool, QWidget* parent)
 
     // table
     mStructureTreeModel = new StructureTreeModel(mTool, this);
+    connect(mStructureTreeModel, &QAbstractItemModel::dataChanged,
+            this, &StructureView::updateDataActions);
     // mModeltester = new QAbstractItemModelTester(mStructureTreeModel, this);
     mStructTreeView = new QTreeView(this);
     mStructTreeView->setObjectName(QStringLiteral("StructTree"));
@@ -79,6 +135,8 @@ StructureView::StructureView(StructuresTool* tool, QWidget* parent)
     header->setSectionResizeMode(QHeaderView::Interactive);
     connect(mStructTreeView, &QWidget::customContextMenuRequested,
             this, &StructureView::onCustomContextMenuRequested);
+    connect(mStructTreeView->selectionModel(), &QItemSelectionModel::selectionChanged,
+            this, &StructureView::onDataSelectionChanged);
 
     // TODO. share code for all these empty-list placeholders
     QWidget* const structListViewViewPort = mStructTreeView->viewport();
@@ -101,48 +159,35 @@ StructureView::StructureView(StructuresTool* tool, QWidget* parent)
     auto* const actionsToolBar = new QToolBar(this);
     actionsToolBar->setToolButtonStyle(Qt::ToolButtonFollowStyle);
 
-    QIcon validateIcon = QIcon::fromTheme(QStringLiteral("document-sign"));
-    mValidateAction =
-        actionsToolBar->addAction(validateIcon, i18nc("@action:button", "Validate"),
-                                  mTool, &StructuresTool::validateAllStructures);
-    const QString validationToolTip = i18nc("@info:tooltip", "Validate all structures.");
-    mValidateAction->setToolTip(validationToolTip);
-    mValidateAction->setEnabled(false); // no point validating without file open
-    connect(mTool, &StructuresTool::byteArrayModelChanged,
-            this, &StructureView::onByteArrayModelChanged);
-    // TODO also disable the button if the structure has no validatable members
-
-    mLockStructureAction =
-        actionsToolBar->addAction(QString(),
-                                  this, &StructureView::onLockButtonClicked);
-    mLockStructureAction->setCheckable(true);
-    mLockStructureAction->setChecked(false);
-    mLockStructureAction->setEnabled(false); // won't work at beginning
-    onLockButtonToggled(false);
-    connect(mLockStructureAction, &QAction::toggled, this, &StructureView::onLockButtonToggled);
+    actionsToolBar->addAction(m_copyAction);
 
     auto* const stretcher = new QWidget(this);
     stretcher->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
     actionsToolBar->addWidget(stretcher);
 
-    QIcon console = QIcon::fromTheme(QStringLiteral("utilities-terminal"));
-    mScriptConsoleAction =
-        actionsToolBar->addAction(console, i18nc("@action:button", "Script console"),
-                                  this, &StructureView::openScriptConsole);
-    mScriptConsoleAction->setToolTip(i18nc("@info:tooltip", "Open script console."));
+    actionsToolBar->addAction(mValidateAction);
 
-    QIcon settings = QIcon::fromTheme(QStringLiteral("configure"));
-    mSettingsAction =
-        actionsToolBar->addAction(settings, i18nc("@action:button", "Settings"),
-                                  this, &StructureView::openSettingsDlg);
-    const QString settingsTooltip = i18nc("@info:tooltip", "Open settings.");
-    mSettingsAction->setToolTip(settingsTooltip);
+    actionsToolBar->addAction(mLockStructureAction);
+
+    auto* const menu = new KActionMenu(QIcon::fromTheme(QStringLiteral("overflow-menu")), QString(), this);
+    menu->setPopupMode(QToolButton::InstantPopup);
+    menu->addAction(m_editAction);
+    menu->addSeparator();
+    menu->addAction(m_copyOffsetAction);
+    menu->addSeparator();
+    menu->addAction(m_selectAction);
+    menu->addSeparator();
+    menu->addAction(mScriptConsoleAction);
+    menu->addAction(mSettingsAction);
+    actionsToolBar->addAction(menu);
 
     baseLayout->addWidget(actionsToolBar);
 
-    connect(mStructTreeView->selectionModel(),
-            &QItemSelectionModel::currentRowChanged,
-            this, &StructureView::onCurrentRowChanged);
+    connect(mTool, &StructuresTool::byteArrayModelChanged,
+            this, &StructureView::onByteArrayModelChanged);
+
+    // init state
+    onDataSelectionChanged();
 }
 
 StructureView::~StructureView() = default;
@@ -232,15 +277,48 @@ void StructureView::setLockButtonState(const QModelIndex& current)
     mLockStructureAction->setChecked(mTool->isStructureLocked(current));
 }
 
-void StructureView::onCurrentRowChanged(const QModelIndex& current, const QModelIndex& previous)
+void StructureView::updateDataActions()
 {
-    Q_UNUSED(previous)
-    if (current.isValid() && mTool->byteArrayModel()) {
-        mTool->mark(current);
+    const QItemSelectionModel* const selectionModel = mStructTreeView->selectionModel();
+
+    const QModelIndexList selectedRows = selectionModel->selectedRows();
+    const QModelIndex currentIndex = selectionModel->currentIndex();
+    const auto* const data = currentIndex.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
+    const bool dataSelected =
+        (data != nullptr) &&
+        (selectedRows.size() == 1) &&
+        selectionModel->isSelected(selectionModel->currentIndex());
+
+    const bool hasData = dataSelected && data->wasAbleToRead();
+
+    const bool isEditable = hasData && (currentIndex.siblingAtColumn(DataInformation::ColumnValue).flags() & Qt::ItemIsEditable);
+    m_editAction->setEnabled(isEditable);
+
+    m_copyAction->setEnabled(hasData);
+    m_copyOffsetAction->setEnabled(hasData);
+    m_selectAction->setEnabled(hasData);
+}
+
+void StructureView::onDataSelectionChanged()
+{
+    const QItemSelectionModel* const selectionModel = mStructTreeView->selectionModel();
+
+    const QModelIndexList selectedRows = selectionModel->selectedRows();
+    const QModelIndex currentIndex = selectionModel->currentIndex();
+    const auto* const data = currentIndex.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
+    const bool dataSelected =
+        (data != nullptr) &&
+        (selectedRows.size() == 1) &&
+        selectionModel->isSelected(selectionModel->currentIndex());
+
+    if (dataSelected && mTool->byteArrayModel()) {
+        mTool->mark(currentIndex);
     } else {
         mTool->unmark();
     }
-    setLockButtonState(current);
+    setLockButtonState(currentIndex);
+
+    updateDataActions();
 }
 
 void StructureView::onLockButtonClicked(bool checked)
@@ -280,8 +358,10 @@ void StructureView::onLockButtonToggled(bool structureLocked)
 
 void StructureView::editData()
 {
-    auto* const action = static_cast<QAction*>(sender());
-    const QModelIndex index = action->data().toModelIndex();
+    const QModelIndex index = mStructTreeView->selectionModel()->currentIndex();
+    if (!index.isValid()) {
+        return;
+    }
 
     mStructTreeView->setCurrentIndex(index);
     mStructTreeView->edit(index);
@@ -289,16 +369,21 @@ void StructureView::editData()
 
 void StructureView::selectBytesInView()
 {
-    auto* const action = static_cast<QAction*>(sender());
-    const QModelIndex index = action->data().toModelIndex();
+    const QModelIndex index = mStructTreeView->selectionModel()->currentIndex();
+    if (!index.isValid()) {
+        return;
+    }
 
     mTool->selectBytesInView(index);
 }
 
 void StructureView::copyToClipboard()
 {
-    auto* const action = static_cast<QAction*>(sender());
-    const QModelIndex index = action->data().toModelIndex();
+    const QModelIndex index = mStructTreeView->selectionModel()->currentIndex();
+    if (!index.isValid()) {
+        return;
+    }
+
     QMimeData* const mimeData = mStructTreeView->model()->mimeData({index});
 
     QApplication::clipboard()->setMimeData(mimeData);
@@ -306,8 +391,10 @@ void StructureView::copyToClipboard()
 
 void StructureView::copyOffsetToClipboard()
 {
-    auto* const action = static_cast<QAction*>(sender());
-    const QModelIndex index = action->data().toModelIndex();
+    const QModelIndex index = mStructTreeView->selectionModel()->currentIndex();
+    if (!index.isValid()) {
+        return;
+    }
 
     const auto* const data = index.data(StructureTreeModel::DataInformationRole).value<DataInformation*>();
     if (!data) {
@@ -363,35 +450,14 @@ void StructureView::onCustomContextMenuRequested(QPoint pos)
     if (data->wasAbleToRead()) {
         const QModelIndex valueIndex = index.siblingAtColumn(DataInformation::ColumnValue);
         if (valueIndex.flags() & Qt::ItemIsEditable) {
-            auto* const editAction = new QAction(QIcon::fromTheme(QStringLiteral("document-edit")),
-                                                 i18nc("@action:inmenu", "Edit"), menu);
-            connect(editAction, &QAction::triggered,
-                    this, &StructureView::editData);
-            editAction->setData(valueIndex);
-            menu->addAction(editAction);
+            menu->addAction(m_editAction);
         }
 
-        // TODO: split into explicit "Copy As Data" and "Copy As Text"
-        QAction* const copyAction = KStandardAction::copy(this, &StructureView::copyToClipboard,  menu);
-        copyAction->setShortcut(QKeySequence());
-        copyAction->setData(index);
-        menu->addAction(copyAction);
+        menu->addAction(m_copyAction);
 
-        auto* const copyOffsetAction = new QAction(QIcon::fromTheme(QStringLiteral("edit-copy")),
-                                                   i18nc("@action", "Copy Offset"), this);
-        copyOffsetAction->setToolTip(i18nc("@info:tooltip",
-                                            "Copies the offset to the clipboard."));
-        connect(copyOffsetAction, &QAction::triggered,
-                this, &StructureView::copyOffsetToClipboard);
-        copyOffsetAction->setData(index);
-        menu->addAction(copyOffsetAction);
+        menu->addAction(m_copyOffsetAction);
 
-        auto* const selectAction = new QAction(QIcon::fromTheme(QStringLiteral("select-rectangular")),
-                                               i18nc("@action:inmenu", "Select in View"), menu);
-        connect(selectAction, &QAction::triggered,
-                this, &StructureView::selectBytesInView);
-        selectAction->setData(index);
-        menu->addAction(selectAction);
+        menu->addAction(m_selectAction);
     }
 
     if (isStructureRoot) {

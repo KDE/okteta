@@ -44,7 +44,8 @@ public: // QObject
 private Q_SLOTS:
     void openSettingsDlg();
     void openScriptConsole();
-    void onCurrentRowChanged(const QModelIndex& current, const QModelIndex& previous);
+    void updateDataActions();
+    void onDataSelectionChanged();
     void onLockButtonClicked(bool checked);
     void onLockButtonToggled(bool checked);
     void onByteArrayModelChanged(Okteta::AbstractByteArrayModel* model);
@@ -71,6 +72,10 @@ private:
     QAction* mSettingsAction;
     QAction* mScriptConsoleAction;
     QAction* mLockStructureAction;
+    QAction* m_editAction;
+    QAction* m_copyAction;
+    QAction* m_copyOffsetAction;
+    QAction* m_selectAction;
 
     QWidget* mStructTreeViewFocusChild = nullptr;
 };
