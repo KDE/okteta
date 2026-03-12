@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-11 02:11+0000\n"
+"POT-Creation-Date: 2026-03-12 02:04+0000\n"
 "PO-Revision-Date: 2024-11-01 14:15+0000\n"
 "Last-Translator: Steve Allewell <steve.allewell@gmail.com>\n"
 "Language-Team: British English\n"
@@ -153,13 +153,7 @@ msgctxt "@title:window"
 msgid "Bookmarks"
 msgstr "Bookmarks"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:72
-#, kde-format
-msgctxt "@info"
-msgid "No bookmarks"
-msgstr "No bookmarks"
-
-#: controllers/view/bookmarks/bookmarksview.cpp:95
+#: controllers/view/bookmarks/bookmarksview.cpp:43
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu create a new view profile"
 #| msgid "Create New…"
@@ -167,13 +161,13 @@ msgctxt "@action"
 msgid "Create New"
 msgstr "Create New…"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:97
+#: controllers/view/bookmarks/bookmarksview.cpp:45
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Creates a new bookmark for the current cursor position."
 msgstr "Creates a new bookmark for the current cursor position."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:99
+#: controllers/view/bookmarks/bookmarksview.cpp:47
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -183,7 +177,7 @@ msgstr ""
 "If you press this button, a new bookmark will be created for the current "
 "cursor position."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:109
+#: controllers/view/bookmarks/bookmarksview.cpp:56
 #, fuzzy, kde-format
 #| msgctxt "@action:button"
 #| msgid "&Delete"
@@ -191,13 +185,13 @@ msgctxt "@action"
 msgid "Delete"
 msgstr "&Delete"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:111
+#: controllers/view/bookmarks/bookmarksview.cpp:58
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Deletes all the selected bookmarks."
 msgstr "Deletes all the selected bookmarks."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:113
+#: controllers/view/bookmarks/bookmarksview.cpp:60
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -205,7 +199,7 @@ msgid ""
 msgstr ""
 "If you press this button, all bookmarks which are selected will be deleted."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:124
+#: controllers/view/bookmarks/bookmarksview.cpp:66
 #, fuzzy, kde-format
 #| msgctxt "@action:inmenu"
 #| msgid "&Go to Offset…"
@@ -213,13 +207,13 @@ msgctxt "@action"
 msgid "Go to Offset"
 msgstr "&Go to Offset…"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:126
+#: controllers/view/bookmarks/bookmarksview.cpp:68
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Moves the cursor to the selected bookmark."
 msgstr "Moves the cursor to the selected bookmark."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:128
+#: controllers/view/bookmarks/bookmarksview.cpp:70
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -229,19 +223,19 @@ msgstr ""
 "If you press this button, the cursor is moved to the position of the "
 "bookmark which has been last selected."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:136
+#: controllers/view/bookmarks/bookmarksview.cpp:77
 #, kde-format
 msgctxt "@action"
 msgid "Rename"
 msgstr ""
 
-#: controllers/view/bookmarks/bookmarksview.cpp:138
+#: controllers/view/bookmarks/bookmarksview.cpp:79
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enables renaming of the selected bookmark."
 msgstr "Enables renaming of the selected bookmark."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:140
+#: controllers/view/bookmarks/bookmarksview.cpp:81
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -251,9 +245,9 @@ msgstr ""
 "If you press this button, the name of the bookmark which was last selected "
 "can be edited."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:149
-#: controllers/view/stringsextract/stringsextractview.cpp:191
-#: controllers/view/structures/structureview.cpp:381
+#: controllers/view/bookmarks/bookmarksview.cpp:87
+#: controllers/view/stringsextract/stringsextractview.cpp:72
+#: controllers/view/structures/structureview.cpp:95
 #, fuzzy, kde-format
 #| msgctxt "@title:column offset of the bookmark"
 #| msgid "Offset"
@@ -261,15 +255,21 @@ msgctxt "@action"
 msgid "Copy Offset"
 msgstr "Offset"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:151
-#: controllers/view/stringsextract/stringsextractview.cpp:193
-#: controllers/view/structures/structureview.cpp:383
+#: controllers/view/bookmarks/bookmarksview.cpp:89
+#: controllers/view/stringsextract/stringsextractview.cpp:74
+#: controllers/view/structures/structureview.cpp:97
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Copies the selected strings to the clipboard."
 msgctxt "@info:tooltip"
 msgid "Copies the offset to the clipboard."
 msgstr "Copies the selected strings to the clipboard."
+
+#: controllers/view/bookmarks/bookmarksview.cpp:126
+#, kde-format
+msgctxt "@info"
+msgid "No bookmarks"
+msgstr "No bookmarks"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:137
 #: controllers/view/info/statistictablemodel.cpp:160
@@ -825,7 +825,7 @@ msgstr ""
 "statistic is built for the bytes in the selected range."
 
 #: controllers/view/info/infoview.cpp:120
-#: controllers/view/stringsextract/stringsextractview.cpp:163
+#: controllers/view/stringsextract/stringsextractview.cpp:52
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Copy As"
@@ -1496,15 +1496,15 @@ msgstr ""
 ">Overwrite the following bytes or insert new ones as needed?"
 
 #: controllers/view/poddecoder/podtableview.cpp:257
-#: controllers/view/structures/structureview.cpp:367
+#: controllers/view/structures/structureview.cpp:86
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit"
 msgstr "Edit"
 
 #: controllers/view/poddecoder/podtableview.cpp:270
-#: controllers/view/stringsextract/stringsextractview.cpp:198
-#: controllers/view/structures/structureview.cpp:390
+#: controllers/view/stringsextract/stringsextractview.cpp:79
+#: controllers/view/structures/structureview.cpp:102
 #, fuzzy, kde-format
 #| msgctxt "@info:status offset value not available"
 #| msgid "Selection: -"
@@ -1784,67 +1784,13 @@ msgctxt "@title:window"
 msgid "Strings"
 msgstr "Strings"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:62
-#, kde-format
-msgctxt ""
-"@label:spinbox minimum length for consecutive chars to be seen as a string"
-msgid "Minimum length:"
-msgstr "Minimum length:"
-
-#: controllers/view/stringsextract/stringsextractview.cpp:74
-#, kde-format
-msgctxt "@action:button extract the strings from the byte array"
-msgid "&Extract"
-msgstr "&Extract"
-
-#: controllers/view/stringsextract/stringsextractview.cpp:77
-#, kde-format
-msgctxt "@info:tooltip"
-msgid ""
-"Finds the strings contained in the selected range and lists them in the view "
-"below."
-msgstr ""
-"Finds the strings contained in the selected range and lists them in the view "
-"below."
-
-#: controllers/view/stringsextract/stringsextractview.cpp:79
-#, kde-kuit-format
-msgctxt "@info:whatsthis"
-msgid ""
-"If you press the <interface>Extract</interface> button, the selected range "
-"is searched for all strings which have the set minimum length. This strings "
-"found will be listed in the view below."
-msgstr ""
-"If you press the <interface>Extract</interface> button, the selected range "
-"is searched for all strings which have the set minimum length. This strings "
-"found will be listed in the view below."
-
-#: controllers/view/stringsextract/stringsextractview.cpp:90
-#, kde-format
-msgctxt "@label:lineedit filter term for displayed strings"
-msgid "Filter:"
-msgstr "Filter:"
-
-#: controllers/view/stringsextract/stringsextractview.cpp:94
-#, fuzzy, kde-format
-#| msgid "Enter a term to limit the list."
-msgctxt "@info:placeholder"
-msgid "Enter a term to limit the list."
-msgstr "Enter a term to limit the list."
-
-#: controllers/view/stringsextract/stringsextractview.cpp:145
-#, kde-format
-msgctxt "@info"
-msgid "No strings"
-msgstr "No strings"
-
-#: controllers/view/stringsextract/stringsextractview.cpp:165
+#: controllers/view/stringsextract/stringsextractview.cpp:54
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected strings to the clipboard."
 msgstr "Copies the selected strings to the clipboard."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:167
+#: controllers/view/stringsextract/stringsextractview.cpp:56
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1854,20 +1800,20 @@ msgstr ""
 "If you press the <interface>Copy</interface> button, all strings you "
 "selected in the list are copied to the clipboard."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:178
+#: controllers/view/stringsextract/stringsextractview.cpp:62
 #, fuzzy, kde-format
 #| msgid "&Show"
 msgctxt "@action:button"
 msgid "Show"
 msgstr "&Show"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:180
+#: controllers/view/stringsextract/stringsextractview.cpp:64
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Shows the selected string in the view."
 msgstr "Shows the selected string in the view."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:182
+#: controllers/view/stringsextract/stringsextractview.cpp:66
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1877,7 +1823,7 @@ msgstr ""
 "If you press the <interface>Go to</interface> button, the string which was "
 "last selected is marked and shown in the view."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:200
+#: controllers/view/stringsextract/stringsextractview.cpp:81
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Shows the selected string in the view."
@@ -1885,13 +1831,67 @@ msgctxt "@info:tooltip"
 msgid "Selects the selected string in the view."
 msgstr "Shows the selected string in the view."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:354
+#: controllers/view/stringsextract/stringsextractview.cpp:99
+#, kde-format
+msgctxt ""
+"@label:spinbox minimum length for consecutive chars to be seen as a string"
+msgid "Minimum length:"
+msgstr "Minimum length:"
+
+#: controllers/view/stringsextract/stringsextractview.cpp:111
+#, kde-format
+msgctxt "@action:button extract the strings from the byte array"
+msgid "&Extract"
+msgstr "&Extract"
+
+#: controllers/view/stringsextract/stringsextractview.cpp:114
+#, kde-format
+msgctxt "@info:tooltip"
+msgid ""
+"Finds the strings contained in the selected range and lists them in the view "
+"below."
+msgstr ""
+"Finds the strings contained in the selected range and lists them in the view "
+"below."
+
+#: controllers/view/stringsextract/stringsextractview.cpp:116
+#, kde-kuit-format
+msgctxt "@info:whatsthis"
+msgid ""
+"If you press the <interface>Extract</interface> button, the selected range "
+"is searched for all strings which have the set minimum length. This strings "
+"found will be listed in the view below."
+msgstr ""
+"If you press the <interface>Extract</interface> button, the selected range "
+"is searched for all strings which have the set minimum length. This strings "
+"found will be listed in the view below."
+
+#: controllers/view/stringsextract/stringsextractview.cpp:127
+#, kde-format
+msgctxt "@label:lineedit filter term for displayed strings"
+msgid "Filter:"
+msgstr "Filter:"
+
+#: controllers/view/stringsextract/stringsextractview.cpp:131
+#, fuzzy, kde-format
+#| msgid "Enter a term to limit the list."
+msgctxt "@info:placeholder"
+msgid "Enter a term to limit the list."
+msgstr "Enter a term to limit the list."
+
+#: controllers/view/stringsextract/stringsextractview.cpp:182
+#, kde-format
+msgctxt "@info"
+msgid "No strings"
+msgstr "No strings"
+
+#: controllers/view/stringsextract/stringsextractview.cpp:369
 #, kde-format
 msgctxt "@info"
 msgid "No strings extracted."
 msgstr "No strings extracted."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:355
+#: controllers/view/stringsextract/stringsextractview.cpp:370
 #, kde-format
 msgctxt "@info"
 msgid "1 string extracted."
@@ -2672,69 +2672,75 @@ msgctxt "size of a data structure"
 msgid "Size"
 msgstr "Size"
 
-#: controllers/view/structures/structureview.cpp:86
-#, kde-format
-msgctxt "@info"
-msgid "No structure definitions"
-msgstr "No structure definitions"
-
-#: controllers/view/structures/structureview.cpp:106
-#, kde-format
-msgctxt "@action:button"
+#: controllers/view/structures/structureview.cpp:56
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "Validate"
+msgctxt "@action"
 msgid "Validate"
 msgstr "Validate"
 
-#: controllers/view/structures/structureview.cpp:108
+#: controllers/view/structures/structureview.cpp:57
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Validate all structures."
 msgstr "Validate all structures."
 
-#: controllers/view/structures/structureview.cpp:130
-#, kde-format
-msgctxt "@action:button"
-msgid "Script console"
+#: controllers/view/structures/structureview.cpp:74
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "Script console"
+msgctxt "@action"
+msgid "Script Console"
 msgstr "Script console"
 
-#: controllers/view/structures/structureview.cpp:132
+#: controllers/view/structures/structureview.cpp:75
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open script console."
 msgstr "Open script console."
 
-#: controllers/view/structures/structureview.cpp:136
-#, kde-format
-msgctxt "@action:button"
+#: controllers/view/structures/structureview.cpp:80
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "Settings"
+msgctxt "@action"
 msgid "Settings"
 msgstr "Settings"
 
-#: controllers/view/structures/structureview.cpp:138
+#: controllers/view/structures/structureview.cpp:81
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open settings."
 msgstr "Open settings."
 
-#: controllers/view/structures/structureview.cpp:169
+#: controllers/view/structures/structureview.cpp:144
+#, kde-format
+msgctxt "@info"
+msgid "No structure definitions"
+msgstr "No structure definitions"
+
+#: controllers/view/structures/structureview.cpp:214
 #, fuzzy, kde-format
 #| msgid "Value Display"
 msgctxt "@title:tab"
 msgid "Value Display"
 msgstr "Value Display"
 
-#: controllers/view/structures/structureview.cpp:181
+#: controllers/view/structures/structureview.cpp:226
 #, fuzzy, kde-format
 #| msgid "Structures management"
 msgctxt "@title:tab"
 msgid "Structures management"
 msgstr "Structures management"
 
-#: controllers/view/structures/structureview.cpp:268
+#: controllers/view/structures/structureview.cpp:346
 #, kde-format
 msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Unlock"
 msgstr "Unlock"
 
-#: controllers/view/structures/structureview.cpp:270
+#: controllers/view/structures/structureview.cpp:348
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -2744,19 +2750,19 @@ msgstr ""
 "Unlock selected structure, i.e. the starting offset is always set to the "
 "current cursor position."
 
-#: controllers/view/structures/structureview.cpp:275
+#: controllers/view/structures/structureview.cpp:353
 #, kde-format
 msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Lock"
 msgstr "Lock"
 
-#: controllers/view/structures/structureview.cpp:277
+#: controllers/view/structures/structureview.cpp:355
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Lock selected structure to current offset."
 msgstr "Lock selected structure to current offset."
 
-#: controllers/view/structures/structureview.cpp:324
+#: controllers/view/structures/structureview.cpp:411
 #, kde-format
 msgctxt "@title:window"
 msgid "Structures Script Console"

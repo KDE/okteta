@@ -2,7 +2,7 @@
 # Copyright (C) 2009-2026 This file is copyright:
 # This file is distributed under the same license as the okteta package.
 #
-# SPDX-FileCopyrightText: 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2018, 2019, 2020, 2022, 2023 Eloy Cuadra <ecuadra@eloihr.net>
+# SPDX-FileCopyrightText: 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2018, 2019, 2020, 2022, 2023, 2026 Eloy Cuadra <ecuadra@eloihr.net>
 # SPDX-FileCopyrightText: 2011 Ricardo Varas Santana <ricardoivaras@gmail.com>
 # SPDX-FileCopyrightText: 2013 Javier Viñal <fjvinal@gmail.com>
 # SPDX-FileCopyrightText: 2024, 2025, 2026 Sofía Priego <spriego@darksylvania.net>
@@ -10,8 +10,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-11 02:11+0000\n"
-"PO-Revision-Date: 2026-01-06 01:49+0100\n"
+"POT-Creation-Date: 2026-03-12 02:04+0000\n"
+"PO-Revision-Date: 2026-03-11 12:29+0100\n"
 "Last-Translator: Sofía Priego <spriego@darksylvania.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
 "Language: es\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 25.12.0\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -148,25 +148,19 @@ msgctxt "@title:window"
 msgid "Bookmarks"
 msgstr "Marcadores"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:72
-#, kde-format
-msgctxt "@info"
-msgid "No bookmarks"
-msgstr "No hay marcadores"
-
-#: controllers/view/bookmarks/bookmarksview.cpp:95
+#: controllers/view/bookmarks/bookmarksview.cpp:43
 #, kde-format
 msgctxt "@action"
 msgid "Create New"
 msgstr "Crear nuevo"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:97
+#: controllers/view/bookmarks/bookmarksview.cpp:45
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Creates a new bookmark for the current cursor position."
 msgstr "Crea un nuevo marcador para la posición actual del cursor."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:99
+#: controllers/view/bookmarks/bookmarksview.cpp:47
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -176,19 +170,19 @@ msgstr ""
 "Si pulsa este botón se creará un nuevo marcador para la posición actual del "
 "cursor."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:109
+#: controllers/view/bookmarks/bookmarksview.cpp:56
 #, kde-format
 msgctxt "@action"
 msgid "Delete"
 msgstr "Borrar"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:111
+#: controllers/view/bookmarks/bookmarksview.cpp:58
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Deletes all the selected bookmarks."
 msgstr "Borra todos los marcadores seleccionados."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:113
+#: controllers/view/bookmarks/bookmarksview.cpp:60
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -197,19 +191,19 @@ msgstr ""
 "Si pulsa este botón se borrarán todos los marcadores que estén seleccionados "
 "actualmente."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:124
+#: controllers/view/bookmarks/bookmarksview.cpp:66
 #, kde-format
 msgctxt "@action"
 msgid "Go to Offset"
 msgstr "Ir a desplazamiento"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:126
+#: controllers/view/bookmarks/bookmarksview.cpp:68
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Moves the cursor to the selected bookmark."
 msgstr "Mueve el cursor al marcador seleccionado."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:128
+#: controllers/view/bookmarks/bookmarksview.cpp:70
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -219,19 +213,19 @@ msgstr ""
 "Si pulsa este botón se moverá el cursor a la posición del marcador que haya "
 "sido seleccionado en último lugar."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:136
+#: controllers/view/bookmarks/bookmarksview.cpp:77
 #, kde-format
 msgctxt "@action"
 msgid "Rename"
 msgstr "Cambiar nombre"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:138
+#: controllers/view/bookmarks/bookmarksview.cpp:79
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enables renaming of the selected bookmark."
 msgstr "Permite cambiar el nombre del marcador seleccionado."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:140
+#: controllers/view/bookmarks/bookmarksview.cpp:81
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -241,21 +235,27 @@ msgstr ""
 "Si pulsa el botón podrá editar el nombre del marcador que haya sido "
 "seleccionado en último lugar."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:149
-#: controllers/view/stringsextract/stringsextractview.cpp:191
-#: controllers/view/structures/structureview.cpp:381
+#: controllers/view/bookmarks/bookmarksview.cpp:87
+#: controllers/view/stringsextract/stringsextractview.cpp:72
+#: controllers/view/structures/structureview.cpp:95
 #, kde-format
 msgctxt "@action"
 msgid "Copy Offset"
 msgstr "Copiar desplazamiento"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:151
-#: controllers/view/stringsextract/stringsextractview.cpp:193
-#: controllers/view/structures/structureview.cpp:383
+#: controllers/view/bookmarks/bookmarksview.cpp:89
+#: controllers/view/stringsextract/stringsextractview.cpp:74
+#: controllers/view/structures/structureview.cpp:97
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the offset to the clipboard."
 msgstr "Copia el desplazamiento en el portapapeles."
+
+#: controllers/view/bookmarks/bookmarksview.cpp:126
+#, kde-format
+msgctxt "@info"
+msgid "No bookmarks"
+msgstr "No hay marcadores"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:137
 #: controllers/view/info/statistictablemodel.cpp:160
@@ -814,7 +814,7 @@ msgstr ""
 "estadísticas de frecuencia para los bytes del intervalo seleccionado."
 
 #: controllers/view/info/infoview.cpp:120
-#: controllers/view/stringsextract/stringsextractview.cpp:163
+#: controllers/view/stringsextract/stringsextractview.cpp:52
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy"
@@ -1484,21 +1484,19 @@ msgstr ""
 "necesario?"
 
 #: controllers/view/poddecoder/podtableview.cpp:257
-#: controllers/view/structures/structureview.cpp:367
+#: controllers/view/structures/structureview.cpp:86
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit"
 msgstr "Editar"
 
 #: controllers/view/poddecoder/podtableview.cpp:270
-#: controllers/view/stringsextract/stringsextractview.cpp:198
-#: controllers/view/structures/structureview.cpp:390
-#, fuzzy, kde-format
-#| msgctxt "@info:status offset value not available"
-#| msgid "Selection: -"
+#: controllers/view/stringsextract/stringsextractview.cpp:79
+#: controllers/view/structures/structureview.cpp:102
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Select in View"
-msgstr "Selección: -"
+msgstr "Seleccionar en la vista"
 
 #: controllers/view/print/printtool.cpp:282
 #: controllers/view/print/printtool.cpp:312
@@ -1776,20 +1774,64 @@ msgctxt "@title:window"
 msgid "Strings"
 msgstr "Cadenas"
 
+#: controllers/view/stringsextract/stringsextractview.cpp:54
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Copies the selected strings to the clipboard."
+msgstr "Copia las cadenas seleccionadas en el portapapeles."
+
+#: controllers/view/stringsextract/stringsextractview.cpp:56
+#, kde-kuit-format
+msgctxt "@info:whatsthis"
+msgid ""
+"If you press the <interface>Copy</interface> button, all strings you "
+"selected in the list are copied to the clipboard."
+msgstr ""
+"Si pulsa el botón <interface>Copiar</interface>, todas las cadenas "
+"seleccionadas de la lista se copiarán en el portapapeles."
+
 #: controllers/view/stringsextract/stringsextractview.cpp:62
+#, kde-format
+msgctxt "@action:button"
+msgid "Show"
+msgstr "Mostrar"
+
+#: controllers/view/stringsextract/stringsextractview.cpp:64
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Shows the selected string in the view."
+msgstr "Muestra la cadena seleccionada en la vista."
+
+#: controllers/view/stringsextract/stringsextractview.cpp:66
+#, kde-kuit-format
+msgctxt "@info:whatsthis"
+msgid ""
+"If you press the <interface>Go to</interface> button, the string which was "
+"last selected is marked and shown in the view."
+msgstr ""
+"Si pulsa el botón <interface>Ir a</interface>, la cadena que se haya "
+"seleccionado en último lugar será marcada y mostrada en la vista."
+
+#: controllers/view/stringsextract/stringsextractview.cpp:81
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Selects the selected string in the view."
+msgstr "Selecciona la cadena seleccionada en la vista."
+
+#: controllers/view/stringsextract/stringsextractview.cpp:99
 #, kde-format
 msgctxt ""
 "@label:spinbox minimum length for consecutive chars to be seen as a string"
 msgid "Minimum length:"
 msgstr "Longitud mínima:"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:74
+#: controllers/view/stringsextract/stringsextractview.cpp:111
 #, kde-format
 msgctxt "@action:button extract the strings from the byte array"
 msgid "&Extract"
 msgstr "&Extraer"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:77
+#: controllers/view/stringsextract/stringsextractview.cpp:114
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1799,7 +1841,7 @@ msgstr ""
 "Busca las cadenas contenidas en el intervalo seleccionado y las lista en la "
 "vista inferior."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:79
+#: controllers/view/stringsextract/stringsextractview.cpp:116
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1812,75 +1854,31 @@ msgstr ""
 "establecida la longitud mínima. Las cadenas encontradas se listarán en la "
 "vista inferior."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:90
+#: controllers/view/stringsextract/stringsextractview.cpp:127
 #, kde-format
 msgctxt "@label:lineedit filter term for displayed strings"
 msgid "Filter:"
 msgstr "Filtro:"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:94
+#: controllers/view/stringsextract/stringsextractview.cpp:131
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter a term to limit the list."
 msgstr "Introduzca un término para limitar la lista."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:145
+#: controllers/view/stringsextract/stringsextractview.cpp:182
 #, kde-format
 msgctxt "@info"
 msgid "No strings"
 msgstr "Sin cadenas"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:165
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Copies the selected strings to the clipboard."
-msgstr "Copia las cadenas seleccionadas en el portapapeles."
-
-#: controllers/view/stringsextract/stringsextractview.cpp:167
-#, kde-kuit-format
-msgctxt "@info:whatsthis"
-msgid ""
-"If you press the <interface>Copy</interface> button, all strings you "
-"selected in the list are copied to the clipboard."
-msgstr ""
-"Si pulsa el botón <interface>Copiar</interface>, todas las cadenas "
-"seleccionadas de la lista se copiarán en el portapapeles."
-
-#: controllers/view/stringsextract/stringsextractview.cpp:178
-#, kde-format
-msgctxt "@action:button"
-msgid "Show"
-msgstr "Mostrar"
-
-#: controllers/view/stringsextract/stringsextractview.cpp:180
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Shows the selected string in the view."
-msgstr "Muestra la cadena seleccionada en la vista."
-
-#: controllers/view/stringsextract/stringsextractview.cpp:182
-#, kde-kuit-format
-msgctxt "@info:whatsthis"
-msgid ""
-"If you press the <interface>Go to</interface> button, the string which was "
-"last selected is marked and shown in the view."
-msgstr ""
-"Si pulsa el botón <interface>Ir a</interface>, la cadena que se haya "
-"seleccionado en último lugar será marcada y mostrada en la vista."
-
-#: controllers/view/stringsextract/stringsextractview.cpp:200
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Selects the selected string in the view."
-msgstr "Selecciona la cadena seleccionada en la vista."
-
-#: controllers/view/stringsextract/stringsextractview.cpp:354
+#: controllers/view/stringsextract/stringsextractview.cpp:369
 #, kde-format
 msgctxt "@info"
 msgid "No strings extracted."
 msgstr "No se han extraído cadenas."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:355
+#: controllers/view/stringsextract/stringsextractview.cpp:370
 #, kde-format
 msgctxt "@info"
 msgid "1 string extracted."
@@ -2663,67 +2661,73 @@ msgctxt "size of a data structure"
 msgid "Size"
 msgstr "Tamaño"
 
-#: controllers/view/structures/structureview.cpp:86
-#, kde-format
-msgctxt "@info"
-msgid "No structure definitions"
-msgstr "Sin definiciones de estructuras"
-
-#: controllers/view/structures/structureview.cpp:106
-#, kde-format
-msgctxt "@action:button"
+#: controllers/view/structures/structureview.cpp:56
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "Validate"
+msgctxt "@action"
 msgid "Validate"
 msgstr "Validar"
 
-#: controllers/view/structures/structureview.cpp:108
+#: controllers/view/structures/structureview.cpp:57
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Validate all structures."
 msgstr "Validar todas las estructuras."
 
-#: controllers/view/structures/structureview.cpp:130
-#, kde-format
-msgctxt "@action:button"
-msgid "Script console"
+#: controllers/view/structures/structureview.cpp:74
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "Script console"
+msgctxt "@action"
+msgid "Script Console"
 msgstr "Consola de scripts"
 
-#: controllers/view/structures/structureview.cpp:132
+#: controllers/view/structures/structureview.cpp:75
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open script console."
 msgstr "Abrir la consola de scripts."
 
-#: controllers/view/structures/structureview.cpp:136
-#, kde-format
-msgctxt "@action:button"
+#: controllers/view/structures/structureview.cpp:80
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "Settings"
+msgctxt "@action"
 msgid "Settings"
 msgstr "Preferencias"
 
-#: controllers/view/structures/structureview.cpp:138
+#: controllers/view/structures/structureview.cpp:81
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open settings."
 msgstr "Abrir las preferencias."
 
-#: controllers/view/structures/structureview.cpp:169
+#: controllers/view/structures/structureview.cpp:144
+#, kde-format
+msgctxt "@info"
+msgid "No structure definitions"
+msgstr "Sin definiciones de estructuras"
+
+#: controllers/view/structures/structureview.cpp:214
 #, kde-format
 msgctxt "@title:tab"
 msgid "Value Display"
 msgstr "Visor de valores"
 
-#: controllers/view/structures/structureview.cpp:181
+#: controllers/view/structures/structureview.cpp:226
 #, kde-format
 msgctxt "@title:tab"
 msgid "Structures management"
 msgstr "Estructuras cargadas"
 
-#: controllers/view/structures/structureview.cpp:268
+#: controllers/view/structures/structureview.cpp:346
 #, kde-format
 msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Unlock"
 msgstr "Desbloquear"
 
-#: controllers/view/structures/structureview.cpp:270
+#: controllers/view/structures/structureview.cpp:348
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -2733,19 +2737,19 @@ msgstr ""
 "Desbloquear la estructura seleccionada. Es decir: el desplazamiento de "
 "inicio se fija siempre a la posición actual del cursor."
 
-#: controllers/view/structures/structureview.cpp:275
+#: controllers/view/structures/structureview.cpp:353
 #, kde-format
 msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Lock"
 msgstr "Bloquear"
 
-#: controllers/view/structures/structureview.cpp:277
+#: controllers/view/structures/structureview.cpp:355
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Lock selected structure to current offset."
 msgstr "Bloquear la estructura seleccionada en el desplazamiento actual."
 
-#: controllers/view/structures/structureview.cpp:324
+#: controllers/view/structures/structureview.cpp:411
 #, kde-format
 msgctxt "@title:window"
 msgid "Structures Script Console"
@@ -4054,11 +4058,3 @@ msgctxt ""
 "@item:inlistbox coding of the bytes as UTF-8 characters with the values"
 msgid "UTF-8"
 msgstr "UTF-8"
-
-#~ msgctxt "@action:inmenu"
-#~ msgid "Select"
-#~ msgstr "Seleccionar"
-
-#~ msgctxt "@action"
-#~ msgid "Select"
-#~ msgstr "Seleccionar"

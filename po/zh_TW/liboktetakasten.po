@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-11 02:11+0000\n"
+"POT-Creation-Date: 2026-03-12 02:04+0000\n"
 "PO-Revision-Date: 2025-12-21 07:57+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -151,25 +151,19 @@ msgctxt "@title:window"
 msgid "Bookmarks"
 msgstr "書籤"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:72
-#, kde-format
-msgctxt "@info"
-msgid "No bookmarks"
-msgstr "沒有書籤"
-
-#: controllers/view/bookmarks/bookmarksview.cpp:95
+#: controllers/view/bookmarks/bookmarksview.cpp:43
 #, kde-format
 msgctxt "@action"
 msgid "Create New"
 msgstr "建立新的"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:97
+#: controllers/view/bookmarks/bookmarksview.cpp:45
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Creates a new bookmark for the current cursor position."
 msgstr "在游標目前位置建立新書籤。"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:99
+#: controllers/view/bookmarks/bookmarksview.cpp:47
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -177,38 +171,38 @@ msgid ""
 "cursor position."
 msgstr "若您按下此鍵，會在游標目前的位置建立新的書籤。"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:109
+#: controllers/view/bookmarks/bookmarksview.cpp:56
 #, kde-format
 msgctxt "@action"
 msgid "Delete"
 msgstr "刪除"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:111
+#: controllers/view/bookmarks/bookmarksview.cpp:58
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Deletes all the selected bookmarks."
 msgstr "刪除所有選取的書籤。"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:113
+#: controllers/view/bookmarks/bookmarksview.cpp:60
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press this button, all bookmarks which are selected will be deleted."
 msgstr "若您按下此鍵，則會刪除所有選取的書籤。"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:124
+#: controllers/view/bookmarks/bookmarksview.cpp:66
 #, kde-format
 msgctxt "@action"
 msgid "Go to Offset"
 msgstr "跳到位移"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:126
+#: controllers/view/bookmarks/bookmarksview.cpp:68
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Moves the cursor to the selected bookmark."
 msgstr "將游標移動到選取的書籤。"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:128
+#: controllers/view/bookmarks/bookmarksview.cpp:70
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -216,19 +210,19 @@ msgid ""
 "bookmark which has been last selected."
 msgstr "若您按下此鍵，游標將會移動到上次選取的書籤的位置。"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:136
+#: controllers/view/bookmarks/bookmarksview.cpp:77
 #, kde-format
 msgctxt "@action"
 msgid "Rename"
 msgstr "重新命名"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:138
+#: controllers/view/bookmarks/bookmarksview.cpp:79
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enables renaming of the selected bookmark."
 msgstr "允許重新命名所選的書籤。"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:140
+#: controllers/view/bookmarks/bookmarksview.cpp:81
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -236,21 +230,27 @@ msgid ""
 "can be edited."
 msgstr "若您按下此鍵，則可以編輯上次選取的書籤的名稱。"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:149
-#: controllers/view/stringsextract/stringsextractview.cpp:191
-#: controllers/view/structures/structureview.cpp:381
+#: controllers/view/bookmarks/bookmarksview.cpp:87
+#: controllers/view/stringsextract/stringsextractview.cpp:72
+#: controllers/view/structures/structureview.cpp:95
 #, kde-format
 msgctxt "@action"
 msgid "Copy Offset"
 msgstr "複製位移"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:151
-#: controllers/view/stringsextract/stringsextractview.cpp:193
-#: controllers/view/structures/structureview.cpp:383
+#: controllers/view/bookmarks/bookmarksview.cpp:89
+#: controllers/view/stringsextract/stringsextractview.cpp:74
+#: controllers/view/structures/structureview.cpp:97
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the offset to the clipboard."
 msgstr "複製位移到剪貼簿中。"
+
+#: controllers/view/bookmarks/bookmarksview.cpp:126
+#, kde-format
+msgctxt "@info"
+msgid "No bookmarks"
+msgstr "沒有書籤"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:137
 #: controllers/view/info/statistictablemodel.cpp:160
@@ -779,7 +779,7 @@ msgstr ""
 "計。"
 
 #: controllers/view/info/infoview.cpp:120
-#: controllers/view/stringsextract/stringsextractview.cpp:163
+#: controllers/view/stringsextract/stringsextractview.cpp:52
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy"
@@ -1427,15 +1427,15 @@ msgstr ""
 "元？"
 
 #: controllers/view/poddecoder/podtableview.cpp:257
-#: controllers/view/structures/structureview.cpp:367
+#: controllers/view/structures/structureview.cpp:86
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit"
 msgstr "編輯"
 
 #: controllers/view/poddecoder/podtableview.cpp:270
-#: controllers/view/stringsextract/stringsextractview.cpp:198
-#: controllers/view/structures/structureview.cpp:390
+#: controllers/view/stringsextract/stringsextractview.cpp:79
+#: controllers/view/structures/structureview.cpp:102
 #, fuzzy, kde-format
 #| msgctxt "@info:status offset value not available"
 #| msgid "Selection: -"
@@ -1709,20 +1709,61 @@ msgctxt "@title:window"
 msgid "Strings"
 msgstr "字串集"
 
+#: controllers/view/stringsextract/stringsextractview.cpp:54
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Copies the selected strings to the clipboard."
+msgstr "複製選取的字串到剪貼簿中。"
+
+#: controllers/view/stringsextract/stringsextractview.cpp:56
+#, kde-kuit-format
+msgctxt "@info:whatsthis"
+msgid ""
+"If you press the <interface>Copy</interface> button, all strings you "
+"selected in the list are copied to the clipboard."
+msgstr ""
+"如果您按下<interface>複製</interface>按鍵，則會將選取的字串複製到剪貼簿中。"
+
 #: controllers/view/stringsextract/stringsextractview.cpp:62
+#, kde-format
+msgctxt "@action:button"
+msgid "Show"
+msgstr "顯示"
+
+#: controllers/view/stringsextract/stringsextractview.cpp:64
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Shows the selected string in the view."
+msgstr "在檢視中顯示選取的字串。"
+
+#: controllers/view/stringsextract/stringsextractview.cpp:66
+#, kde-kuit-format
+msgctxt "@info:whatsthis"
+msgid ""
+"If you press the <interface>Go to</interface> button, the string which was "
+"last selected is marked and shown in the view."
+msgstr "如果您按下<interface>跳到</interface>按鍵，字串會標記並顯示在檢視中。"
+
+#: controllers/view/stringsextract/stringsextractview.cpp:81
+#, kde-format
+msgctxt "@info:tooltip"
+msgid "Selects the selected string in the view."
+msgstr "在檢視中顯示已選的字串。"
+
+#: controllers/view/stringsextract/stringsextractview.cpp:99
 #, kde-format
 msgctxt ""
 "@label:spinbox minimum length for consecutive chars to be seen as a string"
 msgid "Minimum length:"
 msgstr "最小長度："
 
-#: controllers/view/stringsextract/stringsextractview.cpp:74
+#: controllers/view/stringsextract/stringsextractview.cpp:111
 #, kde-format
 msgctxt "@action:button extract the strings from the byte array"
 msgid "&Extract"
 msgstr "解開(&E)"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:77
+#: controllers/view/stringsextract/stringsextractview.cpp:114
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1730,7 +1771,7 @@ msgid ""
 "below."
 msgstr "尋找包含在選取的範圍內的字串，並列在底下的檢視內。"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:79
+#: controllers/view/stringsextract/stringsextractview.cpp:116
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1741,72 +1782,31 @@ msgstr ""
 "如果您按下<interface>解開</interface>按鍵，會在選取的範圍內搜尋所有超過最小長"
 "度設定的字串。找到的字串會被列在下方的檢視內。"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:90
+#: controllers/view/stringsextract/stringsextractview.cpp:127
 #, kde-format
 msgctxt "@label:lineedit filter term for displayed strings"
 msgid "Filter:"
 msgstr "過濾器："
 
-#: controllers/view/stringsextract/stringsextractview.cpp:94
+#: controllers/view/stringsextract/stringsextractview.cpp:131
 #, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter a term to limit the list."
 msgstr "在此輸入過濾清單的字串。"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:145
+#: controllers/view/stringsextract/stringsextractview.cpp:182
 #, kde-format
 msgctxt "@info"
 msgid "No strings"
 msgstr "沒有字串"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:165
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Copies the selected strings to the clipboard."
-msgstr "複製選取的字串到剪貼簿中。"
-
-#: controllers/view/stringsextract/stringsextractview.cpp:167
-#, kde-kuit-format
-msgctxt "@info:whatsthis"
-msgid ""
-"If you press the <interface>Copy</interface> button, all strings you "
-"selected in the list are copied to the clipboard."
-msgstr ""
-"如果您按下<interface>複製</interface>按鍵，則會將選取的字串複製到剪貼簿中。"
-
-#: controllers/view/stringsextract/stringsextractview.cpp:178
-#, kde-format
-msgctxt "@action:button"
-msgid "Show"
-msgstr "顯示"
-
-#: controllers/view/stringsextract/stringsextractview.cpp:180
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Shows the selected string in the view."
-msgstr "在檢視中顯示選取的字串。"
-
-#: controllers/view/stringsextract/stringsextractview.cpp:182
-#, kde-kuit-format
-msgctxt "@info:whatsthis"
-msgid ""
-"If you press the <interface>Go to</interface> button, the string which was "
-"last selected is marked and shown in the view."
-msgstr "如果您按下<interface>跳到</interface>按鍵，字串會標記並顯示在檢視中。"
-
-#: controllers/view/stringsextract/stringsextractview.cpp:200
-#, kde-format
-msgctxt "@info:tooltip"
-msgid "Selects the selected string in the view."
-msgstr "在檢視中顯示已選的字串。"
-
-#: controllers/view/stringsextract/stringsextractview.cpp:354
+#: controllers/view/stringsextract/stringsextractview.cpp:369
 #, kde-format
 msgctxt "@info"
 msgid "No strings extracted."
 msgstr "沒有取出任何字串。"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:355
+#: controllers/view/stringsextract/stringsextractview.cpp:370
 #, kde-format
 msgctxt "@info"
 msgid "1 string extracted."
@@ -2576,67 +2576,73 @@ msgctxt "size of a data structure"
 msgid "Size"
 msgstr "大小"
 
-#: controllers/view/structures/structureview.cpp:86
-#, kde-format
-msgctxt "@info"
-msgid "No structure definitions"
-msgstr "沒有結構定義"
-
-#: controllers/view/structures/structureview.cpp:106
-#, kde-format
-msgctxt "@action:button"
+#: controllers/view/structures/structureview.cpp:56
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "Validate"
+msgctxt "@action"
 msgid "Validate"
 msgstr "檢驗"
 
-#: controllers/view/structures/structureview.cpp:108
+#: controllers/view/structures/structureview.cpp:57
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Validate all structures."
 msgstr "檢驗所有結構。"
 
-#: controllers/view/structures/structureview.cpp:130
-#, kde-format
-msgctxt "@action:button"
-msgid "Script console"
+#: controllers/view/structures/structureview.cpp:74
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "Script console"
+msgctxt "@action"
+msgid "Script Console"
 msgstr "文稿主控台"
 
-#: controllers/view/structures/structureview.cpp:132
+#: controllers/view/structures/structureview.cpp:75
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open script console."
 msgstr "開啟文稿主控台。"
 
-#: controllers/view/structures/structureview.cpp:136
-#, kde-format
-msgctxt "@action:button"
+#: controllers/view/structures/structureview.cpp:80
+#, fuzzy, kde-format
+#| msgctxt "@action:button"
+#| msgid "Settings"
+msgctxt "@action"
 msgid "Settings"
 msgstr "設定"
 
-#: controllers/view/structures/structureview.cpp:138
+#: controllers/view/structures/structureview.cpp:81
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open settings."
 msgstr "開啟設定。"
 
-#: controllers/view/structures/structureview.cpp:169
+#: controllers/view/structures/structureview.cpp:144
+#, kde-format
+msgctxt "@info"
+msgid "No structure definitions"
+msgstr "沒有結構定義"
+
+#: controllers/view/structures/structureview.cpp:214
 #, kde-format
 msgctxt "@title:tab"
 msgid "Value Display"
 msgstr "數值顯示"
 
-#: controllers/view/structures/structureview.cpp:181
+#: controllers/view/structures/structureview.cpp:226
 #, kde-format
 msgctxt "@title:tab"
 msgid "Structures management"
 msgstr "結構管理"
 
-#: controllers/view/structures/structureview.cpp:268
+#: controllers/view/structures/structureview.cpp:346
 #, kde-format
 msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Unlock"
 msgstr "解除鎖定"
 
-#: controllers/view/structures/structureview.cpp:270
+#: controllers/view/structures/structureview.cpp:348
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -2644,19 +2650,19 @@ msgid ""
 "current cursor position."
 msgstr "取消鎖定選取的結構，也就是將啟始位移設定在目前游標位置。"
 
-#: controllers/view/structures/structureview.cpp:275
+#: controllers/view/structures/structureview.cpp:353
 #, kde-format
 msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Lock"
 msgstr "鎖定"
 
-#: controllers/view/structures/structureview.cpp:277
+#: controllers/view/structures/structureview.cpp:355
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Lock selected structure to current offset."
 msgstr "鎖定選取的結構到目前的位移。"
 
-#: controllers/view/structures/structureview.cpp:324
+#: controllers/view/structures/structureview.cpp:411
 #, kde-format
 msgctxt "@title:window"
 msgid "Structures Script Console"
