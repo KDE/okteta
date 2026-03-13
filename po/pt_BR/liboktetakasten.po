@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-03-12 02:04+0000\n"
-"PO-Revision-Date: 2026-03-11 08:53-0300\n"
+"PO-Revision-Date: 2026-03-12 08:16-0300\n"
 "Last-Translator: Marcus Gama <marcus.gama@gmail.com>\n"
 "Language-Team: Brazilian Portuguese <kde-i18n-pt_BR@kde.org>\n"
 "Language: pt_BR\n"
@@ -2654,9 +2654,7 @@ msgid "Size"
 msgstr "Tamanho"
 
 #: controllers/view/structures/structureview.cpp:56
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Validate"
+#, kde-format
 msgctxt "@action"
 msgid "Validate"
 msgstr "Validar"
@@ -2668,9 +2666,7 @@ msgid "Validate all structures."
 msgstr "Validar todas as estruturas."
 
 #: controllers/view/structures/structureview.cpp:74
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Script console"
+#, kde-format
 msgctxt "@action"
 msgid "Script Console"
 msgstr "Console do script"
@@ -2682,9 +2678,7 @@ msgid "Open script console."
 msgstr "Abrir console do script."
 
 #: controllers/view/structures/structureview.cpp:80
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Settings"
+#, kde-format
 msgctxt "@action"
 msgid "Settings"
 msgstr "Configurações"

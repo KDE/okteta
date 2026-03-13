@@ -2568,12 +2568,10 @@ msgid "Size"
 msgstr "大小"
 
 #: controllers/view/structures/structureview.cpp:56
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Validate"
+#, kde-format
 msgctxt "@action"
 msgid "Validate"
-msgstr "验证"
+msgstr ""
 
 #: controllers/view/structures/structureview.cpp:57
 #, kde-format
@@ -2582,12 +2580,10 @@ msgid "Validate all structures."
 msgstr "校验全部结构。"
 
 #: controllers/view/structures/structureview.cpp:74
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Script console"
+#, kde-format
 msgctxt "@action"
 msgid "Script Console"
-msgstr "脚本控制台"
+msgstr ""
 
 #: controllers/view/structures/structureview.cpp:75
 #, kde-format
@@ -2596,12 +2592,10 @@ msgid "Open script console."
 msgstr "打开脚本控制台。"
 
 #: controllers/view/structures/structureview.cpp:80
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Settings"
+#, kde-format
 msgctxt "@action"
 msgid "Settings"
-msgstr "设置"
+msgstr ""
 
 #: controllers/view/structures/structureview.cpp:81
 #, kde-format

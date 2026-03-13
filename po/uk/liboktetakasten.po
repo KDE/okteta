@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-03-12 02:04+0000\n"
-"PO-Revision-Date: 2026-03-11 10:16+0200\n"
+"PO-Revision-Date: 2026-03-12 08:52+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
 "Language: uk\n"
@@ -2680,9 +2680,7 @@ msgid "Size"
 msgstr "Розмір"
 
 #: controllers/view/structures/structureview.cpp:56
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Validate"
+#, kde-format
 msgctxt "@action"
 msgid "Validate"
 msgstr "Перевірити"
@@ -2694,9 +2692,7 @@ msgid "Validate all structures."
 msgstr "Перевірити всі структури."
 
 #: controllers/view/structures/structureview.cpp:74
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Script console"
+#, kde-format
 msgctxt "@action"
 msgid "Script Console"
 msgstr "Скриптова консоль"
@@ -2708,9 +2704,7 @@ msgid "Open script console."
 msgstr "Відкрити скриптову консоль."
 
 #: controllers/view/structures/structureview.cpp:80
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Settings"
+#, kde-format
 msgctxt "@action"
 msgid "Settings"
 msgstr "Параметри"

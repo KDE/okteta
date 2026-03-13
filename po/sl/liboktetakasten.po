@@ -9,7 +9,7 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-03-12 02:04+0000\n"
-"PO-Revision-Date: 2026-03-11 06:53+0100\n"
+"PO-Revision-Date: 2026-03-12 06:49+0100\n"
 "Last-Translator: Matjaž Jeran <matjaz.jeran@amis.net>\n"
 "Language-Team: Slovenian <lugos-slo@lugos.si>\n"
 "Language: sl\n"
@@ -2661,9 +2661,7 @@ msgid "Size"
 msgstr "Velikost"
 
 #: controllers/view/structures/structureview.cpp:56
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Validate"
+#, kde-format
 msgctxt "@action"
 msgid "Validate"
 msgstr "Potrdi veljavnost"
@@ -2675,9 +2673,7 @@ msgid "Validate all structures."
 msgstr "Potrdi veljavnost vseh struktur."
 
 #: controllers/view/structures/structureview.cpp:74
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Script console"
+#, kde-format
 msgctxt "@action"
 msgid "Script Console"
 msgstr "Skriptna konzola"
@@ -2689,9 +2685,7 @@ msgid "Open script console."
 msgstr "Odpri skriptno konzolo."
 
 #: controllers/view/structures/structureview.cpp:80
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Settings"
+#, kde-format
 msgctxt "@action"
 msgid "Settings"
 msgstr "Nastavitve"
