@@ -53,7 +53,6 @@ ByteTableView::ByteTableView(ByteTableTool* tool, QWidget* parent)
     mByteTableView->setItemsExpandable(false);
     mByteTableView->setUniformRowHeights(true);
     mByteTableView->setAllColumnsShowFocus(true);
-    mByteTableView->setSortingEnabled(false);
     QHeaderView* const header = mByteTableView->header();
     header->setSectionResizeMode(QHeaderView::Interactive);
     header->setStretchLastSection(false);

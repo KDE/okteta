@@ -61,7 +61,6 @@ PODTableView::PODTableView(PODDecoderTool* tool, AbstractUserMessagesHandler* us
     mPODTableView->setEditTriggers(QAbstractItemView::EditKeyPressed | QAbstractItemView::DoubleClicked);
     mPODTableView->setDragEnabled(true);
     mPODTableView->setDragDropMode(QAbstractItemView::DragOnly);
-    mPODTableView->setSortingEnabled(false);
     mPODTableView->installEventFilter(this);
     mPODTableView->setContextMenuPolicy(Qt::CustomContextMenu);
     mPODDelegate = new PODDelegate(mTool, this);
