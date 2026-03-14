@@ -19,6 +19,7 @@
 #include <Kasten/UserResponseOption>
 #include <Kasten/UserQuery>
 // KF
+#include <KActionMenu>
 #include <KComboBox>
 #include <KLocalizedString>
 #include <KStandardAction>
@@ -45,12 +46,31 @@ PODTableView::PODTableView(PODDecoderTool* tool, AbstractUserMessagesHandler* us
     , mTool(tool)
     , m_userMessagesHandler(userMessagesHandler)
 {
+    // actions
+    m_editAction = new QAction(QIcon::fromTheme(QStringLiteral("document-edit")),
+                               i18nc("@action:inmenu", "Edit"), this);
+    connect(m_editAction, &QAction::triggered,
+            this, &PODTableView::editData);
+
+    // TODO: split into explicit "Copy As Data" and "Copy As Text"
+    m_copyAction = KStandardAction::copy(this, &PODTableView::copyToClipboard,  this);
+    m_copyAction->setShortcut(QKeySequence());
+
+    m_selectAction = new QAction(QIcon::fromTheme(QStringLiteral("select-rectangular")),
+                                 i18nc("@action:inmenu", "Select in View"), this);
+    connect(m_selectAction, &QAction::triggered,
+            this, &PODTableView::selectBytesInView);
+
+    // UI copntent
     auto* const baseLayout = new QVBoxLayout(this);
     baseLayout->setContentsMargins(0, 0, 0, 0);
     baseLayout->setSpacing(0);
 
     // table
     mPODTableModel = new PODTableModel(mTool, this);
+    connect(mPODTableModel, &QAbstractItemModel::dataChanged,
+            this, &PODTableView::updateDataActions);
+
     mPODTableView = new QTreeView(this);
     mPODTableView->setObjectName(QStringLiteral("PODTable"));
     mPODTableView->setRootIsDecorated(false);
@@ -72,8 +92,8 @@ PODTableView::PODTableView(PODDecoderTool* tool, AbstractUserMessagesHandler* us
     displayModel->setSourceModel(mPODTableModel);
     mPODTableView->setModel(displayModel);
     connect(mPODTableView->selectionModel(),
-            &QItemSelectionModel::currentRowChanged,
-            this, &PODTableView::onCurrentRowChanged);
+            &QItemSelectionModel::selectionChanged,
+            this, &PODTableView::onDataSelectionChanged);
     connect(mPODTableView, &QWidget::customContextMenuRequested,
             this, &PODTableView::onCustomContextMenuRequested);
 
@@ -108,6 +128,20 @@ PODTableView::PODTableView(PODDecoderTool* tool, AbstractUserMessagesHandler* us
     mUnsignedAsHexCheck->setToolTip(unsignedAsHexToolTip);
     settingsToolBar->addWidget(labelledUnsignedAsHexCheck);
 
+    auto* const stretcher = new QWidget(this);
+    stretcher->setSizePolicy(QSizePolicy::Expanding, QSizePolicy::Preferred);
+    settingsToolBar->addWidget(stretcher);
+
+    // TODO: using the settings bar for now, no direct Copy button unlike Structures tool, needs rethinking
+    auto* const menu = new KActionMenu(QIcon::fromTheme(QStringLiteral("overflow-menu")), QString(), this);
+    menu->setPopupMode(QToolButton::InstantPopup);
+    menu->addAction(m_editAction);
+    menu->addSeparator();
+    menu->addAction(m_copyAction);
+    menu->addSeparator();
+    menu->addAction(m_selectAction);
+    settingsToolBar->addAction(menu);
+
     baseLayout->addWidget(settingsToolBar);
 
     mTool->setDifferentSizeDialog(this);
@@ -120,6 +154,9 @@ PODTableView::PODTableView(PODDecoderTool* tool, AbstractUserMessagesHandler* us
     // anyway this is just an initial setting and the width can be changed manually
     header->resizeSection(0, metrics.horizontalAdvance(QStringLiteral("Hexadecimal 8-bit")) + 30);
     header->resizeSection(1, metrics.horizontalAdvance(QStringLiteral("1.01234567890123456789e-111")) + 15);
+
+    // init state
+    updateDataActions();
 }
 
 PODTableView::~PODTableView() = default;
@@ -180,25 +217,35 @@ Answer PODTableView::query(int newValueSize, int oldValueSize, int sizeLeft)
 
 void PODTableView::editData()
 {
-    auto* const action = static_cast<QAction*>(sender());
-    const QModelIndex index = action->data().toModelIndex();
+    const QModelIndex index = mPODTableView->selectionModel()->currentIndex();
+    if (!index.isValid()) {
+        return;
+    }
 
-    mPODTableView->setCurrentIndex(index);
-    mPODTableView->edit(index);
+    const QModelIndex valueIndex = index.siblingAtColumn(PODTableModel::ValueId);
+
+    mPODTableView->setCurrentIndex(valueIndex);
+    mPODTableView->edit(valueIndex);
 }
 
 void PODTableView::selectBytesInView()
 {
-    auto* const action = static_cast<QAction*>(sender());
-    const int podId = action->data().toInt();
+    const QModelIndex index = mPODTableView->selectionModel()->currentIndex();
+    if (!index.isValid()) {
+        return;
+    }
+
+    const int podId = index.row();
 
     mTool->selectBytesInView(podId);
 }
 
 void PODTableView::copyToClipboard()
 {
-    auto* const action = static_cast<QAction*>(sender());
-    const QModelIndex index = action->data().toModelIndex();
+    const QModelIndex index = mPODTableView->selectionModel()->currentIndex();
+    if (!index.isValid()) {
+        return;
+    }
 
     QMimeData* const mimeData = mPODTableView->model()->mimeData({index});
 
@@ -238,12 +285,32 @@ bool PODTableView::eventFilter(QObject* object, QEvent* event)
     return QWidget::eventFilter(object, event);
 }
 
+void PODTableView::updateDataActions()
+{
+    const QItemSelectionModel* const selectionModel = mPODTableView->selectionModel();
+
+    const QModelIndex currentIndex = selectionModel->currentIndex();
+    const QModelIndexList selectedRows = selectionModel->selectedRows();
+    const int podId = currentIndex.row();
+
+    const QVariant value = (podId >= 0) ? mTool->value(podId) : QVariant();
+    const bool isDataSelected =
+        (!value.isNull()) &&
+        (selectedRows.size() == 1) &&
+        selectionModel->isSelected(currentIndex);
+
+    m_editAction->setEnabled(isDataSelected);
+    m_copyAction->setEnabled(isDataSelected);
+    m_selectAction->setEnabled(isDataSelected);
+}
+
 void PODTableView::onCustomContextMenuRequested(QPoint pos)
 {
     const QModelIndex index = mPODTableView->indexAt(pos);
     if (!index.isValid()) {
         return;
     }
+    // TODO: assuming that current index is selected and the same as index under pos
     const int podId = index.row();
     if (mTool->value(podId).isNull()) {
         return;
@@ -252,43 +319,28 @@ void PODTableView::onCustomContextMenuRequested(QPoint pos)
     auto* const menu = new QMenu(this);
     menu->setAttribute(Qt::WA_DeleteOnClose);
 
-    auto* const editAction = new QAction(QIcon::fromTheme(QStringLiteral("document-edit")),
-                                         i18nc("@action:inmenu", "Edit"), menu);
-    connect(editAction, &QAction::triggered,
-            this, &PODTableView::editData);
-    editAction->setData(index.siblingAtColumn(PODTableModel::ValueId));
-    menu->addAction(editAction);
-
-    // TODO: split into explicit "Copy As Data" and "Copy As Text"
-    QAction* const copyAction = KStandardAction::copy(this, &PODTableView::copyToClipboard,  menu);
-    copyAction->setShortcut(QKeySequence());
-    copyAction->setData(index);
-    menu->addAction(copyAction);
-
-    auto* const selectAction = new QAction(QIcon::fromTheme(QStringLiteral("select-rectangular")),
-                                           i18nc("@action:inmenu", "Select in View"), menu);
-    connect(selectAction, &QAction::triggered,
-            this, &PODTableView::selectBytesInView);
-    selectAction->setData(podId);
-    menu->addAction(selectAction);
+    menu->addAction(m_editAction);
+    menu->addAction(m_copyAction);
+    menu->addAction(m_selectAction);
 
     menu->popup(mPODTableView->viewport()->mapToGlobal(pos));
 }
 
-void PODTableView::onCurrentRowChanged(const QModelIndex& current, const QModelIndex& previous)
+void PODTableView::onDataSelectionChanged()
 {
-    Q_UNUSED(previous)
+    if (mTool->isApplyable()) {
+        const QItemSelectionModel* const selectionModel = mPODTableView->selectionModel();
 
-    if (!mTool->isApplyable()) {
-        return;
+        const QModelIndex currentIndex = selectionModel->currentIndex();
+        const int podId = currentIndex.row();
+        if (currentIndex.isValid() && !mTool->value(podId).isNull()) {
+            mTool->markPOD(podId);
+        } else {
+            mTool->unmarkPOD();
+        }
     }
 
-    const int podId = current.row();
-    if (current.isValid() && !mTool->value(podId).isNull()) {
-        mTool->markPOD(podId);
-    } else {
-        mTool->unmarkPOD();
-    }
+    updateDataActions();
 }
 
 }

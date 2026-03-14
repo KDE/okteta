@@ -15,6 +15,7 @@
 class KComboBox;
 class QTreeView;
 class QCheckBox;
+class QAction;
 class QModelIndex;
 
 namespace Kasten {
@@ -47,8 +48,9 @@ public: // AbstractDifferentSizeDialog API
     Answer query(int newValueSize, int oldValueSize, int sizeLeft) override;
 
 private Q_SLOTS:
-    void onCurrentRowChanged(const QModelIndex& current, const QModelIndex& previous);
+    void onDataSelectionChanged();
     void onCustomContextMenuRequested(QPoint pos);
+    void updateDataActions();
     void editData();
     void copyToClipboard();
     void selectBytesInView();
@@ -59,6 +61,10 @@ private:
     AbstractUserMessagesHandler* const m_userMessagesHandler;
 
     PODTableModel* mPODTableModel;
+
+    QAction* m_editAction;
+    QAction* m_copyAction;
+    QAction* m_selectAction;
 
     QTreeView* mPODTableView;
     PODDelegate* mPODDelegate;
