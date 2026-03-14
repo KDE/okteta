@@ -282,7 +282,7 @@ void StructureView::updateDataActions()
     const bool dataSelected =
         (data != nullptr) &&
         (selectedRows.size() == 1) &&
-        selectionModel->isSelected(selectionModel->currentIndex());
+        selectionModel->isSelected(currentIndex);
 
     const bool hasData = dataSelected && data->wasAbleToRead();
 
@@ -304,7 +304,7 @@ void StructureView::onDataSelectionChanged()
     const bool dataSelected =
         (data != nullptr) &&
         (selectedRows.size() == 1) &&
-        selectionModel->isSelected(selectionModel->currentIndex());
+        selectionModel->isSelected(currentIndex);
 
     if (dataSelected && mTool->byteArrayModel()) {
         mTool->mark(currentIndex);
