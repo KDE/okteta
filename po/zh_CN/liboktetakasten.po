@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-12 02:04+0000\n"
+"POT-Creation-Date: 2026-03-15 02:09+0000\n"
 "PO-Revision-Date: 2024-04-22 16:05\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -343,20 +343,20 @@ msgid "1 byte inserted."
 msgid_plural "%1 bytes inserted."
 msgstr[0] "已插入 %1 字节。"
 
-#: controllers/view/bytetable/bytetableview.cpp:73
+#: controllers/view/bytetable/bytetableview.cpp:72
 #, kde-format
 msgctxt "@label:spinbox number of bytes to insert"
 msgid "Number (bytes):"
 msgstr "数量(字节)："
 
-#: controllers/view/bytetable/bytetableview.cpp:81
+#: controllers/view/bytetable/bytetableview.cpp:80
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "Number of repeats of the currently selected byte in the table to be inserted."
 msgstr "重复插入表格中当前所选字节的次数。"
 
-#: controllers/view/bytetable/bytetableview.cpp:97
+#: controllers/view/bytetable/bytetableview.cpp:96
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -880,14 +880,14 @@ msgid "Modular sum 8-bit"
 msgstr "8 位 Modular"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:24
-#: controllers/view/poddecoder/podtableview.cpp:87
+#: controllers/view/poddecoder/podtableview.cpp:106
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Big-endian"
 msgstr "高位优先"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:25
-#: controllers/view/poddecoder/podtableview.cpp:88
+#: controllers/view/poddecoder/podtableview.cpp:107
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Little-endian"
@@ -1368,19 +1368,34 @@ msgctxt "@info:tooltip for column Value"
 msgid "The value of the bytes for the datatype"
 msgstr "数据类型的字节值"
 
-#: controllers/view/poddecoder/podtableview.cpp:94
+#: controllers/view/poddecoder/podtableview.cpp:51
+#: controllers/view/structures/structureview.cpp:86
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Edit"
+msgstr "编辑"
+
+#: controllers/view/poddecoder/podtableview.cpp:60
+#: controllers/view/stringsextract/stringsextractview.cpp:79
+#: controllers/view/structures/structureview.cpp:102
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Select in View"
+msgstr ""
+
+#: controllers/view/poddecoder/podtableview.cpp:113
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte order to use for decoding the bytes."
 msgstr "用于字节解码的字节顺序。"
 
-#: controllers/view/poddecoder/podtableview.cpp:98
+#: controllers/view/poddecoder/podtableview.cpp:117
 #, kde-format
 msgctxt "@option:check"
 msgid "Unsigned as hexadecimal:"
 msgstr "将无符号数显示为十六进制数："
 
-#: controllers/view/poddecoder/podtableview.cpp:107
+#: controllers/view/poddecoder/podtableview.cpp:126
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1388,7 +1403,7 @@ msgid ""
 "hexadecimal instead of as decimal."
 msgstr "设定是否将无符号整型值按十六进制显示，而非按十进制显示。"
 
-#: controllers/view/poddecoder/podtableview.cpp:137
+#: controllers/view/poddecoder/podtableview.cpp:173
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1398,19 +1413,19 @@ msgstr ""
 "新的值需要<emphasis>更少</emphasis>的字节数(从 %2 缩小为 %1)。<nl/>是保留未使"
 "用的字节还是移除他们？"
 
-#: controllers/view/poddecoder/podtableview.cpp:142
+#: controllers/view/poddecoder/podtableview.cpp:178
 #, kde-format
 msgctxt "@action:button keep the unused bytes"
 msgid "&Keep"
 msgstr "保留(&K)"
 
-#: controllers/view/poddecoder/podtableview.cpp:145
+#: controllers/view/poddecoder/podtableview.cpp:181
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Keep the unused bytes with their old values."
 msgstr "保留未使用的字节为其原值。"
 
-#: controllers/view/poddecoder/podtableview.cpp:162
+#: controllers/view/poddecoder/podtableview.cpp:198
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1419,21 +1434,6 @@ msgid ""
 msgstr ""
 "新的值需要<emphasis>更多</emphasis>的字节数(从 %2 增加到 %1)。<nl/>要覆盖后面"
 "的字节还是按需插入新字节？"
-
-#: controllers/view/poddecoder/podtableview.cpp:257
-#: controllers/view/structures/structureview.cpp:86
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Edit"
-msgstr "编辑"
-
-#: controllers/view/poddecoder/podtableview.cpp:270
-#: controllers/view/stringsextract/stringsextractview.cpp:79
-#: controllers/view/structures/structureview.cpp:102
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Select in View"
-msgstr ""
 
 #: controllers/view/print/printtool.cpp:282
 #: controllers/view/print/printtool.cpp:312
@@ -2603,31 +2603,31 @@ msgctxt "@info:tooltip"
 msgid "Open settings."
 msgstr "打开设置。"
 
-#: controllers/view/structures/structureview.cpp:144
+#: controllers/view/structures/structureview.cpp:139
 #, kde-format
 msgctxt "@info"
 msgid "No structure definitions"
 msgstr "没有结构定义"
 
-#: controllers/view/structures/structureview.cpp:214
+#: controllers/view/structures/structureview.cpp:209
 #, kde-format
 msgctxt "@title:tab"
 msgid "Value Display"
 msgstr ""
 
-#: controllers/view/structures/structureview.cpp:226
+#: controllers/view/structures/structureview.cpp:221
 #, kde-format
 msgctxt "@title:tab"
 msgid "Structures management"
 msgstr ""
 
-#: controllers/view/structures/structureview.cpp:346
+#: controllers/view/structures/structureview.cpp:341
 #, kde-format
 msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Unlock"
 msgstr "解除锁定"
 
-#: controllers/view/structures/structureview.cpp:348
+#: controllers/view/structures/structureview.cpp:343
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -2635,19 +2635,19 @@ msgid ""
 "current cursor position."
 msgstr "解锁所选结构块，初始偏移通常会被设到当前光标位置处。"
 
-#: controllers/view/structures/structureview.cpp:353
+#: controllers/view/structures/structureview.cpp:348
 #, kde-format
 msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Lock"
 msgstr "锁定"
 
-#: controllers/view/structures/structureview.cpp:355
+#: controllers/view/structures/structureview.cpp:350
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Lock selected structure to current offset."
 msgstr "锁定所选结构块到当前偏移处。"
 
-#: controllers/view/structures/structureview.cpp:411
+#: controllers/view/structures/structureview.cpp:406
 #, kde-format
 msgctxt "@title:window"
 msgid "Structures Script Console"

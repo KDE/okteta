@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-12 02:04+0000\n"
+"POT-Creation-Date: 2026-03-15 02:09+0000\n"
 "PO-Revision-Date: 2025-10-17 14:29+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
@@ -352,20 +352,20 @@ msgid_plural "%1 bytes inserted."
 msgstr[0] "1 tavu lisätty."
 msgstr[1] "%1 tavua lisätty."
 
-#: controllers/view/bytetable/bytetableview.cpp:73
+#: controllers/view/bytetable/bytetableview.cpp:72
 #, kde-format
 msgctxt "@label:spinbox number of bytes to insert"
 msgid "Number (bytes):"
 msgstr "Määrä (tavuina):"
 
-#: controllers/view/bytetable/bytetableview.cpp:81
+#: controllers/view/bytetable/bytetableview.cpp:80
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "Number of repeats of the currently selected byte in the table to be inserted."
 msgstr "Montako taulukosta valitun tavun monikertaa lisätään"
 
-#: controllers/view/bytetable/bytetableview.cpp:97
+#: controllers/view/bytetable/bytetableview.cpp:96
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -899,14 +899,14 @@ msgid "Modular sum 8-bit"
 msgstr "8-bittinen modulaarinen summa"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:24
-#: controllers/view/poddecoder/podtableview.cpp:87
+#: controllers/view/poddecoder/podtableview.cpp:106
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Big-endian"
 msgstr "Big-endian"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:25
-#: controllers/view/poddecoder/podtableview.cpp:88
+#: controllers/view/poddecoder/podtableview.cpp:107
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Little-endian"
@@ -1394,19 +1394,36 @@ msgctxt "@info:tooltip for column Value"
 msgid "The value of the bytes for the datatype"
 msgstr "Tavujen arvo tietotyypissä"
 
-#: controllers/view/poddecoder/podtableview.cpp:94
+#: controllers/view/poddecoder/podtableview.cpp:51
+#: controllers/view/structures/structureview.cpp:86
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Edit"
+msgstr "Muokkaa"
+
+#: controllers/view/poddecoder/podtableview.cpp:60
+#: controllers/view/stringsextract/stringsextractview.cpp:79
+#: controllers/view/structures/structureview.cpp:102
+#, fuzzy, kde-format
+#| msgctxt "@info:status offset value not available"
+#| msgid "Selection: -"
+msgctxt "@action:inmenu"
+msgid "Select in View"
+msgstr "Valinta: -"
+
+#: controllers/view/poddecoder/podtableview.cpp:113
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte order to use for decoding the bytes."
 msgstr "Tavujärjestys tavuja dekoodattaessa"
 
-#: controllers/view/poddecoder/podtableview.cpp:98
+#: controllers/view/poddecoder/podtableview.cpp:117
 #, kde-format
 msgctxt "@option:check"
 msgid "Unsigned as hexadecimal:"
 msgstr "Etumerkittömät heksadesimaalisena:"
 
-#: controllers/view/poddecoder/podtableview.cpp:107
+#: controllers/view/poddecoder/podtableview.cpp:126
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1416,7 +1433,7 @@ msgstr ""
 "Määrää, näytetäänkö etumerkittömien kokonaislukutyyppien arvot "
 "heksadesimaalisena desimaaliesityksen sijaan"
 
-#: controllers/view/poddecoder/podtableview.cpp:137
+#: controllers/view/poddecoder/podtableview.cpp:173
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1426,19 +1443,19 @@ msgstr ""
 "Uusi arvo tarvitsee <emphasis>vähemmän</emphasis> tavuja (%1 %2:n sijaan)."
 "<nl/>Pidetäänkö käyttämättömät tavut vai poistetaanko ne?"
 
-#: controllers/view/poddecoder/podtableview.cpp:142
+#: controllers/view/poddecoder/podtableview.cpp:178
 #, kde-format
 msgctxt "@action:button keep the unused bytes"
 msgid "&Keep"
 msgstr "&Pidä"
 
-#: controllers/view/poddecoder/podtableview.cpp:145
+#: controllers/view/poddecoder/podtableview.cpp:181
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Keep the unused bytes with their old values."
 msgstr "Pidä käyttämättömät tavut alkuperäisissä arvoissaan"
 
-#: controllers/view/poddecoder/podtableview.cpp:162
+#: controllers/view/poddecoder/podtableview.cpp:198
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1447,23 +1464,6 @@ msgid ""
 msgstr ""
 "Uusi arvo tarvitsee <emphasis>enemmän</emphasis> tavuja (%1 %2:n sijaan).<nl/"
 ">Korvataanko seuraavat tavut vai lisätäänkö tarpeen mukaan uusia?"
-
-#: controllers/view/poddecoder/podtableview.cpp:257
-#: controllers/view/structures/structureview.cpp:86
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Edit"
-msgstr "Muokkaa"
-
-#: controllers/view/poddecoder/podtableview.cpp:270
-#: controllers/view/stringsextract/stringsextractview.cpp:79
-#: controllers/view/structures/structureview.cpp:102
-#, fuzzy, kde-format
-#| msgctxt "@info:status offset value not available"
-#| msgid "Selection: -"
-msgctxt "@action:inmenu"
-msgid "Select in View"
-msgstr "Valinta: -"
 
 #: controllers/view/print/printtool.cpp:282
 #: controllers/view/print/printtool.cpp:312
@@ -2657,31 +2657,31 @@ msgctxt "@info:tooltip"
 msgid "Open settings."
 msgstr "Avaa asetukset"
 
-#: controllers/view/structures/structureview.cpp:144
+#: controllers/view/structures/structureview.cpp:139
 #, kde-format
 msgctxt "@info"
 msgid "No structure definitions"
 msgstr "Ei rakennemääritelmiä"
 
-#: controllers/view/structures/structureview.cpp:214
+#: controllers/view/structures/structureview.cpp:209
 #, kde-format
 msgctxt "@title:tab"
 msgid "Value Display"
 msgstr "Arvojen esitystapa"
 
-#: controllers/view/structures/structureview.cpp:226
+#: controllers/view/structures/structureview.cpp:221
 #, kde-format
 msgctxt "@title:tab"
 msgid "Structures management"
 msgstr "Rakenteiden hallinta"
 
-#: controllers/view/structures/structureview.cpp:346
+#: controllers/view/structures/structureview.cpp:341
 #, kde-format
 msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Unlock"
 msgstr "Avaa lukitus"
 
-#: controllers/view/structures/structureview.cpp:348
+#: controllers/view/structures/structureview.cpp:343
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -2691,19 +2691,19 @@ msgstr ""
 "Avaa valitun rakenteen lukitus, ts. poikkeaman alku asetetaan aina "
 "kohdistimen nykyiseen sijaintiin."
 
-#: controllers/view/structures/structureview.cpp:353
+#: controllers/view/structures/structureview.cpp:348
 #, kde-format
 msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Lock"
 msgstr "Lukitse"
 
-#: controllers/view/structures/structureview.cpp:355
+#: controllers/view/structures/structureview.cpp:350
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Lock selected structure to current offset."
 msgstr "Lukitse valittu rakenne nykyiseen poikkeamaan."
 
-#: controllers/view/structures/structureview.cpp:411
+#: controllers/view/structures/structureview.cpp:406
 #, kde-format
 msgctxt "@title:window"
 msgid "Structures Script Console"

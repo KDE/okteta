@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-12 02:04+0000\n"
+"POT-Creation-Date: 2026-03-15 02:09+0000\n"
 "PO-Revision-Date: 2010-01-09 18:03+0200\n"
 "Last-Translator: Viesturs Zarins <viesturs.zarins@mii.lu.lv>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -373,7 +373,7 @@ msgstr[0] "Paraugs ievietots."
 msgstr[1] "Paraugs ievietots."
 msgstr[2] "Paraugs ievietots."
 
-#: controllers/view/bytetable/bytetableview.cpp:73
+#: controllers/view/bytetable/bytetableview.cpp:72
 #, fuzzy, kde-format
 #| msgctxt "@label:spinbox"
 #| msgid "Number of bytes:"
@@ -381,7 +381,7 @@ msgctxt "@label:spinbox number of bytes to insert"
 msgid "Number (bytes):"
 msgstr "Baitu skaits:"
 
-#: controllers/view/bytetable/bytetableview.cpp:81
+#: controllers/view/bytetable/bytetableview.cpp:80
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid ""
@@ -392,7 +392,7 @@ msgid ""
 "Number of repeats of the currently selected byte in the table to be inserted."
 msgstr "Skaitlis ar kuru tiks ievietots izvēlētais baits."
 
-#: controllers/view/bytetable/bytetableview.cpp:97
+#: controllers/view/bytetable/bytetableview.cpp:96
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid ""
@@ -955,14 +955,14 @@ msgid "Modular sum 8-bit"
 msgstr "Modulāra summa 8-biti"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:24
-#: controllers/view/poddecoder/podtableview.cpp:87
+#: controllers/view/poddecoder/podtableview.cpp:106
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Big-endian"
 msgstr "Big-endian"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:25
-#: controllers/view/poddecoder/podtableview.cpp:88
+#: controllers/view/poddecoder/podtableview.cpp:107
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Little-endian"
@@ -1476,19 +1476,36 @@ msgctxt "@info:tooltip for column Value"
 msgid "The value of the bytes for the datatype"
 msgstr "Baitu vērtība šim datu tipam"
 
-#: controllers/view/poddecoder/podtableview.cpp:94
+#: controllers/view/poddecoder/podtableview.cpp:51
+#: controllers/view/structures/structureview.cpp:86
+#, kde-format
+msgctxt "@action:inmenu"
+msgid "Edit"
+msgstr ""
+
+#: controllers/view/poddecoder/podtableview.cpp:60
+#: controllers/view/stringsextract/stringsextractview.cpp:79
+#: controllers/view/structures/structureview.cpp:102
+#, fuzzy, kde-format
+#| msgctxt "@info:status offset value not available"
+#| msgid "Selection: -"
+msgctxt "@action:inmenu"
+msgid "Select in View"
+msgstr "Izvēle: -"
+
+#: controllers/view/poddecoder/podtableview.cpp:113
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte order to use for decoding the bytes."
 msgstr "Baitu kārtība vērtību dekodēšanai."
 
-#: controllers/view/poddecoder/podtableview.cpp:98
+#: controllers/view/poddecoder/podtableview.cpp:117
 #, kde-format
 msgctxt "@option:check"
 msgid "Unsigned as hexadecimal:"
 msgstr "Bez zīmes heksadecimāli:"
 
-#: controllers/view/poddecoder/podtableview.cpp:107
+#: controllers/view/poddecoder/podtableview.cpp:126
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1498,7 +1515,7 @@ msgstr ""
 "Norāda vai bezzīmes veselo skaitļu vērtību tipi tiek rādīti heksadecimāli "
 "nevis decimāli."
 
-#: controllers/view/poddecoder/podtableview.cpp:137
+#: controllers/view/poddecoder/podtableview.cpp:173
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1508,19 +1525,19 @@ msgstr ""
 "Jaunā  vērtība aizņem <emphasis>mazāk</emphasis> baitus (%1 nevis %2).<nl/"
 ">Paturēt liekos baitus vai izmest tos?"
 
-#: controllers/view/poddecoder/podtableview.cpp:142
+#: controllers/view/poddecoder/podtableview.cpp:178
 #, kde-format
 msgctxt "@action:button keep the unused bytes"
 msgid "&Keep"
 msgstr "&Paturēt"
 
-#: controllers/view/poddecoder/podtableview.cpp:145
+#: controllers/view/poddecoder/podtableview.cpp:181
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Keep the unused bytes with their old values."
 msgstr "Paturēt neizmantotos baitus un to esošās vērtības."
 
-#: controllers/view/poddecoder/podtableview.cpp:162
+#: controllers/view/poddecoder/podtableview.cpp:198
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1529,23 +1546,6 @@ msgid ""
 msgstr ""
 "Jaunā vertība aizņem <emphasis>vairāk</emphasis> baitu (%1nevis %2).<nl/"
 ">Pārraksīt nākamos baitus vai ievietot jaunus?"
-
-#: controllers/view/poddecoder/podtableview.cpp:257
-#: controllers/view/structures/structureview.cpp:86
-#, kde-format
-msgctxt "@action:inmenu"
-msgid "Edit"
-msgstr ""
-
-#: controllers/view/poddecoder/podtableview.cpp:270
-#: controllers/view/stringsextract/stringsextractview.cpp:79
-#: controllers/view/structures/structureview.cpp:102
-#, fuzzy, kde-format
-#| msgctxt "@info:status offset value not available"
-#| msgid "Selection: -"
-msgctxt "@action:inmenu"
-msgid "Select in View"
-msgstr "Izvēle: -"
 
 #: controllers/view/print/printtool.cpp:282
 #: controllers/view/print/printtool.cpp:312
@@ -2867,34 +2867,34 @@ msgctxt "@info:tooltip"
 msgid "Open settings."
 msgstr "Atvērt iestatījumus."
 
-#: controllers/view/structures/structureview.cpp:144
+#: controllers/view/structures/structureview.cpp:139
 #, fuzzy, kde-format
 #| msgid "Structure Definitions"
 msgctxt "@info"
 msgid "No structure definitions"
 msgstr "Struktūras definīcijas"
 
-#: controllers/view/structures/structureview.cpp:214
+#: controllers/view/structures/structureview.cpp:209
 #, fuzzy, kde-format
 #| msgid "Value Display"
 msgctxt "@title:tab"
 msgid "Value Display"
 msgstr "Vērtību attēlošana"
 
-#: controllers/view/structures/structureview.cpp:226
+#: controllers/view/structures/structureview.cpp:221
 #, fuzzy, kde-format
 #| msgid "Structures management"
 msgctxt "@title:tab"
 msgid "Structures management"
 msgstr "Struktūru pārvaldība"
 
-#: controllers/view/structures/structureview.cpp:346
+#: controllers/view/structures/structureview.cpp:341
 #, kde-format
 msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Unlock"
 msgstr ""
 
-#: controllers/view/structures/structureview.cpp:348
+#: controllers/view/structures/structureview.cpp:343
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -2902,19 +2902,19 @@ msgid ""
 "current cursor position."
 msgstr ""
 
-#: controllers/view/structures/structureview.cpp:353
+#: controllers/view/structures/structureview.cpp:348
 #, kde-format
 msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Lock"
 msgstr ""
 
-#: controllers/view/structures/structureview.cpp:355
+#: controllers/view/structures/structureview.cpp:350
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Lock selected structure to current offset."
 msgstr ""
 
-#: controllers/view/structures/structureview.cpp:411
+#: controllers/view/structures/structureview.cpp:406
 #, fuzzy, kde-format
 #| msgid "Structure Definitions"
 msgctxt "@title:window"
