@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-07 03:34+0000\n"
+"POT-Creation-Date: 2026-03-15 03:40+0000\n"
 "PO-Revision-Date: 2013-02-19 20:33+0100\n"
 "Last-Translator: Bjørn Steensrud <bjornst@skogkatt.homelinux.org>\n"
 "Language-Team: Norwegian Bokmål <l10n-no@lister.huftis.org>\n"
@@ -281,20 +281,20 @@ msgid_plural "Inserted %1 Bytes"
 msgstr[0] "Satt inn én byte"
 msgstr[1] "Satt inn %1 byte"
 
-#: controllers/view/bytetable/bytetableview.cpp:82
+#: controllers/view/bytetable/bytetableview.cpp:81
 #, kde-format
 msgctxt "@label:spinbox number of bytes to insert"
 msgid "Number (bytes):"
 msgstr ""
 
-#: controllers/view/bytetable/bytetableview.cpp:90
+#: controllers/view/bytetable/bytetableview.cpp:89
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "Number of repeats of the currently selected byte in the table to be inserted."
 msgstr ""
 
-#: controllers/view/bytetable/bytetableview.cpp:106
+#: controllers/view/bytetable/bytetableview.cpp:105
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -789,14 +789,14 @@ msgid "Modular sum 8-bit"
 msgstr "Modulær sum 8-bit"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:28
-#: controllers/view/poddecoder/podtableview.cpp:84
+#: controllers/view/poddecoder/podtableview.cpp:83
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Big-endian"
 msgstr "Big endian"
 
 #: controllers/view/libbytearraychecksum/algorithm/modsumbytearraychecksumparametersetedit.cpp:29
-#: controllers/view/poddecoder/podtableview.cpp:85
+#: controllers/view/poddecoder/podtableview.cpp:84
 #, kde-format
 msgctxt "@item:inlistbox"
 msgid "Little-endian"
@@ -1161,19 +1161,19 @@ msgctxt "@info:tooltip for column Value"
 msgid "The value of the bytes for the datatype"
 msgstr "Verdien av bytene for datatypen"
 
-#: controllers/view/poddecoder/podtableview.cpp:91
+#: controllers/view/poddecoder/podtableview.cpp:90
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The byte order to use for decoding the bytes."
 msgstr "Byterekkefølgen som skal brukes for avkoding av bytene."
 
-#: controllers/view/poddecoder/podtableview.cpp:95
+#: controllers/view/poddecoder/podtableview.cpp:94
 #, kde-format
 msgctxt "@option:check"
 msgid "Unsigned as hexadecimal:"
 msgstr "Uten fortegn som heksadesimal:"
 
-#: controllers/view/poddecoder/podtableview.cpp:104
+#: controllers/view/poddecoder/podtableview.cpp:103
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -1183,7 +1183,7 @@ msgstr ""
 "Oppgir om verdien av heltall uten fortegn skal vises som heksadesimalt i "
 "stedet for desimalt."
 
-#: controllers/view/poddecoder/podtableview.cpp:140
+#: controllers/view/poddecoder/podtableview.cpp:139
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1193,19 +1193,19 @@ msgstr ""
 "Den nye verdien trenger <emphasis>færre</emphasis> byter (%1 i stedet "
 "for %2).<nl/> Skal de ubrukte bytene beholdes eller fjernes?"
 
-#: controllers/view/poddecoder/podtableview.cpp:145
+#: controllers/view/poddecoder/podtableview.cpp:144
 #, kde-format
 msgctxt "@action:button keep the unused bytes"
 msgid "&Keep"
 msgstr "&Behold"
 
-#: controllers/view/poddecoder/podtableview.cpp:148
+#: controllers/view/poddecoder/podtableview.cpp:147
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Keep the unused bytes with their old values."
 msgstr "Behold ubrukte byte med deres gamle verdier"
 
-#: controllers/view/poddecoder/podtableview.cpp:161
+#: controllers/view/poddecoder/podtableview.cpp:160
 #, kde-kuit-format
 msgctxt "@info"
 msgid ""
@@ -1216,9 +1216,9 @@ msgstr ""
 "for %2).<nl/> Skal følgende byter skrives over, eller nye settes inn etter "
 "behov?"
 
-#: controllers/view/poddecoder/podtableview.cpp:258
+#: controllers/view/poddecoder/podtableview.cpp:257
 #: controllers/view/selectrange/selectrangeview.cpp:139
-#: controllers/view/structures/structureview.cpp:335
+#: controllers/view/structures/structureview.cpp:330
 #, kde-format
 msgctxt "@action:button"
 msgid "&Select"
@@ -2391,59 +2391,59 @@ msgctxt "value of a data structure (primitive type)"
 msgid "Value"
 msgstr "Verdi"
 
-#: controllers/view/structures/structureview.cpp:96
+#: controllers/view/structures/structureview.cpp:91
 #, kde-format
 msgctxt "@action:button"
 msgid "Validate"
 msgstr "Valider"
 
-#: controllers/view/structures/structureview.cpp:98
+#: controllers/view/structures/structureview.cpp:93
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Validate all structures."
 msgstr "Valider alle strukturer."
 
-#: controllers/view/structures/structureview.cpp:120
+#: controllers/view/structures/structureview.cpp:115
 #, kde-format
 msgctxt "@action:button"
 msgid "Script console"
 msgstr "Skriptkonsoll"
 
-#: controllers/view/structures/structureview.cpp:122
+#: controllers/view/structures/structureview.cpp:117
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open script console."
 msgstr "Åpne skriptkonsoll."
 
-#: controllers/view/structures/structureview.cpp:126
+#: controllers/view/structures/structureview.cpp:121
 #, kde-format
 msgctxt "@action:button"
 msgid "Settings"
 msgstr "Innstillinger"
 
-#: controllers/view/structures/structureview.cpp:128
+#: controllers/view/structures/structureview.cpp:123
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open settings."
 msgstr "Åpne innstillinger."
 
-#: controllers/view/structures/structureview.cpp:159
+#: controllers/view/structures/structureview.cpp:154
 #, kde-format
 msgid "Value Display"
 msgstr "Verdivisning"
 
-#: controllers/view/structures/structureview.cpp:171
+#: controllers/view/structures/structureview.cpp:166
 #, kde-format
 msgid "Structures management"
 msgstr "Strukturstyring"
 
-#: controllers/view/structures/structureview.cpp:258
+#: controllers/view/structures/structureview.cpp:253
 #, kde-format
 msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Unlock"
 msgstr ""
 
-#: controllers/view/structures/structureview.cpp:260
+#: controllers/view/structures/structureview.cpp:255
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -2453,19 +2453,19 @@ msgstr ""
 "Lås opp den valgte strukturen, dvs. start-forskyvningen settes alltid til "
 "gjeldende markørposisjon."
 
-#: controllers/view/structures/structureview.cpp:265
+#: controllers/view/structures/structureview.cpp:260
 #, kde-format
 msgctxt "@action:button unlock the starting offset of the current structure"
 msgid "Lock"
 msgstr ""
 
-#: controllers/view/structures/structureview.cpp:267
+#: controllers/view/structures/structureview.cpp:262
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Lock selected structure to current offset."
 msgstr "Lås den valgte strukturen til gjeldende forskyvning."
 
-#: controllers/view/structures/structureview.cpp:291
+#: controllers/view/structures/structureview.cpp:286
 #, kde-format
 msgctxt "@title:window"
 msgid "Structures Script Console"
