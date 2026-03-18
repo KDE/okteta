@@ -110,6 +110,7 @@ StringsExtractView::StringsExtractView(StringsExtractTool* tool, QWidget* parent
     mContainedStringTableView->setObjectName(QStringLiteral("ContainedStringTable"));
     mContainedStringTableView->setRootIsDecorated(false);
     mContainedStringTableView->setItemsExpandable(false);
+    mContainedStringTableView->setAlternatingRowColors(true);
     mContainedStringTableView->setUniformRowHeights(true);
     mContainedStringTableView->setAllColumnsShowFocus(true);
     mContainedStringTableView->setSelectionMode(QAbstractItemView::ExtendedSelection);

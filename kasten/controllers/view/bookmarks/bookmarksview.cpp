@@ -47,6 +47,7 @@ BookmarksView::BookmarksView(BookmarksTool* tool, QWidget* parent)
     mBookmarkListView->setObjectName(QStringLiteral("BookmarkListView"));
     mBookmarkListView->setRootIsDecorated(false);
     mBookmarkListView->setItemsExpandable(false);
+    mBookmarkListView->setAlternatingRowColors(true);
     mBookmarkListView->setUniformRowHeights(true);
     mBookmarkListView->setAllColumnsShowFocus(true);
     mBookmarkListView->setSelectionMode(QAbstractItemView::ExtendedSelection);

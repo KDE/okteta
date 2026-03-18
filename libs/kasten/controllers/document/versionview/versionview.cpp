@@ -33,6 +33,7 @@ VersionView::VersionView(VersionViewTool* tool, QWidget* parent)
     mVersionTableView->setObjectName(QStringLiteral("VersionsTable"));
     mVersionTableView->setRootIsDecorated(false);
     mVersionTableView->setItemsExpandable(false);
+    mVersionTableView->setAlternatingRowColors(true);
     mVersionTableView->setUniformRowHeights(true);
     mVersionTableView->setAllColumnsShowFocus(true);
     mVersionTableView->setModel(mVersionTableModel);
