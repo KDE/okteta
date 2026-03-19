@@ -1,14 +1,14 @@
 # Copyright (C) 2023 This file is copyright:
 # This file is distributed under the same license as the okteta package.
 #
-# SPDX-FileCopyrightText: 2020, 2021, 2022, 2023 giovanni <g.sora@tiscali.it>
+# SPDX-FileCopyrightText: 2020, 2021, 2022, 2023, 2026 giovanni <g.sora@tiscali.it>
 # giovanni <g.sora@tiscali.it>, 2024.
 msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-03-15 02:09+0000\n"
-"PO-Revision-Date: 2024-04-30 12:37+0200\n"
+"PO-Revision-Date: 2026-03-18 11:48+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -43,8 +43,7 @@ msgid "Type:"
 msgstr "Typo:"
 
 #: controllers/document/info/documentinfoview.cpp:79
-#, fuzzy, kde-format
-#| msgid "Location:"
+#, kde-format
 msgctxt "@label"
 msgid "Location:"
 msgstr "Location:"
@@ -64,8 +63,7 @@ msgid "Created/Loaded:"
 msgstr "Create/Cargate:"
 
 #: controllers/document/info/documentinfoview.cpp:91
-#, fuzzy, kde-format
-#| msgid "Last modified:"
+#, kde-format
 msgctxt "@label"
 msgid "Last modified:"
 msgstr "Le ultime modificate:"
@@ -78,8 +76,7 @@ msgid "Last synchronized:"
 msgstr "Ultime synchronisate:"
 
 #: controllers/document/info/documentinfoview.cpp:102
-#, fuzzy, kde-format
-#| msgid "Created:"
+#, kde-format
 msgctxt "@label"
 msgid "Created:"
 msgstr "Create:"
@@ -153,12 +150,10 @@ msgid "Bookmarks"
 msgstr "Marcatores de libro"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:43
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu create a new view profile"
-#| msgid "Create New…"
+#, kde-format
 msgctxt "@action"
 msgid "Create New"
-msgstr "Crea nove..."
+msgstr "Crea nove"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:45
 #, kde-format
@@ -180,7 +175,7 @@ msgstr ""
 #| msgid "&Delete"
 msgctxt "@action"
 msgid "Delete"
-msgstr "&Dele"
+msgstr "Dele"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:58
 #, kde-format
@@ -221,7 +216,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action"
 msgid "Rename"
-msgstr ""
+msgstr "Renomina"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:79
 #, kde-format
@@ -261,7 +256,7 @@ msgstr ""
 #| msgid "Bookmarks"
 msgctxt "@info"
 msgid "No bookmarks"
-msgstr "Marcatores de libro"
+msgstr "Necun marcator de libros"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:137
 #: controllers/view/info/statistictablemodel.cpp:160
@@ -394,9 +389,7 @@ msgid "Charset Conversion"
 msgstr ""
 
 #: controllers/view/charsetconversion/charsetconversiontool.cpp:302
-#, fuzzy, kde-format
-#| msgctxt "Converted from charset 1 to charset 2"
-#| msgid "%1 to %2"
+#, kde-format
 msgctxt "@item Converted from charset 1 to charset 2"
 msgid "%1 to %2"
 msgstr "%1 a %2"
@@ -491,11 +484,10 @@ msgid ""
 msgstr ""
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:170
-#, fuzzy, kde-format
-#| msgid "Con&vert"
+#, kde-format
 msgctxt "@action:button"
 msgid "Convert"
-msgstr "Con&verte"
+msgstr "Converte"
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:173
 #, kde-format
@@ -597,13 +589,13 @@ msgstr ""
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Crop"
-msgstr ""
+msgstr "Talia"
 
 #: controllers/view/crop/cropcontroller.cpp:94
 #, kde-format
 msgctxt "@item name of the change"
 msgid "Crop"
-msgstr ""
+msgstr "Talia"
 
 #: controllers/view/filter/filtertool.cpp:62
 #: controllers/view/filter/filtertoolviewfactory.cpp:22
@@ -788,10 +780,10 @@ msgstr ""
 
 #: controllers/view/info/infoview.cpp:120
 #: controllers/view/stringsextract/stringsextractview.cpp:52
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@action:button"
 msgid "Copy"
-msgstr ""
+msgstr "Copia"
 
 #: controllers/view/info/infoview.cpp:122
 #, kde-format
@@ -1708,13 +1700,13 @@ msgstr "Catena"
 #, kde-format
 msgctxt "@title:window of the tool to extract strings"
 msgid "Strings"
-msgstr ""
+msgstr "Catenas"
 
 #: controllers/view/stringsextract/stringsextracttoolviewfactory.cpp:25
 #, kde-format
 msgctxt "@title:window"
 msgid "Strings"
-msgstr ""
+msgstr "Catenas"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:54
 #, kde-format
@@ -1735,7 +1727,7 @@ msgstr ""
 #| msgid "&Show"
 msgctxt "@action:button"
 msgid "Show"
-msgstr "&Monstra:"
+msgstr "Monstra"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:64
 #, kde-format
@@ -2279,7 +2271,7 @@ msgstr "A proposito"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Uninstall"
-msgstr ""
+msgstr "De-installa"
 
 #: controllers/view/structures/settings/structureitemdelegate.cpp:124
 #, kde-format
@@ -2325,7 +2317,7 @@ msgstr "Structuras"
 #, kde-format
 msgctxt "@action:button"
 msgid "Uninstall"
-msgstr ""
+msgstr "De-installa"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:156
 #, kde-format
@@ -2506,7 +2498,7 @@ msgstr ""
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:73
 #, kde-format
 msgid "Unsigned values:"
-msgstr ""
+msgstr "Valores unsigned:"
 
 #. i18n: ectx: property (text), widget (QLabel, signed_label)
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:86
@@ -2536,12 +2528,12 @@ msgstr ""
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:126
 #, kde-format
 msgid "Character value:"
-msgstr ""
+msgstr "VAlor de Character:"
 
 #: controllers/view/structures/structureinstalljob.cpp:61
 #, kde-format
 msgid "Unknown error (0)"
-msgstr ""
+msgstr "Error Incognite (0)"
 
 #: controllers/view/structures/structureinstalljob.cpp:63
 #, kde-format
@@ -2600,9 +2592,7 @@ msgid "Validate all structures."
 msgstr ""
 
 #: controllers/view/structures/structureview.cpp:74
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Script console"
+#, kde-format
 msgctxt "@action"
 msgid "Script Console"
 msgstr "Console de Script"
@@ -2614,9 +2604,7 @@ msgid "Open script console."
 msgstr ""
 
 #: controllers/view/structures/structureview.cpp:80
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Settings"
+#, kde-format
 msgctxt "@action"
 msgid "Settings"
 msgstr "Preferentias"
@@ -2899,8 +2887,7 @@ msgid "New View Profile"
 msgstr "Profilo de vista "
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:53
-#, fuzzy, kde-format
-#| msgid "Title:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Title:"
 msgstr "Titulo:"
@@ -2945,19 +2932,16 @@ msgid "Offset coding:"
 msgstr "&Displaciamento:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:74
-#, fuzzy, kde-format
-#| msgid "Values"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Values"
 msgstr "Valores"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:75
-#, fuzzy, kde-format
-#| msgctxt "@title:column short for Character"
-#| msgid "Char"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Chars"
-msgstr "Char"
+msgstr "Chars"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:76
 #, fuzzy, kde-format
@@ -2979,9 +2963,7 @@ msgid "Show with rows or columns:"
 msgstr ""
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:86
-#, fuzzy, kde-format
-#| msgctxt "@item:"
-#| msgid "Columns"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Columns"
 msgstr "Columnas"
@@ -3030,12 +3012,10 @@ msgid "Break lines:"
 msgstr ""
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:113
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "No grouping."
+#, kde-format
 msgctxt "@item"
 msgid "No Grouping"
-msgstr "Necun Regruppamento."
+msgstr "Necun Regruppamento"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:117
 #, kde-format
@@ -3052,8 +3032,7 @@ msgid "Bytes per line:"
 msgstr "Elementos per rango:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:129
-#, fuzzy, kde-format
-#| msgid "Values"
+#, kde-format
 msgctxt "@title:group"
 msgid "Values"
 msgstr "Valores"
@@ -3097,7 +3076,7 @@ msgstr "Binari"
 #| msgid "Coding:"
 msgctxt "@label:listbox"
 msgid "Coding:"
-msgstr "Programmation:"
+msgstr "Programmation"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:148
 #, fuzzy, kde-format
@@ -3218,9 +3197,7 @@ msgid "Modification of %1"
 msgstr "Modification de %1"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:209
-#, fuzzy, kde-format
-#| msgctxt "@window:title"
-#| msgid "\"%1\" View Profile"
+#, kde-format
 msgctxt "@title:window"
 msgid "\"%1\" View Profile"
 msgstr "\"%1\" Profilo de vista "
@@ -3447,7 +3424,7 @@ msgstr ""
 #: gui/io/streamcompressor/bzip2/bytearraybzip2streamcompressorconfigeditor.cpp:47
 #, kde-format
 msgid "%1 kB"
-msgstr ""
+msgstr "%1 kB"
 
 #: gui/io/streamcompressor/bzip2/bzip2compressionstream.cpp:33
 #, kde-format
@@ -3455,9 +3432,9 @@ msgid "Internal bzip2 error: %1"
 msgstr ""
 
 #: gui/io/streamcompressor/bzip2/bzip2compressionstream.cpp:47
-#, kde-format
+#, fuzzy, kde-format
 msgid "Error code %1"
-msgstr ""
+msgstr "Codice de error: %1"
 
 #: gui/io/streamcompressor/bzip2/bzip2compressionstream.cpp:66
 #: gui/io/streamcompressor/deflate/deflatecompressionstream.cpp:69
@@ -3484,20 +3461,18 @@ msgstr ""
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:29
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:31
 #: gui/io/streamcompressor/zstd/bytearrayzstdstreamcompressorconfigeditor.cpp:28
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@label:spinbox"
 msgid "Compression level:"
-msgstr ""
+msgstr "Nivello de compression"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:33
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:35
 #: gui/io/streamcompressor/zstd/bytearrayzstdstreamcompressorconfigeditor.cpp:32
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Set as Default"
+#, kde-format
 msgctxt "@item:inmenu compression level"
 msgid "Default"
-msgstr "&Fixa como predefinite"
+msgstr "Predefinite"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:41
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:43
@@ -3508,12 +3483,10 @@ msgstr ""
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:46
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:48
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Set as Default"
+#, kde-format
 msgctxt "@item:inmenu compression strategy"
 msgid "Default"
-msgstr "&Fixa como predefinite"
+msgstr "Predefinite"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:48
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:50
@@ -3522,7 +3495,7 @@ msgstr "&Fixa como predefinite"
 #| msgid "&Filter"
 msgctxt "@item:inmenu compression strategy"
 msgid "Filter"
-msgstr "&Filtro"
+msgstr "Filtro"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:50
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:52
@@ -3571,18 +3544,16 @@ msgid "gzip"
 msgstr ""
 
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:65
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "File Info"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "File name:"
-msgstr "Info de file"
+msgstr "Nomine de file:"
 
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:77
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Comment:"
-msgstr ""
+msgstr "Commento:"
 
 #: gui/io/streamcompressor/iodevicebytearrayoutput.cpp:19
 #, kde-format
@@ -3602,12 +3573,10 @@ msgid "Compression preset level:"
 msgstr ""
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:33
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Set as Default"
+#, kde-format
 msgctxt "@item:inmenu compression preset level"
 msgid "Default"
-msgstr "&Fixa como predefinite"
+msgstr "Predefinite"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:42
 #, kde-format
@@ -3622,29 +3591,25 @@ msgid "Integrity check:"
 msgstr ""
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:57
-#, fuzzy, kde-format
-#| msgctxt "There is no storage location assigned to yet."
-#| msgid "[None]"
+#, kde-format
 msgctxt "@item:inmenu integrity check"
 msgid "None"
 msgstr "Necun"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:59
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@item:inmenu integrity check"
 msgid "CRC32"
-msgstr ""
+msgstr "CRC"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:61
-#, kde-format
+#, fuzzy, kde-format
 msgctxt "@item:inmenu integrity check"
 msgid "CRC64"
-msgstr ""
+msgstr "CRC"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:63
-#, fuzzy, kde-format
-#| msgctxt "name of the hash algorithm"
-#| msgid "SHA-256"
+#, kde-format
 msgctxt "@item:inmenu integrity check"
 msgid "SHA-256"
 msgstr "Sha-256"
@@ -3785,17 +3750,13 @@ msgid "Encoding for escaped chars:"
 msgstr ""
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:55
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip column contains the value in hexadecimal format"
-#| msgid "Hexadecimal"
+#, kde-format
 msgctxt "@item:inmenu escape value encoding"
 msgid "Hexadecimal"
 msgstr "Hexadecimal"
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:57
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip column contains the value in octal format"
-#| msgid "Octal"
+#, kde-format
 msgctxt "@item:inmenu escape value encoding"
 msgid "Octal"
 msgstr "Octal"
@@ -3929,13 +3890,13 @@ msgstr "Separation:"
 #, kde-format
 msgctxt "@label:textbox substring which prefixes each value"
 msgid "Prefix:"
-msgstr ""
+msgstr "Prefixo:"
 
 #: gui/io/streamencoder/values/bytearrayvaluesstreamencoderconfigeditor.cpp:68
 #, kde-format
 msgctxt "@label:textbox substring which postfixes each value"
 msgid "Postfix:"
-msgstr ""
+msgstr "Postfix"
 
 #: gui/io/streamencoder/viewhtml/bytearrayviewhtmlstreamencoder.cpp:34
 #, kde-format
