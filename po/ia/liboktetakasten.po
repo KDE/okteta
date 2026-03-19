@@ -1,13 +1,13 @@
-# Copyright (C) YEAR This file is copyright:
+# Copyright (C) 2026 This file is copyright:
 # This file is distributed under the same license as the okteta package.
 #
-# giovanni <g.sora@tiscali.it>, 2020, 2021, 2023.
+# SPDX-FileCopyrightText: 2020, 2021, 2023, 2026 giovanni <g.sora@tiscali.it>
 msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-03-15 03:40+0000\n"
-"PO-Revision-Date: 2023-07-10 11:43+0200\n"
+"PO-Revision-Date: 2026-03-18 11:08+0100\n"
 "Last-Translator: giovanni <g.sora@tiscali.it>\n"
 "Language-Team: Interlingua <kde-i18n-doc@kde.org>\n"
 "Language: ia\n"
@@ -15,7 +15,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 22.12.3\n"
+"X-Generator: Lokalize 23.08.5\n"
 
 #: controllers/document/info/documentinfotool.cpp:47
 #: controllers/document/info/documentinfotoolviewfactory.cpp:24
@@ -1519,13 +1519,13 @@ msgstr "Catena"
 #, kde-format
 msgctxt "@title:window of the tool to extract strings"
 msgid "Strings"
-msgstr ""
+msgstr "Catenas"
 
 #: controllers/view/stringsextract/stringsextracttoolviewfactory.cpp:24
 #, kde-format
 msgctxt "@title:window"
 msgid "Strings"
-msgstr ""
+msgstr "Catenas"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:54
 #, kde-format
@@ -2227,11 +2227,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, unsigned_label)
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:73
-#, fuzzy, kde-format
-#| msgctxt "data type"
-#| msgid "unsigned byte"
+#, kde-format
 msgid "Unsigned values:"
-msgstr "unsigned byte"
+msgstr "Valores unsigned:"
 
 #. i18n: ectx: property (text), widget (QLabel, signed_label)
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:86
@@ -2259,11 +2257,9 @@ msgstr ""
 
 #. i18n: ectx: property (text), widget (QLabel, char_label)
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:126
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip column contains the character with the value"
-#| msgid "Character"
+#, kde-format
 msgid "Character value:"
-msgstr "Character:"
+msgstr "VAlor de Character:"
 
 #: controllers/view/structures/structurestool.cpp:68
 #: controllers/view/structures/structurestoolviewfactory.cpp:29
