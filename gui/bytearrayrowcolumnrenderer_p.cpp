@@ -421,6 +421,11 @@ LinePositionRange ByteArrayRowColumnRendererPrivate::linePositionsOfColumnXs(Pix
                     break;
                 }
             }
+            // TODO: work-around for renderFirstLine/renderNextLine having no support for just updating spaces
+            // See also AbstractByteArrayColumnRendererPrivate
+            if (positions.start() < 0) {
+                positions.setStart(endPos);
+            }
 
             break;
         }
