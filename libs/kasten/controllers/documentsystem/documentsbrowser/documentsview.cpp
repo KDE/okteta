@@ -34,6 +34,7 @@ DocumentsView::DocumentsView(DocumentsTool* tool, QWidget* parent)
     mDocumentListView->setObjectName(QStringLiteral("DocumentListView"));
     mDocumentListView->setRootIsDecorated(false);
     mDocumentListView->setItemsExpandable(false);
+    mDocumentListView->setAlternatingRowColors(true);
     mDocumentListView->setUniformRowHeights(true);
     mDocumentListView->setAllColumnsShowFocus(true);
     mDocumentListView->setModel(mDocumentListModel);

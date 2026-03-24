@@ -51,6 +51,7 @@ ByteTableView::ByteTableView(ByteTableTool* tool, QWidget* parent)
     mByteTableView->setObjectName(QStringLiteral("ByteTable"));
     mByteTableView->setRootIsDecorated(false);
     mByteTableView->setItemsExpandable(false);
+    mByteTableView->setAlternatingRowColors(true);
     mByteTableView->setUniformRowHeights(true);
     mByteTableView->setAllColumnsShowFocus(true);
     QHeaderView* const header = mByteTableView->header();

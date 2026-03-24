@@ -86,6 +86,7 @@ InfoView::InfoView(InfoTool* tool, QWidget* parent)
     mStatisticTableView->setObjectName(QStringLiteral("StatisticTable"));
     mStatisticTableView->setRootIsDecorated(false);
     mStatisticTableView->setItemsExpandable(false);
+    mStatisticTableView->setAlternatingRowColors(true);
     mStatisticTableView->setUniformRowHeights(true);
     mStatisticTableView->setAllColumnsShowFocus(true);
     mStatisticTableView->setSelectionMode(QAbstractItemView::ExtendedSelection);
