@@ -47,8 +47,6 @@ public:
     void prepareRendering(PixelXRange Xs);
 
 public:
-    // void renderLine( QPainter* painter, int lineIndex );
-    void renderLinePositions(QPainter* painter, Line lineIndex, LinePositionRange linePositions);
     /** paints a cursor based on the type of the byte.
      * @param painter The QPainter.
      * @param byteIndex Index of the byte to paint the cursor for. If -1 a space is used as char.
@@ -224,6 +222,8 @@ private: // API to be redefined
     void recalcByteWidth();
 
 private:
+    void renderLinePositions(QPainter* painter);
+
     void renderPlain(QPainter* painter, LinePositionRange linePositions, Address byteIndex);
     void renderSelection(QPainter* painter, LinePositionRange linePositions, Address byteIndex, unsigned int flag);
     void renderMarking(QPainter* painter, LinePositionRange linePositions, Address byteIndex, unsigned int flag);
