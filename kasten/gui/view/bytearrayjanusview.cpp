@@ -35,8 +35,8 @@ void ByteArrayJanusView::setViewModus(int viewModus)
     }
 
     auto* const newView = (viewModus == ColumnViewId) ?
-                                     (AbstractByteArrayView*)new ByteArrayColumnView(this) :
-                                     (AbstractByteArrayView*)new ByteArrayRowView(this);
+                          static_cast<AbstractByteArrayView*>(new ByteArrayColumnView(this)) :
+                          static_cast<AbstractByteArrayView*>(new ByteArrayRowView(this));
 
     const bool hasFocus = mView ? mView->hasFocus() : false;
     if (mView) {
