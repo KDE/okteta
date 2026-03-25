@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-15 03:40+0000\n"
+"POT-Creation-Date: 2026-03-25 03:47+0000\n"
 "PO-Revision-Date: 2020-03-21 21:45+0100\n"
 "Last-Translator: Iñigo Salvador Azurmendi <xalba@euskalnet.net>\n"
 "Language-Team: Basque <kde-i18n-eu@kde.org>\n"
@@ -130,13 +130,13 @@ msgctxt "@title:window"
 msgid "Bookmarks"
 msgstr "Laster-markak"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:73
+#: controllers/view/bookmarks/bookmarksview.cpp:74
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Creates a new bookmark for the current cursor position."
 msgstr "Laster-marka berri bat sortzen du kurtsorearen uneko kokalekurako."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:75
+#: controllers/view/bookmarks/bookmarksview.cpp:76
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -146,13 +146,13 @@ msgstr ""
 "Botoi hau sakatzen baduzu, laster-marka berri bat sortuko da kurtsorearen "
 "uneko kokalekurako."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:86
+#: controllers/view/bookmarks/bookmarksview.cpp:87
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Deletes all the selected bookmarks."
 msgstr "Hautatutako laster-marka guztiak ezabatzen ditu."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:88
+#: controllers/view/bookmarks/bookmarksview.cpp:89
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -161,13 +161,13 @@ msgstr ""
 "Botoi hau sakatzen baduzu, hautatuta dauden laster-marka guztiak ezabatuko "
 "dira."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:100
+#: controllers/view/bookmarks/bookmarksview.cpp:101
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Moves the cursor to the selected bookmark."
 msgstr "Kurtsorea hautatutako laster-markara eramaten du."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:102
+#: controllers/view/bookmarks/bookmarksview.cpp:103
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -177,13 +177,13 @@ msgstr ""
 "Botoi hau sakatzen baduzu, kurtsorea hautatu den azken laster-markako "
 "kokalekura mugituko da."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:110
+#: controllers/view/bookmarks/bookmarksview.cpp:111
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enables renaming of the selected bookmark."
 msgstr "Hautatutako laster-marka berrizendatzea gaitzen du."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:112
+#: controllers/view/bookmarks/bookmarksview.cpp:113
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -284,20 +284,20 @@ msgid_plural "Inserted %1 Bytes"
 msgstr[0] "Byte 1 txertatu da"
 msgstr[1] "%1 Byte txertatu dira"
 
-#: controllers/view/bytetable/bytetableview.cpp:81
+#: controllers/view/bytetable/bytetableview.cpp:82
 #, kde-format
 msgctxt "@label:spinbox number of bytes to insert"
 msgid "Number (bytes):"
 msgstr "Kopurua (byte):"
 
-#: controllers/view/bytetable/bytetableview.cpp:89
+#: controllers/view/bytetable/bytetableview.cpp:90
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "Number of repeats of the currently selected byte in the table to be inserted."
 msgstr "Taulan hautatuta dagoen bytea zenbat aldiz txertatu behar den."
 
-#: controllers/view/bytetable/bytetableview.cpp:105
+#: controllers/view/bytetable/bytetableview.cpp:106
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -715,7 +715,7 @@ msgstr ""
 "<interface>Eguneratu</interface> botoia sakatzen baduzu, byte maiztasunaren "
 "estatistika eguneratzen da."
 
-#: controllers/view/info/infoview.cpp:184
+#: controllers/view/info/infoview.cpp:185
 #: controllers/view/structures/datatypes/datainformation.cpp:59
 #: controllers/view/structures/datatypes/datainformation.cpp:62
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:232
@@ -1648,18 +1648,18 @@ msgstr "Iragazkia:"
 msgid "Enter a term to limit the list."
 msgstr "Sartu termino bat zerrenda mugatzeko."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:138
+#: controllers/view/stringsextract/stringsextractview.cpp:139
 #, kde-format
 msgid "C&opy"
 msgstr "K&opiatu"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:141
+#: controllers/view/stringsextract/stringsextractview.cpp:142
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected strings to the clipboard."
 msgstr "Hautatutako kateak arbelara kopiatzen ditu."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:143
+#: controllers/view/stringsextract/stringsextractview.cpp:144
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1669,18 +1669,18 @@ msgstr ""
 "<interface>Kopiatu</interface> botoia sakatzen baduzu, zerrendan hautatu "
 "dituzun karaktere-kate guztiak arbelara kopiatuko dira."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:152
+#: controllers/view/stringsextract/stringsextractview.cpp:153
 #, kde-format
 msgid "&Show"
 msgstr "&Erakutsi"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:155
+#: controllers/view/stringsextract/stringsextractview.cpp:156
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Shows the selected string in the view."
 msgstr "Ikuspegian hautatutako karaktere-katea erakusten du."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:157
+#: controllers/view/stringsextract/stringsextractview.cpp:158
 #, fuzzy, kde-kuit-format
 #| msgctxt "@info:whatsthis"
 #| msgid ""

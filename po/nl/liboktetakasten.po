@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-15 03:40+0000\n"
+"POT-Creation-Date: 2026-03-25 03:47+0000\n"
 "PO-Revision-Date: 2020-01-03 11:29+0100\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: Dutch <kde-i18n-nl@kde.org>\n"
@@ -131,13 +131,13 @@ msgctxt "@title:window"
 msgid "Bookmarks"
 msgstr "Bladwijzers"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:73
+#: controllers/view/bookmarks/bookmarksview.cpp:74
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Creates a new bookmark for the current cursor position."
 msgstr "Maakt een nieuwe bladwijzer aan voor de huidige cursorpositie."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:75
+#: controllers/view/bookmarks/bookmarksview.cpp:76
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -147,13 +147,13 @@ msgstr ""
 "Als u op deze knop drukt dan wordt er een nieuw bladwijzer aangemaakt op de "
 "huidige cursorpositie."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:86
+#: controllers/view/bookmarks/bookmarksview.cpp:87
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Deletes all the selected bookmarks."
 msgstr "Verwijdert alle geselecteerde bladwijzers."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:88
+#: controllers/view/bookmarks/bookmarksview.cpp:89
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -161,13 +161,13 @@ msgid ""
 msgstr ""
 "Als u op deze knop drukt worden alle geselecteerde bladwijzers verwijderd."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:100
+#: controllers/view/bookmarks/bookmarksview.cpp:101
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Moves the cursor to the selected bookmark."
 msgstr "Verplaatst de cursor naar de geselecteerde bladwijzer."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:102
+#: controllers/view/bookmarks/bookmarksview.cpp:103
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -177,13 +177,13 @@ msgstr ""
 "Als u op deze knop drukt verplaatst de cursor zich naar de positie van de "
 "laatst geselecteerde bladwijzer."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:110
+#: controllers/view/bookmarks/bookmarksview.cpp:111
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enables renaming of the selected bookmark."
 msgstr "Schakelt het hernoemen van de geselecteerde bladwijzer in."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:112
+#: controllers/view/bookmarks/bookmarksview.cpp:113
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -284,13 +284,13 @@ msgid_plural "Inserted %1 Bytes"
 msgstr[0] "1 byte ingevoegd"
 msgstr[1] "%1 bytes ingevoegd"
 
-#: controllers/view/bytetable/bytetableview.cpp:81
+#: controllers/view/bytetable/bytetableview.cpp:82
 #, kde-format
 msgctxt "@label:spinbox number of bytes to insert"
 msgid "Number (bytes):"
 msgstr "Aantal (bytes):"
 
-#: controllers/view/bytetable/bytetableview.cpp:89
+#: controllers/view/bytetable/bytetableview.cpp:90
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -298,7 +298,7 @@ msgid ""
 msgstr ""
 "Aantal keren dat de nu geselecteerde byte in de tabel zal worden ingevoegd."
 
-#: controllers/view/bytetable/bytetableview.cpp:105
+#: controllers/view/bytetable/bytetableview.cpp:106
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -711,7 +711,7 @@ msgstr ""
 "Als u op de knop <interface>Bouwen</interface> drukt, zal de "
 "frequentiestatistiek van de geselecteerde bytes worden gebouwd."
 
-#: controllers/view/info/infoview.cpp:184
+#: controllers/view/info/infoview.cpp:185
 #: controllers/view/structures/datatypes/datainformation.cpp:59
 #: controllers/view/structures/datatypes/datainformation.cpp:62
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:232
@@ -1645,18 +1645,18 @@ msgstr "Filter:"
 msgid "Enter a term to limit the list."
 msgstr "Voer een term in om de lijst te beperken."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:138
+#: controllers/view/stringsextract/stringsextractview.cpp:139
 #, kde-format
 msgid "C&opy"
 msgstr "K&opiëren"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:141
+#: controllers/view/stringsextract/stringsextractview.cpp:142
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected strings to the clipboard."
 msgstr "Kopieert de geselecteerde tekenreeksen naar het klembord."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:143
+#: controllers/view/stringsextract/stringsextractview.cpp:144
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1666,18 +1666,18 @@ msgstr ""
 "Als u op de knop <interface>Kopiëren</interface> drukt, zullen alle "
 "tekenreeksen die u selecteerde naar het klembord worden gekopieerd."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:152
+#: controllers/view/stringsextract/stringsextractview.cpp:153
 #, kde-format
 msgid "&Show"
 msgstr "&Tonen"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:155
+#: controllers/view/stringsextract/stringsextractview.cpp:156
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Shows the selected string in the view."
 msgstr "Toont de geselecteerde tekenreeks in het beeld."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:157
+#: controllers/view/stringsextract/stringsextractview.cpp:158
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""

@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-15 03:40+0000\n"
+"POT-Creation-Date: 2026-03-25 03:47+0000\n"
 "PO-Revision-Date: 2025-07-06 11:18+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
@@ -132,13 +132,13 @@ msgctxt "@title:window"
 msgid "Bookmarks"
 msgstr "Punts"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:73
+#: controllers/view/bookmarks/bookmarksview.cpp:74
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Creates a new bookmark for the current cursor position."
 msgstr "Crea un punt nou per a la posició actual del cursor."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:75
+#: controllers/view/bookmarks/bookmarksview.cpp:76
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -148,26 +148,26 @@ msgstr ""
 "Si premeu aquest botó, es crearà un punt nou per a la posició actual del "
 "cursor."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:86
+#: controllers/view/bookmarks/bookmarksview.cpp:87
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Deletes all the selected bookmarks."
 msgstr "Elimina tots els punts seleccionats."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:88
+#: controllers/view/bookmarks/bookmarksview.cpp:89
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press this button, all bookmarks which are selected will be deleted."
 msgstr "Si premeu aquest botó, se suprimiran tots els punts seleccionats."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:100
+#: controllers/view/bookmarks/bookmarksview.cpp:101
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Moves the cursor to the selected bookmark."
 msgstr "Mou el cursor al punt seleccionat."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:102
+#: controllers/view/bookmarks/bookmarksview.cpp:103
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -177,13 +177,13 @@ msgstr ""
 "Si premeu aquest botó, es mourà el cursor a la posició del punt que hagi "
 "estat seleccionat l'últim cop."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:110
+#: controllers/view/bookmarks/bookmarksview.cpp:111
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enables renaming of the selected bookmark."
 msgstr "Permet reanomenar els punts seleccionats."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:112
+#: controllers/view/bookmarks/bookmarksview.cpp:113
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -286,13 +286,13 @@ msgid_plural "Inserted %1 Bytes"
 msgstr[0] "S'ha inserit un byte"
 msgstr[1] "S'han inserit %1 bytes"
 
-#: controllers/view/bytetable/bytetableview.cpp:81
+#: controllers/view/bytetable/bytetableview.cpp:82
 #, kde-format
 msgctxt "@label:spinbox number of bytes to insert"
 msgid "Number (bytes):"
 msgstr "Nombre (bytes):"
 
-#: controllers/view/bytetable/bytetableview.cpp:89
+#: controllers/view/bytetable/bytetableview.cpp:90
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -301,7 +301,7 @@ msgstr ""
 "El nombre de repeticions del byte actualment seleccionat en la taula que "
 "s'inserirà."
 
-#: controllers/view/bytetable/bytetableview.cpp:105
+#: controllers/view/bytetable/bytetableview.cpp:106
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -724,7 +724,7 @@ msgstr ""
 "Si premeu el botó <interface>Construeix</interface>, es construirà "
 "l'estadística de freqüència de bytes per als bytes de l'interval seleccionat."
 
-#: controllers/view/info/infoview.cpp:184
+#: controllers/view/info/infoview.cpp:185
 #: controllers/view/structures/datatypes/datainformation.cpp:59
 #: controllers/view/structures/datatypes/datainformation.cpp:62
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:232
@@ -1655,18 +1655,18 @@ msgstr "Filtre:"
 msgid "Enter a term to limit the list."
 msgstr "Introduïu un terme per a limitar la llista."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:138
+#: controllers/view/stringsextract/stringsextractview.cpp:139
 #, kde-format
 msgid "C&opy"
 msgstr "Co&pia"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:141
+#: controllers/view/stringsextract/stringsextractview.cpp:142
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected strings to the clipboard."
 msgstr "Copia les cadenes seleccionades al porta-retalls."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:143
+#: controllers/view/stringsextract/stringsextractview.cpp:144
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1676,18 +1676,18 @@ msgstr ""
 "Si premeu el botó <interface>Copia</interface>, totes les cadenes que heu "
 "seleccionat de la llista es copiaran al porta-retalls."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:152
+#: controllers/view/stringsextract/stringsextractview.cpp:153
 #, kde-format
 msgid "&Show"
 msgstr "&Mostra"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:155
+#: controllers/view/stringsextract/stringsextractview.cpp:156
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Shows the selected string in the view."
 msgstr "Mostra la cadena seleccionada en la visualització."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:157
+#: controllers/view/stringsextract/stringsextractview.cpp:158
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""

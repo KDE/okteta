@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-15 03:40+0000\n"
+"POT-Creation-Date: 2026-03-25 03:47+0000\n"
 "PO-Revision-Date: 2011-04-08 21:21-0700\n"
 "Last-Translator: Fumiaki Okushi <okushi@kde.gr.jp>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -138,13 +138,13 @@ msgctxt "@title:window"
 msgid "Bookmarks"
 msgstr "ブックマーク"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:73
+#: controllers/view/bookmarks/bookmarksview.cpp:74
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Creates a new bookmark for the current cursor position."
 msgstr "現在のカーソル位置に新しいブックマークを作成します"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:75
+#: controllers/view/bookmarks/bookmarksview.cpp:76
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -153,26 +153,26 @@ msgid ""
 msgstr ""
 "このボタンを押すと現在のカーソル位置に新しいブックマークが作成されます。"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:86
+#: controllers/view/bookmarks/bookmarksview.cpp:87
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Deletes all the selected bookmarks."
 msgstr "選択したすべてのブックマークを削除します"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:88
+#: controllers/view/bookmarks/bookmarksview.cpp:89
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press this button, all bookmarks which are selected will be deleted."
 msgstr "このボタンを押すと選択されているすべてのブックマークが削除されます。"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:100
+#: controllers/view/bookmarks/bookmarksview.cpp:101
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Moves the cursor to the selected bookmark."
 msgstr "選択したブックマークにカーソルを移動します"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:102
+#: controllers/view/bookmarks/bookmarksview.cpp:103
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -181,13 +181,13 @@ msgid ""
 msgstr ""
 "このボタンを押すと最後に選択されたブックマークの位置にカーソルが移動します。"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:110
+#: controllers/view/bookmarks/bookmarksview.cpp:111
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enables renaming of the selected bookmark."
 msgstr "選択したブックマークの名前を変更します"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:112
+#: controllers/view/bookmarks/bookmarksview.cpp:113
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -287,7 +287,7 @@ msgid "Inserted 1 Byte"
 msgid_plural "Inserted %1 Bytes"
 msgstr[0] "%1 バイトを挿入"
 
-#: controllers/view/bytetable/bytetableview.cpp:81
+#: controllers/view/bytetable/bytetableview.cpp:82
 #, fuzzy, kde-format
 #| msgctxt "@label:spinbox number of bytes to insert"
 #| msgid "Number:"
@@ -295,14 +295,14 @@ msgctxt "@label:spinbox number of bytes to insert"
 msgid "Number (bytes):"
 msgstr "数:"
 
-#: controllers/view/bytetable/bytetableview.cpp:89
+#: controllers/view/bytetable/bytetableview.cpp:90
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "Number of repeats of the currently selected byte in the table to be inserted."
 msgstr ""
 
-#: controllers/view/bytetable/bytetableview.cpp:105
+#: controllers/view/bytetable/bytetableview.cpp:106
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -697,7 +697,7 @@ msgid ""
 "statistic is built for the bytes in the selected range."
 msgstr "選択範囲に含まれる文字列のリストを更新します"
 
-#: controllers/view/info/infoview.cpp:184
+#: controllers/view/info/infoview.cpp:185
 #: controllers/view/structures/datatypes/datainformation.cpp:59
 #: controllers/view/structures/datatypes/datainformation.cpp:62
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:232
@@ -1617,18 +1617,18 @@ msgstr "フィルタ:"
 msgid "Enter a term to limit the list."
 msgstr "ここに検索語を入力します。"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:138
+#: controllers/view/stringsextract/stringsextractview.cpp:139
 #, kde-format
 msgid "C&opy"
 msgstr "コピー(&O)"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:141
+#: controllers/view/stringsextract/stringsextractview.cpp:142
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected strings to the clipboard."
 msgstr "選択した文字列をクリップボードにコピーします"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:143
+#: controllers/view/stringsextract/stringsextractview.cpp:144
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1638,18 +1638,18 @@ msgstr ""
 "<interface>コピー</interface>ボタンを押すと、リストで選択したすべての文字列が"
 "クリップボードにコピーされます。"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:152
+#: controllers/view/stringsextract/stringsextractview.cpp:153
 #, kde-format
 msgid "&Show"
 msgstr ""
 
-#: controllers/view/stringsextract/stringsextractview.cpp:155
+#: controllers/view/stringsextract/stringsextractview.cpp:156
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Shows the selected string in the view."
 msgstr "選択した文字列をビューに表示します"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:157
+#: controllers/view/stringsextract/stringsextractview.cpp:158
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""

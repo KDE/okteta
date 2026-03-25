@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-15 03:40+0000\n"
+"POT-Creation-Date: 2026-03-25 03:47+0000\n"
 "PO-Revision-Date: 2013-06-21 06:20+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -129,13 +129,13 @@ msgctxt "@title:window"
 msgid "Bookmarks"
 msgstr "Бетбелгілер"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:73
+#: controllers/view/bookmarks/bookmarksview.cpp:74
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Creates a new bookmark for the current cursor position."
 msgstr "Меңзер тұрған жерді бетбелгілеу."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:75
+#: controllers/view/bookmarks/bookmarksview.cpp:76
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -143,26 +143,26 @@ msgid ""
 "cursor position."
 msgstr "Бұл батырманы басқанда, меңзер тұрған жерде бетбелгі қойылады."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:86
+#: controllers/view/bookmarks/bookmarksview.cpp:87
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Deletes all the selected bookmarks."
 msgstr "Барлық таңдалған бетбелгілерді өшіру."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:88
+#: controllers/view/bookmarks/bookmarksview.cpp:89
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press this button, all bookmarks which are selected will be deleted."
 msgstr "Бұл батырманы басқанда, барлық таңдалған бетбелгілер өшіріледі."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:100
+#: controllers/view/bookmarks/bookmarksview.cpp:101
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Moves the cursor to the selected bookmark."
 msgstr "Таңдалған бетбелгінің жеріне меңзерді көшіру."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:102
+#: controllers/view/bookmarks/bookmarksview.cpp:103
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -171,13 +171,13 @@ msgid ""
 msgstr ""
 "Бұл батырманы басқанда, соңғы таңдалған бетбелгінің жеріне меңзер апарылады."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:110
+#: controllers/view/bookmarks/bookmarksview.cpp:111
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enables renaming of the selected bookmark."
 msgstr "Таңдалған бетбелгіні қайта атауын мүмкін қылу."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:112
+#: controllers/view/bookmarks/bookmarksview.cpp:113
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -277,7 +277,7 @@ msgid "Inserted 1 Byte"
 msgid_plural "Inserted %1 Bytes"
 msgstr[0] "%1 байт енгізілді"
 
-#: controllers/view/bytetable/bytetableview.cpp:81
+#: controllers/view/bytetable/bytetableview.cpp:82
 #, fuzzy, kde-format
 #| msgctxt "@label:spinbox number of bytes to insert"
 #| msgid "Number:"
@@ -285,7 +285,7 @@ msgctxt "@label:spinbox number of bytes to insert"
 msgid "Number (bytes):"
 msgstr "Нөмірі:"
 
-#: controllers/view/bytetable/bytetableview.cpp:89
+#: controllers/view/bytetable/bytetableview.cpp:90
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid ""
@@ -296,7 +296,7 @@ msgid ""
 "Number of repeats of the currently selected byte in the table to be inserted."
 msgstr "Кестеде таңдалған байт қандай нөмірімен енгізіледі."
 
-#: controllers/view/bytetable/bytetableview.cpp:105
+#: controllers/view/bytetable/bytetableview.cpp:106
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid ""
@@ -697,7 +697,7 @@ msgstr ""
 "<interface>Есептеу</interface> батырмасын басқанда таңдалған байттар "
 "ауқымындағы байттың жиілік статистикасын есептеледі."
 
-#: controllers/view/info/infoview.cpp:184
+#: controllers/view/info/infoview.cpp:185
 #: controllers/view/structures/datatypes/datainformation.cpp:59
 #: controllers/view/structures/datatypes/datainformation.cpp:62
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:232
@@ -1632,18 +1632,18 @@ msgstr "Сүзгісі:"
 msgid "Enter a term to limit the list."
 msgstr "Тізімді шектейтін шартты келтіріңіз."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:138
+#: controllers/view/stringsextract/stringsextractview.cpp:139
 #, kde-format
 msgid "C&opy"
 msgstr "К&өшіріп алу"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:141
+#: controllers/view/stringsextract/stringsextractview.cpp:142
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected strings to the clipboard."
 msgstr "Таңдалған жолдарды алмасу буферіне көшіріп алу."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:143
+#: controllers/view/stringsextract/stringsextractview.cpp:144
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1653,18 +1653,18 @@ msgstr ""
 "<interface>Көшіріп алу</interface> батырмасын басқанда барлық таңдалған "
 "мәтін жолдары алмасу буферіне көшіріп алынады."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:152
+#: controllers/view/stringsextract/stringsextractview.cpp:153
 #, kde-format
 msgid "&Show"
 msgstr "&Көрсету"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:155
+#: controllers/view/stringsextract/stringsextractview.cpp:156
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Shows the selected string in the view."
 msgstr "Таңдалған жолдарды өрісінде көрсету."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:157
+#: controllers/view/stringsextract/stringsextractview.cpp:158
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""

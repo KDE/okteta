@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-15 03:40+0000\n"
+"POT-Creation-Date: 2026-03-25 03:47+0000\n"
 "PO-Revision-Date: 2023-01-03 09:17+0200\n"
 "Last-Translator: Stelios <sstavra@gmail.com>\n"
 "Language-Team: Greek <kde-i18n-el@kde.org>\n"
@@ -130,14 +130,14 @@ msgctxt "@title:window"
 msgid "Bookmarks"
 msgstr "Σελιδοδείκτες"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:73
+#: controllers/view/bookmarks/bookmarksview.cpp:74
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Creates a new bookmark for the current cursor position."
 msgstr ""
 "Δημιουργεί έναν νέο σελιδοδείκτη για την τρέχουσα τοποθεσία του δρομέα."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:75
+#: controllers/view/bookmarks/bookmarksview.cpp:76
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -147,13 +147,13 @@ msgstr ""
 "Αν πιέσετε αυτό το κουμπί, ένας νέος σελιδοδείκτης θα δημιουργηθεί για την "
 "τρέχουσα τοποθεσία του δρομέα."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:86
+#: controllers/view/bookmarks/bookmarksview.cpp:87
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Deletes all the selected bookmarks."
 msgstr "Διαγράφει όλους τους επιλεγμένους σελιδοδείκτες."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:88
+#: controllers/view/bookmarks/bookmarksview.cpp:89
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -161,13 +161,13 @@ msgid ""
 msgstr ""
 "Αν πιέσετε αυτό το κουμπί, όλοι οι επιλεγμένοι σελιδοδείκτες θα διαγραφούν."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:100
+#: controllers/view/bookmarks/bookmarksview.cpp:101
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Moves the cursor to the selected bookmark."
 msgstr "Μετακινεί το δρομέα στον επιλεγμένο σελιδοδείκτη."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:102
+#: controllers/view/bookmarks/bookmarksview.cpp:103
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -177,13 +177,13 @@ msgstr ""
 "Αν πιέσετε αυτό το κουμπί, ο δρομέας μετακινείται στη θέση του πιο πρόσφατα "
 "επιλεγμένου σελιδοδείκτη."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:110
+#: controllers/view/bookmarks/bookmarksview.cpp:111
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enables renaming of the selected bookmark."
 msgstr "Ενεργοποιεί τη μετονομασία του επιλεγμένου σελιδοδείκτη."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:112
+#: controllers/view/bookmarks/bookmarksview.cpp:113
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -284,13 +284,13 @@ msgid_plural "Inserted %1 Bytes"
 msgstr[0] "Εισήχθη 1 χαρακτήρας"
 msgstr[1] "Εισήχθησαν %1 χαρακτήρες"
 
-#: controllers/view/bytetable/bytetableview.cpp:81
+#: controllers/view/bytetable/bytetableview.cpp:82
 #, kde-format
 msgctxt "@label:spinbox number of bytes to insert"
 msgid "Number (bytes):"
 msgstr "Πλήθος (χαρακτήρες):"
 
-#: controllers/view/bytetable/bytetableview.cpp:89
+#: controllers/view/bytetable/bytetableview.cpp:90
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -299,7 +299,7 @@ msgstr ""
 "Πλήθος επαναλήψεων του τρέχοντος επιλεγμένου χαρακτήρα στο πίνακα που θα "
 "εισαχθεί."
 
-#: controllers/view/bytetable/bytetableview.cpp:105
+#: controllers/view/bytetable/bytetableview.cpp:106
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -720,7 +720,7 @@ msgstr ""
 "Αν πιέσετε το κουμπί <interface>Εξαγωγή</interface>, θα γίνει εξαγωγή των "
 "στατιστικών συχνότητας για τους χαρακτήρες στο επιλεγμένο εύρος."
 
-#: controllers/view/info/infoview.cpp:184
+#: controllers/view/info/infoview.cpp:185
 #: controllers/view/structures/datatypes/datainformation.cpp:59
 #: controllers/view/structures/datatypes/datainformation.cpp:62
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:232
@@ -1650,18 +1650,18 @@ msgstr "Φίλτρο:"
 msgid "Enter a term to limit the list."
 msgstr "Εισάγετε έναν όρο περιορισμού της λίστας."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:138
+#: controllers/view/stringsextract/stringsextractview.cpp:139
 #, kde-format
 msgid "C&opy"
 msgstr "&Αντιγραφή"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:141
+#: controllers/view/stringsextract/stringsextractview.cpp:142
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected strings to the clipboard."
 msgstr "Αντιγραφή επιλεγμένων συμβολοσειρών στο πρόχειρο."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:143
+#: controllers/view/stringsextract/stringsextractview.cpp:144
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -1671,18 +1671,18 @@ msgstr ""
 "Αν πιέσετε το κουμπί <interface>Αντιγραφή</interface>, όλες οι συμβολοσειρές "
 "που έχετε επιλέξει στη λίστα, θα αντιγραφούν στο πρόχειρο."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:152
+#: controllers/view/stringsextract/stringsextractview.cpp:153
 #, kde-format
 msgid "&Show"
 msgstr "&Εμφάνιση"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:155
+#: controllers/view/stringsextract/stringsextractview.cpp:156
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Shows the selected string in the view."
 msgstr "Εμφάνιση επιλεγμένης συμβολοσειράς στην προβολή."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:157
+#: controllers/view/stringsextract/stringsextractview.cpp:158
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
