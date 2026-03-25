@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 09:01+0000\n"
+"POT-Creation-Date: 2026-03-25 02:14+0000\n"
 "PO-Revision-Date: 2018-05-28 13:52+0100\n"
 "Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
@@ -145,7 +145,7 @@ msgctxt "@title:window"
 msgid "Documents"
 msgstr "Dokumente"
 
-#: controllers/documentsystem/documentsbrowser/documentsview.cpp:49
+#: controllers/documentsystem/documentsbrowser/documentsview.cpp:50
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Documents"

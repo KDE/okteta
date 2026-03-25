@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-15 02:09+0000\n"
+"POT-Creation-Date: 2026-03-25 02:14+0000\n"
 "PO-Revision-Date: 2026-03-12 08:52+0200\n"
 "Last-Translator: Yuri Chornoivan <yurchor@ukr.net>\n"
 "Language-Team: Ukrainian <trans-uk@lists.fedoraproject.org>\n"
@@ -250,7 +250,7 @@ msgctxt "@info:tooltip"
 msgid "Copies the offset to the clipboard."
 msgstr "Копіює зміщення до буфера обміну даними."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:126
+#: controllers/view/bookmarks/bookmarksview.cpp:127
 #, kde-format
 msgctxt "@info"
 msgid "No bookmarks"
@@ -360,13 +360,13 @@ msgstr[1] "Вставлено %1 байт."
 msgstr[2] "Вставлено %1 байт."
 msgstr[3] "Вставлено %1 байт."
 
-#: controllers/view/bytetable/bytetableview.cpp:72
+#: controllers/view/bytetable/bytetableview.cpp:73
 #, kde-format
 msgctxt "@label:spinbox number of bytes to insert"
 msgid "Number (bytes):"
 msgstr "Кількість (у байтах):"
 
-#: controllers/view/bytetable/bytetableview.cpp:80
+#: controllers/view/bytetable/bytetableview.cpp:81
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -374,7 +374,7 @@ msgid ""
 msgstr ""
 "Кількість повторень поточного позначеного байта у таблиці під час вставлення."
 
-#: controllers/view/bytetable/bytetableview.cpp:96
+#: controllers/view/bytetable/bytetableview.cpp:97
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -814,20 +814,20 @@ msgstr ""
 "Якщо ви натиснете кнопку <interface>Зібрати</interface>, буде зібрано "
 "статистичні дані щодо частоти байтів для байтів з вказаного діапазону."
 
-#: controllers/view/info/infoview.cpp:120
+#: controllers/view/info/infoview.cpp:121
 #: controllers/view/stringsextract/stringsextractview.cpp:52
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy"
 msgstr "Копіювати"
 
-#: controllers/view/info/infoview.cpp:122
+#: controllers/view/info/infoview.cpp:123
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected statistic lines to the clipboard."
 msgstr "Копіює вибрані статичні рядки до буфера обміну даними."
 
-#: controllers/view/info/infoview.cpp:124
+#: controllers/view/info/infoview.cpp:125
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -837,7 +837,7 @@ msgstr ""
 "Якщо ви натиснете кнопку <interface>Копіювати</interface>, всі вибрані вами "
 "статичні рядки у списку буде скопійовано до буфера."
 
-#: controllers/view/info/infoview.cpp:192
+#: controllers/view/info/infoview.cpp:193
 #: controllers/view/structures/datatypes/datainformation.cpp:58
 #: controllers/view/structures/datatypes/datainformation.cpp:61
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:241
@@ -1863,19 +1863,19 @@ msgctxt "@info:placeholder"
 msgid "Enter a term to limit the list."
 msgstr "Введіть ключ, яким буде виконано фільтрування списку."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:182
+#: controllers/view/stringsextract/stringsextractview.cpp:183
 #, kde-format
 msgctxt "@info"
 msgid "No strings"
 msgstr "Немає рядків"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:369
+#: controllers/view/stringsextract/stringsextractview.cpp:370
 #, kde-format
 msgctxt "@info"
 msgid "No strings extracted."
 msgstr "Не видобуто жодного рядка."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:370
+#: controllers/view/stringsextract/stringsextractview.cpp:371
 #, kde-format
 msgctxt "@info"
 msgid "1 string extracted."

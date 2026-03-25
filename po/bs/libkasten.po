@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeutils\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 09:01+0000\n"
+"POT-Creation-Date: 2026-03-25 02:14+0000\n"
 "PO-Revision-Date: 2015-02-04 15:01+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: Bosnian <bs@li.org>\n"
@@ -155,7 +155,7 @@ msgctxt "@title:window"
 msgid "Documents"
 msgstr "Dokumenti"
 
-#: controllers/documentsystem/documentsbrowser/documentsview.cpp:49
+#: controllers/documentsystem/documentsbrowser/documentsview.cpp:50
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Documents"

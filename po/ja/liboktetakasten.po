@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-15 02:09+0000\n"
+"POT-Creation-Date: 2026-03-25 02:14+0000\n"
 "PO-Revision-Date: 2011-04-08 21:21-0700\n"
 "Last-Translator: Fumiaki Okushi <okushi@kde.gr.jp>\n"
 "Language-Team: Japanese <kde-jp@kde.org>\n"
@@ -270,7 +270,7 @@ msgctxt "@info:tooltip"
 msgid "Copies the offset to the clipboard."
 msgstr "選択した文字列をクリップボードにコピーします"
 
-#: controllers/view/bookmarks/bookmarksview.cpp:126
+#: controllers/view/bookmarks/bookmarksview.cpp:127
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Bookmarks"
@@ -380,7 +380,7 @@ msgid "1 byte inserted."
 msgid_plural "%1 bytes inserted."
 msgstr[0] "パターンが挿入されました。"
 
-#: controllers/view/bytetable/bytetableview.cpp:72
+#: controllers/view/bytetable/bytetableview.cpp:73
 #, fuzzy, kde-format
 #| msgctxt "@label:spinbox number of bytes to insert"
 #| msgid "Number:"
@@ -388,14 +388,14 @@ msgctxt "@label:spinbox number of bytes to insert"
 msgid "Number (bytes):"
 msgstr "数:"
 
-#: controllers/view/bytetable/bytetableview.cpp:80
+#: controllers/view/bytetable/bytetableview.cpp:81
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "Number of repeats of the currently selected byte in the table to be inserted."
 msgstr ""
 
-#: controllers/view/bytetable/bytetableview.cpp:96
+#: controllers/view/bytetable/bytetableview.cpp:97
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -812,14 +812,14 @@ msgid ""
 "statistic is built for the bytes in the selected range."
 msgstr "選択範囲に含まれる文字列のリストを更新します"
 
-#: controllers/view/info/infoview.cpp:120
+#: controllers/view/info/infoview.cpp:121
 #: controllers/view/stringsextract/stringsextractview.cpp:52
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy"
 msgstr ""
 
-#: controllers/view/info/infoview.cpp:122
+#: controllers/view/info/infoview.cpp:123
 #, fuzzy, kde-format
 #| msgctxt "@info:tooltip"
 #| msgid "Copies the selected strings to the clipboard."
@@ -827,7 +827,7 @@ msgctxt "@info:tooltip"
 msgid "Copies the selected statistic lines to the clipboard."
 msgstr "選択した文字列をクリップボードにコピーします"
 
-#: controllers/view/info/infoview.cpp:124
+#: controllers/view/info/infoview.cpp:125
 #, fuzzy, kde-kuit-format
 #| msgctxt "@info:whatsthis"
 #| msgid ""
@@ -841,7 +841,7 @@ msgstr ""
 "<interface>コピー</interface>ボタンを押すと、リストで選択したすべての文字列が"
 "クリップボードにコピーされます。"
 
-#: controllers/view/info/infoview.cpp:192
+#: controllers/view/info/infoview.cpp:193
 #: controllers/view/structures/datatypes/datainformation.cpp:58
 #: controllers/view/structures/datatypes/datainformation.cpp:61
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:241
@@ -1871,7 +1871,7 @@ msgctxt "@info:placeholder"
 msgid "Enter a term to limit the list."
 msgstr "ここに検索語を入力します。"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:182
+#: controllers/view/stringsextract/stringsextractview.cpp:183
 #, fuzzy, kde-format
 #| msgctxt "@title:window of the tool to extract strings"
 #| msgid "Strings"
@@ -1879,13 +1879,13 @@ msgctxt "@info"
 msgid "No strings"
 msgstr "文字列"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:369
+#: controllers/view/stringsextract/stringsextractview.cpp:370
 #, kde-format
 msgctxt "@info"
 msgid "No strings extracted."
 msgstr ""
 
-#: controllers/view/stringsextract/stringsextractview.cpp:370
+#: controllers/view/stringsextract/stringsextractview.cpp:371
 #, kde-format
 msgctxt "@info"
 msgid "1 string extracted."

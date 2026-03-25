@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-15 02:09+0000\n"
+"POT-Creation-Date: 2026-03-25 02:14+0000\n"
 "PO-Revision-Date: 2023-06-14 12:13+0100\n"
 "Last-Translator: José Nuno Coelho Pires <zepires@gmail.com>\n"
 "Language-Team: pt <kde-i18n-pt@kde.org>\n"
@@ -262,7 +262,7 @@ msgctxt "@info:tooltip"
 msgid "Copies the offset to the clipboard."
 msgstr "Copia os textos seleccionados para a área de transferência."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:126
+#: controllers/view/bookmarks/bookmarksview.cpp:127
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Bookmarks"
@@ -375,13 +375,13 @@ msgid_plural "%1 bytes inserted."
 msgstr[0] "1 'byte' convertido."
 msgstr[1] "%1 'bytes' convertidos."
 
-#: controllers/view/bytetable/bytetableview.cpp:72
+#: controllers/view/bytetable/bytetableview.cpp:73
 #, kde-format
 msgctxt "@label:spinbox number of bytes to insert"
 msgid "Number (bytes):"
 msgstr "Número ('bytes'):"
 
-#: controllers/view/bytetable/bytetableview.cpp:80
+#: controllers/view/bytetable/bytetableview.cpp:81
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -390,7 +390,7 @@ msgstr ""
 "O número de repetições do 'byte' seleccionado de momento na tabela será "
 "inserido."
 
-#: controllers/view/bytetable/bytetableview.cpp:96
+#: controllers/view/bytetable/bytetableview.cpp:97
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -831,21 +831,21 @@ msgstr ""
 "Se carregar no botão <interface>Construir</interface>, a estatística de "
 "frequência dos 'bytes' será gerada para os 'bytes' no intervalo indicado."
 
-#: controllers/view/info/infoview.cpp:120
+#: controllers/view/info/infoview.cpp:121
 #: controllers/view/stringsextract/stringsextractview.cpp:52
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy"
 msgstr ""
 
-#: controllers/view/info/infoview.cpp:122
+#: controllers/view/info/infoview.cpp:123
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected statistic lines to the clipboard."
 msgstr ""
 "Copia as linhas de estatísticas seleccionadas para a área de transferência."
 
-#: controllers/view/info/infoview.cpp:124
+#: controllers/view/info/infoview.cpp:125
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -856,7 +856,7 @@ msgstr ""
 "estatísticas que seleccionou na lista serão copiados para a área de "
 "transferência."
 
-#: controllers/view/info/infoview.cpp:192
+#: controllers/view/info/infoview.cpp:193
 #: controllers/view/structures/datatypes/datainformation.cpp:58
 #: controllers/view/structures/datatypes/datainformation.cpp:61
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:241
@@ -1908,7 +1908,7 @@ msgctxt "@info:placeholder"
 msgid "Enter a term to limit the list."
 msgstr "Indique aqui um termo para limitar a lista."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:182
+#: controllers/view/stringsextract/stringsextractview.cpp:183
 #, fuzzy, kde-format
 #| msgctxt "@title:window of the tool to extract strings"
 #| msgid "Strings"
@@ -1916,7 +1916,7 @@ msgctxt "@info"
 msgid "No strings"
 msgstr "Textos"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:369
+#: controllers/view/stringsextract/stringsextractview.cpp:370
 #, fuzzy, kde-format
 #| msgctxt "@info"
 #| msgid "No bytes converted."
@@ -1924,7 +1924,7 @@ msgctxt "@info"
 msgid "No strings extracted."
 msgstr "Não foram convertidos nenhuns 'bytes'."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:370
+#: controllers/view/stringsextract/stringsextractview.cpp:371
 #, kde-format
 msgctxt "@info"
 msgid "1 string extracted."

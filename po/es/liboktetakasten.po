@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-15 02:09+0000\n"
+"POT-Creation-Date: 2026-03-25 02:14+0000\n"
 "PO-Revision-Date: 2026-03-12 12:21+0100\n"
 "Last-Translator: Sofía Priego <spriego@darksylvania.net>\n"
 "Language-Team: Spanish <kde-l10n-es@kde.org>\n"
@@ -251,7 +251,7 @@ msgctxt "@info:tooltip"
 msgid "Copies the offset to the clipboard."
 msgstr "Copia el desplazamiento en el portapapeles."
 
-#: controllers/view/bookmarks/bookmarksview.cpp:126
+#: controllers/view/bookmarks/bookmarksview.cpp:127
 #, kde-format
 msgctxt "@info"
 msgid "No bookmarks"
@@ -357,13 +357,13 @@ msgid_plural "%1 bytes inserted."
 msgstr[0] "1 byte insertado."
 msgstr[1] "%1 bytes insertados."
 
-#: controllers/view/bytetable/bytetableview.cpp:72
+#: controllers/view/bytetable/bytetableview.cpp:73
 #, kde-format
 msgctxt "@label:spinbox number of bytes to insert"
 msgid "Number (bytes):"
 msgstr "Número (bytes):"
 
-#: controllers/view/bytetable/bytetableview.cpp:80
+#: controllers/view/bytetable/bytetableview.cpp:81
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -372,7 +372,7 @@ msgstr ""
 "Número de repeticiones a insertar del byte actualmente seleccionado en la "
 "tabla."
 
-#: controllers/view/bytetable/bytetableview.cpp:96
+#: controllers/view/bytetable/bytetableview.cpp:97
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -813,20 +813,20 @@ msgstr ""
 "Si pulsa el botón <interface>Construir</interface>, se generan las "
 "estadísticas de frecuencia para los bytes del intervalo seleccionado."
 
-#: controllers/view/info/infoview.cpp:120
+#: controllers/view/info/infoview.cpp:121
 #: controllers/view/stringsextract/stringsextractview.cpp:52
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy"
 msgstr "Copiar"
 
-#: controllers/view/info/infoview.cpp:122
+#: controllers/view/info/infoview.cpp:123
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected statistic lines to the clipboard."
 msgstr "Copia las líneas de estadísticas seleccionadas en el portapapeles."
 
-#: controllers/view/info/infoview.cpp:124
+#: controllers/view/info/infoview.cpp:125
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -836,7 +836,7 @@ msgstr ""
 "Si pulsa el botón <interface>Copiar</interface>, todas las líneas de "
 "estadísticas seleccionadas de la lista se copiarán en el portapapeles."
 
-#: controllers/view/info/infoview.cpp:192
+#: controllers/view/info/infoview.cpp:193
 #: controllers/view/structures/datatypes/datainformation.cpp:58
 #: controllers/view/structures/datatypes/datainformation.cpp:61
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:241
@@ -1866,19 +1866,19 @@ msgctxt "@info:placeholder"
 msgid "Enter a term to limit the list."
 msgstr "Introduzca un término para limitar la lista."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:182
+#: controllers/view/stringsextract/stringsextractview.cpp:183
 #, kde-format
 msgctxt "@info"
 msgid "No strings"
 msgstr "Sin cadenas"
 
-#: controllers/view/stringsextract/stringsextractview.cpp:369
+#: controllers/view/stringsextract/stringsextractview.cpp:370
 #, kde-format
 msgctxt "@info"
 msgid "No strings extracted."
 msgstr "No se han extraído cadenas."
 
-#: controllers/view/stringsextract/stringsextractview.cpp:370
+#: controllers/view/stringsextract/stringsextractview.cpp:371
 #, kde-format
 msgctxt "@info"
 msgid "1 string extracted."

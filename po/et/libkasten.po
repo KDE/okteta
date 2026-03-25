@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 09:01+0000\n"
+"POT-Creation-Date: 2026-03-25 02:14+0000\n"
 "PO-Revision-Date: 2019-12-05 17:38+0200\n"
 "Last-Translator: Marek Laane <qiilaq69@gmail.com>\n"
 "Language-Team: Estonian <kde-et@lists.linux.ee>\n"
@@ -145,7 +145,7 @@ msgctxt "@title:window"
 msgid "Documents"
 msgstr "Dokumendid"
 
-#: controllers/documentsystem/documentsbrowser/documentsview.cpp:49
+#: controllers/documentsystem/documentsbrowser/documentsview.cpp:50
 #, fuzzy, kde-format
 #| msgctxt "@title:window"
 #| msgid "Documents"
