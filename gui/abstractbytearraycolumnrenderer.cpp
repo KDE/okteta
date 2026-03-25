@@ -238,13 +238,6 @@ void AbstractByteArrayColumnRenderer::renderNextLine(QPainter* painter)
     d->renderNextLine(painter);
 }
 
-void AbstractByteArrayColumnRenderer::renderLinePositions(QPainter* painter, Line lineIndex, LinePositionRange linePositions)
-{
-    Q_D(AbstractByteArrayColumnRenderer);
-
-    d->renderLinePositions(painter, lineIndex, linePositions);
-}
-
 void AbstractByteArrayColumnRenderer::renderByte(QPainter* painter, Address byteIndex)
 {
     Q_D(AbstractByteArrayColumnRenderer);
