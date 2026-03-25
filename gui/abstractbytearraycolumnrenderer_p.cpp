@@ -371,38 +371,41 @@ void AbstractByteArrayColumnRendererPrivate::renderFirstLine(QPainter* painter, 
 
     mRenderLine = firstLineIndex;
 
-    renderLinePositions(painter, mRenderLine++, mRenderLinePositions);
+    renderLinePositions(painter);
 }
 
 void AbstractByteArrayColumnRendererPrivate::renderNextLine(QPainter* painter)
 {
-    renderLinePositions(painter, mRenderLine++, mRenderLinePositions);
+    ++mRenderLine;
+
+    renderLinePositions(painter);
 }
 
-void AbstractByteArrayColumnRendererPrivate::renderLinePositions(QPainter* painter, Line lineIndex, LinePositionRange linePositions)
+void AbstractByteArrayColumnRendererPrivate::renderLinePositions(QPainter* painter)
 {
     // clear background
     const unsigned int blankFlag =
-        (linePositions.start() != 0 ? StartsBefore : 0) | (linePositions.end() != mLastLinePos ? EndsLater : 0);
+        (mRenderLinePositions.start() != 0 ? StartsBefore : 0) | (mRenderLinePositions.end() != mLastLinePos ? EndsLater : 0);
     const QBrush& backgroundBrush = mStylist->palette().brush(QPalette::Base);
 
-    renderRange(painter, backgroundBrush, linePositions, blankFlag);
+    renderRange(painter, backgroundBrush, mRenderLinePositions, blankFlag);
 
     // no bytes to paint?
-    if (!mLayout->hasContent(lineIndex)) {
+    if (!mLayout->hasContent(mRenderLine)) {
         return;
     }
 
     // Go through the lines TODO: handle first and last line more efficiently
     // check for leading and trailing spaces
-    const LinePositionRange existingLinePositions = mLayout->linePositions(lineIndex);
+    const LinePositionRange existingLinePositions = mLayout->linePositions(mRenderLine);
 
+    LinePositionRange linePositions(mRenderLinePositions);
     linePositions.restrictTo(existingLinePositions);
     const int firstLinePosition = linePositions.start();
 
     // check for leading and trailing spaces
     AddressRange byteIndizes =
-        AddressRange::fromWidth(mLayout->indexAtCoord(Coord(linePositions.start(), lineIndex)), linePositions.width());
+        AddressRange::fromWidth(mLayout->indexAtCoord(Coord(linePositions.start(), mRenderLine)), linePositions.width());
 
     unsigned int selectionFlag = 0;
     unsigned int markingFlag = 0;
@@ -411,7 +414,7 @@ void AbstractByteArrayColumnRendererPrivate::renderLinePositions(QPainter* paint
     bool hasMarking = mRanges->hasMarking();
     bool hasSelection = mRanges->hasSelection();
 
-// qCDebug(LOG_OKTETA_GUI) << QString("painting linePositions (painter%1-%2L%3): ").arg(linePositions.start()).arg(linePositions.end()).arg(lineIndex)
+// qCDebug(LOG_OKTETA_GUI) << QString("painting linePositions (painter%1-%2L%3): ").arg(linePositions.start()).arg(linePositions.end()).arg(mRenderLine)
 //         <<linePositions.start()<<"-"<<linePositions.start()
 //         <<" for byteIndizes "<<byteIndizes.start()<<"-"<<byteIndizes.start()<<endl;
     while (linePositions.isValid()) {
