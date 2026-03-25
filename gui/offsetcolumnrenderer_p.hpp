@@ -39,7 +39,7 @@ private:
     /** recalculates all x values */
     void recalcX();
     /** paints full line */
-    void renderLine(QPainter* painter, Line lineIndex);
+    void renderLine(QPainter* painter);
     /** */
     void renderColumnBackground(QPainter* painter, PixelXRange Xs, PixelYRange Ys);
 
@@ -64,7 +64,7 @@ public: // general layout
 
 public: // firstnext trips related
     /** */
-    Line mRenderLineIndex;
+    Line mRenderLine;
 
 private:
     OffsetColumnRenderer* const q_ptr;

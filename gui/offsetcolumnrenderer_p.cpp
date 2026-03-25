@@ -18,9 +18,9 @@
 
 namespace Okteta {
 
-void OffsetColumnRendererPrivate::renderLine(QPainter* painter, Line lineIndex)
+void OffsetColumnRendererPrivate::renderLine(QPainter* painter)
 {
-    const PixelX offset = mLayout->firstLineOffset() + mLayout->noOfBytesPerLine() * lineIndex;
+    const PixelX offset = mLayout->firstLineOffset() + mLayout->noOfBytesPerLine() * mRenderLine;
     PrintFunction(mCodedOffset, offset);
 
     const QColor& buttonColor = mStylist->palette().buttonText().color();
@@ -42,13 +42,16 @@ void OffsetColumnRendererPrivate::renderFirstLine(QPainter* painter, PixelXRange
 {
     Q_UNUSED(Xs)
 
-    mRenderLineIndex = firstLineIndex;
-    renderLine(painter, mRenderLineIndex++);
+    mRenderLine = firstLineIndex;
+
+    renderLine(painter);
 }
 
 void OffsetColumnRendererPrivate::renderNextLine(QPainter* painter)
 {
-    renderLine(painter, mRenderLineIndex++);
+    ++mRenderLine;
+
+    renderLine(painter);
 }
 
 void OffsetColumnRendererPrivate::renderColumn(QPainter* painter, PixelXRange Xs, PixelYRange Ys)
