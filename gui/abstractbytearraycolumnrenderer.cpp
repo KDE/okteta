@@ -56,27 +56,6 @@ int AbstractByteArrayColumnRenderer::noOfGroupedBytes() const
     return d->noOfGroupedBytes();
 }
 
-LinePosition AbstractByteArrayColumnRenderer::firstLinePos() const
-{
-    Q_D(const AbstractByteArrayColumnRenderer);
-
-    return d->firstLinePos();
-}
-
-LinePosition AbstractByteArrayColumnRenderer::lastLinePos() const
-{
-    Q_D(const AbstractByteArrayColumnRenderer);
-
-    return d->lastLinePos();
-}
-
-LinePositionRange AbstractByteArrayColumnRenderer::visibleLinePositions() const
-{
-    Q_D(const AbstractByteArrayColumnRenderer);
-
-    return d->visibleLinePositions();
-}
-
 const ByteArrayTableLayout* AbstractByteArrayColumnRenderer::tableLayout() const
 {
     Q_D(const AbstractByteArrayColumnRenderer);

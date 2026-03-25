@@ -153,12 +153,6 @@ public: // value access
     int noOfGroupedBytes() const;
 
     [[nodiscard]]
-    LinePosition firstLinePos() const;
-    [[nodiscard]]
-    LinePosition lastLinePos()  const;
-    [[nodiscard]]
-    LinePositionRange visibleLinePositions() const;
-    [[nodiscard]]
     const ByteArrayTableLayout* tableLayout() const;
     [[nodiscard]]
     bool isByteTypeColored() const;
@@ -264,10 +258,6 @@ inline PixelX AbstractByteArrayColumnRendererPrivate::byteSpacingWidth()  const 
 inline PixelX AbstractByteArrayColumnRendererPrivate::groupSpacingWidth() const { return mGroupSpacingWidth; }
 
 inline int AbstractByteArrayColumnRendererPrivate::noOfGroupedBytes()      const { return mNoOfGroupedBytes; }
-
-inline LinePosition AbstractByteArrayColumnRendererPrivate::firstLinePos() const { return mRenderLinePositions.start(); }
-inline LinePosition AbstractByteArrayColumnRendererPrivate::lastLinePos()  const { return mRenderLinePositions.end(); }
-inline LinePositionRange AbstractByteArrayColumnRendererPrivate::visibleLinePositions() const { return mRenderLinePositions; }
 
 inline const ByteArrayTableLayout* AbstractByteArrayColumnRendererPrivate::tableLayout() const { return mLayout; }
 

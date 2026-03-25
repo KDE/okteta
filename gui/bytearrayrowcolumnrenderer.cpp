@@ -69,27 +69,6 @@ Size ByteArrayRowColumnRenderer::noOfGroupedBytes() const
     return d->noOfGroupedBytes();
 }
 
-LinePosition ByteArrayRowColumnRenderer::firstLinePos() const
-{
-    Q_D(const ByteArrayRowColumnRenderer);
-
-    return d->firstLinePos();
-}
-
-LinePosition ByteArrayRowColumnRenderer::lastLinePos() const
-{
-    Q_D(const ByteArrayRowColumnRenderer);
-
-    return d->lastLinePos();
-}
-
-LinePositionRange ByteArrayRowColumnRenderer::visibleLinePositions() const
-{
-    Q_D(const ByteArrayRowColumnRenderer);
-
-    return d->visibleLinePositions();
-}
-
 const ByteArrayTableLayout* ByteArrayRowColumnRenderer::tableLayout() const
 {
     Q_D(const ByteArrayRowColumnRenderer);

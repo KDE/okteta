@@ -166,12 +166,6 @@ public: // value access
     int noOfGroupedBytes() const;
 
     [[nodiscard]]
-    LinePosition firstLinePos() const;
-    [[nodiscard]]
-    LinePosition lastLinePos()  const;
-    [[nodiscard]]
-    LinePositionRange visibleLinePositions() const;
-    [[nodiscard]]
     const ByteArrayTableLayout* tableLayout() const;
     [[nodiscard]]
     bool isByteTypeColored() const;

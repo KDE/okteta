@@ -210,12 +210,6 @@ public: // value access
     QChar undefinedChar() const;
 
     [[nodiscard]]
-    LinePosition firstLinePos() const;
-    [[nodiscard]]
-    LinePosition lastLinePos()  const;
-    [[nodiscard]]
-    LinePositionRange visibleLinePositions() const;
-    [[nodiscard]]
     const ByteArrayTableLayout* tableLayout() const;
     [[nodiscard]]
     bool isByteTypeColored() const;
@@ -352,10 +346,6 @@ inline PixelX ByteArrayRowColumnRendererPrivate::byteSpacingWidth()  const { ret
 inline PixelX ByteArrayRowColumnRendererPrivate::groupSpacingWidth() const { return mGroupSpacingWidth; }
 inline PixelY ByteArrayRowColumnRendererPrivate::digitHeight()       const { return mDigitHeight; }
 inline Size ByteArrayRowColumnRendererPrivate::noOfGroupedBytes()      const { return mNoOfGroupedBytes; }
-
-inline LinePosition ByteArrayRowColumnRendererPrivate::firstLinePos() const { return mRenderLinePositions.start(); }
-inline LinePosition ByteArrayRowColumnRendererPrivate::lastLinePos()  const { return mRenderLinePositions.end(); }
-inline LinePositionRange ByteArrayRowColumnRendererPrivate::visibleLinePositions() const { return mRenderLinePositions; }
 
 inline const ByteArrayTableLayout* ByteArrayRowColumnRendererPrivate::tableLayout() const { return mLayout; }
 
