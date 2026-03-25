@@ -87,7 +87,7 @@ void StructuresManager::reloadPaths()
         }
         // Support backward-compat also files in the top-level dir, when the use the same base name
         {
-            const QString structureBasePath = structuresDir;
+            const QString& structureBasePath = structuresDir;
             const QStringList desktopFiles =
                 QDir(structureBasePath).entryList(QStringList(QStringLiteral("*.desktop")));
             for (const QString& desktopFile : desktopFiles) {
