@@ -43,10 +43,10 @@ private:
     /** */
     void renderColumnBackground(QPainter* painter, PixelXRange Xs, PixelYRange Ys);
 
-public: // user settings
+private: // user settings
     ByteArrayTableLayout* const mLayout;
 
-public: // pixel related
+private: // pixel related
     /** */
     PixelX mOffsetTextWidth = 0;
     /** */
@@ -54,7 +54,7 @@ public: // pixel related
 
     PixelX mMargin = 2;
 
-public: // general layout
+private: // general layout
     OffsetFormat::Format mFormat;
 
     OffsetFormat::print PrintFunction;
@@ -62,7 +62,7 @@ public: // general layout
     /** buffer to hold the formatted coding */
     mutable char mCodedOffset[OffsetFormat::MaxFormatWidth + 1];
 
-public: // firstnext trips related
+private: // firstnext trips related
     /** */
     Line mRenderLine;
 
