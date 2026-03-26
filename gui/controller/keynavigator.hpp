@@ -23,10 +23,10 @@ private:
     enum MoveAction
     {
         MoveBackward,
-        MoveWordBackward,
+        MoveGroupBackward,
         MoveNonZeroBackward,
         MoveForward,
-        MoveWordForward,
+        MoveGroupForward,
         MoveNonZeroForward,
         MoveUp,
         MovePgUp,

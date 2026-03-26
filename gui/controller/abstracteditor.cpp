@@ -77,7 +77,7 @@ bool AbstractEditor::handleKeyPress(QKeyEvent* keyEvent)
         if (mView->hasSelectedData()) {
             mView->removeSelectedData();
         } else {
-            doEditAction(WordBackspace);
+            doEditAction(GroupBackspace);
         }
         keyUsed = true;
     } else if (keyEvent->matches(QKeySequence::DeleteEndOfWord)) {
@@ -85,7 +85,7 @@ bool AbstractEditor::handleKeyPress(QKeyEvent* keyEvent)
         if (mView->hasSelectedData()) {
             mView->removeSelectedData();
         } else {
-            doEditAction(WordDelete);
+            doEditAction(GroupDelete);
         }
         keyUsed = true;
     } else {
@@ -127,7 +127,7 @@ void AbstractEditor::doEditAction(EditAction action)
             }
         }
         break;
-    case WordDelete: // kills data until the start of the next word
+    case GroupDelete: // kills data until the start of the next group
         if (!mView->isOverwriteMode()) {
             const Address index = mCursor->realIndex();
             if (index < mView->layout()->length()) {
@@ -150,7 +150,7 @@ void AbstractEditor::doEditAction(EditAction action)
             }
         }
         break;
-    case WordBackspace:
+    case GroupBackspace:
     {
         const int leftIndex = mCursor->realIndex() - 1;
         if (leftIndex >= 0) {

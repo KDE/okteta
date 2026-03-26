@@ -339,7 +339,7 @@ void AbstractByteArrayView::selectAll(bool select)
 bool AbstractByteArrayView::selectWord(Address index)
 {
     Q_D(AbstractByteArrayView);
-    return d->selectWord(index);
+    return d->selectGroup(index);
 }
 
 void AbstractByteArrayView::setCursorPosition(Address index, bool isBehind)

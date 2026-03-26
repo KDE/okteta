@@ -270,25 +270,25 @@ void MouseNavigator::handleMouseMove(QPoint point)   // handles the move of the 
     mView->placeCursor(point);
     mView->ensureCursorVisible();
 
-    // do wordwise selection?
-    if (mInLMBDoubleClick && tableRanges->hasFirstWordSelection()) {
+    // do group-wise selection?
+    if (mInLMBDoubleClick && tableRanges->hasFirstGroupSelection()) {
         Address newIndex = tableCursor->realIndex();
-        const AddressRange firstWordSelection = tableRanges->firstWordSelection();
+        const AddressRange firstGroupSelection = tableRanges->firstGroupSelection();
         const TextByteArrayAnalyzer textAnalyzer(mView->byteArrayModel(), mView->charCodec());
         // are we before the selection?
-        if (firstWordSelection.startsBehind(newIndex)) {
-            tableRanges->ensureWordSelectionForward(false);
+        if (firstGroupSelection.startsBehind(newIndex)) {
+            tableRanges->ensureGroupSelectionForward(false);
             newIndex = textAnalyzer.indexOfLeftWordSelect(newIndex);
         }
         // or behind?
-        else if (firstWordSelection.endsBefore(newIndex)) {
-            tableRanges->ensureWordSelectionForward(true);
+        else if (firstGroupSelection.endsBefore(newIndex)) {
+            tableRanges->ensureGroupSelectionForward(true);
             newIndex = textAnalyzer.indexOfRightWordSelect(newIndex);
         }
         // or inside?
         else {
-            tableRanges->ensureWordSelectionForward(true);
-            newIndex = firstWordSelection.nextBehindEnd();
+            tableRanges->ensureGroupSelectionForward(true);
+            newIndex = firstGroupSelection.nextBehindEnd();
         }
 
         tableCursor->gotoCIndex(newIndex);

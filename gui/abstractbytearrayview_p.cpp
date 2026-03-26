@@ -650,7 +650,7 @@ void AbstractByteArrayViewPrivate::setMarking(const AddressRange& _marking)
 }
 
 // TODO: make this use select( start, end )
-bool AbstractByteArrayViewPrivate::selectWord(Address index)
+bool AbstractByteArrayViewPrivate::selectGroup(Address index)
 {
     bool result = false;
 
@@ -661,7 +661,7 @@ bool AbstractByteArrayViewPrivate::selectWord(Address index)
             pauseCursor();
             finishByteEditor();
 
-            mTableRanges->setFirstWordSelection(wordSection);
+            mTableRanges->setFirstGroupSelection(wordSection);
             mTableCursor->gotoCIndex(wordSection.nextBehindEnd());
 
             endViewUpdate();

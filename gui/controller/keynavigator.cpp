@@ -96,10 +96,10 @@ bool KeyNavigator::handleKeyPress(QKeyEvent* keyEvent)
         moveCursor(MoveBackward, Select);
         keyUsed = true;
     } else if (keyEvent->matches(QKeySequence::MoveToPreviousWord)) {
-        moveCursor(MoveWordBackward, Unselect);
+        moveCursor(MoveGroupBackward, Unselect);
         keyUsed = true;
     } else if (keyEvent->matches(QKeySequence::SelectPreviousWord)) {
-        moveCursor(MoveWordBackward, Select);
+        moveCursor(MoveGroupBackward, Select);
         keyUsed = true;
     } else if (keyEvent->matches(QKeySequence::MoveToNextChar)) {
         moveCursor(MoveForward, Unselect);
@@ -108,10 +108,10 @@ bool KeyNavigator::handleKeyPress(QKeyEvent* keyEvent)
         moveCursor(MoveForward, Select);
         keyUsed = true;
     } else if (keyEvent->matches(QKeySequence::MoveToNextWord)) {
-        moveCursor(MoveWordForward, Unselect);
+        moveCursor(MoveGroupForward, Unselect);
         keyUsed = true;
     } else if (keyEvent->matches(QKeySequence::SelectNextWord)) {
-        moveCursor(MoveWordForward, Select);
+        moveCursor(MoveGroupForward, Select);
         keyUsed = true;
     } else if (keyEvent->matches(QKeySequence::MoveToStartOfLine)) {
         moveCursor(MoveLineStart, Unselect);
@@ -254,7 +254,7 @@ void KeyNavigator::moveCursor(MoveAction action, SelectAction selectAction)
     switch (action)
     {
     case MoveBackward:     tableCursor->gotoPreviousByte(); break;
-    case MoveWordBackward: {
+    case MoveGroupBackward: {
         const Okteta::TextByteArrayAnalyzer textAnalyzer(mView->byteArrayModel(), mView->charCodec());
         const int newIndex = textAnalyzer.indexOfPreviousWordStart(tableCursor->realIndex());
         tableCursor->gotoIndex(newIndex);
@@ -266,7 +266,7 @@ void KeyNavigator::moveCursor(MoveAction action, SelectAction selectAction)
         break;
     }
     case MoveForward:      tableCursor->gotoNextByte();     break;
-    case MoveWordForward:  {
+    case MoveGroupForward:  {
         const Okteta::TextByteArrayAnalyzer textAnalyzer(mView->byteArrayModel(), mView->charCodec());
         const int newIndex = textAnalyzer.indexOfNextWordStart(tableCursor->realIndex());
         tableCursor->gotoCIndex(newIndex);

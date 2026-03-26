@@ -331,7 +331,13 @@ public: // modification access
     void setSelection(Address start, Address end);
     void setSelection(const AddressRange& selection);
     /** selects word at index, returns true if there is one */
-    bool selectWord(/*unsigned*/ Address index /*, Chartype*/);
+    bool selectWord(/*unsigned*/ Address index);
+    inline
+    /** selects group of bytes at index (word if active coding is char), returns true if there is one */
+    bool selectGroup(/*unsigned*/ Address index)
+    {
+        return selectWord(index);
+    }
 
     void setMarking(Address start, Address end);
     void setMarking(const AddressRange& marking);
