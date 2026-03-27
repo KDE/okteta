@@ -80,6 +80,13 @@ void CoordTest::testAssign()
     QCOMPARE(otherCoord, coord);
 }
 
+void CoordTest::testPosFromIndex()
+{
+    const LinePosition pos = Coord::posFromIndex(Index, LineWidth);
+
+    QCOMPARE(pos, Pos);
+}
+
 void CoordTest::testSetPosLine()
 {
     Coord coord;

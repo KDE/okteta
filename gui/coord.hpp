@@ -37,6 +37,8 @@ public:
      */
     static Coord fromIndex(Address index, LinePositionSize lineWidth);
 
+    static LinePosition posFromIndex(Address index, LinePositionSize lineWidth);
+
 public:
     /** creates a coord with 0,0 */
     Coord() = default;
@@ -177,6 +179,13 @@ inline Coord Coord::fromIndex(Address index, LinePositionSize lineWidth)
     const Line line = index / lineWidth;
     const LinePosition pos  = index - line * lineWidth;
     return Coord(pos, line);
+}
+
+inline LinePosition Coord::posFromIndex(Address index, LinePositionSize lineWidth)
+{
+    const Line line = index / lineWidth;
+    const LinePosition pos  = index - line * lineWidth;
+    return pos;
 }
 
 constexpr bool Coord::operator==(const Coord& other) const { return mPos == other.mPos && mLine == other.mLine; }
