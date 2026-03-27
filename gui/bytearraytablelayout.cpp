@@ -265,6 +265,15 @@ LinePosition ByteArrayTableLayout::lastLinePosition(Line line) const
     return (line == mCoordRange.end().line()) ? mCoordRange.end().pos() : mNoOfBytesPerLine - 1;
 }
 
+LinePosition ByteArrayTableLayout::linePosition(Address index) const
+{
+    const LinePosition pos =
+        (index <= mByteArrayOffset) ?     mCoordRange.start().pos() :
+        (index >= mLastByteArrayOffset) ? mCoordRange.end().pos() :
+                                          Coord::posFromIndex(index + mRelativeStartOffset - mByteArrayOffset, mNoOfBytesPerLine);
+    return pos;
+}
+
 bool ByteArrayTableLayout::hasContent(Line line) const
 {
     return mCoordRange.includesLine(line);

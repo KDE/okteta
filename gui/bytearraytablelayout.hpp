@@ -132,6 +132,8 @@ public: // value calculation service
     LinePosition firstLinePosition(const Coord& coord) const;
     /** returns the valid Pos or the last Pos in line. if coord is invalid the behaviour is undefinded */
     LinePosition lastLinePosition(const Coord& coord) const;
+    /** returns the valid Pos in its line. if @p index is out of range, it is bounded and that pos returned. */
+    LinePosition linePosition(Address index) const;
     /** returns true if the line has content */
     bool hasContent(Line line) const;
     /** returns true if the coord is the first in it's line. if coord is invalid the behaviour is undefinded */
