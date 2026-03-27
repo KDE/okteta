@@ -291,7 +291,7 @@ void MouseNavigator::handleMouseMove(QPoint point)   // handles the move of the 
             newIndex = firstWordSelection.nextBehindEnd();
         }
 
-        tableCursor->gotoIndex(newIndex);
+        tableCursor->gotoCIndex(newIndex);
     }
 
     if (tableRanges->selectionStarted()) {
