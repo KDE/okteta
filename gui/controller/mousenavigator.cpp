@@ -219,15 +219,13 @@ bool MouseNavigator::handleMouseDoubleClickEvent(QMouseEvent* mouseEvent)
 
         const Address index = tableCursor->validIndex();
 
-        if (mView->activeCoding() == AbstractByteArrayView::CharCodingId) {
-            mView->selectWord(index);
+        mView->selectGroup(index);
 
-            // as we already have a double-click maybe it is a triple-click
-            m_tripleClickTimer->start(QApplication::doubleClickInterval());
-            mDoubleClickPoint = mouseEvent->globalPos();
-        }
-        //  else
-        //    mValueEditor->goInsideByte(); TODO: make this possible again
+        // as we already have a double-click maybe it is a triple-click
+        m_tripleClickTimer->start(QApplication::doubleClickInterval());
+        mDoubleClickPoint = mouseEvent->globalPos();
+
+        // mValueEditor->goInsideByte(); TODO: make this possible again in some way?
 
         mInLMBDoubleClick = true; //
         mLMBPressed = true;
@@ -274,16 +272,27 @@ void MouseNavigator::handleMouseMove(QPoint point)   // handles the move of the 
     if (mInLMBDoubleClick && tableRanges->hasFirstGroupSelection()) {
         Address newIndex = tableCursor->realIndex();
         const AddressRange firstGroupSelection = tableRanges->firstGroupSelection();
-        const TextByteArrayAnalyzer textAnalyzer(mView->byteArrayModel(), mView->charCodec());
         // are we before the selection?
         if (firstGroupSelection.startsBehind(newIndex)) {
             tableRanges->ensureGroupSelectionForward(false);
-            newIndex = textAnalyzer.indexOfLeftWordSelect(newIndex);
+            if (mView->activeCoding() == AbstractByteArrayView::CharCodingId) {
+                const TextByteArrayAnalyzer textAnalyzer(mView->byteArrayModel(), mView->charCodec());
+                newIndex = textAnalyzer.indexOfLeftWordSelect(newIndex);
+            } else {
+                const int noOfGroupedBytes = mView->noOfGroupedBytes();
+                newIndex = mView->layout()->indexAtGroupStart(newIndex, noOfGroupedBytes);
+            }
         }
         // or behind?
         else if (firstGroupSelection.endsBefore(newIndex)) {
             tableRanges->ensureGroupSelectionForward(true);
-            newIndex = textAnalyzer.indexOfRightWordSelect(newIndex);
+            if (mView->activeCoding() == AbstractByteArrayView::CharCodingId) {
+                const TextByteArrayAnalyzer textAnalyzer(mView->byteArrayModel(), mView->charCodec());
+                newIndex = textAnalyzer.indexOfRightWordSelect(newIndex);
+            } else {
+                const int noOfGroupedBytes = mView->noOfGroupedBytes();
+                newIndex = mView->layout()->indexAtGroupEnd(newIndex, noOfGroupedBytes) + 1;
+            }
         }
         // or inside?
         else {
