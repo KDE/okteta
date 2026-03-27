@@ -162,6 +162,9 @@ public: // value calculation service
     /** returns the valid Pos or the last Pos in line. if coord is invalid the behaviour is undefinded */
     [[nodiscard]]
     LinePosition lastLinePosition(Coord coord) const;
+    /** returns the valid Pos in its line. if @p index is out of range, it is bounded and that pos returned. */
+    [[nodiscard]]
+    LinePosition linePosition(Address index) const;
     /** returns true if the line has content */
     [[nodiscard]]
     bool hasContent(Line line) const;
@@ -178,6 +181,16 @@ public: // value calculation service
     /** returns the coord if valid or the nearest valid coord */
     [[nodiscard]]
     Coord correctCoord(Coord coord) const;
+
+    /** calculates the index of first pos in grouped bytes the @p index belongs to. if @p index is out of range, it is bounded and the value for that returned. */
+    [[nodiscard]]
+    Address indexAtGroupStart(Address index, int noOfGroupedBytes) const;
+    /** calculates the index of last pos in grouped bytes the @p index belongs to. if @p index is out of range, it is bounded and the value for that returned. */
+    [[nodiscard]]
+    Address indexAtGroupEnd(Address index, int noOfGroupedBytes) const;
+    /** calculates the range of indizes in grouped bytes the @p index belongs to. if @p index is out of range, it is bounded and the values for that returned. */
+    [[nodiscard]]
+    AddressRange groupSection(Address index, int noOfGroupedBytes) const;
 
 public: // modification access; return true if changes
     /** sets mStartOffset, returns true if changed */

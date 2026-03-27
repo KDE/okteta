@@ -74,7 +74,7 @@ bool AbstractEditor::handleKeyPress(QKeyEvent* keyEvent)
         if (mView->hasSelectedBytes()) {
             mView->removeSelectedBytes();
         } else {
-            doEditAction(WordBackspace);
+            doEditAction(GroupBackspace);
         }
         keyUsed = true;
     } else if (keyEvent->matches(QKeySequence::DeleteEndOfWord)) {
@@ -82,7 +82,7 @@ bool AbstractEditor::handleKeyPress(QKeyEvent* keyEvent)
         if (mView->hasSelectedBytes()) {
             mView->removeSelectedBytes();
         } else {
-            doEditAction(WordDelete);
+            doEditAction(GroupDelete);
         }
         keyUsed = true;
     } else {
@@ -126,13 +126,19 @@ void AbstractEditor::doEditAction(EditAction action)
             }
         }
         break;
-    case WordDelete: // kills data until the start of the next word
+    case GroupDelete: // kills data until the start of the next group
         if (!mView->isOverwriteMode()) {
             const Address index = tableCursor->realIndex();
             if (index < mView->tableLayout()->length()) {
-                const TextByteArrayAnalyzer textAnalyzer(byteArrayModel, mView->charCodec());
-                const Address end = textAnalyzer.indexOfBeforeNextWordStart(index);
-                std::ignore = byteArrayModel->removeBytes(AddressRange(index, end));
+                Address groupEnd;
+                if (mView->activeCoding() == AbstractByteArrayView::CharCodingId) {
+                    const TextByteArrayAnalyzer textAnalyzer(byteArrayModel, mView->charCodec());
+                    groupEnd = textAnalyzer.indexOfBeforeNextWordStart(index);
+                } else {
+                    const int noOfGroupedBytes = mView->q_func()->noOfGroupedBytes();
+                    groupEnd = mView->tableLayout()->indexAtGroupEnd(index, noOfGroupedBytes);
+                }
+                std::ignore = byteArrayModel->removeBytes(AddressRange(index, groupEnd));
             }
         }
         break;
@@ -149,14 +155,20 @@ void AbstractEditor::doEditAction(EditAction action)
             }
         }
         break;
-    case WordBackspace:
+    case GroupBackspace:
     {
         const int leftIndex = tableCursor->realIndex() - 1;
         if (leftIndex >= 0) {
-            const TextByteArrayAnalyzer textAnalyzer(byteArrayModel, mView->charCodec());
-            const Address wordStart = textAnalyzer.indexOfPreviousWordStart(leftIndex);
             if (!mView->isOverwriteMode()) {
-                std::ignore = byteArrayModel->removeBytes(AddressRange(wordStart, leftIndex));
+                Address groupStart;
+                if (mView->activeCoding() == AbstractByteArrayView::CharCodingId) {
+                    const TextByteArrayAnalyzer textAnalyzer(byteArrayModel, mView->charCodec());
+                    groupStart = textAnalyzer.indexOfPreviousWordStart(leftIndex);
+                } else {
+                    const int noOfGroupedBytes = mView->q_func()->noOfGroupedBytes();
+                    groupStart = mView->tableLayout()->indexAtGroupStart(leftIndex, noOfGroupedBytes);
+                }
+                std::ignore = byteArrayModel->removeBytes(AddressRange(groupStart, leftIndex));
             }
         }
     }

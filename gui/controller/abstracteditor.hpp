@@ -19,9 +19,9 @@ protected:
     enum EditAction
     {
         CharDelete,
-        WordDelete,
+        GroupDelete,
         CharBackspace,
-        WordBackspace
+        GroupBackspace
     };
 
 protected:

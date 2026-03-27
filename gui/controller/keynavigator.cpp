@@ -7,6 +7,7 @@
 #include "keynavigator.hpp"
 
 // lib
+#include <bytearraytablelayout.hpp>
 #include <bytearraytableranges.hpp>
 #include <bytearraytablecursor.hpp>
 #include <abstractbytearrayview_p.hpp>
@@ -94,10 +95,10 @@ bool KeyNavigator::handleKeyPress(QKeyEvent* keyEvent)
         moveCursor(MoveBackward, Select);
         keyUsed = true;
     } else if (keyEvent->matches(QKeySequence::MoveToPreviousWord)) {
-        moveCursor(MoveWordBackward, Unselect);
+        moveCursor(MoveGroupBackward, Unselect);
         keyUsed = true;
     } else if (keyEvent->matches(QKeySequence::SelectPreviousWord)) {
-        moveCursor(MoveWordBackward, Select);
+        moveCursor(MoveGroupBackward, Select);
         keyUsed = true;
     } else if (keyEvent->matches(QKeySequence::MoveToNextChar)) {
         moveCursor(MoveForward, Unselect);
@@ -106,10 +107,10 @@ bool KeyNavigator::handleKeyPress(QKeyEvent* keyEvent)
         moveCursor(MoveForward, Select);
         keyUsed = true;
     } else if (keyEvent->matches(QKeySequence::MoveToNextWord)) {
-        moveCursor(MoveWordForward, Unselect);
+        moveCursor(MoveGroupForward, Unselect);
         keyUsed = true;
     } else if (keyEvent->matches(QKeySequence::SelectNextWord)) {
-        moveCursor(MoveWordForward, Select);
+        moveCursor(MoveGroupForward, Select);
         keyUsed = true;
     } else if (keyEvent->matches(QKeySequence::MoveToStartOfLine)) {
         moveCursor(MoveLineStart, Unselect);
@@ -252,9 +253,16 @@ void KeyNavigator::moveCursor(MoveAction action, SelectAction selectAction)
     switch (action)
     {
     case MoveBackward:     tableCursor->gotoPreviousByte(); break;
-    case MoveWordBackward: {
-        const Okteta::TextByteArrayAnalyzer textAnalyzer(mView->byteArrayModel(), mView->charCodec());
-        const int newIndex = textAnalyzer.indexOfPreviousWordStart(tableCursor->realIndex());
+    case MoveGroupBackward: {
+        const Address index = tableCursor->realIndex();
+        int newIndex;
+        if (mView->activeCoding() == AbstractByteArrayView::CharCodingId) {
+            const Okteta::TextByteArrayAnalyzer textAnalyzer(mView->byteArrayModel(), mView->charCodec());
+            newIndex = textAnalyzer.indexOfPreviousWordStart(index);
+        } else {
+            const int noOfGroupedBytes = mView->q_func()->noOfGroupedBytes();
+            newIndex = mView->tableLayout()->indexAtGroupStart(index - 1, noOfGroupedBytes);
+        }
         tableCursor->gotoIndex(newIndex);
         break;
     }
@@ -264,9 +272,16 @@ void KeyNavigator::moveCursor(MoveAction action, SelectAction selectAction)
         break;
     }
     case MoveForward:      tableCursor->gotoNextByte();     break;
-    case MoveWordForward:  {
-        const Okteta::TextByteArrayAnalyzer textAnalyzer(mView->byteArrayModel(), mView->charCodec());
-        const int newIndex = textAnalyzer.indexOfNextWordStart(tableCursor->realIndex());
+    case MoveGroupForward:  {
+        const Address index = tableCursor->realIndex();
+        int newIndex;
+        if (mView->activeCoding() == AbstractByteArrayView::CharCodingId) {
+            const Okteta::TextByteArrayAnalyzer textAnalyzer(mView->byteArrayModel(), mView->charCodec());
+            newIndex = textAnalyzer.indexOfNextWordStart(index);
+        } else {
+            const int noOfGroupedBytes = mView->q_func()->noOfGroupedBytes();
+            newIndex = mView->tableLayout()->indexAtGroupEnd(index, noOfGroupedBytes) + 1;
+        }
         tableCursor->gotoCIndex(newIndex);
         break;
     }

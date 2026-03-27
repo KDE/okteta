@@ -23,6 +23,7 @@ private Q_SLOTS: // test functions
     void testCopyConstructor();
     void testEquals();
     void testAssign();
+    void testPosFromIndex();
     void testSetPosLine();
     void testSet();
     void testIsAtStart();

@@ -594,19 +594,27 @@ void AbstractByteArrayViewPrivate::setMarking(const AddressRange& _marking)
 }
 
 // TODO: make this use select( start, end )
-bool AbstractByteArrayViewPrivate::selectWord(Address index)
+bool AbstractByteArrayViewPrivate::selectGroup(Address index)
 {
+    Q_Q(AbstractByteArrayView);
+
     bool result = false;
 
     if (0 <= index && index < mTableLayout.length()) {
-        const TextByteArrayAnalyzer textAnalyzer(mByteArrayModel, mCharCodec.get());
-        const AddressRange wordSection = textAnalyzer.wordSection(index);
-        if (wordSection.isValid()) {
+        AddressRange groupSection;
+        if (activeCoding() == AbstractByteArrayView::CharCodingId) {
+            const TextByteArrayAnalyzer textAnalyzer(mByteArrayModel, mCharCodec.get());
+            groupSection = textAnalyzer.wordSection(index);
+        } else {
+            const int noOfGroupedBytes = q->noOfGroupedBytes();
+            groupSection = mTableLayout.groupSection(index, noOfGroupedBytes);
+        }
+        if (groupSection.isValid()) {
             pauseCursor();
             finishByteEditor();
 
-            mTableRanges.setFirstWordSelection(wordSection);
-            mTableCursor.gotoIndex(wordSection.nextBehindEnd());
+            mTableRanges.setFirstGroupSelection(groupSection);
+            mTableCursor.gotoCIndex(groupSection.nextBehindEnd());
 
             endViewUpdate();
 

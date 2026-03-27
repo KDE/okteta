@@ -24,7 +24,7 @@ ByteArrayTableRanges::~ByteArrayTableRanges() = default;
 void ByteArrayTableRanges::reset()
 {
     mSelection.cancel();
-    FirstWordSelection.unset();
+    m_firstGroupSelection.unset();
     mMarking.unset();
     ChangedRanges.clear();
     mPreviousSelection = mSelection;
@@ -144,7 +144,7 @@ AddressRange ByteArrayTableRanges::removeSelection(int id)
     }
 
     mSelection.cancel();
-    FirstWordSelection.unset();
+    m_firstGroupSelection.unset();
 
     return range;
 }
@@ -273,17 +273,17 @@ void ByteArrayTableRanges::takeHasSelectionChanged(bool* hasSelectionChanged, bo
     }
 }
 
-void ByteArrayTableRanges::setFirstWordSelection(const AddressRange& selection)
+void ByteArrayTableRanges::setFirstGroupSelection(const AddressRange& selection)
 {
-    FirstWordSelection = selection;
-    setSelection(FirstWordSelection);
+    m_firstGroupSelection = selection;
+    setSelection(m_firstGroupSelection);
 }
 
-void ByteArrayTableRanges::ensureWordSelectionForward(bool Forward)
+void ByteArrayTableRanges::ensureGroupSelectionForward(bool Forward)
 {
     // in the anchor not on the right side?
     if (mSelection.isForward() != Forward) {
-        setSelectionEnd(Forward ? FirstWordSelection.start() : FirstWordSelection.nextBehindEnd());
+        setSelectionEnd(Forward ? m_firstGroupSelection.start() : m_firstGroupSelection.nextBehindEnd());
 
         mSelection.setForward(Forward);
     }

@@ -6,6 +6,9 @@
 
 #include "bytearraytablelayout.hpp"
 
+// Std
+#include <algorithm>
+
 namespace Okteta {
 
 static constexpr LineSize DefaultNoOfLinesPerPage = 1;
@@ -226,6 +229,55 @@ Coord ByteArrayTableLayout::correctCoord(Coord coord) const
                                                 coord;
 }
 
+Address ByteArrayTableLayout::indexAtGroupStart(Address index, int noOfGroupedBytes) const
+{
+    if (noOfGroupedBytes < 1) {
+        noOfGroupedBytes = 1;
+    }
+    const LinePosition pos = linePosition(index);
+    const LinePosition groupStartPos = (pos / noOfGroupedBytes) * noOfGroupedBytes;
+    const LinePosition startPosDiff = pos - groupStartPos;
+
+    const Address indexAtGroupStart = index - startPosDiff;
+    return std::max(indexAtGroupStart, mByteArrayOffset);
+}
+
+Address ByteArrayTableLayout::indexAtGroupEnd(Address index, int noOfGroupedBytes) const
+{
+    if (noOfGroupedBytes < 1) {
+        noOfGroupedBytes = 1;
+    }
+    const LinePosition pos = linePosition(index);
+    const LinePosition rawGroupEndPos = (pos / noOfGroupedBytes) * noOfGroupedBytes + noOfGroupedBytes - 1;
+    const LinePosition groupEndPos = std::min(rawGroupEndPos, mNoOfBytesPerLine - 1);
+    const LinePosition endPosDiff = groupEndPos - pos;
+
+    const Address indexAtGroupEnd = index + endPosDiff;
+    return std::min(indexAtGroupEnd, mLastByteArrayOffset);
+}
+
+AddressRange ByteArrayTableLayout::groupSection(Address index, int noOfGroupedBytes) const
+{
+    if (noOfGroupedBytes < 1) {
+        noOfGroupedBytes = 1;
+    }
+    const LinePosition pos = linePosition(index);
+    const LinePosition groupStartPos = (pos / noOfGroupedBytes) * noOfGroupedBytes;
+    const LinePosition startPosDiff = pos - groupStartPos;
+
+    Address indexAtGroupStart = index - startPosDiff;
+    indexAtGroupStart = std::max(indexAtGroupStart, mByteArrayOffset);
+
+    const LinePosition rawGroupEndPos = (pos / noOfGroupedBytes) * noOfGroupedBytes + noOfGroupedBytes - 1;
+    const LinePosition groupEndPos = std::min(rawGroupEndPos, mNoOfBytesPerLine - 1);
+    const LinePosition endPosDiff = groupEndPos - pos;
+
+    Address indexAtGroupEnd = index + endPosDiff;
+    indexAtGroupEnd = std::min(indexAtGroupEnd, mLastByteArrayOffset);
+
+    return {indexAtGroupStart, indexAtGroupEnd};
+}
+
 bool ByteArrayTableLayout::atFirstLinePosition(Coord coord) const
 {
     return (coord.line() == mCoordRange.start().line()) ? coord.pos() == mCoordRange.start().pos() :
@@ -261,6 +313,15 @@ LinePosition ByteArrayTableLayout::firstLinePosition(Line line) const
 LinePosition ByteArrayTableLayout::lastLinePosition(Line line) const
 {
     return (line == mCoordRange.end().line()) ? mCoordRange.end().pos() : mNoOfBytesPerLine - 1;
+}
+
+LinePosition ByteArrayTableLayout::linePosition(Address index) const
+{
+    const LinePosition pos =
+        (index <= mByteArrayOffset) ?     mCoordRange.start().pos() :
+        (index >= mLastByteArrayOffset) ? mCoordRange.end().pos() :
+                                          Coord::posFromIndex(index + mRelativeStartOffset - mByteArrayOffset, mNoOfBytesPerLine);
+    return pos;
 }
 
 bool ByteArrayTableLayout::hasContent(Line line) const

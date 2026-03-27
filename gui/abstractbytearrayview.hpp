@@ -335,9 +335,9 @@ public: // modification access
 
     void setSelection(Address start, Address end);
     void setSelection(const AddressRange& selection);
-    /** selects word at index, returns true if there is one */
+    /** selects group at index, returns true if there is one */
     [[nodiscard]]
-    bool selectWord(/*unsigned*/ Address index /*, Chartype*/);
+    bool selectGroup(/*unsigned*/ Address index);
 
     void setMarking(Address start, Address end);
     void setMarking(const AddressRange& marking);

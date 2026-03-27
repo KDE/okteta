@@ -42,9 +42,9 @@ public: // modification access
     void setSelectionEnd(Address endIndex);
     void setSelection(const AddressRange& selection);
     /** */
-    void setFirstWordSelection(const AddressRange& selection);
+    void setFirstGroupSelection(const AddressRange& selection);
     /** */
-    void ensureWordSelectionForward(bool Forward);
+    void ensureGroupSelectionForward(bool Forward);
 
     /** removes selection with id and returns it */
     AddressRange removeSelection(int id = 0);
@@ -75,7 +75,7 @@ public: // value access
     [[nodiscard]]
     AddressRange selection() const;
     [[nodiscard]]
-    AddressRange firstWordSelection() const;
+    AddressRange firstGroupSelection() const;
     [[nodiscard]]
     Size selectionLength() const;
     [[nodiscard]]
@@ -95,7 +95,7 @@ public: // calculated logic access
     [[nodiscard]]
     bool selectionJustStarted() const;
     [[nodiscard]]
-    bool hasFirstWordSelection() const;
+    bool hasFirstGroupSelection() const;
     [[nodiscard]]
     bool selectionIncludes(Address index) const;
     [[nodiscard]]
@@ -120,8 +120,8 @@ private:
 
     AddressRange mMarking;
     Selection mSelection;
-    /** memories first selected word on wordwise selection */
-    AddressRange FirstWordSelection;
+    /** Memorizes first selected group on group-wise selection. */
+    AddressRange m_firstGroupSelection;
 
     /** lines that were added or removed */
     LineRange mChangedOffsetLines;
@@ -137,7 +137,7 @@ inline int ByteArrayTableRanges::noOfSelections()  const { return 1; }
 inline Address ByteArrayTableRanges::selectionStart()  const { return mSelection.start(); }
 inline Address ByteArrayTableRanges::selectionEnd()    const { return mSelection.end(); }
 inline AddressRange ByteArrayTableRanges::selection()  const { return mSelection.range(); }
-inline AddressRange ByteArrayTableRanges::firstWordSelection()  const { return FirstWordSelection; }
+inline AddressRange ByteArrayTableRanges::firstGroupSelection()  const { return m_firstGroupSelection; }
 inline Size ByteArrayTableRanges::selectionLength()    const { return mSelection.range().width(); }
 inline AddressRange ByteArrayTableRanges::marking()    const { return mMarking; }
 inline bool ByteArrayTableRanges::isModified()         const { return mModified; }
@@ -146,7 +146,7 @@ inline LineRange ByteArrayTableRanges::changedOffsetLines() const { return mChan
 inline bool ByteArrayTableRanges::hasSelection()             const { return mSelection.isValid(); }
 inline bool ByteArrayTableRanges::selectionStarted()         const { return mSelection.started(); }
 inline bool ByteArrayTableRanges::selectionJustStarted()     const { return mSelection.justStarted(); }
-inline bool ByteArrayTableRanges::hasFirstWordSelection()    const { return FirstWordSelection.isValid(); }
+inline bool ByteArrayTableRanges::hasFirstGroupSelection()   const { return m_firstGroupSelection.isValid(); }
 inline bool ByteArrayTableRanges::hasMarking()               const { return mMarking.isValid(); }
 inline bool ByteArrayTableRanges::selectionIncludes(Address index) const { return mSelection.range().includes(index); }
 inline bool ByteArrayTableRanges::markingIncludes(Address index)   const { return mMarking.includes(index); }

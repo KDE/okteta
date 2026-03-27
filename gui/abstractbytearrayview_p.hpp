@@ -204,7 +204,7 @@ public: // zooming
 public: // interaction
     void selectAll(bool select);
     [[nodiscard]]
-    bool selectWord(Address index /*, Chartype*/);
+    bool selectGroup(Address index);
     void setSelection(const AddressRange& selection);
 
     void setCursorPosition(Address index, bool isBehind);
