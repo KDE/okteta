@@ -131,9 +131,15 @@ void AbstractEditor::doEditAction(EditAction action)
         if (!mView->isOverwriteMode()) {
             const Address index = mCursor->realIndex();
             if (index < mView->layout()->length()) {
-                const TextByteArrayAnalyzer textAnalyzer(byteArrayModel, mView->charCodec());
-                const Address end = textAnalyzer.indexOfBeforeNextWordStart(index);
-                byteArrayModel->remove(AddressRange(index, end));
+                Address groupEnd;
+                if (mView->activeCoding() == AbstractByteArrayView::CharCodingId) {
+                    const TextByteArrayAnalyzer textAnalyzer(byteArrayModel, mView->charCodec());
+                    groupEnd = textAnalyzer.indexOfBeforeNextWordStart(index);
+                } else {
+                    const int noOfGroupedBytes = mView->noOfGroupedBytes();
+                    groupEnd = mView->layout()->indexAtGroupEnd(index, noOfGroupedBytes);
+                }
+                byteArrayModel->remove(AddressRange(index, groupEnd));
             }
         }
         break;
@@ -154,10 +160,16 @@ void AbstractEditor::doEditAction(EditAction action)
     {
         const int leftIndex = mCursor->realIndex() - 1;
         if (leftIndex >= 0) {
-            const TextByteArrayAnalyzer textAnalyzer(byteArrayModel, mView->charCodec());
-            const Address wordStart = textAnalyzer.indexOfPreviousWordStart(leftIndex);
             if (!mView->isOverwriteMode()) {
-                byteArrayModel->remove(AddressRange(wordStart, leftIndex));
+                Address groupStart;
+                if (mView->activeCoding() == AbstractByteArrayView::CharCodingId) {
+                    const TextByteArrayAnalyzer textAnalyzer(byteArrayModel, mView->charCodec());
+                    groupStart = textAnalyzer.indexOfPreviousWordStart(leftIndex);
+                } else {
+                    const int noOfGroupedBytes = mView->noOfGroupedBytes();
+                    groupStart = mView->layout()->indexAtGroupStart(leftIndex, noOfGroupedBytes);
+                }
+                byteArrayModel->remove(AddressRange(groupStart, leftIndex));
             }
         }
     }
