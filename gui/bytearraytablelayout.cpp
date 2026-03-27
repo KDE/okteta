@@ -8,6 +8,9 @@
 
 #include "bytearraytablelayout.hpp"
 
+// Std
+#include <algorithm>
+
 namespace Okteta {
 
 static constexpr LineSize DefaultNoOfLinesPerPage = 1;
@@ -226,6 +229,19 @@ Coord ByteArrayTableLayout::correctCoord(const Coord& coord) const
            (coord >= mCoordRange.end()) ?       mCoordRange.end() :
            (coord.pos() >= mNoOfBytesPerLine) ? Coord(mNoOfBytesPerLine - 1, coord.line()) :
                                                 coord;
+}
+
+Address ByteArrayTableLayout::indexAtGroupStart(Address index, int noOfGroupedBytes) const
+{
+    if (noOfGroupedBytes < 1) {
+        noOfGroupedBytes = 1;
+    }
+    const LinePosition pos = linePosition(index);
+    const LinePosition groupStartPos = (pos / noOfGroupedBytes) * noOfGroupedBytes;
+    const LinePosition startPosDiff = pos - groupStartPos;
+
+    const Address indexAtGroupStart = index - startPosDiff;
+    return std::max(indexAtGroupStart, mByteArrayOffset);
 }
 
 bool ByteArrayTableLayout::atFirstLinePosition(const Coord& coord) const

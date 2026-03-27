@@ -146,6 +146,9 @@ public: // value calculation service
     /** returns the coord if valid or the nearest valid coord */
     Coord correctCoord(const Coord& coord) const;
 
+    /** calculates the index of first pos in grouped bytes the @p index belongs to. if @p index is out of range, it is bounded and the value for that returned. */
+    Address indexAtGroupStart(Address index, int noOfGroupedBytes) const;
+
 public: // modification access; return true if changes
     /** sets mStartOffset, returns true if changed */
     bool setStartOffset(Address startOffset);
