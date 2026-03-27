@@ -258,6 +258,28 @@ Address ByteArrayTableLayout::indexAtGroupEnd(Address index, int noOfGroupedByte
     return std::min(indexAtGroupEnd, mLastByteArrayOffset);
 }
 
+AddressRange ByteArrayTableLayout::groupSection(Address index, int noOfGroupedBytes) const
+{
+    if (noOfGroupedBytes < 1) {
+        noOfGroupedBytes = 1;
+    }
+    const LinePosition pos = linePosition(index);
+    const LinePosition groupStartPos = (pos / noOfGroupedBytes) * noOfGroupedBytes;
+    const LinePosition startPosDiff = pos - groupStartPos;
+
+    Address indexAtGroupStart = index - startPosDiff;
+    indexAtGroupStart = std::max(indexAtGroupStart, mByteArrayOffset);
+
+    const LinePosition rawGroupEndPos = (pos / noOfGroupedBytes) * noOfGroupedBytes + noOfGroupedBytes - 1;
+    const LinePosition groupEndPos = std::min(rawGroupEndPos, mNoOfBytesPerLine - 1);
+    const LinePosition endPosDiff = groupEndPos - pos;
+
+    Address indexAtGroupEnd = index + endPosDiff;
+    indexAtGroupEnd = std::min(indexAtGroupEnd, mLastByteArrayOffset);
+
+    return {indexAtGroupStart, indexAtGroupEnd};
+}
+
 bool ByteArrayTableLayout::atFirstLinePosition(const Coord& coord) const
 {
     return (coord.line() == mCoordRange.start().line()) ? coord.pos() == mCoordRange.start().pos() :

@@ -150,6 +150,8 @@ public: // value calculation service
     Address indexAtGroupStart(Address index, int noOfGroupedBytes) const;
     /** calculates the index of last pos in grouped bytes the @p index belongs to. if @p index is out of range, it is bounded and the value for that returned. */
     Address indexAtGroupEnd(Address index, int noOfGroupedBytes) const;
+    /** calculates the range of indizes in grouped bytes the @p index belongs to. if @p index is out of range, it is bounded and the values for that returned. */
+    AddressRange groupSection(Address index, int noOfGroupedBytes) const;
 
 public: // modification access; return true if changes
     /** sets mStartOffset, returns true if changed */
