@@ -9,6 +9,7 @@
 #include "keynavigator.hpp"
 
 // lib
+#include <bytearraytablelayout.hpp>
 #include <bytearraytableranges.hpp>
 #include <bytearraytablecursor.hpp>
 #include <abstractbytearrayview.hpp>
@@ -255,8 +256,15 @@ void KeyNavigator::moveCursor(MoveAction action, SelectAction selectAction)
     {
     case MoveBackward:     tableCursor->gotoPreviousByte(); break;
     case MoveGroupBackward: {
-        const Okteta::TextByteArrayAnalyzer textAnalyzer(mView->byteArrayModel(), mView->charCodec());
-        const int newIndex = textAnalyzer.indexOfPreviousWordStart(tableCursor->realIndex());
+        const Address index = tableCursor->realIndex();
+        int newIndex;
+        if (mView->activeCoding() == AbstractByteArrayView::CharCodingId) {
+            const Okteta::TextByteArrayAnalyzer textAnalyzer(mView->byteArrayModel(), mView->charCodec());
+            newIndex = textAnalyzer.indexOfPreviousWordStart(index);
+        } else {
+            const int noOfGroupedBytes = mView->noOfGroupedBytes();
+            newIndex = mView->layout()->indexAtGroupStart(index - 1, noOfGroupedBytes);
+        }
         tableCursor->gotoIndex(newIndex);
         break;
     }
@@ -267,8 +275,15 @@ void KeyNavigator::moveCursor(MoveAction action, SelectAction selectAction)
     }
     case MoveForward:      tableCursor->gotoNextByte();     break;
     case MoveGroupForward:  {
-        const Okteta::TextByteArrayAnalyzer textAnalyzer(mView->byteArrayModel(), mView->charCodec());
-        const int newIndex = textAnalyzer.indexOfNextWordStart(tableCursor->realIndex());
+        const Address index = tableCursor->realIndex();
+        int newIndex;
+        if (mView->activeCoding() == AbstractByteArrayView::CharCodingId) {
+            const Okteta::TextByteArrayAnalyzer textAnalyzer(mView->byteArrayModel(), mView->charCodec());
+            newIndex = textAnalyzer.indexOfNextWordStart(index);
+        } else {
+            const int noOfGroupedBytes = mView->noOfGroupedBytes();
+            newIndex = mView->layout()->indexAtGroupEnd(index, noOfGroupedBytes) + 1;
+        }
         tableCursor->gotoCIndex(newIndex);
         break;
     }
