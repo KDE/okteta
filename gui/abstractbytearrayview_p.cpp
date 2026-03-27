@@ -662,7 +662,7 @@ bool AbstractByteArrayViewPrivate::selectWord(Address index)
             finishByteEditor();
 
             mTableRanges->setFirstWordSelection(wordSection);
-            mTableCursor->gotoIndex(wordSection.nextBehindEnd());
+            mTableCursor->gotoCIndex(wordSection.nextBehindEnd());
 
             endViewUpdate();
 
