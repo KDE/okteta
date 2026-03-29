@@ -5,7 +5,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-15 02:09+0000\n"
+"POT-Creation-Date: 2026-03-25 02:14+0000\n"
 "PO-Revision-Date: 2023-08-10 18:12+0200\n"
 "Last-Translator: Karl Ove Hufthammer <karl@huftis.org>\n"
 "Language-Team: Norwegian Nynorsk <l10n-no@lister.huftis.org>\n"
@@ -243,7 +243,7 @@ msgctxt "@info:tooltip"
 msgid "Copies the offset to the clipboard."
 msgstr ""
 
-#: controllers/view/bookmarks/bookmarksview.cpp:126
+#: controllers/view/bookmarks/bookmarksview.cpp:127
 #, kde-format
 msgctxt "@info"
 msgid "No bookmarks"
@@ -349,20 +349,20 @@ msgid_plural "%1 bytes inserted."
 msgstr[0] ""
 msgstr[1] ""
 
-#: controllers/view/bytetable/bytetableview.cpp:72
+#: controllers/view/bytetable/bytetableview.cpp:73
 #, kde-format
 msgctxt "@label:spinbox number of bytes to insert"
 msgid "Number (bytes):"
 msgstr "Tal (byte):"
 
-#: controllers/view/bytetable/bytetableview.cpp:80
+#: controllers/view/bytetable/bytetableview.cpp:81
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
 "Number of repeats of the currently selected byte in the table to be inserted."
 msgstr "Kor mange gongar byten vald i tabellen skal setjast inn."
 
-#: controllers/view/bytetable/bytetableview.cpp:96
+#: controllers/view/bytetable/bytetableview.cpp:97
 #, kde-format
 msgctxt "@info:tooltip"
 msgid ""
@@ -789,20 +789,20 @@ msgstr ""
 "Trykk <interface>Bygg</interface> for å rekna ut frekvensstatistikk for byte-"
 "verdiane i det merkte området."
 
-#: controllers/view/info/infoview.cpp:120
+#: controllers/view/info/infoview.cpp:121
 #: controllers/view/stringsextract/stringsextractview.cpp:52
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy"
 msgstr ""
 
-#: controllers/view/info/infoview.cpp:122
+#: controllers/view/info/infoview.cpp:123
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected statistic lines to the clipboard."
 msgstr "Kopierer dei merkte statiske linjene til utklippstavla."
 
-#: controllers/view/info/infoview.cpp:124
+#: controllers/view/info/infoview.cpp:125
 #, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
@@ -812,7 +812,7 @@ msgstr ""
 "Trykk <interface>Kopier</interface> for å kopiera alle dei merkte statiske "
 "linjene i lista til utklippstavla."
 
-#: controllers/view/info/infoview.cpp:192
+#: controllers/view/info/infoview.cpp:193
 #: controllers/view/structures/datatypes/datainformation.cpp:58
 #: controllers/view/structures/datatypes/datainformation.cpp:61
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:241
@@ -1832,19 +1832,19 @@ msgctxt "@info:placeholder"
 msgid "Enter a term to limit the list."
 msgstr ""
 
-#: controllers/view/stringsextract/stringsextractview.cpp:182
+#: controllers/view/stringsextract/stringsextractview.cpp:183
 #, kde-format
 msgctxt "@info"
 msgid "No strings"
 msgstr ""
 
-#: controllers/view/stringsextract/stringsextractview.cpp:369
+#: controllers/view/stringsextract/stringsextractview.cpp:370
 #, kde-format
 msgctxt "@info"
 msgid "No strings extracted."
 msgstr ""
 
-#: controllers/view/stringsextract/stringsextractview.cpp:370
+#: controllers/view/stringsextract/stringsextractview.cpp:371
 #, kde-format
 msgctxt "@info"
 msgid "1 string extracted."
