@@ -8,6 +8,14 @@
 
 #include "loadercontroller.hpp"
 
+// Workaround for QTBUG-96157
+// QFileDialog's default implementation misses to emit QFileDialog::urlsSelected,
+// so if the Qt platform integration does not provide a native file picker dialog,
+// there is no option to get async QUrl results.
+// There is also no way to defined way to query if a native dialog is used.
+// So for now use sync API (as done traditionally by code elsewhere)
+#define KASTEN_USE_SYNC_LOAD_FILE_PICKER 1
+
 // Kasten Gui
 #include <Kasten/AbstractDocumentStrategy>
 // KF
@@ -20,6 +28,9 @@
 // Qt
 #include <QFileDialog>
 #include <QApplication>
+#if KASTEN_USE_SYNC_LOAD_FILE_PICKER
+#include <QPointer>
+#endif
 
 namespace Kasten {
 
@@ -55,12 +66,28 @@ void LoaderController::setTargetModel(AbstractModel* model)
 
 void LoaderController::load()
 {
+#if KASTEN_USE_SYNC_LOAD_FILE_PICKER
+    QPointer<QFileDialog> dialog = new QFileDialog(QApplication::activeWindow());
+#else
     auto* dialog = new QFileDialog(QApplication::activeWindow());
     dialog->setAttribute(Qt::WA_DeleteOnClose, true);
+#endif
     dialog->setFileMode(QFileDialog::ExistingFiles);
     dialog->setMimeTypeFilters(mDocumentStrategy->supportedRemoteTypes());
+#if KASTEN_USE_SYNC_LOAD_FILE_PICKER
+    if (dialog->exec() == QDialog::Rejected) {
+        delete dialog;
+        return;
+    }
+
+    const QList<QUrl> urls = dialog->selectedUrls();
+    delete dialog;
+
+    loadUrls(urls);
+#else
     connect(dialog, &QFileDialog::urlsSelected, this, &LoaderController::loadUrls);
     dialog->open();
+#endif
 }
 
 void LoaderController::loadUrls(const QList<QUrl>& urls)
