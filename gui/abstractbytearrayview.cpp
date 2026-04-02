@@ -336,6 +336,12 @@ void AbstractByteArrayView::selectAll(bool select)
     d->selectAll(select);
 }
 
+bool AbstractByteArrayView::selectLine(Address index)
+{
+    Q_D(AbstractByteArrayView);
+    return d->selectLine(index);
+}
+
 bool AbstractByteArrayView::selectWord(Address index)
 {
     Q_D(AbstractByteArrayView);

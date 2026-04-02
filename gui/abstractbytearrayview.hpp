@@ -330,6 +330,8 @@ public: // modification access
 
     void setSelection(Address start, Address end);
     void setSelection(const AddressRange& selection);
+    /** selects line at index, returns true if there is one */
+    bool selectLine(/*unsigned*/ Address index);
     /** selects word at index, returns true if there is one */
     bool selectWord(/*unsigned*/ Address index);
     inline

@@ -147,6 +147,7 @@ public: // zooming
 
 public: // interaction
     void selectAll(bool select);
+    bool selectLine(Address index);
     bool selectGroup(Address index);
     void setSelection(const AddressRange& selection);
 

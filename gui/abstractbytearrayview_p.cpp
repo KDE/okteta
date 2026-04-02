@@ -680,6 +680,26 @@ bool AbstractByteArrayViewPrivate::selectGroup(Address index)
     return result;
 }
 
+bool AbstractByteArrayViewPrivate::selectLine(Address index)
+{
+    bool result = false;
+
+    const AddressRange lineSection = mTableLayout->lineSection(index);
+    if (lineSection.isValid()) {
+        pauseCursor();
+        finishByteEditor();
+
+        mTableRanges->setFirstGroupSelection(lineSection);
+        mTableCursor->gotoCIndex(lineSection.nextBehindEnd());
+
+        endViewUpdate();
+
+        result = true;
+    }
+
+    return result;
+}
+
 // TODO: make this use select( start, end )
 void AbstractByteArrayViewPrivate::selectAll(bool select)
 {
