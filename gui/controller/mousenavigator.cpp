@@ -246,7 +246,6 @@ void MouseNavigator::autoScrollTimerDone()
 
 void MouseNavigator::handleMouseMove(QPoint point)   // handles the move of the mouse with pressed buttons
 {
-    ByteArrayTableCursor* tableCursor = mView->tableCursor();
     ByteArrayTableRanges* tableRanges = mView->tableRanges();
 
     const int yOffset = mView->yOffset();
@@ -270,6 +269,7 @@ void MouseNavigator::handleMouseMove(QPoint point)   // handles the move of the 
 
     // do group-wise selection?
     if (mInLMBDoubleClick && tableRanges->hasFirstGroupSelection()) {
+        ByteArrayTableCursor* const tableCursor = mView->tableCursor();
         Address newIndex = tableCursor->realIndex();
         const AddressRange firstGroupSelection = tableRanges->firstGroupSelection();
         // are we before the selection?
