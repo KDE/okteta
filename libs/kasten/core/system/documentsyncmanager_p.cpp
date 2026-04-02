@@ -119,9 +119,7 @@ bool DocumentSyncManagerPrivate::setSynchronizer(AbstractDocument* document)
         }
 
         if (saveAsFileDialog->exec() == QDialog::Rejected) {
-            break;
-        }
-        if (!saveAsFileDialog) {
+            delete saveAsFileDialog;
             break;
         }
 

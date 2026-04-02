@@ -33,6 +33,7 @@ MouseNavigator::MouseNavigator(AbstractByteArrayViewPrivate* view, AbstractMouse
     : AbstractMouseController(view, parent)
     , mLMBPressed(false)
     , mInLMBDoubleClick(false)
+    , mInLMBTripleClick(false)
     , mDragStartPossible(false)
 {
     connect(&mScrollTimer,      &QTimer::timeout, this, &MouseNavigator::autoScrollTimerDone);
@@ -52,23 +53,22 @@ bool MouseNavigator::handleMousePressEvent(QMouseEvent* mouseEvent)
         ByteArrayTableRanges* const tableRanges = mView->tableRanges();
         const ByteArrayTableLayout* const tableLayout = mView->tableLayout();
 
-        mView->pauseCursor();
-        mView->finishByteEditor();
-
         mLMBPressed = true;
 
         // select whole line?
         if (m_tripleClickTimer.isActive()
             && (mouseEvent->globalPos() - mDoubleClickPoint).manhattanLength() < QApplication::startDragDistance()) {
             m_tripleClickTimer.stop();
-            const Address indexAtFirstDoubleClickLinePosition = tableLayout->indexAtFirstLinePosition(mDoubleClickLine);
-            tableRanges->setSelectionStart(indexAtFirstDoubleClickLinePosition);
-            tableCursor->gotoIndex(indexAtFirstDoubleClickLinePosition);
-            tableCursor->gotoLineEnd();
-            tableRanges->setSelectionEnd(mView->cursorPosition());
+            mInLMBTripleClick = true;
 
-            mView->updateChanged();
+            // TODO: or store mDoubleClickIndex instead?
+            const Address indexAtFirstDoubleClickLinePosition = tableLayout->indexAtFirstLinePosition(mDoubleClickLine);
+
+            std::ignore = mView->selectLine(indexAtFirstDoubleClickLinePosition);
         } else {
+            mView->pauseCursor();
+            mView->finishByteEditor();
+
             // TODO: pos() is now, not at the moment of the event, use globalPos() for that,.says dox
             const QPoint mousePoint = mView->viewportToColumns(mouseEvent->pos());
 
@@ -104,10 +104,10 @@ bool MouseNavigator::handleMousePressEvent(QMouseEvent* mouseEvent)
                 mView->updateChanged();
                 mView->setMouseCursor(mView->isEffectiveReadOnly() ? Qt::ArrowCursor : Qt::IBeamCursor);
             }
-        }
 
-        mView->unpauseCursor();
-        mView->emitSelectionUpdates();
+            mView->unpauseCursor();
+            mView->emitSelectionUpdates();
+        }
 
         eventUsed = true;
     }
@@ -196,6 +196,7 @@ bool MouseNavigator::handleMouseReleaseEvent(QMouseEvent* mouseEvent)
         mView->emitCursorPositionChanged();
 
         mInLMBDoubleClick = false;
+        mInLMBTripleClick = false;
 
         if (tableRanges->selectionJustStarted()) {
             tableRanges->removeSelection();
@@ -246,7 +247,6 @@ void MouseNavigator::autoScrollTimerDone()
 
 void MouseNavigator::handleMouseMove(QPoint point)   // handles the move of the mouse with pressed buttons
 {
-    ByteArrayTableCursor* const tableCursor = mView->tableCursor();
     ByteArrayTableRanges* const tableRanges = mView->tableRanges();
 
     const int yOffset = mView->yOffset();
@@ -269,29 +269,38 @@ void MouseNavigator::handleMouseMove(QPoint point)   // handles the move of the 
     mView->ensureCursorVisible();
 
     // do group-wise selection?
-    if (mInLMBDoubleClick && tableRanges->hasFirstGroupSelection()) {
+    if ((mInLMBDoubleClick || mInLMBTripleClick) && tableRanges->hasFirstGroupSelection()) {
+        ByteArrayTableCursor* const tableCursor = mView->tableCursor();
         Address newIndex = tableCursor->realIndex();
         const AddressRange firstGroupSelection = tableRanges->firstGroupSelection();
         // are we before the selection?
         if (firstGroupSelection.startsBehind(newIndex)) {
             tableRanges->ensureGroupSelectionForward(false);
-            if (mView->activeCoding() == AbstractByteArrayView::CharCodingId) {
-                const TextByteArrayAnalyzer textAnalyzer(mView->byteArrayModel(), mView->charCodec());
-                newIndex = textAnalyzer.indexOfLeftWordSelect(newIndex);
+            if (mInLMBTripleClick) {
+                newIndex = mView->tableLayout()->indexAtLineStart(newIndex);
             } else {
-                const int noOfGroupedBytes = mView->q_func()->noOfGroupedBytes();
-                newIndex = mView->tableLayout()->indexAtGroupStart(newIndex, noOfGroupedBytes);
+                if (mView->activeCoding() == AbstractByteArrayView::CharCodingId) {
+                    const TextByteArrayAnalyzer textAnalyzer(mView->byteArrayModel(), mView->charCodec());
+                    newIndex = textAnalyzer.indexOfLeftWordSelect(newIndex);
+                } else {
+                    const int noOfGroupedBytes = mView->q_func()->noOfGroupedBytes();
+                    newIndex = mView->tableLayout()->indexAtGroupStart(newIndex, noOfGroupedBytes);
+                }
             }
         }
         // or behind?
         else if (firstGroupSelection.endsBefore(newIndex)) {
             tableRanges->ensureGroupSelectionForward(true);
-            if (mView->activeCoding() == AbstractByteArrayView::CharCodingId) {
-                const TextByteArrayAnalyzer textAnalyzer(mView->byteArrayModel(), mView->charCodec());
-                newIndex = textAnalyzer.indexOfRightWordSelect(newIndex);
+            if (mInLMBTripleClick) {
+                newIndex = mView->tableLayout()->indexAtLineEnd(newIndex) +  1;
             } else {
-                const int noOfGroupedBytes = mView->q_func()->noOfGroupedBytes();
-                newIndex = mView->tableLayout()->indexAtGroupEnd(newIndex, noOfGroupedBytes) + 1;
+                if (mView->activeCoding() == AbstractByteArrayView::CharCodingId) {
+                    const TextByteArrayAnalyzer textAnalyzer(mView->byteArrayModel(), mView->charCodec());
+                    newIndex = textAnalyzer.indexOfRightWordSelect(newIndex);
+                } else {
+                    const int noOfGroupedBytes = mView->q_func()->noOfGroupedBytes();
+                    newIndex = mView->tableLayout()->indexAtGroupEnd(newIndex, noOfGroupedBytes) + 1;
+                }
             }
         }
         // or inside?
@@ -317,6 +326,7 @@ void MouseNavigator::startDrag()
     // reset states
     mLMBPressed = false;
     mInLMBDoubleClick = false;
+    mInLMBTripleClick = false;
     mDragStartPossible = false;
 
     // create data

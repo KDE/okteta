@@ -69,6 +69,8 @@ private: // parameters
     bool mLMBPressed : 1;
     /** flag if a double-click is happening */
     bool mInLMBDoubleClick : 1;
+    /** flag if a triple-click is happening */
+    bool mInLMBTripleClick : 1;
     /** flag if a drag might have started */
     bool mDragStartPossible : 1;
 };

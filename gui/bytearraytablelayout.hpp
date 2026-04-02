@@ -137,6 +137,10 @@ public: // value calculation service
     /** calculates the index of last pos in line. if line is invalid the behaviour is undefinded */
     [[nodiscard]]
     Address indexAtLastLinePosition(Line line) const;
+    [[nodiscard]]
+    Address indexAtLineStart(Address index) const;
+    [[nodiscard]]
+    Address indexAtLineEnd(Address index) const;
     /** calculates the line in which index is found. if index is invalid the behaviour is undefinded */
     [[nodiscard]]
     Line lineAtIndex(Address index) const;
@@ -191,6 +195,9 @@ public: // value calculation service
     /** calculates the range of indizes in grouped bytes the @p index belongs to. if @p index is out of range, it is bounded and the values for that returned. */
     [[nodiscard]]
     AddressRange groupSection(Address index, int noOfGroupedBytes) const;
+    /** calculates the range of indizes in the line @p line. if @p line is invalid the behaviour is undefinded. */
+    [[nodiscard]]
+    AddressRange lineSection(Address index) const;
 
 public: // modification access; return true if changes
     /** sets mStartOffset, returns true if changed */
@@ -248,6 +255,17 @@ inline Line ByteArrayTableLayout::startLine()                 const { return sta
 inline Line ByteArrayTableLayout::finalLine()                 const { return finalCoord().line(); }
 inline LineSize ByteArrayTableLayout::noOfLinesPerPage()      const { return mNoOfLinesPerPage; }
 inline LineSize ByteArrayTableLayout::noOfLines()             const { return mByteArrayOffset > mLastByteArrayOffset ? 0 : finalLine() + 1; }
+
+inline Address ByteArrayTableLayout::indexAtLineStart(Address index) const
+{
+    const Line line = lineAtIndex(index);
+    return indexAtFirstLinePosition(line);
+}
+inline Address ByteArrayTableLayout::indexAtLineEnd(Address index) const
+{
+    const Line line = lineAtIndex(index);
+    return indexAtLastLinePosition(line) ;
+}
 
 }
 

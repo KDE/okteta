@@ -134,9 +134,7 @@ void ModelCodecManagerPrivate::exportDocument(AbstractModelExporter* exporter,
         exportFileDialog->setLabelText(QFileDialog::Accept, i18nc("@action:button", "&Export"));
 
         if (exportFileDialog->exec() == QDialog::Rejected) {
-            break;
-        }
-        if (!exportFileDialog) {
+            delete exportFileDialog;
             break;
         }
 

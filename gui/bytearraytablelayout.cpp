@@ -278,6 +278,18 @@ AddressRange ByteArrayTableLayout::groupSection(Address index, int noOfGroupedBy
     return {indexAtGroupStart, indexAtGroupEnd};
 }
 
+AddressRange ByteArrayTableLayout::lineSection(Address index) const
+{
+    const Line line = lineAtIndex(index);
+
+    const Address rawIndexAtLineStart = line * mNoOfBytesPerLine - mRelativeStartOffset + mByteArrayOffset;
+    const Address rawIndexAtLineEnd = rawIndexAtLineStart + mNoOfBytesPerLine  - 1;
+    const Address indexAtLineStart = std::max(rawIndexAtLineStart, mByteArrayOffset);
+    const Address indexAtLineEnd = std::min(rawIndexAtLineEnd, mLastByteArrayOffset);
+
+    return {indexAtLineStart, indexAtLineEnd};
+}
+
 bool ByteArrayTableLayout::atFirstLinePosition(Coord coord) const
 {
     return (coord.line() == mCoordRange.start().line()) ? coord.pos() == mCoordRange.start().pos() :

@@ -335,6 +335,9 @@ public: // modification access
 
     void setSelection(Address start, Address end);
     void setSelection(const AddressRange& selection);
+    /** selects line at index, returns true if there is one */
+    [[nodiscard]]
+    bool selectLine(/*unsigned*/ Address index);
     /** selects group at index, returns true if there is one */
     [[nodiscard]]
     bool selectGroup(/*unsigned*/ Address index);

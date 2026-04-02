@@ -204,6 +204,8 @@ public: // zooming
 public: // interaction
     void selectAll(bool select);
     [[nodiscard]]
+    bool selectLine(Address index);
+    [[nodiscard]]
     bool selectGroup(Address index);
     void setSelection(const AddressRange& selection);
 
