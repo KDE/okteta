@@ -115,6 +115,8 @@ public: // value calculation service
     Address indexAtFirstLinePosition(Line line) const;
     /** calculates the index of last pos in line. if line is invalid the behaviour is undefinded */
     Address indexAtLastLinePosition(Line line) const;
+    Address indexAtLineStart(Address index) const;
+    Address indexAtLineEnd(Address index) const;
     /** calculates the line in which index is found. if index is invalid the behaviour is undefinded */
     Line lineAtIndex(Address index) const;
     /** calculates the coord in which index is found. if index is invalid the behaviour is undefinded */
@@ -211,6 +213,17 @@ inline Line ByteArrayTableLayout::startLine()                 const { return sta
 inline Line ByteArrayTableLayout::finalLine()                 const { return finalCoord().line(); }
 inline LineSize ByteArrayTableLayout::noOfLinesPerPage()      const { return mNoOfLinesPerPage; }
 inline LineSize ByteArrayTableLayout::noOfLines()             const { return mByteArrayOffset > mLastByteArrayOffset ? 0 : finalLine() + 1; }
+
+inline Address ByteArrayTableLayout::indexAtLineStart(Address index) const
+{
+    const Line line = lineAtIndex(index);
+    return indexAtFirstLinePosition(line);
+}
+inline Address ByteArrayTableLayout::indexAtLineEnd(Address index) const
+{
+    const Line line = lineAtIndex(index);
+    return indexAtLastLinePosition(line) ;
+}
 
 }
 
