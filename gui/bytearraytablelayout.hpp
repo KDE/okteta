@@ -152,6 +152,8 @@ public: // value calculation service
     Address indexAtGroupEnd(Address index, int noOfGroupedBytes) const;
     /** calculates the range of indizes in grouped bytes the @p index belongs to. if @p index is out of range, it is bounded and the values for that returned. */
     AddressRange groupSection(Address index, int noOfGroupedBytes) const;
+    /** calculates the range of indizes in the line @p line. if @p line is invalid the behaviour is undefinded. */
+    AddressRange lineSection(Address index) const;
 
 public: // modification access; return true if changes
     /** sets mStartOffset, returns true if changed */
