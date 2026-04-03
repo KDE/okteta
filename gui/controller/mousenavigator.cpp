@@ -276,6 +276,10 @@ void MouseNavigator::handleMouseMove(QPoint point)   // handles the move of the 
                 if (mView->activeCoding() == AbstractByteArrayView::CharCodingId) {
                     const TextByteArrayAnalyzer textAnalyzer(mView->byteArrayModel(), mView->charCodec());
                     newIndex = textAnalyzer.indexOfLeftWordSelect(newIndex);
+                    // prevent picking word border behind the anchor section
+                    if (firstGroupSelection.startsBefore(newIndex)) {
+                        newIndex = firstGroupSelection.start();
+                    }
                 } else {
                     const int noOfGroupedBytes = mView->noOfGroupedBytes();
                     newIndex = mView->layout()->indexAtGroupStart(newIndex, noOfGroupedBytes);
@@ -292,6 +296,10 @@ void MouseNavigator::handleMouseMove(QPoint point)   // handles the move of the 
                 if (mView->activeCoding() == AbstractByteArrayView::CharCodingId) {
                     const TextByteArrayAnalyzer textAnalyzer(mView->byteArrayModel(), mView->charCodec());
                     newIndex = textAnalyzer.indexOfRightWordSelect(indexBefore);
+                    // prevent picking word border before the anchor section
+                    if (firstGroupSelection.endsBehind(newIndex - 1)) {
+                        newIndex = firstGroupSelection.nextBehindEnd();
+                    }
                 } else {
                     const int noOfGroupedBytes = mView->noOfGroupedBytes();
                     newIndex = mView->layout()->indexAtGroupEnd(indexBefore, noOfGroupedBytes) + 1;
