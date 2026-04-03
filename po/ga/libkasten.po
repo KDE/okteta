@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: playground-utils/okteta.po\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-25 02:14+0000\n"
+"POT-Creation-Date: 2026-04-03 02:08+0000\n"
 "PO-Revision-Date: 2007-11-05 08:28-0500\n"
 "Last-Translator: Kevin Scannell <kscanne@gmail.com>\n"
 "Language-Team: Irish <gaeilge-gnulinux@lists.sourceforge.net>\n"
@@ -409,13 +409,13 @@ msgctxt "@title:window"
 msgid "Save As"
 msgstr "Sábháil Mar"
 
-#: core/system/documentsyncmanager_p.cpp:213
+#: core/system/documentsyncmanager_p.cpp:211
 #, kde-format
 msgctxt "@title:window"
 msgid "Close"
 msgstr "Dún"
 
-#: core/system/documentsyncmanager_p.cpp:248
+#: core/system/documentsyncmanager_p.cpp:246
 #, kde-format
 msgctxt "@title:window"
 msgid "Reload"

@@ -15,7 +15,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: khexedit\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-25 02:14+0000\n"
+"POT-Creation-Date: 2026-04-03 02:08+0000\n"
 "PO-Revision-Date: 2026-02-14 22:42+0200\n"
 "Last-Translator: Alexander Yavorskiy <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -401,13 +401,13 @@ msgctxt "@title:window"
 msgid "Save As"
 msgstr "Сохранить как"
 
-#: core/system/documentsyncmanager_p.cpp:213
+#: core/system/documentsyncmanager_p.cpp:211
 #, kde-format
 msgctxt "@title:window"
 msgid "Close"
 msgstr "Закрыть"
 
-#: core/system/documentsyncmanager_p.cpp:248
+#: core/system/documentsyncmanager_p.cpp:246
 #, kde-format
 msgctxt "@title:window"
 msgid "Reload"
