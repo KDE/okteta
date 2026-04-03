@@ -283,17 +283,18 @@ void MouseNavigator::handleMouseMove(QPoint point)   // handles the move of the 
             }
         }
         // or behind?
-        else if (firstGroupSelection.endsBefore(newIndex)) {
+        else if (firstGroupSelection.endsBefore(newIndex - 1)) {
             tableRanges->ensureGroupSelectionForward(true);
+            const Address indexBefore = newIndex - 1;
             if (mInLMBTripleClick) {
-                newIndex = mView->layout()->indexAtLineEnd(newIndex) +  1;
+                newIndex = mView->layout()->indexAtLineEnd(indexBefore) +  1;
             } else {
                 if (mView->activeCoding() == AbstractByteArrayView::CharCodingId) {
                     const TextByteArrayAnalyzer textAnalyzer(mView->byteArrayModel(), mView->charCodec());
-                    newIndex = textAnalyzer.indexOfRightWordSelect(newIndex);
+                    newIndex = textAnalyzer.indexOfRightWordSelect(indexBefore);
                 } else {
                     const int noOfGroupedBytes = mView->noOfGroupedBytes();
-                    newIndex = mView->layout()->indexAtGroupEnd(newIndex, noOfGroupedBytes) + 1;
+                    newIndex = mView->layout()->indexAtGroupEnd(indexBefore, noOfGroupedBytes) + 1;
                 }
             }
         }
