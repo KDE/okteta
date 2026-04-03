@@ -49,9 +49,6 @@ bool MouseNavigator::handleMousePressEvent(QMouseEvent* mouseEvent)
     bool eventUsed = false;
 
     if (mouseEvent->button() == Qt::LeftButton) {
-        ByteArrayTableCursor* tableCursor = mView->tableCursor();
-        ByteArrayTableRanges* tableRanges = mView->tableRanges();
-
         mLMBPressed = true;
 
         // select whole line?
@@ -62,6 +59,7 @@ bool MouseNavigator::handleMousePressEvent(QMouseEvent* mouseEvent)
 
             mView->selectLine(m_doubleClickIndex);
         } else {
+            ByteArrayTableRanges* const tableRanges = mView->tableRanges();
             mView->pauseCursor();
             mView->finishByteEdit();
 
@@ -77,7 +75,7 @@ bool MouseNavigator::handleMousePressEvent(QMouseEvent* mouseEvent)
                 mView->placeCursor(mousePoint);
                 mView->ensureCursorVisible();
 
-                const Address realIndex = tableCursor->realIndex();
+                const Address realIndex = mView->tableCursor()->realIndex();
                 if (tableRanges->selectionStarted()) {
                     if (mouseEvent->modifiers() & Qt::SHIFT) {
                         tableRanges->setSelectionEnd(realIndex);
