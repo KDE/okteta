@@ -51,7 +51,6 @@ bool MouseNavigator::handleMousePressEvent(QMouseEvent* mouseEvent)
     if (mouseEvent->button() == Qt::LeftButton) {
         ByteArrayTableCursor* tableCursor = mView->tableCursor();
         ByteArrayTableRanges* tableRanges = mView->tableRanges();
-        ByteArrayTableLayout* tableLayout = mView->layout();
 
         mLMBPressed = true;
 
@@ -61,10 +60,7 @@ bool MouseNavigator::handleMousePressEvent(QMouseEvent* mouseEvent)
             m_tripleClickTimer->stop();
             mInLMBTripleClick = true;
 
-            // TODO: or store mDoubleClickIndex instead?
-            const Address indexAtFirstDoubleClickLinePosition = tableLayout->indexAtFirstLinePosition(mDoubleClickLine);
-
-            mView->selectLine(indexAtFirstDoubleClickLinePosition);
+            mView->selectLine(m_doubleClickIndex);
         } else {
             mView->pauseCursor();
             mView->finishByteEdit();
@@ -216,9 +212,9 @@ bool MouseNavigator::handleMouseDoubleClickEvent(QMouseEvent* mouseEvent)
     if (mouseEvent->button() == Qt::LeftButton) {
         ByteArrayTableCursor* tableCursor = mView->tableCursor();
 
-        mDoubleClickLine = tableCursor->line();
-
         const Address index = tableCursor->validIndex();
+
+        m_doubleClickIndex = index;
 
         mView->selectGroup(index);
 
