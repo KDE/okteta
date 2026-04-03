@@ -9,6 +9,8 @@
 
 // lib
 #include "abstractmousecontroller.hpp"
+// Okteta core
+#include <Okteta/Address>
 // Qt
 #include <QObject>
 #include <QPoint>
@@ -59,8 +61,8 @@ private:
 private:
     /** point at which the current double-click happened (used by triple-click) */
     QPoint mDoubleClickPoint;
-    /** line in which the current double-click happened (used by triple-click) */
-    int mDoubleClickLine;
+    /** Address for which the current double-click happened (used by triple-click) */
+    Address m_doubleClickIndex;
     /** point at which the current dragging started */
     QPoint mDragStartPoint;
 

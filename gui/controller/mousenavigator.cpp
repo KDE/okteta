@@ -49,10 +49,6 @@ bool MouseNavigator::handleMousePressEvent(QMouseEvent* mouseEvent)
     bool eventUsed = false;
 
     if (mouseEvent->button() == Qt::LeftButton) {
-        ByteArrayTableCursor* const tableCursor = mView->tableCursor();
-        ByteArrayTableRanges* const tableRanges = mView->tableRanges();
-        const ByteArrayTableLayout* const tableLayout = mView->tableLayout();
-
         mLMBPressed = true;
 
         // select whole line?
@@ -61,11 +57,9 @@ bool MouseNavigator::handleMousePressEvent(QMouseEvent* mouseEvent)
             m_tripleClickTimer.stop();
             mInLMBTripleClick = true;
 
-            // TODO: or store mDoubleClickIndex instead?
-            const Address indexAtFirstDoubleClickLinePosition = tableLayout->indexAtFirstLinePosition(mDoubleClickLine);
-
-            std::ignore = mView->selectLine(indexAtFirstDoubleClickLinePosition);
+            std::ignore = mView->selectLine(m_doubleClickIndex);
         } else {
+            ByteArrayTableRanges* const tableRanges = mView->tableRanges();
             mView->pauseCursor();
             mView->finishByteEditor();
 
@@ -81,7 +75,7 @@ bool MouseNavigator::handleMousePressEvent(QMouseEvent* mouseEvent)
                 mView->placeCursor(mousePoint);
                 mView->ensureCursorVisible();
 
-                const Address realIndex = tableCursor->realIndex();
+                const Address realIndex = mView->tableCursor()->realIndex();
                 if (tableRanges->selectionStarted()) {
                     if (mouseEvent->modifiers() & Qt::SHIFT) {
                         tableRanges->setSelectionEnd(realIndex);
@@ -216,9 +210,9 @@ bool MouseNavigator::handleMouseDoubleClickEvent(QMouseEvent* mouseEvent)
     if (mouseEvent->button() == Qt::LeftButton) {
         const ByteArrayTableCursor* const tableCursor = mView->tableCursor();
 
-        mDoubleClickLine = tableCursor->line();
-
         const Address index = tableCursor->validIndex();
+
+        m_doubleClickIndex = index;
 
         std::ignore = mView->selectGroup(index);
 
@@ -282,6 +276,10 @@ void MouseNavigator::handleMouseMove(QPoint point)   // handles the move of the 
                 if (mView->activeCoding() == AbstractByteArrayView::CharCodingId) {
                     const TextByteArrayAnalyzer textAnalyzer(mView->byteArrayModel(), mView->charCodec());
                     newIndex = textAnalyzer.indexOfLeftWordSelect(newIndex);
+                    // prevent picking word border behind the anchor section
+                    if (firstGroupSelection.startsBefore(newIndex)) {
+                        newIndex = firstGroupSelection.start();
+                    }
                 } else {
                     const int noOfGroupedBytes = mView->q_func()->noOfGroupedBytes();
                     newIndex = mView->tableLayout()->indexAtGroupStart(newIndex, noOfGroupedBytes);
@@ -289,17 +287,22 @@ void MouseNavigator::handleMouseMove(QPoint point)   // handles the move of the 
             }
         }
         // or behind?
-        else if (firstGroupSelection.endsBefore(newIndex)) {
+        else if (firstGroupSelection.endsBefore(newIndex - 1)) {
             tableRanges->ensureGroupSelectionForward(true);
+            const Address indexBefore = newIndex - 1;
             if (mInLMBTripleClick) {
-                newIndex = mView->tableLayout()->indexAtLineEnd(newIndex) +  1;
+                newIndex = mView->tableLayout()->indexAtLineEnd(indexBefore) +  1;
             } else {
                 if (mView->activeCoding() == AbstractByteArrayView::CharCodingId) {
                     const TextByteArrayAnalyzer textAnalyzer(mView->byteArrayModel(), mView->charCodec());
-                    newIndex = textAnalyzer.indexOfRightWordSelect(newIndex);
+                    newIndex = textAnalyzer.indexOfRightWordSelect(indexBefore);
+                    // prevent picking word border before the anchor section
+                    if (firstGroupSelection.endsBehind(newIndex - 1)) {
+                        newIndex = firstGroupSelection.nextBehindEnd();
+                    }
                 } else {
                     const int noOfGroupedBytes = mView->q_func()->noOfGroupedBytes();
-                    newIndex = mView->tableLayout()->indexAtGroupEnd(newIndex, noOfGroupedBytes) + 1;
+                    newIndex = mView->tableLayout()->indexAtGroupEnd(indexBefore, noOfGroupedBytes) + 1;
                 }
             }
         }
