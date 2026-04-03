@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 16:19+0000\n"
+"POT-Creation-Date: 2026-04-03 03:35+0000\n"
 "PO-Revision-Date: 2013-03-13 14:58+0530\n"
 "Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
 "Language-Team: Marathi <kde-i18n-doc@kde.org>\n"
@@ -382,13 +382,13 @@ msgctxt "@title:window"
 msgid "Save As"
 msgstr "असे साठवा"
 
-#: core/system/documentsyncmanager_p.cpp:217
+#: core/system/documentsyncmanager_p.cpp:215
 #, kde-format
 msgctxt "@title:window"
 msgid "Close"
 msgstr "बंद करा"
 
-#: core/system/documentsyncmanager_p.cpp:252
+#: core/system/documentsyncmanager_p.cpp:250
 #, kde-format
 msgctxt "@title:window"
 msgid "Reload"

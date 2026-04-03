@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 16:19+0000\n"
+"POT-Creation-Date: 2026-04-03 03:35+0000\n"
 "PO-Revision-Date: 2018-06-13 21:36+0100\n"
 "Last-Translator: Paolo Zamponi <zapaolo@email.it>\n"
 "Language-Team: Italian <kde-i18n-it@kde.org>\n"
@@ -387,13 +387,13 @@ msgctxt "@title:window"
 msgid "Save As"
 msgstr "Salva come"
 
-#: core/system/documentsyncmanager_p.cpp:217
+#: core/system/documentsyncmanager_p.cpp:215
 #, kde-format
 msgctxt "@title:window"
 msgid "Close"
 msgstr "Chiudi"
 
-#: core/system/documentsyncmanager_p.cpp:252
+#: core/system/documentsyncmanager_p.cpp:250
 #, kde-format
 msgctxt "@title:window"
 msgid "Reload"
