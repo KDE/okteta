@@ -40,6 +40,9 @@ MouseNavigator::MouseNavigator(AbstractByteArrayView* view, AbstractMouseControl
     connect(mDragStartTimer,   &QTimer::timeout, this, &MouseNavigator::startDrag);
     mDragStartTimer->setSingleShot(true);
     m_tripleClickTimer->setSingleShot(true);
+
+    connect(mView, &AbstractByteArrayView::readOnlyChanged, this, &MouseNavigator::updateCursorShape);
+    updateCursorShape(mView->isReadOnly());
 }
 
 MouseNavigator::~MouseNavigator() = default;
@@ -96,7 +99,7 @@ bool MouseNavigator::handleMousePressEvent(QMouseEvent* mouseEvent)
 
             if (tableRanges->isModified()) {
                 mView->updateChanged();
-                mView->viewport()->setCursor(mView->isReadOnly() ? Qt::ArrowCursor : Qt::IBeamCursor);
+                updateCursorShape(mView->isReadOnly());
             }
 
             mView->unpauseCursor();
@@ -237,6 +240,11 @@ void MouseNavigator::autoScrollTimerDone()
     if (mLMBPressed) {
         handleMouseMove(mView->viewportToColumns(mView->viewport()->mapFromGlobal(QCursor::pos())));
     }
+}
+
+void MouseNavigator::updateCursorShape(bool isReadOnly)
+{
+    mView->viewport()->setCursor(isReadOnly ? Qt::ArrowCursor : Qt::IBeamCursor);
 }
 
 void MouseNavigator::handleMouseMove(QPoint point)   // handles the move of the mouse with pressed buttons

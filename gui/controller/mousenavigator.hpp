@@ -46,6 +46,7 @@ private Q_SLOTS:
     void autoScrollTimerDone();
     /** */
     void startDrag();
+    void updateCursorShape(bool isReadOnly);
 
 private:
     /** Timer that triggers ensureCursorVisible function calls */
