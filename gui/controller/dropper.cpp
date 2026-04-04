@@ -32,6 +32,8 @@ bool Dropper::handleDragEnterEvent(QDragEnterEvent* dragEnterEvent)
 
     if (!mByteArrayView->isReadOnly()
         && mByteArrayView->canReadData(dragEnterEvent->mimeData())) {
+        setDropEventAction(dragEnterEvent);
+
         mIsActive = true;
         // TODO: store value edit data
         ByteArrayTableCursor* tableCursor = mByteArrayView->tableCursor();
@@ -52,6 +54,8 @@ bool Dropper::handleDragMoveEvent(QDragMoveEvent* dragMoveEvent)
 
     if (!mByteArrayView->isReadOnly()
         && mByteArrayView->canReadData(dragMoveEvent->mimeData())) {
+        setDropEventAction(dragMoveEvent);
+
         mCursorIsMovedByDrag = true;
 
         // let text cursor follow mouse
@@ -94,6 +98,8 @@ bool Dropper::handleDropEvent(QDropEvent* dropEvent)
 
     if (!mByteArrayView->isReadOnly()
         && mByteArrayView->canReadData(dropEvent->mimeData())) {
+        setDropEventAction(dropEvent);
+
         // leave state
         mIsActive = false;
 
@@ -113,6 +119,19 @@ bool Dropper::handleDropEvent(QDropEvent* dropEvent)
     return eventUsed;
 }
 
+void Dropper::setDropEventAction(QDropEvent* dropEvent)
+{
+    auto* const sourceByteArrayView = qobject_cast<AbstractByteArrayView*>(dropEvent->source());
+    const bool isInternal = (sourceByteArrayView && (sourceByteArrayView->byteArrayModel() == mByteArrayView->byteArrayModel()));
+
+    const Qt::DropAction action = isInternal ?
+        // internal: default to move, force copy by Shift
+        ((dropEvent->keyboardModifiers() & Qt::ShiftModifier) ? Qt::CopyAction : Qt::MoveAction) :
+        // external: default to copy, force move by Ctrl
+        ((dropEvent->keyboardModifiers() & Qt::ControlModifier) ? Qt::MoveAction : Qt::CopyAction);
+    dropEvent->setDropAction(action);
+}
+
 void Dropper::handleInternalDrag(QDropEvent* dropEvent, AbstractByteArrayView* sourceByteArrayView)
 {
     // get drag origin
@@ -124,7 +143,7 @@ void Dropper::handleInternalDrag(QDropEvent* dropEvent, AbstractByteArrayView* s
     Address insertIndex = tableCursor->realIndex();
 
     // is this a move?
-    if (dropEvent->proposedAction() == Qt::MoveAction) {
+    if (dropEvent->dropAction() == Qt::MoveAction) {
         // ignore the copy hold in the event but only move
         Address newCursorIndex;
         // need to swap?
