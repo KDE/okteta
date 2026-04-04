@@ -39,6 +39,9 @@ public: // AbstractMouseController API
     [[nodiscard]]
     bool handleMouseDoubleClickEvent(QMouseEvent* mouseEvent) override;
 
+public:
+    void init();
+
 private:
     /** handles the move of the mouse with pressed buttons */
     void handleMouseMove(QPoint point);
@@ -48,6 +51,7 @@ private Q_SLOTS:
     void autoScrollTimerDone();
     /** */
     void startDrag();
+    void updateCursorShape(bool isReadOnly);
 
 private:
     /** Timer that triggers ensureCursorVisible function calls */

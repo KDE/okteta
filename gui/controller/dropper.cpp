@@ -31,6 +31,8 @@ bool Dropper::handleDragEnterEvent(QDragEnterEvent* dragEnterEvent)
 
     if (!mByteArrayView->isEffectiveReadOnly()
         && mByteArrayView->canInsertBytesFromMimeData(dragEnterEvent->mimeData())) {
+        setDropEventAction(dragEnterEvent);
+
         mIsActive = true;
         // TODO: store value edit data
         const ByteArrayTableCursor* const tableCursor = mByteArrayView->tableCursor();
@@ -51,6 +53,8 @@ bool Dropper::handleDragMoveEvent(QDragMoveEvent* dragMoveEvent)
 
     if (!mByteArrayView->isEffectiveReadOnly()
         && mByteArrayView->canInsertBytesFromMimeData(dragMoveEvent->mimeData())) {
+        setDropEventAction(dragMoveEvent);
+
         mCursorIsMovedByDrag = true;
 
         // let text cursor follow mouse
@@ -93,6 +97,8 @@ bool Dropper::handleDropEvent(QDropEvent* dropEvent)
 
     if (!mByteArrayView->isEffectiveReadOnly()
         && mByteArrayView->canInsertBytesFromMimeData(dropEvent->mimeData())) {
+        setDropEventAction(dropEvent);
+
         // leave state
         mIsActive = false;
 
@@ -105,9 +111,24 @@ bool Dropper::handleDropEvent(QDropEvent* dropEvent)
             // mByteArrayView->tableRanges()->removeSelection();
             mByteArrayView->insertBytesFromMimeData(dropEvent->mimeData());
         }
+
+        eventUsed = true;
     }
 
     return eventUsed;
+}
+
+void Dropper::setDropEventAction(QDropEvent* dropEvent)
+{
+    auto* const sourceByteArrayView = qobject_cast<AbstractByteArrayView*>(dropEvent->source());
+    const bool isInternal = (sourceByteArrayView && (sourceByteArrayView->byteArrayModel() == mByteArrayView->byteArrayModel()));
+
+    const Qt::DropAction action = isInternal ?
+        // internal: default to move, force copy by Shift
+        ((dropEvent->keyboardModifiers() & Qt::ShiftModifier) ? Qt::CopyAction : Qt::MoveAction) :
+        // external: default to copy, force move by Ctrl
+        ((dropEvent->keyboardModifiers() & Qt::ControlModifier) ? Qt::MoveAction : Qt::CopyAction);
+    dropEvent->setDropAction(action);
 }
 
 void Dropper::handleInternalDrag(QDropEvent* dropEvent, AbstractByteArrayViewPrivate* sourceByteArrayView)
@@ -121,7 +142,7 @@ void Dropper::handleInternalDrag(QDropEvent* dropEvent, AbstractByteArrayViewPri
     Address insertIndex = tableCursor->realIndex();
 
     // is this a move?
-    if (dropEvent->proposedAction() == Qt::MoveAction) {
+    if (dropEvent->dropAction() == Qt::MoveAction) {
         // ignore the copy hold in the event but only move
         Address newCursorIndex;
         // need to swap?

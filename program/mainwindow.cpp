@@ -303,7 +303,7 @@ void OktetaMainWindow::onDataOffered(const QMimeData* mimeData, bool& accept)
              || mProgram->documentManager()->createManager()->canCreateNewFromData(mimeData);
 }
 
-void OktetaMainWindow::onDataDropped(const QMimeData* mimeData)
+void OktetaMainWindow::onDataDropped(const QMimeData* mimeData, bool& accept)
 {
     const QList<QUrl> urls = mimeData->urls();
 
@@ -314,8 +314,11 @@ void OktetaMainWindow::onDataDropped(const QMimeData* mimeData)
         for (const QUrl& url : urls) {
             syncManager->load(url);
         }
+        accept = true;
     } else {
         documentManager->createManager()->createNewFromData(mimeData, true);
+        // TODO: only set on success
+        accept = true;
     }
 }
 

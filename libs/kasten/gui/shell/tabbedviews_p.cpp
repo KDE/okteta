@@ -15,6 +15,7 @@
 #include <QTabBar>
 #include <QApplication>
 #include <QClipboard>
+#include <QMimeData>
 
 namespace Kasten {
 
@@ -44,9 +45,9 @@ void TabbedViewsPrivate::init()
                      q, [this](const QPoint& pos) { onContextMenuRequested(pos); });
 
     QObject::connect(mTabWidget.get(), &TabWidget::testCanDecode,
-                     q, [this](const QDragMoveEvent* event, bool& accept) { onDragMoveEvent(event, accept); });
+                     q, [this](QDragMoveEvent* event, bool& accept) { onDragMoveEvent(event, accept); });
     QObject::connect(mTabWidget.get(), &TabWidget::receivedDropEvent,
-                     q, [this](QDropEvent* event) { onDropEvent(event); });
+                     q, [this](QDropEvent* event, bool& accept) { onDropEvent(event, accept); });
     QObject::connect(mTabWidget.get(), &TabWidget::mouseMiddleClick,
                      q, [this]() { onMouseMiddleClick(); });
     QObject::connect(mTabWidget.get(), &TabWidget::emptySpaceMouseDoubleClicked,
@@ -259,7 +260,8 @@ void TabbedViewsPrivate::onMouseMiddleClick()
 
     const QMimeData* const mimeData = QApplication::clipboard()->mimeData(QClipboard::Selection);
 
-    Q_EMIT q->dataDropped(mimeData);
+    bool acceptedDummy;
+    Q_EMIT q->dataDropped(mimeData, acceptedDummy);
 }
 
 void TabbedViewsPrivate::onEmptySpaceMouseDoubleClicked()
@@ -269,22 +271,40 @@ void TabbedViewsPrivate::onEmptySpaceMouseDoubleClicked()
     Q_EMIT q->newDocumentRequested();
 }
 
-void TabbedViewsPrivate::onDragMoveEvent(const QDragMoveEvent* event, bool& accepted)
+void TabbedViewsPrivate::onDragMoveEvent(QDragMoveEvent* event, bool& accepted)
 {
     Q_Q(TabbedViews);
 
     const QMimeData* const mimeData = event->mimeData();
 
     Q_EMIT q->dataOffered(mimeData, accepted);
+
+    if (accepted) {
+        setDropEventAction(event);
+    }
 }
 
-void TabbedViewsPrivate::onDropEvent(QDropEvent* event)
+void TabbedViewsPrivate::onDropEvent(QDropEvent* event, bool& accepted)
 {
     Q_Q(TabbedViews);
 
     const QMimeData* const mimeData = event->mimeData();
 
-    Q_EMIT q->dataDropped(mimeData);
+    Q_EMIT q->dataDropped(mimeData, accepted);
+
+    if (accepted) {
+        setDropEventAction(event);
+    }
+}
+
+void TabbedViewsPrivate::setDropEventAction(QDropEvent* dropEvent)
+{
+    const Qt::DropAction action = dropEvent->mimeData()->urls().isEmpty() ?
+        // default to copy, force move by Ctrl
+        ((dropEvent->keyboardModifiers() & Qt::ControlModifier) ? Qt::MoveAction : Qt::CopyAction) :
+        // TODO: URLS hard-coded to copy for now, instead have dataOffered & dataDropped handlers decide
+        Qt::CopyAction;
+    dropEvent->setDropAction(action);
 }
 
 }

@@ -74,7 +74,7 @@ Q_SIGNALS: // If::ViewAreaSplitable API
 
 Q_SIGNALS:
     void dataOffered(const QMimeData* mimeData, bool& accepted);
-    void dataDropped(const QMimeData* mimeData);
+    void dataDropped(const QMimeData* mimeData, bool& accepted);
     void contextMenuRequested(Kasten::AbstractGroupedViews* viewArea, Kasten::AbstractView* view, QPoint pos);
     void newDocumentRequested();
 

@@ -154,6 +154,7 @@ void AbstractByteArrayViewPrivate::init()
     Q_Q(AbstractByteArrayView);
 
     ColumnsViewScrollAreaEngine::init();
+    mMouseNavigator.init();
 
     // TODO: check if the crash noted with the constructor of FontScalingZoomState still holds
     // if not, move to constructor init

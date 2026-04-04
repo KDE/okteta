@@ -46,6 +46,7 @@ public:
 
 private:
     void handleInternalDrag(QDropEvent* dropEvent, AbstractByteArrayViewPrivate* sourceByteArrayView);
+    void setDropEventAction(QDropEvent* dropEvent);
 
 private:
     AbstractByteArrayViewPrivate* const mByteArrayView;

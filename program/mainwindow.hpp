@@ -42,7 +42,7 @@ private:
 
 private Q_SLOTS:
     void onDataOffered(const QMimeData* mimeData, bool& accept);
-    void onDataDropped(const QMimeData* mimeData);
+    void onDataDropped(const QMimeData* mimeData, bool& accept);
     void onCloseRequest(const QVector<Kasten::AbstractView*>& views);
     void onNewDocumentRequested();
 

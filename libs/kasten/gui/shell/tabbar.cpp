@@ -83,8 +83,14 @@ void TabBar::dragMoveEvent(QDragMoveEvent* event)
 void TabBar::dropEvent(QDropEvent* event)
 {
     if (tabAt(event->pos()) == -1) {
-        Q_EMIT receivedDropEvent(event);
-        return;
+        bool accept = false;
+        // The receivers of the testCanDecode() signal has to adjust
+        // 'accept' accordingly.
+        Q_EMIT receivedDropEvent(event, accept);
+        if (accept) {
+            event->setAccepted(true);
+            return;
+        }
     }
 
     QTabBar::dropEvent(event);
