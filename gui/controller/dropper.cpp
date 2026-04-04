@@ -106,6 +106,8 @@ bool Dropper::handleDropEvent(QDropEvent* dropEvent)
             // mByteArrayView->tableRanges()->removeSelection();
             mByteArrayView->pasteData(dropEvent->mimeData());
         }
+
+        eventUsed = true;
     }
 
     return eventUsed;
