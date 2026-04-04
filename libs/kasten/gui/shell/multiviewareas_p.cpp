@@ -51,6 +51,8 @@ TabbedViews* MultiViewAreasPrivate::createViewArea(QSplitter* splitter)
                      q, &MultiViewAreas::dataOffered);
     QObject::connect(viewArea, &TabbedViews::dataDropped,
                      q, &MultiViewAreas::dataDropped);
+    QObject::connect(viewArea, &TabbedViews::dataDroppedAndAccepted,
+                     q, &MultiViewAreas::dataDroppedAndAccepted);
     QObject::connect(viewArea, &TabbedViews::newDocumentRequested,
                      q, &MultiViewAreas::newDocumentRequested);
 

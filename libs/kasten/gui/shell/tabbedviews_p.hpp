@@ -59,8 +59,11 @@ public: // Q_SLOTS:
     void onContextMenuRequested(QPoint pos);
     void onMouseMiddleClick();
     void onEmptySpaceMouseDoubleClicked();
-    void onDragMoveEvent(const QDragMoveEvent* event, bool& accept);
-    void onDropEvent(QDropEvent* event);
+    void onDragMoveEvent(QDragMoveEvent* event, bool& accept);
+    void onDropEvent(QDropEvent* event, bool& accept);
+
+private:
+    void setDropEventAction(QDropEvent* dropEvent);
 
 private:
     Q_DECLARE_PUBLIC(TabbedViews)

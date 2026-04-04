@@ -95,7 +95,12 @@ void TabWidget::dragMoveEvent(QDragMoveEvent* event)
 void TabWidget::dropEvent(QDropEvent* event)
 {
     if (count() == 0) {
-        emit receivedDropEvent(event);
+        bool accept = false;
+        // The receivers of the testCanDecode() signal has to adjust
+        // 'accept' accordingly.
+        emit receivedDropEvent(event, accept);
+
+        event->setAccepted(accept);
         return;
     }
 
