@@ -16,13 +16,13 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 23.08.3\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
+"X-Generator: Lokalize 23.08.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
 msgid "Your names"
-msgstr ""
+msgstr "Roman Paholík"
 
 #, kde-format
 msgctxt "EMAIL OF TRANSLATORS"
@@ -37,50 +37,43 @@ msgid "File Info"
 msgstr "Info o súbore"
 
 #: controllers/document/info/documentinfoview.cpp:65
-#, fuzzy, kde-format
-#| msgid "Type:"
+#, kde-format
 msgctxt "@label"
 msgid "Type:"
 msgstr "Typ:"
 
 #: controllers/document/info/documentinfoview.cpp:79
-#, fuzzy, kde-format
-#| msgid "Location:"
+#, kde-format
 msgctxt "@label"
 msgid "Location:"
 msgstr "Umiestnenie:"
 
 #: controllers/document/info/documentinfoview.cpp:84
-#, fuzzy, kde-format
-#| msgid "Size:"
+#, kde-format
 msgctxt "@label"
 msgid "Size:"
 msgstr "Veľkosť:"
 
 #: controllers/document/info/documentinfoview.cpp:87
-#, fuzzy, kde-format
-#| msgid "Created/Loaded:"
+#, kde-format
 msgctxt "@label"
 msgid "Created/Loaded:"
 msgstr "Vytvorené/Načítané:"
 
 #: controllers/document/info/documentinfoview.cpp:91
-#, fuzzy, kde-format
-#| msgid "Last modified:"
+#, kde-format
 msgctxt "@label"
 msgid "Last modified:"
 msgstr "Naposledy modifikované:"
 
 #: controllers/document/info/documentinfoview.cpp:95
-#, fuzzy, kde-format
-#| msgid "Last synchronized:"
+#, kde-format
 msgctxt "@label"
 msgid "Last synchronized:"
 msgstr "Naposledy synchronizované:"
 
 #: controllers/document/info/documentinfoview.cpp:102
-#, fuzzy, kde-format
-#| msgid "Created:"
+#, kde-format
 msgctxt "@label"
 msgid "Created:"
 msgstr "Vytvorené:"
@@ -154,9 +147,7 @@ msgid "Bookmarks"
 msgstr "Záložky"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:43
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu create a new view profile"
-#| msgid "Create New..."
+#, kde-format
 msgctxt "@action"
 msgid "Create New"
 msgstr "Vytvoriť nový..."
@@ -178,12 +169,10 @@ msgstr ""
 "kurzora."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:56
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Delete"
+#, kde-format
 msgctxt "@action"
 msgid "Delete"
-msgstr "O&dstrániť"
+msgstr "Odstrániť"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:58
 #, kde-format
@@ -199,9 +188,7 @@ msgid ""
 msgstr "Ak stlačíte toto tlačidlo, zmažú sa všetky vybrané záložky."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:66
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Go to Offset..."
+#, kde-format
 msgctxt "@action"
 msgid "Go to Offset"
 msgstr "Choď na ofset(&G)..."
@@ -225,7 +212,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action"
 msgid "Rename"
-msgstr ""
+msgstr "Premenovať"
 
 #: controllers/view/bookmarks/bookmarksview.cpp:79
 #, kde-format
@@ -244,9 +231,7 @@ msgstr "Ak stlačíte toto tlačidlo, môžete zmeniť meno vybranej záložky."
 #: controllers/view/bookmarks/bookmarksview.cpp:87
 #: controllers/view/stringsextract/stringsextractview.cpp:72
 #: controllers/view/structures/structureview.cpp:95
-#, fuzzy, kde-format
-#| msgctxt "@title:column offset of the bookmark"
-#| msgid "Offset"
+#, kde-format
 msgctxt "@action"
 msgid "Copy Offset"
 msgstr "Ofset"
@@ -254,17 +239,13 @@ msgstr "Ofset"
 #: controllers/view/bookmarks/bookmarksview.cpp:89
 #: controllers/view/stringsextract/stringsextractview.cpp:74
 #: controllers/view/structures/structureview.cpp:97
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Copies the selected strings to the clipboard."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the offset to the clipboard."
 msgstr "Skopíruje vybrané reťazce do schránky."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:127
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "Bookmarks"
+#, kde-format
 msgctxt "@info"
 msgid "No bookmarks"
 msgstr "Záložky"
@@ -354,9 +335,7 @@ msgid "Value/Char Table"
 msgstr "Tabuľka hodnoty/znaku"
 
 #: controllers/view/bytetable/bytetabletool.cpp:96
-#, fuzzy, kde-format
-#| msgid "Inserted 1 Byte"
-#| msgid_plural "Inserted %1 Bytes"
+#, kde-format
 msgctxt "@item"
 msgid "Inserted 1 Byte"
 msgid_plural "Inserted %1 Bytes"
@@ -365,10 +344,7 @@ msgstr[1] "Vložené %1 byty"
 msgstr[2] "Vložených %1 bytov"
 
 #: controllers/view/bytetable/bytetabletool.cpp:114
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "1 byte converted."
-#| msgid_plural "%1 bytes converted."
+#, kde-format
 msgctxt "@info"
 msgid "1 byte inserted."
 msgid_plural "%1 bytes inserted."
@@ -405,9 +381,7 @@ msgid "Charset Conversion"
 msgstr "Konverzia znakovej sady"
 
 #: controllers/view/charsetconversion/charsetconversiontool.cpp:302
-#, fuzzy, kde-format
-#| msgctxt "Converted from charset 1 to charset 2"
-#| msgid "%1 to %2"
+#, kde-format
 msgctxt "@item Converted from charset 1 to charset 2"
 msgid "%1 to %2"
 msgstr "%1 na %2"
@@ -511,8 +485,7 @@ msgstr ""
 "znakovej sady."
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:170
-#, fuzzy, kde-format
-#| msgid "Con&vert"
+#, kde-format
 msgctxt "@action:button"
 msgid "Convert"
 msgstr "Previesť"
@@ -691,9 +664,7 @@ msgstr ""
 "ste vybrali pre byty vo vybranom rozsahu a s danými voľbami."
 
 #: controllers/view/gotooffset/gotooffsetcontroller.cpp:30
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Go to Offset..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Go to Offset…"
 msgstr "Choď na ofset(&G)..."
@@ -830,22 +801,16 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "Copy"
-msgstr ""
+msgstr "Kopírovať"
 
 #: controllers/view/info/infoview.cpp:123
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Copies the selected strings to the clipboard."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected statistic lines to the clipboard."
 msgstr "Skopíruje vybrané reťazce do schránky."
 
 #: controllers/view/info/infoview.cpp:125
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:whatsthis"
-#| msgid ""
-#| "If you press the <interface>Copy</interface> button, all strings you "
-#| "selected in the list are copied to the clipboard."
+#, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press the <interface>Copy</interface> button, all statistic lines you "
@@ -974,9 +939,7 @@ msgstr ""
 
 #: controllers/view/libbytearraychecksum/algorithm/nobytearraychecksumparametersetedit.cpp:21
 #: controllers/view/libbytearrayfilter/filter/nobytearrayfilterparametersetedit.cpp:21
-#, fuzzy, kde-format
-#| msgctxt "@title:group"
-#| msgid "Parameters"
+#, kde-format
 msgctxt "@info"
 msgid "No parameters"
 msgstr "Parametre"
@@ -1406,17 +1369,13 @@ msgid "Decoding Table"
 msgstr "Dekódovacia tabuľka"
 
 #: controllers/view/poddecoder/poddecodertool.cpp:308
-#, fuzzy, kde-format
-#| msgctxt "Edited as %datatype"
-#| msgid "Edited as %1"
+#, kde-format
 msgctxt "@item Edited as datatype"
 msgid "Edited as %1"
 msgstr "Editované ako %1"
 
 #: controllers/view/poddecoder/poddecodertool.cpp:317
-#, fuzzy, kde-format
-#| msgctxt "Edited as %datatype"
-#| msgid "Edited as %1"
+#, kde-format
 msgctxt "@info Edited as datatype"
 msgid "Edited as %1"
 msgstr "Editované ako %1"
@@ -1447,19 +1406,15 @@ msgstr "Hodnota bytov pre dátový typ"
 
 #: controllers/view/poddecoder/podtableview.cpp:51
 #: controllers/view/structures/structureview.cpp:86
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Edit..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Edit"
-msgstr "&Editovať..."
+msgstr "Upraviť"
 
 #: controllers/view/poddecoder/podtableview.cpp:60
 #: controllers/view/stringsextract/stringsextractview.cpp:79
 #: controllers/view/structures/structureview.cpp:102
-#, fuzzy, kde-format
-#| msgctxt "@info:status offset value not available"
-#| msgid "Selection: -"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Select in View"
 msgstr "Výber: -"
@@ -1715,9 +1670,7 @@ msgid "Search"
 msgstr "Hľadať"
 
 #: controllers/view/selectrange/selectrangecontroller.cpp:31
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "&Select Range..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "&Select Range…"
 msgstr "Vybrať rozsah..."
@@ -1809,11 +1762,10 @@ msgstr ""
 "reťazce sa skopírujú do schránky."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:62
-#, fuzzy, kde-format
-#| msgid "&Show"
+#, kde-format
 msgctxt "@action:button"
 msgid "Show"
-msgstr "Ukázať(&S)"
+msgstr "Zobraziť"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:64
 #, kde-format
@@ -1832,9 +1784,7 @@ msgstr ""
 "reťazec bude označený a zobrazený."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:81
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip"
-#| msgid "Shows the selected string in the view."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "Selects the selected string in the view."
 msgstr "Zobrazí vybraný reťazec."
@@ -1879,24 +1829,19 @@ msgid "Filter:"
 msgstr "Filter:"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:131
-#, fuzzy, kde-format
-#| msgid "Enter a term to limit the list."
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Enter a term to limit the list."
 msgstr "Zadajte limit pre zoznam."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:183
-#, fuzzy, kde-format
-#| msgctxt "@title:window of the tool to extract strings"
-#| msgid "Strings"
+#, kde-format
 msgctxt "@info"
 msgid "No strings"
 msgstr "Reťazce"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:370
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "No bytes converted."
+#, kde-format
 msgctxt "@info"
 msgid "No strings extracted."
 msgstr "Žiadne bajty neskonvertované."
@@ -1957,13 +1902,13 @@ msgid "Size:"
 msgstr "Veľkosť:"
 
 #: controllers/view/structures/datatypes/datainformation.cpp:239
-#, fuzzy, kde-format
+#, kde-format
 msgctxt "size (elements)"
 msgid "%2 (%1 child)"
 msgid_plural "%2 (%1 children)"
-msgstr[0] "Potomok"
-msgstr[1] "Deti"
-msgstr[2] "Deti"
+msgstr[0] ""
+msgstr[1] ""
+msgstr[2] ""
 
 #: controllers/view/structures/datatypes/datainformation.cpp:264
 #: controllers/view/structures/datatypes/datainformationwithchildren.cpp:207
@@ -2374,7 +2319,7 @@ msgstr "O aplikácii"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Uninstall"
-msgstr ""
+msgstr "Odinštalovať"
 
 #: controllers/view/structures/settings/structureitemdelegate.cpp:124
 #, kde-format
@@ -2383,8 +2328,7 @@ msgid "Can not be uninstalled."
 msgstr ""
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:61
-#, fuzzy, kde-format
-#| msgid "Advanced Selection..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Advanced Selection…"
 msgstr "Pokročilý výber..."
@@ -2396,8 +2340,7 @@ msgid "Install from File(s)…"
 msgstr ""
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:69
-#, fuzzy, kde-format
-#| msgid "Get New Structures..."
+#, kde-format
 msgctxt "@action:button"
 msgid "Get New Structures…"
 msgstr "Získať nové štruktúry..."
@@ -2411,8 +2354,7 @@ msgid ""
 msgstr ""
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:130
-#, fuzzy, kde-format
-#| msgid "Structure Definitions"
+#, kde-format
 msgctxt "@title:window"
 msgid "Structure Installation"
 msgstr "Definície štruktúry"
@@ -2421,7 +2363,7 @@ msgstr "Definície štruktúry"
 #, kde-format
 msgctxt "@action:button"
 msgid "Uninstall"
-msgstr ""
+msgstr "Odinštalovať"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:156
 #, kde-format
@@ -2430,8 +2372,7 @@ msgstr ""
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:157
 #: controllers/view/structures/settings/structuresmanagerview.cpp:176
-#, fuzzy, kde-format
-#| msgid "Structure Definitions"
+#, kde-format
 msgctxt "@title:window"
 msgid "Structure Uninstallation"
 msgstr "Definície štruktúry"
@@ -2453,12 +2394,10 @@ msgid "Structure Definitions"
 msgstr "Definície štruktúry"
 
 #: controllers/view/structures/settings/structuresselector.cpp:44
-#, fuzzy, kde-format
-#| msgctxt "@title"
-#| msgid "Search"
+#, kde-format
 msgctxt "@info:placeholder"
 msgid "Search…"
-msgstr "Hľadať"
+msgstr "Hľadať..."
 
 #. i18n: ectx: tooltip, entry (UnsignedDisplayBase), group (ValueDisplay)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:9
@@ -2648,12 +2587,10 @@ msgstr "Hodnota znaku:"
 #: controllers/view/structures/structureinstalljob.cpp:61
 #, kde-format
 msgid "Unknown error (0)"
-msgstr ""
+msgstr "Neznáma chyba (0)"
 
 #: controllers/view/structures/structureinstalljob.cpp:63
-#, fuzzy, kde-format
-#| msgctxt "not all values in this structure are as they should be"
-#| msgid "Validation failed: \"%1\""
+#, kde-format
 msgid "Downloading failed: %1"
 msgstr "Overenie zlyhalo: \"%1\""
 
@@ -2695,9 +2632,7 @@ msgid "Size"
 msgstr "Size"
 
 #: controllers/view/structures/structureview.cpp:56
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Validate"
+#, kde-format
 msgctxt "@action"
 msgid "Validate"
 msgstr "Skontrolovať"
@@ -2709,12 +2644,10 @@ msgid "Validate all structures."
 msgstr "Skontrolovať všetky štruktúry."
 
 #: controllers/view/structures/structureview.cpp:74
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Script console"
+#, kde-format
 msgctxt "@action"
 msgid "Script Console"
-msgstr "Skriptová konzola"
+msgstr "Konzola skriptov"
 
 #: controllers/view/structures/structureview.cpp:75
 #, kde-format
@@ -2723,9 +2656,7 @@ msgid "Open script console."
 msgstr "Otvoriť skriptovú konzolu."
 
 #: controllers/view/structures/structureview.cpp:80
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Settings"
+#, kde-format
 msgctxt "@action"
 msgid "Settings"
 msgstr "Nastavenia"
@@ -2737,22 +2668,19 @@ msgid "Open settings."
 msgstr "Otvoriť nastavenia"
 
 #: controllers/view/structures/structureview.cpp:139
-#, fuzzy, kde-format
-#| msgid "Structure Definitions"
+#, kde-format
 msgctxt "@info"
 msgid "No structure definitions"
 msgstr "Definície štruktúry"
 
 #: controllers/view/structures/structureview.cpp:209
-#, fuzzy, kde-format
-#| msgid "Value Display"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Value Display"
 msgstr "Zobrazenie hodnoty"
 
 #: controllers/view/structures/structureview.cpp:221
-#, fuzzy, kde-format
-#| msgid "Structures management"
+#, kde-format
 msgctxt "@title:tab"
 msgid "Structures management"
 msgstr "menežment štruktúr"
@@ -2889,17 +2817,13 @@ msgid "Show &Non-printing Chars"
 msgstr "Zobraz &Nezobraziteľné znaky."
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:78
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Set Bytes per Line..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Set Bytes per Line…"
 msgstr "Nastaviť bajty na riadok..."
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:85
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Set Bytes per Group..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Set Bytes per Group…"
 msgstr "Nastaviť bajty na skupinu..."
@@ -2987,9 +2911,7 @@ msgid "View Profile"
 msgstr "Profil pohľadu"
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:42
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu create a new view profile"
-#| msgid "Create New..."
+#, kde-format
 msgctxt "@action:inmenu create a new view profile"
 msgid "Create New…"
 msgstr "Vytvoriť nový..."
@@ -3008,30 +2930,25 @@ msgstr "Vynulovať zmeny"
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:182
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:178
-#, fuzzy, kde-format
-#| msgctxt "@window:title"
-#| msgid "New View Profile"
+#, kde-format
 msgctxt "@title:window"
 msgid "New View Profile"
 msgstr "Nový profil pohľadu"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:53
-#, fuzzy, kde-format
-#| msgid "Title:"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "Title:"
 msgstr "Názov:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:57
-#, fuzzy, kde-format
-#| msgid "Display"
+#, kde-format
 msgctxt "@title:group"
 msgid "Display"
 msgstr "Obrazovka"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:61
-#, fuzzy, kde-format
-#| msgid "Show Line Offset:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show line offset:"
 msgstr "Ukáž ofset riadku:"
@@ -3055,68 +2972,55 @@ msgid "Octal"
 msgstr "Octal"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:70
-#, fuzzy, kde-format
-#| msgid "Offset Coding:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Offset coding:"
 msgstr "Kódovanie posunu:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:74
-#, fuzzy, kde-format
-#| msgid "Values"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Values"
 msgstr "Hodnoty"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:75
-#, fuzzy, kde-format
-#| msgid "Chars"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Chars"
 msgstr "Znaky"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:76
-#, fuzzy, kde-format
-#| msgctxt "@item:"
-#| msgid "Values & Chars"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Values & Chars"
 msgstr "Hodnoty & Znaky"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:79
-#, fuzzy, kde-format
-#| msgid "Show Values or Chars:"
+#, kde-format
 msgctxt "@option:check"
 msgid "Show values or chars:"
 msgstr "Zobraziť hodnoty alebo znaky:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:83
-#, fuzzy, kde-format
-#| msgctxt "@label:listbox "
-#| msgid "Show with Rows or Columns:"
+#, kde-format
 msgctxt "@label:listbox "
 msgid "Show with rows or columns:"
 msgstr "Zobraziť s riadkami alebo stĺpcami:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:86
-#, fuzzy, kde-format
-#| msgctxt "@item:"
-#| msgid "Columns"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Columns"
 msgstr "Stĺpce"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:87
-#, fuzzy, kde-format
-#| msgctxt "@item:"
-#| msgid "Rows"
+#, kde-format
 msgctxt "@item:inmenu"
 msgid "Rows"
 msgstr "Riadky"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:94
-#, fuzzy, kde-format
-#| msgid "Layout"
+#, kde-format
 msgctxt "@title:group"
 msgid "Layout"
 msgstr "Rozloženie"
@@ -3144,39 +3048,31 @@ msgid "On"
 msgstr "Zapnúť"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:109
-#, fuzzy, kde-format
-#| msgid "Break lines:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Break lines:"
 msgstr "Zalomiť riadky:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:113
-#, fuzzy, kde-format
-#| msgctxt "@label"
-#| msgid "No grouping."
+#, kde-format
 msgctxt "@item"
 msgid "No Grouping"
-msgstr "Žiadne zoskupovanie."
+msgstr "Žiadne zoskupovanie"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:117
-#, fuzzy, kde-format
-#| msgctxt "@label:spinbox number of bytes which are grouped"
-#| msgid "Bytes per Group:"
+#, kde-format
 msgctxt "@label:spinbox number of bytes which are grouped"
 msgid "Bytes per group:"
 msgstr "Bajtov na skupinu:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:124
-#, fuzzy, kde-format
-#| msgctxt "@label:spinbox number of bytes which are shown per line"
-#| msgid "Bytes per Line:"
+#, kde-format
 msgctxt "@label:spinbox number of bytes which are shown per line"
 msgid "Bytes per line:"
 msgstr "Bajtov na riadok:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:129
-#, fuzzy, kde-format
-#| msgid "Values"
+#, kde-format
 msgctxt "@title:group"
 msgid "Values"
 msgstr "Hodnoty"
@@ -3216,37 +3112,31 @@ msgstr "Binárny"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:144
 #: controllers/view/viewprofiles/viewprofileedit.cpp:153
-#, fuzzy, kde-format
-#| msgid "Coding:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Coding:"
 msgstr "Kódovanie:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:148
-#, fuzzy, kde-format
-#| msgid "Chars"
+#, kde-format
 msgctxt "@title:group"
 msgid "Chars"
 msgstr "Znaky"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:163
-#, fuzzy, kde-format
-#| msgid "Char for non-printable bytes:"
+#, kde-format
 msgctxt "@label:chooser"
 msgid "Char for non-printable bytes:"
 msgstr "Znak pre netlačiteľné znaky:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:168
-#, fuzzy, kde-format
-#| msgid "Char for undefined bytes:"
+#, kde-format
 msgctxt "@label:chooser"
 msgid "Char for undefined bytes:"
 msgstr "Znak pre nedefinované bajty:"
 
 #: controllers/view/viewprofiles/viewprofilesmanagecontroller.cpp:29
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu"
-#| msgid "Manage View Profiles..."
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage View Profiles…"
 msgstr "Spravovať profily pohľadu..."
@@ -3258,9 +3148,7 @@ msgid "View Profiles"
 msgstr "Profil pohľadu"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:61
-#, fuzzy, kde-format
-#| msgctxt "@action:inmenu create a new view profile"
-#| msgid "Create New..."
+#, kde-format
 msgctxt "@action:button"
 msgid "&Create New…"
 msgstr "Vytvoriť nový..."
@@ -3272,12 +3160,7 @@ msgid "Opens an editor for a new view profile."
 msgstr "Otvorí editor pre nový profil pohľadu."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:66
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:whatsthis"
-#| msgid ""
-#| "If you press the <interface>Create new...</interface> button, an editor "
-#| "is opened where you can create and edit a new view profile. The values "
-#| "will be based on the ones of the view profile you selected in the list."
+#, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press the <interface>Create New…</interface> button, an editor is "
@@ -3289,12 +3172,10 @@ msgstr ""
 "založené na hodnotách profilu pohľadu vybraného v zozname."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:75
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Edit..."
+#, kde-format
 msgctxt "@action:button"
 msgid "&Edit…"
-msgstr "&Editovať..."
+msgstr "&Upraviť"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:78
 #, kde-format
@@ -3303,11 +3184,7 @@ msgid "Opens an editor for the view profile."
 msgstr "Otvorí editor pre profil pohľadu."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:80
-#, fuzzy, kde-kuit-format
-#| msgctxt "@info:whatsthis"
-#| msgid ""
-#| "If you press the <interface>Edit...</interface> button, an editor will be "
-#| "opened for the view profile you selected in the list."
+#, kde-kuit-format
 msgctxt "@info:whatsthis"
 msgid ""
 "If you press the <interface>Edit…</interface> button, an editor will be "
@@ -3366,9 +3243,7 @@ msgid "Modification of %1"
 msgstr "Zmeny %1"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:209
-#, fuzzy, kde-format
-#| msgctxt "@window:title"
-#| msgid "\"%1\" View Profile"
+#, kde-format
 msgctxt "@title:window"
 msgid "\"%1\" View Profile"
 msgstr "Profil pohľadu \"%1\""
@@ -3492,16 +3367,13 @@ msgid "Support to load files larger than 2 GiB has not yet been implemented."
 msgstr "Podpora čítania súborov väčších ako 2 GiB ešte nie je implementovaná."
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:97
-#, fuzzy, kde-format
-#| msgctxt "@item name of the generated data"
-#| msgid "Pattern"
+#, kde-format
 msgctxt "name of the generated data"
 msgid "Pattern…"
 msgstr "Šablóna"
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:146
-#, fuzzy, kde-format
-#| msgid "Pattern inserted."
+#, kde-format
 msgctxt "@item"
 msgid "Pattern Inserted"
 msgstr "Šablóna vložená."
@@ -3539,16 +3411,13 @@ msgid "Pattern"
 msgstr "Šablóna"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:43
-#, fuzzy, kde-format
-#| msgctxt "@item name of the generated data"
-#| msgid "Random Data"
+#, kde-format
 msgctxt "name of the generated data"
 msgid "Random Data…"
 msgstr "Náhodné dáta"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:86
-#, fuzzy, kde-format
-#| msgid "RandomData inserted."
+#, kde-format
 msgctxt "@item"
 msgid "RandomData Inserted"
 msgstr "Vložené náhodné dáta."
@@ -3578,8 +3447,7 @@ msgid "Sequence"
 msgstr "Sekvencia"
 
 #: gui/io/generator/sequence/bytearraysequencegenerator.cpp:56
-#, fuzzy, kde-format
-#| msgid "Sequence inserted."
+#, kde-format
 msgctxt "@item"
 msgid "Sequence Inserted"
 msgstr "Vložená sekvencia"
@@ -3588,7 +3456,7 @@ msgstr "Vložená sekvencia"
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "bzip2"
-msgstr ""
+msgstr "bzip2"
 
 #: gui/io/streamcompressor/bzip2/bytearraybzip2streamcompressorconfigeditor.cpp:29
 #, kde-format
@@ -3599,7 +3467,7 @@ msgstr ""
 #: gui/io/streamcompressor/bzip2/bytearraybzip2streamcompressorconfigeditor.cpp:47
 #, kde-format
 msgid "%1 kB"
-msgstr ""
+msgstr "%1 kB"
 
 #: gui/io/streamcompressor/bzip2/bzip2compressionstream.cpp:33
 #, kde-format
@@ -3644,9 +3512,7 @@ msgstr ""
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:33
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:35
 #: gui/io/streamcompressor/zstd/bytearrayzstdstreamcompressorconfigeditor.cpp:32
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Set as Default"
+#, kde-format
 msgctxt "@item:inmenu compression level"
 msgid "Default"
 msgstr "Nastaviť ako predvolené"
@@ -3660,18 +3526,14 @@ msgstr ""
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:46
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:48
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Set as Default"
+#, kde-format
 msgctxt "@item:inmenu compression strategy"
 msgid "Default"
 msgstr "Nastaviť ako predvolené"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:48
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:50
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Filter"
+#, kde-format
 msgctxt "@item:inmenu compression strategy"
 msgid "Filter"
 msgstr "&Filter"
@@ -3685,9 +3547,7 @@ msgstr ""
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:52
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:54
-#, fuzzy, kde-format
-#| msgctxt "name of the encoding target"
-#| msgid "Uuencoding"
+#, kde-format
 msgctxt "@item:inmenu compression strategy"
 msgid "Run-Length Encoding"
 msgstr "Uuencoding"
@@ -3722,21 +3582,19 @@ msgstr ""
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "gzip"
-msgstr ""
+msgstr "gzip"
 
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:65
-#, fuzzy, kde-format
-#| msgctxt "@title:window"
-#| msgid "File Info"
+#, kde-format
 msgctxt "@label:textbox"
 msgid "File name:"
-msgstr "Info o súbore"
+msgstr "Názov súboru:"
 
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:77
 #, kde-format
 msgctxt "@label:textbox"
 msgid "Comment:"
-msgstr ""
+msgstr "Komentár:"
 
 #: gui/io/streamcompressor/iodevicebytearrayoutput.cpp:19
 #, kde-format
@@ -3747,7 +3605,7 @@ msgstr ""
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "xz"
-msgstr ""
+msgstr "xz"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:29
 #, kde-format
@@ -3756,9 +3614,7 @@ msgid "Compression preset level:"
 msgstr ""
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:33
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "&Set as Default"
+#, kde-format
 msgctxt "@item:inmenu compression preset level"
 msgid "Default"
 msgstr "Nastaviť ako predvolené"
@@ -3776,9 +3632,7 @@ msgid "Integrity check:"
 msgstr ""
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:57
-#, fuzzy, kde-format
-#| msgctxt "There is no storage location assigned to yet."
-#| msgid "[None]"
+#, kde-format
 msgctxt "@item:inmenu integrity check"
 msgid "None"
 msgstr "[Žiaden]"
@@ -3796,9 +3650,7 @@ msgid "CRC64"
 msgstr ""
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:63
-#, fuzzy, kde-format
-#| msgctxt "name of the hash algorithm"
-#| msgid "SHA-256"
+#, kde-format
 msgctxt "@item:inmenu integrity check"
 msgid "SHA-256"
 msgstr "SHA-256"
@@ -3903,8 +3755,7 @@ msgid "Ascii85"
 msgstr "Ascii85"
 
 #: gui/io/streamencoder/bytearraytextstreamencoderpreview.cpp:25
-#, fuzzy, kde-format
-#| msgid "The preview uses maximal the first 100 bytes."
+#, kde-format
 msgctxt "@info:tooltip"
 msgid "The preview uses maximally the first 100 bytes."
 msgstr "Náhľad používa maximálne prvých 100 bajtov."
@@ -3916,18 +3767,13 @@ msgid "Characters"
 msgstr "Znaky"
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:32
-#, fuzzy, kde-format
-#| msgid "Show Non-printable:"
+#, kde-format
 msgctxt "@label:listbox"
 msgid "Non-printable encode mode:"
 msgstr "Zobraziť netlačiteľné:"
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:36
-#, fuzzy, kde-format
-#| msgctxt ""
-#| "@label:textbox byte to use for chars which are not part of the target "
-#| "charset"
-#| msgid "Substitute byte:"
+#, kde-format
 msgctxt "@item:inmenu encode mode"
 msgid "Substitute"
 msgstr "Nahradiť bajt:"
@@ -3945,17 +3791,13 @@ msgid "Encoding for escaped chars:"
 msgstr ""
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:55
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip column contains the value in hexadecimal format"
-#| msgid "Hexadecimal"
+#, kde-format
 msgctxt "@item:inmenu escape value encoding"
 msgid "Hexadecimal"
 msgstr "Hexadecimálny"
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoderconfigeditor.cpp:57
-#, fuzzy, kde-format
-#| msgctxt "@info:tooltip column contains the value in octal format"
-#| msgid "Octal"
+#, kde-format
 msgctxt "@item:inmenu escape value encoding"
 msgid "Octal"
 msgstr "Osmičkový"
@@ -4095,12 +3937,10 @@ msgstr ""
 #, kde-format
 msgctxt "@label:textbox substring which postfixes each value"
 msgid "Postfix:"
-msgstr ""
+msgstr "Postfix:"
 
 #: gui/io/streamencoder/viewhtml/bytearrayviewhtmlstreamencoder.cpp:34
-#, fuzzy, kde-format
-#| msgctxt "name of the encoding target"
-#| msgid "View in Plain Text"
+#, kde-format
 msgctxt "name of the encoding target"
 msgid "View in HTML"
 msgstr "Zobraziť ako čistý text"
@@ -4182,15 +4022,11 @@ msgid "UTF-8"
 msgstr "UTF-8"
 
 #, fuzzy
-#~| msgctxt "@title:window of the tool to select a range"
-#~| msgid "Select"
 #~ msgctxt "@action:inmenu"
 #~ msgid "Select"
 #~ msgstr "Vybrať"
 
 #, fuzzy
-#~| msgctxt "@title:window of the tool to select a range"
-#~| msgid "Select"
 #~ msgctxt "@action"
 #~ msgid "Select"
 #~ msgstr "Vybrať"
