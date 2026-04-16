@@ -13,6 +13,8 @@
 // Qt
 #include <QVector>
 #include <QTest>
+// Std
+#include <cstdio>
 
 namespace KPieceTable {
 struct StorageDataTestData
@@ -26,6 +28,7 @@ struct StorageDataTestData
 }
 
 Q_DECLARE_METATYPE(QVector<KPieceTable::StorageDataTestData>)
+Q_DECLARE_METATYPE(QVector<KPieceTable::Piece>)
 Q_DECLARE_METATYPE(KPieceTable::AddressRange)
 
 namespace KPieceTable {
@@ -40,6 +43,50 @@ static constexpr Size Width = End - Start + 1;
 
 static constexpr Address ChangeStart = 8;
 static constexpr Address ChangeEnd = ChangeStart + Width - 1;
+
+void sprintf(char* buffer, Piece piece)
+{
+    const char* const storageId = (piece.storageId() == Piece::OriginalStorage) ? "Original" : "Change";
+
+    ::sprintf(buffer, "%d-%d, %s", piece.start(), piece.end(), storageId);
+}
+
+QDebug operator<<(QDebug dbg, Piece piece)
+{
+    char text[256]; // TODO: estimate max. needed size
+    sprintf(text, piece);
+    dbg.nospace() << "Piece(" << text << ')';
+    return dbg.space();
+}
+
+char* toString(Piece piece)
+{
+    char text[256]; // TODO: estimate max. needed size
+    sprintf(text, piece);
+    // TODO: Qt5's QTest::toString() needs casting to char*, char[] type not known in overload resolution
+    return QTest::toString(static_cast<const char*>(text));
+}
+
+void compare(const PieceTable& pieceTable, const QVector<Piece>& expectedPieces)
+{
+    // TODO: find some useful output with QCOMPARE
+    if (pieceTable.piecesSize() != expectedPieces.size()) {
+        for (const auto& piece : expectedPieces) {
+            qDebug() << "Expected:" << piece;
+        }
+        for (const auto& piece : pieceTable) {
+            qDebug() << "Actual:" << piece;
+        }
+    }
+
+    QCOMPARE(pieceTable.piecesSize(), expectedPieces.size());
+
+    int i = 0;
+    for (const auto& piece : pieceTable) {
+        const auto& expectedPiece = expectedPieces[i++];
+        QCOMPARE(piece, expectedPiece);
+    }
+}
 
 void PieceTableTest::testSimpleConstructor()
 {
@@ -517,18 +564,28 @@ void PieceTableTest::testSwap_data()
 {
     QTest::addColumn<Address>("firstStart");
     QTest::addColumn<AddressRange>("secondRange");
+    QTest::addColumn<QVector<Piece>>("expectedPieces");
     QTest::addColumn<QVector<StorageDataTestData>>("testData");
 
+    AddressRange moveRange = AddressRange::fromWidth(End + 1, BaseSize - (End + 1));
     QTest::newRow("moving-end-at-begin")
-        << 0 << AddressRange::fromWidth(End + 1, BaseSize - (End + 1))
+        << 0 << moveRange
+        << QVector<Piece> {
+            {moveRange, Piece::OriginalStorage},
+            {0, moveRange.start(), Piece::OriginalStorage}}
         << QVector<StorageDataTestData> {
             {0, true, End + 1, Piece::OriginalStorage},
             {BaseSize - End - 2, true, BaseSize - 1, Piece::OriginalStorage},
             {BaseSize - End - 1, true, 0, Piece::OriginalStorage},
             {BaseSize - 1, true, End, Piece::OriginalStorage},
             {BaseSize, false, -1, Piece::OriginalStorage}};
+    moveRange = AddressRange::fromWidth(End + 1, BaseSize - (End + 1));
     QTest::newRow("moving-end-at-mid")
-        << Start << AddressRange::fromWidth(End + 1, BaseSize - (End + 1))
+        << Start << moveRange
+        << QVector<Piece> {
+            {0, Start, Piece::OriginalStorage},
+            {moveRange, Piece::OriginalStorage},
+            {Start, Width, Piece::OriginalStorage}}
         << QVector<StorageDataTestData> {
             {Start - 1, true, Start - 1, Piece::OriginalStorage},
             {Start, true, End + 1, Piece::OriginalStorage},
@@ -536,8 +593,13 @@ void PieceTableTest::testSwap_data()
             {Start + BaseSize - End - 1, true, Start, Piece::OriginalStorage},
             {BaseSize - 1, true, End, Piece::OriginalStorage},
             {BaseSize, false, -1, Piece::OriginalStorage}};
+    moveRange = AddressRange::fromWidth(Start, Width);
     QTest::newRow("moving-mid-at-begin")
-        << 0 << AddressRange::fromWidth(Start, Width)
+        << 0 << moveRange
+        << QVector<Piece> {
+            {moveRange, Piece::OriginalStorage},
+            {0, moveRange.start(), Piece::OriginalStorage},
+            {moveRange.nextBehindEnd(), BaseSize - moveRange.nextBehindEnd(), Piece::OriginalStorage}}
         << QVector<StorageDataTestData> {
             {0, true, Start, Piece::OriginalStorage},
             {Width - 1, true, End, Piece::OriginalStorage},
@@ -545,8 +607,14 @@ void PieceTableTest::testSwap_data()
             {End, true, Start - 1, Piece::OriginalStorage},
             {End + 1, true, End + 1, Piece::OriginalStorage}};
     const Address mid = (End + Start) / 2;
+    moveRange = AddressRange::fromWidth(mid, End - mid + 1);
     QTest::newRow("moving-mid-at-mid")
-        << Start << AddressRange::fromWidth(mid, End - mid + 1)
+        << Start << moveRange
+        << QVector<Piece> {
+            {0, Start, Piece::OriginalStorage},
+            {moveRange, Piece::OriginalStorage},
+            {Start,  Width - moveRange.width(), Piece::OriginalStorage},
+            {moveRange.nextBehindEnd(), BaseSize - moveRange.nextBehindEnd(), Piece::OriginalStorage}}
         << QVector<StorageDataTestData> {
             {Start - 1, true, Start - 1, Piece::OriginalStorage},
             {Start, true, mid, Piece::OriginalStorage},
@@ -560,6 +628,7 @@ void PieceTableTest::testSwap()
 {
     QFETCH(const Address, firstStart);
     QFETCH(const AddressRange, secondRange);
+    QFETCH(const QVector<Piece>, expectedPieces);
     QFETCH(const QVector<StorageDataTestData>, testData);
 
     PieceTable pieceTable;
@@ -583,6 +652,7 @@ void PieceTableTest::testSwap()
             QCOMPARE(storageId, testDataEntry.expectedStorageId);
         }
     }
+    compare(pieceTable, expectedPieces);
 }
 
 }

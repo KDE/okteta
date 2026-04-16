@@ -45,6 +45,14 @@ public:
     bool getStorageData(int* storageId, Address* storageOffset, Address dataOffset) const;
     Size size() const;
 
+public: // introspection API, used for tests
+    using ConstIterator = QLinkedList<Piece>::ConstIterator;
+
+    // TODO: size() is more std-ish for number of elements, but used for address range so far here?
+    int piecesSize() const;
+    ConstIterator begin() const;
+    ConstIterator end() const;
+
 private:
     QLinkedList<Piece> mList;
     Size mSize;
@@ -53,6 +61,11 @@ private:
 inline PieceTable::~PieceTable() = default;
 
 inline Size PieceTable::size() const { return mSize; }
+
+inline int PieceTable::piecesSize() const { return mList.size(); }
+
+inline PieceTable::ConstIterator PieceTable::begin() const { return mList.begin(); }
+inline PieceTable::ConstIterator PieceTable::end() const { return mList.end(); }
 
 }
 
