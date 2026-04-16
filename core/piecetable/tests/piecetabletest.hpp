@@ -22,6 +22,7 @@ private Q_SLOTS: // test functions
     void testSimpleConstructor();
     void testInit();
     void testInsert();
+    void testRemove_data();
     void testRemove();
     void testSwap_data();
     void testSwap();
