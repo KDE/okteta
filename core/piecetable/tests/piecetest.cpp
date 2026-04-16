@@ -38,6 +38,35 @@ void PieceTest::testFullConstructor()
     QVERIFY(piece.isValid());
 }
 
+void PieceTest::testEqualOperator()
+{
+    const Piece originalPiece(Start, End, Piece::OriginalStorage);
+
+    const Piece samePiece(Start, End, Piece::OriginalStorage);
+    const bool isSameEqual = (originalPiece == samePiece);
+    const bool isSameNotEqual = (originalPiece != samePiece);
+    QCOMPARE(isSameEqual, true);
+    QCOMPARE(isSameNotEqual, false);
+
+    const Piece otherStartPiece(Start - 1, End, Piece::OriginalStorage);
+    const bool isOtherStartEqual = (originalPiece == otherStartPiece);
+    const bool isOtherStartNotEqual = (originalPiece != otherStartPiece);
+    QCOMPARE(isOtherStartEqual, false);
+    QCOMPARE(isOtherStartNotEqual, true);
+
+    const Piece otherEndPiece(Start, End + 1, Piece::OriginalStorage);
+    const bool isOtherEndEqual = (originalPiece == otherEndPiece);
+    const bool isOtherEndNotEqual = (originalPiece != otherEndPiece);
+    QCOMPARE(isOtherEndEqual, false);
+    QCOMPARE(isOtherEndNotEqual, true);
+
+    const Piece otherStoragePiece(Start, End, Piece::ChangeStorage);
+    const bool isOtherStorageEqual = (originalPiece == otherStoragePiece);
+    const bool isOtherStorageNotEqual = (originalPiece != otherStoragePiece);
+    QCOMPARE(isOtherStorageEqual, false);
+    QCOMPARE(isOtherStorageNotEqual, true);
+}
+
 void PieceTest::testSplitAt()
 {
     const AddressRange storageSection(Start, End);

@@ -37,6 +37,10 @@ public:
     Piece& operator=(const Piece&) = default; // trivial
 
 public:
+    bool operator==(const Piece& R) const;
+    bool operator!=(const Piece& R) const;
+
+public:
     int storageId() const;
 
 public:
@@ -66,6 +70,16 @@ inline Piece::Piece(const AddressRange& storageRange, int storageId)
     , mStorageId(storageId)
 {}
 inline Piece::Piece() = default;
+
+inline bool Piece::operator==(const Piece& R) const
+{
+    return AddressRange::operator==(R) && (mStorageId == R.mStorageId);
+}
+
+inline bool Piece::operator!=(const Piece& R) const
+{
+    return AddressRange::operator!=(R) || (mStorageId != R.mStorageId);
+}
 
 inline int Piece::storageId() const { return mStorageId; }
 
