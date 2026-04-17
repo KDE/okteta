@@ -122,6 +122,10 @@ void PieceTableTest::testInit()
         }
     }
 
+    const QVector<Piece> expectedPieces {
+            {0, BaseSize, Piece::OriginalStorage}
+    };
+    compare(pieceTable, expectedPieces);
 }
 
 static void fillWithSize(PieceTable* pieceTable, int count)
