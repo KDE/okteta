@@ -98,32 +98,30 @@ void PieceTableTest::testInit()
 {
     PieceTable pieceTable;
 
+    // tested action
     pieceTable.init(BaseSize);
-    Piece::StorageType storageId;
-    Address storageOffset;
 
-    bool result = pieceTable.getStorageData(&storageId, &storageOffset, 0);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, 0);
-    QCOMPARE(storageId, Piece::OriginalStorage);
+    // check result
+    const QVector<StorageDataTestData> testData {
+        {0, true, 0, Piece::OriginalStorage},
+        {Start, true, Start, Piece::OriginalStorage},
+        {End, true, End, Piece::OriginalStorage},
+        {BaseSize - 1, true, BaseSize - 1, Piece::OriginalStorage},
+        {BaseSize, false, -1, Piece::OriginalStorage},
+    };
+    for (const auto& testDataEntry : testData) {
+        Piece::StorageType storageId;
+        Address storageOffset;
 
-    result = pieceTable.getStorageData(&storageId, &storageOffset, Start);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, Start);
-    QCOMPARE(storageId, Piece::OriginalStorage);
+        const bool result = pieceTable.getStorageData(&storageId, &storageOffset, testDataEntry.dataOffset);
 
-    result = pieceTable.getStorageData(&storageId, &storageOffset, End);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, End);
-    QCOMPARE(storageId, Piece::OriginalStorage);
+        QCOMPARE(result, testDataEntry.expectedResult);
+        if (testDataEntry.expectedResult) {
+            QCOMPARE(storageOffset, testDataEntry.expectedStorageOffset);
+            QCOMPARE(storageId, testDataEntry.expectedStorageId);
+        }
+    }
 
-    result = pieceTable.getStorageData(&storageId, &storageOffset, BaseSize - 1);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, BaseSize - 1);
-    QCOMPARE(storageId, Piece::OriginalStorage);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, BaseSize);
-    QVERIFY(!result);
 }
 
 static void fillWithSize(PieceTable* pieceTable, int count)
