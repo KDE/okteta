@@ -92,6 +92,7 @@ void PieceTableTest::testSimpleConstructor()
 {
     PieceTable pieceTable;
     QCOMPARE(pieceTable.size(), 0);
+    QCOMPARE(pieceTable.piecesSize(), 0);
 }
 
 void PieceTableTest::testInit()
