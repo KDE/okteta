@@ -37,15 +37,26 @@ public:
     /// for use to reapply
     void replace(const AddressRange& removeRange, const PieceList& insertPieceList);
     void swap(Address firstStart, const AddressRange& secondRange);
-    Piece replaceOne(Address dataOffset, Address storageOffset, int storageId = Piece::ChangeStorage);
+    Piece replaceOne(Address dataOffset, Address storageOffset, Piece::StorageType storageId = Piece::ChangeStorage);
 
 //     int fill( const char FillChar, unsigned int Pos = 0, int Length = -1 ); TODO: filter change, calculated
 
 public:
     [[nodiscard]]
-    bool getStorageData(int* storageId, Address* storageOffset, Address dataOffset) const;
+    bool getStorageData(Piece::StorageType* storageId, Address* storageOffset, Address dataOffset) const;
     [[nodiscard]]
     Size size() const;
+
+public: // introspection API, used for tests
+    using ConstIterator = QLinkedList<Piece>::ConstIterator;
+
+    // TODO: size() is more std-ish for number of elements, but used for address range so far here?
+    [[nodiscard]]
+    int piecesSize() const;
+    [[nodiscard]]
+    ConstIterator begin() const;
+    [[nodiscard]]
+    ConstIterator end() const;
 
 private:
     QLinkedList<Piece> mList;
@@ -55,6 +66,11 @@ private:
 inline PieceTable::~PieceTable() = default;
 
 inline Size PieceTable::size() const { return mSize; }
+
+inline int PieceTable::piecesSize() const { return mList.size(); }
+
+inline PieceTable::ConstIterator PieceTable::begin() const { return mList.begin(); }
+inline PieceTable::ConstIterator PieceTable::end() const { return mList.end(); }
 
 }
 

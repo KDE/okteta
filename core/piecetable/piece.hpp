@@ -19,14 +19,15 @@ using AddressRange = Okteta::AddressRange;
 class Piece : public AddressRange
 {
 public:
-    enum {
+    enum StorageType
+    {
         OriginalStorage,
         ChangeStorage
     };
 
 public:
-    Piece(Address storageOffset, Size size, int storageId);
-    Piece(const AddressRange& storageRange, int storageId);
+    Piece(Address storageOffset, Size size, StorageType storageId);
+    Piece(const AddressRange& storageRange, StorageType storageId);
     Piece();
     Piece(const Piece&) = default; // trivial
     Piece(Piece&&) = default; // trivial
@@ -38,10 +39,16 @@ public:
 
 public:
     [[nodiscard]]
-    int storageId() const;
+    bool operator==(const Piece& other) const;
+    [[nodiscard]]
+    bool operator!=(const Piece& other) const;
 
 public:
-    void setStorageId(int storageId);
+    [[nodiscard]]
+    StorageType storageId() const;
+
+public:
+    void setStorageId(StorageType storageId);
     [[nodiscard]]
     Piece splitAt(Address storageOffset);
     [[nodiscard]]
@@ -60,22 +67,32 @@ public:
     Piece subPiece(const AddressRange& local) const;
 
 private:
-    int mStorageId = OriginalStorage;
+    StorageType mStorageId = OriginalStorage;
 };
 
-inline Piece::Piece(Address storageOffset, Size size, int storageId)
+inline Piece::Piece(Address storageOffset, Size size, StorageType storageId)
     : AddressRange(AddressRange::fromWidth(storageOffset, size))
     , mStorageId(storageId)
 {}
-inline Piece::Piece(const AddressRange& storageRange, int storageId)
+inline Piece::Piece(const AddressRange& storageRange, StorageType storageId)
     : AddressRange(storageRange)
     , mStorageId(storageId)
 {}
 inline Piece::Piece() = default;
 
-inline int Piece::storageId() const { return mStorageId; }
+inline bool Piece::operator==(const Piece& other) const
+{
+    return AddressRange::operator==(other) && (mStorageId == other.mStorageId);
+}
 
-inline void Piece::setStorageId(int storageId) { mStorageId = storageId; }
+inline bool Piece::operator!=(const Piece& other) const
+{
+    return AddressRange::operator!=(other) || (mStorageId != other.mStorageId);
+}
+
+inline Piece::StorageType Piece::storageId() const { return mStorageId; }
+
+inline void Piece::setStorageId(StorageType storageId) { mStorageId = storageId; }
 
 inline Piece Piece::splitAt(Address storageOffset)
 {

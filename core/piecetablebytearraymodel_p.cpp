@@ -34,7 +34,7 @@ PieceTableByteArrayModelPrivate::~PieceTableByteArrayModelPrivate() = default;
 // TODO: getStorageData needs some caching, optimize for successive access
 Byte PieceTableByteArrayModelPrivate::byte(Address offset) const
 {
-    int storageId;
+    KPieceTable::Piece::StorageType storageId;
     Address storageOffset;
     mPieceTable.getStorageData(&storageId, &storageOffset, offset);
 

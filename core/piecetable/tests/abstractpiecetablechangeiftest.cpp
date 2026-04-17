@@ -62,13 +62,13 @@ void AbstractPieceTableChangeIfTest::testRevertApply()
 
     QCOMPARE(pieceTable.size(), BaseSize);
     for (int i = 0; i < BaseSize; ++i) {
-        int storageId;
+        Piece::StorageType storageId;
         Address storageOffset;
         bool result = pieceTable.getStorageData(&storageId, &storageOffset, i);
 
         QVERIFY(result);
         QCOMPARE(storageOffset, i + ChangeStorageOffset);
-        QCOMPARE(storageId, (int)Piece::ChangeStorage);
+        QCOMPARE(storageId, Piece::ChangeStorage);
     }
 
     // now replay changes
@@ -77,13 +77,13 @@ void AbstractPieceTableChangeIfTest::testRevertApply()
 
     QCOMPARE(pieceTable.size(), BaseSize);
     for (Address i = 0; i < BaseSize; ++i) {
-        int storageId;
+        Piece::StorageType storageId;
         Address storageOffset;
         bool result = pieceTable.getStorageData(&storageId, &storageOffset, i);
 
         QVERIFY(result);
         QCOMPARE(storageOffset, i + ChangeStorageOffset);
-        QCOMPARE(storageId, (int)Piece::ChangeStorage);
+        QCOMPARE(storageId, Piece::ChangeStorage);
     }
 }
 
