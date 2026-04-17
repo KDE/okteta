@@ -72,7 +72,7 @@ public:
     void setBeforeCurrentChangeAsBase(bool hide);
 
 public:
-    bool getStorageData(int* storageId, Address* storageOffset, Address dataOffset) const;
+    bool getStorageData(Piece::StorageType* storageId, Address* storageOffset, Address dataOffset) const;
     Size size() const;
     void getChangeData(ArrayChangeMetrics* metrics, Address* storageOffset, int versionIndex) const;
 
@@ -90,7 +90,7 @@ private:
 
 inline RevertablePieceTable::~RevertablePieceTable() = default;
 
-inline bool RevertablePieceTable::getStorageData(int* storageId, Address* storageOffset, Address dataOffset) const
+inline bool RevertablePieceTable::getStorageData(Piece::StorageType* storageId, Address* storageOffset, Address dataOffset) const
 {
     return mPieceTable.getStorageData(storageId, storageOffset, dataOffset);
 }

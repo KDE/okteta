@@ -37,12 +37,12 @@ public:
     /// for use to reapply
     void replace(const AddressRange& removeRange, const PieceList& insertPieceList);
     void swap(Address firstStart, const AddressRange& secondRange);
-    Piece replaceOne(Address dataOffset, Address storageOffset, int storageId = Piece::ChangeStorage);
+    Piece replaceOne(Address dataOffset, Address storageOffset, Piece::StorageType storageId = Piece::ChangeStorage);
 
 //     int fill( const char FillChar, unsigned int Pos = 0, int Length = -1 ); TODO: filter change, calculated
 
 public:
-    bool getStorageData(int* storageId, Address* storageOffset, Address dataOffset) const;
+    bool getStorageData(Piece::StorageType* storageId, Address* storageOffset, Address dataOffset) const;
     Size size() const;
 
 public: // introspection API, used for tests

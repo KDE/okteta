@@ -21,14 +21,15 @@ using AddressRange = Okteta::AddressRange;
 class Piece : public AddressRange
 {
 public:
-    enum {
+    enum StorageType
+    {
         OriginalStorage,
         ChangeStorage
     };
 
 public:
-    Piece(Address storageOffset, Size size, int storageId);
-    Piece(const AddressRange& storageRange, int storageId);
+    Piece(Address storageOffset, Size size, StorageType storageId);
+    Piece(const AddressRange& storageRange, StorageType storageId);
     Piece();
     Piece(const Piece&) = default; // trivial
 
@@ -41,10 +42,10 @@ public:
     bool operator!=(const Piece& R) const;
 
 public:
-    int storageId() const;
+    StorageType storageId() const;
 
 public:
-    void setStorageId(int storageId);
+    void setStorageId(StorageType storageId);
     Piece splitAt(Address storageOffset);
     Piece splitAtLocal(Address localStorageOffset);
     Piece remove(const AddressRange& removeStorageRange);
@@ -58,14 +59,14 @@ public:
     Piece subPiece(const AddressRange& local) const;
 
 private:
-    int mStorageId = OriginalStorage;
+    StorageType mStorageId = OriginalStorage;
 };
 
-inline Piece::Piece(Address storageOffset, Size size, int storageId)
+inline Piece::Piece(Address storageOffset, Size size, StorageType storageId)
     : AddressRange(AddressRange::fromWidth(storageOffset, size))
     , mStorageId(storageId)
 {}
-inline Piece::Piece(const AddressRange& storageRange, int storageId)
+inline Piece::Piece(const AddressRange& storageRange, StorageType storageId)
     : AddressRange(storageRange)
     , mStorageId(storageId)
 {}
@@ -81,9 +82,9 @@ inline bool Piece::operator!=(const Piece& R) const
     return AddressRange::operator!=(R) || (mStorageId != R.mStorageId);
 }
 
-inline int Piece::storageId() const { return mStorageId; }
+inline Piece::StorageType Piece::storageId() const { return mStorageId; }
 
-inline void Piece::setStorageId(int storageId) { mStorageId = storageId; }
+inline void Piece::setStorageId(StorageType storageId) { mStorageId = storageId; }
 
 inline Piece Piece::splitAt(Address storageOffset)
 {

@@ -23,7 +23,7 @@ struct StorageDataTestData
 
     bool expectedResult;
     Address expectedStorageOffset;
-    int expectedStorageId;
+    Piece::StorageType expectedStorageId;
 };
 }
 
@@ -99,28 +99,28 @@ void PieceTableTest::testInit()
     PieceTable pieceTable;
 
     pieceTable.init(BaseSize);
-    int storageId;
+    Piece::StorageType storageId;
     Address storageOffset;
 
     bool result = pieceTable.getStorageData(&storageId, &storageOffset, 0);
     QVERIFY(result);
     QCOMPARE(storageOffset, 0);
-    QCOMPARE(storageId, (int)Piece::OriginalStorage);
+    QCOMPARE(storageId, Piece::OriginalStorage);
 
     result = pieceTable.getStorageData(&storageId, &storageOffset, Start);
     QVERIFY(result);
     QCOMPARE(storageOffset, Start);
-    QCOMPARE(storageId, (int)Piece::OriginalStorage);
+    QCOMPARE(storageId, Piece::OriginalStorage);
 
     result = pieceTable.getStorageData(&storageId, &storageOffset, End);
     QVERIFY(result);
     QCOMPARE(storageOffset, End);
-    QCOMPARE(storageId, (int)Piece::OriginalStorage);
+    QCOMPARE(storageId, Piece::OriginalStorage);
 
     result = pieceTable.getStorageData(&storageId, &storageOffset, BaseSize - 1);
     QVERIFY(result);
     QCOMPARE(storageOffset, BaseSize - 1);
-    QCOMPARE(storageId, (int)Piece::OriginalStorage);
+    QCOMPARE(storageId, Piece::OriginalStorage);
 
     result = pieceTable.getStorageData(&storageId, &storageOffset, BaseSize);
     QVERIFY(!result);
@@ -217,7 +217,7 @@ void PieceTableTest::testInsert()
     QCOMPARE(pieceTable.size(), expectedTableSize);
 
     for (const auto& testDataEntry : testData) {
-        int storageId;
+        Piece::StorageType storageId;
         Address storageOffset;
 
         const bool result = pieceTable.getStorageData(&storageId, &storageOffset, testDataEntry.dataOffset);
@@ -382,7 +382,7 @@ void PieceTableTest::testInsertMulti()
     testData.append({byteArrayOffset, false, 0, Piece::OriginalStorage});
 
     for (const auto& testDataEntry : testData) {
-        int storageId;
+        Piece::StorageType storageId;
         Address storageOffset;
 
         const bool result = pieceTable.getStorageData(&storageId, &storageOffset, testDataEntry.dataOffset);
@@ -660,7 +660,7 @@ void PieceTableTest::testRemove()
     QCOMPARE(pieceTable.size(), expectedTableSize);
 
     for (const auto& testDataEntry : testData) {
-        int storageId;
+        Piece::StorageType storageId;
         Address storageOffset;
 
         const bool result = pieceTable.getStorageData(&storageId, &storageOffset, testDataEntry.dataOffset);
@@ -755,7 +755,7 @@ void PieceTableTest::testSwap()
     QCOMPARE(pieceTable.size(), BaseSize);
 
     for (const auto& testDataEntry : testData) {
-        int storageId;
+        Piece::StorageType storageId;
         Address storageOffset;
 
         const bool result = pieceTable.getStorageData(&storageId, &storageOffset, testDataEntry.dataOffset);

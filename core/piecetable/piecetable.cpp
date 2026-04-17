@@ -28,7 +28,7 @@ void PieceTable::init(Size size)
     mSize = size;
 }
 
-bool PieceTable::getStorageData(int* storageId, Address* storageOffset, Address dataOffset) const
+bool PieceTable::getStorageData(Piece::StorageType* storageId, Address* storageOffset, Address dataOffset) const
 {
     bool result = false;
 
@@ -54,7 +54,7 @@ bool PieceTable::getStorageData(int* storageId, Address* storageOffset, Address 
 // TODO: combine sucsequenting inserts, also on other changes if possible link neighbors
 void PieceTable::insert(Address insertDataOffset, Size insertLength, Address storageOffset)
 {
-    const int storageId = Piece::ChangeStorage;
+    const Piece::StorageType storageId = Piece::ChangeStorage;
     QMutableLinkedListIterator<Piece> it(mList);
 
     const Piece insertPiece(storageOffset, insertLength, storageId);
@@ -364,9 +364,9 @@ void PieceTable::swap(Address firstStart, const AddressRange& secondRange)
     }
 }
 
-Piece PieceTable::replaceOne(Address dataOffset, Address storageOffset, int storageId)
+Piece PieceTable::replaceOne(Address dataOffset, Address storageOffset, Piece::StorageType storageId)
 {
-    int replacedStorageId = Piece::OriginalStorage;
+    Piece::StorageType replacedStorageId = Piece::OriginalStorage;
     Address replacedStorageOffset = -1;
 
     QMutableLinkedListIterator<Piece> it(mList);
