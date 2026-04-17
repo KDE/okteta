@@ -142,12 +142,15 @@ void PieceTableTest::testInsert_data()
     QTest::addColumn<Size>("insertLength");
     QTest::addColumn<Address>("insertStorageOffset");
     QTest::addColumn<Size>("expectedTableSize");
+    QTest::addColumn<QVector<Piece>>("expectedPieces");
     QTest::addColumn<QVector<StorageDataTestData>>("testData");
 
     QTest::newRow("inserting-to-empty")
         << 0
         << 0 << Width << ChangeStart
         << Width
+        << QVector<Piece> {
+            {ChangeStart, Width, Piece::ChangeStorage}}
         << QVector<StorageDataTestData> {
             {0, true, ChangeStart, Piece::ChangeStorage},
             {Width - 1, true, ChangeEnd, Piece::ChangeStorage},
@@ -156,6 +159,9 @@ void PieceTableTest::testInsert_data()
         << BaseSize
         << 0 << Width << ChangeStart
         << BaseSize + Width
+        << QVector<Piece> {
+            {ChangeStart, Width, Piece::ChangeStorage},
+            {0, BaseSize, Piece::OriginalStorage}}
         << QVector<StorageDataTestData> {
             {0, true, ChangeStart, Piece::ChangeStorage},
             {Width - 1, true, ChangeEnd, Piece::ChangeStorage},
@@ -166,6 +172,10 @@ void PieceTableTest::testInsert_data()
         << BaseSize
         << Start << Width << ChangeStart
         << BaseSize + Width
+        << QVector<Piece> {
+            {0, Start, Piece::OriginalStorage},
+            {ChangeStart, Width, Piece::ChangeStorage},
+            {Start, BaseSize - Start, Piece::OriginalStorage}}
         << QVector<StorageDataTestData> {
             {Start - 1, true, Start - 1, Piece::OriginalStorage},
             {Start, true, ChangeStart, Piece::ChangeStorage},
@@ -177,6 +187,9 @@ void PieceTableTest::testInsert_data()
         << BaseSize
         << BaseSize << Width << ChangeStart
         << BaseSize + Width
+        << QVector<Piece> {
+            {0, BaseSize, Piece::OriginalStorage},
+            {ChangeStart, Width, Piece::ChangeStorage}}
         << QVector<StorageDataTestData> {
             {BaseSize - 1, true, BaseSize - 1, Piece::OriginalStorage},
             {BaseSize, true, ChangeStart, Piece::ChangeStorage},
@@ -191,6 +204,7 @@ void PieceTableTest::testInsert()
     QFETCH(const Size, insertLength);
     QFETCH(const Address, insertStorageOffset);
     QFETCH(const Size, expectedTableSize);
+    QFETCH(const QVector<Piece>, expectedPieces);
     QFETCH(const QVector<StorageDataTestData>, testData);
 
     PieceTable pieceTable;
@@ -214,6 +228,7 @@ void PieceTableTest::testInsert()
             QCOMPARE(storageId, testDataEntry.expectedStorageId);
         }
     }
+    compare(pieceTable, expectedPieces);
 }
 
 void PieceTableTest::testInsertMulti()
