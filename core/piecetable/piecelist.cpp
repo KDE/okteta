@@ -12,6 +12,10 @@ namespace KPieceTable {
 
 void PieceList::append(const Piece& piece)
 {
+    if (!piece.isValid()) {
+        return;
+    }
+
     bool isMerged = false;
     if (!mList.isEmpty()) {
         isMerged = mList.last().append(piece);
