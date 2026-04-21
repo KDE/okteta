@@ -38,6 +38,12 @@ public:
     void append(const Piece& piece);
     void prepend(const PieceList& other);
 
+public: // introspection API, used for tests
+    using ConstIterator = QVector<Piece>::ConstIterator;
+
+    ConstIterator begin() const;
+    ConstIterator end() const;
+
 private:
     QVector<Piece> mList;
     Size mTotalLength = 0;
@@ -57,6 +63,8 @@ inline bool PieceList::isEmpty()         const { return mList.isEmpty(); }
 inline Size PieceList::totalLength()     const { return mTotalLength; }
 inline const Piece& PieceList::at(int i) const { return mList.at(i); }
 
+inline PieceList::ConstIterator PieceList::begin() const { return mList.begin(); }
+inline PieceList::ConstIterator PieceList::end() const { return mList.end(); }
 
 }
 

@@ -1,7 +1,9 @@
-set( SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/../.. )
+set(SUTDIR ${CMAKE_CURRENT_SOURCE_DIR}/..)
 
+# to see Okteta Core headers for Address, Size, etc. types
+# also for tests to enable more namespaced <piecetable/*> includes
 include_directories(
-  ${SUTDIR}
+  ${SUTDIR}/..
 )
 
 add_library( testpiecetablechangelib STATIC
@@ -15,6 +17,14 @@ target_link_libraries( testpiecetablechangelib
 )
 
 ecm_add_test( piecetest.cpp
+  NAME_PREFIX "libpiecetable-"
+  LINK_LIBRARIES Qt5::Test
+)
+
+ecm_add_test(
+  piecelisttest.cpp
+  ${SUTDIR}/piecelist.cpp
+  TEST_NAME piecelisttest
   NAME_PREFIX "libpiecetable-"
   LINK_LIBRARIES Qt5::Test
 )
