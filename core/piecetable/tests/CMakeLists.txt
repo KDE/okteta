@@ -18,9 +18,6 @@ ecm_add_test( piecetest.cpp
   NAME_PREFIX "libpiecetable-"
   LINK_LIBRARIES Qt5::Test
 )
-target_include_directories(piecetest
-    PRIVATE ${CMAKE_CURRENT_BINARY_DIR}/../..
-)
 
 ecm_add_test( piecetabletest.cpp
   NAME_PREFIX "libpiecetable-"
