@@ -28,13 +28,18 @@ void PieceList::append(const Piece& piece)
 
 void PieceList::append(const PieceList& other)
 {
+    if (other.isEmpty()) {
+        return;
+    }
+    if (mList.isEmpty()) {
+        *this = other;
+        return;
+    }
+
     QVector<Piece>::ConstIterator it = other.mList.begin();
 
     // see if the ones at the border can be merged
-    bool isMerged = false;
-    if (!mList.isEmpty() && !other.mList.isEmpty()) {
-        isMerged = mList.last().append(other.mList.first());
-    }
+    const bool isMerged = mList.last().append(other.mList.first());
     if (isMerged) {
         ++it;
     }
