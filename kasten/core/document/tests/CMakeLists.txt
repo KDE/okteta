@@ -14,8 +14,6 @@ target_compile_definitions(OktetaKastenCoreDocumentSourcesTestShim INTERFACE
     -DOKTETAKASTENCORE_STATICLIB
 )
 
-########### bytearraydocumenttest ###############
-
 ecm_add_test(
     bytearraydocumenttest.cpp
     ${SUTDIR}/bytearraydocument.cpp
@@ -28,9 +26,6 @@ ecm_add_test(
         Qt5::Test
 )
 target_compile_definitions(bytearraydocumenttest PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")
-
-
-########### bytearraydocumentfactorytest ###############
 
 ecm_add_test(
     bytearraydocumentfactorytest.cpp

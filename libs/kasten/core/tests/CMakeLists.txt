@@ -1,5 +1,3 @@
-########### util ###############
-
 add_library(KastenCoreTestUtil STATIC)
 target_sources(KastenCoreTestUtil
     PRIVATE
@@ -11,8 +9,6 @@ target_link_libraries(KastenCoreTestUtil
     PRIVATE
         Qt5::Test
 )
-
-########### io ###############
 
 add_library(KastenCoreTestIo STATIC)
 target_link_libraries(KastenCoreTestIo
@@ -33,8 +29,6 @@ target_sources(KastenCoreTestIo
         testdocumentfilewritetojob.cpp
 )
 
-########### testdocumenttest ###############
-
 ecm_add_test(
     testdocument.cpp
     testdocumenttest.cpp
@@ -43,8 +37,6 @@ ecm_add_test(
         KastenCore
         Qt5::Test
 )
-
-########### testdocumentfilesynchronizertest ###############
 
 ecm_add_test(
     testdocument.cpp
@@ -58,8 +50,6 @@ ecm_add_test(
         Qt5::Test
 )
 
-############ testdocumentfilesynchronizerfactorytest ###############
-
 ecm_add_test(
     testdocument.cpp
     testdocumentfilesynchronizer.cpp
@@ -72,8 +62,6 @@ ecm_add_test(
         KastenCore
         Qt5::Test
 )
-
-########### documentmanagertest ###############
 
 ecm_add_test(
     testdocument.cpp

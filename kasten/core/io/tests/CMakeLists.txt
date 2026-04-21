@@ -37,8 +37,6 @@ target_compile_definitions(OktetaKastenCoreIoSut
         TRANSLATION_DOMAIN=\"liboktetakasten\"
 )
 
-########### bytearrayrawfilesynchronizertest ###############
-
 ecm_add_test(
     bytearrayrawfilesynchronizertest.cpp
     ${SUTDIR}/../document/bytearraydocument.cpp
@@ -55,8 +53,6 @@ ecm_add_test(
         Qt5::Test
 )
 target_compile_definitions(bytearrayrawfilesynchronizertest PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")
-
-########### bytearrayrawfilesynchronizerfactorytest ###############
 
 ecm_add_test(
     bytearrayrawfilesynchronizerfactorytest.cpp

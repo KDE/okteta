@@ -8,4 +8,75 @@
 
 namespace KPieceTable {
 
+void PieceList::append(const Piece& piece)
+{
+    if (!piece.isValid()) {
+        return;
+    }
+
+    bool isMerged = false;
+    if (!mList.isEmpty()) {
+        isMerged = mList.last().append(piece);
+    }
+    if (!isMerged) {
+        mList.append(piece);
+    }
+    mTotalLength += piece.width();
+}
+
+void PieceList::append(const PieceList& other)
+{
+    if (other.isEmpty()) {
+        return;
+    }
+    if (mList.isEmpty()) {
+        *this = other;
+        return;
+    }
+
+    auto it = other.mList.begin();
+
+    // see if the ones at the border can be merged
+    const bool isMerged = mList.last().append(other.mList.first());
+    if (isMerged) {
+        ++it;
+    }
+
+    std::for_each(it, other.mList.end(), [this](const Piece& piece) {
+        mList.append(piece);
+    });
+// was:     mList += other.mList;
+
+    mTotalLength += other.mTotalLength;
+}
+
+void PieceList::prepend(const PieceList& other)
+{
+    if (other.isEmpty()) {
+        return;
+    }
+    if (mList.isEmpty()) {
+        *this = other;
+        return;
+    }
+
+    QVector<Piece> otherCopy = other.mList;
+    auto it = mList.begin();
+
+    // see if the ones at the border can be merged
+    const bool isMerged = otherCopy.last().append(mList.first());
+    if (isMerged) {
+        ++it;
+    }
+
+    std::for_each(it, mList.end(), [&otherCopy](const Piece& piece) mutable {
+        otherCopy.append(piece);
+    });
+
+    mList = otherCopy;
+// was:     mList = other.mList + mList;
+
+    mTotalLength += other.mTotalLength;
+}
+
 }

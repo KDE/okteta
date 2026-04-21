@@ -242,17 +242,26 @@ void KeyNavigator::moveCursor(MoveAction action, SelectAction selectAction)
     ByteArrayTableCursor* const tableCursor = mView->tableCursor();
     ByteArrayTableRanges* const tableRanges = mView->tableRanges();
 
+    AddressRange dissolvedSelection;
+
     if (selectAction == Select) {
         if (!tableRanges->selectionStarted()) {
             tableRanges->setSelectionStart(tableCursor->realIndex());
         }
     } else {
-        tableRanges->removeSelection();
+        dissolvedSelection = tableRanges->removeSelection();
     }
 
     switch (action)
     {
-    case MoveBackward:     tableCursor->gotoPreviousByte(); break;
+    case MoveBackward: {
+        if (dissolvedSelection.isValid()) {
+            tableCursor->gotoIndex(dissolvedSelection.start());
+        } else {
+            tableCursor->gotoPreviousByte();
+        }
+        break;
+    }
     case MoveGroupBackward: {
         const Address index = tableCursor->realIndex();
         int newIndex;
@@ -271,7 +280,14 @@ void KeyNavigator::moveCursor(MoveAction action, SelectAction selectAction)
         tableCursor->gotoIndex(newIndex);
         break;
     }
-    case MoveForward:      tableCursor->gotoNextByte();     break;
+    case MoveForward: {
+        if (dissolvedSelection.isValid()) {
+            tableCursor->gotoCIndex(dissolvedSelection.nextBehindEnd());
+        } else {
+            tableCursor->gotoNextByte();
+        }
+        break;
+    }
     case MoveGroupForward:  {
         const Address index = tableCursor->realIndex();
         int newIndex;
