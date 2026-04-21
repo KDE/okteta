@@ -57,60 +57,6 @@ inline bool PieceList::isEmpty()         const { return mList.isEmpty(); }
 inline Size PieceList::totalLength()     const { return mTotalLength; }
 inline const Piece& PieceList::at(int i) const { return mList.at(i); }
 
-inline void PieceList::append(const Piece& piece)
-{
-    bool isMerged = false;
-    if (!mList.isEmpty()) {
-        isMerged = mList.last().append(piece);
-    }
-    if (!isMerged) {
-        mList.append(piece);
-    }
-    mTotalLength += piece.width();
-}
-inline void PieceList::append(const PieceList& other)
-{
-    QVector<Piece>::ConstIterator it = other.mList.begin();
-
-    // see if the ones at the border can be merged
-    bool isMerged = false;
-    if (!mList.isEmpty() && !other.mList.isEmpty()) {
-        isMerged = mList.last().append(other.mList.first());
-    }
-    if (isMerged) {
-        ++it;
-    }
-
-    std::for_each(it, other.mList.end(), [this](const Piece& piece) {
-        mList.append(piece);
-    });
-// was:     mList += other.mList;
-
-    mTotalLength += other.mTotalLength;
-}
-inline void PieceList::prepend(const PieceList& other)
-{
-    QVector<Piece> otherCopy = other.mList;
-    QVector<Piece>::Iterator it = mList.begin();
-
-    // see if the ones at the border can be merged
-    bool isMerged = false;
-    if (!otherCopy.isEmpty() && !mList.isEmpty()) {
-        isMerged = otherCopy.last().append(mList.first());
-    }
-    if (isMerged) {
-        ++it;
-    }
-
-    std::for_each(it, mList.end(), [&otherCopy](const Piece& piece) mutable {
-        otherCopy.append(piece);
-    });
-
-    mList = otherCopy;
-// was:     mList = other.mList + mList;
-
-    mTotalLength += other.mTotalLength;
-}
 
 }
 
