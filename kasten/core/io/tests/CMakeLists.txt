@@ -36,8 +36,6 @@ target_compile_definitions(oktetakastenio
 )
 
 
-########### bytearrayrawfilesynchronizertest ###############
-
 ecm_add_test(
   bytearrayrawfilesynchronizertest.cpp
   ${SUTDIR}/../document/bytearraydocument.cpp
@@ -54,8 +52,6 @@ ecm_add_test(
   KF5::Bookmarks
   Qt5::Test
 )
-
-########### bytearrayrawfilesynchronizerfactorytest ###############
 
 ecm_add_test(
   bytearrayrawfilesynchronizerfactorytest.cpp

@@ -1,5 +1,3 @@
-########### util ###############
-
 set( KastenCoreTestUtil_LIB_SRCS
   util/filesystem.cpp
 )
@@ -11,8 +9,6 @@ target_link_libraries( KastenCoreTestUtil
   PRIVATE
     Qt5::Test
 )
-
-########### io ###############
 
 set( kastencoretestio_LIB_SRCS
   testdocumentfileloadthread.cpp
@@ -33,8 +29,6 @@ PRIVATE
   KF5::CoreAddons
 )
 
-########### testdocumenttest ###############
-
 ecm_add_test(
   testdocument.cpp
   testdocumenttest.cpp
@@ -44,8 +38,6 @@ ecm_add_test(
   KastenCore
   Qt5::Test
 )
-
-########### testdocumentfilesynchronizertest ###############
 
 ecm_add_test(
   testdocument.cpp
@@ -60,8 +52,6 @@ ecm_add_test(
   Qt5::Test
 )
 
-############ testdocumentfilesynchronizerfactorytest ###############
-
 ecm_add_test(
   testdocument.cpp
   testdocumentfilesynchronizer.cpp
@@ -75,8 +65,6 @@ ecm_add_test(
   KastenCoreTestUtil
   Qt5::Test
 )
-
-########### documentmanagertest ###############
 
 ecm_add_test(
   testdocument.cpp
