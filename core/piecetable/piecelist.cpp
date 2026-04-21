@@ -54,14 +54,19 @@ void PieceList::append(const PieceList& other)
 
 void PieceList::prepend(const PieceList& other)
 {
+    if (other.isEmpty()) {
+        return;
+    }
+    if (mList.isEmpty()) {
+        *this = other;
+        return;
+    }
+
     QVector<Piece> otherCopy = other.mList;
     QVector<Piece>::Iterator it = mList.begin();
 
     // see if the ones at the border can be merged
-    bool isMerged = false;
-    if (!otherCopy.isEmpty() && !mList.isEmpty()) {
-        isMerged = otherCopy.last().append(mList.first());
-    }
+    const bool isMerged = otherCopy.last().append(mList.first());
     if (isMerged) {
         ++it;
     }
