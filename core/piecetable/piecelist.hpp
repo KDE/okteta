@@ -33,16 +33,15 @@ public:
     Size totalLength() const;
     const Piece& at(int i) const;
 
-public:
-    void append(const PieceList& other);
-    void append(const Piece& piece);
-    void prepend(const PieceList& other);
-
-public: // introspection API, used for tests
     using ConstIterator = QVector<Piece>::ConstIterator;
 
     ConstIterator begin() const;
     ConstIterator end() const;
+
+public:
+    void append(const Piece& piece);
+    void append(const PieceList& other);
+    void prepend(const PieceList& other);
 
 private:
     QVector<Piece> mList;

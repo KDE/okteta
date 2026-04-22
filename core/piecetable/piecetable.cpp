@@ -8,6 +8,9 @@
 
 #include "piecetable.hpp"
 
+// Std
+#include <algorithm>
+
 namespace KPieceTable {
 
 PieceTable::PieceTable(Size size)
@@ -109,11 +112,12 @@ void PieceTable::insert(Address insertDataOffset, const PieceList& insertPieceLi
 
         // piece starts at offset?
         if (dataRange.start() == insertDataOffset) {
-            int i = 0;
+            auto firstInsertIt = insertPieceList.begin();
             if (it != mList.begin()) {
                 Piece& previousPiece = *(it - 1);
-                if (previousPiece.append(insertPieceList.at(0))) {
-                    if (insertPieceList.size() == 1) {
+                if (previousPiece.append(*firstInsertIt)) {
+                    ++firstInsertIt;
+                    if (firstInsertIt == insertPieceList.end()) {
                         if (previousPiece.append(piece)) {
                             ++it;
                             mList.erase(it);
@@ -121,17 +125,18 @@ void PieceTable::insert(Address insertDataOffset, const PieceList& insertPieceLi
                         isInserted = true;
                         break;
                     }
-                    ++i;
                 }
             }
 
-            const int lastIndex = insertPieceList.size() - 1;
-            for (; i < lastIndex; ++i) {
-                it = mList.insert(it, insertPieceList.at(i));
+            const auto lastInsertIt = insertPieceList.end() - 1;
+            // there is at least 1 piece to handle, also given the shortcut above,
+            // so firstInsertIt <= lastInsertIt can be relied on
+            std::for_each(firstInsertIt, lastInsertIt, [this, &it](const Piece& piece) mutable {
+                it = mList.insert(it, piece);
                 ++it;
-            }
+            });
 
-            const Piece& lastInsertPiece = insertPieceList.at(lastIndex);
+            const Piece& lastInsertPiece = *lastInsertIt;
             if (!piece.prepend(lastInsertPiece)) {
                 mList.insert(it, lastInsertPiece);
             }
@@ -141,8 +146,8 @@ void PieceTable::insert(Address insertDataOffset, const PieceList& insertPieceLi
         ++it;
         if (dataRange.includes(insertDataOffset)) {
             const Piece secondPiece = piece.splitAtLocal(dataRange.localIndex(insertDataOffset));
-            for (int i = 0; i < insertPieceList.size(); ++i) {
-                it = mList.insert(it, insertPieceList.at(i));
+            for (const auto& insertPiece : insertPieceList) {
+                it = mList.insert(it, insertPiece);
                 ++it;
             }
 
@@ -154,17 +159,17 @@ void PieceTable::insert(Address insertDataOffset, const PieceList& insertPieceLi
         dataRange.setStart(dataRange.nextBehindEnd());
     }
     if (!isInserted && (dataRange.start() == insertDataOffset)) {
-        int i = 0;
+        auto firstInsertIt = insertPieceList.begin();
         if (it != mList.begin()) {
             Piece& previousPiece = *(it - 1);
-            if (previousPiece.append(insertPieceList.at(0))) {
-                ++i;
+            if (previousPiece.append(*firstInsertIt)) {
+                ++firstInsertIt;
             }
         }
-        for (; i < insertPieceList.size(); ++i) {
-            it = mList.insert(it, insertPieceList.at(i));
+        std::for_each(firstInsertIt, insertPieceList.end(), [this, &it](const Piece& piece) mutable {
+            it = mList.insert(it, piece);
             ++it;
-        }
+        });
     }
 
     mSize += insertPieceList.totalLength();
