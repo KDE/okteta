@@ -110,24 +110,29 @@ void PieceTable::insert(Address insertDataOffset, const PieceList& insertPieceLi
         Piece& piece = *it;
         dataRange.setEndByWidth(piece.width());
 
-        // piece starts at offset?
+        // current piece starts at insert offset?
         if (dataRange.start() == insertDataOffset) {
             auto firstInsertIt = insertPieceList.begin();
+            // merge first inserted piece with previous piece if possible
             if (it != mList.begin()) {
                 Piece& previousPiece = *(it - 1);
                 if (previousPiece.append(*firstInsertIt)) {
                     ++firstInsertIt;
+                    // shortcut if no more pieces left to add
                     if (firstInsertIt == insertPieceList.end()) {
+                        // merge altered previous and current piece if possible
                         if (previousPiece.append(piece)) {
                             ++it;
                             mList.erase(it);
                         }
+                        // done
                         isInserted = true;
                         break;
                     }
                 }
             }
 
+            // insert all-but-last to-insert pieces
             const auto lastInsertIt = insertPieceList.end() - 1;
             // there is at least 1 piece to handle, also given the shortcut above,
             // so firstInsertIt <= lastInsertIt can be relied on
@@ -136,36 +141,46 @@ void PieceTable::insert(Address insertDataOffset, const PieceList& insertPieceLi
                 ++it;
             });
 
+            // merge last to-insert piece with current piece if possible, otherwise insert
             const Piece& lastInsertPiece = *lastInsertIt;
             if (!piece.prepend(lastInsertPiece)) {
                 mList.insert(it, lastInsertPiece);
             }
+            // done
             isInserted = true;
             break;
         }
+        // current piece covers insert offset
         ++it;
         if (dataRange.includes(insertDataOffset)) {
+            // split current piece at insertion offset, will be two valid pieces
             const Piece secondPiece = piece.splitAtLocal(dataRange.localIndex(insertDataOffset));
+            // insert all to-insert pieces
             for (const auto& insertPiece : insertPieceList) {
                 it = mList.insert(it, insertPiece);
                 ++it;
             }
-
+            // at last insert split-off half piece
             mList.insert(it, secondPiece);
+            // done
             isInserted = true;
             break;
         }
 
+        // update loop state
         dataRange.setStart(dataRange.nextBehindEnd());
     }
+    // end of pieces reached
     if (!isInserted && (dataRange.start() == insertDataOffset)) {
         auto firstInsertIt = insertPieceList.begin();
+        // merge first inserted piece with last piece if possible
         if (it != mList.begin()) {
             Piece& previousPiece = *(it - 1);
             if (previousPiece.append(*firstInsertIt)) {
                 ++firstInsertIt;
             }
         }
+        // insert all to-insert pieces at end
         std::for_each(firstInsertIt, insertPieceList.end(), [this, &it](const Piece& piece) mutable {
             it = mList.insert(it, piece);
             ++it;
