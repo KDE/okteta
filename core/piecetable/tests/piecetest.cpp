@@ -13,7 +13,36 @@
 // Qt
 #include <QTest>
 
+namespace KPieceTable {
+struct PieceDataTestData
+{
+    static PieceDataTestData invalid()
+    { return {}; }
+    static PieceDataTestData valid(Address start, Address end, Piece::StorageType storageId)
+    { return {true, start, end, storageId}; }
+
+    PieceDataTestData() = default;
+
+    bool isValid() const { return m_isValid; }
+    Address start() const { return m_start; }
+    Address end() const { return m_end; }
+    Piece::StorageType storageId() const { return m_storageId; }
+
+private:
+    PieceDataTestData(bool isValid, Address start, Address end, Piece::StorageType storageId)
+        : m_isValid(isValid), m_start(start), m_end(end), m_storageId(storageId)
+    {}
+
+private:
+    const bool m_isValid = false;
+    const Address m_start = 0;
+    const Address m_end = -1;
+    const Piece::StorageType m_storageId = Piece::OriginalStorage;
+};
+}
+
 Q_DECLARE_METATYPE(KPieceTable::AddressRange)
+Q_DECLARE_METATYPE(KPieceTable::PieceDataTestData)
 Q_DECLARE_METATYPE(KPieceTable::Piece::StorageType)
 
 namespace KPieceTable {
@@ -88,56 +117,68 @@ void PieceTest::testEqualOperator()
     QCOMPARE(isSameNotEqual, expectedSameNotEqual);
 }
 
+void PieceTest::testSplitAt_data()
+{
+    QTest::addColumn<Address>("splitAddress");
+    QTest::addColumn<PieceDataTestData>("expectedPieceData");
+    QTest::addColumn<PieceDataTestData>("expectedSplitPieceData");
+
+    const Address Mid = (Start + End) / 2;
+
+    QTest::newRow("at-start")
+        << Start
+        << PieceDataTestData::invalid()
+        << PieceDataTestData::valid(Start, End, Piece::ChangeStorage);
+
+    QTest::newRow("at-one-after-start")
+        << Start + 1
+        << PieceDataTestData::valid(Start, Start, Piece::ChangeStorage)
+        << PieceDataTestData::valid(Start + 1, End, Piece::ChangeStorage);
+
+    QTest::newRow("at-mid")
+        << Mid
+        << PieceDataTestData::valid(Start, Mid - 1, Piece::ChangeStorage)
+        << PieceDataTestData::valid(Mid, End, Piece::ChangeStorage);
+
+    QTest::newRow("at-one-before-width")
+        << End
+        << PieceDataTestData::valid(Start, End - 1, Piece::ChangeStorage)
+        << PieceDataTestData::valid(End, End, Piece::ChangeStorage);
+
+    QTest::newRow("at-start")
+        << End + 1
+        << PieceDataTestData::valid(Start, End, Piece::ChangeStorage)
+        << PieceDataTestData::invalid();
+}
+
 void PieceTest::testSplitAt()
 {
+    QFETCH(const Address, splitAddress);
+    QFETCH(const PieceDataTestData, expectedPieceData);
+    QFETCH(const PieceDataTestData, expectedSplitPieceData);
+
     const AddressRange storageSection(Start, End);
     Piece piece(storageSection, Piece::ChangeStorage);
 
-    // split at start
-    Piece splitPiece = piece.splitAt(Start);
-    QVERIFY(!piece.isValid());
-    QCOMPARE(splitPiece.start(), Start);
-    QCOMPARE(splitPiece.end(),   End);
-    QCOMPARE(splitPiece.storageId(), Piece::ChangeStorage);
+    // tested action
+    const Piece splitPiece = piece.splitAt(splitAddress);
 
-    // split at one after start
-    piece.set(Start, End);
-    splitPiece = piece.splitAt(Start + 1);
-    QCOMPARE(piece.start(), Start);
-    QCOMPARE(piece.end(), Start);
-    QCOMPARE(piece.storageId(), Piece::ChangeStorage);
-    QCOMPARE(splitPiece.start(), Start + 1);
-    QCOMPARE(splitPiece.end(),   End);
-    QCOMPARE(splitPiece.storageId(), Piece::ChangeStorage);
+    // check result
+    QCOMPARE(piece.isValid(), expectedPieceData.isValid());
+    if (expectedPieceData.isValid()) {
+        QCOMPARE(piece.start(), expectedPieceData.start());
+        QCOMPARE(piece.end(),   expectedPieceData.end());
+        QCOMPARE(piece.storageId(), expectedPieceData.storageId());
+    }
+    QCOMPARE(splitPiece.isValid(), expectedSplitPieceData.isValid());
+    if (expectedSplitPieceData.isValid()) {
+        QCOMPARE(splitPiece.start(), expectedSplitPieceData.start());
+        QCOMPARE(splitPiece.end(),   expectedSplitPieceData.end());
+        QCOMPARE(splitPiece.storageId(), expectedSplitPieceData.storageId());
+    }
 
-    // split at mid
-    const Address Mid = (Start + End) / 2;
-    piece.set(Start, End);
-    splitPiece = piece.splitAt(Mid);
-    QCOMPARE(piece.start(), Start);
-    QCOMPARE(piece.end(), Mid - 1);
-    QCOMPARE(piece.storageId(), Piece::ChangeStorage);
-    QCOMPARE(splitPiece.start(), Mid);
-    QCOMPARE(splitPiece.end(),   End);
-    QCOMPARE(splitPiece.storageId(), Piece::ChangeStorage);
 
-    // split at one before width
-    piece.set(Start, End);
-    splitPiece = piece.splitAt(End);
-    QCOMPARE(piece.start(), Start);
-    QCOMPARE(piece.end(), End - 1);
-    QCOMPARE(piece.storageId(), Piece::ChangeStorage);
-    QCOMPARE(splitPiece.start(), End);
-    QCOMPARE(splitPiece.end(),   End);
-    QCOMPARE(splitPiece.storageId(), Piece::ChangeStorage);
 
-    // split at start so the split is the full
-    piece.set(Start, End);
-    splitPiece = piece.splitAt(End + 1);
-    QCOMPARE(piece.start(), Start);
-    QCOMPARE(piece.end(), End);
-    QCOMPARE(piece.storageId(), Piece::ChangeStorage);
-    QVERIFY(!splitPiece.isValid());
 }
 
 void PieceTest::testSplitAtLocal()
