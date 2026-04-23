@@ -13,6 +13,9 @@
 // Qt
 #include <QTest>
 
+Q_DECLARE_METATYPE(KPieceTable::AddressRange)
+Q_DECLARE_METATYPE(KPieceTable::Piece::StorageType)
+
 namespace KPieceTable {
 
 // local variables
@@ -38,33 +41,51 @@ void PieceTest::testFullConstructor()
     QVERIFY(piece.isValid());
 }
 
+void PieceTest::testEqualOperator_data()
+{
+    QTest::addColumn<AddressRange>("section");
+    QTest::addColumn<Piece::StorageType>("storageId");
+    QTest::addColumn<bool>("expectedSameEqual");
+
+    QTest::newRow("same")
+        << AddressRange(Start, End) << Piece::OriginalStorage
+        << true;
+
+    QTest::newRow("other-start")
+        << AddressRange(Start - 1, End) << Piece::OriginalStorage
+        << false;
+
+    QTest::newRow("other-end")
+        << AddressRange(Start, End + 1) << Piece::OriginalStorage
+        << false;
+
+    QTest::newRow("other-storage")
+        << AddressRange(Start, End) << Piece::ChangeStorage
+        << false;
+
+    QTest::newRow("all-other")
+        << AddressRange(Start - 1, End + 1) << Piece::ChangeStorage
+        << false;
+}
+
 void PieceTest::testEqualOperator()
 {
-    const Piece originalPiece(Start, End, Piece::OriginalStorage);
+    QFETCH(const AddressRange, section);
+    QFETCH(const Piece::StorageType, storageId);
+    QFETCH(const bool, expectedSameEqual);
+    const bool expectedSameNotEqual = !expectedSameEqual;
 
-    const Piece samePiece(Start, End, Piece::OriginalStorage);
-    const bool isSameEqual = (originalPiece == samePiece);
-    const bool isSameNotEqual = (originalPiece != samePiece);
-    QCOMPARE(isSameEqual, true);
-    QCOMPARE(isSameNotEqual, false);
+    const Piece originalPiece(Start, Width, Piece::OriginalStorage);
 
-    const Piece otherStartPiece(Start - 1, End, Piece::OriginalStorage);
-    const bool isOtherStartEqual = (originalPiece == otherStartPiece);
-    const bool isOtherStartNotEqual = (originalPiece != otherStartPiece);
-    QCOMPARE(isOtherStartEqual, false);
-    QCOMPARE(isOtherStartNotEqual, true);
+    const Piece otherPiece(section, storageId);
 
-    const Piece otherEndPiece(Start, End + 1, Piece::OriginalStorage);
-    const bool isOtherEndEqual = (originalPiece == otherEndPiece);
-    const bool isOtherEndNotEqual = (originalPiece != otherEndPiece);
-    QCOMPARE(isOtherEndEqual, false);
-    QCOMPARE(isOtherEndNotEqual, true);
+    // tested action
+    const bool isSameEqual = (originalPiece == otherPiece);
+    const bool isSameNotEqual = (originalPiece != otherPiece);
 
-    const Piece otherStoragePiece(Start, End, Piece::ChangeStorage);
-    const bool isOtherStorageEqual = (originalPiece == otherStoragePiece);
-    const bool isOtherStorageNotEqual = (originalPiece != otherStoragePiece);
-    QCOMPARE(isOtherStorageEqual, false);
-    QCOMPARE(isOtherStorageNotEqual, true);
+    // check result
+    QCOMPARE(isSameEqual, expectedSameEqual);
+    QCOMPARE(isSameNotEqual, expectedSameNotEqual);
 }
 
 void PieceTest::testSplitAt()

@@ -21,6 +21,7 @@ class PieceTest : public QObject
 private Q_SLOTS: // test functions
     void testSimpleConstructor();
     void testFullConstructor();
+    void testEqualOperator_data();
     void testEqualOperator();
     void testSplitAt();
     void testSplitAtLocal();
