@@ -23,6 +23,7 @@ private Q_SLOTS: // test functions
     void testFullConstructor();
     void testEqualOperator_data();
     void testEqualOperator();
+    void testSetStorageId();
     void testSplitAt_data();
     void testSplitAt();
     void testSplitAtLocal_data();

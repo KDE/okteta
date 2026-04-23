@@ -117,6 +117,23 @@ void PieceTest::testEqualOperator()
     QCOMPARE(isSameNotEqual, expectedSameNotEqual);
 }
 
+void PieceTest::testSetStorageId()
+{
+    Piece piece(Start, Width, Piece::OriginalStorage);
+
+    // tested action
+    piece.setStorageId(Piece::ChangeStorage);
+
+    // check result
+    QCOMPARE(piece.storageId(), Piece::ChangeStorage);
+
+    // tested action
+    piece.setStorageId(Piece::OriginalStorage);
+
+    // check result
+    QCOMPARE(piece.storageId(), Piece::OriginalStorage);
+}
+
 void PieceTest::testSplitAt_data()
 {
     QTest::addColumn<Address>("splitAddress");
