@@ -59,10 +59,10 @@ void PieceTable::insert(Address insertDataOffset, Size insertLength, Address sto
         return;
     }
 
-    const Piece::StorageType storageId = Piece::ChangeStorage;
-    auto it = mList.begin();
+    const Piece insertPiece(storageOffset, insertLength, Piece::ChangeStorage);
 
-    const Piece insertPiece(storageOffset, insertLength, storageId);
+    bool isInserted = false;
+    auto it = mList.begin();
 
     // TODO: use width or offset from current and next?
     AddressRange dataRange(0, -1);
@@ -70,31 +70,59 @@ void PieceTable::insert(Address insertDataOffset, Size insertLength, Address sto
         Piece& piece = *it;
         dataRange.setEndByWidth(piece.width());
 
-        // piece starts at offset?
+        // current piece starts at insert offset?
         if (dataRange.start() == insertDataOffset) {
-            it = mList.insert(it, insertPiece);
-            ++it;
+            // merge inserted piece with previous piece if possible
+            if (it != mList.begin()) {
+                Piece& previousPiece = *(it - 1);
+                if (previousPiece.append(insertPiece)) {
+                    // merge altered previous and current piece if possible
+                    if (previousPiece.append(piece)) {
+                        mList.erase(it);
+                    }
+                    // done
+                    isInserted = true;
+                    break;
+                }
+            }
+
+            // merge to-insert piece with current piece if possible, otherwise insert
+            if (!piece.prepend(insertPiece)) {
+                mList.insert(it, insertPiece);
+            }
+            // done
+            isInserted = true;
             break;
         }
-        if (dataRange.nextBehindEnd() == insertDataOffset) {
-            if (piece.append(insertPiece)) {
-                break;
-            }
-        }
+        // current piece covers insert offset
         ++it;
         if (dataRange.includes(insertDataOffset)) {
+            // split current piece at insertion offset, will be two valid pieces
             const Piece secondPiece = piece.splitAtLocal(dataRange.localIndex(insertDataOffset));
+            // insert to-insert piece
             it = mList.insert(it, insertPiece);
             ++it;
-            it = mList.insert(it, secondPiece);
-            ++it;
+            // at last insert split-off half piece
+            mList.insert(it, secondPiece);
+            // done
+            isInserted = true;
             break;
         }
 
+        // update loop state
         dataRange.setStart(dataRange.nextBehindEnd());
     }
-    if ((it == mList.end()) && (dataRange.start() == insertDataOffset)) {
-        mList.insert(it, insertPiece);
+    // end of pieces reached
+    if (!isInserted && (dataRange.start() == insertDataOffset)) {
+        // merge to-insert piece with last piece if possible
+        if (it != mList.begin()) {
+            Piece& previousPiece = *(it - 1);
+            isInserted = previousPiece.append(insertPiece);
+        }
+        if (!isInserted) {
+            // insert to-insert piece at end
+            mList.insert(it, insertPiece);
+        }
     }
 
     mSize += insertLength;
