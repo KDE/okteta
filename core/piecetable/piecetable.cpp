@@ -54,6 +54,11 @@ bool PieceTable::getStorageData(Piece::StorageType* storageId, Address* storageO
 // TODO: combine sucsequenting inserts, also on other changes if possible link neighbors
 void PieceTable::insert(Address insertDataOffset, Size insertLength, Address storageOffset)
 {
+    // shortcut empty size
+    if (insertLength < 1) {
+        return;
+    }
+
     const Piece::StorageType storageId = Piece::ChangeStorage;
     auto it = mList.begin();
 
@@ -97,6 +102,7 @@ void PieceTable::insert(Address insertDataOffset, Size insertLength, Address sto
 
 void PieceTable::insert(Address insertDataOffset, const PieceList& insertPieceList)
 {
+    // shortcut empty list
     if (insertPieceList.isEmpty()) {
         return;
     }
@@ -193,6 +199,12 @@ void PieceTable::insert(Address insertDataOffset, const PieceList& insertPieceLi
 // TODO: make algorithm simpler
 PieceList PieceTable::remove(const AddressRange& removeRange)
 {
+    // shortcut empty range
+    // TODO: empty range should be acceptable, warnn about anything?
+    if (!removeRange.isValid()) {
+        return {};
+    }
+
     PieceList removedPieceList;
 
     AddressRange dataRange(0, -1);
@@ -305,6 +317,12 @@ void PieceTable::replace(const AddressRange& removeRange, const PieceList& inser
 
 void PieceTable::swap(Address firstStart, const AddressRange& secondRange)
 {
+    // shortcut empty range
+    // TODO: empty range should be acceptable, warnn about anything?
+    if (!secondRange.isValid()) {
+        return;
+    }
+
     AddressRange dataRange(0, -1);
 
     QLinkedList<Piece>::Iterator it = mList.begin();
