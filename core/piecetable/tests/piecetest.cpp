@@ -482,7 +482,62 @@ void PieceTest::testPrepend()
         QCOMPARE(piece.end(),   expectedPieceData.end());
         QCOMPARE(piece.storageId(), expectedPieceData.storageId());
     }
+}
 
+void PieceTest::testAppend_data()
+{
+    QTest::addColumn<AddressRange>("initSection");
+    QTest::addColumn<Piece::StorageType>("initStorageId");
+    QTest::addColumn<AddressRange>("prependSection");
+    QTest::addColumn<Piece::StorageType>("prependStorageId");
+    QTest::addColumn<bool>("expectedSuccess");
+    QTest::addColumn<PieceDataTestData>("expectedPieceData");
+
+    QTest::newRow("noncontinous-samestorage")
+        << AddressRange(Start, End) << Piece::OriginalStorage
+        << AddressRange(End + 2, End + 10) << Piece::OriginalStorage
+        << false << PieceDataTestData::valid(Start, End, Piece::OriginalStorage);
+
+    QTest::newRow("noncontinous-differentstorage")
+        << AddressRange(Start, End) << Piece::OriginalStorage
+        << AddressRange(End + 2, End + 10) << Piece::ChangeStorage
+        << false << PieceDataTestData::valid(Start, End, Piece::OriginalStorage);
+
+    QTest::newRow("continous-samestorage")
+        << AddressRange(Start, End) << Piece::OriginalStorage
+        << AddressRange(End + 1, End + 10) << Piece::OriginalStorage
+        << true << PieceDataTestData::valid(Start, End + 10, Piece::OriginalStorage);
+
+    QTest::newRow("continous-differentstorage")
+        << AddressRange(Start, End) << Piece::OriginalStorage
+        << AddressRange(End + 1, End + 10) << Piece::ChangeStorage
+        << false << PieceDataTestData::valid(Start, End, Piece::OriginalStorage);
+}
+
+void PieceTest::testAppend()
+{
+    QFETCH(const AddressRange, initSection);
+    QFETCH(const Piece::StorageType, initStorageId);
+    QFETCH(const AddressRange, prependSection);
+    QFETCH(const Piece::StorageType, prependStorageId);
+    QFETCH(const bool, expectedSuccess);
+    QFETCH(const PieceDataTestData, expectedPieceData);
+
+    Piece piece(initSection, initStorageId);
+
+    const Piece otherPiece(prependSection, prependStorageId);
+
+    // tested action
+    const bool success = piece.append(otherPiece);
+
+    // check result
+    QCOMPARE(success, expectedSuccess);
+    QCOMPARE(piece.isValid(), expectedPieceData.isValid());
+    if (expectedPieceData.isValid()) {
+        QCOMPARE(piece.start(), expectedPieceData.start());
+        QCOMPARE(piece.end(),   expectedPieceData.end());
+        QCOMPARE(piece.storageId(), expectedPieceData.storageId());
+    }
 }
 
 }
