@@ -237,105 +237,95 @@ void PieceTest::testSplitAtLocal()
         QCOMPARE(splitPiece.end(),   expectedSplitPieceData.end());
         QCOMPARE(splitPiece.storageId(), expectedSplitPieceData.storageId());
     }
+}
 
+void PieceTest::testRemove_data()
+{
+    QTest::addColumn<AddressRange>("removeSection");
+    QTest::addColumn<PieceDataTestData>("expectedPieceData");
+    QTest::addColumn<PieceDataTestData>("expectedSplitPieceData");
 
+    const Address Mid = (Start + End) / 2;
 
+    QTest::newRow("none-at-start")
+        << AddressRange(Start, Start - 1)
+        << PieceDataTestData::invalid()
+        << PieceDataTestData::valid(Start, End, Piece::ChangeStorage);
+
+    QTest::newRow("one-at-start")
+        << AddressRange(Start, Start)
+        << PieceDataTestData::invalid()
+        << PieceDataTestData::valid(Start + 1, End, Piece::ChangeStorage);
+
+    QTest::newRow("many-at-start")
+        << AddressRange(Start, Mid)
+        << PieceDataTestData::invalid()
+        << PieceDataTestData::valid(Mid + 1, End, Piece::ChangeStorage);
+
+    QTest::newRow("all-except-last")
+        << AddressRange(Start, End - 1)
+        << PieceDataTestData::invalid()
+        << PieceDataTestData::valid(End, End, Piece::ChangeStorage);
+
+    QTest::newRow("at-mid")
+        << AddressRange(Mid - 1, Mid + 1)
+        << PieceDataTestData::valid(Start, Mid - 2, Piece::ChangeStorage)
+        << PieceDataTestData::valid(Mid + 2, End, Piece::ChangeStorage);
+
+    QTest::newRow("none-at-width")
+        << AddressRange(End + 1, End)
+        << PieceDataTestData::valid(Start, End, Piece::ChangeStorage)
+        << PieceDataTestData::invalid();
+
+    QTest::newRow("one-at-width")
+        << AddressRange(End, End)
+        << PieceDataTestData::valid(Start, End - 1, Piece::ChangeStorage)
+        << PieceDataTestData::invalid();
+
+    QTest::newRow("many-at-width")
+        << AddressRange(Mid, End)
+        << PieceDataTestData::valid(Start, Mid - 1, Piece::ChangeStorage)
+        << PieceDataTestData::invalid();
+
+    QTest::newRow("all-except-first")
+        << AddressRange(Start + 1, End)
+        << PieceDataTestData::valid(Start, Start, Piece::ChangeStorage)
+        << PieceDataTestData::invalid();
+
+    QTest::newRow("all")
+        << AddressRange(Start, End)
+        << PieceDataTestData::invalid()
+        << PieceDataTestData::invalid();
 }
 
 void PieceTest::testRemove()
 {
-    const Address Mid = (Start + End) / 2;
+    QFETCH(const AddressRange, removeSection);
+    QFETCH(const PieceDataTestData, expectedPieceData);
+    QFETCH(const PieceDataTestData, expectedSplitPieceData);
+
     const AddressRange storageSection(Start, End);
     Piece piece(storageSection, Piece::ChangeStorage);
 
-    // remove none at start
-    AddressRange RemoveSection(Start, Start - 1);
-    Piece splitPiece = piece.remove(RemoveSection);
-    QVERIFY(!piece.isValid());
-    QCOMPARE(splitPiece.start(), Start);
-    QCOMPARE(splitPiece.end(),   End);
-    QCOMPARE(splitPiece.storageId(), Piece::ChangeStorage);
+    // tested action
+    const Piece removedPiece = piece.remove(removeSection);
 
-    // remove one at start
-    piece.set(Start, End);
-    RemoveSection.set(Start, Start);
-    splitPiece = piece.remove(RemoveSection);
-    QVERIFY(!piece.isValid());
-    QCOMPARE(splitPiece.start(), Start + 1);
-    QCOMPARE(splitPiece.end(),   End);
-    QCOMPARE(splitPiece.storageId(), Piece::ChangeStorage);
+    // check result
+    QCOMPARE(piece.isValid(), expectedPieceData.isValid());
+    if (expectedPieceData.isValid()) {
+        QCOMPARE(piece.start(), expectedPieceData.start());
+        QCOMPARE(piece.end(),   expectedPieceData.end());
+        QCOMPARE(piece.storageId(), expectedPieceData.storageId());
+    }
+    QCOMPARE(removedPiece.isValid(), expectedSplitPieceData.isValid());
+    if (expectedSplitPieceData.isValid()) {
+        QCOMPARE(removedPiece.start(), expectedSplitPieceData.start());
+        QCOMPARE(removedPiece.end(),   expectedSplitPieceData.end());
+        QCOMPARE(removedPiece.storageId(), expectedSplitPieceData.storageId());
+    }
 
-    // remove many at start
-    piece.set(Start, End);
-    RemoveSection.set(Start, Mid);
-    splitPiece = piece.remove(RemoveSection);
-    QVERIFY(!piece.isValid());
-    QCOMPARE(splitPiece.start(), Mid + 1);
-    QCOMPARE(splitPiece.end(),   End);
-    QCOMPARE(splitPiece.storageId(), Piece::ChangeStorage);
 
-    // remove all except last
-    piece.set(Start, End);
-    RemoveSection.set(Start, End - 1);
-    splitPiece = piece.remove(RemoveSection);
-    QVERIFY(!piece.isValid());
-    QCOMPARE(splitPiece.start(), End);
-    QCOMPARE(splitPiece.end(),   End);
-    QCOMPARE(splitPiece.storageId(), Piece::ChangeStorage);
 
-    // remove at mid
-    piece.set(Start, End);
-    RemoveSection.set(Mid - 1, Mid + 1);
-    splitPiece = piece.remove(RemoveSection);
-    QCOMPARE(piece.start(), Start);
-    QCOMPARE(piece.end(), Mid - 2);
-    QCOMPARE(piece.storageId(), Piece::ChangeStorage);
-    QCOMPARE(splitPiece.start(), Mid + 2);
-    QCOMPARE(splitPiece.end(),   End);
-    QCOMPARE(splitPiece.storageId(), Piece::ChangeStorage);
-
-    // remove none at width
-    piece.set(Start, End);
-    RemoveSection.set(End + 1, End);
-    splitPiece = piece.remove(RemoveSection);
-    QCOMPARE(piece.start(), Start);
-    QCOMPARE(piece.end(),   End);
-    QCOMPARE(piece.storageId(), Piece::ChangeStorage);
-    QVERIFY(!splitPiece.isValid());
-
-    // remove one at width
-    piece.set(Start, End);
-    RemoveSection.set(End, End);
-    splitPiece = piece.remove(RemoveSection);
-    QCOMPARE(piece.start(), Start);
-    QCOMPARE(piece.end(),   End - 1);
-    QCOMPARE(piece.storageId(), Piece::ChangeStorage);
-    QVERIFY(!splitPiece.isValid());
-
-    // remove many at width
-    piece.set(Start, End);
-    RemoveSection.set(Mid, End);
-    splitPiece = piece.remove(RemoveSection);
-    QCOMPARE(piece.start(), Start);
-    QCOMPARE(piece.end(),   Mid - 1);
-    QCOMPARE(piece.storageId(), Piece::ChangeStorage);
-    QVERIFY(!splitPiece.isValid());
-
-    // remove all except first
-    piece.set(Start, End);
-    RemoveSection.set(Start + 1, End);
-    splitPiece = piece.remove(RemoveSection);
-    QCOMPARE(piece.start(), Start);
-    QCOMPARE(piece.end(),   Start);
-    QCOMPARE(piece.storageId(), Piece::ChangeStorage);
-    QVERIFY(!splitPiece.isValid());
-
-    // remove all
-    piece.set(Start, End);
-    RemoveSection.set(Start, End);
-    splitPiece = piece.remove(RemoveSection);
-    QVERIFY(!piece.isValid());
-    QVERIFY(!splitPiece.isValid());
 }
 
 void PieceTest::testRemoveLocal()

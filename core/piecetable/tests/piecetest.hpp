@@ -27,6 +27,7 @@ private Q_SLOTS: // test functions
     void testSplitAt();
     void testSplitAtLocal_data();
     void testSplitAtLocal();
+    void testRemove_data();
     void testRemove();
     void testRemoveLocal();
 };
