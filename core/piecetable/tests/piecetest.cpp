@@ -656,6 +656,74 @@ void PieceTest::testAppend()
     }
 }
 
+void PieceTest::testSubPiece_data()
+{
+    QTest::addColumn<AddressRange>("subRange");
+    QTest::addColumn<PieceDataTestData>("expectedSubPieceData");
+
+    const Address Mid = Width / 2;
+
+    QTest::newRow("none-at-start")
+        << AddressRange(0, 0 - 1)
+        << PieceDataTestData::invalid();
+
+    QTest::newRow("one-at-start")
+        << AddressRange(0, 0)
+        << PieceDataTestData::valid(Start, Start, Piece::ChangeStorage);
+
+    QTest::newRow("many-at-start")
+        << AddressRange(0, Mid)
+        << PieceDataTestData::valid(Start, Start + Mid, Piece::ChangeStorage);
+
+    QTest::newRow("all-except-last")
+        << AddressRange(0, Width - 2)
+        << PieceDataTestData::valid(Start, End - 1, Piece::ChangeStorage);
+
+    QTest::newRow("at-mid")
+        << AddressRange(Mid - 1, Mid + 1)
+        << PieceDataTestData::valid(Start + Mid - 1, Start + Mid + 1, Piece::ChangeStorage);
+
+    QTest::newRow("none-at-width")
+        << AddressRange(Width, Width - 1)
+        << PieceDataTestData::invalid();
+
+    QTest::newRow("one-at-width")
+        << AddressRange(Width - 1, Width - 1)
+        << PieceDataTestData::valid(End, End, Piece::ChangeStorage);
+
+    QTest::newRow("many-at-width")
+        << AddressRange(Mid, Width - 1)
+        << PieceDataTestData::valid(Start + Mid, End, Piece::ChangeStorage);
+
+    QTest::newRow("all-except-first")
+        << AddressRange(1, Width - 1)
+        << PieceDataTestData::valid(Start + 1, End, Piece::ChangeStorage);
+
+    QTest::newRow("all")
+        << AddressRange(0, Width - 1)
+        << PieceDataTestData::valid(Start, End, Piece::ChangeStorage);
+}
+
+void PieceTest::testSubPiece()
+{
+    QFETCH(const AddressRange, subRange);
+    QFETCH(const PieceDataTestData, expectedSubPieceData);
+
+    const AddressRange storageSection(Start, End);
+    Piece piece(storageSection, Piece::ChangeStorage);
+
+    // tested action
+    const Piece subPiece = piece.subPiece(subRange);
+
+    // check result
+    QCOMPARE(subPiece.isValid(), expectedSubPieceData.isValid());
+    if (expectedSubPieceData.isValid()) {
+        QCOMPARE(subPiece.start(), expectedSubPieceData.start());
+        QCOMPARE(subPiece.end(),   expectedSubPieceData.end());
+        QCOMPARE(subPiece.storageId(), expectedSubPieceData.storageId());
+    }
+}
+
 }
 
 QTEST_GUILESS_MAIN(KPieceTable::PieceTest)

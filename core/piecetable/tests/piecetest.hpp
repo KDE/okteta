@@ -40,6 +40,8 @@ private Q_SLOTS: // test functions
     void testPrepend();
     void testAppend_data();
     void testAppend();
+    void testSubPiece_data();
+    void testSubPiece();
 };
 
 }
