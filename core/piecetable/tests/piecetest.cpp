@@ -489,6 +489,61 @@ void PieceTest::testRemoveStartBeforeLocal()
     }
 }
 
+void PieceTest::testRemoveEndBehindLocal_data()
+{
+    QTest::addColumn<Address>("localRemoveAddress");
+    QTest::addColumn<PieceDataTestData>("expectedPieceData");
+    QTest::addColumn<PieceDataTestData>("expectedRemovedPieceData");
+
+    const Address Mid = Width / 2;
+
+    QTest::newRow("none")
+        << Width - 1
+        << PieceDataTestData::valid(Start, End, Piece::ChangeStorage)
+        << PieceDataTestData::invalid();
+    QTest::newRow("one")
+        << Width - 2
+        << PieceDataTestData::valid(Start, End - 1, Piece::ChangeStorage)
+        << PieceDataTestData::valid(End, End, Piece::ChangeStorage);
+
+    QTest::newRow("many")
+        << Mid
+        << PieceDataTestData::valid(Start, Start + Mid, Piece::ChangeStorage)
+        << PieceDataTestData::valid(Start + Mid + 1, End, Piece::ChangeStorage);
+
+    QTest::newRow("all-except-first")
+        << 0
+        << PieceDataTestData::valid(Start, Start, Piece::ChangeStorage)
+        << PieceDataTestData::valid(Start + 1, End, Piece::ChangeStorage);
+}
+
+void PieceTest::testRemoveEndBehindLocal()
+{
+    QFETCH(const Address, localRemoveAddress);
+    QFETCH(const PieceDataTestData, expectedPieceData);
+    QFETCH(const PieceDataTestData, expectedRemovedPieceData);
+
+    const AddressRange storageSection(Start, End);
+    Piece piece(storageSection, Piece::ChangeStorage);
+
+    // tested action
+    const Piece removedPiece = piece.removeEndBehindLocal(localRemoveAddress);
+
+    // check result
+    QCOMPARE(piece.isValid(), expectedPieceData.isValid());
+    if (expectedPieceData.isValid()) {
+        QCOMPARE(piece.start(), expectedPieceData.start());
+        QCOMPARE(piece.end(),   expectedPieceData.end());
+        QCOMPARE(piece.storageId(), expectedPieceData.storageId());
+    }
+    QCOMPARE(removedPiece.isValid(), expectedRemovedPieceData.isValid());
+    if (expectedRemovedPieceData.isValid()) {
+        QCOMPARE(removedPiece.start(), expectedRemovedPieceData.start());
+        QCOMPARE(removedPiece.end(),   expectedRemovedPieceData.end());
+        QCOMPARE(removedPiece.storageId(), expectedRemovedPieceData.storageId());
+    }
+}
+
 void PieceTest::testPrepend_data()
 {
     QTest::addColumn<AddressRange>("initSection");
