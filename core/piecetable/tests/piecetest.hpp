@@ -32,6 +32,8 @@ private Q_SLOTS: // test functions
     void testRemove();
     void testRemoveLocal_data();
     void testRemoveLocal();
+    void testRemoveStartBeforeLocal_data();
+    void testRemoveStartBeforeLocal();
     void testPrepend_data();
     void testPrepend();
     void testAppend_data();
