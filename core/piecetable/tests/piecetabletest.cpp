@@ -515,7 +515,7 @@ void PieceTableTest::testRemove_data()
             {fullSize - BaseSize - 1, true, changeStarts[pieceCount] + BaseSize - 1, Piece::ChangeStorage},
             {fullSize - BaseSize, false, 0, Piece::OriginalStorage}};
     removeRange = AddressRange::fromWidth(midPieceOffset, BaseSize + Start);
-    QTest::newRow("removing-whole-piece-and-start-of-next-in-middke")
+    QTest::newRow("removing-whole-piece-and-start-of-next-in-middle")
         << pieceCount << removeRange
         << fullSize - removeRange.width()
         << QVector<Piece> {
