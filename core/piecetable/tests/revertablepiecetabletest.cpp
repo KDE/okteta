@@ -477,88 +477,17 @@ void RevertablePieceTableTest::testInsert()
     QVERIFY(!result);
 }
 
-void RevertablePieceTableTest::testRemove()
+
+
+
+void RevertablePieceTableTest::testRemove_data()
 {
-    RevertablePieceTable pieceTable;
-
-    Address changeStarts[6];
-    Piece::StorageType storageId;
-    Address storageOffset;
-    bool result;
-
-    // removing at begin
-    pieceTable.init(BaseSize);
-    pieceTable.remove(AddressRange(0, Start - 1));
-
-    QCOMPARE(pieceTable.size(), BaseSize - Start);
-    QCOMPARE(pieceTable.changesCount(), 1);
-    QCOMPARE(pieceTable.appliedChangesCount(), 1);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, 0);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, Start);
-    QCOMPARE(storageId, Piece::OriginalStorage);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, BaseSize - Start - 1);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, BaseSize - 1);
-    QCOMPARE(storageId, Piece::OriginalStorage);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, BaseSize - Start);
-    QVERIFY(!result);
-
-    // removing at middle
-    pieceTable.init(BaseSize);
-    pieceTable.remove(AddressRange(Start, End));
-
-    QCOMPARE(pieceTable.size(), BaseSize - Width);
-    QCOMPARE(pieceTable.changesCount(), 1);
-    QCOMPARE(pieceTable.appliedChangesCount(), 1);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, Start - 1);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, Start - 1);
-    QCOMPARE(storageId, Piece::OriginalStorage);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, Start);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, End + 1);
-    QCOMPARE(storageId, Piece::OriginalStorage);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, BaseSize - Width - 1);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, BaseSize - 1);
-    QCOMPARE(storageId, Piece::OriginalStorage);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, BaseSize - Width);
-    QVERIFY(!result);
-
-    // removing at end
-    pieceTable.init(BaseSize);
-    pieceTable.remove(AddressRange(End + 1, BaseSize - 1));
-
-    QCOMPARE(pieceTable.size(), End + 1);
-    QCOMPARE(pieceTable.changesCount(), 1);
-    QCOMPARE(pieceTable.appliedChangesCount(), 1);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, End);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, End);
-    QCOMPARE(storageId, Piece::OriginalStorage);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, End + 1);
-    QVERIFY(!result);
-
-    // removing all
-    pieceTable.init(BaseSize);
-    pieceTable.remove(AddressRange::fromWidth(BaseSize));
-
-    QCOMPARE(pieceTable.size(), 0);
-    QCOMPARE(pieceTable.changesCount(), 1);
-    QCOMPARE(pieceTable.appliedChangesCount(), 1);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, 0);
-    QVERIFY(!result);
+    QTest::addColumn<int>("multiFillCount");
+    QTest::addColumn<AddressRange>("removeRange");
+    QTest::addColumn<Size>("expectedTableSize");
+    QTest::addColumn<int>("expectedChangesCount");
+    QTest::addColumn<int>("expectedAppliedChangesCount");
+    QTest::addColumn<QVector<StorageDataTestData>>("testData");
 
     // removing a lot:
     const int pieceCount = 5;
@@ -566,313 +495,210 @@ void RevertablePieceTableTest::testRemove()
     const Address midPieceOffset = BaseSize * (mid - 1);
     const Size fullSize = pieceCount * BaseSize;
     // for this five equally sized pieces are inserted, reverse to offset in ChangeStore
+    Address changeStarts[6];
     for (int i = 0; i < pieceCount; ++i) {
         changeStarts[pieceCount - i] = BaseSize * i;
     }
 
-    // removing inside a piece in the middle
-    fillWithSize(&pieceTable, pieceCount);
-    pieceTable.remove(AddressRange::fromWidth(midPieceOffset + Start, Width));
-
-    QCOMPARE(pieceTable.size(), fullSize - Width);
-    QCOMPARE(pieceTable.changesCount(), pieceCount + 1);
-    QCOMPARE(pieceTable.appliedChangesCount(), pieceCount + 1);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, midPieceOffset + Start - 1);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, changeStarts[mid] + Start - 1);
-    QCOMPARE(storageId, Piece::ChangeStorage);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, midPieceOffset + Start);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, changeStarts[mid] + End + 1);
-    QCOMPARE(storageId, Piece::ChangeStorage);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, fullSize - Width - 1);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, changeStarts[pieceCount] + BaseSize - 1);
-    QCOMPARE(storageId, Piece::ChangeStorage);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, fullSize - Width);
-    QVERIFY(!result);
-
-    // removing start of a piece in the middle
-    fillWithSize(&pieceTable, pieceCount);
-    pieceTable.remove(AddressRange::fromWidth(midPieceOffset, Start));
-
-    QCOMPARE(pieceTable.size(), fullSize - Start);
-    QCOMPARE(pieceTable.changesCount(), pieceCount + 1);
-    QCOMPARE(pieceTable.appliedChangesCount(), pieceCount + 1);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, midPieceOffset - 1);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, changeStarts[mid - 1] + BaseSize - 1);
-    QCOMPARE(storageId, Piece::ChangeStorage);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, midPieceOffset);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, changeStarts[mid] + Start);
-    QCOMPARE(storageId, Piece::ChangeStorage);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, fullSize - Start - 1);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, changeStarts[pieceCount] + BaseSize - 1);
-    QCOMPARE(storageId, Piece::ChangeStorage);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, fullSize - Start);
-    QVERIFY(!result);
-
-    // removing end of a piece in the middle
-    fillWithSize(&pieceTable, pieceCount);
-    pieceTable.remove(AddressRange::fromWidth(midPieceOffset + End + 1, BaseSize - (End + 1)));
-
-    QCOMPARE(pieceTable.size(), fullSize - (BaseSize - End - 1));
-    QCOMPARE(pieceTable.changesCount(), pieceCount + 1);
-    QCOMPARE(pieceTable.appliedChangesCount(), pieceCount + 1);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, midPieceOffset + End);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, changeStarts[mid] + End);
-    QCOMPARE(storageId, Piece::ChangeStorage);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, midPieceOffset + End + 1);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, changeStarts[mid + 1]);
-    QCOMPARE(storageId, Piece::ChangeStorage);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, fullSize - (BaseSize - End - 1) - 1);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, changeStarts[pieceCount] + BaseSize - 1);
-    QCOMPARE(storageId, Piece::ChangeStorage);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, fullSize - (BaseSize - End - 1));
-    QVERIFY(!result);
-
-    // removing whole piece in the middle
-    fillWithSize(&pieceTable, pieceCount);
-    pieceTable.remove(AddressRange::fromWidth(midPieceOffset, BaseSize));
-
-    QCOMPARE(pieceTable.size(), fullSize - BaseSize);
-    QCOMPARE(pieceTable.changesCount(), pieceCount + 1);
-    QCOMPARE(pieceTable.appliedChangesCount(), pieceCount + 1);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, midPieceOffset - 1);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, changeStarts[mid - 1] + BaseSize - 1);
-    QCOMPARE(storageId, Piece::ChangeStorage);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, midPieceOffset);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, changeStarts[mid + 1]);
-    QCOMPARE(storageId, Piece::ChangeStorage);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, fullSize - BaseSize - 1);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, changeStarts[pieceCount] + BaseSize - 1);
-    QCOMPARE(storageId, Piece::ChangeStorage);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, fullSize - BaseSize);
-    QVERIFY(!result);
-
-    // removing whole piece and start of next in the middke
-    fillWithSize(&pieceTable, pieceCount);
-    pieceTable.remove(AddressRange::fromWidth(midPieceOffset, BaseSize + Start));
-
-    QCOMPARE(pieceTable.size(), fullSize - BaseSize - Start);
-    QCOMPARE(pieceTable.changesCount(), pieceCount + 1);
-    QCOMPARE(pieceTable.appliedChangesCount(), pieceCount + 1);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, midPieceOffset - 1);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, changeStarts[mid - 1] + BaseSize - 1);
-    QCOMPARE(storageId, Piece::ChangeStorage);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, midPieceOffset);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, changeStarts[mid + 1] + Start);
-    QCOMPARE(storageId, Piece::ChangeStorage);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, fullSize - BaseSize - Start - 1);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, changeStarts[pieceCount] + BaseSize - 1);
-    QCOMPARE(storageId, Piece::ChangeStorage);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, fullSize - BaseSize - Start);
-    QVERIFY(!result);
-
-    // removing whole piece and end of previous in the middle
-    fillWithSize(&pieceTable, pieceCount);
-    pieceTable.remove(AddressRange::fromWidth(midPieceOffset - (BaseSize - End - 1), BaseSize + BaseSize - (End + 1)));
-
-    QCOMPARE(pieceTable.size(), fullSize - BaseSize - (BaseSize - End - 1));
-    QCOMPARE(pieceTable.changesCount(), pieceCount + 1);
-    QCOMPARE(pieceTable.appliedChangesCount(), pieceCount + 1);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, midPieceOffset - (BaseSize - End - 1) - 1);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, changeStarts[mid - 1] + End);
-    QCOMPARE(storageId, Piece::ChangeStorage);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, midPieceOffset - (BaseSize - End - 1));
-    QVERIFY(result);
-    QCOMPARE(storageOffset, changeStarts[mid + 1]);
-    QCOMPARE(storageId, Piece::ChangeStorage);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, fullSize - BaseSize - (BaseSize - End - 1) - 1);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, changeStarts[pieceCount] + BaseSize - 1);
-    QCOMPARE(storageId, Piece::ChangeStorage);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, fullSize - BaseSize - (BaseSize - End - 1));
-    QVERIFY(!result);
-
-    // removing end of previous, whole and start of next in the middle
-    fillWithSize(&pieceTable, pieceCount);
-    pieceTable.remove(AddressRange::fromWidth(midPieceOffset - (BaseSize - End - 1), Start + BaseSize + BaseSize - (End + 1)));
-
-    QCOMPARE(pieceTable.size(), fullSize - BaseSize - (BaseSize - End - 1) - Start);
-    QCOMPARE(pieceTable.changesCount(), pieceCount + 1);
-    QCOMPARE(pieceTable.appliedChangesCount(), pieceCount + 1);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, midPieceOffset - (BaseSize - End - 1) - 1);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, changeStarts[mid - 1] + BaseSize - (BaseSize - End - 1) - 1);
-    QCOMPARE(storageId, Piece::ChangeStorage);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, midPieceOffset - (BaseSize - End - 1));
-    QVERIFY(result);
-    QCOMPARE(storageOffset, changeStarts[mid + 1] + Start);
-    QCOMPARE(storageId, Piece::ChangeStorage);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, fullSize - BaseSize - (BaseSize - End - 1) - Start - 1);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, changeStarts[pieceCount] + BaseSize - 1);
-    QCOMPARE(storageId, Piece::ChangeStorage);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, fullSize - BaseSize - (BaseSize - End - 1) - Start);
-    QVERIFY(!result);
-
-    // removing start of piece at start
-    fillWithSize(&pieceTable, pieceCount);
-    pieceTable.remove(AddressRange::fromWidth(Start));
-
-    QCOMPARE(pieceTable.size(), fullSize - Start);
-    QCOMPARE(pieceTable.changesCount(), pieceCount + 1);
-    QCOMPARE(pieceTable.appliedChangesCount(), pieceCount + 1);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, 0);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, changeStarts[1] + Start);
-    QCOMPARE(storageId, Piece::ChangeStorage);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, fullSize - Start - 1);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, changeStarts[pieceCount] + BaseSize - 1);
-    QCOMPARE(storageId, Piece::ChangeStorage);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, fullSize - Start);
-    QVERIFY(!result);
-
-    // removing whole piece at start
-    fillWithSize(&pieceTable, pieceCount);
-    pieceTable.remove(AddressRange::fromWidth(BaseSize));
-
-    QCOMPARE(pieceTable.size(), fullSize - BaseSize);
-    QCOMPARE(pieceTable.changesCount(), pieceCount + 1);
-    QCOMPARE(pieceTable.appliedChangesCount(), pieceCount + 1);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, 0);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, changeStarts[2]);
-    QCOMPARE(storageId, Piece::ChangeStorage);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, fullSize - BaseSize - 1);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, changeStarts[pieceCount] + BaseSize - 1);
-    QCOMPARE(storageId, Piece::ChangeStorage);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, fullSize - BaseSize);
-    QVERIFY(!result);
-
-    // removing whole piece and start of next at start
-    fillWithSize(&pieceTable, pieceCount);
-    pieceTable.remove(AddressRange::fromWidth(BaseSize + Start));
-
-    QCOMPARE(pieceTable.size(), fullSize - BaseSize - Start);
-    QCOMPARE(pieceTable.changesCount(), pieceCount + 1);
-    QCOMPARE(pieceTable.appliedChangesCount(), pieceCount + 1);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, 0);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, changeStarts[2] + Start);
-    QCOMPARE(storageId, Piece::ChangeStorage);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, fullSize - BaseSize - Start - 1);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, changeStarts[pieceCount] + BaseSize - 1);
-    QCOMPARE(storageId, Piece::ChangeStorage);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, fullSize - BaseSize - Start);
-    QVERIFY(!result);
-
-    // removing end of piece at end
-    fillWithSize(&pieceTable, pieceCount);
-    pieceTable.remove(AddressRange::fromWidth(fullSize - BaseSize + End + 1, BaseSize - (End + 1)));
-
-    QCOMPARE(pieceTable.size(), fullSize - (BaseSize - End - 1));
-    QCOMPARE(pieceTable.changesCount(), pieceCount + 1);
-    QCOMPARE(pieceTable.appliedChangesCount(), pieceCount + 1);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, fullSize - BaseSize + End);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, changeStarts[pieceCount] + End);
-    QCOMPARE(storageId, Piece::ChangeStorage);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, fullSize - (BaseSize - End - 1));
-    QVERIFY(!result);
-
-    // removing whole piece at end
-    fillWithSize(&pieceTable, pieceCount);
-    pieceTable.remove(AddressRange::fromWidth(fullSize - BaseSize, BaseSize));
-
-    QCOMPARE(pieceTable.size(), fullSize - BaseSize);
-    QCOMPARE(pieceTable.changesCount(), pieceCount + 1);
-    QCOMPARE(pieceTable.appliedChangesCount(), pieceCount + 1);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, fullSize - BaseSize - 1);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, changeStarts[pieceCount - 1] + BaseSize - 1);
-    QCOMPARE(storageId, Piece::ChangeStorage);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, fullSize - BaseSize);
-    QVERIFY(!result);
-
-    // removing whole piece and end of previous at end
-    fillWithSize(&pieceTable, pieceCount);
-    pieceTable.remove(AddressRange::fromWidth(fullSize - BaseSize - (BaseSize - End - 1), BaseSize + BaseSize - (End + 1)));
-
-    QCOMPARE(pieceTable.size(), fullSize - BaseSize - (BaseSize - End - 1));
-    QCOMPARE(pieceTable.changesCount(), pieceCount + 1);
-    QCOMPARE(pieceTable.appliedChangesCount(), pieceCount + 1);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, fullSize - BaseSize - (BaseSize - End - 1) - 1);
-    QVERIFY(result);
-    QCOMPARE(storageOffset, changeStarts[pieceCount - 1] + End);
-    QCOMPARE(storageId, Piece::ChangeStorage);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, fullSize - BaseSize - (BaseSize - End - 1));
-    QVERIFY(!result);
-
-    // removing all
-    fillWithSize(&pieceTable, pieceCount);
-    pieceTable.remove(AddressRange::fromWidth(fullSize));
-
-    QCOMPARE(pieceTable.size(), 0);
-    QCOMPARE(pieceTable.changesCount(), pieceCount + 1);
-    QCOMPARE(pieceTable.appliedChangesCount(), pieceCount + 1);
-
-    result = pieceTable.getStorageData(&storageId, &storageOffset, 0);
-    QVERIFY(!result);
+    AddressRange removeRange = AddressRange(0, Start - 1);
+    QTest::newRow("removing-at-begin")
+        << 0 << removeRange
+        << BaseSize - Start << 1 << 1
+        << QVector<StorageDataTestData> {
+            StorageDataTestData::valid(0, Start, Piece::OriginalStorage),
+            StorageDataTestData::valid(BaseSize - Start - 1, BaseSize - 1, Piece::OriginalStorage),
+            StorageDataTestData::invalid(BaseSize - Start)};
+
+    removeRange = AddressRange(Start, End);
+    QTest::newRow("removing-at-middle")
+        << 0 << removeRange
+        << BaseSize - Width << 1 << 1
+        << QVector<StorageDataTestData> {
+            StorageDataTestData::valid(Start - 1, Start - 1, Piece::OriginalStorage),
+            StorageDataTestData::valid(Start, End + 1, Piece::OriginalStorage),
+            StorageDataTestData::valid(BaseSize - Width - 1, BaseSize - 1, Piece::OriginalStorage),
+            StorageDataTestData::invalid(BaseSize - Width)};
+
+    removeRange = AddressRange(End + 1, BaseSize - 1);
+    QTest::newRow("removing-at-end")
+        << 0 << removeRange
+        << End + 1 << 1 << 1
+        << QVector<StorageDataTestData> {
+            StorageDataTestData::valid(End, End, Piece::OriginalStorage),
+            StorageDataTestData::invalid(End + 1)};
+
+    removeRange = AddressRange::fromWidth(BaseSize);
+    QTest::newRow("removing-all")
+        << 0 << removeRange
+        << 0 << 1 << 1
+        << QVector<StorageDataTestData> {
+            StorageDataTestData::invalid(0)};
+
+    removeRange = AddressRange::fromWidth(midPieceOffset + Start, Width);
+    QTest::newRow("removing-inside-a-piece-in-middle")
+        << pieceCount << removeRange
+        << fullSize - Width << pieceCount + 1 << pieceCount + 1
+        << QVector<StorageDataTestData> {
+            StorageDataTestData::valid(midPieceOffset + Start - 1, changeStarts[mid] + Start - 1, Piece::ChangeStorage),
+            StorageDataTestData::valid(midPieceOffset + Start, changeStarts[mid] + End + 1, Piece::ChangeStorage),
+            StorageDataTestData::valid(fullSize - Width - 1, changeStarts[pieceCount] + BaseSize - 1, Piece::ChangeStorage),
+            StorageDataTestData::invalid(fullSize - Width)};
+
+    removeRange = AddressRange::fromWidth(midPieceOffset, Start);
+    QTest::newRow("removing-start-of-a-piece-in-middle")
+        << pieceCount << removeRange
+        << fullSize - Start << pieceCount + 1 << pieceCount + 1
+        << QVector<StorageDataTestData> {
+            StorageDataTestData::valid(midPieceOffset - 1, changeStarts[mid - 1] + BaseSize - 1, Piece::ChangeStorage),
+            StorageDataTestData::valid(midPieceOffset, changeStarts[mid] + Start, Piece::ChangeStorage),
+            StorageDataTestData::valid(fullSize - Start - 1, changeStarts[pieceCount] + BaseSize - 1, Piece::ChangeStorage),
+            StorageDataTestData::invalid(fullSize - Start)};
+
+    removeRange = AddressRange::fromWidth(midPieceOffset + End + 1, BaseSize - (End + 1));
+    QTest::newRow("removing-end-of-a-piece-in-middle")
+        << pieceCount << removeRange
+        << fullSize - (BaseSize - End - 1) << pieceCount + 1 << pieceCount + 1
+        << QVector<StorageDataTestData> {
+            StorageDataTestData::valid(midPieceOffset + End, changeStarts[mid] + End, Piece::ChangeStorage),
+            StorageDataTestData::valid(midPieceOffset + End + 1, changeStarts[mid + 1], Piece::ChangeStorage),
+            StorageDataTestData::valid(fullSize - (BaseSize - End - 1) - 1, changeStarts[pieceCount] + BaseSize - 1, Piece::ChangeStorage),
+            StorageDataTestData::invalid(fullSize - (BaseSize - End - 1))};
+
+    removeRange = AddressRange::fromWidth(midPieceOffset, BaseSize);
+    QTest::newRow("removing-whole-piece-in-middle")
+        << pieceCount << removeRange
+        << fullSize - BaseSize << pieceCount + 1 << pieceCount + 1
+        << QVector<StorageDataTestData> {
+            StorageDataTestData::valid(midPieceOffset - 1, changeStarts[mid - 1] + BaseSize - 1, Piece::ChangeStorage),
+            StorageDataTestData::valid(midPieceOffset, changeStarts[mid + 1], Piece::ChangeStorage),
+            StorageDataTestData::valid(fullSize - BaseSize - 1, changeStarts[pieceCount] + BaseSize - 1, Piece::ChangeStorage),
+            StorageDataTestData::invalid(fullSize - BaseSize)};
+
+    removeRange = AddressRange::fromWidth(midPieceOffset, BaseSize + Start);
+    QTest::newRow("removing-whole-piece-and-start-of-next-in-middle")
+        << pieceCount << removeRange
+        << fullSize - BaseSize - Start << pieceCount + 1 << pieceCount + 1
+        << QVector<StorageDataTestData> {
+            StorageDataTestData::valid(midPieceOffset - 1, changeStarts[mid - 1] + BaseSize - 1, Piece::ChangeStorage),
+            StorageDataTestData::valid(midPieceOffset, changeStarts[mid + 1] + Start, Piece::ChangeStorage),
+            StorageDataTestData::valid(fullSize - BaseSize - Start - 1, changeStarts[pieceCount] + BaseSize - 1, Piece::ChangeStorage),
+            StorageDataTestData::invalid(fullSize - BaseSize - Start)};
+
+    removeRange = AddressRange::fromWidth(midPieceOffset - (BaseSize - End - 1), BaseSize + BaseSize - (End + 1));
+    QTest::newRow("removing-whole-piece-and-end-of-previous-in-middle")
+        << pieceCount << removeRange
+        << fullSize - BaseSize - (BaseSize - End - 1) << pieceCount + 1 << pieceCount + 1
+        << QVector<StorageDataTestData> {
+            StorageDataTestData::valid(midPieceOffset - (BaseSize - End - 1) - 1, changeStarts[mid - 1] + End, Piece::ChangeStorage),
+            StorageDataTestData::valid(midPieceOffset - (BaseSize - End - 1), changeStarts[mid + 1], Piece::ChangeStorage),
+            StorageDataTestData::valid(fullSize - BaseSize - (BaseSize - End - 1) - 1, changeStarts[pieceCount] + BaseSize - 1, Piece::ChangeStorage),
+            StorageDataTestData::invalid(fullSize - BaseSize - (BaseSize - End - 1))};
+
+    removeRange = AddressRange::fromWidth(midPieceOffset - (BaseSize - End - 1), Start + BaseSize + BaseSize - (End + 1));
+    QTest::newRow("removing-end-of-previous-whole-and-start-of-next-in-middle")
+        << pieceCount << removeRange
+        << fullSize - BaseSize - (BaseSize - End - 1) - Start << pieceCount + 1 << pieceCount + 1
+        << QVector<StorageDataTestData> {
+            StorageDataTestData::valid(midPieceOffset - (BaseSize - End - 1) - 1, changeStarts[mid - 1] + BaseSize - (BaseSize - End - 1) - 1, Piece::ChangeStorage),
+            StorageDataTestData::valid(midPieceOffset - (BaseSize - End - 1), changeStarts[mid + 1] + Start, Piece::ChangeStorage),
+            StorageDataTestData::valid(fullSize - BaseSize - (BaseSize - End - 1) - Start - 1, changeStarts[pieceCount] + BaseSize - 1, Piece::ChangeStorage),
+            StorageDataTestData::invalid(fullSize - BaseSize - (BaseSize - End - 1) - Start)};
+
+    removeRange = AddressRange::fromWidth(Start);
+    QTest::newRow("removing-start-of-piece-at-start")
+        << pieceCount << removeRange
+        << fullSize - Start << pieceCount + 1 << pieceCount + 1
+        << QVector<StorageDataTestData> {
+            StorageDataTestData::valid(0, changeStarts[1] + Start, Piece::ChangeStorage),
+            StorageDataTestData::valid(fullSize - Start - 1, changeStarts[pieceCount] + BaseSize - 1, Piece::ChangeStorage),
+            StorageDataTestData::invalid(fullSize - Start)};
+
+    removeRange = AddressRange::fromWidth(BaseSize);
+    QTest::newRow("removing-whole-piece-at-start")
+        << pieceCount << removeRange
+        << fullSize - BaseSize << pieceCount + 1 << pieceCount + 1
+        << QVector<StorageDataTestData> {
+            StorageDataTestData::valid(0, changeStarts[2], Piece::ChangeStorage),
+            StorageDataTestData::valid(fullSize - BaseSize - 1, changeStarts[pieceCount] + BaseSize - 1, Piece::ChangeStorage),
+            StorageDataTestData::invalid(fullSize - BaseSize)};
+
+    removeRange = AddressRange::fromWidth(BaseSize + Start);
+    QTest::newRow("removing-whole-piece-and-start-of-next-at-start")
+        << pieceCount << removeRange
+        << fullSize - BaseSize - Start << pieceCount + 1 << pieceCount + 1
+        << QVector<StorageDataTestData> {
+            StorageDataTestData::valid(0, changeStarts[2] + Start, Piece::ChangeStorage),
+            StorageDataTestData::valid(fullSize - BaseSize - Start - 1, changeStarts[pieceCount] + BaseSize - 1, Piece::ChangeStorage),
+            StorageDataTestData::invalid(fullSize - BaseSize - Start)};
+
+    removeRange = AddressRange::fromWidth(fullSize - BaseSize + End + 1, BaseSize - (End + 1));
+    QTest::newRow("removing-end-of-piece-at-end")
+        << pieceCount << removeRange
+        << fullSize - (BaseSize - End - 1) << pieceCount + 1 << pieceCount + 1
+        << QVector<StorageDataTestData> {
+            StorageDataTestData::valid(fullSize - BaseSize + End, changeStarts[pieceCount] + End, Piece::ChangeStorage),
+            StorageDataTestData::invalid(fullSize - (BaseSize - End - 1))};
+
+    removeRange = AddressRange::fromWidth(fullSize - BaseSize, BaseSize);
+    QTest::newRow("removing-whole-piece-at-end")
+        << pieceCount << removeRange
+        << fullSize - BaseSize << pieceCount + 1 << pieceCount + 1
+        << QVector<StorageDataTestData> {
+            StorageDataTestData::valid(fullSize - BaseSize - 1, changeStarts[pieceCount - 1] + BaseSize - 1, Piece::ChangeStorage),
+            StorageDataTestData::invalid(fullSize - BaseSize)};
+
+    removeRange = AddressRange::fromWidth(fullSize - BaseSize - (BaseSize - End - 1), BaseSize + BaseSize - (End + 1));
+    QTest::newRow("removing-whole-piece-and-end-of-previous-at-end")
+        << pieceCount << removeRange
+        << fullSize - BaseSize - (BaseSize - End - 1) << pieceCount + 1 << pieceCount + 1
+        << QVector<StorageDataTestData> {
+            StorageDataTestData::valid(fullSize - BaseSize - (BaseSize - End - 1) - 1, changeStarts[pieceCount - 1] + End, Piece::ChangeStorage),
+            StorageDataTestData::invalid(fullSize - BaseSize - (BaseSize - End - 1))};
+
+    removeRange = AddressRange::fromWidth(fullSize);
+    QTest::newRow("removing-all")
+        << pieceCount << removeRange
+        << 0 << pieceCount + 1 << pieceCount + 1
+        << QVector<StorageDataTestData> {
+            StorageDataTestData::invalid(0)};
+}
+
+void RevertablePieceTableTest::testRemove()
+{
+    QFETCH(const int, multiFillCount);
+    QFETCH(const AddressRange, removeRange);
+    QFETCH(const Size, expectedTableSize);
+    QFETCH(const int, expectedChangesCount);
+    QFETCH(const int, expectedAppliedChangesCount);
+    QFETCH(const QVector<StorageDataTestData>, testData);
+
+    RevertablePieceTable pieceTable;
+    if (multiFillCount > 0) {
+        fillWithSize(&pieceTable, multiFillCount);
+    } else {
+        pieceTable.init(BaseSize);
+    }
+
+    // tested action
+    pieceTable.remove(removeRange);
+
+    // check result
+    QCOMPARE(pieceTable.size(), expectedTableSize);
+    QCOMPARE(pieceTable.changesCount(), expectedChangesCount);
+    QCOMPARE(pieceTable.appliedChangesCount(), expectedAppliedChangesCount);
+
+    for (const auto& testDataEntry : testData) {
+        Piece::StorageType storageId;
+        Address storageOffset;
+
+        const bool result = pieceTable.getStorageData(&storageId, &storageOffset, testDataEntry.dataOffset());
+
+        QCOMPARE(result, testDataEntry.expectedResult());
+        if (testDataEntry.expectedResult()) {
+            QCOMPARE(storageOffset, testDataEntry.expectedStorageOffset());
+            QCOMPARE(storageId, testDataEntry.expectedStorageId());
+        }
+    }
 }
 
 void RevertablePieceTableTest::testSwap_data()
