@@ -1794,7 +1794,7 @@ msgstr "Zobrazí vybraný reťazec."
 msgctxt ""
 "@label:spinbox minimum length for consecutive chars to be seen as a string"
 msgid "Minimum length:"
-msgstr "Minimálna dľžka:"
+msgstr "Minimálna dĺžka:"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:111
 #, kde-format
@@ -1819,7 +1819,7 @@ msgid ""
 "found will be listed in the view below."
 msgstr ""
 "Ak stlačíte tlačidlo <interface>Extrahovať</interface> , začne sa "
-"vyhľadávanie všetkých reťazcov ktoré majú nastavenú minim. dľžku vo vybranom "
+"vyhľadávanie všetkých reťazcov ktoré majú nastavenú minim. dĺžku vo vybranom "
 "rozsahu. Tieto reťazce sa zobrazia nižšie."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:127
@@ -2575,7 +2575,7 @@ msgstr ""
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:106
 #, kde-format
 msgid "Floating-point precision:"
-msgstr "Presnoosť pre plávajúcu čiarku:"
+msgstr "Presnosť pre plávajúcu čiarku:"
 
 #. i18n: ectx: property (text), widget (QCheckBox, kcfg_ShowCharNumericalValue)
 #: controllers/view/structures/settings/structureviewsettingswidget.ui:119
@@ -2688,7 +2688,7 @@ msgstr "Zobrazenie hodnoty"
 #, kde-format
 msgctxt "@title:tab"
 msgid "Structures management"
-msgstr "menežment štruktúr"
+msgstr "Manažment štruktúr"
 
 #: controllers/view/structures/structureview.cpp:341
 #, kde-format
@@ -2901,7 +2901,7 @@ msgstr "Mód zobrazenia(&V)"
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "&Columns"
-msgstr "Stľpce(&C)"
+msgstr "Stĺpce(&C)"
 
 #: controllers/view/viewmode/viewmodecontroller.cpp:25
 #, kde-format

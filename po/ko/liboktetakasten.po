@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-03-25 02:14+0000\n"
-"PO-Revision-Date: 2026-02-03 23:47+0100\n"
+"PO-Revision-Date: 2026-04-26 21:18+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -1390,12 +1390,10 @@ msgstr "편집"
 #: controllers/view/poddecoder/podtableview.cpp:60
 #: controllers/view/stringsextract/stringsextractview.cpp:79
 #: controllers/view/structures/structureview.cpp:102
-#, fuzzy, kde-format
-#| msgctxt "@info:status offset value not available"
-#| msgid "Selection: -"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Select in View"
-msgstr "선택: -"
+msgstr "보기에서 선택"
 
 #: controllers/view/poddecoder/podtableview.cpp:113
 #, kde-format
@@ -2588,9 +2586,7 @@ msgid "Size"
 msgstr "크기"
 
 #: controllers/view/structures/structureview.cpp:56
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Validate"
+#, kde-format
 msgctxt "@action"
 msgid "Validate"
 msgstr "검사"
@@ -2602,9 +2598,7 @@ msgid "Validate all structures."
 msgstr "모든 구조체를 검사합니다."
 
 #: controllers/view/structures/structureview.cpp:74
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Script console"
+#, kde-format
 msgctxt "@action"
 msgid "Script Console"
 msgstr "스크립트 콘솔"
@@ -2616,9 +2610,7 @@ msgid "Open script console."
 msgstr "스크립트 콘솔을 엽니다."
 
 #: controllers/view/structures/structureview.cpp:80
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Settings"
+#, kde-format
 msgctxt "@action"
 msgid "Settings"
 msgstr "설정"
