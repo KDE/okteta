@@ -8,6 +8,8 @@
 
 // lib
 #include <logging.hpp>
+// Std
+#include <algorithm>
 
 namespace KPieceTable {
 
@@ -52,10 +54,15 @@ bool PieceTable::getStorageData(Piece::StorageType* storageId, Address* storageO
 // TODO: combine sucsequenting inserts, also on other changes if possible link neighbors
 void PieceTable::insert(Address insertDataOffset, Size insertLength, Address storageOffset)
 {
-    const Piece::StorageType storageId = Piece::ChangeStorage;
-    auto it = mList.begin();
+    // shortcut empty size
+    if (insertLength < 1) {
+        return;
+    }
 
-    const Piece insertPiece(storageOffset, insertLength, storageId);
+    const Piece insertPiece(storageOffset, insertLength, Piece::ChangeStorage);
+
+    bool isInserted = false;
+    auto it = mList.begin();
 
     // TODO: use width or offset from current and next?
     AddressRange dataRange(0, -1);
@@ -63,31 +70,59 @@ void PieceTable::insert(Address insertDataOffset, Size insertLength, Address sto
         Piece& piece = *it;
         dataRange.setEndByWidth(piece.width());
 
-        // piece starts at offset?
+        // current piece starts at insert offset?
         if (dataRange.start() == insertDataOffset) {
-            it = mList.insert(it, insertPiece);
-            ++it;
+            // merge inserted piece with previous piece if possible
+            if (it != mList.begin()) {
+                Piece& previousPiece = *(it - 1);
+                if (previousPiece.append(insertPiece)) {
+                    // merge altered previous and current piece if possible
+                    if (previousPiece.append(piece)) {
+                        mList.erase(it);
+                    }
+                    // done
+                    isInserted = true;
+                    break;
+                }
+            }
+
+            // merge to-insert piece with current piece if possible, otherwise insert
+            if (!piece.prepend(insertPiece)) {
+                mList.insert(it, insertPiece);
+            }
+            // done
+            isInserted = true;
             break;
         }
-        if (dataRange.nextBehindEnd() == insertDataOffset) {
-            if (piece.append(insertPiece)) {
-                break;
-            }
-        }
+        // current piece covers insert offset
         ++it;
         if (dataRange.includes(insertDataOffset)) {
+            // split current piece at insertion offset, will be two valid pieces
             const Piece secondPiece = piece.splitAtLocal(dataRange.localIndex(insertDataOffset));
+            // insert to-insert piece
             it = mList.insert(it, insertPiece);
             ++it;
-            it = mList.insert(it, secondPiece);
-            ++it;
+            // at last insert split-off half piece
+            mList.insert(it, secondPiece);
+            // done
+            isInserted = true;
             break;
         }
 
+        // update loop state
         dataRange.setStart(dataRange.nextBehindEnd());
     }
-    if ((it == mList.end()) && (dataRange.start() == insertDataOffset)) {
-        mList.insert(it, insertPiece);
+    // end of pieces reached
+    if (!isInserted && (dataRange.start() == insertDataOffset)) {
+        // merge to-insert piece with last piece if possible
+        if (it != mList.begin()) {
+            Piece& previousPiece = *(it - 1);
+            isInserted = previousPiece.append(insertPiece);
+        }
+        if (!isInserted) {
+            // insert to-insert piece at end
+            mList.insert(it, insertPiece);
+        }
     }
 
     mSize += insertLength;
@@ -95,6 +130,7 @@ void PieceTable::insert(Address insertDataOffset, Size insertLength, Address sto
 
 void PieceTable::insert(Address insertDataOffset, const PieceList& insertPieceList)
 {
+    // shortcut empty list
     if (insertPieceList.isEmpty()) {
         return;
     }
@@ -108,64 +144,81 @@ void PieceTable::insert(Address insertDataOffset, const PieceList& insertPieceLi
         Piece& piece = *it;
         dataRange.setEndByWidth(piece.width());
 
-        // piece starts at offset?
+        // current piece starts at insert offset?
         if (dataRange.start() == insertDataOffset) {
-            int i = 0;
+            auto firstInsertIt = insertPieceList.begin();
+            // merge first inserted piece with previous piece if possible
             if (it != mList.begin()) {
                 Piece& previousPiece = *(it - 1);
-                if (previousPiece.append(insertPieceList.at(0))) {
-                    if (insertPieceList.size() == 1) {
+                if (previousPiece.append(*firstInsertIt)) {
+                    ++firstInsertIt;
+                    // shortcut if no more pieces left to add
+                    if (firstInsertIt == insertPieceList.end()) {
+                        // merge altered previous and current piece if possible
                         if (previousPiece.append(piece)) {
                             ++it;
                             mList.erase(it);
                         }
+                        // done
                         isInserted = true;
                         break;
                     }
-                    ++i;
                 }
             }
 
-            const int lastIndex = insertPieceList.size() - 1;
-            for (; i < lastIndex; ++i) {
-                it = mList.insert(it, insertPieceList.at(i));
+            // insert all-but-last to-insert pieces
+            const auto lastInsertIt = insertPieceList.end() - 1;
+            // there is at least 1 piece to handle, also given the shortcut above,
+            // so firstInsertIt <= lastInsertIt can be relied on
+            std::for_each(firstInsertIt, lastInsertIt, [this, &it](const Piece& piece) mutable {
+                it = mList.insert(it, piece);
                 ++it;
-            }
+            });
 
-            const Piece& lastInsertPiece = insertPieceList.at(lastIndex);
+            // merge last to-insert piece with current piece if possible, otherwise insert
+            const Piece& lastInsertPiece = *lastInsertIt;
             if (!piece.prepend(lastInsertPiece)) {
                 mList.insert(it, lastInsertPiece);
             }
+            // done
             isInserted = true;
             break;
         }
+        // current piece covers insert offset
         ++it;
         if (dataRange.includes(insertDataOffset)) {
+            // split current piece at insertion offset, will be two valid pieces
             const Piece secondPiece = piece.splitAtLocal(dataRange.localIndex(insertDataOffset));
-            for (int i = 0; i < insertPieceList.size(); ++i) {
-                it = mList.insert(it, insertPieceList.at(i));
+            // insert all to-insert pieces
+            for (const auto& insertPiece : insertPieceList) {
+                it = mList.insert(it, insertPiece);
                 ++it;
             }
-
+            // at last insert split-off half piece
             mList.insert(it, secondPiece);
+            // done
             isInserted = true;
             break;
         }
 
+        // update loop state
         dataRange.setStart(dataRange.nextBehindEnd());
     }
+    // end of pieces reached
     if (!isInserted && (dataRange.start() == insertDataOffset)) {
-        int i = 0;
+        auto firstInsertIt = insertPieceList.begin();
+        // merge first inserted piece with last piece if possible
         if (it != mList.begin()) {
             Piece& previousPiece = *(it - 1);
-            if (previousPiece.append(insertPieceList.at(0))) {
-                ++i;
+            if (previousPiece.append(*firstInsertIt)) {
+                ++firstInsertIt;
             }
         }
-        for (; i < insertPieceList.size(); ++i) {
-            it = mList.insert(it, insertPieceList.at(i));
+        // insert all to-insert pieces at end
+        std::for_each(firstInsertIt, insertPieceList.end(), [this, &it](const Piece& piece) mutable {
+            it = mList.insert(it, piece);
             ++it;
-        }
+        });
     }
 
     mSize += insertPieceList.totalLength();
@@ -174,6 +227,12 @@ void PieceTable::insert(Address insertDataOffset, const PieceList& insertPieceLi
 // TODO: make algorithm simpler
 PieceList PieceTable::remove(const AddressRange& removeRange)
 {
+    // shortcut empty range
+    // TODO: empty range should be acceptable, warnn about anything?
+    if (!removeRange.isValid()) {
+        return {};
+    }
+
     PieceList removedPieceList;
 
     AddressRange dataRange(0, -1);
@@ -286,6 +345,12 @@ void PieceTable::replace(const AddressRange& removeRange, const PieceList& inser
 
 void PieceTable::swap(Address firstStart, const AddressRange& secondRange)
 {
+    // shortcut empty range
+    // TODO: empty range should be acceptable, warnn about anything?
+    if (!secondRange.isValid()) {
+        return;
+    }
+
     AddressRange dataRange(0, -1);
 
     auto it = mList.begin();

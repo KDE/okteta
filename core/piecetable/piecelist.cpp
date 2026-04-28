@@ -6,6 +6,9 @@
 
 #include "piecelist.hpp"
 
+// Std
+#include <algorithm>
+
 namespace KPieceTable {
 
 void PieceList::append(const Piece& piece)
