@@ -272,9 +272,14 @@ function(okteta_add_library _baseName)
     set_property(TARGET ${_targetName} PROPERTY OKTETA_NO_TARGETNAMESPACE ${OKTETA_ADD_LIBRARY_NO_TARGET_NAMESPACE})
     set_property(TARGET ${_targetName} PROPERTY OKTETA_USE_VERSIONED_PACKAGE_NAME ${_use_versioned_package_name})
 
+    set(_other_install_targets_args)
+    if(NOT BUILD_DEVEL)
+        list(APPEND _other_install_targets_args LIBRARY NAMELINK_SKIP)
+    endif()
     install( TARGETS ${_targetName}
         EXPORT ${_targets_export_name}
         ${KDE_INSTALL_TARGETS_DEFAULT_ARGS}
+        ${_other_install_targets_args}
     )
 
     if (OKTETA_ADD_LIBRARY_HEADERS OR OKTETA_ADD_LIBRARY_CCHEADERS)
@@ -296,19 +301,25 @@ function(okteta_add_library _baseName)
         target_include_directories(${_targetName}
             INTERFACE "$<INSTALL_INTERFACE:${_include_install_dir}>"
         )
-        install( FILES ${OKTETA_ADD_LIBRARY_HEADERS} ${_exportHeaderFilePath}
-            DESTINATION "${_include_install_dir}/${_include_dir}"
-            COMPONENT Devel
-        )
-        install( FILES ${OKTETA_ADD_LIBRARY_CCHEADERS}
-            DESTINATION "${_include_install_dir}/${_cc_include_dir}"
-            COMPONENT Devel
-        )
+        if (BUILD_DEVEL)
+            install( FILES ${OKTETA_ADD_LIBRARY_HEADERS} ${_exportHeaderFilePath}
+                DESTINATION "${_include_install_dir}/${_include_dir}"
+                COMPONENT Devel
+            )
+            install( FILES ${OKTETA_ADD_LIBRARY_CCHEADERS}
+                DESTINATION "${_include_install_dir}/${_cc_include_dir}"
+                COMPONENT Devel
+            )
+        endif()
     endif()
 endfunction()
 
 
 function(okteta_add_cmakeconfig _baseName)
+    if (NOT BUILD_DEVEL)
+        return()
+    endif()
+
     set(options
     )
     set(oneValueArgs
@@ -375,6 +386,10 @@ endfunction()
 
 
 function(okteta_add_qmakeconfig _baseName)
+    if (NOT BUILD_DEVEL)
+        return()
+    endif()
+
     set(options
     )
     set(oneValueArgs
@@ -422,6 +437,10 @@ function(okteta_add_qmakeconfig _baseName)
 endfunction()
 
 function(okteta_add_pkgconfig _baseName)
+    if (NOT BUILD_DEVEL)
+        return()
+    endif()
+
     set(options
     )
     set(oneValueArgs
