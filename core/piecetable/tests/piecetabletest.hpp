@@ -28,6 +28,8 @@ private Q_SLOTS: // test functions
     void testRemove();
     void testSwap_data();
     void testSwap();
+    void testGetStorageData_data();
+    void testGetStorageData();
 };
 
 }
