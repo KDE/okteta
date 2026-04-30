@@ -396,6 +396,25 @@ void PieceTableTest::testInsertMulti()
             QCOMPARE(storageId, testDataEntry.expectedStorageId);
         }
     }
+
+    const QVector<Piece> expectedPieces {
+        {changeStarts[12],      BaseSize,       Piece::ChangeStorage},
+        {changeStarts[9],       Mid,            Piece::ChangeStorage}, // part ninth
+        {changeStarts[11],      BaseSize,       Piece::ChangeStorage},
+        {changeStarts[9] + Mid, Mid + BaseSize, Piece::ChangeStorage}, // split ninth + merged tenth
+        {  0,  Mid, Piece::OriginalStorage},  // part original
+        {changeStarts[8],       BaseSize,       Piece::ChangeStorage},
+        {changeStarts[5],       Mid,            Piece::ChangeStorage}, // part fifth
+        {changeStarts[7],       BaseSize,       Piece::ChangeStorage},
+        {changeStarts[5] + Mid, Mid + BaseSize, Piece::ChangeStorage}, // split fifth + merged sixth
+        { Mid,  Mid, Piece::OriginalStorage}, // split original
+        {changeStarts[4],       BaseSize,       Piece::ChangeStorage},
+        {changeStarts[1],       Mid,            Piece::ChangeStorage}, // part first
+        {changeStarts[3],       BaseSize,       Piece::ChangeStorage},
+        {changeStarts[1] + Mid, Mid + BaseSize, Piece::ChangeStorage}, // split first + merged second
+    };
+
+    compare(pieceTable, expectedPieces);
 }
 
 void PieceTableTest::testRemove_data()
