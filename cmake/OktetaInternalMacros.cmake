@@ -342,18 +342,20 @@ macro(okteta_library_sources _baseName)
     endif()
 
     # install
-    get_property(_include_install_dir TARGET ${_targetName} PROPERTY OKTETA_INSTALL_INCLUDEDIR)
-    if (_include_install_dir)
-        get_property(_include_dir TARGET ${_targetName} PROPERTY OKTETA_INSTALL_NORMAL_HEADERS_SUBDIR)
-        get_property(_cc_include_dir TARGET ${_targetName} PROPERTY OKTETA_INSTALL_CAMELCASE_HEADERS_SUBDIR)
-        install( FILES ${_hdrs}
-            DESTINATION "${_include_install_dir}/${_include_dir}"
-            COMPONENT Devel
-        )
-        install( FILES ${_cchdrs}
-            DESTINATION "${_include_install_dir}/${_cc_include_dir}"
-            COMPONENT Devel
-        )
+    if (BUILD_DEVEL)
+        get_property(_include_install_dir TARGET ${_targetName} PROPERTY OKTETA_INSTALL_INCLUDEDIR)
+        if (_include_install_dir)
+            get_property(_include_dir TARGET ${_targetName} PROPERTY OKTETA_INSTALL_NORMAL_HEADERS_SUBDIR)
+            get_property(_cc_include_dir TARGET ${_targetName} PROPERTY OKTETA_INSTALL_CAMELCASE_HEADERS_SUBDIR)
+            install( FILES ${_hdrs}
+                DESTINATION "${_include_install_dir}/${_include_dir}"
+                COMPONENT Devel
+            )
+            install( FILES ${_cchdrs}
+                DESTINATION "${_include_install_dir}/${_cc_include_dir}"
+                COMPONENT Devel
+            )
+        endif()
     endif()
 endmacro()
 
@@ -589,18 +591,20 @@ macro(okteta_sublibrary_sources _baseName)
     endif()
 
     # install
-    get_property(_include_install_dir TARGET ${_targetName} PROPERTY OKTETA_INSTALL_INCLUDEDIR)
-    if (_include_install_dir)
-        get_property(_include_dir TARGET ${_targetName} PROPERTY OKTETA_INSTALL_NORMAL_HEADERS_SUBDIR)
-        get_property(_cc_include_dir TARGET ${_targetName} PROPERTY OKTETA_INSTALL_CAMELCASE_HEADERS_SUBDIR)
-        install( FILES ${_hdrs}
-            DESTINATION "${_include_install_dir}/${_include_dir}"
-            COMPONENT Devel
-        )
-        install( FILES ${_cchdrs}
-            DESTINATION "${_include_install_dir}/${_cc_include_dir}"
-            COMPONENT Devel
-        )
+    if (BUILD_DEVEL)
+        get_property(_include_install_dir TARGET ${_targetName} PROPERTY OKTETA_INSTALL_INCLUDEDIR)
+        if (_include_install_dir)
+            get_property(_include_dir TARGET ${_targetName} PROPERTY OKTETA_INSTALL_NORMAL_HEADERS_SUBDIR)
+            get_property(_cc_include_dir TARGET ${_targetName} PROPERTY OKTETA_INSTALL_CAMELCASE_HEADERS_SUBDIR)
+            install( FILES ${_hdrs}
+                DESTINATION "${_include_install_dir}/${_include_dir}"
+                COMPONENT Devel
+            )
+            install( FILES ${_cchdrs}
+                DESTINATION "${_include_install_dir}/${_cc_include_dir}"
+                COMPONENT Devel
+            )
+        endif()
     endif()
 endmacro()
 
@@ -754,7 +758,7 @@ function(okteta_add_library _baseName)
     set_property(TARGET ${_targetName} PROPERTY OKTETA_USE_VERSIONED_PACKAGE_NAME ${_use_versioned_package_name})
 
     set(_other_install_targets_args)
-    if(ARG_NAMELINK_SKIP)
+    if(${ARG_NAMELINK_SKIP} OR NOT ${BUILD_DEVEL})
         list(APPEND _other_install_targets_args LIBRARY NAMELINK_SKIP)
     endif()
     install( TARGETS ${_targetName}
@@ -784,14 +788,20 @@ function(okteta_add_library _baseName)
     target_include_directories(${_targetName}
         INTERFACE "$<INSTALL_INTERFACE:${_include_install_dir}>"
     )
-    install( FILES ${_exportHeaderFilePath}
-        DESTINATION "${_include_install_dir}/${_include_dir}"
-        COMPONENT Devel
-    )
+    if (BUILD_DEVEL)
+        install( FILES ${_exportHeaderFilePath}
+            DESTINATION "${_include_install_dir}/${_include_dir}"
+            COMPONENT Devel
+        )
+    endif()
 endfunction()
 
 
 function(okteta_add_cmakeconfig _baseName)
+    if (NOT BUILD_DEVEL)
+        return()
+    endif()
+
     set(options
     )
     set(oneValueArgs
@@ -908,6 +918,10 @@ endfunction()
 
 
 function(okteta_add_qmakeconfig _baseName)
+    if (NOT BUILD_DEVEL)
+        return()
+    endif()
+
     set(options
     )
     set(oneValueArgs
@@ -949,6 +963,10 @@ function(okteta_add_qmakeconfig _baseName)
 endfunction()
 
 function(okteta_add_pkgconfig _baseName)
+    if (NOT BUILD_DEVEL)
+        return()
+    endif()
+
     set(options
     )
     set(oneValueArgs

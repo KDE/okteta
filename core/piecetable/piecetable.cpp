@@ -156,7 +156,6 @@ void PieceTable::insert(Address insertDataOffset, const PieceList& insertPieceLi
                     if (firstInsertIt == insertPieceList.end()) {
                         // merge altered previous and current piece if possible
                         if (previousPiece.append(piece)) {
-                            ++it;
                             mList.erase(it);
                         }
                         // done

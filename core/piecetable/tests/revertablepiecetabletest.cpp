@@ -20,8 +20,6 @@ struct StorageDataTestData
     static StorageDataTestData valid(Address dataOffset, Address storageOffset, Piece::StorageType storageId)
     { return {dataOffset, true, storageOffset, storageId}; }
 
-    StorageDataTestData() = default;
-
     Address dataOffset() const { return m_dataOffset; }
     bool expectedResult() const { return m_result; }
     Address expectedStorageOffset() const { return m_storageOffset; }

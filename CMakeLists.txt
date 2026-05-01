@@ -48,6 +48,8 @@ if( NOT OMIT_INTERNAL_TEMPLATES )
     set( KASTEN_BUILD_INTERNAL_TEMPLATES TRUE )
 endif()
 
+option(BUILD_DEVEL "Build the public development files." ON)
+add_feature_info(DEVEL ${BUILD_DEVEL} "Public development files")
 option(BUILD_DESIGNERPLUGIN "Build the Designer plugin." ON)
 add_feature_info(DESIGNERPLUGIN ${BUILD_DESIGNERPLUGIN} "Qt Designer plugin")
 option(BUILD_OKTETAKASTENLIBS "Build the Okteta Kasten libraries." ON)

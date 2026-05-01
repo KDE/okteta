@@ -551,22 +551,22 @@ void PieceTest::testPrepend_data()
     QTest::addColumn<bool>("expectedSuccess");
     QTest::addColumn<PieceDataTestData>("expectedPieceData");
 
-    QTest::newRow("noncontinous-samestorage")
+    QTest::newRow("noncontinuous-samestorage")
         << AddressRange(Start, End) << Piece::OriginalStorage
         << AddressRange(0, Start - 2) << Piece::OriginalStorage
         << false << PieceDataTestData::valid(Start, End, Piece::OriginalStorage);
 
-    QTest::newRow("noncontinous-differentstorage")
+    QTest::newRow("noncontinuous-differentstorage")
         << AddressRange(Start, End) << Piece::OriginalStorage
         << AddressRange(0, Start - 2) << Piece::ChangeStorage
         << false << PieceDataTestData::valid(Start, End, Piece::OriginalStorage);
 
-    QTest::newRow("continous-samestorage")
+    QTest::newRow("continuous-samestorage")
         << AddressRange(Start, End) << Piece::OriginalStorage
         << AddressRange(0, Start - 1) << Piece::OriginalStorage
         << true << PieceDataTestData::valid(0, End, Piece::OriginalStorage);
 
-    QTest::newRow("continous-differentstorage")
+    QTest::newRow("continuous-differentstorage")
         << AddressRange(Start, End) << Piece::OriginalStorage
         << AddressRange(0, Start - 1) << Piece::ChangeStorage
         << false << PieceDataTestData::valid(Start, End, Piece::OriginalStorage);
@@ -607,22 +607,22 @@ void PieceTest::testAppend_data()
     QTest::addColumn<bool>("expectedSuccess");
     QTest::addColumn<PieceDataTestData>("expectedPieceData");
 
-    QTest::newRow("noncontinous-samestorage")
+    QTest::newRow("noncontinuous-samestorage")
         << AddressRange(Start, End) << Piece::OriginalStorage
         << AddressRange(End + 2, End + 10) << Piece::OriginalStorage
         << false << PieceDataTestData::valid(Start, End, Piece::OriginalStorage);
 
-    QTest::newRow("noncontinous-differentstorage")
+    QTest::newRow("noncontinuous-differentstorage")
         << AddressRange(Start, End) << Piece::OriginalStorage
         << AddressRange(End + 2, End + 10) << Piece::ChangeStorage
         << false << PieceDataTestData::valid(Start, End, Piece::OriginalStorage);
 
-    QTest::newRow("continous-samestorage")
+    QTest::newRow("continuous-samestorage")
         << AddressRange(Start, End) << Piece::OriginalStorage
         << AddressRange(End + 1, End + 10) << Piece::OriginalStorage
         << true << PieceDataTestData::valid(Start, End + 10, Piece::OriginalStorage);
 
-    QTest::newRow("continous-differentstorage")
+    QTest::newRow("continuous-differentstorage")
         << AddressRange(Start, End) << Piece::OriginalStorage
         << AddressRange(End + 1, End + 10) << Piece::ChangeStorage
         << false << PieceDataTestData::valid(Start, End, Piece::OriginalStorage);

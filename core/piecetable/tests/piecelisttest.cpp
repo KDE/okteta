@@ -130,7 +130,7 @@ void PieceListTest::testAppendPiece_data()
         << QVector<Piece> {
             {0, 10, Piece::OriginalStorage}};
 
-    QTest::newRow("noncontinous-samestorage")
+    QTest::newRow("noncontinuous-samestorage")
         << Piece{0, 10, Piece::OriginalStorage}
         << Piece{20, 5, Piece::OriginalStorage}
         << 15
@@ -138,7 +138,7 @@ void PieceListTest::testAppendPiece_data()
             {0, 10, Piece::OriginalStorage},
             {20, 5, Piece::OriginalStorage}};
 
-    QTest::newRow("noncontinous-differentstorage")
+    QTest::newRow("noncontinuous-differentstorage")
         << Piece{0, 10, Piece::OriginalStorage}
         << Piece{20, 5, Piece::ChangeStorage}
         << 15
@@ -146,14 +146,14 @@ void PieceListTest::testAppendPiece_data()
             {0, 10, Piece::OriginalStorage},
             {20, 5, Piece::ChangeStorage}};
 
-    QTest::newRow("continous-samestorage")
+    QTest::newRow("continuous-samestorage")
         << Piece{0, 10, Piece::OriginalStorage}
         << Piece{10, 5, Piece::OriginalStorage}
         << 15
         << QVector<Piece> {
             {0, 15, Piece::OriginalStorage}};
 
-    QTest::newRow("continous-differentstorage")
+    QTest::newRow("continuous-differentstorage")
         << Piece{0, 10, Piece::OriginalStorage}
         << Piece{10, 5, Piece::ChangeStorage}
         << 15
@@ -204,7 +204,7 @@ void PieceListTest::testAppendPieceList_data()
             {0, 5, Piece::ChangeStorage},
             {0, 10, Piece::OriginalStorage}};
 
-    QTest::newRow("noncontinous-samestorage")
+    QTest::newRow("noncontinuous-samestorage")
         << QVector<Piece> {
             {0, 5, Piece::ChangeStorage},
             {0, 10, Piece::OriginalStorage}}
@@ -216,7 +216,7 @@ void PieceListTest::testAppendPieceList_data()
             {0, 10, Piece::OriginalStorage},
             {20, 5, Piece::OriginalStorage}};
 
-    QTest::newRow("noncontinous-differentstorage")
+    QTest::newRow("noncontinuous-differentstorage")
         << QVector<Piece> {
             {0, 5, Piece::ChangeStorage},
             {0, 10, Piece::OriginalStorage}}
@@ -230,7 +230,7 @@ void PieceListTest::testAppendPieceList_data()
             {20, 5, Piece::ChangeStorage},
             {20, 10, Piece::OriginalStorage}};
 
-    QTest::newRow("continous-samestorage")
+    QTest::newRow("continuous-samestorage")
         << QVector<Piece> {
             {0, 5, Piece::ChangeStorage},
             {0, 10, Piece::OriginalStorage}}
@@ -243,7 +243,7 @@ void PieceListTest::testAppendPieceList_data()
             {0, 15, Piece::OriginalStorage},
             {20, 5, Piece::OriginalStorage}};
 
-    QTest::newRow("continous-differentstorage")
+    QTest::newRow("continuous-differentstorage")
         << QVector<Piece> {
             {0, 5, Piece::ChangeStorage},
             {0, 10, Piece::OriginalStorage}}
@@ -308,7 +308,7 @@ void PieceListTest::testPrependPieceList_data()
             {0, 5, Piece::ChangeStorage},
             {0, 10, Piece::OriginalStorage}};
 
-    QTest::newRow("noncontinous-samestorage")
+    QTest::newRow("noncontinuous-samestorage")
         << QVector<Piece> {
             {20, 5, Piece::OriginalStorage}}
         << QVector<Piece> {
@@ -320,7 +320,7 @@ void PieceListTest::testPrependPieceList_data()
             {0, 10, Piece::OriginalStorage},
             {20, 5, Piece::OriginalStorage}};
 
-    QTest::newRow("noncontinous-differentstorage")
+    QTest::newRow("noncontinuous-differentstorage")
         << QVector<Piece> {
             {20, 5, Piece::ChangeStorage},
             {20, 10, Piece::OriginalStorage}}
@@ -334,7 +334,7 @@ void PieceListTest::testPrependPieceList_data()
             {20, 5, Piece::ChangeStorage},
             {20, 10, Piece::OriginalStorage}};
 
-    QTest::newRow("continous-samestorage")
+    QTest::newRow("continuous-samestorage")
         << QVector<Piece> {
             {10, 5, Piece::OriginalStorage},
             {20, 5, Piece::OriginalStorage}}
@@ -347,7 +347,7 @@ void PieceListTest::testPrependPieceList_data()
             {0, 15, Piece::OriginalStorage},
             {20, 5, Piece::OriginalStorage}};
 
-    QTest::newRow("continous-differentstorage")
+    QTest::newRow("continuous-differentstorage")
         << QVector<Piece> {
             {10, 5, Piece::ChangeStorage},
             {20, 5, Piece::OriginalStorage}}
