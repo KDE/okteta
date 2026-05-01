@@ -15,6 +15,7 @@
 #include <QTest>
 // Std
 #include <cstdio>
+#include <numeric>
 
 namespace KPieceTable {
 struct StorageDataTestData
@@ -83,6 +84,12 @@ char* toString(Piece piece)
 
 void compare(const PieceTable& pieceTable, const QVector<Piece>& expectedPieces)
 {
+    const Size expectedTableSize = std::accumulate(expectedPieces.begin(), expectedPieces.end(), 0, [](Size sum, const Piece& piece) {
+        return sum + piece.width();
+    });
+
+    QCOMPARE(pieceTable.size(), expectedTableSize);
+
     // TODO: find some useful output with QCOMPARE
     if (pieceTable.piecesSize() != expectedPieces.size()) {
         for (const auto& piece : expectedPieces) {
@@ -138,26 +145,22 @@ void PieceTableTest::testInsert_data()
     QTest::addColumn<Address>("insertDataOffset");
     QTest::addColumn<Size>("insertLength");
     QTest::addColumn<Address>("insertStorageOffset");
-    QTest::addColumn<Size>("expectedTableSize");
     QTest::addColumn<QVector<Piece>>("expectedPieces");
 
     QTest::newRow("inserting-to-empty")
         << 0
         << 0 << Width << ChangeStart
-        << Width
         << QVector<Piece> {
             {ChangeStart, Width, Piece::ChangeStorage}};
     QTest::newRow("inserting-one-at-begin")
         << BaseSize
         << 0 << Width << ChangeStart
-        << BaseSize + Width
         << QVector<Piece> {
             {ChangeStart, Width, Piece::ChangeStorage},
             {0, BaseSize, Piece::OriginalStorage}};
     QTest::newRow("inserting-one-in-middle")
         << BaseSize
         << Start << Width << ChangeStart
-        << BaseSize + Width
         << QVector<Piece> {
             {0, Start, Piece::OriginalStorage},
             {ChangeStart, Width, Piece::ChangeStorage},
@@ -165,7 +168,6 @@ void PieceTableTest::testInsert_data()
     QTest::newRow("inserting-one-at-end")
         << BaseSize
         << BaseSize << Width << ChangeStart
-        << BaseSize + Width
         << QVector<Piece> {
             {0, BaseSize, Piece::OriginalStorage},
             {ChangeStart, Width, Piece::ChangeStorage}};
@@ -177,7 +179,6 @@ void PieceTableTest::testInsert()
     QFETCH(const Address, insertDataOffset);
     QFETCH(const Size, insertLength);
     QFETCH(const Address, insertStorageOffset);
-    QFETCH(const Size, expectedTableSize);
     QFETCH(const QVector<Piece>, expectedPieces);
 
     PieceTable pieceTable;
@@ -187,8 +188,6 @@ void PieceTableTest::testInsert()
     pieceTable.insert(insertDataOffset, insertLength, insertStorageOffset);
 
     // check result
-    QCOMPARE(pieceTable.size(), expectedTableSize);
-
     compare(pieceTable, expectedPieces);
 }
 
@@ -273,7 +272,6 @@ void PieceTableTest::testRemove_data()
 {
     QTest::addColumn<int>("multiFillCount");
     QTest::addColumn<AddressRange>("removeRange");
-    QTest::addColumn<Size>("expectedTableSize");
     QTest::addColumn<QVector<Piece>>("expectedPieces");
 
     // removing a lot:
@@ -285,30 +283,25 @@ void PieceTableTest::testRemove_data()
     AddressRange removeRange = AddressRange(0, Start - 1);
     QTest::newRow("removing-at-begin")
         << 0 << removeRange
-        << BaseSize - removeRange.width()
         << QVector<Piece> {
             {removeRange.nextBehindEnd(), BaseSize - removeRange.width(), Piece::OriginalStorage}};
     removeRange = AddressRange(Start, End);
     QTest::newRow("removing-at-middle")
         << 0 << removeRange
-        << BaseSize - removeRange.width()
         << QVector<Piece> {
             {0, removeRange.start(), Piece::OriginalStorage},
             {removeRange.nextBehindEnd(), BaseSize - removeRange.end() - 1, Piece::OriginalStorage}};
     removeRange = AddressRange(End + 1, BaseSize - 1);
     QTest::newRow("removing-at-end")
         << 0 << removeRange
-        << End + 1
         << QVector<Piece> {
             {0, BaseSize - removeRange.width(), Piece::OriginalStorage}};
     QTest::newRow("removing-all")
         << 0 << AddressRange::fromWidth(BaseSize)
-        << 0
         << QVector<Piece>();
     removeRange = AddressRange::fromWidth(midPieceOffset + Start, Width);
     QTest::newRow("removing-inside-piece-in-middle")
         << pieceCount << removeRange
-        << fullSize - removeRange.width()
         << QVector<Piece> {
             {4 * BaseSize, BaseSize, Piece::ChangeStorage},
             {3 * BaseSize, BaseSize, Piece::ChangeStorage},
@@ -319,7 +312,6 @@ void PieceTableTest::testRemove_data()
     removeRange = AddressRange::fromWidth(midPieceOffset, Start);
     QTest::newRow("removing-start-of-piece-in-middle")
         << pieceCount << removeRange
-        << fullSize - removeRange.width()
         << QVector<Piece> {
             {4 * BaseSize, BaseSize, Piece::ChangeStorage},
             {3 * BaseSize, BaseSize, Piece::ChangeStorage},
@@ -329,7 +321,6 @@ void PieceTableTest::testRemove_data()
     removeRange = AddressRange::fromWidth(midPieceOffset + End + 1, BaseSize - (End + 1));
     QTest::newRow("removing-end-of-piece-in-middle")
         << pieceCount << removeRange
-        << fullSize - removeRange.width()
         << QVector<Piece> {
             {4 * BaseSize, BaseSize, Piece::ChangeStorage},
             {3 * BaseSize, BaseSize, Piece::ChangeStorage},
@@ -339,7 +330,6 @@ void PieceTableTest::testRemove_data()
     removeRange = AddressRange::fromWidth(midPieceOffset, BaseSize);
     QTest::newRow("removing-whole-piece-in-middle")
         << pieceCount << removeRange
-        << fullSize - removeRange.width()
         << QVector<Piece> {
             {4 * BaseSize, BaseSize, Piece::ChangeStorage},
             {3 * BaseSize, BaseSize, Piece::ChangeStorage},
@@ -348,7 +338,6 @@ void PieceTableTest::testRemove_data()
     removeRange = AddressRange::fromWidth(midPieceOffset, BaseSize + Start);
     QTest::newRow("removing-whole-piece-and-start-of-next-in-middle")
         << pieceCount << removeRange
-        << fullSize - removeRange.width()
         << QVector<Piece> {
             {4 * BaseSize, BaseSize, Piece::ChangeStorage},
             {3 * BaseSize, BaseSize, Piece::ChangeStorage},
@@ -357,7 +346,6 @@ void PieceTableTest::testRemove_data()
     removeRange = AddressRange::fromWidth(midPieceOffset - (BaseSize - End - 1), BaseSize + BaseSize - (End + 1));
     QTest::newRow("removing-whole-piece-and-end-of-previous-in-middle")
         << pieceCount << removeRange
-        << fullSize - removeRange.width()
         << QVector<Piece> {
             {4 * BaseSize, BaseSize, Piece::ChangeStorage},
             {3 * BaseSize, End + 1, Piece::ChangeStorage},
@@ -366,7 +354,6 @@ void PieceTableTest::testRemove_data()
     removeRange = AddressRange::fromWidth(midPieceOffset - (BaseSize - End - 1), Start + BaseSize + BaseSize - (End + 1));
     QTest::newRow("removing-end-of-previous-whole-and-start-of-next-in-middle")
         << pieceCount << removeRange
-        << fullSize - removeRange.width()
         << QVector<Piece> {
             {4 * BaseSize, BaseSize, Piece::ChangeStorage},
             {3 * BaseSize, End + 1, Piece::ChangeStorage},
@@ -375,7 +362,6 @@ void PieceTableTest::testRemove_data()
     removeRange = AddressRange::fromWidth(Start);
     QTest::newRow("removing-start-of-piece-at-start")
         << pieceCount << removeRange
-        << fullSize - removeRange.width()
         << QVector<Piece> {
             {4 * BaseSize + Start, BaseSize - Start, Piece::ChangeStorage},
             {3 * BaseSize, BaseSize, Piece::ChangeStorage},
@@ -385,7 +371,6 @@ void PieceTableTest::testRemove_data()
     removeRange = AddressRange::fromWidth(BaseSize);
     QTest::newRow("removing-whole-piece-at-start")
         << pieceCount << removeRange
-        << fullSize - removeRange.width()
         << QVector<Piece> {
             {3 * BaseSize, BaseSize, Piece::ChangeStorage},
             {2 * BaseSize, BaseSize, Piece::ChangeStorage},
@@ -394,7 +379,6 @@ void PieceTableTest::testRemove_data()
     removeRange = AddressRange::fromWidth(BaseSize + Start);
     QTest::newRow("removing-whole-piece-and-start-of-next-at-start")
         << pieceCount << removeRange
-        << fullSize - removeRange.width()
         << QVector<Piece> {
             {3 * BaseSize + Start, BaseSize - Start, Piece::ChangeStorage},
             {2 * BaseSize, BaseSize, Piece::ChangeStorage},
@@ -403,7 +387,6 @@ void PieceTableTest::testRemove_data()
     removeRange = AddressRange::fromWidth(fullSize - BaseSize + End + 1, BaseSize - (End + 1));
     QTest::newRow("removing-end-of-piece-at-end")
         << pieceCount << removeRange
-        << fullSize - removeRange.width()
         << QVector<Piece> {
             {4 * BaseSize, BaseSize, Piece::ChangeStorage},
             {3 * BaseSize, BaseSize, Piece::ChangeStorage},
@@ -413,7 +396,6 @@ void PieceTableTest::testRemove_data()
     removeRange = AddressRange::fromWidth(fullSize - BaseSize, BaseSize);
     QTest::newRow("removing-whole-piece-at-end")
         << pieceCount << removeRange
-        << fullSize - removeRange.width()
         << QVector<Piece> {
             {4 * BaseSize, BaseSize, Piece::ChangeStorage},
             {3 * BaseSize, BaseSize, Piece::ChangeStorage},
@@ -422,7 +404,6 @@ void PieceTableTest::testRemove_data()
     removeRange = AddressRange::fromWidth(fullSize - BaseSize - (BaseSize - End - 1), BaseSize + BaseSize - (End + 1));
     QTest::newRow("removing-whole-piece-and-end-of-previous-at-end")
         << pieceCount << removeRange
-        << fullSize - removeRange.width()
         << QVector<Piece> {
             {4 * BaseSize, BaseSize, Piece::ChangeStorage},
             {3 * BaseSize, BaseSize, Piece::ChangeStorage},
@@ -430,7 +411,6 @@ void PieceTableTest::testRemove_data()
             {BaseSize, End + 1, Piece::ChangeStorage}};
     QTest::newRow("removing-all-pieces")
         << pieceCount << AddressRange::fromWidth(fullSize)
-        << 0
         << QVector<Piece>();
 }
 
@@ -438,7 +418,6 @@ void PieceTableTest::testRemove()
 {
     QFETCH(const int, multiFillCount);
     QFETCH(const AddressRange, removeRange);
-    QFETCH(const Size, expectedTableSize);
     QFETCH(const QVector<Piece>, expectedPieces);
 
     PieceTable pieceTable;
@@ -452,8 +431,6 @@ void PieceTableTest::testRemove()
     pieceTable.remove(removeRange);
 
     // check result
-    QCOMPARE(pieceTable.size(), expectedTableSize);
-
     compare(pieceTable, expectedPieces);
 }
 
