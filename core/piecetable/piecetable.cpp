@@ -444,14 +444,18 @@ Piece PieceTable::replaceOne(Address dataOffset, Address storageOffset, Piece::S
         Piece* const piece = &(*it);
         dataRange.setEndByWidth(piece->width());
         if (dataRange.includes(dataOffset)) {
+            // collect replaced stprage type
             replacedStorageId = piece->storageId();
 
             const Piece replacePiece(storageOffset, 1, storageId);
+
             // piece starts at offset?
             if (dataRange.start() == dataOffset) {
+                // collect replaced stprage offset
                 replacedStorageOffset = piece->start();
 
                 bool isApppendedToPrevious = false;
+                // merge inserted piece with previous piece if possible
                 if (it != mList.begin()) {
                     Piece& previousPiece = *(it - 1);
                     isApppendedToPrevious = previousPiece.append(replacePiece);
@@ -459,6 +463,7 @@ Piece PieceTable::replaceOne(Address dataOffset, Address storageOffset, Piece::S
 
                 // existing piece 1:1 replacement?
                 if (dataRange.width() == 1) {
+                    // merge inserted piece with next piece if possible
                     bool isPrependedToNext = false;
                     bool isPreviousNextMerged = false;
                     const auto nextIt = it + 1;
@@ -471,6 +476,7 @@ Piece PieceTable::replaceOne(Address dataOffset, Address storageOffset, Piece::S
                             isPrependedToNext = nextPiece.prepend(replacePiece);
                         }
                     }
+                    // if merged, drop existing piece, otherwise reuse it
                     if (isApppendedToPrevious || isPrependedToNext) {
                         it = mList.erase(it);
                         if (isPreviousNextMerged) {
@@ -481,38 +487,53 @@ Piece PieceTable::replaceOne(Address dataOffset, Address storageOffset, Piece::S
                         piece->setStorageId(storageId);
                     }
                 } else {
+                    // insert before current piece
                     if (!isApppendedToPrevious) {
                         mList.insert(it, replacePiece);
                     }
+                    // chop off leading 1 from that
                     piece->moveStartBy(1);
                 }
             } else if (dataRange.end() == dataOffset) {
+                // collect replaced stprage offset
                 replacedStorageOffset = piece->end();
+                // assuming size > 1, piece with size == 1 would be handled in check for start above
+                // chop off trailing 1 from current piece
                 piece->moveEndBy(-1);
+                // merge inserted piece with next piece if possible
                 bool isPrependedToNext = false;
                 const auto nextIt = it + 1;
                 if (nextIt != mList.end()) {
                     Piece& nextPiece = *nextIt;
                     isPrependedToNext = nextPiece.prepend(replacePiece);
                 }
+                // insert after current piece
                 if (!isPrependedToNext) {
                     mList.insert(nextIt, replacePiece);
                 }
             } else {
                 const Address localIndex = dataRange.localIndex(dataOffset);
+
+                // collect replaced stprage offset
                 replacedStorageOffset = piece->start() + localIndex;
 
+                // split off second piece and insert after adapted current
                 const Piece secondPiece = piece->removeLocal(AddressRange::fromWidth(localIndex, 1));
                 ++it;
                 it = mList.insert(it, replacePiece);
                 ++it;
                 mList.insert(it, secondPiece);
             }
+
+            // done
             break;
         }
+
+        // update loop state
         ++it;
         dataRange.setStart(dataRange.nextBehindEnd());
     }
+
     return Piece(replacedStorageOffset, 1, replacedStorageId);
 }
 
