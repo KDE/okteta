@@ -131,6 +131,49 @@ void PieceTableTest::testInit()
     compare(pieceTable, expectedPieces);
 }
 
+void PieceTableTest::testInsertPieceListToEmpty_data()
+{
+    QTest::addColumn<QVector<Piece>>("insertPieces");
+    QTest::addColumn<QVector<Piece>>("expectedPieces");
+
+    QTest::newRow("empty")
+        << QVector<Piece> {}
+        << QVector<Piece> {};
+
+    QTest::newRow("one")
+        << QVector<Piece> {
+            {Start, Width, Piece::ChangeStorage}}
+        << QVector<Piece> {
+            {Start, Width, Piece::ChangeStorage}};
+
+    QTest::newRow("two")
+        << QVector<Piece> {
+            {Start, Width, Piece::ChangeStorage},
+            {0, Width, Piece::OriginalStorage}}
+        << QVector<Piece> {
+            {Start, Width, Piece::ChangeStorage},
+            {0, Width, Piece::OriginalStorage}};
+}
+
+void PieceTableTest::testInsertPieceListToEmpty()
+{
+    QFETCH(const QVector<Piece>, insertPieces);
+    QFETCH(const QVector<Piece>, expectedPieces);
+
+    PieceList insertPieceList;
+    for (const auto& piece : insertPieces) {
+        insertPieceList.append(piece);
+    }
+
+    PieceTable pieceTable;
+
+    // tested action
+    pieceTable.insert(0, insertPieceList);
+
+    // check result
+    compare(pieceTable, expectedPieces);
+}
+
 static void fillWithSize(PieceTable* pieceTable, int count)
 {
     pieceTable->init(0);
