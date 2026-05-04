@@ -450,18 +450,54 @@ Piece PieceTable::replaceOne(Address dataOffset, Address storageOffset, Piece::S
             // piece starts at offset?
             if (dataRange.start() == dataOffset) {
                 replacedStorageOffset = piece->start();
+
+                bool isApppendedToPrevious = false;
+                if (it != mList.begin()) {
+                    Piece& previousPiece = *(it - 1);
+                    isApppendedToPrevious = previousPiece.append(replacePiece);
+                }
+
+                // existing piece 1:1 replacement?
                 if (dataRange.width() == 1) {
-                    piece->set(storageOffset, storageOffset);
-                    piece->setStorageId(storageId);
+                    bool isPrependedToNext = false;
+                    bool isPreviousNextMerged = false;
+                    const auto nextIt = it + 1;
+                    if (nextIt != mList.end()) {
+                        Piece& nextPiece = *nextIt;
+                        if (isApppendedToPrevious) {
+                            Piece& previousPiece = *(it - 1);
+                            isPreviousNextMerged = previousPiece.append(nextPiece);
+                        } else {
+                            isPrependedToNext = nextPiece.prepend(replacePiece);
+                        }
+                    }
+                    if (isApppendedToPrevious || isPrependedToNext) {
+                        it = mList.erase(it);
+                        if (isPreviousNextMerged) {
+                            mList.erase(it);
+                        }
+                    } else {
+                        piece->set(storageOffset, storageOffset);
+                        piece->setStorageId(storageId);
+                    }
                 } else {
-                    mList.insert(it, replacePiece);
+                    if (!isApppendedToPrevious) {
+                        mList.insert(it, replacePiece);
+                    }
                     piece->moveStartBy(1);
                 }
             } else if (dataRange.end() == dataOffset) {
                 replacedStorageOffset = piece->end();
                 piece->moveEndBy(-1);
-                ++it;
-                mList.insert(it, replacePiece);
+                bool isPrependedToNext = false;
+                const auto nextIt = it + 1;
+                if (nextIt != mList.end()) {
+                    Piece& nextPiece = *nextIt;
+                    isPrependedToNext = nextPiece.prepend(replacePiece);
+                }
+                if (!isPrependedToNext) {
+                    mList.insert(nextIt, replacePiece);
+                }
             } else {
                 const Address localIndex = dataRange.localIndex(dataOffset);
                 replacedStorageOffset = piece->start() + localIndex;
