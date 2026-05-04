@@ -88,10 +88,10 @@ void compare(const PieceTable& pieceTable, const QVector<Piece>& expectedPieces)
         return sum + piece.width();
     });
 
-    QCOMPARE(pieceTable.size(), expectedTableSize);
 
     // TODO: find some useful output with QCOMPARE
-    if (pieceTable.piecesSize() != expectedPieces.size()) {
+    if ((pieceTable.piecesSize() != expectedPieces.size()) ||
+        (pieceTable.size() != expectedTableSize)) {
         for (const auto& piece : expectedPieces) {
             qDebug() << "Expected:" << piece;
         }
@@ -100,6 +100,7 @@ void compare(const PieceTable& pieceTable, const QVector<Piece>& expectedPieces)
         }
     }
 
+    QCOMPARE(pieceTable.size(), expectedTableSize);
     QCOMPARE(pieceTable.piecesSize(), expectedPieces.size());
 
     int i = 0;
