@@ -45,6 +45,8 @@ private:
 
 Q_DECLARE_METATYPE(QVector<KPieceTable::StorageDataTestData>)
 Q_DECLARE_METATYPE(QVector<KPieceTable::Piece>)
+Q_DECLARE_METATYPE(KPieceTable::Piece)
+Q_DECLARE_METATYPE(KPieceTable::Piece::StorageType)
 Q_DECLARE_METATYPE(KPieceTable::AddressRange)
 
 namespace KPieceTable {
@@ -529,6 +531,140 @@ void PieceTableTest::testSwap()
 
     // check result
     QCOMPARE(pieceTable.size(), BaseSize);
+
+    compare(pieceTable, expectedPieces);
+}
+
+void PieceTableTest::testReplaceOne_data()
+{
+    QTest::addColumn<QVector<Piece>>("initPieces");
+    QTest::addColumn<Address>("replaceDataOffset");
+    QTest::addColumn<Address>("replaceStorageOffset");
+    QTest::addColumn<Piece::StorageType>("replaceStorageId");
+    QTest::addColumn<Piece>("expectedReplacedPiece");
+    QTest::addColumn<QVector<Piece>>("expectedPieces");
+
+    const Piece changePieceA1 {0, 1, Piece::ChangeStorage};
+    const Piece changePieceA2 {1, 1, Piece::ChangeStorage};
+    const Piece changePieceA3 {2, 1, Piece::ChangeStorage};
+    const Piece changePieceA12 {0, 2, Piece::ChangeStorage};
+    const Piece changePieceA123 {0, 3, Piece::ChangeStorage};
+    const Piece changePieceB {Start, Width, Piece::ChangeStorage};
+    const Piece changePieceB1 {Start, 1, Piece::ChangeStorage};
+    const Piece changePieceB2 {Start + 1, 1, Piece::ChangeStorage};
+    const Piece changePiece_B {Start + 1, Width - 1, Piece::ChangeStorage};
+    const Piece changePiece__B {Start + 2, Width - 2, Piece::ChangeStorage};
+
+    const Piece originalPieceB {Start, Width, Piece::OriginalStorage};
+    const Piece originalPieceB_ {Start, Width - 1, Piece::OriginalStorage};
+    const Piece originalPieceB__ {Start, Width - 2, Piece::OriginalStorage};
+    const Piece originalPieceB1 {Start, 1, Piece::OriginalStorage};
+    const Piece originalPiece_B {Start + 1, Width - 1, Piece::OriginalStorage};
+    const Piece originalPiece1B {End, 1, Piece::OriginalStorage};
+    const Piece originalPieceBM {Start, Width / 2, Piece::OriginalStorage};
+    const Piece originalPiece_MB {Start + Width / 2 + 1, Width / 2, Piece::OriginalStorage};
+
+    QTest::newRow("one-with-one-only")
+        << QVector<Piece> {originalPieceB1}
+        << 0 << Start + 1 << Piece::ChangeStorage
+        << originalPieceB1
+        << QVector<Piece> {changePieceB2};
+
+    QTest::newRow("one-with-one-first-continuous")
+        << QVector<Piece> {originalPieceB1, changePieceA2}
+        << 0 << 0 << Piece::ChangeStorage
+        << originalPieceB1
+        << QVector<Piece> {changePieceA12};
+
+    QTest::newRow("one-with-one-first-noncontinuous")
+        << QVector<Piece> {originalPieceB1, changePieceA1}
+        << 0 << Start + 1 << Piece::ChangeStorage
+        << originalPieceB1
+        << QVector<Piece> {changePieceB2, changePieceA1};
+
+    QTest::newRow("one-with-one-second-continuous")
+        << QVector<Piece> {changePieceA1, originalPieceB1}
+        << 1 << 1 << Piece::ChangeStorage
+        << originalPieceB1
+        << QVector<Piece> {changePieceA12};
+
+    QTest::newRow("one-with-one-second-noncontinuous")
+        << QVector<Piece> {changePieceA1, originalPieceB1}
+        << 1 << Start + 1 << Piece::ChangeStorage
+        << originalPieceB1
+        << QVector<Piece> {changePieceA1, changePieceB2};
+
+    QTest::newRow("one-with-one-three-continuous")
+        << QVector<Piece> {changePieceA1, originalPieceB1, changePieceA3}
+        << 1 << 1 << Piece::ChangeStorage
+        << originalPieceB1
+        << QVector<Piece> {changePieceA123};
+
+    QTest::newRow("one-with-begin-multi")
+        << QVector<Piece> {originalPieceB}
+        << 0 << Start + 1 << Piece::ChangeStorage
+        << originalPieceB1
+        << QVector<Piece> {changePieceB2, originalPiece_B};
+
+    QTest::newRow("one-with-middle-multi")
+        << QVector<Piece> {originalPieceB}
+        << Width / 2 << Start + 1 << Piece::ChangeStorage
+        << Piece {Start + Width / 2, 1, Piece::OriginalStorage}
+        << QVector<Piece> {originalPieceBM, changePieceB2, originalPiece_MB};
+
+    QTest::newRow("one-with-end-multi")
+        << QVector<Piece> {originalPieceB}
+        << Width - 1 << Start + 1 << Piece::ChangeStorage
+        << originalPiece1B
+        << QVector<Piece> {originalPieceB_, changePieceB2};
+
+    QTest::newRow("one-with-end-multi-next-continuous")
+        << QVector<Piece> {originalPieceB, changePiece_B}
+        << Width - 1 << Start << Piece::ChangeStorage
+        << originalPiece1B
+        << QVector<Piece> {originalPieceB_, changePieceB};
+
+    QTest::newRow("one-with-end-multi-next-noncontinuous")
+        << QVector<Piece> {originalPieceB, changePiece__B}
+        << Width - 1 << Start << Piece::ChangeStorage
+        << originalPiece1B
+        << QVector<Piece> {originalPieceB_, changePieceB1, changePiece__B};
+
+    QTest::newRow("one-with-begin-multi-previous-continuous")
+        << QVector<Piece> {originalPieceB_, changePieceB}
+        << Width - 1 << End << Piece::OriginalStorage
+        << changePieceB1
+        << QVector<Piece> {originalPieceB, changePiece_B};
+
+    QTest::newRow("one-with-begin-multi-previous-noncontinuous")
+        << QVector<Piece> {originalPieceB__, changePieceB}
+        << Width - 2 << End << Piece::OriginalStorage
+        << changePieceB1
+        << QVector<Piece> {originalPieceB__, originalPiece1B, changePiece_B};
+}
+
+void PieceTableTest::testReplaceOne()
+{
+    QFETCH(const QVector<Piece>, initPieces);
+    QFETCH(const Address, replaceDataOffset);
+    QFETCH(const Address, replaceStorageOffset);
+    QFETCH(const Piece::StorageType, replaceStorageId);
+    QFETCH(const Piece, expectedReplacedPiece);
+    QFETCH(const QVector<Piece>, expectedPieces);
+
+    PieceList initPieceList;
+    for (const auto& piece : initPieces) {
+        initPieceList.append(piece);
+    }
+
+    PieceTable pieceTable;
+    pieceTable.insert(0, initPieceList);
+
+    // tested action
+    const Piece replacedPiece = pieceTable.replaceOne(replaceDataOffset, replaceStorageOffset, replaceStorageId);
+
+    // check result
+    QCOMPARE(replacedPiece, expectedReplacedPiece);
 
     compare(pieceTable, expectedPieces);
 }
