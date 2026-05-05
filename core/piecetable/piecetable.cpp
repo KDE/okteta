@@ -244,7 +244,6 @@ PieceList PieceTable::remove(const AddressRange& removeRange)
         if (dataRange.includes(removeRange.start())) {
             QLinkedList<Piece>::Iterator firstRemoved = it;
             const Address firstDataRangeStart = dataRange.start();
-// int sections = 1;
 
             if (dataRange.includesInside(removeRange)) {
                 const AddressRange localRange = dataRange.localRange(removeRange);
@@ -253,13 +252,11 @@ PieceList PieceTable::remove(const AddressRange& removeRange)
 
                 mList.insert(++it, secondPiece);
                 removedPieceList.append(removedPiece);
-// qCDebug(LOG_OKTETA_CORE) << "removed intern";
                 break;
             }
             do {
                 if (dataRange.includes(removeRange.end())) {
                     QLinkedList<Piece>::Iterator lastRemoved = it;
-// qCDebug(LOG_OKTETA_CORE) << removeRange.start() << removeRange.end() << firstDataRangeStart << dataRange.end();
                     // cut from first section if not all
                     bool onlyCompletePiecesRemoved = true;
                     if (firstDataRangeStart < removeRange.start()) {
@@ -269,8 +266,6 @@ PieceList PieceTable::remove(const AddressRange& removeRange)
 
                         ++firstRemoved;
                         onlyCompletePiecesRemoved = false;
-// qCDebug(LOG_OKTETA_CORE) << "end of first removed"<<piece->start()<<piece->end()<<"->"<<removedPiece.start()<<removedPiece.end();
-// --sections;
                     }
 
                     Piece removedPartialPieceFromLast;
@@ -280,8 +275,6 @@ PieceList PieceTable::remove(const AddressRange& removeRange)
                         removedPartialPieceFromLast = piece->removeStartBeforeLocal(newLocalStart);
 
                         onlyCompletePiecesRemoved = false;
-// qCDebug(LOG_OKTETA_CORE) << "start of last removed"<<piece->start()<<piece->end()<<"->"<<removedPartialPieceFromLast.start()<<removedPartialPieceFromLast.end();
-// --sections;
                     } else {
                         ++lastRemoved;
                     }
@@ -304,12 +297,10 @@ PieceList PieceTable::remove(const AddressRange& removeRange)
                     }
 
                     mList.erase(firstRemoved, lastRemoved);
-// qCDebug(LOG_OKTETA_CORE) << "removed "<<sections;
                     break;
                 }
                 dataRange.setStart(dataRange.nextBehindEnd());
                 ++it;
-// ++sections;
                 // removeRange is longer than content TODO: just quit or at least remove till the end?
                 if (it == mList.end()) {
                     break;
@@ -326,7 +317,6 @@ PieceList PieceTable::remove(const AddressRange& removeRange)
 
     mSize -= removeRange.width();
 
-// qCDebug(LOG_OKTETA_CORE)<<"end:"<<asStringList(mList);
     return removedPieceList;
 }
 
