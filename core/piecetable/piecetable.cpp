@@ -223,8 +223,13 @@ void PieceTable::insert(Address insertDataOffset, const PieceList& insertPieceLi
     mSize += insertPieceList.totalLength();
 }
 
-// TODO: make algorithm simpler
 PieceList PieceTable::remove(const AddressRange& removeRange)
+{
+    return doRemove(removeRange, RemoveMergeMode::Merge);
+}
+
+// TODO: make algorithm simpler
+PieceList PieceTable::doRemove(const AddressRange& removeRange, RemoveMergeMode mergeMode)
 {
     // shortcut empty range
     // TODO: empty range should be acceptable, warnn about anything?
@@ -295,7 +300,7 @@ PieceList PieceTable::remove(const AddressRange& removeRange)
                         removedPieceList.append(removedPartialPieceFromLast);
                     }
 
-                    if (onlyCompletePiecesRemoved) {
+                    if (onlyCompletePiecesRemoved && (mergeMode == RemoveMergeMode::Merge)) {
                         if (firstRemoved != mList.begin() && lastRemoved != mList.end()) {
                             const auto beforeFirstRemoved = firstRemoved - 1;
                             if ((*beforeFirstRemoved).append(*lastRemoved)) {
@@ -337,14 +342,22 @@ PieceList PieceTable::remove(const AddressRange& removeRange)
 
 PieceList PieceTable::replace(const AddressRange& removeRange, Size insertLength, Address storageOffset)
 {
-    const PieceList removedPieceList = remove(removeRange);
-    insert(removeRange.start(), insertLength, storageOffset);
+    const bool isInserting = (insertLength > 0);
+    const RemoveMergeMode mergeMode = isInserting ? RemoveMergeMode::NoMerge : RemoveMergeMode::Merge;
+    const PieceList removedPieceList = doRemove(removeRange, mergeMode);
+    if (isInserting) {
+        insert(removeRange.start(), insertLength, storageOffset);
+    }
     return removedPieceList;
 }
 void PieceTable::replace(const AddressRange& removeRange, const PieceList& insertPieceList)
 {
-    remove(removeRange);
-    insert(removeRange.start(), insertPieceList);
+    const bool isInserting = !insertPieceList.isEmpty();
+    const RemoveMergeMode mergeMode = isInserting ? RemoveMergeMode::NoMerge : RemoveMergeMode::Merge;
+    doRemove(removeRange, mergeMode);
+    if (isInserting) {
+        insert(removeRange.start(), insertPieceList);
+    }
 }
 
 void PieceTable::swap(Address firstStart, const AddressRange& secondRange)

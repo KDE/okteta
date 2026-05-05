@@ -59,6 +59,13 @@ public: // introspection API, used for tests
     ConstIterator end() const;
 
 private:
+    enum class RemoveMergeMode {
+        NoMerge,
+        Merge,
+    };
+    PieceList doRemove(const AddressRange& removeRange, RemoveMergeMode mergeMode);
+
+private:
     QLinkedList<Piece> mList;
     Size mSize;
 };
