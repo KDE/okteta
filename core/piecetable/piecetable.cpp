@@ -242,18 +242,19 @@ PieceList PieceTable::remove(const AddressRange& removeRange)
         dataRange.setEndByWidth(piece->width());
 
         if (dataRange.includes(removeRange.start())) {
-            QLinkedList<Piece>::Iterator firstRemoved = it;
-            const Address firstDataRangeStart = dataRange.start();
-
             if (dataRange.includesInside(removeRange)) {
                 const AddressRange localRange = dataRange.localRange(removeRange);
                 const Piece removedPiece = piece->subPiece(localRange);
-                const Piece secondPiece = piece->removeLocal(localRange);
-
-                mList.insert(++it, secondPiece);
                 removedPieceList.append(removedPiece);
+                const Piece secondPiece = piece->removeLocal(localRange);
+                mList.insert(it + 1, secondPiece);
+
                 break;
             }
+
+            QLinkedList<Piece>::Iterator firstRemoved = it;
+            const Address firstDataRangeStart = dataRange.start();
+
             do {
                 if (dataRange.includes(removeRange.end())) {
                     QLinkedList<Piece>::Iterator lastRemoved = it;
@@ -311,8 +312,8 @@ PieceList PieceTable::remove(const AddressRange& removeRange)
             break;
         }
 
-        dataRange.setStart(dataRange.nextBehindEnd());
         ++it;
+        dataRange.setStart(dataRange.nextBehindEnd());
     }
 
     mSize -= removeRange.width();
