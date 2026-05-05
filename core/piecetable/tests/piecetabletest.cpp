@@ -176,15 +176,6 @@ void PieceTableTest::testInsertPieceListToEmpty()
     compare(pieceTable, expectedPieces);
 }
 
-static void fillWithSize(PieceTable* pieceTable, int count)
-{
-    pieceTable->init(0);
-    for (int i = 0; i < count; ++i) {
-        pieceTable->insert(0, BaseSize, BaseSize * i);
-    }
-
-}
-
 void PieceTableTest::testInsert_data()
 {
     QTest::addColumn<Size>("initTableSize");
@@ -316,162 +307,339 @@ void PieceTableTest::testInsertMulti()
 
 void PieceTableTest::testRemove_data()
 {
-    QTest::addColumn<int>("multiFillCount");
+    QTest::addColumn<QVector<Piece>>("initPieces");
     QTest::addColumn<AddressRange>("removeRange");
     QTest::addColumn<QVector<Piece>>("expectedPieces");
 
-    // removing a lot:
-    const int pieceCount = 5;
-    const int mid = (pieceCount + 1) / 2;
-    const Address midPieceOffset = BaseSize * (mid - 1);
-    const Size fullSize = pieceCount * BaseSize;
+    const Piece originalPieceA {0, BaseSize, Piece::OriginalStorage};
+    const Piece originalPieceA1 {0, 1, Piece::OriginalStorage};
+    const Piece originalPiece__A {2, BaseSize - 2, Piece::OriginalStorage};
+    const Piece originalPiece_A {1, BaseSize - 1, Piece::OriginalStorage};
+    const Piece originalPieceA_ {0, BaseSize - 1, Piece::OriginalStorage};
+    const Piece originalPieceA__ {0, BaseSize - 2, Piece::OriginalStorage};
+    const Piece originalPieceAM {0, BaseSize / 2, Piece::OriginalStorage};
+    const Piece originalPiece_MA {BaseSize / 2 + 1, BaseSize / 2 - 1, Piece::OriginalStorage};
+    const Piece originalPiece__MA {BaseSize / 2 + 2, BaseSize / 2 - 2, Piece::OriginalStorage};
 
-    AddressRange removeRange = AddressRange(0, Start - 1);
-    QTest::newRow("removing-at-begin")
-        << 0 << removeRange
-        << QVector<Piece> {
-            {removeRange.nextBehindEnd(), BaseSize - removeRange.width(), Piece::OriginalStorage}};
-    removeRange = AddressRange(Start, End);
-    QTest::newRow("removing-at-middle")
-        << 0 << removeRange
-        << QVector<Piece> {
-            {0, removeRange.start(), Piece::OriginalStorage},
-            {removeRange.nextBehindEnd(), BaseSize - removeRange.end() - 1, Piece::OriginalStorage}};
-    removeRange = AddressRange(End + 1, BaseSize - 1);
-    QTest::newRow("removing-at-end")
-        << 0 << removeRange
-        << QVector<Piece> {
-            {0, BaseSize - removeRange.width(), Piece::OriginalStorage}};
-    QTest::newRow("removing-all")
-        << 0 << AddressRange::fromWidth(BaseSize)
-        << QVector<Piece>();
-    removeRange = AddressRange::fromWidth(midPieceOffset + Start, Width);
-    QTest::newRow("removing-inside-piece-in-middle")
-        << pieceCount << removeRange
-        << QVector<Piece> {
-            {4 * BaseSize, BaseSize, Piece::ChangeStorage},
-            {3 * BaseSize, BaseSize, Piece::ChangeStorage},
-            {2 * BaseSize, Start, Piece::ChangeStorage},
-            {removeRange.nextBehindEnd(), 3 * BaseSize - removeRange.end() - 1, Piece::ChangeStorage},
-            {BaseSize, BaseSize, Piece::ChangeStorage},
-            {0, BaseSize, Piece::ChangeStorage}};
-    removeRange = AddressRange::fromWidth(midPieceOffset, Start);
-    QTest::newRow("removing-start-of-piece-in-middle")
-        << pieceCount << removeRange
-        << QVector<Piece> {
-            {4 * BaseSize, BaseSize, Piece::ChangeStorage},
-            {3 * BaseSize, BaseSize, Piece::ChangeStorage},
-            {2 * BaseSize + Start, BaseSize - removeRange.width(), Piece::ChangeStorage},
-            {BaseSize, BaseSize, Piece::ChangeStorage},
-            {0, BaseSize, Piece::ChangeStorage}};
-    removeRange = AddressRange::fromWidth(midPieceOffset + End + 1, BaseSize - (End + 1));
-    QTest::newRow("removing-end-of-piece-in-middle")
-        << pieceCount << removeRange
-        << QVector<Piece> {
-            {4 * BaseSize, BaseSize, Piece::ChangeStorage},
-            {3 * BaseSize, BaseSize, Piece::ChangeStorage},
-            {2 * BaseSize, BaseSize - removeRange.width(), Piece::ChangeStorage},
-            {BaseSize, BaseSize, Piece::ChangeStorage},
-            {0, BaseSize, Piece::ChangeStorage}};
-    removeRange = AddressRange::fromWidth(midPieceOffset, BaseSize);
-    QTest::newRow("removing-whole-piece-in-middle")
-        << pieceCount << removeRange
-        << QVector<Piece> {
-            {4 * BaseSize, BaseSize, Piece::ChangeStorage},
-            {3 * BaseSize, BaseSize, Piece::ChangeStorage},
-            {BaseSize, BaseSize, Piece::ChangeStorage},
-            {0, BaseSize, Piece::ChangeStorage}};
-    removeRange = AddressRange::fromWidth(midPieceOffset, BaseSize + Start);
-    QTest::newRow("removing-whole-piece-and-start-of-next-in-middle")
-        << pieceCount << removeRange
-        << QVector<Piece> {
-            {4 * BaseSize, BaseSize, Piece::ChangeStorage},
-            {3 * BaseSize, BaseSize, Piece::ChangeStorage},
-            {BaseSize + Start, BaseSize - Start, Piece::ChangeStorage},
-            {0, BaseSize, Piece::ChangeStorage}};
-    removeRange = AddressRange::fromWidth(midPieceOffset - (BaseSize - End - 1), BaseSize + BaseSize - (End + 1));
-    QTest::newRow("removing-whole-piece-and-end-of-previous-in-middle")
-        << pieceCount << removeRange
-        << QVector<Piece> {
-            {4 * BaseSize, BaseSize, Piece::ChangeStorage},
-            {3 * BaseSize, End + 1, Piece::ChangeStorage},
-            {BaseSize, BaseSize, Piece::ChangeStorage},
-            {0, BaseSize, Piece::ChangeStorage}};
-    removeRange = AddressRange::fromWidth(midPieceOffset - (BaseSize - End - 1), Start + BaseSize + BaseSize - (End + 1));
-    QTest::newRow("removing-end-of-previous-whole-and-start-of-next-in-middle")
-        << pieceCount << removeRange
-        << QVector<Piece> {
-            {4 * BaseSize, BaseSize, Piece::ChangeStorage},
-            {3 * BaseSize, End + 1, Piece::ChangeStorage},
-            {BaseSize + Start, BaseSize - Start, Piece::ChangeStorage},
-            {0, BaseSize, Piece::ChangeStorage}};
-    removeRange = AddressRange::fromWidth(Start);
-    QTest::newRow("removing-start-of-piece-at-start")
-        << pieceCount << removeRange
-        << QVector<Piece> {
-            {4 * BaseSize + Start, BaseSize - Start, Piece::ChangeStorage},
-            {3 * BaseSize, BaseSize, Piece::ChangeStorage},
-            {2 * BaseSize, BaseSize, Piece::ChangeStorage},
-            {BaseSize, BaseSize, Piece::ChangeStorage},
-            {0, BaseSize, Piece::ChangeStorage}};
+    const Piece changePieceA {0, BaseSize, Piece::ChangeStorage};
+    const Piece changePieceA1 {0, 1, Piece::ChangeStorage};
+    const Piece changePieceA_ {0, BaseSize - 1, Piece::ChangeStorage};
+    const Piece changePieceA__ {0, BaseSize - 2, Piece::ChangeStorage};
+    const Piece changePiece_A {1, BaseSize - 1, Piece::ChangeStorage};
+    const Piece changePiece__A {2, BaseSize - 2, Piece::ChangeStorage};
+    const Piece changePieceB {BaseSize, BaseSize, Piece::ChangeStorage};
+    const Piece changePieceBC {BaseSize, BaseSize * 2, Piece::ChangeStorage};
+    const Piece changePieceC {BaseSize * 2, BaseSize, Piece::ChangeStorage};
+    const Piece changePieceD {BaseSize * 3, BaseSize, Piece::ChangeStorage};
+    const Piece changePieceE {BaseSize * 4, BaseSize, Piece::ChangeStorage};
+
+    AddressRange removeRange = AddressRange(0, 0);
+    QTest::newRow("one-at-begin-one-multi")
+        << QVector<Piece> {originalPieceA}
+        << removeRange
+        << QVector<Piece> {originalPiece_A};
+    removeRange = AddressRange(0, 1);
+    QTest::newRow("multi-at-begin-one-multi")
+        << QVector<Piece> {originalPieceA}
+        << removeRange
+        << QVector<Piece> {originalPiece__A};
+    removeRange = AddressRange::fromWidth(BaseSize / 2, 1);
+    QTest::newRow("one-at-middle-one-multi")
+        << QVector<Piece> {originalPieceA}
+        << removeRange
+        << QVector<Piece> {originalPieceAM, originalPiece_MA};
+    removeRange = AddressRange::fromWidth(BaseSize / 2, 2);
+    QTest::newRow("multi-at-middle-one-multi")
+        << QVector<Piece> {originalPieceA}
+        << removeRange
+        << QVector<Piece> {originalPieceAM, originalPiece__MA};
+    removeRange = AddressRange(BaseSize - 1, BaseSize - 1);
+    QTest::newRow("one-at-end-one-multi")
+        << QVector<Piece> {originalPieceA}
+        << removeRange
+        << QVector<Piece> {originalPieceA_};
+    removeRange = AddressRange(BaseSize - 2, BaseSize - 1);
+    QTest::newRow("multi-at-end-one-multi")
+        << QVector<Piece> {originalPieceA}
+        << removeRange
+        << QVector<Piece> {originalPieceA__};
+    removeRange = AddressRange(0, 0);
+    QTest::newRow("all-one-one")
+        << QVector<Piece> {originalPieceA1}
+        << removeRange
+        << QVector<Piece> {};
     removeRange = AddressRange::fromWidth(BaseSize);
-    QTest::newRow("removing-whole-piece-at-start")
-        << pieceCount << removeRange
-        << QVector<Piece> {
-            {3 * BaseSize, BaseSize, Piece::ChangeStorage},
-            {2 * BaseSize, BaseSize, Piece::ChangeStorage},
-            {BaseSize, BaseSize, Piece::ChangeStorage},
-            {0, BaseSize, Piece::ChangeStorage}};
-    removeRange = AddressRange::fromWidth(BaseSize + Start);
-    QTest::newRow("removing-whole-piece-and-start-of-next-at-start")
-        << pieceCount << removeRange
-        << QVector<Piece> {
-            {3 * BaseSize + Start, BaseSize - Start, Piece::ChangeStorage},
-            {2 * BaseSize, BaseSize, Piece::ChangeStorage},
-            {BaseSize, BaseSize, Piece::ChangeStorage},
-            {0, BaseSize, Piece::ChangeStorage}};
-    removeRange = AddressRange::fromWidth(fullSize - BaseSize + End + 1, BaseSize - (End + 1));
-    QTest::newRow("removing-end-of-piece-at-end")
-        << pieceCount << removeRange
-        << QVector<Piece> {
-            {4 * BaseSize, BaseSize, Piece::ChangeStorage},
-            {3 * BaseSize, BaseSize, Piece::ChangeStorage},
-            {2 * BaseSize, BaseSize, Piece::ChangeStorage},
-            {BaseSize, BaseSize, Piece::ChangeStorage},
-            {0, End + 1, Piece::ChangeStorage}};
-    removeRange = AddressRange::fromWidth(fullSize - BaseSize, BaseSize);
-    QTest::newRow("removing-whole-piece-at-end")
-        << pieceCount << removeRange
-        << QVector<Piece> {
-            {4 * BaseSize, BaseSize, Piece::ChangeStorage},
-            {3 * BaseSize, BaseSize, Piece::ChangeStorage},
-            {2 * BaseSize, BaseSize, Piece::ChangeStorage},
-            {BaseSize, BaseSize, Piece::ChangeStorage}};
-    removeRange = AddressRange::fromWidth(fullSize - BaseSize - (BaseSize - End - 1), BaseSize + BaseSize - (End + 1));
-    QTest::newRow("removing-whole-piece-and-end-of-previous-at-end")
-        << pieceCount << removeRange
-        << QVector<Piece> {
-            {4 * BaseSize, BaseSize, Piece::ChangeStorage},
-            {3 * BaseSize, BaseSize, Piece::ChangeStorage},
-            {2 * BaseSize, BaseSize, Piece::ChangeStorage},
-            {BaseSize, End + 1, Piece::ChangeStorage}};
-    QTest::newRow("removing-all-pieces")
-        << pieceCount << AddressRange::fromWidth(fullSize)
+    QTest::newRow("all-one-multi")
+        << QVector<Piece> {originalPieceA}
+        << removeRange
         << QVector<Piece>();
+
+    removeRange = AddressRange(0, 0);
+    QTest::newRow("one-at-begin-first-two-multi")
+        << QVector<Piece> {originalPieceA, changePieceA}
+        << removeRange
+        << QVector<Piece> {originalPiece_A, changePieceA};
+    removeRange = AddressRange(0, 1);
+    QTest::newRow("multi-at-begin-first-two-multi")
+        << QVector<Piece> {originalPieceA, changePieceA}
+        << removeRange
+        << QVector<Piece> {originalPiece__A, changePieceA};
+    removeRange = AddressRange::fromWidth(BaseSize / 2, 1);
+    QTest::newRow("one-at-middle-first-two-multi")
+        << QVector<Piece> {originalPieceA, changePieceA}
+        << removeRange
+        << QVector<Piece> {originalPieceAM, originalPiece_MA, changePieceA};
+    removeRange = AddressRange::fromWidth(BaseSize / 2, 2);
+    QTest::newRow("multi-at-middle-first-two-multi")
+        << QVector<Piece> {originalPieceA, changePieceA}
+        << removeRange
+        << QVector<Piece> {originalPieceAM, originalPiece__MA, changePieceA};
+    removeRange = AddressRange(BaseSize - 1, BaseSize - 1);
+    QTest::newRow("one-at-end-first-two-multi-noncontinuous")
+        << QVector<Piece> {originalPieceA, changePieceA}
+        << removeRange
+        << QVector<Piece> {originalPieceA_, changePieceA};
+    removeRange = AddressRange(BaseSize - 2, BaseSize - 1);
+    QTest::newRow("multi-at-end-first-two-multi-noncontinuous")
+        << QVector<Piece> {originalPieceA, changePieceA}
+        << removeRange
+        << QVector<Piece> {originalPieceA__, changePieceA};
+    removeRange = AddressRange(0, 0);
+    QTest::newRow("all-first-two-one")
+        << QVector<Piece> {originalPieceA1, changePieceA}
+        << removeRange
+        << QVector<Piece> {changePieceA};
+    removeRange = AddressRange::fromWidth(BaseSize);
+    QTest::newRow("all-first-two-multi")
+        << QVector<Piece> {originalPieceA, changePieceA}
+        << removeRange
+        << QVector<Piece> {changePieceA};
+    removeRange = AddressRange::fromWidth(0, BaseSize + 1);
+    QTest::newRow("all-first-one-at-begin-second-two-multi")
+        << QVector<Piece> {originalPieceA, changePieceA}
+        << removeRange
+        << QVector<Piece> {changePiece_A};
+    removeRange = AddressRange::fromWidth(0, BaseSize + 2);
+    QTest::newRow("all-first-multi-at-begin-second-two-multi")
+        << QVector<Piece> {originalPieceA, changePieceA}
+        << removeRange
+        << QVector<Piece> {changePiece__A};
+
+    removeRange = AddressRange::fromWidth(BaseSize, 1);
+    QTest::newRow("one-at-begin-second-two-multi-noncontinuous")
+        << QVector<Piece> {changePieceA, originalPieceA}
+        << removeRange
+        << QVector<Piece> {changePieceA, originalPiece_A};
+    removeRange = AddressRange::fromWidth(BaseSize, 2);
+    QTest::newRow("multi-at-begin-second-two-multi-noncontinuous")
+        << QVector<Piece> {changePieceA, originalPieceA}
+        << removeRange
+        << QVector<Piece> {changePieceA, originalPiece__A};
+    removeRange = AddressRange::fromWidth(BaseSize + BaseSize / 2, 1);
+    QTest::newRow("one-at-middle-second-two-multi")
+        << QVector<Piece> {changePieceA, originalPieceA}
+        << removeRange
+        << QVector<Piece> {changePieceA, originalPieceAM, originalPiece_MA};
+    removeRange = AddressRange::fromWidth(BaseSize + BaseSize / 2, 2);
+    QTest::newRow("multi-at-middle-second-two-multi")
+        << QVector<Piece> {changePieceA, originalPieceA}
+        << removeRange
+        << QVector<Piece> {changePieceA, originalPieceAM, originalPiece__MA};
+    removeRange = AddressRange::fromWidth(2 * BaseSize - 1, 1);
+    QTest::newRow("one-at-end-second-two-multi")
+        << QVector<Piece> {changePieceA, originalPieceA}
+        << removeRange
+        << QVector<Piece> {changePieceA, originalPieceA_};
+    removeRange = AddressRange::fromWidth(2 * BaseSize - 2, 2);
+    QTest::newRow("multi-at-end-second-two-multi")
+        << QVector<Piece> {changePieceA, originalPieceA}
+        << removeRange
+        << QVector<Piece> {changePieceA, originalPieceA__};
+    removeRange = AddressRange::fromWidth(BaseSize, 1);
+    QTest::newRow("all-second-two-one")
+        << QVector<Piece> {changePieceA, originalPieceA1}
+        << removeRange
+        << QVector<Piece> {changePieceA};
+    removeRange = AddressRange::fromWidth(BaseSize, BaseSize);
+    QTest::newRow("all-second-two-multi")
+        << QVector<Piece> {changePieceA, originalPieceA}
+        << removeRange
+        << QVector<Piece> {changePieceA};
+    removeRange = AddressRange::fromWidth(BaseSize - 1, BaseSize + 1);
+    QTest::newRow("all-second-one-at-end-first-two-multi")
+        << QVector<Piece> {changePieceA, originalPieceA}
+        << removeRange
+        << QVector<Piece> {changePieceA_};
+    removeRange = AddressRange::fromWidth(BaseSize - 2, BaseSize + 2);
+    QTest::newRow("all-second-multi-at-end-first-two-multi")
+        << QVector<Piece> {changePieceA, originalPieceA}
+        << removeRange
+        << QVector<Piece> {changePieceA__};
+
+    removeRange = AddressRange::fromWidth(BaseSize - 1, 2);
+    QTest::newRow("one-at-end-first-one-at-begin-second-two-multi")
+        << QVector<Piece> {changePieceA, originalPieceA}
+        << removeRange
+        << QVector<Piece> {changePieceA_, originalPiece_A};
+    removeRange = AddressRange::fromWidth(BaseSize - 2, 4);
+    QTest::newRow("multi-at-end-first-multi-at-begin-second-two-multi")
+        << QVector<Piece> {changePieceA, originalPieceA}
+        << removeRange
+        << QVector<Piece> {changePieceA__, originalPiece__A};
+    removeRange = AddressRange::fromWidth(0, 2);
+    QTest::newRow("all-two-one")
+        << QVector<Piece> {changePieceA1, originalPieceA1}
+        << removeRange
+        << QVector<Piece> {};
+    removeRange = AddressRange::fromWidth(0, 2 * BaseSize);
+    QTest::newRow("all-two-multi")
+        << QVector<Piece> {changePieceA, originalPieceA}
+        << removeRange
+        << QVector<Piece> {};
+
+    removeRange = AddressRange::fromWidth(2 * BaseSize, 1);
+    QTest::newRow("one-at-begin-third-five-multi-noncontinuous")
+        << QVector<Piece> {changePieceE, changePieceD, originalPieceA, changePieceB, changePieceA}
+        << removeRange
+        << QVector<Piece> {changePieceE, changePieceD, originalPiece_A, changePieceB, changePieceA};
+    removeRange = AddressRange::fromWidth(2 * BaseSize, 2);
+    QTest::newRow("multi-at-begin-third-five-multi-noncontinuous")
+        << QVector<Piece> {changePieceE, changePieceD, originalPieceA, changePieceB, changePieceA}
+        << removeRange
+        << QVector<Piece> {changePieceE, changePieceD, originalPiece__A, changePieceB, changePieceA};
+    removeRange = AddressRange::fromWidth(2 * BaseSize + BaseSize / 2, 1);
+    QTest::newRow("one-at-middle-third-five-multi")
+        << QVector<Piece> {changePieceE, changePieceD, originalPieceA, changePieceB, changePieceA}
+        << removeRange
+        << QVector<Piece> {changePieceE, changePieceD, originalPieceAM, originalPiece_MA, changePieceB, changePieceA};
+    removeRange = AddressRange::fromWidth(2 * BaseSize + BaseSize / 2, 2);
+    QTest::newRow("multi-at-middle-third-five-multi")
+        << QVector<Piece> {changePieceE, changePieceD, originalPieceA, changePieceB, changePieceA}
+        << removeRange
+        << QVector<Piece> {changePieceE, changePieceD, originalPieceAM, originalPiece__MA, changePieceB, changePieceA};
+    removeRange = AddressRange::fromWidth(3 * BaseSize - 1, 1);
+    QTest::newRow("one-at-end-third-five-multi")
+        << QVector<Piece> {changePieceE, changePieceD, originalPieceA, changePieceB, changePieceA}
+        << removeRange
+        << QVector<Piece> {changePieceE, changePieceD, originalPieceA_, changePieceB, changePieceA};
+    removeRange = AddressRange::fromWidth(3 * BaseSize - 2, 2);
+    QTest::newRow("multi-at-end-third-five-multi")
+        << QVector<Piece> {changePieceE, changePieceD, originalPieceA, changePieceB, changePieceA}
+        << removeRange
+        << QVector<Piece> {changePieceE, changePieceD, originalPieceA__, changePieceB, changePieceA};
+    removeRange = AddressRange::fromWidth(2 * BaseSize, 1);
+    QTest::newRow("all-third-five-one-noncontinuous")
+        << QVector<Piece> {changePieceE, changePieceD, originalPieceA1, changePieceB, changePieceA}
+        << removeRange
+        << QVector<Piece> {changePieceE, changePieceD, changePieceB, changePieceA};
+    removeRange = AddressRange::fromWidth(2 * BaseSize, BaseSize);
+    QTest::newRow("all-third-five-multi-noncontinuous")
+        << QVector<Piece> {changePieceE, changePieceD, originalPieceA, changePieceB, changePieceA}
+        << removeRange
+        << QVector<Piece> {changePieceE, changePieceD, changePieceB, changePieceA};
+    removeRange = AddressRange::fromWidth(2 * BaseSize, 1);
+    QTest::newRow("all-third-five-one-continuous")
+        << QVector<Piece> {changePieceE, changePieceB, originalPieceA1, changePieceC, changePieceA}
+        << removeRange
+        << QVector<Piece> {changePieceE, changePieceBC, changePieceA};
+    removeRange = AddressRange::fromWidth(2 * BaseSize, BaseSize);
+    QTest::newRow("all-third-five-multi-noncontinuous")
+        << QVector<Piece> {changePieceE, changePieceB, originalPieceA, changePieceC, changePieceA}
+        << removeRange
+        << QVector<Piece> {changePieceE, changePieceBC, changePieceA};
+
+    removeRange = AddressRange::fromWidth(2 * BaseSize, BaseSize + 1);
+    QTest::newRow("all-third-one-at-begin-fourth-five-multi")
+        << QVector<Piece> {changePieceE, changePieceD, originalPieceA, changePieceA, changePieceC}
+        << removeRange
+        << QVector<Piece> {changePieceE, changePieceD, changePiece_A, changePieceC};
+    removeRange = AddressRange::fromWidth(2 * BaseSize, BaseSize + 2);
+    QTest::newRow("all-third-multi-at-begin-fourth-five-multi")
+        << QVector<Piece> {changePieceE, changePieceD, originalPieceA, changePieceA, changePieceC}
+        << removeRange
+        << QVector<Piece> {changePieceE, changePieceD, changePiece__A, changePieceC};
+    removeRange = AddressRange::fromWidth(2 * BaseSize - 1, BaseSize + 1);
+    QTest::newRow("all-third-one-at-end-second-five-multi")
+        << QVector<Piece> {changePieceE, changePieceA, originalPieceA, changePieceD, changePieceC}
+        << removeRange
+        << QVector<Piece> {changePieceE, changePieceA_, changePieceD, changePieceC};
+    removeRange = AddressRange::fromWidth(2 * BaseSize - 2, BaseSize + 2);
+    QTest::newRow("all-third-multi-at-end-second-five-multi")
+        << QVector<Piece> {changePieceE, changePieceA, originalPieceA, changePieceD, changePieceC}
+        << removeRange
+        << QVector<Piece> {changePieceE, changePieceA__, changePieceD, changePieceC};
+    removeRange = AddressRange::fromWidth(2 * BaseSize - 1, BaseSize + 2);
+    QTest::newRow("all-third-one-at-end-second-one-at-begin-fourth-five-multi")
+        << QVector<Piece> {changePieceE, changePieceA, changePieceD, originalPieceA, changePieceC}
+        << removeRange
+        << QVector<Piece> {changePieceE, changePieceA_, originalPiece_A, changePieceC};
+    removeRange = AddressRange::fromWidth(2 * BaseSize - 2, BaseSize + 4);
+    QTest::newRow("all-third-multi-at-end-second-multi-at-begin-fourth-five-multi")
+        << QVector<Piece> {changePieceE, changePieceA, changePieceD, originalPieceA, changePieceC}
+        << removeRange
+        << QVector<Piece> {changePieceE, changePieceA__, originalPiece__A, changePieceC};
+    removeRange = AddressRange::fromWidth(BaseSize, 3 * BaseSize);
+    QTest::newRow("all-second-third-fourth-five-multi-noncontinuous")
+        << QVector<Piece> {changePieceE, changePieceA, changePieceD, originalPieceA, changePieceC}
+        << removeRange
+        << QVector<Piece> {changePieceE, changePieceC};
+    removeRange = AddressRange::fromWidth(BaseSize, 3 * BaseSize);
+    QTest::newRow("all-second-third-fourth-five-multi-continuous")
+        << QVector<Piece> {changePieceB, changePieceA, changePieceD, originalPieceA, changePieceC}
+        << removeRange
+        << QVector<Piece> {changePieceBC};
+
+    removeRange = AddressRange::fromWidth(0, 2);
+    QTest::newRow("multi-at-begin-first-five-multi")
+        << QVector<Piece> {originalPieceA, changePieceD, changePieceC, changePieceB, changePieceA}
+        << removeRange
+        << QVector<Piece> {originalPiece__A, changePieceD, changePieceC, changePieceB, changePieceA};
+    removeRange = AddressRange::fromWidth(BaseSize);
+    QTest::newRow("all-first-five-multi")
+        << QVector<Piece> {changePieceE, changePieceD, changePieceC, changePieceB, changePieceA}
+        << removeRange
+        << QVector<Piece> {changePieceD, changePieceC, changePieceB, changePieceA};
+    removeRange = AddressRange::fromWidth(0, BaseSize + 2);
+    QTest::newRow("all-first-multi-at-begin-second-five-multi")
+        << QVector<Piece> {changePieceD, originalPieceA, changePieceC, changePieceB, changePieceA}
+        << removeRange
+        << QVector<Piece> {originalPiece__A, changePieceC, changePieceB, changePieceA};
+    removeRange = AddressRange::fromWidth(5 * BaseSize - 2, 2);
+    QTest::newRow("multi-at-end-last-five-multi")
+        << QVector<Piece> {changePieceE, changePieceD, changePieceC, changePieceB, originalPieceA}
+        << removeRange
+        << QVector<Piece> {changePieceE, changePieceD, changePieceC, changePieceB, originalPieceA__};
+    removeRange = AddressRange::fromWidth(4 * BaseSize, BaseSize);
+    QTest::newRow("all-last-five-multi")
+        << QVector<Piece> {changePieceE, changePieceD, changePieceC, changePieceB, changePieceA}
+        << removeRange
+        << QVector<Piece> {changePieceE, changePieceD, changePieceC, changePieceB};
+    removeRange = AddressRange::fromWidth(4 * BaseSize - 2, BaseSize + 2);
+    QTest::newRow("all-last-multi-at-end-fourth-five-multi")
+        << QVector<Piece> {changePieceE, changePieceD, changePieceC, originalPieceA, changePieceA}
+        << removeRange
+        << QVector<Piece> {changePieceE, changePieceD, changePieceC, originalPieceA__};
+
+    removeRange = AddressRange::fromWidth(0, 5 * BaseSize);
+    QTest::newRow("all-five-multi")
+        << QVector<Piece> {changePieceE, changePieceD, originalPieceA, changePieceB, changePieceA}
+        << removeRange
+        << QVector<Piece> {};
 }
 
 void PieceTableTest::testRemove()
 {
-    QFETCH(const int, multiFillCount);
+    QFETCH(const QVector<Piece>, initPieces);
     QFETCH(const AddressRange, removeRange);
     QFETCH(const QVector<Piece>, expectedPieces);
 
-    PieceTable pieceTable;
-    if (multiFillCount > 0) {
-        fillWithSize(&pieceTable, multiFillCount);
-    } else {
-        pieceTable.init(BaseSize);
+    PieceList initPieceList;
+    for (const auto& piece : initPieces) {
+        initPieceList.append(piece);
     }
+
+    PieceTable pieceTable;
+    pieceTable.insert(0, initPieceList);
 
     // tested action
     pieceTable.remove(removeRange);
