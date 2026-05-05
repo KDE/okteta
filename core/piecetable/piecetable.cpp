@@ -337,7 +337,7 @@ PieceList PieceTable::remove(const AddressRange& removeRange)
 
 PieceList PieceTable::replace(const AddressRange& removeRange, Size insertLength, Address storageOffset)
 {
-    PieceList removedPieceList = remove(removeRange);
+    const PieceList removedPieceList = remove(removeRange);
     insert(removeRange.start(), insertLength, storageOffset);
     return removedPieceList;
 }
