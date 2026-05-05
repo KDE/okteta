@@ -242,13 +242,19 @@ PieceList PieceTable::remove(const AddressRange& removeRange)
         dataRange.setEndByWidth(piece->width());
 
         if (dataRange.includes(removeRange.start())) {
+            // remove internal subpiece if possible
             if (dataRange.includesInside(removeRange)) {
                 const AddressRange localRange = dataRange.localRange(removeRange);
+
+                // collect removed piece
                 const Piece removedPiece = piece->subPiece(localRange);
                 removedPieceList.append(removedPiece);
+
+                // split off second piece and insert after adapted current
                 const Piece secondPiece = piece->removeLocal(localRange);
                 mList.insert(it + 1, secondPiece);
 
+                // done
                 break;
             }
 
@@ -256,6 +262,7 @@ PieceList PieceTable::remove(const AddressRange& removeRange)
             const Address firstDataRangeStart = dataRange.start();
 
             do {
+                // last piece to adapt?
                 if (dataRange.includes(removeRange.end())) {
                     QLinkedList<Piece>::Iterator lastRemoved = it;
                     // cut from first section if not all
@@ -298,8 +305,12 @@ PieceList PieceTable::remove(const AddressRange& removeRange)
                     }
 
                     mList.erase(firstRemoved, lastRemoved);
+
+                    // done
                     break;
                 }
+
+                // update loop state
                 dataRange.setStart(dataRange.nextBehindEnd());
                 ++it;
                 // removeRange is longer than content TODO: just quit or at least remove till the end?
@@ -309,9 +320,12 @@ PieceList PieceTable::remove(const AddressRange& removeRange)
                 piece = &*it;
                 dataRange.setEndByWidth(piece->width());
             } while (it != mList.end());
+
+            // done
             break;
         }
 
+        // update loop state
         ++it;
         dataRange.setStart(dataRange.nextBehindEnd());
     }
