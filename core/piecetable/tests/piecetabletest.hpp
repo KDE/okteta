@@ -19,13 +19,19 @@ class PieceTableTest : public QObject
 private Q_SLOTS: // test functions
     void testSimpleConstructor();
     void testInit();
+    void testInsertPieceListToEmpty_data();
+    void testInsertPieceListToEmpty();
     void testInsert_data();
     void testInsert();
     void testInsertMulti();
+    void testInsertPieceList_data();
+    void testInsertPieceList();
     void testRemove_data();
     void testRemove();
     void testSwap_data();
     void testSwap();
+    void testReplaceOne_data();
+    void testReplaceOne();
     void testGetStorageData_data();
     void testGetStorageData();
 };

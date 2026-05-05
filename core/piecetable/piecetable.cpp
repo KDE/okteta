@@ -242,24 +242,29 @@ PieceList PieceTable::remove(const AddressRange& removeRange)
         dataRange.setEndByWidth(piece->width());
 
         if (dataRange.includes(removeRange.start())) {
-            auto firstRemoved = it;
-            const Address firstDataRangeStart = dataRange.start();
-// int sections = 1;
-
+            // remove internal subpiece if possible
             if (dataRange.includesInside(removeRange)) {
                 const AddressRange localRange = dataRange.localRange(removeRange);
-                const Piece removedPiece = piece->subPiece(localRange);
-                const Piece secondPiece = piece->removeLocal(localRange);
 
-                mList.insert(++it, secondPiece);
+                // collect removed piece
+                const Piece removedPiece = piece->subPiece(localRange);
                 removedPieceList.append(removedPiece);
-// qCDebug(LOG_OKTETA_CORE) << "removed intern";
+
+                // split off second piece and insert after adapted current
+                const Piece secondPiece = piece->removeLocal(localRange);
+                mList.insert(it + 1, secondPiece);
+
+                // done
                 break;
             }
+
+            auto firstRemoved = it;
+            const Address firstDataRangeStart = dataRange.start();
+
             do {
+                // last piece to adapt?
                 if (dataRange.includes(removeRange.end())) {
                     auto lastRemoved = it;
-// qCDebug(LOG_OKTETA_CORE) << removeRange.start() << removeRange.end() << firstDataRangeStart << dataRange.end();
                     // cut from first section if not all
                     bool onlyCompletePiecesRemoved = true;
                     if (firstDataRangeStart < removeRange.start()) {
@@ -269,8 +274,6 @@ PieceList PieceTable::remove(const AddressRange& removeRange)
 
                         ++firstRemoved;
                         onlyCompletePiecesRemoved = false;
-// qCDebug(LOG_OKTETA_CORE) << "end of first removed"<<piece->start()<<piece->end()<<"->"<<removedPiece.start()<<removedPiece.end();
-// --sections;
                     }
 
                     Piece removedPartialPieceFromLast;
@@ -280,8 +283,6 @@ PieceList PieceTable::remove(const AddressRange& removeRange)
                         removedPartialPieceFromLast = piece->removeStartBeforeLocal(newLocalStart);
 
                         onlyCompletePiecesRemoved = false;
-// qCDebug(LOG_OKTETA_CORE) << "start of last removed"<<piece->start()<<piece->end()<<"->"<<removedPartialPieceFromLast.start()<<removedPartialPieceFromLast.end();
-// --sections;
                     } else {
                         ++lastRemoved;
                     }
@@ -304,12 +305,14 @@ PieceList PieceTable::remove(const AddressRange& removeRange)
                     }
 
                     mList.erase(firstRemoved, lastRemoved);
-// qCDebug(LOG_OKTETA_CORE) << "removed "<<sections;
+
+                    // done
                     break;
                 }
+
+                // update loop state
                 dataRange.setStart(dataRange.nextBehindEnd());
                 ++it;
-// ++sections;
                 // removeRange is longer than content TODO: just quit or at least remove till the end?
                 if (it == mList.end()) {
                     break;
@@ -317,22 +320,24 @@ PieceList PieceTable::remove(const AddressRange& removeRange)
                 piece = &*it;
                 dataRange.setEndByWidth(piece->width());
             } while (it != mList.end());
+
+            // done
             break;
         }
 
-        dataRange.setStart(dataRange.nextBehindEnd());
+        // update loop state
         ++it;
+        dataRange.setStart(dataRange.nextBehindEnd());
     }
 
     mSize -= removeRange.width();
 
-// qCDebug(LOG_OKTETA_CORE)<<"end:"<<asStringList(mList);
     return removedPieceList;
 }
 
 PieceList PieceTable::replace(const AddressRange& removeRange, Size insertLength, Address storageOffset)
 {
-    PieceList removedPieceList = remove(removeRange);
+    const PieceList removedPieceList = remove(removeRange);
     insert(removeRange.start(), insertLength, storageOffset);
     return removedPieceList;
 }
@@ -444,39 +449,96 @@ Piece PieceTable::replaceOne(Address dataOffset, Address storageOffset, Piece::S
         Piece* const piece = &(*it);
         dataRange.setEndByWidth(piece->width());
         if (dataRange.includes(dataOffset)) {
+            // collect replaced stprage type
             replacedStorageId = piece->storageId();
 
             const Piece replacePiece(storageOffset, 1, storageId);
+
             // piece starts at offset?
             if (dataRange.start() == dataOffset) {
+                // collect replaced stprage offset
                 replacedStorageOffset = piece->start();
+
+                bool isApppendedToPrevious = false;
+                // merge inserted piece with previous piece if possible
+                if (it != mList.begin()) {
+                    Piece& previousPiece = *(it - 1);
+                    isApppendedToPrevious = previousPiece.append(replacePiece);
+                }
+
+                // existing piece 1:1 replacement?
                 if (dataRange.width() == 1) {
-                    piece->set(storageOffset, storageOffset);
-                    piece->setStorageId(storageId);
+                    // merge inserted piece with next piece if possible
+                    bool isPrependedToNext = false;
+                    bool isPreviousNextMerged = false;
+                    const auto nextIt = it + 1;
+                    if (nextIt != mList.end()) {
+                        Piece& nextPiece = *nextIt;
+                        if (isApppendedToPrevious) {
+                            Piece& previousPiece = *(it - 1);
+                            isPreviousNextMerged = previousPiece.append(nextPiece);
+                        } else {
+                            isPrependedToNext = nextPiece.prepend(replacePiece);
+                        }
+                    }
+                    // if merged, drop existing piece, otherwise reuse it
+                    if (isApppendedToPrevious || isPrependedToNext) {
+                        it = mList.erase(it);
+                        if (isPreviousNextMerged) {
+                            mList.erase(it);
+                        }
+                    } else {
+                        piece->set(storageOffset, storageOffset);
+                        piece->setStorageId(storageId);
+                    }
                 } else {
-                    mList.insert(it, replacePiece);
+                    // insert before current piece
+                    if (!isApppendedToPrevious) {
+                        mList.insert(it, replacePiece);
+                    }
+                    // chop off leading 1 from that
                     piece->moveStartBy(1);
                 }
             } else if (dataRange.end() == dataOffset) {
+                // collect replaced stprage offset
                 replacedStorageOffset = piece->end();
+                // assuming size > 1, piece with size == 1 would be handled in check for start above
+                // chop off trailing 1 from current piece
                 piece->moveEndBy(-1);
-                ++it;
-                mList.insert(it, replacePiece);
+                // merge inserted piece with next piece if possible
+                bool isPrependedToNext = false;
+                const auto nextIt = it + 1;
+                if (nextIt != mList.end()) {
+                    Piece& nextPiece = *nextIt;
+                    isPrependedToNext = nextPiece.prepend(replacePiece);
+                }
+                // insert after current piece
+                if (!isPrependedToNext) {
+                    mList.insert(nextIt, replacePiece);
+                }
             } else {
                 const Address localIndex = dataRange.localIndex(dataOffset);
+
+                // collect replaced stprage offset
                 replacedStorageOffset = piece->start() + localIndex;
 
+                // split off second piece and insert after adapted current
                 const Piece secondPiece = piece->removeLocal(AddressRange::fromWidth(localIndex, 1));
                 ++it;
                 it = mList.insert(it, replacePiece);
                 ++it;
                 mList.insert(it, secondPiece);
             }
+
+            // done
             break;
         }
+
+        // update loop state
         ++it;
         dataRange.setStart(dataRange.nextBehindEnd());
     }
+
     return {replacedStorageOffset, 1, replacedStorageId};
 }
 
