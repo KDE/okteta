@@ -177,9 +177,9 @@ void StructuresManagerTest::deployToplevelFiles(const QString& metadataFileName,
 
 void StructuresManagerTest::initTestCase()
 {
-    // Hide any eventually installed osds
+    // Avoid messing up test user data
+    // StructuresManager also prepared to not look into system dirs, using OKTETA_UNITTEST define
     QStandardPaths::setTestModeEnabled(true);
-    qputenv("XDG_DATA_DIRS", "/oktetadummy");
 }
 
 void StructuresManagerTest::testInstallationRoundtrip_data()

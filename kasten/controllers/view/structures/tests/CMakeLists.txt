@@ -61,7 +61,10 @@ ecm_add_test(
         Qt5::Xml
         Qt5::Test
 )
-target_compile_definitions(structuresmanagertest PRIVATE -DTRANSLATION_DOMAIN=\"liboktetakasten\")
+target_compile_definitions(structuresmanagertest PRIVATE
+    -DTRANSLATION_DOMAIN=\"liboktetakasten\"
+    -DOKTETA_UNITTEST
+)
 
 # remove useless default definition of QT_TESTCASE_BUILDDIR in interface from imported target Qt5::Test
 get_target_property(qttestdefs Qt5::Test INTERFACE_COMPILE_DEFINITIONS)

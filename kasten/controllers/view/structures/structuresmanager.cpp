@@ -67,8 +67,14 @@ void StructuresManager::reloadPaths()
     mDefs.clear();
     QStringList paths;
     QStringList backwardCompatPaths;
+#ifdef OKTETA_UNITTEST
+    // Prevent picking up random stuff from the system, only use test user data
+    // assumes also QStandardPaths::setTestModeEnabled(true)
+    const QStringList structuresDirs = {userStructuresRootDir()};
+#else
     const QStringList structuresDirs = QStandardPaths::locateAll(QStandardPaths::GenericDataLocation,
                                                                  QStringLiteral("okteta/structures"), QStandardPaths::LocateDirectory);
+#endif
     for (const QString& structuresDir : structuresDirs) {
         const QStringList entries = QDir(structuresDir).entryList(QDir::Dirs | QDir::NoDotAndDotDot);
         for (const QString& e : entries) {
