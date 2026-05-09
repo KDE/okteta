@@ -204,48 +204,325 @@ void PieceTableTest::testInsertPieceListToEmpty()
 
 void PieceTableTest::testInsert_data()
 {
-    QTest::addColumn<Size>("initTableSize");
+    QTest::addColumn<QVector<Piece>>("initPieces");
     QTest::addColumn<Address>("insertDataOffset");
     QTest::addColumn<Size>("insertLength");
     QTest::addColumn<Address>("insertStorageOffset");
     QTest::addColumn<QVector<Piece>>("expectedPieces");
 
-    QTest::newRow("inserting-to-empty")
-        << 0
-        << 0 << Width << ChangeStart
-        << QVector<Piece> {
-            {ChangeStart, Width, Piece::ChangeStorage}};
-    QTest::newRow("inserting-one-at-begin")
-        << BaseSize
-        << 0 << Width << ChangeStart
-        << QVector<Piece> {
-            {ChangeStart, Width, Piece::ChangeStorage},
-            {0, BaseSize, Piece::OriginalStorage}};
-    QTest::newRow("inserting-one-in-middle")
-        << BaseSize
-        << Start << Width << ChangeStart
-        << QVector<Piece> {
-            {0, Start, Piece::OriginalStorage},
-            {ChangeStart, Width, Piece::ChangeStorage},
-            {Start, BaseSize - Start, Piece::OriginalStorage}};
-    QTest::newRow("inserting-one-at-end")
-        << BaseSize
-        << BaseSize << Width << ChangeStart
-        << QVector<Piece> {
-            {0, BaseSize, Piece::OriginalStorage},
-            {ChangeStart, Width, Piece::ChangeStorage}};
+    const Piece originalPieceA {0, BaseSize, Piece::OriginalStorage};
+    const Piece originalPieceA1 {0, 1, Piece::OriginalStorage};
+    const Piece originalPieceAM {0, HalfBaseSize, Piece::OriginalStorage};
+    const Piece originalPieceA_ {0, BaseSize - 1, Piece::OriginalStorage};
+    const Piece originalPieceMA {HalfBaseSize, HalfBaseSize, Piece::OriginalStorage};
+    const Piece originalPiece1A {BaseSize - 1, 1, Piece::OriginalStorage};
+    const Piece originalPiece_A {1, BaseSize - 1, Piece::OriginalStorage};
+    const Piece originalPieceB {BaseSize, BaseSize, Piece::OriginalStorage};
+    const Piece originalPieceB1 {BaseSize, 1, Piece::OriginalStorage};
+    const Piece originalPiece_B {BaseSize + 1, BaseSize - 1, Piece::OriginalStorage};
+
+    const Piece changePieceA {0, BaseSize, Piece::ChangeStorage};
+    const Piece changePieceA1 {0, 1, Piece::ChangeStorage};
+    const Piece changePieceA2 {1, 1, Piece::ChangeStorage};
+    const Piece changePieceA12 {0, 2, Piece::ChangeStorage};
+    const Piece changePieceA_ {0, BaseSize - 1, Piece::ChangeStorage};
+    const Piece changePiece1A {BaseSize - 1, 1, Piece::ChangeStorage};
+    const Piece changePiece_A {1, BaseSize - 1, Piece::ChangeStorage};
+    const Piece changePiece__A {2, BaseSize - 2, Piece::ChangeStorage};
+    const Piece changePieceB {BaseSize, BaseSize, Piece::ChangeStorage};
+    const Piece changePieceB1 {BaseSize, 1, Piece::ChangeStorage};
+    const Piece changePieceB2 {BaseSize + 1, 1, Piece::ChangeStorage};
+    const Piece changePiece_B {BaseSize + 1, BaseSize - 1, Piece::ChangeStorage};
+    const Piece changePieceAB {0, 2 * BaseSize, Piece::ChangeStorage};
+    const Piece changePieceAB1 {0, BaseSize + 1, Piece::ChangeStorage};
+
+    QTest::newRow("empty-to-empty")
+        << QVector<Piece> {}
+        << 0 << 0 << 0
+        << QVector<Piece> {};
+    QTest::newRow("one-to-empty")
+        << QVector<Piece> {}
+        << 0 << changePieceB1.width() << changePieceB1.start()
+        << QVector<Piece> {changePieceB1};
+    QTest::newRow("multi-to-empty")
+        << QVector<Piece> {}
+        << 0 << changePieceB.width() << changePieceB.start()
+        << QVector<Piece> {changePieceB};
+
+    QTest::newRow("empty-to-begin-one")
+        << QVector<Piece> {originalPieceA1}
+        << 0 << 0 << 0
+        << QVector<Piece> {originalPieceA1};
+    QTest::newRow("one-to-begin-one-noncontinuous-samestorage")
+        << QVector<Piece> {changePieceB2}
+        << 0 << changePiece1A.width() << changePiece1A.start()
+        << QVector<Piece> {changePiece1A, changePieceB2};
+    QTest::newRow("one-to-begin-one-noncontinuous-differentstorage")
+        << QVector<Piece> {originalPieceB1}
+        << 0 << changePiece1A.width() << changePiece1A.start()
+        << QVector<Piece> {changePiece1A, originalPieceB1};
+    QTest::newRow("one-to-begin-one-continuous")
+        << QVector<Piece> {changePieceA2}
+        << 0 << changePieceA1.width() << changePieceA1.start()
+        << QVector<Piece> {changePieceA12};
+    QTest::newRow("multi-to-begin-one-noncontinuous-samestorage")
+        << QVector<Piece> {changePieceB2}
+        << 0 << changePieceA.width() << changePieceA.start()
+        << QVector<Piece> {changePieceA, changePieceB2};
+    QTest::newRow("multi-to-begin-one-noncontinuous-differentstorage")
+        << QVector<Piece> {originalPieceB1}
+        << 0 << changePieceA.width() << changePieceA.start()
+        << QVector<Piece> {changePieceA, originalPieceB1};
+    QTest::newRow("multi-to-begin-one-continuous")
+        << QVector<Piece> {changePieceB1}
+        << 0 << changePieceA.width() << changePieceA.start()
+        << QVector<Piece> {changePieceAB1};
+
+    QTest::newRow("empty-to-end-one")
+        << QVector<Piece> {originalPieceA1}
+        << originalPieceA1.width() << 0 << 0
+        << QVector<Piece> {originalPieceA1};
+    QTest::newRow("one-to-end-one-noncontinuous-samestorage")
+        << QVector<Piece> {changePiece1A}
+        << changePiece1A.width() << changePieceB2.width() << changePieceB2.start()
+        << QVector<Piece> {changePiece1A, changePieceB2};
+    QTest::newRow("one-to-end-one-noncontinuous-differentstorage")
+        << QVector<Piece> {originalPiece1A}
+        << originalPiece1A.width() << changePieceB1.width() << changePieceB1.start()
+        << QVector<Piece> {originalPiece1A, changePieceB1};
+    QTest::newRow("one-to-end-one-continuous")
+        << QVector<Piece> {changePieceA1}
+        << changePieceA1.width() << changePieceA2.width() << changePieceA2.start()
+        << QVector<Piece> {changePieceA12};
+    QTest::newRow("multi-to-end-one-noncontinuous-samestorage")
+        << QVector<Piece> {changePiece1A}
+        << changePiece1A.width() << changePiece_B.width() << changePiece_B.start()
+        << QVector<Piece> {changePiece1A, changePiece_B};
+    QTest::newRow("multi-to-end-one-noncontinuous-differentstorage")
+        << QVector<Piece> {originalPiece1A}
+        << originalPiece1A.width() << changePieceB.width() << changePieceB.start()
+        << QVector<Piece> {originalPiece1A, changePieceB};
+    QTest::newRow("multi-to-end-one-continuous")
+        << QVector<Piece> {changePieceA1}
+        << changePieceA1.width() << changePiece_A.width() << changePiece_A.start()
+        << QVector<Piece> {changePieceA};
+
+    QTest::newRow("empty-to-begin-multi")
+        << QVector<Piece> {originalPieceA}
+        << 0 << 0 << 0
+        << QVector<Piece> {originalPieceA};
+    QTest::newRow("one-to-begin-multi-noncontinuous-samestorage")
+        << QVector<Piece> {changePiece_B}
+        << 0 << changePiece1A.width() << changePiece1A.start()
+        << QVector<Piece> {changePiece1A, changePiece_B};
+    QTest::newRow("one-to-begin-multi-noncontinuous-differentstorage")
+        << QVector<Piece> {originalPieceB}
+        << 0 << changePiece1A.width() << changePiece1A.start()
+        << QVector<Piece> {changePiece1A, originalPieceB};
+    QTest::newRow("one-to-begin-multi-continuous")
+        << QVector<Piece> {changePiece_A}
+        << 0 << changePieceA1.width() << changePieceA1.start()
+        << QVector<Piece> {changePieceA};
+    QTest::newRow("multi-to-begin-multi-noncontinuous-samestorage")
+        << QVector<Piece> {changePiece_B}
+        << 0 << changePieceA.width() << changePieceA.start()
+        << QVector<Piece> {changePieceA, changePiece_B};
+    QTest::newRow("multi-to-begin-multi-noncontinuous-differentstorage")
+        << QVector<Piece> {originalPieceB}
+        << 0 << changePieceA.width() << changePieceA.start()
+        << QVector<Piece> {changePieceA, originalPieceB};
+    QTest::newRow("multi-to-begin-multi-continuous")
+        << QVector<Piece> {changePieceB}
+        << 0 << changePieceA.width() << changePieceA.start()
+        << QVector<Piece> {changePieceAB};
+
+    QTest::newRow("empty-to-after-begin-multi")
+        << QVector<Piece> {originalPieceA}
+        << 1 << 0 << 0
+        << QVector<Piece> {originalPieceA};
+    QTest::newRow("one-to-after-begin-multi")
+        << QVector<Piece> {originalPieceA}
+        << 1 << changePieceB1.width() << changePieceB1.start()
+        << QVector<Piece> {originalPieceA1, changePieceB1, originalPiece_A};
+    QTest::newRow("multi-to-after-begin-multi")
+        << QVector<Piece> {originalPieceA}
+        << 1 << changePieceB.width() << changePieceB.start()
+        << QVector<Piece> {originalPieceA1, changePieceB, originalPiece_A};
+
+    QTest::newRow("emoty-to-middle-multi")
+        << QVector<Piece> {originalPieceA}
+        << originalPieceAM.width() << 0 << 0
+        << QVector<Piece> {originalPieceA};
+    QTest::newRow("one-to-middle-multi")
+        << QVector<Piece> {originalPieceA}
+        << originalPieceAM.width() << changePieceB1.width() << changePieceB1.start()
+        << QVector<Piece> {originalPieceAM, changePieceB1, originalPieceMA};
+    QTest::newRow("multi-to-middle-multi")
+        << QVector<Piece> {originalPieceA}
+        << originalPieceAM.width() << changePieceB.width() << changePieceB.start()
+        << QVector<Piece> {originalPieceAM, changePieceB, originalPieceMA};
+
+    QTest::newRow("empty-to-before-end-multi")
+        << QVector<Piece> {originalPieceA}
+        << originalPieceA.width() - 1 << 0 << 0
+        << QVector<Piece> {originalPieceA};
+    QTest::newRow("one-to-before-end-multi")
+        << QVector<Piece> {originalPieceA}
+        << originalPieceA.width() - 1 << changePieceB1.width() << changePieceB1.start()
+        << QVector<Piece> {originalPieceA_, changePieceB1, originalPiece1A};
+    QTest::newRow("multi-to-before-end-multi")
+        << QVector<Piece> {originalPieceA}
+        << originalPieceA.width() - 1 << changePieceB.width() << changePieceB.start()
+        << QVector<Piece> {originalPieceA_, changePieceB, originalPiece1A};
+
+    QTest::newRow("empty-to-end-multi")
+        << QVector<Piece> {originalPieceA}
+        << originalPieceA.width() << 0 << 0
+        << QVector<Piece> {originalPieceA};
+    QTest::newRow("one-to-end-multi-noncontinuous-samestorage")
+        << QVector<Piece> {changePieceA}
+        << changePieceA.width() << changePieceB2.width() << changePieceB2.start()
+        << QVector<Piece> {changePieceA, changePieceB2};
+    QTest::newRow("one-to-end-multi-noncontinuous-differentstorage")
+        << QVector<Piece> {originalPieceA}
+        << originalPieceA.width() << changePieceB1.width() << changePieceB1.start()
+        << QVector<Piece> {originalPieceA, changePieceB1};
+    QTest::newRow("one-to-end-multi-continuous")
+        << QVector<Piece> {changePieceA_}
+        << changePieceA_.width() << changePiece1A.width() << changePiece1A.start()
+        << QVector<Piece> {changePieceA};
+    QTest::newRow("multi-to-end-multi-noncontinuous-samestorage")
+        << QVector<Piece> {changePieceA}
+        << changePieceA.width() << changePiece_B.width() << changePiece_B.start()
+        << QVector<Piece> {changePieceA, changePiece_B};
+    QTest::newRow("multi-to-end-multi-noncontinuous-differentstorage")
+        << QVector<Piece> {originalPieceA}
+        << originalPieceA.width() << changePieceB.width() << changePieceB.start()
+        << QVector<Piece> {originalPieceA, changePieceB};
+    QTest::newRow("multi-to-end-multi-continuous")
+        << QVector<Piece> {changePieceA}
+        << changePieceA.width() << changePieceB.width() << changePieceB.start()
+        << QVector<Piece> {changePieceAB};
+
+    QTest::newRow("empty-to-begin-first-two-multi")
+        << QVector<Piece> {originalPieceB, originalPieceA}
+        << 0 << 0 << 0
+        << QVector<Piece> {originalPieceB, originalPieceA};
+    QTest::newRow("one-to-begin-first-two-multi-noncontinuous-samestorage")
+        << QVector<Piece> {changePiece_B, originalPieceB}
+        << 0 << changePiece1A.width() << changePiece1A.start()
+        << QVector<Piece> {changePiece1A, changePiece_B, originalPieceB};
+    QTest::newRow("one-to-begin-first-two-multi-noncontinuous-differentstorage")
+        << QVector<Piece> {originalPieceB, changePieceB}
+        << 0 << changePiece1A.width() << changePiece1A.start()
+        << QVector<Piece> {changePiece1A, originalPieceB, changePieceB};
+    QTest::newRow("one-to-begin-first-two-multi-continuous")
+        << QVector<Piece> {changePiece_A, originalPieceB}
+        << 0 << changePieceA1.width() << changePieceA1.start()
+        << QVector<Piece> {changePieceA, originalPieceB};
+    QTest::newRow("multi-to-begin-first-two-multi-noncontinuous-samestorage")
+        << QVector<Piece> {changePiece_B, originalPieceB}
+        << 0 << changePieceA.width() << changePieceA.start()
+        << QVector<Piece> {changePieceA, changePiece_B, originalPieceB};
+    QTest::newRow("multi-to-begin-first-two-multi-noncontinuous-differentstorage")
+        << QVector<Piece> {originalPieceB, changePieceB}
+        << 0 << changePieceA.width() << changePieceA.start()
+        << QVector<Piece> {changePieceA, originalPieceB, changePieceB};
+    QTest::newRow("multi-to-begin-first-two-multi-continuous")
+        << QVector<Piece> {changePieceB,originalPieceB}
+        << 0 << changePieceA.width() << changePieceA.start()
+        << QVector<Piece> {changePieceAB, originalPieceB};
+
+    QTest::newRow("empty-to-begin-second-two-multi")
+        << QVector<Piece> {originalPieceB, originalPieceA}
+        << originalPieceB.width() << 0 << 0
+        << QVector<Piece> {originalPieceB, originalPieceA};
+    QTest::newRow("one-to-begin-second-two-multi-noncontinuous-samestorage")
+        << QVector<Piece> {originalPieceB, changePiece_B}
+        << originalPieceB.width() << changePiece1A.width() << changePiece1A.start()
+        << QVector<Piece> {originalPieceB, changePiece1A, changePiece_B};
+    QTest::newRow("one-to-begin-second-two-multi-noncontinuous-differentstorage")
+        << QVector<Piece> {changePieceB, originalPieceB}
+        << changePieceB.width() << changePiece1A.width() << changePiece1A.start()
+        << QVector<Piece> {changePieceB, changePiece1A, originalPieceB};
+    QTest::newRow("one-to-begin-second-two-multi-continuous-first")
+        << QVector<Piece> {changePieceA_, originalPieceB}
+        << changePieceA_.width() << changePiece1A.width() << changePiece1A.start()
+        << QVector<Piece> {changePieceA, originalPieceB};
+    QTest::newRow("one-to-begin-second-two-multi-continuous-second")
+        << QVector<Piece> {originalPieceB, changePiece_A}
+        << originalPieceB.width() << changePieceA1.width() << changePieceA1.start()
+        << QVector<Piece> {originalPieceB, changePieceA};
+    QTest::newRow("one-to-begin-second-two-multi-continuous-all")
+        << QVector<Piece> {changePieceA_, changePieceB}
+        << changePieceA_.width() << changePiece1A.width() << changePiece1A.start()
+        << QVector<Piece> {changePieceAB};
+    QTest::newRow("multi-to-begin-second-two-multi-noncontinuous-samestorage")
+        << QVector<Piece> {originalPieceB, changePiece_B}
+        << originalPieceB.width() << changePieceA.width() << changePieceA.start()
+        << QVector<Piece> {originalPieceB, changePieceA, changePiece_B};
+    QTest::newRow("multi-to-begin-second-two-multi-noncontinuous-differentstorage")
+        << QVector<Piece> {changePieceB, originalPieceB}
+        << changePieceB.width() << changePieceA.width() << changePieceA.start()
+        << QVector<Piece> {changePieceB, changePieceA, originalPieceB};
+    QTest::newRow("multi-to-begin-second-two-multi-continuous-first")
+        << QVector<Piece> {changePieceA, originalPieceB}
+        << changePieceA.width() << changePieceB.width() << changePieceB.start()
+        << QVector<Piece> {changePieceAB, originalPieceB};
+    QTest::newRow("multi-to-begin-second-two-multi-continuous-second")
+        << QVector<Piece> {originalPieceB, changePieceB}
+        << originalPieceB.width() << changePieceA.width() << changePieceA.start()
+        << QVector<Piece> {originalPieceB, changePieceAB};
+    QTest::newRow("multi-to-begin-second-two-multi-continuous-all")
+        << QVector<Piece> {changePieceA12, changePieceB}
+        << changePieceA12.width() << changePiece__A.width() << changePiece__A.start()
+        << QVector<Piece> {changePieceAB};
+
+    QTest::newRow("empty-to-end-second-two-multi")
+        << QVector<Piece> {originalPieceB, originalPieceA}
+        << originalPieceB.width() + originalPieceA.width() << 0 << 0
+        << QVector<Piece> {originalPieceB, originalPieceA};
+    QTest::newRow("one-to-end-second-two-multi-noncontinuous-samestorage")
+        << QVector<Piece> {originalPieceB, changePieceA}
+        << originalPieceB.width() + changePieceA.width() << changePieceB2.width() << changePieceB2.start()
+        << QVector<Piece> {originalPieceB, changePieceA, changePieceB2};
+    QTest::newRow("one-to-end-second-two-multi-noncontinuous-differentstorage")
+        << QVector<Piece> {originalPieceB, originalPieceA}
+        << originalPieceB.width() + originalPieceA.width() << changePieceB1.width() << changePieceB1.start()
+        << QVector<Piece> {originalPieceB, originalPieceA, changePieceB1};
+    QTest::newRow("one-to-end-second-two-multi-continuous")
+        << QVector<Piece> {originalPieceB, changePieceA_}
+        << originalPieceB.width() + changePieceA_.width() << changePiece1A.width() << changePiece1A.start()
+        << QVector<Piece> {originalPieceB, changePieceA};
+    QTest::newRow("multi-to-end-second-two-multi-noncontinuous-samestorage")
+        << QVector<Piece> {originalPieceB, changePieceA}
+        << originalPieceB.width() + changePieceA.width() << changePiece_B.width() << changePiece_B.start()
+        << QVector<Piece> {originalPieceB, changePieceA, changePiece_B};
+    QTest::newRow("multi-to-end-second-two-multi-noncontinuous-differentstorage")
+        << QVector<Piece> {originalPieceB, originalPieceA}
+        << originalPieceB.width() + originalPieceA.width() << changePieceB.width() << changePieceB.start()
+        << QVector<Piece> {originalPieceB, originalPieceA, changePieceB};
+    QTest::newRow("multi-to-end-second-two-multi-continuous")
+        << QVector<Piece> {originalPieceB, changePieceA}
+        << originalPieceB.width() + changePieceA.width() << changePieceB.width() << changePieceB.start()
+        << QVector<Piece> {originalPieceB, changePieceAB};
 }
 
 void PieceTableTest::testInsert()
 {
-    QFETCH(const Size, initTableSize);
+    QFETCH(const QVector<Piece>, initPieces);
     QFETCH(const Address, insertDataOffset);
     QFETCH(const Size, insertLength);
     QFETCH(const Address, insertStorageOffset);
     QFETCH(const QVector<Piece>, expectedPieces);
 
+    PieceList initPieceList;
+    for (const auto& piece : initPieces) {
+        initPieceList.append(piece);
+    }
+
     PieceTable pieceTable;
-    pieceTable.init(initTableSize);
+    pieceTable.insert(0, initPieceList);
 
     // tested action
     pieceTable.insert(insertDataOffset, insertLength, insertStorageOffset);

@@ -61,6 +61,8 @@ cmake_dependent_option(BUILD_KPARTSPLUGIN "Build the KParts plugin." ON "BUILD_O
 add_feature_info(KPARTSPLUGIN ${BUILD_KPARTSPLUGIN} "KParts plugin")
 cmake_dependent_option(BUILD_DESKTOPPROGRAM "Build the program." ON "BUILD_OKTETAKASTENLIBS" OFF)
 add_feature_info(DESKTOPPROGRAM ${BUILD_DESKTOPPROGRAM} "Program")
+cmake_dependent_option(BUILD_DOC "Build the offline program manual." ON "BUILD_DESKTOPPROGRAM" OFF)
+add_feature_info(DOC ${BUILD_DOC} "Offline program manual")
 
 set(REQUIRED_QT_VERSION "5.15.2")
 set(ADDITIONAL_REQUIRED_QT_COMPONENTS)
@@ -110,6 +112,10 @@ if( BUILD_DESKTOPPROGRAM )
     list(APPEND ADDITIONAL_REQUIRED_KF_COMPONENTS
         Crash
         DBusAddons
+    )
+endif()
+if(BUILD_DOC)
+    list(APPEND ADDITIONAL_REQUIRED_KF_COMPONENTS
         DocTools
     )
 endif()
@@ -139,7 +145,7 @@ endif()
 
 # helper libs
 add_subdirectory( libs )
-if( BUILD_DESKTOPPROGRAM )
+if( BUILD_DOC )
     add_subdirectory( doc )
 endif()
 
@@ -177,7 +183,7 @@ endif()
 
 ki18n_install(po)
 
-if( BUILD_DESKTOPPROGRAM )
+if( BUILD_DOC )
     kdoctools_install(po)
 endif()
 
