@@ -33,7 +33,7 @@ void TabBar::mouseReleaseEvent(QMouseEvent* event)
     if (event->button() == Qt::MiddleButton) {
         const int tabIndex = tabAt(event->pos());
         if (tabIndex == -1) {
-            Q_EMIT mouseMiddleClick();
+            Q_EMIT mouseMiddleButtonClicked();
             event->setAccepted(true);
             return;
         }

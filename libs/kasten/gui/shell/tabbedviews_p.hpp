@@ -64,7 +64,7 @@ public: // Q_SLOTS:
 //     void onModifiedChanged( Kasten::AbstractDocument::SyncStates newStates );
     void onViewFocusChanged(bool hasFocus);
     void onContextMenuRequested(QPoint pos);
-    void onMouseMiddleClick();
+    void onMouseMiddleButtonClicked();
     void onEmptySpaceMouseDoubleClicked();
     void onDragMoveEvent(QDragMoveEvent* event, bool& accept);
     void onDropEvent(QDropEvent* event, bool& accept);

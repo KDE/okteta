@@ -21,7 +21,7 @@ public:
     ~TabBar() override;
 
 Q_SIGNALS:
-    void mouseMiddleClick();
+    void mouseMiddleButtonClicked();
     void emptySpaceMouseDoubleClicked();
     void testCanDecode(QDragMoveEvent* event, bool& accept);
     void receivedDropEvent(QDropEvent* event, bool& accept);

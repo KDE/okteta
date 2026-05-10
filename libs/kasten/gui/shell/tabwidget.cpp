@@ -25,8 +25,8 @@ TabWidget::TabWidget(QWidget* parent)
             this, &TabWidget::testCanDecode);
     connect(tabBar, &TabBar::receivedDropEvent,
             this, &TabWidget::receivedDropEvent);
-    connect(tabBar, &TabBar::mouseMiddleClick,
-            this, &TabWidget::mouseMiddleClick);
+    connect(tabBar, &TabBar::mouseMiddleButtonClicked,
+            this, &TabWidget::mouseMiddleButtonClicked);
     connect(tabBar, &TabBar::emptySpaceMouseDoubleClicked,
             this, &TabWidget::emptySpaceMouseDoubleClicked);
 
@@ -41,7 +41,7 @@ void TabWidget::mouseReleaseEvent(QMouseEvent* event)
 {
     if (event->button() == Qt::MiddleButton) {
         if (count() == 0) {
-            Q_EMIT mouseMiddleClick();
+            Q_EMIT mouseMiddleButtonClicked();
             event->setAccepted(true);
             return;
         }

@@ -48,8 +48,8 @@ void TabbedViewsPrivate::init()
                      q, [this](QDragMoveEvent* event, bool& accept) { onDragMoveEvent(event, accept); });
     QObject::connect(mTabWidget.get(), &TabWidget::receivedDropEvent,
                      q, [this](QDropEvent* event, bool& accept) { onDropEvent(event, accept); });
-    QObject::connect(mTabWidget.get(), &TabWidget::mouseMiddleClick,
-                     q, [this]() { onMouseMiddleClick(); });
+    QObject::connect(mTabWidget.get(), &TabWidget::mouseMiddleButtonClicked,
+                     q, [this]() { onMouseMiddleButtonClicked(); });
     QObject::connect(mTabWidget.get(), &TabWidget::emptySpaceMouseDoubleClicked,
                      q, [this]() { onEmptySpaceMouseDoubleClicked(); });
 }
@@ -254,7 +254,7 @@ void TabbedViewsPrivate::onContextMenuRequested(QPoint pos)
     Q_EMIT q->contextMenuRequested(view, mTabWidget->mapTo(mViewAreaBox.get(), pos));
 }
 
-void TabbedViewsPrivate::onMouseMiddleClick()
+void TabbedViewsPrivate::onMouseMiddleButtonClicked()
 {
     Q_Q(TabbedViews);
 
