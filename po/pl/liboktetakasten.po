@@ -8,14 +8,14 @@
 # Michał Lachowski <michal@lachowski.info>, 2010.
 # Michał Zając <michal.zajac@gmail.com>, 2010.
 # Artur Chłond <eugenewolfe@o2.pl>, 2011.
-# SPDX-FileCopyrightText: 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2021, 2022, 2023, 2024, 2025, 2026 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
+# SPDX-FileCopyrightText: 2011-2019, 2021-2026 Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-03-25 03:47+0000\n"
-"PO-Revision-Date: 2026-01-24 11:05+0100\n"
+"PO-Revision-Date: 2026-05-09 17:03+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: pl\n"
 "Language: pl\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 25.08.2\n"
+"X-Generator: Lokalize 26.04.0\n"
 
 #: controllers/document/info/documentinfotool.cpp:47
 #: controllers/document/info/documentinfotoolviewfactory.cpp:24
@@ -238,7 +238,7 @@ msgstr "Bin"
 #, kde-format
 msgctxt "@title:column short for Character"
 msgid "Char"
-msgstr "Char"
+msgstr "Znak"
 
 #: controllers/view/bytetable/bytetablemodel.cpp:176
 #: controllers/view/info/statistictablemodel.cpp:239
@@ -3441,7 +3441,7 @@ msgstr "Bin"
 #, kde-format
 msgctxt "@item:inlistbox coding of the bytes as characters with the values"
 msgid "Char"
-msgstr "Char"
+msgstr "Znak"
 
 #: gui/liboktetawidgets/bytearraycombobox_p.cpp:30
 #, kde-format
