@@ -52,7 +52,7 @@ void DocumentManagerPrivate::closeDocument(AbstractDocument* document)
     Q_Q(DocumentManager);
 
     // TODO: first check if unsaved and ask, only then close
-    const bool isRemoved = mList.removeOne(document);;
+    const bool isRemoved = mList.removeOne(document);
 
     if (isRemoved) {
         const QVector<AbstractDocument*> closedDocuments { document };

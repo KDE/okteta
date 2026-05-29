@@ -123,7 +123,7 @@ void StructuresManagerTest::createDir(QString& path,
 
     QDir parentDir(m_temporaryDir.path());
     QVERIFY(parentDir.mkdir(name));
-    path = parentDir.absoluteFilePath(name);;
+    path = parentDir.absoluteFilePath(name);
 
     QFile metadataFile(m_temporaryDir.filePath(metadataFileName));
     QVERIFY(metadataFile.open(QIODevice::WriteOnly));
@@ -145,7 +145,7 @@ void StructuresManagerTest::deploySubdirFiles(const QString& id,
 
     QDir structuresRootDir(Kasten::StructuresManager::userStructuresRootDir());
     structuresRootDir.mkpath(name);
-    const QString path = structuresRootDir.absoluteFilePath(name);;
+    const QString path = structuresRootDir.absoluteFilePath(name);
 
     QFile metadataFile(structuresRootDir.filePath(metadataFileName));
     QVERIFY(metadataFile.open(QIODevice::WriteOnly));

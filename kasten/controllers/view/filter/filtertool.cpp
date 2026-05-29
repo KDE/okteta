@@ -111,7 +111,7 @@ void FilterTool::setTargetModel(AbstractModel* model)
 void FilterTool::saveParameterSet(int filterId)
 {
     if ((filterId < 0) || (static_cast<int>(mFilterList.size()) <= filterId)) {
-        return;;
+        return;
     }
 
     KConfigGroup configGroup(KSharedConfig::openConfig(), ConfigGroupId);
@@ -125,7 +125,7 @@ void FilterTool::setFilter(int filterId)
     }
 
     if ((filterId < 0) || (static_cast<int>(mFilterList.size()) <= filterId)) {
-        return;;
+        return;
     }
 
     mFilterId = filterId;
@@ -139,7 +139,7 @@ void FilterTool::setFilter(int filterId)
 void FilterTool::filter() const
 {
     if ((mFilterId < 0) || (static_cast<int>(mFilterList.size()) <= mFilterId)) {
-        return;;
+        return;
     }
 
     const auto& byteArrayFilter = mFilterList[mFilterId];

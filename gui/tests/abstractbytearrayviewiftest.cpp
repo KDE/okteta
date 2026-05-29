@@ -44,7 +44,7 @@ void AbstractByteArrayViewIfTest::cleanup()
 
     deleteByteArrayView(std::move(m_byteArrayView));
 
-    m_byteArrayModel.reset();;
+    m_byteArrayModel.reset();
 }
 
 void AbstractByteArrayViewIfTest::checkZoomScaleChanged(double zoomScaleExpected)

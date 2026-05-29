@@ -181,7 +181,7 @@ void StructuresManagerView::uninstallStructure(const QString& id)
 
 QStringList StructuresManagerView::values() const
 {
-    return mStructuresSelector->enabledStructures();;
+    return mStructuresSelector->enabledStructures();
 }
 
 void StructuresManagerView::setValues(const QStringList& values)
@@ -201,7 +201,7 @@ void StructuresManagerView::advancedSelection()
 
 void StructuresManagerView::setEnabledStructures(const QStringList& enabledStructures)
 {
-    mStructuresSelector->setEnabledStructures(enabledStructures);;
+    mStructuresSelector->setEnabledStructures(enabledStructures);
 }
 
 void StructuresManagerView::resetLoadedStructures()

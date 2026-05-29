@@ -98,7 +98,7 @@ QString UserMessagesHandlerPrivate::executeQuery(std::unique_ptr<UserQuery>&& us
             primaryResponseOption = responseOption.get();
             continue;
         }
-        secondaryResponseOption = responseOption.get();;
+        secondaryResponseOption = responseOption.get();
     }
 
     std::unordered_map<QDialogButtonBox::StandardButton, UserResponseOption*> buttonTable;
