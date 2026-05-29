@@ -195,5 +195,6 @@ kastengui_sublibrary_sources(KastenGuiShell
 okteta_add_cmakeconfig(Gui NAMESPACE Kasten
     DEPS
         Qt5Widgets ${Qt5_VERSION}
+        KF5XmlGui ${KF5_VERSION}
         KastenCore
 )
