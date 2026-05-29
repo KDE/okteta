@@ -12,8 +12,9 @@
 #include <QWidget>
 #include "../datatypes/topleveldatainformation.hpp"
 
-class QTableView;
 class KComboBox;
+
+class QTableView;
 
 class ScriptLoggerView : public QWidget
 {

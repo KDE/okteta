@@ -14,10 +14,10 @@
 
 class KDirOperator;
 class KUrlNavigator;
-class QUrl;
 class KFileItem;
 class KActionCollection;
 class KToolBar;
+class QUrl;
 
 namespace Kasten {
 
