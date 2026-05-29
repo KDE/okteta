@@ -13,7 +13,7 @@
 #include <Kasten/AbstractDocument>
 // KF
 #include <KLocalizedString>
-
+// Qt
 #include <QIcon>
 
 namespace Kasten {

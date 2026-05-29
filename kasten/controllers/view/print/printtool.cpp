@@ -85,7 +85,7 @@ template <typename T>
 static
 QString pageUnitAsString(T unit)
 {
-    return pageUnitAsString(static_cast<PageUnit>(unit));;
+    return pageUnitAsString(static_cast<PageUnit>(unit));
 }
 
 }

@@ -13,9 +13,9 @@
 class AbstractByteArrayChecksumParameterSet;
 
 class KComboBox;
+
 class QLineEdit;
 class QAction;
-
 class QStackedWidget;
 
 namespace Kasten {

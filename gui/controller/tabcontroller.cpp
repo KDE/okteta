@@ -24,7 +24,7 @@ void TabController::handleShortcutOverrideEvent(QKeyEvent* keyEvent) const
 {
     bool isKeyToUse = false;
 
-    const Qt::KeyboardModifiers keyModifiers = keyEvent->modifiers() & ~(Qt::KeypadModifier | Qt::GroupSwitchModifier);;
+    const Qt::KeyboardModifiers keyModifiers = keyEvent->modifiers() & ~(Qt::KeypadModifier | Qt::GroupSwitchModifier);
 
     const bool isAtMostShiftModifier = !(keyModifiers & (Qt::ControlModifier | Qt::AltModifier | Qt::MetaModifier));
 
@@ -50,7 +50,7 @@ bool TabController::handleKeyPress(QKeyEvent* keyEvent)
 {
     bool keyUsed = false;
 
-    const Qt::KeyboardModifiers keyModifiers = keyEvent->modifiers() & ~(Qt::KeypadModifier | Qt::GroupSwitchModifier);;
+    const Qt::KeyboardModifiers keyModifiers = keyEvent->modifiers() & ~(Qt::KeypadModifier | Qt::GroupSwitchModifier);
 
     const bool isAtMostShiftModifier = !(keyModifiers & (Qt::ControlModifier | Qt::AltModifier | Qt::MetaModifier));
 

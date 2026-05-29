@@ -8,7 +8,7 @@
 
 // test object
 #include <charcodecs/textcharcodec.hpp>
-// KF
+// Qt
 #include <QTest>
 
 namespace Okteta {

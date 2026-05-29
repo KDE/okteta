@@ -13,8 +13,9 @@
 #include <QVector>
 #include <QWidget>
 
-class QTableView;
 class KComboBox;
+
+class QTableView;
 
 class ScriptLoggerView : public QWidget
 {

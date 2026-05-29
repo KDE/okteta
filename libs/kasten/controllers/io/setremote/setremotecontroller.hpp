@@ -10,8 +10,8 @@
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
 
-class QAction;
 class KXMLGUIClient;
+class QAction;
 
 namespace Kasten {
 

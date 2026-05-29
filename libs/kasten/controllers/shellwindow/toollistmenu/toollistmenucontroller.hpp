@@ -12,8 +12,8 @@
 // Qt
 #include <QList>
 
-class QAction;
 class KXMLGUIClient;
+class QAction;
 
 namespace Kasten {
 

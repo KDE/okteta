@@ -9,7 +9,7 @@
 
 // lib
 #include "arraychangemetrics.hpp"
-//
+// Qt
 #include <QVector>
 
 namespace Okteta {

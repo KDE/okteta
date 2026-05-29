@@ -10,7 +10,7 @@
 // library
 #include "abstractfilesystemsyncfromremotejob.hpp"
 #include <abstractsyncfromremotejob_p.hpp>
-// KF
+// Qt
 #include <QFile>
 // Std
 #include <memory>

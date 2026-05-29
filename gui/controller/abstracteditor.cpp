@@ -35,7 +35,7 @@ void AbstractEditor::handleShortcutOverrideEvent(QKeyEvent* keyEvent) const
         keyEvent->matches(QKeySequence::DeleteEndOfWord)) {
         isKeyToUse = true;
     } else {
-        const Qt::KeyboardModifiers keyModifiers = keyEvent->modifiers() & ~(Qt::KeypadModifier | Qt::GroupSwitchModifier);;
+        const Qt::KeyboardModifiers keyModifiers = keyEvent->modifiers() & ~(Qt::KeypadModifier | Qt::GroupSwitchModifier);
 
         if (keyModifiers == Qt::NoModifier) {
             const int keyCode = keyEvent->key();
@@ -86,7 +86,7 @@ bool AbstractEditor::handleKeyPress(QKeyEvent* keyEvent)
         }
         keyUsed = true;
     } else {
-        const Qt::KeyboardModifiers keyModifiers = keyEvent->modifiers() & ~(Qt::KeypadModifier | Qt::GroupSwitchModifier);;
+        const Qt::KeyboardModifiers keyModifiers = keyEvent->modifiers() & ~(Qt::KeypadModifier | Qt::GroupSwitchModifier);
 
         if (keyModifiers == Qt::NoModifier) {
             switch (keyEvent->key()) {
