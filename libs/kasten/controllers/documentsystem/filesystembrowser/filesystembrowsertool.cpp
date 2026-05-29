@@ -12,11 +12,10 @@
 #include <Kasten/DocumentSyncManager>
 #include <Kasten/AbstractDocument>
 #include <Kasten/AbstractModelSynchronizer>
-
 // KF
 #include <KLocalizedString>
 #include <KIO/Global>
-
+// Qt
 #include <QUrl>
 
 namespace Kasten {

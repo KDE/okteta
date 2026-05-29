@@ -12,7 +12,7 @@
 #include <charcodec.hpp>
 // lib
 #include <character.hpp>
-// KF
+// Qt
 #include <QTest>
 
 namespace Okteta {
