@@ -62,7 +62,7 @@ void KeyNavigator::handleShortcutOverrideEvent(QKeyEvent* keyEvent) const
         keyEvent->matches(QKeySequence::SelectEndOfDocument)) {
         isKeyToUse = true;
     } else {
-        const Qt::KeyboardModifiers shiftLessKeyModifiers = keyEvent->modifiers() & ~(Qt::KeypadModifier | Qt::GroupSwitchModifier | Qt::ShiftModifier);;
+        const Qt::KeyboardModifiers shiftLessKeyModifiers = keyEvent->modifiers() & ~(Qt::KeypadModifier | Qt::GroupSwitchModifier | Qt::ShiftModifier);
         if (shiftLessKeyModifiers == (Qt::ControlModifier | Qt::AltModifier)) {
             const int keyCode = keyEvent->key();
             if ((keyCode == Qt::Key_Left) ||
@@ -163,7 +163,7 @@ bool KeyNavigator::handleKeyPress(QKeyEvent* keyEvent)
         moveCursor(MoveEnd, Select);
         keyUsed = true;
     } else {
-        const Qt::KeyboardModifiers keyModifiers = keyEvent->modifiers() & ~(Qt::KeypadModifier | Qt::GroupSwitchModifier);;
+        const Qt::KeyboardModifiers keyModifiers = keyEvent->modifiers() & ~(Qt::KeypadModifier | Qt::GroupSwitchModifier);
 
         const Qt::KeyboardModifiers shiftLessKeyModifiers = keyModifiers & ~Qt::ShiftModifier;
         if (shiftLessKeyModifiers == (Qt::ControlModifier | Qt::AltModifier)) {

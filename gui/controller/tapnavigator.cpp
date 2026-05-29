@@ -27,7 +27,7 @@ bool TapNavigator::handleTapGesture(QTapGesture* tapGesture)
         mView->pauseCursor();
         mView->finishByteEdit();
 
-        const QPoint viewportPos = tapGesture->position().toPoint();;
+        const QPoint viewportPos = tapGesture->position().toPoint();
         const QPoint tapPoint = mView->viewportToColumns(viewportPos);
         mView->placeCursor(tapPoint);
         ByteArrayTableRanges* tableRanges = mView->tableRanges();

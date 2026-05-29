@@ -28,7 +28,7 @@ void CharEditor::handleShortcutOverrideEvent(QKeyEvent* keyEvent) const
 {
     bool isKeyToUse = false;
 
-    const Qt::KeyboardModifiers keyModifiers = keyEvent->modifiers() & ~(Qt::KeypadModifier | Qt::GroupSwitchModifier);;
+    const Qt::KeyboardModifiers keyModifiers = keyEvent->modifiers() & ~(Qt::KeypadModifier | Qt::GroupSwitchModifier);
 
     const Qt::KeyboardModifiers shiftLessKeyModifiers = keyModifiers & ~Qt::ShiftModifier;
     if (shiftLessKeyModifiers == Qt::NoModifier) {
@@ -54,7 +54,7 @@ bool CharEditor::handleKeyPress(QKeyEvent* keyEvent)
 {
     bool keyUsed = false;
 
-    const Qt::KeyboardModifiers keyModifiers = keyEvent->modifiers() & ~(Qt::KeypadModifier | Qt::GroupSwitchModifier);;
+    const Qt::KeyboardModifiers keyModifiers = keyEvent->modifiers() & ~(Qt::KeypadModifier | Qt::GroupSwitchModifier);
 
     const Qt::KeyboardModifiers shiftLessKeyModifiers = keyModifiers & ~Qt::ShiftModifier;
     if (shiftLessKeyModifiers == Qt::NoModifier) {

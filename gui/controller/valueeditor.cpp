@@ -97,7 +97,7 @@ void ValueEditor::handleShortcutOverrideEvent(QKeyEvent* keyEvent) const
                 isKeyToUse = true;
             }
         } else {
-            const Qt::KeyboardModifiers keyModifiers = keyEvent->modifiers() & ~(Qt::KeypadModifier | Qt::GroupSwitchModifier);;
+            const Qt::KeyboardModifiers keyModifiers = keyEvent->modifiers() & ~(Qt::KeypadModifier | Qt::GroupSwitchModifier);
 
             switch (keyEvent->key()) {
             case Qt::Key_Plus:
@@ -168,7 +168,7 @@ bool ValueEditor::handleKeyPress(QKeyEvent* keyEvent)
                 keyUsed = true;
             }
         } else {
-            const Qt::KeyboardModifiers keyModifiers = keyEvent->modifiers() & ~(Qt::KeypadModifier | Qt::GroupSwitchModifier);;
+            const Qt::KeyboardModifiers keyModifiers = keyEvent->modifiers() & ~(Qt::KeypadModifier | Qt::GroupSwitchModifier);
 
             switch (keyEvent->key()) {
             case Qt::Key_Plus:
