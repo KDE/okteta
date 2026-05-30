@@ -2,7 +2,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeorg\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-03 02:08+0000\n"
+"POT-Creation-Date: 2026-05-30 02:12+0000\n"
 "PO-Revision-Date: 2024-04-22 16:05\n"
 "Last-Translator: \n"
 "Language-Team: Chinese Simplified\n"
@@ -150,7 +150,7 @@ msgctxt "@info"
 msgid "No documents"
 msgstr "没有文档"
 
-#: controllers/documentsystem/filesystembrowser/filesystembrowsertool.cpp:30
+#: controllers/documentsystem/filesystembrowser/filesystembrowsertool.cpp:29
 #: controllers/documentsystem/filesystembrowser/filesystembrowsertoolviewfactory.cpp:22
 #, kde-format
 msgctxt "@title:window"

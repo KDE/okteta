@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: libkasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-03 02:08+0000\n"
+"POT-Creation-Date: 2026-05-30 02:12+0000\n"
 "PO-Revision-Date: 2025-01-03 21:16+0100\n"
 "Last-Translator: Oliver Kellogg <olivermkellogg@gmail.com>\n"
 "Language-Team: esperanto <kde-i18n-eo@kde.org>\n"
@@ -152,7 +152,7 @@ msgctxt "@info"
 msgid "No documents"
 msgstr "Neniuj dokumentoj"
 
-#: controllers/documentsystem/filesystembrowser/filesystembrowsertool.cpp:30
+#: controllers/documentsystem/filesystembrowser/filesystembrowsertool.cpp:29
 #: controllers/documentsystem/filesystembrowser/filesystembrowsertoolviewfactory.cpp:22
 #, kde-format
 msgctxt "@title:window"

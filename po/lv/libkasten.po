@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-04-03 02:08+0000\n"
+"POT-Creation-Date: 2026-05-30 02:12+0000\n"
 "PO-Revision-Date: 2010-01-09 16:07+0200\n"
 "Last-Translator: Viesturs Zarins <viesturs.zarins@mii.lu.lv>\n"
 "Language-Team: Latvian <locale@laka.lv>\n"
@@ -161,7 +161,7 @@ msgctxt "@info"
 msgid "No documents"
 msgstr "Dokumenti"
 
-#: controllers/documentsystem/filesystembrowser/filesystembrowsertool.cpp:30
+#: controllers/documentsystem/filesystembrowser/filesystembrowsertool.cpp:29
 #: controllers/documentsystem/filesystembrowser/filesystembrowsertoolviewfactory.cpp:22
 #, kde-format
 msgctxt "@title:window"
