@@ -2685,7 +2685,7 @@ msgstr "Valida totes les estructures."
 #, kde-format
 msgctxt "@action"
 msgid "Script Console"
-msgstr "Consola de script"
+msgstr "Consola de scripts"
 
 #: controllers/view/structures/structureview.cpp:75
 #, kde-format
@@ -3340,7 +3340,7 @@ msgstr "%1 bytes"
 #, kde-format
 msgctxt "@info:status selection: start offset - end offset ()"
 msgid "Selection: %1 - %2 (%3)"
-msgstr "Selecció: %1 - %2 (%3)"
+msgstr "Selecció: %1 – %2 (%3)"
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:211
 #, kde-format
@@ -3359,7 +3359,7 @@ msgstr "Selecció: -"
 #, kde-format
 msgctxt "@info:status selection: start offset - end offset (number of bytes)"
 msgid "Selection: %1 - %2 (%3)"
-msgstr "Selecció: %1 - %2 (%3)"
+msgstr "Selecció: %1 – %2 (%3)"
 
 #: core/document/bytearraydocument.cpp:50
 #, kde-format
