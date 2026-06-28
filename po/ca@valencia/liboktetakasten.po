@@ -3054,7 +3054,7 @@ msgstr "%1 bytes"
 #, kde-format
 msgctxt "@info:status selection: start offset - end offset ()"
 msgid "Selection: %1 - %2 (%3)"
-msgstr "Selecció: %1 - %2 (%3)"
+msgstr "Selecció: %1 – %2 (%3)"
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:202
 #, kde-format
@@ -3073,7 +3073,7 @@ msgstr "Selecció: -"
 #, kde-format
 msgctxt "@info:status selection: start offset - end offset (number of bytes)"
 msgid "Selection: %1 - %2 (%3)"
-msgstr "Selecció: %1 - %2 (%3)"
+msgstr "Selecció: %1 – %2 (%3)"
 
 #: core/document/bytearraydocument.cpp:53
 #, kde-format
