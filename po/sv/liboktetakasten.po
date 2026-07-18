@@ -2,21 +2,21 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 #
-# SPDX-FileCopyrightText: 2007, 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2018, 2019, 2020, 2023, 2024, 2025 Stefan Asserhäll <stefan.asserhall@gmail.com>
+# SPDX-FileCopyrightText: 2007-2016, 2018-2020, 2023-2026 Stefan Asserhäll <stefan.asserhall@gmail.com>
 # Arve Eriksson <031299870@telia.com>, 2011.
 msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-03-25 02:14+0000\n"
-"PO-Revision-Date: 2025-09-01 19:26+0200\n"
+"PO-Revision-Date: 2026-07-17 21:13+0200\n"
 "Last-Translator: Stefan Asserhäll <stefan.asserhall@gmail.com>\n"
 "Language-Team: Swedish <kde-i18n-doc@kde.org>\n"
 "Language: sv\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Lokalize 25.08.0\n"
+"X-Generator: Lokalize 26.04.3\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 
 #, kde-format
@@ -1416,12 +1416,10 @@ msgstr "Redigera"
 #: controllers/view/poddecoder/podtableview.cpp:60
 #: controllers/view/stringsextract/stringsextractview.cpp:79
 #: controllers/view/structures/structureview.cpp:102
-#, fuzzy, kde-format
-#| msgctxt "@info:status offset value not available"
-#| msgid "Selection: -"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Select in View"
-msgstr "Markering: -"
+msgstr "Markera i vy"
 
 #: controllers/view/poddecoder/podtableview.cpp:113
 #, kde-format
@@ -2319,13 +2317,13 @@ msgstr "Om"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Uninstall"
-msgstr ""
+msgstr "Avinstallera"
 
 #: controllers/view/structures/settings/structureitemdelegate.cpp:124
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Can not be uninstalled."
-msgstr ""
+msgstr "Kan inte avinstalleras."
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:61
 #, kde-format
@@ -2337,7 +2335,7 @@ msgstr "Avancerad markering..."
 #, kde-format
 msgctxt "@action:button"
 msgid "Install from File(s)…"
-msgstr ""
+msgstr "Installera från fil(er)…"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:69
 #, kde-format
@@ -2352,32 +2350,33 @@ msgid ""
 "\n"
 "%2"
 msgstr ""
+"Installation från <filename>%1</filename> misslyckades:\n"
+"\n"
+"%2"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:130
-#, fuzzy, kde-format
-#| msgid "Structure Definitions"
+#, kde-format
 msgctxt "@title:window"
 msgid "Structure Installation"
-msgstr "Strukturdefinitioner"
+msgstr "Strukturinstallation"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:153
 #, kde-format
 msgctxt "@action:button"
 msgid "Uninstall"
-msgstr ""
+msgstr "Avinstallera"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:156
 #, kde-format
 msgid "Do you want to uninstall \"%1\"?"
-msgstr ""
+msgstr "Vill du avinstallera \"%1\"?"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:157
 #: controllers/view/structures/settings/structuresmanagerview.cpp:176
-#, fuzzy, kde-format
-#| msgid "Structure Definitions"
+#, kde-format
 msgctxt "@title:window"
 msgid "Structure Uninstallation"
-msgstr "Strukturdefinitioner"
+msgstr "Strukturavinstallation"
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:28
 #, kde-format
@@ -2584,23 +2583,20 @@ msgid "Character value:"
 msgstr "Teckenvärde:"
 
 #: controllers/view/structures/structureinstalljob.cpp:61
-#, fuzzy, kde-format
-#| msgid "Unknown zlib error, code %1"
+#, kde-format
 msgid "Unknown error (0)"
-msgstr "Okänt zlib-fel, code %1"
+msgstr "Okänt fel (0)"
 
 #: controllers/view/structures/structureinstalljob.cpp:63
-#, fuzzy, kde-format
-#| msgctxt "not all values in this structure are as they should be"
-#| msgid "Validation failed: \"%1\""
+#, kde-format
 msgid "Downloading failed: %1"
-msgstr "Validering misslyckades: \"%1\""
+msgstr "Nerladdning misslyckades: \"%1\""
 
 #: controllers/view/structures/structureinstalljob.cpp:101
 #: controllers/view/structures/structureinstalljob.cpp:132
 #, kde-format
 msgid "The structure archive is invalid."
-msgstr ""
+msgstr "Strukturarkivet är ogiltigt."
 
 #: controllers/view/structures/structurestool.cpp:72
 #: controllers/view/structures/structurestoolviewfactory.cpp:27
@@ -2634,9 +2630,7 @@ msgid "Size"
 msgstr "Storlek"
 
 #: controllers/view/structures/structureview.cpp:56
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Validate"
+#, kde-format
 msgctxt "@action"
 msgid "Validate"
 msgstr "Validera"
@@ -2648,12 +2642,10 @@ msgid "Validate all structures."
 msgstr "Validera alla strukturer."
 
 #: controllers/view/structures/structureview.cpp:74
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Script console"
+#, kde-format
 msgctxt "@action"
 msgid "Script Console"
-msgstr "Skriptkonsol"
+msgstr "Skriptterminal"
 
 #: controllers/view/structures/structureview.cpp:75
 #, kde-format
@@ -2662,9 +2654,7 @@ msgid "Open script console."
 msgstr "Visa skriptkonsol."
 
 #: controllers/view/structures/structureview.cpp:80
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Settings"
+#, kde-format
 msgctxt "@action"
 msgid "Settings"
 msgstr "Inställningar"
