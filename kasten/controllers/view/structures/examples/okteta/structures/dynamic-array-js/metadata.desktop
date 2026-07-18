@@ -17,6 +17,7 @@ Name[pt_BR]=Testar as listas de tamanho dinâmico (JS)
 Name[ru]=Пример массивов переменной длины (JS)
 Name[sk]=Testovaine polí dynamickej dĺžky
 Name[sl]=Preizkušanje polj dinamične dolžine (JS)
+Name[sv]=Testar fält med dynamisk längd (JS)
 Name[tr]=Hareketli uzunluk dizilişleri sınanıyor (JS)
 Name[uk]=Тестування масивів зі змінною розмірністю (JS)
 Comment=A test structure for dynamic arrays (JS)
@@ -33,6 +34,7 @@ Comment[pt_BR]=Uma estrutura de testes para listas dinâmicas (JS)
 Comment[ru]=Пример структуры динамического массива (JS)
 Comment[sk]=Testovacia štruktúra pre dynamické polia
 Comment[sl]=Preizkusna struktura za dinamična polja (JS)
+Comment[sv]=En teststruktur för dynamiska fält (JS)
 Comment[tr]=Hareketli uzunluk dizilişleri için bir sınama yapısı (JS)
 Comment[uk]=Тестова структура для динамічних масивів (JS)
 
