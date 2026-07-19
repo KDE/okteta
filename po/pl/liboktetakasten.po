@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-03-25 03:47+0000\n"
-"PO-Revision-Date: 2026-05-09 17:03+0200\n"
+"PO-Revision-Date: 2026-07-18 17:04+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: pl\n"
 "Language: pl\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 26.04.0\n"
+"X-Generator: Lokalize 26.04.2\n"
 
 #: controllers/document/info/documentinfotool.cpp:47
 #: controllers/document/info/documentinfotoolviewfactory.cpp:24
@@ -2022,7 +2022,7 @@ msgstr "double"
 #, kde-format
 msgctxt "data type"
 msgid "bitfield"
-msgstr "bitfield"
+msgstr "pole bitowe"
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:94
 #, kde-format
@@ -2921,7 +2921,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "&Edit..."
-msgstr "&Edytuj..."
+msgstr "&Edytuj…"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:80
 #, kde-format
