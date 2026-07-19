@@ -15,7 +15,7 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-03-25 02:14+0000\n"
-"PO-Revision-Date: 2026-05-09 17:03+0200\n"
+"PO-Revision-Date: 2026-07-18 17:04+0200\n"
 "Last-Translator: Łukasz Wojniłowicz <lukasz.wojnilowicz@gmail.com>\n"
 "Language-Team: pl\n"
 "Language: pl\n"
@@ -24,7 +24,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1 ? 0 : n%10>=2 && n%10<=4 && (n%100<10 "
 "|| n%100>=20) ? 1 : 2);\n"
-"X-Generator: Lokalize 26.04.0\n"
+"X-Generator: Lokalize 26.04.2\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -1431,12 +1431,10 @@ msgstr "Edytuj"
 #: controllers/view/poddecoder/podtableview.cpp:60
 #: controllers/view/stringsextract/stringsextractview.cpp:79
 #: controllers/view/structures/structureview.cpp:102
-#, fuzzy, kde-format
-#| msgctxt "@info:status offset value not available"
-#| msgid "Selection: -"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Select in View"
-msgstr "Wybór: -"
+msgstr "Wybierz na widoku"
 
 #: controllers/view/poddecoder/podtableview.cpp:113
 #, kde-format
@@ -2116,7 +2114,7 @@ msgstr "double"
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:37
 msgctxt "data type"
 msgid "bitfield"
-msgstr "bitfield"
+msgstr "pole bitowe"
 
 #: controllers/view/structures/datatypes/primitivedatatype.cpp:85
 #, kde-format
@@ -2654,9 +2652,7 @@ msgid "Size"
 msgstr "Rozmiar"
 
 #: controllers/view/structures/structureview.cpp:56
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Validate"
+#, kde-format
 msgctxt "@action"
 msgid "Validate"
 msgstr "Sprawdź"
@@ -2668,9 +2664,7 @@ msgid "Validate all structures."
 msgstr "Sprawdź wszystkie struktury."
 
 #: controllers/view/structures/structureview.cpp:74
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Script console"
+#, kde-format
 msgctxt "@action"
 msgid "Script Console"
 msgstr "Konsola skryptu"
@@ -2682,9 +2676,7 @@ msgid "Open script console."
 msgstr "Otwórz konsolę skryptu."
 
 #: controllers/view/structures/structureview.cpp:80
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Settings"
+#, kde-format
 msgctxt "@action"
 msgid "Settings"
 msgstr "Ustawienia"
