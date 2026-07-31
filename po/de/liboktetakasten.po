@@ -2527,7 +2527,7 @@ msgstr ""
 msgctxt "@info:tooltip"
 msgid "Whether to use short type names (i.e. uint32 instead of unsigned int)"
 msgstr ""
-"Legt fest, ob kurze Typnamen verwendet werden (d. h. „uint32“ statt "
+"Legt fest, ob kurze Typnamen verwendet werden (d. h. „uint32“ statt "
 "„unsigned int“)"
 
 #. i18n: ectx: tooltip, entry (LocaleAwareDecimalFormatting), group (ValueDisplay)
@@ -2797,7 +2797,7 @@ msgid ""
 "Unlock selected structure, i.e. the starting offset is always set to the "
 "current cursor position."
 msgstr ""
-"Entsperren der ausgewählten Struktur, d. h. der Start-Offset wird immer auf "
+"Entsperren der ausgewählten Struktur, d. h. der Start-Offset wird immer auf "
 "die aktuelle Cursor-Position festgelegt."
 
 #: controllers/view/structures/structureview.cpp:348
@@ -3371,7 +3371,7 @@ msgid ""
 msgstr ""
 "Wenn Sie auf <interface>Als Standard verwenden</interface> klicken, wird das "
 "in der Liste ausgewählte Ansichtsprofil als Voreinstellung für alle "
-"Ansichten benutzt."
+"Ansichten verwendet."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:100
 #, kde-format
