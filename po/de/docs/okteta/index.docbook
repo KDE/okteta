@@ -179,7 +179,7 @@
 >Im Suchdialog können Sie nach einer bestimmten Folge von Bytes suchen, das Suchmuster kann als Wert (hexadezimal, dezimal, oktal, binär) oder als Text (kodiert in 8-Bit oder UTF-8) eingegeben werden.</para>
 
     <para
->Mehrere Byte-Felder können zur gleichen Zeit geöffnet werden, aber nur eines kann aktiv sein. Benutzen Sie das Menü <guimenu
+>Mehrere Byte-Felder können zur gleichen Zeit geöffnet werden, aber nur eines kann aktiv sein. Verwenden Sie das Menü <guimenu
 >Fenster</guimenu
 > zum Auswählen des aktiven Byte-Feldes.</para>
 </sect1>
@@ -450,9 +450,9 @@ Support for strings (various Unicode encodings) in definitions
       </sect3>
       <sect3>
         <title
->Neu installierte Strukturen benutzen</title>
+>Neu installierte Strukturen verwenden</title>
         <para
->Wenn Sie eine neue Strukturdefinition installiert haben, müssen Sie &okteta; neu starten, um sie benutzen zu können. Nach den Neustart von &okteta; den Einrichtungsdialog der Strukturen öffnen. Wählen Sie dort die Seite <guilabel
+>Wenn Sie eine neue Strukturdefinition installiert haben, müssen Sie &okteta; neu starten, um sie verwenden zu können. Nach den Neustart von &okteta; den Einrichtungsdialog der Strukturen öffnen. Wählen Sie dort die Seite <guilabel
 >Strukturen-Verwaltung</guilabel
 > und überprüfen Sie, ob die neue Strukturdefinition ausgewählt ist. Wechseln Sie dann zur Seite <guilabel
 >Strukturen</guilabel
@@ -466,7 +466,7 @@ Support for strings (various Unicode encodings) in definitions
       <para
 >Allgemein gebräuchlich Strukturen müssen Sie wahrscheinlich nicht selbst definieren, sondern können zum Beispiel vorhandene Definitionen von der Seite <ulink url="https://store.kde.org/browse/cat/214"
 >store.kde.org</ulink
-> benutzen.</para>
+> verwenden.</para>
       <para
 >Möchten Sie eine Strukturdefinition im Internet zur Verfügung stellen, packen Sie den Unterordner mit der <literal role="extension"
 >.desktop</literal
@@ -490,11 +490,11 @@ Support for strings (various Unicode encodings) in definitions
 ></note>
 
       <para
->Es gibt zwei Möglichkeiten, um eine Strukturdefinition zu erstellen, entweder im &XML;-Format oder als JavaScript. Mit JavaScript können Sie komplexere Strukturen mit Funktionen wie zum Beispiel der Überprüfung der Gültigkeit der Struktur schreiben. Mit &XML; haben Sie weniger Funktionen, wenn Ihnen aber eine statische Struktur reicht, ist das der einfachste Ansatz. Brauchen Sie dynamische Strukturen, bei denen zum Beispiel eine Feldlänge oder das Strukturlayout von anderen Werten in der Struktur abhängt, dann müssen Sie die Strukturdefinition in JavaScript schreiben. Es gibt eine Ausnahme für diese Regel: Haben Sie ein Feld, dessen Länge <emphasis role="bold"
+>Es gibt zwei Möglichkeiten, um eine Strukturdefinition zu erstellen, entweder im &XML;-Format oder als JavaScript. Mit JavaScript können Sie komplexere Strukturen mit Funktionen wie zum Beispiel der Überprüfung der Gültigkeit der Struktur schreiben. Mit &XML; haben Sie weniger Funktionen, wenn Ihnen aber eine statische Struktur reicht, ist das der einfachste Ansatz. Benötigen Sie dynamische Strukturen, bei denen zum Beispiel eine Feldlänge oder das Strukturlayout von anderen Werten in der Struktur abhängt, dann müssen Sie die Strukturdefinition in JavaScript schreiben. Es gibt eine Ausnahme für diese Regel: Haben Sie ein Feld, dessen Länge <emphasis role="bold"
 >genau</emphasis
 > wie ein anderer Wert in der Struktur angenommen wird, dann können Sie auch &XML; verwenden. Ist dieser Wert aber so ähnlich wie <emphasis
 >Länge -1</emphasis
->, dann müssen Sie JavaScript benutzen.</para>
+>, dann müssen Sie JavaScript verwenden.</para>
     </sect2>
 
 
@@ -641,7 +641,7 @@ Support for strings (various Unicode encodings) in definitions
 ><para
 >Denken Sie daran für „padding“ nach einem <emphasis
 >&lt;bitfield&gt;</emphasis
-> einen Wert anzugeben, sonst beginnt das nächste Element (ausgenommen Zeichenfolgen (strings) und Felder (arrays), die „padding“ automatisch einfügen) mitten in einem Byte. Ist dieses Verhalten gewünscht, brauchen Sie offensichtlich kein „padding“ anzugeben.</para
+> einen Wert anzugeben, sonst beginnt das nächste Element (ausgenommen Zeichenfolgen (strings) und Felder (arrays), die „padding“ automatisch einfügen) mitten in einem Byte. Ist dieses Verhalten gewünscht, benötigen Sie offensichtlich kein „padding“ anzugeben.</para
 ></note>
                   </listitem>
                 </varlistentry>
@@ -658,7 +658,7 @@ Support for strings (various Unicode encodings) in definitions
 ></term>
             <listitem
 ><para
->Zur Definition eines einfachen Typs bei dem alle Werte als Elemente einer Aufzählung dargestellt werden. Diese Element kann keine untergeordneten Elemente enthalten, Sie brauchen jedoch ein Tag <emphasis
+>Zur Definition eines einfachen Typs bei dem alle Werte als Elemente einer Aufzählung dargestellt werden. Diese Element kann keine untergeordneten Elemente enthalten, Sie benötigen jedoch ein Tag <emphasis
 >&lt;enumDef&gt;</emphasis
 > in der Datei zur Referenzierung. Folgende Attribute sind erlaubt:</para>
               <variablelist>
@@ -945,7 +945,7 @@ Support for strings (various Unicode encodings) in definitions
 > <calloutlist
 > <callout arearefs="icon"
 > <para
->Das in &okteta; benutzte Symbol für die Anzeige dieser Struktur kann durch Ausführung des Befehls <userinput
+>Das in &okteta; verwendete Symbol für die Anzeige dieser Struktur kann durch Ausführung des Befehls <userinput
 ><command
 >kdialog</command
 > <option
@@ -1006,7 +1006,7 @@ Support for strings (various Unicode encodings) in definitions
           <para
 >Erstellen Sie nun einen Ordner <filename class="directory"
 >simplestruct</filename
-> im Strukturinstallationsordner wie im Abschnitt manuelle Installation beschrieben. Kopieren Sie diese beiden Dateien in diesen Ordner. Starten Sie &okteta; neu und benutzen Sie die neue Struktur.</para>
+> im Strukturinstallationsordner wie im Abschnitt manuelle Installation beschrieben. Kopieren Sie diese beiden Dateien in diesen Ordner. Starten Sie &okteta; neu und verwenden Sie die neue Struktur.</para>
       </sect3>
       <sect3>
         <title
@@ -1031,7 +1031,7 @@ Support for strings (various Unicode encodings) in definitions
 >init</literal
 >.</para>
         <para
->Die folgenden Funktionen können benutzt werden, um einen primitiven Typ zu erzeugen: <itemizedlist
+>Die folgenden Funktionen können verwendet werden, um einen primitiven Typ zu erzeugen: <itemizedlist
 > <listitem
 ><para
 >char()</para
@@ -1110,7 +1110,7 @@ Support for strings (various Unicode encodings) in definitions
           <para
 >Als nächstes wird die Datei <filename
 >complex.desktop</filename
-> wie im vorher gezeigten Beispiel erstellt. Benutzen Sie für <literal
+> wie im vorher gezeigten Beispiel erstellt. Verwenden Sie für <literal
 >X-KDE-PluginInfo-Name</literal
 > den richtigen Namen und installieren Sie beide Dateien.</para>
       </sect3>
@@ -1124,7 +1124,7 @@ Support for strings (various Unicode encodings) in definitions
 >.osd</literal
 >-Dateien beschreibt, finden Sie <ulink url="https://commits.kde.org/okteta?path=kasten/controllers/view/structures/schema/"
 >hier</ulink
->. Brauchen Sie weitere Informationen, kontaktieren Sie &Alex.Richardson.email;. </para>
+>. Benötigen Sie weitere Informationen, kontaktieren Sie &Alex.Richardson.email;. </para>
       </sect3>
     </sect2>
 <!--FIXME missing
