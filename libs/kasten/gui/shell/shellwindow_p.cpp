@@ -123,8 +123,8 @@ void ShellWindowPrivate::saveNewToolbarConfig()
 
     q->KXmlGuiWindow::saveNewToolbarConfig();
 
-    for (AbstractXmlGuiController* controller : std::as_const(mControllers)) {
-        if (auto* const replugRequiring = qobject_cast<If::XmlGuiActionListsReplugRequiring*>(controller)) {
+    for (const auto& controller : std::as_const(mControllers)) {
+        if (auto* const replugRequiring = qobject_cast<If::XmlGuiActionListsReplugRequiring*>(controller.get())) {
             replugRequiring->replugActionLists();
         }
     }
