@@ -34,7 +34,7 @@
 
 namespace Kasten {
 
-static constexpr char BookmarkListActionListId[] = "bookmark_list";
+QString BookmarkListActionListId() { return QStringLiteral("bookmark_list"); }
 
 // TODO: sort by offset or time
 
@@ -142,9 +142,14 @@ void BookmarksController::setTargetModel(AbstractModel* model)
     mDeleteAllAction->setEnabled(hasBookmarks);
 }
 
+void BookmarksController::replugActionLists()
+{
+    plugBookmarkListActionList();
+}
+
 void BookmarksController::updateBookmarks()
 {
-    mGuiClient->unplugActionList(QLatin1String(BookmarkListActionListId));
+    mGuiClient->unplugActionList(BookmarkListActionListId());
 
     qDeleteAll(mBookmarksActionGroup->actions());
 
@@ -177,8 +182,7 @@ void BookmarksController::updateBookmarks()
         action->setData(bookmark.offset());
         mBookmarksActionGroup->addAction(action);
     }
-    mGuiClient->plugActionList(QString::fromUtf8(BookmarkListActionListId),
-                               mBookmarksActionGroup->actions());
+    plugBookmarkListActionList();
 }
 
 void BookmarksController::onBookmarksAdded(const QVector<Okteta::Bookmark>& bookmarks)
@@ -238,6 +242,12 @@ void BookmarksController::activateCursorPosition(Okteta::Address position)
 {
     mByteArrayView->setCursorPosition(position);
     mByteArrayView->widget()->setFocus();
+}
+
+void BookmarksController::plugBookmarkListActionList()
+{
+    mGuiClient->plugActionList(BookmarkListActionListId(),
+                               mBookmarksActionGroup->actions());
 }
 
 void BookmarksController::createBookmark()

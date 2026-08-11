@@ -19,7 +19,7 @@
 namespace Kasten {
 
 static constexpr int MaxEntryLength = 150;
-static constexpr char WindowsListActionListId[] = "windows_list";
+QString WindowsListActionListId() { return QStringLiteral("windows_list"); }
 
 ViewListMenuController::ViewListMenuController(ViewManager* viewManager, AbstractGroupedViews* groupedViews,
                                                KXMLGUIClient* guiClient)
@@ -45,9 +45,14 @@ void ViewListMenuController::setTargetModel(AbstractModel* model)
     Q_UNUSED(model)
 }
 
+void ViewListMenuController::replugActionLists()
+{
+    plugViewListActionList();
+}
+
 void ViewListMenuController::updateActions()
 {
-    mGuiClient->unplugActionList(QLatin1String(WindowsListActionListId));
+    mGuiClient->unplugActionList(WindowsListActionListId());
 
     qDeleteAll(mWindowsActionGroup->actions());
 
@@ -73,7 +78,12 @@ void ViewListMenuController::updateActions()
     }
     mWindowsActionGroup->setEnabled(hasViews);
 
-    mGuiClient->plugActionList(QLatin1String(WindowsListActionListId), mWindowsActionGroup->actions());
+    plugViewListActionList();
+}
+
+void ViewListMenuController::plugViewListActionList()
+{
+    mGuiClient->plugActionList(WindowsListActionListId(), mWindowsActionGroup->actions());
 }
 
 void ViewListMenuController::onActionTriggered(QAction* action)

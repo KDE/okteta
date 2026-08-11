@@ -68,6 +68,13 @@ void ShellWindow::updateControllers(AbstractView* view)
     d->updateControllers(view);
 }
 
+void ShellWindow::saveNewToolbarConfig()
+{
+    Q_D(ShellWindow);
+
+    d->saveNewToolbarConfig();
+}
+
 }
 
 #include "moc_shellwindow.cpp"

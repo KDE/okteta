@@ -13,6 +13,7 @@
 #include <abstracttoolview.hpp>
 #include <abstractxmlguicontroller.hpp>
 #include <toolviewdockwidget.hpp>
+#include <xmlguiactionlistsreplugrequiring.hpp>
 // Kasten core
 #include <Kasten/AbstractTool>
 #include <Kasten/AbstractModelSynchronizer>
@@ -112,6 +113,19 @@ void ShellWindowPrivate::updateControllers(AbstractView* view)
     for (ToolViewDockWidget* dockWidget : std::as_const(mDockWidgets)) {
         if (dockWidget->isShown()) {
             dockWidget->toolView()->tool()->setTargetModel(view);
+        }
+    }
+}
+
+void ShellWindowPrivate::saveNewToolbarConfig()
+{
+    Q_Q(ShellWindow);
+
+    q->KXmlGuiWindow::saveNewToolbarConfig();
+
+    for (AbstractXmlGuiController* controller : std::as_const(mControllers)) {
+        if (auto* const replugRequiring = qobject_cast<If::XmlGuiActionListsReplugRequiring*>(controller)) {
+            replugRequiring->replugActionLists();
         }
     }
 }

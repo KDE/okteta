@@ -51,6 +51,9 @@ public: // If::WidgetsDockable API
     [[nodiscard]]
     QVector<ToolViewDockWidget*> dockWidgets() const;
 
+protected: // Q_SLOTS KXmlGuiWindow API
+    void saveNewToolbarConfig();
+
 private: // Q_SLOTS
     void onTitleChanged(const QString& newTitle);
     void onContentFlagsChanged(Kasten::ContentFlags contentFlags);

@@ -16,7 +16,7 @@
 
 namespace Kasten {
 
-static constexpr char ToolListActionListId[] = "tools_list";
+QString ToolListActionListId() { return QStringLiteral("tools_list"); }
 
 ToolListMenuController::ToolListMenuController(If::WidgetsDockable* widgetsDockable,
                                                KXMLGUIClient* guiClient)
@@ -32,9 +32,14 @@ void ToolListMenuController::setTargetModel(AbstractModel* model)
     Q_UNUSED(model)
 }
 
+void ToolListMenuController::replugActionLists()
+{
+    plugToolListActionList();
+}
+
 void ToolListMenuController::updateActions()
 {
-    mGuiClient->unplugActionList(QLatin1String(ToolListActionListId));
+    mGuiClient->unplugActionList(ToolListActionListId());
 
     qDeleteAll(mToolActionList);
     mToolActionList.clear();
@@ -49,7 +54,12 @@ void ToolListMenuController::updateActions()
         mToolActionList.append(action);
     }
 
-    mGuiClient->plugActionList(QLatin1String(ToolListActionListId), mToolActionList);
+    plugToolListActionList();
+}
+
+void ToolListMenuController::plugToolListActionList()
+{
+    mGuiClient->plugActionList(ToolListActionListId(), mToolActionList);
 }
 
 }

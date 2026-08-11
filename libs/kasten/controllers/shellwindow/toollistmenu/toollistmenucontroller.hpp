@@ -9,6 +9,7 @@
 
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
+#include <Kasten/XmlGuiActionListsReplugRequiring>
 // Qt
 #include <QList>
 
@@ -22,8 +23,12 @@ class WidgetsDockable;
 }
 
 class ToolListMenuController : public AbstractXmlGuiController
+                             , public If::XmlGuiActionListsReplugRequiring
 {
     Q_OBJECT
+    Q_INTERFACES(
+        Kasten::If::XmlGuiActionListsReplugRequiring
+    )
 
 public:
     ToolListMenuController(If::WidgetsDockable* widgetsDockable, KXMLGUIClient* guiClient);
@@ -31,8 +36,12 @@ public:
 public: // AbstractXmlGuiController API
     void setTargetModel(AbstractModel* model) override;
 
+public: // If::XmlGuiActionListsReplugRequiring API
+    void replugActionLists() override;
+
 private:
     void updateActions();
+    void plugToolListActionList();
 
 private:
     If::WidgetsDockable* const mWidgetsDockable;
