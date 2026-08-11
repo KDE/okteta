@@ -5,7 +5,9 @@
     "runtime-version": "5.15-24.08",
     "sdk": "org.kde.Sdk",
     "command": "okteta",
-    "tags": ["nightly"],
+    "tags": [
+        "nightly"
+    ],
     "desktop-file-name-suffix": " (Nightly)",
     "finish-args": [
         "--device=dri",
@@ -22,7 +24,13 @@
         {
             "name": "okteta",
             "buildsystem": "cmake",
-            "sources": [ { "type": "dir", "path": ".", "branch": "master" } ]
+            "sources": [
+                {
+                    "type": "dir",
+                    "path": ".",
+                    "branch": "master"
+                }
+            ]
         }
     ]
 }
