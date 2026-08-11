@@ -1471,6 +1471,8 @@ void AbstractByteArrayViewPrivate::contextMenuEvent(QContextMenuEvent* contextMe
     menu->setAttribute(Qt::WA_DeleteOnClose);
 
     menu->popup(contextMenuEvent->globalPos());
+
+    contextMenuEvent->accept();
 }
 
 void AbstractByteArrayViewPrivate::timerEvent(QTimerEvent* timerEvent)
