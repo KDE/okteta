@@ -35,7 +35,7 @@
 
 namespace Kasten {
 
-static constexpr char BookmarkListActionListId[] = "bookmark_list";
+QString BookmarkListActionListId() { return QStringLiteral("bookmark_list"); }
 
 // TODO: sort by offset or time
 
@@ -145,7 +145,7 @@ void BookmarksController::setTargetModel(AbstractModel* model)
 
 void BookmarksController::updateBookmarks()
 {
-    mGuiClient->unplugActionList(QLatin1String(BookmarkListActionListId));
+    mGuiClient->unplugActionList(BookmarkListActionListId());
 
     qDeleteAll(mBookmarksActionGroup->actions());
 
@@ -178,7 +178,7 @@ void BookmarksController::updateBookmarks()
         action->setData(bookmark.offset());
         mBookmarksActionGroup->addAction(action);
     }
-    mGuiClient->plugActionList(QString::fromUtf8(BookmarkListActionListId),
+    mGuiClient->plugActionList(BookmarkListActionListId(),
                                mBookmarksActionGroup->actions());
 }
 
