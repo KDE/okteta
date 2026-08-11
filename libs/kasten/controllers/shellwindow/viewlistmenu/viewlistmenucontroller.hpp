@@ -11,6 +11,7 @@
 
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
+#include <Kasten/XmlGuiActionListsReplugRequiring>
 
 class KXMLGUIClient;
 class QAction;
@@ -22,8 +23,12 @@ class ViewManager;
 class AbstractGroupedViews;
 
 class ViewListMenuController : public AbstractXmlGuiController
+                             , public If::XmlGuiActionListsReplugRequiring
 {
     Q_OBJECT
+    Q_INTERFACES(
+        Kasten::If::XmlGuiActionListsReplugRequiring
+    )
 
 public:
     ViewListMenuController(ViewManager* viewManager, AbstractGroupedViews* groupedViews, KXMLGUIClient* guiClient);
@@ -31,9 +36,15 @@ public:
 public: // AbstractXmlGuiController API
     void setTargetModel(AbstractModel* model) override;
 
+public: // If::XmlGuiActionListsReplugRequiring API
+    void replugActionLists() override;
+
 private Q_SLOTS:
     void updateActions();
     void onActionTriggered(QAction* action);
+
+private:
+    void plugViewListActionList();
 
 private:
     ViewManager* mViewManager;

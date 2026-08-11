@@ -34,6 +34,11 @@ void ToolListMenuController::setTargetModel(AbstractModel* model)
     Q_UNUSED(model)
 }
 
+void ToolListMenuController::replugActionLists()
+{
+    plugToolListActionList();
+}
+
 void ToolListMenuController::updateActions()
 {
     mGuiClient->unplugActionList(ToolListActionListId());
@@ -51,6 +56,11 @@ void ToolListMenuController::updateActions()
         mToolActionList.append(action);
     }
 
+    plugToolListActionList();
+}
+
+void ToolListMenuController::plugToolListActionList()
+{
     mGuiClient->plugActionList(ToolListActionListId(), mToolActionList);
 }
 

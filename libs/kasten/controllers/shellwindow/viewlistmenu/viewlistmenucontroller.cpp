@@ -47,6 +47,11 @@ void ViewListMenuController::setTargetModel(AbstractModel* model)
     Q_UNUSED(model)
 }
 
+void ViewListMenuController::replugActionLists()
+{
+    plugViewListActionList();
+}
+
 void ViewListMenuController::updateActions()
 {
     mGuiClient->unplugActionList(WindowsListActionListId());
@@ -75,6 +80,11 @@ void ViewListMenuController::updateActions()
     }
     mWindowsActionGroup->setEnabled(hasViews);
 
+    plugViewListActionList();
+}
+
+void ViewListMenuController::plugViewListActionList()
+{
     mGuiClient->plugActionList(WindowsListActionListId(), mWindowsActionGroup->actions());
 }
 

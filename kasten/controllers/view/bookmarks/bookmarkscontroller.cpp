@@ -143,6 +143,11 @@ void BookmarksController::setTargetModel(AbstractModel* model)
     mDeleteAllAction->setEnabled(hasBookmarks);
 }
 
+void BookmarksController::replugActionLists()
+{
+    plugBookmarkListActionList();
+}
+
 void BookmarksController::updateBookmarks()
 {
     mGuiClient->unplugActionList(BookmarkListActionListId());
@@ -178,8 +183,7 @@ void BookmarksController::updateBookmarks()
         action->setData(bookmark.offset());
         mBookmarksActionGroup->addAction(action);
     }
-    mGuiClient->plugActionList(BookmarkListActionListId(),
-                               mBookmarksActionGroup->actions());
+    plugBookmarkListActionList();
 }
 
 void BookmarksController::onBookmarksAdded(const QVector<Okteta::Bookmark>& bookmarks)
@@ -239,6 +243,12 @@ void BookmarksController::activateCursorPosition(Okteta::Address position)
 {
     mByteArrayView->setCursorPosition(position);
     mByteArrayView->widget()->setFocus();
+}
+
+void BookmarksController::plugBookmarkListActionList()
+{
+    mGuiClient->plugActionList(BookmarkListActionListId(),
+                               mBookmarksActionGroup->actions());
 }
 
 void BookmarksController::createBookmark()
