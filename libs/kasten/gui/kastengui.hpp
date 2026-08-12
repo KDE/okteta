@@ -7,6 +7,8 @@
 #ifndef KASTEN_KASTENGUI_HPP
 #define KASTEN_KASTENGUI_HPP
 
+// lib
+#include "kastengui_export.hpp"
 // Qt
 #include <QFlags>
 

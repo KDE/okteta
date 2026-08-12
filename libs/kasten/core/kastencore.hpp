@@ -7,6 +7,8 @@
 #ifndef KASTEN_KASTENCORE_HPP
 #define KASTEN_KASTENCORE_HPP
 
+// lib
+#include "kastencore_export.hpp"
 // Qt core
 #include <QFlags>
 

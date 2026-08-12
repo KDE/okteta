@@ -7,6 +7,9 @@
 #ifndef KASTEN_DOCUMENTVERSIONID_HPP
 #define KASTEN_DOCUMENTVERSIONID_HPP
 
+// lib
+#include "kastencore_export.hpp"
+
 namespace Kasten {
 
 using DocumentVersionId = int;

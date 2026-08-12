@@ -7,6 +7,8 @@
 #ifndef KASTEN_IF_USERNOTIFICATIONSINLINEABLE_HPP
 #define KASTEN_IF_USERNOTIFICATIONSINLINEABLE_HPP
 
+// lib
+#include "kastengui_export.hpp"
 // Qt
 #include <QtPlugin>
 // Std

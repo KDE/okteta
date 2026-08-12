@@ -7,6 +7,8 @@
 #ifndef KASTEN_IF_XMLGUIACTIONLISTSPLUGREQUIRING_HPP
 #define KASTEN_IF_XMLGUIACTIONLISTSPLUGREQUIRING_HPP
 
+// lib
+#include "kastengui_export.hpp"
 // Qt
 #include <QtPlugin>
 

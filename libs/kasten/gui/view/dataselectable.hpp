@@ -7,6 +7,8 @@
 #ifndef KASTEN_IF_DATASELECTABLE_HPP
 #define KASTEN_IF_DATASELECTABLE_HPP
 
+// lib
+#include "kastengui_export.hpp"
 // Qt
 #include <QtPlugin>
 // Std
