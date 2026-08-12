@@ -32,7 +32,7 @@ void ToolListMenuController::setTargetModel(AbstractModel* model)
     Q_UNUSED(model)
 }
 
-void ToolListMenuController::replugActionLists()
+void ToolListMenuController::plugActionLists()
 {
     plugToolListActionList();
 }

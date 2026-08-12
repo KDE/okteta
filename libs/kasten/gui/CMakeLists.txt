@@ -146,7 +146,7 @@ kastengui_sublibrary_sources(KastenGuiController
     PUBLIC
         AbstractXmlGuiController
         AbstractXmlGuiControllerFactory
-        XmlGuiActionListsReplugRequiring
+        XmlGuiActionListsPlugRequiring
 
         AbstractLinePopup
         AbstractToolWidget

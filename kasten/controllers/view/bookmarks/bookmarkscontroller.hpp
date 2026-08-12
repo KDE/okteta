@@ -9,7 +9,7 @@
 
 // Kasten gui
 #include <Kasten/AbstractXmlGuiController>
-#include <Kasten/XmlGuiActionListsReplugRequiring>
+#include <Kasten/XmlGuiActionListsPlugRequiring>
 // Okteta core
 #include <Okteta/Address>
 #include <Okteta/Size>
@@ -30,11 +30,11 @@ namespace Kasten {
 class ByteArrayView;
 
 class BookmarksController : public AbstractXmlGuiController
-                          , public If::XmlGuiActionListsReplugRequiring
+                          , public If::XmlGuiActionListsPlugRequiring
 {
     Q_OBJECT
     Q_INTERFACES(
-        Kasten::If::XmlGuiActionListsReplugRequiring
+        Kasten::If::XmlGuiActionListsPlugRequiring
     )
 
 private:
@@ -48,8 +48,8 @@ public:
 public: // AbstractXmlGuiController API
     void setTargetModel(AbstractModel* model) override;
 
-public: // If::XmlGuiActionListsReplugRequiring API
-    void replugActionLists() override;
+public: // If::XmlGuiActionListsPlugRequiring API
+    void plugActionLists() override;
 
 private Q_SLOTS: // action slots
     void createBookmark();

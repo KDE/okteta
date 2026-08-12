@@ -58,10 +58,9 @@ void ByteArrayRowsColumnTextRenderer::setWidths(int byteWidth, int byteSpacingWi
 
     }
     int N = 0;
-    int p = 0;
     int gs = 0;
     int* P = mLinePositions.get();
-    for (; P < &mLinePositions[mNoOfBytesPerLine]; ++P, ++p, ++gs) {
+    for (; P < &mLinePositions[mNoOfBytesPerLine]; ++P, ++gs) {
         *P = N;
         N += byteWidth;
 

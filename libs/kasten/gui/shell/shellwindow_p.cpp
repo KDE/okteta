@@ -13,7 +13,7 @@
 #include <abstracttoolview.hpp>
 #include <abstractxmlguicontroller.hpp>
 #include <toolviewdockwidget.hpp>
-#include <xmlguiactionlistsreplugrequiring.hpp>
+#include <xmlguiactionlistsplugrequiring.hpp>
 // Kasten core
 #include <Kasten/AbstractTool>
 #include <Kasten/AbstractModelSynchronizer>
@@ -117,17 +117,22 @@ void ShellWindowPrivate::updateControllers(AbstractView* view)
     }
 }
 
+void ShellWindowPrivate::plugActionLists()
+{
+    for (const auto& controller : std::as_const(mControllers)) {
+        if (auto* const plugRequiring = qobject_cast<If::XmlGuiActionListsPlugRequiring*>(controller.get())) {
+            plugRequiring->plugActionLists();
+        }
+    }
+}
+
 void ShellWindowPrivate::saveNewToolbarConfig()
 {
     Q_Q(ShellWindow);
 
     q->KXmlGuiWindow::saveNewToolbarConfig();
 
-    for (const auto& controller : std::as_const(mControllers)) {
-        if (auto* const replugRequiring = qobject_cast<If::XmlGuiActionListsReplugRequiring*>(controller.get())) {
-            replugRequiring->replugActionLists();
-        }
-    }
+    plugActionLists();
 }
 
 void ShellWindowPrivate::onTitleChanged(const QString& newTitle)

@@ -46,6 +46,7 @@ public:
     void addXmlGuiController(std::unique_ptr<AbstractXmlGuiController>&& controller);
     void addTool(std::unique_ptr<AbstractTool>&& tool, std::unique_ptr<AbstractToolView>&& toolView);
     void showDocument(AbstractDocument* document);
+    void plugActionLists();
 
 public: // If::WidgetsDockable API
     [[nodiscard]]
