@@ -149,7 +149,7 @@ public: // logic access
 protected:
     /** delivers a null element. Should be specialized for complexer types. */
     [[nodiscard]]
-    constexpr T null() const { return NullValue{}(); }
+    static constexpr T null() { return NullValue{}(); }
 
 protected:
     /** first value of the range */
