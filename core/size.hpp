@@ -7,6 +7,8 @@
 #ifndef OKTETA_SIZE_HPP
 #define OKTETA_SIZE_HPP
 
+// lib
+#include "oktetacore_export.hpp"
 // Qt
 #include <QtGlobal>
 

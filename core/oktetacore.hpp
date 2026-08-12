@@ -7,6 +7,9 @@
 #ifndef OKTETACORE_HPP
 #define OKTETACORE_HPP
 
+// lib
+#include "oktetacore_export.hpp"
+
 // here we collect all general data
 // let's see how much it gets ;)
 

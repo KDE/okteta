@@ -7,6 +7,9 @@
 #ifndef OKTETA_RANGE_HPP
 #define OKTETA_RANGE_HPP
 
+// lib
+#include "oktetacore_export.hpp"
+
 namespace Okteta {
 
 template<typename T>

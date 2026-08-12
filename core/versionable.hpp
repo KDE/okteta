@@ -7,6 +7,8 @@
 #ifndef OKTETA_VERSIONABLE_HPP
 #define OKTETA_VERSIONABLE_HPP
 
+// lib
+#include "oktetacore_export.hpp"
 // Qt
 #include <QtPlugin>
 

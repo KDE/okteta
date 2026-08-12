@@ -7,6 +7,7 @@ set(ECM_TEST_NAME_PREFIX "libpiecetable-")
 # also for tests to enable more namespaced <piecetable/*> includes
 include_directories(
     ${SUTDIR}/..
+    ${CMAKE_CURRENT_BINARY_DIR}/../.. # for oktetacore_export.hpp
 )
 
 add_library(OktetaCoreTestPieceTableChange STATIC

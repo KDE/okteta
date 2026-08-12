@@ -7,6 +7,9 @@
 #ifndef OKTETA_BYTE_HPP
 #define OKTETA_BYTE_HPP
 
+// lib
+#include "oktetacore_export.hpp"
+
 namespace Okteta {
 
 using Byte = unsigned char;

@@ -7,6 +7,8 @@
 #ifndef OKTETA_CHANGESDESCRIBABLE_HPP
 #define OKTETA_CHANGESDESCRIBABLE_HPP
 
+// lib
+#include "oktetacore_export.hpp"
 // Qt
 #include <QtPlugin>
 #include <QString>

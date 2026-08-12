@@ -7,6 +7,8 @@
 #ifndef OKTETA_ADDRESS_HPP
 #define OKTETA_ADDRESS_HPP
 
+// lib
+#include "oktetacore_export.hpp"
 // Qt
 #include <QtGlobal>
 
