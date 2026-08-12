@@ -143,7 +143,7 @@ void BookmarksController::setTargetModel(AbstractModel* model)
     mDeleteAllAction->setEnabled(hasBookmarks);
 }
 
-void BookmarksController::replugActionLists()
+void BookmarksController::plugActionLists()
 {
     plugBookmarkListActionList();
 }

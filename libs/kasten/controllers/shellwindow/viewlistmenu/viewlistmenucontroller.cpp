@@ -47,7 +47,7 @@ void ViewListMenuController::setTargetModel(AbstractModel* model)
     Q_UNUSED(model)
 }
 
-void ViewListMenuController::replugActionLists()
+void ViewListMenuController::plugActionLists()
 {
     plugViewListActionList();
 }
