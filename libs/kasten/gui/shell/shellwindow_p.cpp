@@ -118,17 +118,22 @@ void ShellWindowPrivate::updateControllers(AbstractView* view)
     }
 }
 
+void ShellWindowPrivate::plugActionLists()
+{
+    for (AbstractXmlGuiController* controller : qAsConst(mControllers)) {
+        if (auto* const plugRequiring = qobject_cast<If::XmlGuiActionListsPlugRequiring*>(controller)) {
+            plugRequiring->plugActionLists();
+        }
+    }
+}
+
 void ShellWindowPrivate::saveNewToolbarConfig()
 {
     Q_Q(ShellWindow);
 
     q->KXmlGuiWindow::saveNewToolbarConfig();
 
-    for (AbstractXmlGuiController* controller : qAsConst(mControllers)) {
-        if (auto* const plugRequiring = qobject_cast<If::XmlGuiActionListsPlugRequiring*>(controller)) {
-            plugRequiring->plugActionLists();
-        }
-    }
+    plugActionLists();
 }
 
 void ShellWindowPrivate::onTitleChanged(const QString& newTitle)

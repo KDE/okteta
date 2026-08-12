@@ -41,6 +41,7 @@ public:
     void addXmlGuiController(AbstractXmlGuiController* controller);
     void addTool(AbstractToolView* toolView);
     void showDocument(AbstractDocument* document);
+    void plugActionLists();
 
 public: // If::WidgetsDockable API
     QVector<ToolViewDockWidget*> dockWidgets() const;

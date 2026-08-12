@@ -67,6 +67,13 @@ void ShellWindow::updateControllers(AbstractView* view)
     d->updateControllers(view);
 }
 
+void ShellWindow::plugActionLists()
+{
+    Q_D(ShellWindow);
+
+    d->plugActionLists();
+}
+
 void ShellWindow::saveNewToolbarConfig()
 {
     Q_D(ShellWindow);

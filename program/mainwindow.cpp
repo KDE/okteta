@@ -149,11 +149,7 @@ OktetaMainWindow::OktetaMainWindow(OktetaProgram* program)
     setupControllers();
     setupGUI();
 
-    // all controllers which use plugActionList have to do so after(!) setupGUI() or their entries will be removed
-    // TODO: why is this so?
-    // tmp
-    addXmlGuiControllerFromFactory(ToolListMenuControllerFactory(this));
-    addXmlGuiControllerFromFactory(ViewListMenuControllerFactory(viewManager(), viewArea()));
+    plugActionLists();
 }
 
 OktetaMainWindow::~OktetaMainWindow() = default;
@@ -182,6 +178,7 @@ void OktetaMainWindow::setupControllers()
     addXmlGuiControllerFromFactory(ViewAreaContextMenuControllerFactory(viewArea, syncManager));
     addXmlGuiControllerFromFactory(SwitchViewControllerFactory(viewArea));
     addXmlGuiControllerFromFactory(ViewAreaSplitControllerFactory(viewManager, viewArea));
+    addXmlGuiControllerFromFactory(ViewListMenuControllerFactory(viewManager, viewArea));
     addXmlGuiControllerFromFactory(FullScreenControllerFactory(this));
 #ifndef KASTEN_NO_UICOLORSCHEMECONTROLLER
     addXmlGuiControllerFromFactory(UiColorSchemeControllerFactory(this));
@@ -234,6 +231,10 @@ void OktetaMainWindow::setupControllers()
     addToolFromFactory(PodDecoderToolViewFactory(), PodDecoderToolFactory());
     addToolFromFactory(StructuresToolViewFactory(), StructuresToolFactory());
     addToolFromFactory(BookmarksToolViewFactory(), BookmarksToolFactory());
+
+    // TODO: ToolListMenuController collects ToolViewDockWidget only on creation, never updates
+    // currently needs to be created after all tools/views have been
+    addXmlGuiControllerFromFactory(ToolListMenuControllerFactory(this));
 }
 
 void OktetaMainWindow::addToolFromFactory(const AbstractToolViewFactory& toolViewFactory,
