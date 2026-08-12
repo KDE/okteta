@@ -117,7 +117,7 @@ public: // logic access
 
 protected:
     /** delivers a null element. Should be specialized for complexer types. */
-    const T null() const { return T(-1);}
+    static T null() { return T(-1);}
 
 protected:
     /** first value of the range */

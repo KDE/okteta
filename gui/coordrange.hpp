@@ -21,7 +21,7 @@ namespace Okteta {
 using BaseCoordRange = Range<Coord>;
 
 template <>
-inline const Coord BaseCoordRange::null() const
+inline Coord BaseCoordRange::null()
 { return Coord(-1, -1); }
 
 
