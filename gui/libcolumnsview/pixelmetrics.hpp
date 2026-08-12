@@ -7,6 +7,8 @@
 #ifndef OKTETA_PIXELMETRICS_HPP
 #define OKTETA_PIXELMETRICS_HPP
 
+// lib
+#include "oktetagui_export.hpp"
 // Okteta core
 #include <Okteta/NumberRange>
 

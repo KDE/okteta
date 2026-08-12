@@ -7,6 +7,8 @@
 #ifndef OKTETA_LINEPOSITION_HPP
 #define OKTETA_LINEPOSITION_HPP
 
+// lib
+#include "oktetagui_export.hpp"
 // Qt
 #include <QtGlobal>
 

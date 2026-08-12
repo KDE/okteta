@@ -7,6 +7,8 @@
 #ifndef OKTETA_SELECTION_HPP
 #define OKTETA_SELECTION_HPP
 
+// lib
+#include "oktetagui_export.hpp"
 // Okteta core
 #include <Okteta/AddressRange>
 

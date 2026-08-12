@@ -7,6 +7,8 @@
 #ifndef OKTETA_LINE_HPP
 #define OKTETA_LINE_HPP
 
+// lib
+#include "oktetagui_export.hpp"
 // Qt
 #include <QtGlobal>
 

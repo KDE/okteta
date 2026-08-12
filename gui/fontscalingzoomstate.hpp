@@ -7,6 +7,8 @@
 #ifndef OKTETA_FONTSCALINGZOOMSTATE_HPP
 #define OKTETA_FONTSCALINGZOOMSTATE_HPP
 
+// lib
+#include "oktetagui_export.hpp"
 // Qt
 #include <QFont>
 
