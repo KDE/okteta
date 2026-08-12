@@ -7,4 +7,7 @@
 #ifndef KASTEN_OKTETAKASTENGUI_HPP
 #define KASTEN_OKTETAKASTENGUI_HPP
 
+// lib
+#include "oktetakastengui_export.hpp"
+
 #endif
