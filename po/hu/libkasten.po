@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: KDE 4.4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-05-30 03:44+0000\n"
+"POT-Creation-Date: 2026-08-12 04:26+0000\n"
 "PO-Revision-Date: 2021-10-30 13:01+0200\n"
 "Last-Translator: Kristof Kiszel <kiszel.kristof@gmail.com>\n"
 "Language-Team: Hungarian <kde-i18n-hu@kde.org>\n"
@@ -314,7 +314,7 @@ msgctxt "@action:inmenu"
 msgid "Close View Area"
 msgstr "A nézetterület bezárása"
 
-#: controllers/shellwindow/viewlistmenu/viewlistmenucontroller.cpp:73
+#: controllers/shellwindow/viewlistmenu/viewlistmenucontroller.cpp:78
 #, kde-format
 msgctxt "@item There are no windows."
 msgid "None."

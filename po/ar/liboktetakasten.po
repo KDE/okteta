@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-25 03:47+0000\n"
-"PO-Revision-Date: 2025-09-25 18:03+0400\n"
+"POT-Creation-Date: 2026-08-12 04:26+0000\n"
+"PO-Revision-Date: 2026-03-14 11:27+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
 "Language: ar\n"
@@ -109,13 +109,13 @@ msgctxt "@action:inmenu"
 msgid "Go to Previous Bookmark"
 msgstr "انتقل إلى العلامة السّابقة"
 
-#: controllers/view/bookmarks/bookmarkscontroller.cpp:170
+#: controllers/view/bookmarks/bookmarkscontroller.cpp:175
 #, kde-format
 msgctxt "@item description of bookmark"
 msgid "%1: %2"
 msgstr "%1: %2"
 
-#: controllers/view/bookmarks/bookmarkscontroller.cpp:255
+#: controllers/view/bookmarks/bookmarkscontroller.cpp:265
 #: controllers/view/bookmarks/bookmarkstool.cpp:130
 #, kde-format
 msgctxt "default name of a bookmark"
@@ -168,7 +168,7 @@ msgctxt "@info:whatsthis"
 msgid ""
 "If you press this button, the cursor is moved to the position of the "
 "bookmark which has been last selected."
-msgstr "اضغط على هذا الزر لنقل المؤشر إلى موقع العلامة التي حددتها أخيراً."
+msgstr "اضغط على هذا الزر لنقل المؤشر إلى موقع العلامة التي حددتها أخيرًا."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:111
 #, kde-format
@@ -182,7 +182,7 @@ msgctxt "@info:whatsthis"
 msgid ""
 "If you press this button, the name of the bookmark which was last selected "
 "can be edited."
-msgstr "اضغط على هذا الزر لتعديل اسم العلامة التي حددتها أخيراً."
+msgstr "اضغط على هذا الزر لتعديل اسم العلامة التي حددتها أخيرًا."
 
 #: controllers/view/bytetable/bytetablemodel.cpp:148
 #: controllers/view/info/statistictablemodel.cpp:178
@@ -2130,7 +2130,7 @@ msgstr "سلسلة UTF16-BE"
 #: controllers/view/structures/datatypes/strings/utf8stringdata.cpp:55
 #, kde-format
 msgid "Value too big: 0x%1"
-msgstr "القيمة كبيرة جداً: 0x%1"
+msgstr "القيمة كبيرة جدًا: 0x%1"
 
 #: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:62
 #: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:65
@@ -2293,7 +2293,7 @@ msgstr "تنسيق قيم النقاط العائمة وفقًا للموقع ا
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Whether to use short type names (i.e. uint32 instead of unsigned int)"
-msgstr "استخدام أسماء أنواع قصيرة (مثلاً uint32 بدلًا من unsigned int) أم لا"
+msgstr "استخدام أسماء أنواع قصيرة (مثلًا uint32 بدلًا من unsigned int) أم لا"
 
 #. i18n: ectx: tooltip, entry (LocaleAwareDecimalFormatting), group (ValueDisplay)
 #: controllers/view/structures/settings/structureviewpreferences.kcfg:33
@@ -2938,7 +2938,7 @@ msgstr "أ&نشئ جديدًا..."
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Opens an editor for a new view profile."
-msgstr "يفتح محرراً لتشكيلة عرض جديدة."
+msgstr "يفتح محررًا لتشكيلة عرض جديدة."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:68
 #, kde-kuit-format
@@ -2962,7 +2962,7 @@ msgstr "&حرّر..."
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Opens an editor for the view profile."
-msgstr "يفتح محرراً لتشكيلة العرض."
+msgstr "يفتح محررًا لتشكيلة العرض."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:82
 #, kde-kuit-format

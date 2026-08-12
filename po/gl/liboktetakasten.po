@@ -10,7 +10,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-03-25 03:47+0000\n"
+"POT-Creation-Date: 2026-08-12 04:26+0000\n"
 "PO-Revision-Date: 2024-12-16 01:04+0100\n"
 "Last-Translator: Adrián Chaves (Gallaecio) <adrian@chaves.io>\n"
 "Language-Team: Proxecto Trasno (proxecto@trasno.gal)\n"
@@ -111,13 +111,13 @@ msgctxt "@action:inmenu"
 msgid "Go to Previous Bookmark"
 msgstr "Ir ao anterior marcador"
 
-#: controllers/view/bookmarks/bookmarkscontroller.cpp:170
+#: controllers/view/bookmarks/bookmarkscontroller.cpp:175
 #, kde-format
 msgctxt "@item description of bookmark"
 msgid "%1: %2"
 msgstr "%1: %2"
 
-#: controllers/view/bookmarks/bookmarkscontroller.cpp:255
+#: controllers/view/bookmarks/bookmarkscontroller.cpp:265
 #: controllers/view/bookmarks/bookmarkstool.cpp:130
 #, kde-format
 msgctxt "default name of a bookmark"
