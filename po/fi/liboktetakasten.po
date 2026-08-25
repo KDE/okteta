@@ -1,7 +1,7 @@
 # Copyright (C) YEAR This_file_is_part_of_KDE
 # This file is distributed under the same license as the PACKAGE package.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2011, 2012, 2013, 2014, 2015.
-# SPDX-FileCopyrightText: 2018, 2019, 2020, 2022, 2023, 2024, 2025 Tommi Nieminen <translator@legisign.org>
+# SPDX-FileCopyrightText: 2018, 2019, 2020, 2022, 2023, 2024, 2025, 2026 Tommi Nieminen <translator@legisign.org>
 #
 # KDE Finnish translation sprint participants:
 # Author: Artnay
@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-12 02:35+0000\n"
-"PO-Revision-Date: 2025-10-17 14:29+0300\n"
+"PO-Revision-Date: 2026-03-02 19:13+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -2301,13 +2301,13 @@ msgstr "Tietoa"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Uninstall"
-msgstr ""
+msgstr "Poista asennus"
 
 #: controllers/view/structures/settings/structureitemdelegate.cpp:124
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Can not be uninstalled."
-msgstr ""
+msgstr "Asennusta ei voi poistaa."
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:61
 #, kde-format
@@ -2319,7 +2319,7 @@ msgstr "Tarkka valinta…"
 #, kde-format
 msgctxt "@action:button"
 msgid "Install from File(s)…"
-msgstr ""
+msgstr "Asenna tiedosto(i)sta…"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:69
 #, kde-format
@@ -2334,32 +2334,33 @@ msgid ""
 "\n"
 "%2"
 msgstr ""
+"Asennus tiedostosta <filename>%1</filename> epäonnistui:\n"
+"\n"
+"%2"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:130
-#, fuzzy, kde-format
-#| msgid "Structure Definitions"
+#, kde-format
 msgctxt "@title:window"
 msgid "Structure Installation"
-msgstr "Rakennemääritelmät"
+msgstr "Rakenneasennus"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:153
 #, kde-format
 msgctxt "@action:button"
 msgid "Uninstall"
-msgstr ""
+msgstr "Poista asennus"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:156
 #, kde-format
 msgid "Do you want to uninstall \"%1\"?"
-msgstr ""
+msgstr "Haluatko poistaa asennuksen: ”%1”?"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:157
 #: controllers/view/structures/settings/structuresmanagerview.cpp:176
-#, fuzzy, kde-format
-#| msgid "Structure Definitions"
+#, kde-format
 msgctxt "@title:window"
 msgid "Structure Uninstallation"
-msgstr "Rakennemääritelmät"
+msgstr "Rakenneasennuksen poistaminen"
 
 #: controllers/view/structures/settings/structuresselectiondialog.cpp:28
 #, kde-format
@@ -2566,23 +2567,20 @@ msgid "Character value:"
 msgstr "Merkin arvon muoto:"
 
 #: controllers/view/structures/structureinstalljob.cpp:61
-#, fuzzy, kde-format
-#| msgid "Unknown zlib error, code %1"
+#, kde-format
 msgid "Unknown error (0)"
-msgstr "Tuntematon zlib-virhe, koodi %1"
+msgstr "Tuntematon virhe (0)"
 
 #: controllers/view/structures/structureinstalljob.cpp:63
-#, fuzzy, kde-format
-#| msgctxt "not all values in this structure are as they should be"
-#| msgid "Validation failed: \"%1\""
+#, kde-format
 msgid "Downloading failed: %1"
-msgstr "Validointi epäonnistui: ”%1”"
+msgstr "Lataaminen epäonnistui: %1"
 
 #: controllers/view/structures/structureinstalljob.cpp:101
 #: controllers/view/structures/structureinstalljob.cpp:132
 #, kde-format
 msgid "The structure archive is invalid."
-msgstr ""
+msgstr "Rakennearkisto on virheellinen."
 
 #: controllers/view/structures/structurestool.cpp:72
 #: controllers/view/structures/structurestoolviewfactory.cpp:27
