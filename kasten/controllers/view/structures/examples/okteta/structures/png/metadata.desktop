@@ -56,6 +56,7 @@ Comment[ar]=بنية اختبار تحتوي على ترويسة ملفات PNG 
 Comment[bs]=Probna struktura koja sadrži zaglavlje PNG datoteke (datoteka treba biti postavljena na big endian)
 Comment[ca]=Una estructura de proves que conté la capçalera d'un fitxer PNG (el fitxer s'ha de definir com a «big-endian»)
 Comment[ca@valencia]=Una estructura de proves que conté la capçalera d'un fitxer PNG (el fitxer s'ha de definir com a «big-endian»)
+Comment[cs]=Testovací struktura obsahující hlavičku souboru PNG (soubor musí být nastaven na big-endian)
 Comment[da]=En teststruktur som indeholder PNG-fil-headeren (filen skal være sat til big-endian)
 Comment[de]=Eine Test-Struktur, die einen PNG-Dateivorspann enthält (die Datei muss auf „Big Endian“ eingestellt sein)
 Comment[el]=Μια δοκιμαστική δομή που περιέχει την κεφαλίδα αρχείου PNG (το αρχείο πρέπει να οριστεί ως big-endian)
