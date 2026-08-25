@@ -3,21 +3,22 @@
 # SPDX-FileCopyrightText: 2010, 2011, 2012, 2013, 2014, 2016, 2018, 2019, 2020, 2024 Vít Pelčák <vit@pelcak.org>
 # Tomáš Chvátal <tomas.chvatal@gmail.com>, 2012.
 # SPDX-FileCopyrightText: 2021, 2022, 2023, 2024 Vit Pelcak <vit@pelcak.org>
+# SPDX-FileCopyrightText: 2026 Libor Filípek <libor.filipek@gmail.com>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-12 04:26+0000\n"
-"PO-Revision-Date: 2023-06-22 14:47+0200\n"
-"Last-Translator: Vit Pelcak <vit@pelcak.org>\n"
+"PO-Revision-Date: 2026-08-24 20:43+0200\n"
+"Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=3; plural=(n==1) ? 0 : (n>=2 && n<=4) ? 1 : 2;\n"
-"X-Generator: Lokalize 24.08.1\n"
+"X-Generator: Lokalize 26.08.0\n"
 
 #: controllers/document/info/documentinfotool.cpp:47
 #: controllers/document/info/documentinfotoolviewfactory.cpp:24
@@ -44,7 +45,7 @@ msgstr "Velikost:"
 #: controllers/document/info/documentinfoview.cpp:86
 #, kde-format
 msgid "Created/Loaded:"
-msgstr ""
+msgstr "Vytvořeno/Načteno:"
 
 #: controllers/document/info/documentinfoview.cpp:90
 #, kde-format
@@ -54,12 +55,12 @@ msgstr "Poslední změna:"
 #: controllers/document/info/documentinfoview.cpp:94
 #, kde-format
 msgid "Last synchronized:"
-msgstr ""
+msgstr "Poslední synchronizace:"
 
 #: controllers/document/info/documentinfoview.cpp:101
 #, kde-format
 msgid "Created:"
-msgstr "Vytvořený:"
+msgstr "Vytvořeno:"
 
 #: controllers/document/info/documentinfoview.cpp:153
 #, kde-format
@@ -133,7 +134,7 @@ msgstr "Záložky"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Creates a new bookmark for the current cursor position."
-msgstr ""
+msgstr "Vytvoří novou záložku pro aktuální pozici kurzoru."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:76
 #, kde-format
@@ -142,12 +143,14 @@ msgid ""
 "If you press this button, a new bookmark will be created for the current "
 "cursor position."
 msgstr ""
+"Pokud stisknete toto tlačítko, vytvoří se nová záložka pro aktuální pozici "
+"kurzoru."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:87
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Deletes all the selected bookmarks."
-msgstr ""
+msgstr "Odstraní všechny vybrané záložky."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:89
 #, kde-format
@@ -155,12 +158,13 @@ msgctxt "@info:whatsthis"
 msgid ""
 "If you press this button, all bookmarks which are selected will be deleted."
 msgstr ""
+"Pokud stisknete toto tlačítko, budou odstraněny všechny vybrané záložky."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:101
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Moves the cursor to the selected bookmark."
-msgstr ""
+msgstr "Přesune kurzor na vybranou záložku."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:103
 #, kde-format
@@ -169,12 +173,14 @@ msgid ""
 "If you press this button, the cursor is moved to the position of the "
 "bookmark which has been last selected."
 msgstr ""
+"Pokud stisknete toto tlačítko, kurzor se přesune na pozici naposledy vybrané "
+"záložky."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:111
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Enables renaming of the selected bookmark."
-msgstr ""
+msgstr "Umožňuje přejmenovat vybranou záložku."
 
 #: controllers/view/bookmarks/bookmarksview.cpp:113
 #, kde-format
@@ -183,6 +189,8 @@ msgid ""
 "If you press this button, the name of the bookmark which was last selected "
 "can be edited."
 msgstr ""
+"Pokud stisknete toto tlačítko, můžete upravit název naposledy vybrané "
+"záložky."
 
 #: controllers/view/bytetable/bytetablemodel.cpp:148
 #: controllers/view/info/statistictablemodel.cpp:178
@@ -266,21 +274,21 @@ msgstr "Znak"
 #, kde-format
 msgctxt "@title:window"
 msgid "Value/Char Table"
-msgstr ""
+msgstr "Tabulka hodnot a znaků"
 
 #: controllers/view/bytetable/bytetabletool.cpp:92
 #, kde-format
 msgid "Inserted 1 Byte"
 msgid_plural "Inserted %1 Bytes"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "Vložen 1 bajt"
+msgstr[1] "Vloženy %1 bajty"
+msgstr[2] "Vloženo %1 bajtů"
 
 #: controllers/view/bytetable/bytetableview.cpp:82
 #, kde-format
 msgctxt "@label:spinbox number of bytes to insert"
 msgid "Number (bytes):"
-msgstr "Číslo (bajty):"
+msgstr "Počet (bajty):"
 
 #: controllers/view/bytetable/bytetableview.cpp:90
 #, kde-format
@@ -288,6 +296,7 @@ msgctxt "@info:tooltip"
 msgid ""
 "Number of repeats of the currently selected byte in the table to be inserted."
 msgstr ""
+"Počet opakování aktuálně vybraného bajtu v tabulce, který má být vložen."
 
 #: controllers/view/bytetable/bytetableview.cpp:106
 #, kde-format
@@ -295,13 +304,13 @@ msgctxt "@info:tooltip"
 msgid ""
 "Insert the currently selected byte in the table repeated the given number of "
 "times."
-msgstr ""
+msgstr "Vložit do tabulky aktuálně vybraný bajt tolikrát, kolikrát je uvedeno."
 
 #: controllers/view/charsetconversion/charsetconversiontool.cpp:141
 #, kde-format
 msgctxt "@title:window of the tool to convert between charsets"
 msgid "Charset Conversion"
-msgstr ""
+msgstr "Převod znakové sady"
 
 #: controllers/view/charsetconversion/charsetconversiontool.cpp:313
 #, kde-format
@@ -313,7 +322,7 @@ msgstr "%1 do %2"
 #, kde-format
 msgctxt "@title:window"
 msgid "Charset Conversion"
-msgstr ""
+msgstr "Převod znakové sady"
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:46
 #, kde-format
@@ -333,7 +342,7 @@ msgstr "Do"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The direction the bytes are converted, to or from the selected charset."
-msgstr ""
+msgstr "Směr převodu bajtů – do vybrané znakové sady nebo z ní."
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:59
 #, kde-format
@@ -341,19 +350,19 @@ msgctxt "@info:whatsthis"
 msgid ""
 "Select the direction the bytes are converted, to or from the selected "
 "charset."
-msgstr ""
+msgstr "Vyberte směr převodu bajtů – do vybrané znakové sady nebo z ní."
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:75
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "The charset the bytes are converted to."
-msgstr ""
+msgstr "Znaková sada, do které se bajty převádějí."
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:79
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Select the charset the bytes are converted to."
-msgstr ""
+msgstr "Vyberte znakovou sadu, do které se bajty převedou."
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:94
 #: controllers/view/checksum/checksumview.cpp:62
@@ -368,7 +377,7 @@ msgstr "Parametry"
 msgctxt ""
 "@option:check substitute bytes whose char is not part of the target charset"
 msgid "Substitute missing:"
-msgstr ""
+msgstr "Chybí zástupce:"
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:105
 #, kde-format
@@ -377,6 +386,8 @@ msgid ""
 "Selects if bytes should be substituted with a default byte if its char in "
 "the source charset is not part of the target charset."
 msgstr ""
+"Určuje, zda mají být bajty nahrazeny výchozím bajtem, pokud znak, který ve "
+"zdrojové znakové sadě představují, není součástí cílové znakové sady."
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:109
 #, kde-format
@@ -553,7 +564,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Go to Offset..."
-msgstr ""
+msgstr "&Přejít na offset"
 
 #: controllers/view/gotooffset/gotooffsettool.cpp:50
 #, kde-format
@@ -1219,7 +1230,7 @@ msgstr "Šestnáctková 8 bit"
 #, kde-format
 msgctxt "@label:textbox encoding of one byte as value in the octal format"
 msgid "Octal 8-bit"
-msgstr "Osmičková 8 bit:"
+msgstr "Osmičková 8 bit"
 
 #: controllers/view/poddecoder/typecodecs/sint16codec.cpp:20
 #, kde-format
@@ -2074,12 +2085,12 @@ msgstr ""
 #: controllers/view/structures/settings/structuresmanagerview.cpp:49
 #, kde-format
 msgid "Advanced Selection..."
-msgstr ""
+msgstr "Pokročilý výběr…"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:58
 #, kde-format
 msgid "Get New Structures..."
-msgstr ""
+msgstr "Získat nové struktury..."
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:182
 #, kde-format
@@ -2806,6 +2817,8 @@ msgid ""
 "If you press the <interface>Edit...</interface> button, an editor will be "
 "opened for the view profile you selected in the list."
 msgstr ""
+"Pokud stisknete tlačítko <interface>Upravit…</interface> , bude otevřen "
+"editor pro zobrazení profilu, který jste vybrali ze seznamu."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:90
 #, kde-format
