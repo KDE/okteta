@@ -97,6 +97,7 @@
     <p xml:lang="bg">Okteta е прост редактор за суровите данни на файловете.</p>
     <p xml:lang="ca">L'Okteta és un editor senzill per a les dades sense processar dels fitxers.</p>
     <p xml:lang="ca-valencia">Okteta és un editor senzill per a les dades sense processar dels fitxers.</p>
+    <p xml:lang="cs">Okteta je jednoduchý editor pro surová data souborů.</p>
     <p xml:lang="de">Okteta ist ein einfacher Editor für die Rohdaten von Dateien.</p>
     <p xml:lang="el">Το Okteta είναι ένας απλός επεξεργαστής για τα ακατέργαστα δεδομένα αρχείων.</p>
     <p xml:lang="en-GB">Okteta is a simple editor for the raw data of files.</p>
@@ -179,6 +180,7 @@
       <li xml:lang="bg">Стойностите и символите се показват или в две колони (традиционното показване в шестнайсетичните редактори), или в редове със стойността върху символа.</li>
       <li xml:lang="ca">Els valors i els caràcters es mostren en dues columnes (la vista tradicional en els editors hexadecimals) o en files amb el valor a sobre del caràcter</li>
       <li xml:lang="ca-valencia">Els valors i els caràcters es mostren en dues columnes (la vista tradicional en els editors hexadecimals) o en files amb el valor damunt del caràcter</li>
+      <li xml:lang="cs">Hodnoty a znaky jsou zobrazeny buď ve dvou sloupcích (tradiční zobrazení v hexadecimálních editorech), nebo v řádcích, kde je hodnota nad znakem</li>
       <li xml:lang="de">Werte und Zeichen können in zwei Spalten (die traditionelle Anzeige von Hexeditoren) oder in Reihen mit der Anzeige der Werte über den Zeichen dargestellt werden</li>
       <li xml:lang="el">Οιτιμές και οι χαρακτήρες εμφανίζονταιή σε δύο στήλες (η παραδοσιακή παρουσίαση στους επεξεργαστές δεκαεξαδικών) ή σε γραμμέςμε την τιμή στην κορυφή του χαρακτήρα</li>
       <li xml:lang="en-GB">Values and characters shown either in two columns (the traditional display in hex editors) or in rows with the value on top of the character</li>
@@ -216,6 +218,7 @@
       <li xml:lang="bg">Редактиране и навигация, подобно на текстови редактор</li>
       <li xml:lang="ca">Edició i navegació semblant a un editor de text</li>
       <li xml:lang="ca-valencia">Edició i navegació pareixent a un editor de text</li>
+      <li xml:lang="cs">Úpravy a navigace podobné jako v textovém editoru</li>
       <li xml:lang="de">Bearbeiten und navigieren ähnlich wie in einem Texteditor</li>
       <li xml:lang="el">Επεξεργασία και πλοήγηση παρόμοια με επεξεργαστή κειμένου</li>
       <li xml:lang="en-GB">Editing and navigating similar to a text editor</li>
@@ -253,6 +256,7 @@
       <li xml:lang="bg">Възможност за персонализиране на изгледите на данните, с възможност за зареждане и съхранение на профили</li>
       <li xml:lang="ca">Vistes de dades que es poden personalitzar, amb perfils que es poden carregar i emmagatzemar</li>
       <li xml:lang="ca-valencia">Vistes de dades que es poden personalitzar, amb perfils que es poden carregar i emmagatzemar</li>
+      <li xml:lang="cs">Přizpůsobitelné zobrazení dat s profily, které lze načíst a uložit</li>
       <li xml:lang="de">Benutzerdefinierte Datenansichten mit Profilen, die gespeichert und geladen werden können.</li>
       <li xml:lang="el">Προσαρμόσιμες προβολές δεδομένων με φορτώσιμα και αποθηκεύσιμα προφίλ</li>
       <li xml:lang="en-GB">Customisable data views, with loadable and storable profiles</li>
@@ -290,6 +294,7 @@
       <li xml:lang="bg">Ленти с инструменти, с възможност за прилепване от всички страни, а също и в плаващ режим</li>
       <li xml:lang="ca">Eines acoblables en totes les vores o flotants</li>
       <li xml:lang="ca-valencia">Eines acoblables en totes les vores o flotants</li>
+      <li xml:lang="cs">Nástroje, které lze ukotvit u všech stran nebo nechat plavat</li>
       <li xml:lang="de">Werkzeuge können an allen Seiten verankert oder freischwebend verwendet werden</li>
       <li xml:lang="el">Εργαλεία έτοιμα για διαχειριστές εργασιών σε όλες τις πλευρές ή αιωρούμενα</li>
       <li xml:lang="en-GB">Tools dockable on all sides or floating</li>
@@ -327,6 +332,7 @@
       <li xml:lang="bg">Числени кодировки: Шестнадесетична, десетична, осмична, двоична</li>
       <li xml:lang="ca">Codificacions numèriques: Hexadecimal, Decimal, Octal, Binari</li>
       <li xml:lang="ca-valencia">Codificacions numèriques: Hexadecimal, Decimal, Octal, Binari</li>
+      <li xml:lang="cs">Číselné soustavy: hexadecimální, desítková, osmičková, binární</li>
       <li xml:lang="de">Zahlenkodierung: Hexadezimal, Dezimal, Oktal und Binär</li>
       <li xml:lang="el">Αριθμητικές κωδικοποιήσεις: Δεκαεξαδική, δεκαδική, οκταδική, δυαδική</li>
       <li xml:lang="en-GB">Numerical encodings: Hexadecimal, Decimal, Octal, Binary</li>
@@ -365,6 +371,7 @@
       <li xml:lang="bg">Кодировки на знаци: Всички 8-битови кодировки, предоставени от Qt, EBCDIC</li>
       <li xml:lang="ca">Codificacions de caràcters: Totes les codificacions de 8 bits proporcionades per les Qt, EBCDIC</li>
       <li xml:lang="ca-valencia">Codificacions de caràcters: Totes les codificacions de 8 bits proporcionades per les Qt, EBCDIC</li>
+      <li xml:lang="cs">Kódování znaků: Všechna 8bitová kódování dodávaná v rámci Qt, EBCDIC</li>
       <li xml:lang="de">Zeichenkodierungen: Alle Kodierungen, die von Qt und EBCDIC unterstützt werden</li>
       <li xml:lang="el">Κωδικοποίηση χαρακτήρων: όλες οι 8-bit κωδικοποιήσεις όπως έρχονται από Qt, EBCDIC</li>
       <li xml:lang="en-GB">Character encodings: All 8-bit encodings as supplied by Qt, EBCDIC</li>
@@ -403,6 +410,7 @@
       <li xml:lang="bg">Бързо изобразяване на данни на екрана</li>
       <li xml:lang="ca">Renderització ràpida de les dades a la pantalla</li>
       <li xml:lang="ca-valencia">Renderització ràpida de les dades a la pantalla</li>
+      <li xml:lang="cs">Rychlé vykreslování dat na obrazovce</li>
       <li xml:lang="de">Schnelles Rendern der Daten auf dem Bildschirm</li>
       <li xml:lang="el">Γρήγορη αποτύπωση χαρακτήρων στην οθόνη</li>
       <li xml:lang="en-GB">Fast data rendering on screen</li>
@@ -522,6 +530,7 @@
       <li xml:lang="bg">Инструмент за структури за анализиране и редактиране въз основа на структурни дефиниции, създадени от потребителя</li>
       <li xml:lang="ca">Eina d'estructures per a analitzar i editar, basada en definicions de l'estructura que pot crear l'usuari</li>
       <li xml:lang="ca-valencia">Eina d'estructures per a analitzar i editar, basada en definicions de l'estructura que pot crear l'usuari</li>
+      <li xml:lang="cs">Strukturální nástroj pro analýzu a úpravy na základě definic struktur, které si může uživatel sám vytvořit</li>
       <li xml:lang="de">Strukturen-Werkzeug für die Untersuchung und Bearbeitung auf der Basis von benutzerdefinierten Strukturdefinitionen</li>
       <li xml:lang="el">Εργαλείο δομών για ανάλυση και επεξεργασία με βάση ορισμούς δομών που δημιουργεί ο χρήστης</li>
       <li xml:lang="en-GB">Structures tool for analysing and editing based on user-creatable structure definitions</li>
