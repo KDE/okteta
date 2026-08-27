@@ -10,7 +10,7 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-12 04:26+0000\n"
-"PO-Revision-Date: 2026-08-25 19:39+0200\n"
+"PO-Revision-Date: 2026-08-26 23:13+0200\n"
 "Last-Translator: Libor Filípek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
 "Language: cs\n"
@@ -1072,7 +1072,7 @@ msgid ""
 "Perform a case sensitive search: entering the pattern 'Joe' will not match "
 "'joe' or 'JOE', only 'Joe'."
 msgstr ""
-"Provede hledání s rozlišením velikosti: vložení vzoru 'Joe' nenajde 'joe "
+"Provede hledání s rozlišením velikosti: vložení vzorku 'Joe' nenajde 'joe "
 "nebo 'JOE'. Pouze 'Joe'."
 
 #: controllers/view/libfinddialog/abstractfinddialog.cpp:109
@@ -1376,7 +1376,7 @@ msgstr[2] "Provedeno %1 náhrad."
 #, kde-format
 msgctxt "@info"
 msgid "Replace pattern not found in byte array."
-msgstr "Nahradit vzor, který se v bajtovém poli nevyskytuje."
+msgstr "Nahradit vzorek, který se v bajtovém poli nevyskytuje."
 
 #: controllers/view/replace/replacecontroller.cpp:93
 #: controllers/view/search/searchcontroller.cpp:120
@@ -1771,8 +1771,29 @@ msgid_plural ""
 "\n"
 " %6"
 msgstr[0] ""
+"Název: %2\n"
+"Hodnota: %3\n"
+"\n"
+"Typ: %4\n"
+"Velikost: %5 (%1 podřízený)\n"
+"\n"
+" %6"
 msgstr[1] ""
+"Název: %2\n"
+"Hodnota: %3\n"
+"\n"
+"Typ: %4\n"
+"Velikost: %5 (%1 podřízení)\n"
+"\n"
+" %6"
 msgstr[2] ""
+"Název: %2\n"
+"Hodnota: %3\n"
+"\n"
+"Typ: %4\n"
+"Velikost: %5 (%1 podřízených)\n"
+"\n"
+" %6"
 
 #: controllers/view/structures/datatypes/datainformationwithchildren.cpp:220
 #, kde-format
@@ -1789,8 +1810,23 @@ msgid_plural ""
 "Type: %4\n"
 "Size: %5 (%1 children)"
 msgstr[0] ""
+"Název: %2\n"
+"Hodnota: %3\n"
+"\n"
+"Typ: %4\n"
+"Velikost: %5 (%1 podřízený)"
 msgstr[1] ""
+"Název: %2\n"
+"Hodnota: %3\n"
+"\n"
+"Typ: %4\n"
+"Velikost: %5 (%1 podřízení)"
 msgstr[2] ""
+"Název: %2\n"
+"Hodnota: %3\n"
+"\n"
+"Typ: %4\n"
+"Velikost: %5 (%1 podřízených)"
 
 #: controllers/view/structures/datatypes/primitive/bitfield/abstractbitfielddatainformation.cpp:32
 #, kde-format
@@ -2571,13 +2607,13 @@ msgstr "Nastavit počet bajtů na řádek..."
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Set Bytes per Group..."
-msgstr ""
+msgstr "Nastavit počet bajtů na skupinu..."
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:105
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Dynamic Layout"
-msgstr ""
+msgstr "&Dynamické rozvržení"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:109
 #, kde-format
@@ -2591,7 +2627,7 @@ msgctxt ""
 "@item:inmenu  The layout will adapt to the size, but only with complete "
 "groups of bytes."
 msgid "&Wrap Only Complete Byte Groups"
-msgstr ""
+msgstr "&Zahrnout pouze celé skupiny bajtů"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:113
 #, kde-format
@@ -2605,13 +2641,13 @@ msgstr "Zapnut&o"
 #, kde-format
 msgctxt "@option:check"
 msgid "Show &Line Offset"
-msgstr ""
+msgstr "Zobrazit o&ffset řádků"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:131
 #, kde-format
 msgctxt "@title:menu"
 msgid "&Show Values or Chars"
-msgstr ""
+msgstr "&Zobrazit hodnoty nebo znaky"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:134
 #, kde-format
@@ -2629,7 +2665,7 @@ msgstr "Zn&aky"
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Values && Chars"
-msgstr ""
+msgstr "Hodnoty a znaky"
 
 #: controllers/view/viewmode/viewmodecontroller.cpp:25
 #, kde-format
@@ -2678,7 +2714,7 @@ msgstr "Vrátit změny"
 #, kde-format
 msgctxt "@window:title"
 msgid "New View Profile"
-msgstr ""
+msgstr "Nový profil zobrazení"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:55
 #, kde-format
@@ -2693,7 +2729,7 @@ msgstr "Zobrazit"
 #: controllers/view/viewprofiles/viewprofileedit.cpp:63
 #, kde-format
 msgid "Show Line Offset:"
-msgstr ""
+msgstr "Zobrazit offset řádků:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:67
 #, kde-format
@@ -2710,7 +2746,7 @@ msgstr "Desítková"
 #: controllers/view/viewprofiles/viewprofileedit.cpp:71
 #, kde-format
 msgid "Offset Coding:"
-msgstr ""
+msgstr "Kódování offsetu:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:75
 #, kde-format
@@ -2728,18 +2764,18 @@ msgstr "Znaky"
 #, kde-format
 msgctxt "@item:"
 msgid "Values & Chars"
-msgstr ""
+msgstr "Hodnoty a znaky"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:80
 #, kde-format
 msgid "Show Values or Chars:"
-msgstr ""
+msgstr "Zobrazit hodnoty nebo znaky:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:84
 #, kde-format
 msgctxt "@label:listbox "
 msgid "Show with Rows or Columns:"
-msgstr ""
+msgstr "Zobrazit s řádky nebo sloupci:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:87
 #, kde-format
@@ -2770,7 +2806,7 @@ msgctxt ""
 "@item:inmenu  The layout will adapt to the size, but only with complete "
 "groups of bytes."
 msgid "Wrap Only Complete Byte Groups"
-msgstr ""
+msgstr "Zahrnout pouze celé skupiny bajtů"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:105
 #, kde-format
@@ -2837,24 +2873,24 @@ msgstr "Znaky"
 #: controllers/view/viewprofiles/viewprofileedit.cpp:165
 #, kde-format
 msgid "Char for non-printable bytes:"
-msgstr ""
+msgstr "Znak pro netisknutelné bajty:"
 
 #: controllers/view/viewprofiles/viewprofileedit.cpp:170
 #, kde-format
 msgid "Char for undefined bytes:"
-msgstr ""
+msgstr "Znak pro nedefinované bajty:"
 
 #: controllers/view/viewprofiles/viewprofilesmanagecontroller.cpp:31
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage View Profiles..."
-msgstr ""
+msgstr "Spravovat profily zobrazení..."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:36
 #, kde-format
 msgctxt "@title:window"
 msgid "View Profiles"
-msgstr ""
+msgstr "Zobrazit profily"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:63
 #, kde-format
@@ -2866,7 +2902,7 @@ msgstr "Vy&tvořit nový..."
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Opens an editor for a new view profile."
-msgstr ""
+msgstr "Otevře editor pro nový profil zobrazení."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:68
 #, kde-kuit-format
@@ -2876,6 +2912,9 @@ msgid ""
 "opened where you can create and edit a new view profile. The values will be "
 "based on the ones of the view profile you selected in the list."
 msgstr ""
+"Pokud stisknete tlačítko <interface>Vytvořit nový...</interface>, otevře se "
+"editor, ve kterém můžete vytvořit a upravit nový profil zobrazení. Hodnoty "
+"budou vycházet z hodnot profilu zobrazení, který jste vybrali v seznamu."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:77
 #, kde-format
@@ -2887,7 +2926,7 @@ msgstr "&Upravit..."
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Opens an editor for the view profile."
-msgstr ""
+msgstr "Otevře editor profilu zobrazení."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:82
 #, kde-kuit-format
@@ -2909,7 +2948,7 @@ msgstr "Na&stavit jako výchozí"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets the selected view profile as default for all views."
-msgstr ""
+msgstr "Nastaví vybraný profil zobrazení jako výchozí pro všechna zobrazení."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:95
 #, kde-kuit-format
@@ -2918,6 +2957,9 @@ msgid ""
 "If you press the <interface>Set as Default</interface> button, the view "
 "profile you selected in the list is set as default for all views."
 msgstr ""
+"Pokud stisknete tlačítko <interface>Nastavit jako výchozí</interface>, "
+"profil zobrazení, který jste vybrali v seznamu, se nastaví jako výchozí pro "
+"všechna zobrazení."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:102
 #, kde-format
@@ -2929,7 +2971,7 @@ msgstr "&Smazat"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Deletes the selected view profile."
-msgstr ""
+msgstr "Smaže vybraný profil zobrazení."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:107
 #, kde-kuit-format
@@ -2938,11 +2980,13 @@ msgid ""
 "If you press the <interface>Delete</interface> button, the view profile you "
 "selected in the list is deleted."
 msgstr ""
+"Pokud stisknete tlačítko <interface>Smazat</interface>, profil zobrazení, "
+"který jste vybrali v seznamu, bude smazán."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:174
 #, kde-format
 msgid "Modification of %1"
-msgstr ""
+msgstr "Úprava %1"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:211
 #, kde-format
@@ -2978,13 +3022,13 @@ msgstr "Režim přepisování"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Coding of the value interpretation in the current view."
-msgstr ""
+msgstr "Kódování interpretace hodnoty v aktuálním zobrazení."
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:69
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Encoding in the character column of the current view."
-msgstr ""
+msgstr "Kódování ve sloupci znaků aktuálního zobrazení."
 
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:108
 #: controllers/view/viewstatus/viewstatuscontroller.cpp:215
@@ -3026,13 +3070,13 @@ msgstr "Výběr: %1 - %2 (%3)"
 #, kde-format
 msgctxt "name of the data type"
 msgid "Byte Array"
-msgstr ""
+msgstr "Pole bajtů"
 
 #: core/document/bytearraydocumentfactory.cpp:40
 #, kde-format
 msgctxt "The byte array was new created."
 msgid "New created."
-msgstr ""
+msgstr "Nově vytvořeno."
 
 #: core/document/bytearraydocumentfactory.cpp:47
 #: core/document/bytearraydocumentfactory.cpp:123
@@ -3040,33 +3084,35 @@ msgstr ""
 msgctxt "numbered title for a created document without a filename"
 msgid "[New Byte Array]"
 msgid_plural "[New Byte Array %1]"
-msgstr[0] ""
-msgstr[1] ""
-msgstr[2] ""
+msgstr[0] "[Nové pole bajtů]"
+msgstr[1] "[%1 nová pole bajtů]"
+msgstr[2] "[%1 nových polí bajtů]"
 
 #: core/document/bytearraydocumentfactory.cpp:116
 #, kde-format
 msgctxt "origin of the byte array"
 msgid "Created from data."
-msgstr ""
+msgstr "Vytvořeno z dat."
 
 #: core/io/filesystem/bytearrayrawfileloadthread.cpp:56
 #, kde-format
 msgctxt "destination of the byte array"
 msgid "Loaded from file."
-msgstr ""
+msgstr "Načteno ze souboru."
 
 #: core/io/filesystem/bytearrayrawfileloadthread.cpp:65
 #: core/io/filesystem/bytearrayrawfilereloadthread.cpp:55
 #, kde-format
 msgid "There is not enough free working memory to load this file."
 msgstr ""
+"K načtení tohoto souboru není k dispozici dostatek volné pracovní paměti."
 
 #: core/io/filesystem/bytearrayrawfileloadthread.cpp:68
 #: core/io/filesystem/bytearrayrawfilereloadthread.cpp:58
 #, kde-format
 msgid "Support to load files larger than 2 GiB has not yet been implemented."
 msgstr ""
+"Podpora načítání souborů větších než 2 GiB zatím nebyla implementována."
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:108
 #, kde-format
@@ -3077,7 +3123,7 @@ msgstr "Vzorek..."
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:157
 #, kde-format
 msgid "Pattern inserted."
-msgstr ""
+msgstr "Vzorek vložen."
 
 #: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:35
 #, kde-format
@@ -3090,7 +3136,7 @@ msgstr "Vzorek:"
 msgctxt "@info:whatsthis"
 msgid ""
 "Enter a pattern to search for, or select a previous pattern from the list."
-msgstr "Zadejte vzor pro vyhledávání, nebo vyberte vzor z předešlých zadání."
+msgstr "Zadejte vzorek pro vyhledávání, nebo vyberte vzor z předešlých zadání."
 
 #: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:52
 #, kde-format
@@ -3102,7 +3148,7 @@ msgstr "Čís&lo:"
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Enter the number of times the pattern should be inserted."
-msgstr ""
+msgstr "Zadejte počet opakování vzorku."
 
 #: gui/io/generator/pattern/bytearraypatterngeneratorconfigeditor.cpp:72
 #, kde-format
@@ -3119,7 +3165,7 @@ msgstr "Náhodná data..."
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:111
 #, kde-format
 msgid "RandomData inserted."
-msgstr ""
+msgstr "Vložena náhodná data."
 
 #: gui/io/generator/randomdata/bytearrayrandomdatageneratorconfigeditor.cpp:33
 #, kde-format
@@ -3131,7 +3177,7 @@ msgstr "&Velikost (bajty):"
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Enter the size of the bytearray to generate."
-msgstr ""
+msgstr "Zadejte velikost bajtového pole, které chcete vygenerovat."
 
 #: gui/io/generator/randomdata/bytearrayrandomdatageneratorconfigeditor.cpp:51
 #, kde-format
@@ -3148,7 +3194,7 @@ msgstr "Pořadí"
 #: gui/io/generator/sequence/bytearraysequencegenerator.cpp:58
 #, kde-format
 msgid "Sequence inserted."
-msgstr ""
+msgstr "Vložena sekvence."
 
 #: gui/io/streamencoder/base32/bytearraybase32streamencoder.cpp:137
 #, kde-format
@@ -3174,13 +3220,13 @@ msgstr "Klasický"
 #, kde-format
 msgctxt "@item:inmenu Doing the base32 using the Base32hex encoding"
 msgid "Base32hex"
-msgstr ""
+msgstr "Base32hex"
 
 #: gui/io/streamencoder/base32/bytearraybase32streamencoderconfigeditor.cpp:42
 #, kde-format
 msgctxt "@item:inmenu Doing the base32 using the z-base-32 encoding"
 msgid "z-base-32"
-msgstr ""
+msgstr "z-base-32"
 
 #: gui/io/streamencoder/base64/bytearraybase64streamencoder.cpp:41
 #, kde-format
@@ -3197,7 +3243,7 @@ msgstr "Ascii85"
 #: gui/io/streamencoder/bytearraytextstreamencoderpreview.cpp:27
 #, kde-format
 msgid "The preview uses maximal the first 100 bytes."
-msgstr ""
+msgstr "Náhled využívá maximálně prvních 100 bajtů."
 
 #: gui/io/streamencoder/chars/bytearraycharsstreamencoder.cpp:27
 #, kde-format
@@ -3216,7 +3262,7 @@ msgstr "Intel Hex"
 #, kde-format
 msgctxt "@label:listbox the size in bits of the addresses."
 msgid "Address size:"
-msgstr ""
+msgstr "Velikost adresy:"
 
 #: gui/io/streamencoder/ihex/bytearrayihexstreamencoderconfigeditor.cpp:39
 #: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:38
@@ -3242,7 +3288,7 @@ msgstr "8-bit"
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "C Array"
-msgstr ""
+msgstr "Pole C"
 
 #: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoderconfigeditor.cpp:36
 #, kde-format
@@ -3254,7 +3300,7 @@ msgstr "Název proměnné:"
 #, kde-format
 msgctxt "@label:textbox to define after how many items the list is wrapped"
 msgid "Items per line:"
-msgstr ""
+msgstr "Počet položek na řádek:"
 
 #: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoderconfigeditor.cpp:59
 #, kde-format
@@ -3268,13 +3314,13 @@ msgctxt ""
 "@option:check Encode the values in hexadecimal instead of decimal, if the "
 "datatype has the property Unsigned"
 msgid "Unsigned as hexadecimal:"
-msgstr ""
+msgstr "Nepodepsané jako hexadecimální:"
 
 #: gui/io/streamencoder/srec/bytearraysrecstreamencoder.cpp:177
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "S-Record"
-msgstr ""
+msgstr "S-Záznam"
 
 #: gui/io/streamencoder/srec/bytearraysrecstreamencoderconfigeditor.cpp:40
 #, kde-format
@@ -3286,14 +3332,14 @@ msgstr "24-bit"
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "Uuencoding"
-msgstr ""
+msgstr "Kódování uuenc"
 
 #: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:34
 #: gui/io/streamencoder/xxencoding/bytearrayxxencodingstreamencoderconfigeditor.cpp:33
 #, kde-format
 msgctxt "@label:textbox file name internally given to the encoded data"
 msgid "Internal name of file:"
-msgstr ""
+msgstr "Vnitřní název souboru:"
 
 #: gui/io/streamencoder/uuencoding/bytearrayuuencodingstreamencoderconfigeditor.cpp:45
 #, kde-format
@@ -3334,13 +3380,13 @@ msgstr "Oddělení:"
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "View in Plain Text"
-msgstr ""
+msgstr "Zobrazit jako prostý text"
 
 #: gui/io/streamencoder/xxencoding/bytearrayxxencodingstreamencoder.cpp:69
 #, kde-format
 msgctxt "name of the encoding target"
 msgid "Xxencoding"
-msgstr ""
+msgstr "Kódování xxenc"
 
 #. i18nc("@item:inlistbox guessing the format of the address by the input",      "Auto"),
 #: gui/liboktetawidgets/addresscombobox_p.cpp:30
