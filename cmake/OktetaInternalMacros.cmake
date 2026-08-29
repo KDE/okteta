@@ -14,6 +14,13 @@ include(ECMGeneratePkgConfigFile)
 include(CMakePackageConfigHelpers)
 include(CheckCXXCompilerFlag)
 
+if(${ECM_VERSION} VERSION_GREATER_EQUAL 6.30)
+    include(ECMInstalledLibraryCheck)
+    set(_has_lib_check TRUE)
+else()
+    set(_has_lib_check FALSE)
+endif()
+
 # helper macros
 function(_okteta_target_name _varName _baseName)
     string(CONCAT _namespacePrefix ${ARGN})
@@ -358,6 +365,19 @@ macro(okteta_library_sources _baseName)
                 DESTINATION "${_include_install_dir}/${_cc_include_dir}"
                 COMPONENT Devel
             )
+
+            if (_has_lib_check)
+                if(_cc_include_dir)
+                    set(_prefix_args PREFIX ${_cc_include_dir})
+                else()
+                    set(_prefix_args)
+                endif()
+
+                ecm_installed_library_check_include_strings(${_targetName}
+                    HEADERS ${_cchdrs}
+                    ${_prefix_args}
+                )
+            endif()
         endif()
     endif()
 endmacro()
@@ -610,6 +630,19 @@ macro(okteta_sublibrary_sources _baseName)
                 DESTINATION "${_include_install_dir}/${_cc_include_dir}"
                 COMPONENT Devel
             )
+
+            if (_has_lib_check)
+                if(_cc_include_dir)
+                    set(_prefix_args PREFIX ${_cc_include_dir})
+                else()
+                    set(_prefix_args)
+                endif()
+
+                ecm_installed_library_check_include_strings(${_targetName}
+                    HEADERS ${_cchdrs}
+                    ${_prefix_args}
+                )
+            endif()
         endif()
     endif()
 endmacro()
@@ -772,6 +805,30 @@ function(okteta_add_library _baseName)
         ${KDE_INSTALL_TARGETS_DEFAULT_ARGS}
         ${_other_install_targets_args}
     )
+
+    if (_has_lib_check)
+        if (_use_versioned_package_name)
+            set(_configName "${_fullVersionedName}")
+        else()
+            set(_configName "${_fullName}")
+        endif()
+        if(ARG_NO_TARGET_NAMESPACE)
+            set(_namespace_args NO_PACKAGE_TARGET_NAMESPACE)
+        else()
+            set(_namespace_args PACKAGE_TARGET_NAMESPACE "${_namespacePrefix}::")
+        endif()
+
+        ecm_add_installed_library_check(${_targetName}
+            PACKAGE_NAME "${_configName}"
+            PACKAGE_VERSION ${ARG_VERSION}
+            ${_namespace_args}
+        )
+
+        ecm_installed_library_check_version_preprocessor_macros(${_targetName}
+            PREFIX  ${_definitions_prefix}
+            VERSION ${ARG_VERSION}
+        )
+    endif()
 
     # TODO: perhaps only do on first PUBLIC usage in okteta_add_sublibrary?
     if (ARG_NO_PACKAGE_NAMESPACED_INCLUDEDIR)
