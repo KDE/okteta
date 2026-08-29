@@ -208,6 +208,7 @@ oktetakastencontrollers_sources(
     PRIVATE
         OverwriteModeController
 )
+
 oktetakastencontrollers_sources(
     SUBDIR view/info
     PUBLIC
@@ -553,7 +554,6 @@ oktetakastencontrollers_sources(
         BookmarksToolView
 )
 
-
 oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersStructuresDataTypes
     SUBDIR view/structures/datatypes
     BUILD_INCLUDEDIR
@@ -677,7 +677,6 @@ oktetakastencontrollers_sublibrary_sources(OktetaKastenControllersStructuresData
         AllPrimitiveTypes
 )
 
-
 #these source files are not needed by the static library for unit tests, therefore keep them separate
 oktetakastencontrollers_sources(
     SUBDIR view/structures/parsers
@@ -687,6 +686,7 @@ oktetakastencontrollers_sources(
         OsdParser
         ScriptFileParser
 )
+
 oktetakastencontrollers_sources(
     SUBDIR view/structures/settings
     BUILD_INCLUDEDIR
@@ -704,6 +704,7 @@ oktetakastencontrollers_sources(
         LicenseDialog
     UI structureviewsettingswidget.ui
 )
+
 oktetakastencontrollers_sources(
     SUBDIR view/structures
     PUBLIC
