@@ -913,6 +913,8 @@ function(okteta_add_cmakeconfig _baseName)
     if(NOT _no_target_namespace)
         get_property(_namespacePrefix TARGET ${_targetName} PROPERTY OKTETA_TARGET_NAMESPACEPREFIX)
         set(_namespace_args NAMESPACE "${_namespacePrefix}::")
+    else()
+        set(_namespace_args)
     endif()
     install(EXPORT ${_targets_export_name}
         FILE "${_configName}Targets.cmake"
