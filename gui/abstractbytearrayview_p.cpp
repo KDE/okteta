@@ -133,7 +133,7 @@ AbstractByteArrayViewPrivate::AbstractByteArrayViewPrivate(AbstractByteArrayView
     , mValueEditor(this, &mKeyNavigator)
     , mCharEditor(this, &mKeyNavigator)
     , mMousePaster(this, nullptr)
-    , mMouseNavigator(this, &mMousePaster)
+    , mMouseNavigator(this, QApplication::clipboard()->supportsSelection() ? &mMousePaster : nullptr)
     , mZoomWheelController(this, nullptr)
     , mDropper(this)
     , mMouseController(&mMouseNavigator)
@@ -889,9 +889,8 @@ void AbstractByteArrayViewPrivate::insertBytesFromMimeData(const QMimeData* mime
 
 bool AbstractByteArrayViewPrivate::canInsertBytesFromMimeData(const QMimeData* mimeData) const
 {
-    Q_UNUSED(mimeData)
     // taking all for now, see comment in insertBytesFromMimeData above
-    return true;// data->hasFormat( OctetStreamFormatName );
+    return (mimeData != nullptr);// data->hasFormat( OctetStreamFormatName );
 }
 
 void AbstractByteArrayViewPrivate::insertBytes(const QByteArray& bytes)

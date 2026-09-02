@@ -259,6 +259,9 @@ void TabbedViewsPrivate::onMouseMiddleButtonClicked()
     Q_Q(TabbedViews);
 
     const QMimeData* const mimeData = QApplication::clipboard()->mimeData(QClipboard::Selection);
+    if (!mimeData) {
+        return;
+    }
 
     bool acceptedDummy;
     Q_EMIT q->dataDropped(mimeData, acceptedDummy);
