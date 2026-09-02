@@ -944,9 +944,8 @@ void AbstractByteArrayViewPrivate::pasteData(const QMimeData* mimeData)
 
 bool AbstractByteArrayViewPrivate::canReadData(const QMimeData* mimeData) const
 {
-    Q_UNUSED(mimeData)
     // taking all for now, see comment in pasteData above
-    return true;// data->hasFormat( OctetStreamFormatName );
+    return (mimeData != nullptr);// data->hasFormat( OctetStreamFormatName );
 }
 
 void AbstractByteArrayViewPrivate::insert(const QByteArray& byteArray)
