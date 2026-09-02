@@ -216,7 +216,8 @@ void AbstractByteArrayViewPrivate::init()
     mValueEditor = new ValueEditor(mTableCursor, q, mKeyNavigator);
     mCharEditor = new CharEditor(mTableCursor, q, mKeyNavigator);
 
-    mMousePaster = new MousePaster(q, nullptr);
+    const bool hasSelectionClipboard = QApplication::clipboard()->supportsSelection();
+    mMousePaster = hasSelectionClipboard ? new MousePaster(q, nullptr) : nullptr;
     mMouseNavigator = new MouseNavigator(q, mMousePaster);
     mMouseController = mMouseNavigator;
     mTapNavigator = new TapNavigator(q);
