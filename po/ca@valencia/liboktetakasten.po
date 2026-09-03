@@ -3,9 +3,9 @@
 # This file is distributed under the license LGPL version 2 or later.
 #
 # SPDX-FileCopyrightText: 2009 Joan Maspons <joanmaspons@gmail.com>
-# SPDX-FileCopyrightText: 2010, 2011, 2012 Manuel Tortosa <manutortosa@chakra-project.org>
-# SPDX-FileCopyrightText: 2012, 2014, 2015, 2016, 2020, 2022 Antoni Bella Pérez <antonibella5@yahoo.com>
-# SPDX-FileCopyrightText: 2008, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021, 2022, 2023, 2024, 2025, 2026 Josep M. Ferrer <txemaq@gmail.com>
+# SPDX-FileCopyrightText: 2010-2012 Manuel Tortosa <manutortosa@chakra-project.org>
+# SPDX-FileCopyrightText: 2012, 2014-2016, 2020, 2022 Antoni Bella Pérez <antonibella5@yahoo.com>
+# SPDX-FileCopyrightText: 2008-2026 Josep M. Ferrer <txemaq@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
@@ -2691,7 +2691,7 @@ msgstr "Consola de scripts"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Open script console."
-msgstr "Obri un script de consola."
+msgstr "Obri la consola de scripts."
 
 #: controllers/view/structures/structureview.cpp:80
 #, kde-format
@@ -2755,7 +2755,7 @@ msgstr "Bloqueja l'estructura seleccionada al desplaçament actual."
 #, kde-format
 msgctxt "@title:window"
 msgid "Structures Script Console"
-msgstr "Consola de script d'estructures"
+msgstr "Consola de scripts d'estructures"
 
 #: controllers/view/viewconfig/bytespergroupdialog.cpp:31
 #, kde-format
