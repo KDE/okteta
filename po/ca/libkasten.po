@@ -1,15 +1,15 @@
 # Translation of libkasten.po to Catalan
-# Copyright (C) 2008-2024 This_file_is_part_of_KDE
+# Copyright (C) 2008-2026 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2 or later.
 #
-# SPDX-FileCopyrightText: 2008-2010, 2018, 2024 Josep M. Ferrer <txemaq@gmail.com>
+# SPDX-FileCopyrightText: 2008-2010, 2018, 2024, 2026 Josep M. Ferrer <txemaq@gmail.com>
 # SPDX-FileCopyrightText: 2009 Joan Maspons <joanmaspons@gmail.com>
 msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-12 02:35+0000\n"
-"PO-Revision-Date: 2024-10-22 09:49+0200\n"
+"PO-Revision-Date: 2026-09-06 20:55+0200\n"
 "Last-Translator: Josep M. Ferrer <txemaq@gmail.com>\n"
 "Language-Team: Catalan <kde-i18n-ca@kde.org>\n"
 "Language: ca\n"
@@ -18,7 +18,7 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
 "X-Accelerator-Marker: &\n"
-"X-Generator: Lokalize 24.08.2\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #: controllers/document/modified/modifiedbarcontroller.cpp:74
 #, kde-format
@@ -373,7 +373,7 @@ msgstr "&Ajusta a l'amplada"
 #: controllers/view/zoom/zoomcontroller.cpp:67
 #, kde-format
 msgid "&Fit to Height"
-msgstr "&Ajusta a l'alçada"
+msgstr "&Ajusta a l'altura"
 
 #: controllers/view/zoom/zoomcontroller.cpp:69
 #, kde-format
