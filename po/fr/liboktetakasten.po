@@ -1780,19 +1780,19 @@ msgstr "Offset"
 #, kde-format
 msgctxt "@title:column string extracted from the byte array"
 msgid "String"
-msgstr "Chaîne"
+msgstr "Chaine"
 
 #: controllers/view/stringsextract/stringsextracttool.cpp:52
 #, kde-format
 msgctxt "@title:window of the tool to extract strings"
 msgid "Strings"
-msgstr "Chaînes"
+msgstr "Chaines"
 
 #: controllers/view/stringsextract/stringsextracttoolviewfactory.cpp:25
 #, kde-format
 msgctxt "@title:window"
 msgid "Strings"
-msgstr "Chaînes"
+msgstr "Chaines"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:54
 #, kde-format
@@ -2162,7 +2162,7 @@ msgstr "Caractère ASCII"
 #: controllers/view/structures/datatypes/strings/asciistringdata.cpp:148
 #, kde-format
 msgid "ASCII string"
-msgstr "Chaîne ASCII"
+msgstr "Chaine ASCII"
 
 #: controllers/view/structures/datatypes/strings/ebcdicstringdata.cpp:136
 #, kde-format
@@ -2172,7 +2172,7 @@ msgstr "Caractère EBCDIC"
 #: controllers/view/structures/datatypes/strings/ebcdicstringdata.cpp:146
 #, kde-format
 msgid "EBCDIC string"
-msgstr "Chaîne EBCDIC"
+msgstr "Chaine EBCDIC"
 
 #: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:130
 #, kde-format
@@ -2182,7 +2182,7 @@ msgstr "Caractère « Latin1 »"
 #: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:140
 #, kde-format
 msgid "Latin1 string"
-msgstr "Chaîne Latin1"
+msgstr "Chaine Latin1"
 
 #: controllers/view/structures/datatypes/strings/stringdatainformation.cpp:317
 #, kde-format
@@ -2202,12 +2202,12 @@ msgstr "Caractère « UTF16-BE »"
 #: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:35
 #, kde-format
 msgid "UTF16-LE string"
-msgstr "Chaîne « UTF16-LE »"
+msgstr "Chaine « UTF16-LE »"
 
 #: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:35
 #, kde-format
 msgid "UTF16-BE string"
-msgstr "Chaîne « UTF16-BE »"
+msgstr "Chaine « UTF16-BE »"
 
 #: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:54
 #: controllers/view/structures/datatypes/strings/utf32stringdata.cpp:54
@@ -2239,12 +2239,12 @@ msgstr "Caractère « UTF32-BE »"
 #: controllers/view/structures/datatypes/strings/utf32stringdata.cpp:35
 #, kde-format
 msgid "UTF32-LE string"
-msgstr "Chaîne « UTF32-LE »"
+msgstr "Chaine « UTF32-LE »"
 
 #: controllers/view/structures/datatypes/strings/utf32stringdata.cpp:35
 #, kde-format
 msgid "UTF32-BE string"
-msgstr "Chaîne « UTF32-BE »"
+msgstr "Chaine « UTF32-BE »"
 
 #: controllers/view/structures/datatypes/strings/utf8stringdata.cpp:30
 #, kde-format
@@ -2254,7 +2254,7 @@ msgstr "Caractère « UTF8 »"
 #: controllers/view/structures/datatypes/strings/utf8stringdata.cpp:35
 #, kde-format
 msgid "UTF8 string"
-msgstr "Chaîne « UTF8 »"
+msgstr "Chaine « UTF8 »"
 
 #: controllers/view/structures/datatypes/structuredatainformation.cpp:28
 #: controllers/view/structures/datatypes/taggeduniondatainformation.cpp:40
