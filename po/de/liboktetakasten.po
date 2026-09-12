@@ -6,20 +6,21 @@
 # SPDX-FileCopyrightText: 2009-2013, 2015-2016, 2023 Frederik Schwarzer <schwarzer@kde.org>
 # SPDX-FileCopyrightText: 2010 Jonathan Kolberg <bulldog98@kubuntu-de.org>
 # SPDX-FileCopyrightText: 2010 Markus Slopianka <markus.s@kdemail.net>
+# SPDX-FileCopyrightText: 2026 Philipp Kiemle <l10n.daphipz@fastmail.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-12 04:26+0000\n"
-"PO-Revision-Date: 2023-08-13 16:27+0200\n"
-"Last-Translator: Frederik Schwarzer <schwarzer@kde.org>\n"
+"PO-Revision-Date: 2026-09-09 18:28+0200\n"
+"Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.11.70\n"
+"X-Generator: Lokalize 26.08.0\n"
 
 #: controllers/document/info/documentinfotool.cpp:47
 #: controllers/document/info/documentinfotoolviewfactory.cpp:24
@@ -56,7 +57,7 @@ msgstr "Zuletzt geändert:"
 #: controllers/document/info/documentinfoview.cpp:94
 #, kde-format
 msgid "Last synchronized:"
-msgstr "Zuletzt abgeglichen:"
+msgstr "Zuletzt synchronisiert:"
 
 #: controllers/document/info/documentinfoview.cpp:101
 #, kde-format
@@ -585,7 +586,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Go to Offset..."
-msgstr "&Gehe zu Offset ..."
+msgstr "&Gehe zu Offset …"
 
 #: controllers/view/gotooffset/gotooffsettool.cpp:50
 #, kde-format
@@ -1540,7 +1541,7 @@ msgstr "Suchen"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "&Select Range..."
-msgstr "Bereich au&swählen ..."
+msgstr "Bereich au&swählen …"
 
 #: controllers/view/selectrange/selectrangetool.cpp:61
 #, kde-format
@@ -2185,12 +2186,12 @@ msgstr "Verwendete Strukturen:"
 #: controllers/view/structures/settings/structuresmanagerview.cpp:49
 #, kde-format
 msgid "Advanced Selection..."
-msgstr "Erweiterte Auswahl ..."
+msgstr "Erweiterte Auswahl …"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:58
 #, kde-format
 msgid "Get New Structures..."
-msgstr "Neue Strukturen holen ..."
+msgstr "Neue Strukturen holen …"
 
 #: controllers/view/structures/settings/structuresmanagerview.cpp:182
 #, kde-format
@@ -2604,13 +2605,13 @@ msgstr "Nicht &druckbare Zeichen anzeigen"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Set Bytes per Line..."
-msgstr "Bytes pro Zeile festlegen ..."
+msgstr "Bytes pro Zeile festlegen …"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:98
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Set Bytes per Group..."
-msgstr "Bytes pro Gruppe festlegen ..."
+msgstr "Bytes pro Gruppe festlegen …"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:105
 #, kde-format
@@ -2698,7 +2699,7 @@ msgstr "Ansichtsprofil"
 #, kde-format
 msgctxt "@action:inmenu create a new view profile"
 msgid "Create New..."
-msgstr "Neu erstellen ..."
+msgstr "Neu erstellen …"
 
 #: controllers/view/viewprofiles/viewprofilecontroller.cpp:56
 #, kde-format
@@ -2887,7 +2888,7 @@ msgstr "Zeichen für undefinierte Bytes:"
 #, kde-format
 msgctxt "@action:inmenu"
 msgid "Manage View Profiles..."
-msgstr "Ansichtsprofile verwalten ..."
+msgstr "Ansichtsprofile verwalten …"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:36
 #, kde-format
@@ -2899,7 +2900,7 @@ msgstr "Ansichtsprofile"
 #, kde-format
 msgctxt "@action:button"
 msgid "&Create new..."
-msgstr "&Neues erstellen ..."
+msgstr "&Neu erstellen …"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:66
 #, kde-format
@@ -2915,8 +2916,8 @@ msgid ""
 "opened where you can create and edit a new view profile. The values will be "
 "based on the ones of the view profile you selected in the list."
 msgstr ""
-"Wenn Sie den Knopf <interface>Neues erstellen ...</interface> drücken, wird "
-"ein Editor geöffnet, in dem Sie ein neues Ansichtsprofil erstellen und "
+"Wenn Sie den Knopf <interface>Neu erstellen …</interface> drücken, wird ein "
+"Editor geöffnet, in dem Sie ein neues Ansichtsprofil erstellen und "
 "bearbeiten können. Grundlage des neuen Profils sind die Werte des von Ihnen "
 "in der Liste ausgewählten Ansichtsprofils."
 
@@ -2924,7 +2925,7 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "&Edit..."
-msgstr "&Bearbeiten ..."
+msgstr "&Bearbeiten …"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:80
 #, kde-format
@@ -2939,7 +2940,7 @@ msgid ""
 "If you press the <interface>Edit...</interface> button, an editor will be "
 "opened for the view profile you selected in the list."
 msgstr ""
-"Wenn Sie auf <interface>Bearbeiten ...</interface> klicken, wird das in der "
+"Wenn Sie auf <interface>Bearbeiten …</interface> klicken, wird das in der "
 "Liste ausgewählte Ansichtsprofil in einem Editor geöffnet."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:90
@@ -3124,7 +3125,7 @@ msgstr ""
 #, kde-format
 msgctxt "name of the generated data"
 msgid "Pattern..."
-msgstr "Muster ..."
+msgstr "Muster …"
 
 #: gui/io/generator/pattern/bytearraypatterngenerator.cpp:157
 #, kde-format
@@ -3168,7 +3169,7 @@ msgstr "Muster"
 #, kde-format
 msgctxt "name of the generated data"
 msgid "Random Data..."
-msgstr "Zufällige Daten ..."
+msgstr "Zufällige Daten …"
 
 #: gui/io/generator/randomdata/bytearrayrandomdatagenerator.cpp:111
 #, kde-format
