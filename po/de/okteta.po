@@ -4,19 +4,21 @@
 # SPDX-FileCopyrightText: 2009-2010 Panagiotis Papadopoulos <pano_90@gmx.net>
 # SPDX-FileCopyrightText: 2010 Markus Slopianka <markus.s@kdemail.net>
 # SPDX-FileCopyrightText: 2011, 2016 Frederik Schwarzer <schwarzer@kde.org>
+# SPDX-FileCopyrightText: 2026 Philipp Kiemle <l10n.daphipz@fastmail.de>
 msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2025-11-17 09:01+0000\n"
-"PO-Revision-Date: 2021-03-01 12:31+0100\n"
-"Last-Translator: Burkhard Lück <lueck@hube-lueck.de>\n"
+"PO-Revision-Date: 2026-09-04 15:16+0200\n"
+"Last-Translator: Philipp Kiemle <l10n.daphipz@fastmail.de>\n"
 "Language-Team: German <kde-i18n-de@kde.org>\n"
 "Language: de\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 26.08.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -34,8 +36,7 @@ msgid "Okteta"
 msgstr "Okteta"
 
 #: about.cpp:17
-#, fuzzy, kde-format
-#| msgid "Hex editor"
+#, kde-format
 msgctxt "@info"
 msgid "Hex editor"
 msgstr "Hex-Editor"
@@ -47,38 +48,31 @@ msgid "2006-%1 Friedrich W. H. Kossebau"
 msgstr "2006–%1 Friedrich W. H. Kossebau"
 
 #: about.cpp:20
-#, fuzzy, kde-format
-#| msgid "Edit the raw data of files"
+#, kde-format
 msgctxt "@info"
 msgid "Edit the raw data of files"
-msgstr "Die Rohdaten von Dateien bearbeiten"
+msgstr "Rohdaten von Dateien bearbeiten"
 
 #: about.cpp:25
-#, fuzzy, kde-format
-#| msgid "Friedrich W. H. Kossebau"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Friedrich W. H. Kossebau"
 msgstr "Friedrich W. H. Kossebau"
 
 #: about.cpp:26
-#, fuzzy, kde-format
-#| msgid "Author"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Author"
 msgstr "Autor"
 
 #: about.cpp:28
-#, fuzzy, kde-format
-#| msgctxt "Author"
-#| msgid "Alexander Richardson"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Alexander Richardson"
 msgstr "Alexander Richardson"
 
 #: about.cpp:29
-#, fuzzy, kde-format
-#| msgctxt "Task description"
-#| msgid "Structures tool"
+#, kde-format
 msgctxt "@info:credit"
 msgid "Structures tool"
 msgstr "Strukturen-Werkzeug"
@@ -103,8 +97,7 @@ msgid "Main Toolbar"
 msgstr "Haupt-Werkzeugleiste"
 
 #: program.cpp:89
-#, fuzzy, kde-format
-#| msgid "File(s) to load."
+#, kde-format
 msgctxt "@info"
 msgid "File(s) to load."
 msgstr "Zu öffnende Datei(en)."
