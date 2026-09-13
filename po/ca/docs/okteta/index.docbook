@@ -1831,7 +1831,7 @@ Structures Script Console-->
 ></term>
     <listitem
 ><para
->La configuració de la vista es pot desar per separat com a perfils de vista. El perfil actualment seleccionat es pot actualitzar directament des de la configuració actual de la vista, o es pot crear un de nou a partir d'ells. Tots els perfils de visualització es poden gestionar en un diàleg disponible des d'<menuchoice
+>La configuració de la vista es pot desar per separat com a perfils de vista. El perfil actualment seleccionat es pot actualitzar directament des de la configuració actual de la vista, o se'n pot crear un de nou a partir d'ells. Tots els perfils de visualització es poden gestionar en un diàleg disponible des d'<menuchoice
 ><guimenu
 >Arranjament</guimenu
 ><guimenuitem
