@@ -1,0 +1,100 @@
+# Copyright (C) 2026 This file is copyright:
+# This file is distributed under the same license as the okteta package.
+#
+# SPDX-FileCopyrightText: 2026 Yaron Shahrabani <sh.yaron@gmail.com>
+msgid ""
+msgstr ""
+"Project-Id-Version: okteta\n"
+"Report-Msgid-Bugs-To: https://bugs.kde.org\n"
+"POT-Creation-Date: 2025-11-17 09:01+0000\n"
+"PO-Revision-Date: 2026-09-13 21:24+0300\n"
+"Last-Translator: Yaron Shahrabani <sh.yaron@gmail.com>\n"
+"Language-Team: צוות התרגום של KDE ישראל\n"
+"Language: he\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Generator: Lokalize 26.08.0\n"
+
+#, kde-format
+msgctxt "NAME OF TRANSLATORS"
+msgid "Your names"
+msgstr "צוות התרגום של KDE ישראל"
+
+#, kde-format
+msgctxt "EMAIL OF TRANSLATORS"
+msgid "Your emails"
+msgstr "kde-l10n-he@kde.org"
+
+#: about.cpp:15
+#, kde-format
+msgid "Okteta"
+msgstr "Okteta"
+
+#: about.cpp:17
+#, kde-format
+msgctxt "@info"
+msgid "Hex editor"
+msgstr "עורך הקסדצילמי"
+
+#: about.cpp:19
+#, kde-format
+msgctxt "@info"
+msgid "2006-%1 Friedrich W. H. Kossebau"
+msgstr "2006‏-%1 פרידריך ו. ה. קוסבאו"
+
+#: about.cpp:20
+#, kde-format
+msgctxt "@info"
+msgid "Edit the raw data of files"
+msgstr "עריכת נתונים גולמיים של קבצים"
+
+#: about.cpp:25
+#, kde-format
+msgctxt "@info:credit"
+msgid "Friedrich W. H. Kossebau"
+msgstr "פרידריך ו. ה. קוסבאו"
+
+#: about.cpp:26
+#, kde-format
+msgctxt "@info:credit"
+msgid "Author"
+msgstr "יוצר"
+
+#: about.cpp:28
+#, kde-format
+msgctxt "@info:credit"
+msgid "Alexander Richardson"
+msgstr "אלכסנדר ריצ׳רדסון"
+
+#: about.cpp:29
+#, kde-format
+msgctxt "@info:credit"
+msgid "Structures tool"
+msgstr "כלי מבנים"
+
+#. i18n: ectx: Menu (permission)
+#: oktetaui.rc:15
+#, kde-format
+msgctxt "@title:menu"
+msgid "Permissions"
+msgstr "הרשאות"
+
+#. i18n: ectx: Menu (windows)
+#: oktetaui.rc:67
+#, kde-format
+msgid "&Windows"
+msgstr "&חלונות"
+
+#. i18n: ectx: ToolBar (mainToolBar)
+#: oktetaui.rc:80
+#, kde-format
+msgid "Main Toolbar"
+msgstr "סרגל כלים ראשי"
+
+#: program.cpp:89
+#, kde-format
+msgctxt "@info"
+msgid "File(s) to load."
+msgstr "קבצים לטעינה."
