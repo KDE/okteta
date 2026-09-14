@@ -112,6 +112,7 @@ Keywords[de]=binär;oktal;hexadezimal;bit;byte;
 Keywords[es]=binario;octal;hexadecimal;bit;byte;
 Keywords[fi]=binaari;binaarinen;binääri;binäärinen;oktaali;oktaalinen;heksa;heksadesimaali;heksadesimaalinen;bitti;tavu;
 Keywords[fr]=binaire ; octal ; hexadécimal ; bit ; octet ;
+Keywords[he]=בינרי;הקסדצימלי;סיבית;בית;בייט;ביט;
 Keywords[it]=binario;ottale;esadecimale;bit;byte;
 Keywords[ko]=이진;팔진;십육진;2진;8진;16진;비트;바이트;
 Keywords[nl]=binair;octaal;hexadecimaal;bit;byte;
