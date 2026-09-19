@@ -264,7 +264,7 @@ void BookmarksController::createBookmark()
         bookmarkName = i18nc("default name of a bookmark", "Bookmark");  // %1").arg( 0 ) ); // TODO: use counter like with new file, globally
     }
 
-    // ensure popup is relative to focussed view, so by default after the popup will switch to the latter
+    // ensure popup is relative to focused view, so by default after the popup will switch to the latter
     mByteArrayView->widget()->setFocus();
 
     auto* const bookmarkEditPopup = new BookmarkEditPopup(mByteArrayView->widget());

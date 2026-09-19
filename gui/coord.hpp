@@ -160,13 +160,13 @@ public:
     void goLineEnd(LinePosition lastPos, Coord other);
     /** moves the coord 1 lines upwards. There is no check whether the first line is overstepped. */
     void goUp();
-    /** moves the coord lines lines downwards. */
+    /** moves the coord lines downwards. */
     void goDown();
-    /** moves the coord lines lines upwards. There is no check whether the first line is overstepped.
+    /** moves the coord lines upwards. There is no check whether the first line is overstepped.
      * @param lines number of lines
      */
     void goUp(LineSize lines);
-    /** moves the coord lines lines downwards.
+    /** moves the coord lines downwards.
      * @param lines number of lines
      */
     void goDown(LineSize lines);
