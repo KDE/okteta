@@ -11,7 +11,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 09:01+0000\n"
+"POT-Creation-Date: 2026-09-19 02:08+0000\n"
 "PO-Revision-Date: 2025-12-21 07:39+0900\n"
 "Last-Translator: Kisaragi Hiu <mail@kisaragi-hiu.com>\n"
 "Language-Team: Traditional Chinese <zh-l10n@lists.slat.org>\n"
@@ -44,9 +44,11 @@ msgid "Hex editor"
 msgstr "十六進位資料編輯器"
 
 #: about.cpp:19
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@info"
+#| msgid "2006-%1 Friedrich W. H. Kossebau"
 msgctxt "@info"
-msgid "2006-%1 Friedrich W. H. Kossebau"
+msgid "Copyright 2006–%1 Friedrich W. H. Kossebau"
 msgstr "2006-%1 Friedrich W. H. Kossebau"
 
 #: about.cpp:20

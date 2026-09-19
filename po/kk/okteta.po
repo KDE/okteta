@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 09:01+0000\n"
+"POT-Creation-Date: 2026-09-19 02:08+0000\n"
 "PO-Revision-Date: 2013-06-27 04:20+0600\n"
 "Last-Translator: Sairan Kikkarin <sairan@computer.org>\n"
 "Language-Team: Kazakh <kde-i18n-doc@kde.org>\n"
@@ -43,7 +43,7 @@ msgstr "16-ық редакторы"
 #, fuzzy, kde-format
 #| msgid "Copyright 2006-2013 Friedrich W. H. Kossebau"
 msgctxt "@info"
-msgid "2006-%1 Friedrich W. H. Kossebau"
+msgid "Copyright 2006–%1 Friedrich W. H. Kossebau"
 msgstr "Copyright 2006-2013 Friedrich W. H. Kossebau"
 
 #: about.cpp:20

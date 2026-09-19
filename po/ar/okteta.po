@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 09:01+0000\n"
+"POT-Creation-Date: 2026-09-19 02:08+0000\n"
 "PO-Revision-Date: 2026-08-10 18:04+0400\n"
 "Last-Translator: Zayed Al-Saidi <zayed.alsaidi@gmail.com>\n"
 "Language-Team: ar\n"
@@ -42,9 +42,11 @@ msgid "Hex editor"
 msgstr "محرّر ستّ-عشريّ"
 
 #: about.cpp:19
-#, kde-format
+#, fuzzy, kde-format
+#| msgctxt "@info"
+#| msgid "2006-%1 Friedrich W. H. Kossebau"
 msgctxt "@info"
-msgid "2006-%1 Friedrich W. H. Kossebau"
+msgid "Copyright 2006–%1 Friedrich W. H. Kossebau"
 msgstr "2006-%1 فريدريش دبليو اتش كوسباو"
 
 #: about.cpp:20

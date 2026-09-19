@@ -9,7 +9,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 09:01+0000\n"
+"POT-Creation-Date: 2026-09-19 02:08+0000\n"
 "PO-Revision-Date: 2013-10-18 20:13+0000\n"
 "Last-Translator: Samir Ribić <Unknown>\n"
 "Language-Team: bosanski <bs@li.org>\n"
@@ -47,7 +47,7 @@ msgstr "Heksadekadni editor"
 #: about.cpp:19
 #, fuzzy, kde-format
 msgctxt "@info"
-msgid "2006-%1 Friedrich W. H. Kossebau"
+msgid "Copyright 2006–%1 Friedrich W. H. Kossebau"
 msgstr "Autorska prava 2006-2013 Friedrich W. H. Kossebau"
 
 #: about.cpp:20

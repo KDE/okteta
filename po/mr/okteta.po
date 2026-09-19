@@ -6,7 +6,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2025-11-17 09:01+0000\n"
+"POT-Creation-Date: 2026-09-19 02:08+0000\n"
 "PO-Revision-Date: 2013-03-28 14:37+0530\n"
 "Last-Translator: Chetan Khona <chetan@kompkin.com>\n"
 "Language-Team: Marathi <kde-i18n-doc@kde.org>\n"
@@ -43,7 +43,7 @@ msgstr "हेक्स संपादक"
 #, fuzzy, kde-format
 #| msgid "Copyright 2006-2013 Friedrich W. H. Kossebau"
 msgctxt "@info"
-msgid "2006-%1 Friedrich W. H. Kossebau"
+msgid "Copyright 2006–%1 Friedrich W. H. Kossebau"
 msgstr "सर्वाधिकार 2006-2013 फ्रेडरिश डब्ल्यु. एच. कोस्सेबाउ"
 
 #: about.cpp:20
