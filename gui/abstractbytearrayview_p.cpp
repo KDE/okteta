@@ -37,7 +37,6 @@
 #include <Okteta/Bookmark>
 #include <Okteta/Character>
 // Qt
-#include <QScroller>
 #include <QPainter>
 #include <QDragEnterEvent>
 #include <QDragMoveEvent>
