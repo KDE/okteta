@@ -1,5 +1,5 @@
 # Translation of okteta.po to Catalan
-# Copyright (C) 2008-2025 This_file_is_part_of_KDE
+# Copyright (C) 2008-2026 This_file_is_part_of_KDE
 # This file is distributed under the license LGPL version 2 or later.
 #
 # SPDX-FileCopyrightText: 2008-2011, 2013-2021, 2025-2026 Josep M. Ferrer <txemaq@gmail.com>
