@@ -4,14 +4,14 @@
 #
 # Rinse de Vries <rinsedevries@kde.nl>, 2008.
 # Kristof Bal <kristof.bal@gmail.com>, 2008.
-# SPDX-FileCopyrightText: 2008, 2025 Freek de Kruijf <f.de.kruijf@hetnet.nl>
+# SPDX-FileCopyrightText: 2008, 2025-2026 Freek de Kruijf <f.de.kruijf@hetnet.nl>
 # Freek de Kruijf <freekdekruijf@kde.nl>, 2009, 2010, 2011, 2012, 2013, 2014, 2015, 2016, 2017, 2018, 2019, 2020, 2021.
 msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-19 02:08+0000\n"
-"PO-Revision-Date: 2025-02-14 12:38+0100\n"
+"PO-Revision-Date: 2026-09-19 11:59+0200\n"
 "Last-Translator: Freek de Kruijf <freekdekruijf@kde.nl>\n"
 "Language-Team: \n"
 "Language: nl\n"
@@ -19,7 +19,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=n != 1;\n"
-"X-Generator: Lokalize 24.12.2\n"
+"X-Generator: Lokalize 26.08.1\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -45,12 +45,10 @@ msgid "Hex editor"
 msgstr "Hexbewerker"
 
 #: about.cpp:19
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "2006-%1 Friedrich W. H. Kossebau"
+#, kde-format
 msgctxt "@info"
 msgid "Copyright 2006–%1 Friedrich W. H. Kossebau"
-msgstr "2006-%1 Friedrich W. H. Kossebau"
+msgstr "Copyright 2006-%1 Friedrich W. H. Kossebau"
 
 #: about.cpp:20
 #, kde-format
