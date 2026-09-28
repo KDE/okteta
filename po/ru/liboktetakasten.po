@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: khexedit\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-12 04:26+0000\n"
-"PO-Revision-Date: 2022-10-12 16:05+0300\n"
+"PO-Revision-Date: 2026-09-27 09:27+0300\n"
 "Last-Translator: Olesya Gerasimenko <translation-team@basealt.ru>\n"
 "Language-Team: Basealt Translation Team\n"
 "Language: ru\n"
@@ -1207,7 +1207,7 @@ msgid ""
 "Sets whether the values of the unsigned integer types are shown as "
 "hexadecimal instead of as decimal."
 msgstr ""
-"Определяет, будут ли значения беззнаковых целых чисел отображаться как "
+"Определяет, будут ли значения беззнаковых целых чисел показываться как "
 "шестнадцатеричные вместо десятичных."
 
 #: controllers/view/poddecoder/podtableview.cpp:139
@@ -1639,7 +1639,7 @@ msgid ""
 msgstr ""
 "При нажатии кнопки <interface>Извлечь</interface> программа выполнит поиск в "
 "выбранном диапазоне всех строк, которые имеют установленную минимальную "
-"длину. Найденные строки будут отображены ниже."
+"длину. Найденные строки будут показаны ниже."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:81
 #, kde-format
@@ -1767,7 +1767,7 @@ msgstr "Проверка не удалась."
 #, kde-format
 msgctxt "not all values in this structure are as they should be"
 msgid "Validation failed: \"%1\""
-msgstr "Проверка не удалась: \"%1\""
+msgstr "Проверка не удалась: «%1»"
 
 #: controllers/view/structures/datatypes/datainformationwithchildren.cpp:215
 #, kde-format
@@ -2300,7 +2300,7 @@ msgid ""
 "If true, integers being displayed in decimal format will be formatted "
 "according to the current locale settings"
 msgstr ""
-"В случае подтверждения, целые числа, которые отображаются в десятичном "
+"В случае подтверждения, целые числа, которые показываются в десятичном "
 "формате, будут отформатированы в соответствии с текущими настройками локали."
 
 #. i18n: ectx: whatsthis, entry (LocaleAwareDecimalFormatting), group (ValueDisplay)
@@ -2561,13 +2561,13 @@ msgstr "Байтов в группе"
 #, kde-format
 msgctxt "@label:spinbox number of bytes which are shown per line"
 msgid "Bytes per Line:"
-msgstr "Байтов на строке:"
+msgstr "Байтов в строке:"
 
 #: controllers/view/viewconfig/bytesperlinedialog.cpp:49
 #, kde-format
 msgctxt "@title:window"
 msgid "Bytes per Line"
-msgstr "Байтов на строке"
+msgstr "Байтов в строке"
 
 #: controllers/view/viewconfig/viewconfigcontroller.cpp:35
 #, kde-format
@@ -2698,7 +2698,7 @@ msgstr "&Символы"
 #, kde-format
 msgctxt "@item:inmenu"
 msgid "Values && Chars"
-msgstr "Массив байтов &и символы"
+msgstr "Массив байтов && символы"
 
 #: controllers/view/viewmode/viewmodecontroller.cpp:25
 #, kde-format
@@ -2935,7 +2935,7 @@ msgstr "С&оздать новый..."
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Opens an editor for a new view profile."
-msgstr "Открывает редактор нового профиля просмотра. "
+msgstr "Открывает редактор нового профиля просмотра."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:68
 #, kde-kuit-format
@@ -2960,7 +2960,7 @@ msgstr "&Изменить..."
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Opens an editor for the view profile."
-msgstr "Открывает редактор профиля просмотра. "
+msgstr "Открывает редактор профиля просмотра."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:82
 #, kde-kuit-format
@@ -3333,7 +3333,7 @@ msgstr "Название переменной:"
 #, kde-format
 msgctxt "@label:textbox to define after how many items the list is wrapped"
 msgid "Items per line:"
-msgstr "Элементов на строке:"
+msgstr "Элементов в строке:"
 
 #: gui/io/streamencoder/sourcecode/bytearraysourcecodestreamencoderconfigeditor.cpp:59
 #, kde-format
