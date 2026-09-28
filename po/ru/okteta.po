@@ -18,7 +18,7 @@ msgstr ""
 "Project-Id-Version: khexedit\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-19 02:08+0000\n"
-"PO-Revision-Date: 2026-02-14 22:44+0200\n"
+"PO-Revision-Date: 2026-09-27 09:27+0300\n"
 "Last-Translator: Alexander Yavorskiy <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
 "Language: ru\n"
@@ -55,12 +55,10 @@ msgid "Hex editor"
 msgstr "Шестнадцатеричный редактор"
 
 #: about.cpp:19
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "2006-%1 Friedrich W. H. Kossebau"
+#, kde-format
 msgctxt "@info"
 msgid "Copyright 2006–%1 Friedrich W. H. Kossebau"
-msgstr "Friedrich W. H. Kossebau, 2006-%1"
+msgstr "© Friedrich W. H. Kossebau, 2006—%1"
 
 #: about.cpp:20
 #, kde-format
