@@ -1,14 +1,14 @@
 # Translation of okteta to Korean.
 # Copyright (C) 2008 This_file_is_part_of_KDE
 # This file is distributed under the same license as the kdeutils package.
-# SPDX-FileCopyrightText: 2008, 2009, 2010, 2011, 2014, 2015, 2017, 2018, 2019, 2020, 2021, 2025 Shinjo Park <kde@peremen.name>
+# SPDX-FileCopyrightText: 2008, 2009, 2010, 2011, 2014, 2015, 2017, 2018, 2019, 2020, 2021, 2025, 2026 Shinjo Park <kde@peremen.name>
 #
 msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-19 02:08+0000\n"
-"PO-Revision-Date: 2025-04-07 00:07+0200\n"
+"PO-Revision-Date: 2026-09-29 00:53+0200\n"
 "Last-Translator: Shinjo Park <kde@peremen.name>\n"
 "Language-Team: Korean <kde-kr@kde.org>\n"
 "Language: ko\n"
@@ -16,7 +16,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=1; plural=0;\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.12.3\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -40,12 +40,10 @@ msgid "Hex editor"
 msgstr "16진수 편집기"
 
 #: about.cpp:19
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "2006-%1 Friedrich W. H. Kossebau"
+#, kde-format
 msgctxt "@info"
 msgid "Copyright 2006–%1 Friedrich W. H. Kossebau"
-msgstr "2006-%1 Friedrich W. H. Kossebau"
+msgstr "Copyright 2006–%1 Friedrich W. H. Kossebau"
 
 #: about.cpp:20
 #, kde-format
