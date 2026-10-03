@@ -11,7 +11,7 @@ msgstr ""
 "Project-Id-Version: liboktetakasten\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-12 02:35+0000\n"
-"PO-Revision-Date: 2026-03-02 19:13+0200\n"
+"PO-Revision-Date: 2026-09-05 11:11+0300\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -1404,12 +1404,10 @@ msgstr "Muokkaa"
 #: controllers/view/poddecoder/podtableview.cpp:60
 #: controllers/view/stringsextract/stringsextractview.cpp:79
 #: controllers/view/structures/structureview.cpp:102
-#, fuzzy, kde-format
-#| msgctxt "@info:status offset value not available"
-#| msgid "Selection: -"
+#, kde-format
 msgctxt "@action:inmenu"
 msgid "Select in View"
-msgstr "Valinta: -"
+msgstr "Valitse näkymään"
 
 #: controllers/view/poddecoder/podtableview.cpp:113
 #, kde-format
@@ -2614,9 +2612,7 @@ msgid "Size"
 msgstr "Koko"
 
 #: controllers/view/structures/structureview.cpp:56
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Validate"
+#, kde-format
 msgctxt "@action"
 msgid "Validate"
 msgstr "Validoi"
@@ -2628,9 +2624,7 @@ msgid "Validate all structures."
 msgstr "Tarkasta kaikkien rakenteiden kelvollisuus"
 
 #: controllers/view/structures/structureview.cpp:74
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Script console"
+#, kde-format
 msgctxt "@action"
 msgid "Script Console"
 msgstr "Skriptikonsoli"
@@ -2642,9 +2636,7 @@ msgid "Open script console."
 msgstr "Avaa skriptikonsoli"
 
 #: controllers/view/structures/structureview.cpp:80
-#, fuzzy, kde-format
-#| msgctxt "@action:button"
-#| msgid "Settings"
+#, kde-format
 msgctxt "@action"
 msgid "Settings"
 msgstr "Asetukset"
