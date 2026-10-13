@@ -3683,7 +3683,7 @@ msgstr "ZStandard"
 #, kde-format
 msgctxt "@option:check"
 msgid "Content size in frame header:"
-msgstr "Çerçeve üstbilgisindeki içerik boyutu:"
+msgstr "Çerçeve üst bilgisindeki içerik boyutu:"
 
 #: gui/io/streamcompressor/zstd/bytearrayzstdstreamcompressorconfigeditor.cpp:47
 #, kde-format
