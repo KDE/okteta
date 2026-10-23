@@ -957,6 +957,8 @@ function(okteta_add_cmakeconfig _baseName)
     configure_package_config_file(
         "${_configFileTemplatePath}"
         "${_configFilePath}"
+        NO_SET_AND_CHECK_MACRO
+        NO_CHECK_REQUIRED_COMPONENTS_MACRO
         INSTALL_DESTINATION ${CMAKECONFIG_INSTALL_DIR}
     )
 
