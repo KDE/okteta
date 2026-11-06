@@ -3,7 +3,7 @@
 # This file is distributed under the same license as the kdeutils package.
 # Jorma Karvonen <karvonen.jorma@gmail.com>, 2010.
 # Lasse Liehu <lasse.liehu@gmail.com>, 2011, 2013, 2014, 2015, 2016.
-# SPDX-FileCopyrightText: 2018, 2019, 2020, 2021, 2025 Tommi Nieminen <translator@legisign.org>
+# SPDX-FileCopyrightText: 2018, 2019, 2020, 2021, 2025, 2026 Tommi Nieminen <translator@legisign.org>
 #
 # KDE Finnish translation sprint participants:
 # Author: Lliehu
@@ -12,7 +12,7 @@ msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-09-19 02:08+0000\n"
-"PO-Revision-Date: 2025-02-16 10:50+0200\n"
+"PO-Revision-Date: 2026-10-26 19:27+0200\n"
 "Last-Translator: Tommi Nieminen <translator@legisign.org>\n"
 "Language-Team: Finnish <kde-i18n-doc@kde.org>\n"
 "Language: fi\n"
@@ -20,7 +20,7 @@ msgstr ""
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-"X-Generator: Lokalize 23.08.5\n"
+"X-Generator: Lokalize 25.04.0\n"
 
 #, kde-format
 msgctxt "NAME OF TRANSLATORS"
@@ -46,12 +46,10 @@ msgid "Hex editor"
 msgstr "Heksamuokkain"
 
 #: about.cpp:19
-#, fuzzy, kde-format
-#| msgctxt "@info"
-#| msgid "2006-%1 Friedrich W. H. Kossebau"
+#, kde-format
 msgctxt "@info"
 msgid "Copyright 2006–%1 Friedrich W. H. Kossebau"
-msgstr "2006–%1 Friedrich W. H. Kossebau"
+msgstr "Tekijänoikeudet 2006–%1 Friedrich W. H. Kossebau"
 
 #: about.cpp:20
 #, kde-format
