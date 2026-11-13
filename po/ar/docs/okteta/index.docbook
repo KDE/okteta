@@ -1,0 +1,2031 @@
+<?xml version="1.0" ?>
+<!DOCTYPE book PUBLIC "-//KDE//DTD DocBook XML V4.5-Based Variant V1.1//EN" "dtd/kdedbx45.dtd" [
+  <!ENTITY % Arabic "INCLUDE">
+  <!ENTITY % addindex "IGNORE">
+]>
+
+<book id="okteta" lang="&language;">
+
+<bookinfo>
+<title
+>دليل أكتيتا</title>
+
+<authorgroup>
+    <author
+><firstname
+>Friedrich</firstname
+><othername
+>W. H.</othername
+><surname
+>Kossebau</surname
+> <affiliation
+> <address
+>&Friedrich.Kossebau.email;</address>
+      </affiliation>
+    </author>
+    <author
+><firstname
+>Alex</firstname
+><surname
+>Richardson</surname
+> <affiliation
+> <address
+>&Alex.Richardson.email;</address>
+      </affiliation>
+    </author>
+<othercredit role="translator"
+><firstname
+>زايد</firstname
+><surname
+>السعيدي</surname
+><affiliation
+><address
+><email
+>zayed.alsaidi@gmail.com</email
+></address
+></affiliation
+><contrib
+>التّرجمة العربيّة</contrib
+></othercredit
+> 
+</authorgroup>
+
+<copyright>
+<year
+>2008, 2010, 2011</year>
+<holder
+>&Friedrich.Kossebau; و &Alex.Richardson;</holder>
+</copyright>
+<legalnotice
+>&FDLNotice;</legalnotice>
+
+<date
+>2018-03-23</date>
+<releaseinfo
+>أكتيتا 0.24.60</releaseinfo>
+
+<abstract>
+  <para
+>أوكتيتا هو محرر بسيط للبيانات الأولية للملفات. يُطلق على هذا النوع من البرامج أيضًا اسم محرر سداسي عشري أو محرر ثنائي.</para>
+</abstract>
+
+<keywordset>
+<keyword
+>كيدي</keyword>
+<keyword
+>أكتيتا</keyword>
+<keyword
+>عرض</keyword>
+<keyword
+>حرّر</keyword>
+<keyword
+>بتات</keyword>
+<keyword
+>بايت</keyword>
+<keyword
+>ثنائي</keyword>
+<keyword
+>ثماني</keyword>
+<keyword
+>ست عشري</keyword>
+<keyword
+>محرّر ستّ-عشريّ</keyword>
+<keyword
+>بيانات خام</keyword>
+</keywordset>
+</bookinfo>
+
+<chapter id="introduction">
+<title
+>مقدمة</title>
+
+<para
+>أوكتيتا هو محرر بسيط للبيانات الأولية للملفات.</para>
+
+<para
+>تُعرض البيانات بنمطين: كقيم عددية للبايتات وكحرف مسند للقيم. يمكن إظهار القيم والحروف إما في عمودين (العرض التقليدي في محررات الست عشري) أو في صفوف مع القيمة فوق الحرف. يمكن التحرير لكل من القيم والحروف.</para>
+
+<para
+>إلى جانب قدرات التحرير المعتادة، يجلب أكتيتا أيضًا مجموعة صغيرة من الأدوات، مثل جدول يسرد فك الترميز إلى أنواع بيانات بسيطة شائعة، وجدول يسرد جميع البايتات الممكنة مع ما يعادلها من حروف وقيم، وعرض معلومات مع إحصاء، وآلة حاسبة للمجموع الاختباري، وأداة تصفية، وأداة استخراج سلاسل.</para>
+
+<para
+>يمكن التراجع عن جميع التعديلات على البيانات المحملة أو إعادتها بلا حدود.</para>
+
+</chapter>
+
+<chapter id="basics">
+<title
+>أساسيات</title>
+
+<sect1 id="starting-basics">
+<title
+>بدء أكتيتا</title>
+
+    <para
+>اكتب <userinput
+><command
+>okteta</command
+></userinput
+> في موجه الأوامر أو اختر <guimenuitem
+>محرر ست عشري</guimenuitem
+> من مجموعة <menuchoice
+><guisubmenu
+>التطبيقات</guisubmenu
+><guisubmenu
+>الأدوات المساعدة</guisubmenu
+> </menuchoice
+> في مشغل التطبيقات.</para>
+
+    <para
+>خيارات سطر الأوامر القياسية لـ &Qt; و &kf5-full; متوفرة، ويمكن سردها بإدخال <userinput
+><command
+>okteta</command
+> <option
+>--help</option
+></userinput
+>.</para>
+
+    <para
+>خيارات سطر الأوامر الخاصة بـ أكتيتا هي:</para>
+
+    <para
+><option
+><replaceable
+>&lt;&URL;(s)&gt;</replaceable
+></option
+> - افتح ملفًا (ملفات) من &URL;(s) المحددة</para>
+
+</sect1>
+
+<sect1 id="usage-basics">
+<title
+>الاستخدام</title>
+
+    <para
+>تحتوي نافذة أكتيتا الرئيسة على المكونات التالية: شريط قوائم، وشريط أدوات، وشريط حالة، وشريط جانبي واحد أو عدة أشرطة جانبية بأدوات، والعرض الرئيس مع عروض البيانات المبوبة.</para>
+
+    <para
+>عند فتح ملف أو إنشاء مصفوفة بايتات جديدة، تُدرج البايتات المحتواة تباعًا في أسطر بعدد معين من البايتات لكل سطر. تُعرض بنمطين: كقيم عددية للبايتات وكحروف مسندة للقيم. يمكن إظهار القيم والحروف إما مفصولة في عمودين أو بجانب بعضها مع القيمة فوق الحرف. على الجانب الأيسر، تُظهر الإزاحات للبايت الأول في كل سطر.</para>
+
+    <para
+>المعالجة مماثلة لمعظم محررات النصوص: يمكن تحرير البيانات، وقصها، ونسخها، ولصقها، وسحبها وإفلاتها كما في النصوص. يحدد مؤشر الموضع الحالي. يؤدي الضغط على مفتاح <keycap
+>إدراج</keycap
+> إلى التبديل بين وضعي الكتابة فوق وإدراج. وضع الكتابة فوق أكثر صرامة من محررات النصوص، إذ لا يسمح بأي عملية تغير حجم مصفوفة البايتات.</para>
+
+    <para
+>على عكس محررات النصوص، يُعرض المحتوى بنمطين. واحد فقط منهما نشط فيما يتعلق بالإدخال الجديد. يُظهر مؤشران مرتبطان لعرض القيمة والحرف، ومؤشر النشط منها يومض. مع تنشيط الحروف، يمكن إدخال الحروف كما هو معروف من محررات النصوص. مع تنشيط القيم، تؤدي كتابة رقم إلى فتح محرر مصغر لإدخال باقي القيمة.</para>
+
+    <para
+>يسمح حوار البحث للمستخدم بالبحث عن سلسلة بايتات محددة، قابلة للتعريف كقيم (ست عشري، عشري، ثماني، ثنائي) أو نص (ترميز 8-بت الحالي أو UTF-8).</para>
+
+    <para
+>يمكن فتح مصفوفات بايتات متعددة في نفس الوقت، لكن واحدة فقط يمكن أن تكون نشطة. استخدم قائمة <guimenu
+>النوافذ</guimenu
+> لاختيار مصفوفة البايتات التي ستكون نشطة.</para>
+</sect1>
+
+
+</chapter>
+
+<chapter id="tools">
+  <title
+>أدوات</title>
+
+<!-- The tool Versions is not part of released versions,
+just used for development, so no need to document it. -->
+<!--
+4.7
+Other stuff:
+New encodings: ISO-8859-14, ISO-8859-16, Codepage 874
+File info tool now estimates the mimetype also for the unstored/edited data in the working memory
+FIXME  
+-->
+<sect1 id="tools-overview">
+
+  <title
+>نظرة عامة</title>
+  <para
+>يجلب أكتيتا بعض الأدوات، بعضها لتحليل مصفوفات البايتات ومعالجتها وبعضها لأغراض أكثر عمومية. يمكن تنشيط هذه الأدوات أو إلغاء تنشيطها من مدخل <guimenu
+>الأدوات</guimenu
+> في شريط القوائم. لكل أداة عرض صغير، يرتكز إما في أحد الأشرطة الجانبية أو يطفو بحرية كنافذة. يمكنك تثبيت عروض الأدوات وإلغاء تثبيتها وإعادة ترتيبها وتكديسها أيضًا باستخدام الفأرة، بالضغط على &LMB; على شريط عنوان عرض الأداة، وتحريكه كما تريد، وتحرير &LMB; لإكمال الإجراء، وإلا ألغِه بالضغط على مفتاح &Esc;.</para>
+
+<sect2>
+  <title
+>محللات ومعالجات</title>
+<variablelist>
+  <varlistentry>
+    <term
+>جدول القيمة/الحرف</term>
+    <listitem
+><para
+>يسرد الجدول جميع قيم البايتات الممكنة، كحرف وفي الترميزات العددية المختلفة.</para>
+    <para
+>يمكن إدراج القيمة المحددة في موضع المؤشر لعدد محدد من البايتات. يمكن تحقيق ذلك باستخدام زر <guibutton
+>إدراج</guibutton
+> أو النقر المزدوج على السطر في الجدول.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>المرشح الثنائي</term>
+    <listitem
+><para
+>ينفذ المرشح عمليات ثنائية على البايتات المحددة. بعد اختيار العملية (AND, OR, ROTATE..)، يمكن ضبط المعاملات، إن وجدت، في المربع أدناه. يُنفذ المرشح عند استخدام زر <guibutton
+>تصفية</guibutton
+>.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>السّلاسل النصية</term>
+    <listitem
+><para
+>تحدد هذه الأداة السلاسل في البايتات المحددة. بعد اختيار الحد الأدنى لطول السلسلة، تُبحث السلاسل عند استخدام زر <guibutton
+>استخراج</guibutton
+>. يمكن تضييق قائمة السلاسل المعروضة بإدخال مصطلح تصفية.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>الإحصائيّات</term>
+    <listitem
+><para
+>تبني هذه الأداة إحصاءً للبايتات المحددة. يعطي الإحصاء تكرار حدوث كل قيمة بايت في التحديد. يمكن حسابه باستخدام الزر <guibutton
+>ابنِ</guibutton
+>.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>المجموع</term>
+    <listitem
+><para
+>تحسب هذه الأداة مجاميع تدقيق أو مجاميع تلبيد مختلفة للبايتات المحددة. بعد اختيار الخوارزمية وضبط الوسيط، إن وُجد، يُحسب المجموع عند استخدام الزر <guibutton
+>احسب</guibutton
+>.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>جدول فك الترميز</term>
+    <listitem
+><para
+>يعرض الجدول قيم البايت أو البايتات ابتداءً من المؤشر لبعض أنواع البيانات البسيطة الشائعة مثل عدد صحيح أو عدد عائم، وأيضًا UTF-8. يؤدي النقر المزدوج على سطر في الجدول إلى فتح محرر، لذا يمكن تحرير القيمة وتغييرها.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>البنى</term>
+    <listitem
+><para
+>تمكّن هذه الأداة من فحص وتحرير مصفوفات البايت بناءً على تعريفات هيكل يمكن للمستخدم إنشاؤها. التعليمات التفصيلية موجودة في <link linkend="tools-structures"
+>قسم</link
+> خاص.</para
+></listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+
+<sect2>
+  <title
+>أدوات عامة</title>
+<variablelist>
+  <varlistentry>
+    <term
+>نظام الملفات</term>
+    <listitem
+><para
+>تقدم هذه الأداة متصفح ملفات مضمّنًا يمكن استخدامه لاختيار ملفات لفتحها.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>المستندات</term>
+    <listitem
+><para
+>تعرض هذه الأداة جميع الملفات المنشأة أو المحملة حاليًا. تضع الرموز علامة على الملف ذي العرض النشط حاليًا وتظهر أيضًا أي الملفات بها تغييرات غير محفوظة أو أي نسخة تخزين عُدلت بواسطة برنامج آخر.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>العلامات</term>
+    <listitem
+><para
+>يمكن استخدام هذه الأداة لإدارة العلامات، كبديل لقائمة <link linkend="bookmarks-menu"
+><guimenu
+>العلامات</guimenu
+></link
+>. <note
+><para
+>العلامات حاليًا مؤقتة فقط ولا تُحفظ إذا أغلقت مصفوفة بايت أو البرنامج بأكمله.</para
+></note
+></para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>معلومات الملف</term>
+    <listitem
+><para
+>تعرض هذه الأداة بعض المعلومات عن الملف الحالي، بما في ذلك نوعه وموقع التخزين وحجمه.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>الطرفية</term>
+    <listitem
+><para
+>طرفية مضمّنة، دليل العمل غير مقترن بالملف النشط.</para
+></listitem>
+  </varlistentry>
+
+  <varlistentry>
+    <term
+>تحويل مجموعة المحارف</term>
+    <listitem
+><para
+>تعيد الأداة كتابة البايتات بحيث تكون المحارف المناظرة مماثلة لتلك الخاصة بمجموعة المحارف الأخرى. فقط مجموعات المحارف ذات 8 بت مدعومة، والمحارف غير المتطابقة تُستبدل حاليًا بقيمة مشفرة ثابتًا على 0. </para
+></listitem>
+  </varlistentry>
+</variablelist>
+</sect2>
+</sect1>
+
+
+<sect1 id="tools-structures">
+<!--
+Many improvements in the Structures tool by Alex:
+Begin of a structure can be pinned to a specific offset
+Support for strings (various Unicode encodings) in definitions
+  -->
+    <title
+>أداة البنى</title>
+
+    <sect2>
+      <title
+>عامّ</title>
+
+      <para
+>تمكّن أداة الهياكل من تحليل وتحرير مصفوفات البايت بناءً على تعريفات هيكل يمكن للمستخدم إنشاؤها، والتي يمكن بناؤها من مصفوفات واتحادات وأنواع بدائية وقيم تعداد.</para>
+     <!-- explain/link what these types are? probably not, since most user will be programmers? -->
+      <para
+>لها حوار إعدادات خاص، يمكن الوصول إليه باستخدام الزر <guibutton
+>الإعدادات</guibutton
+>. هناك خيارات متنوعة يمكن ضبطها، مثل النمط (عشري أو ست عشري أو ثنائي) الذي تُعرض به القيم. علاوة على ذلك، يمكن اختيار تعريفات الهيكل التي تُحمّل وأي الهياكل تُعرض في المنظر.</para>
+      <para
+>تُعرف الهياكل في ملفات تعريف هيكل أكتيتا (المبنية على &XML;، بامتداد الملف <literal role="extension"
+>.osd</literal
+>). بالإضافة إلى ذلك، يحتوي ملف <literal role="extension"
+>.desktop</literal
+> على بيانات وصفية عن ملف وصف الهيكل ذلك، مثل المؤلف والصفحة الرئيسية والرخصة.</para>
+      <para
+>لا يوجد حاليًا دعم مضمّن لإنشاء أو تحرير تعريفات الهيكل، لذلك يجب القيام بذلك يدويًا كما هو موصوف في الأقسام التالية.</para>
+    </sect2>
+
+    <sect2>
+      <title
+>تثبيت تعريفات الهيكل</title>
+
+      <sect3>
+        <title
+>التثبيت باستخدام KNewStuff</title>
+        <para
+>أسهل طريقة لتثبيت تعريفات هيكل جديدة هي باستخدام دعم KNewStuff المضمّن في أكتيتا. لتثبيت هيكل موجود، افتح حوار إعدادات أداة الهياكل. هناك اختر اللسان <guilabel
+>إدارة الهياكل</guilabel
+> واضغط الزر <guibutton
+>احصل على هياكل جديدة...</guibutton
+>. يسمح لك الحوار الذي يظهر الآن بتثبيت وإلغاء تثبيت الهياكل.</para>
+      </sect3>
+      <sect3>
+        <title
+>تثبيت تعريفات الهيكل يدويًا</title>
+        <para
+>تبحث أداة الهياكل عن أوصاف الهيكل في الدليل الفرعي <filename class="directory"
+>okteta/structures/</filename
+> من دليل المستخدم لبيانات البرنامج (ابحث عن ذلك بتنفيذ <userinput
+><command
+>qtpaths</command
+> <option
+>--paths GenericDataLocation</option
+></userinput
+>). قد تحتاج إلى إنشاء هذا الدليل إذا لم تكن تعريفات الهيكل مثبتة بعد.</para>
+          <para
+>يوجد ملفان لكل تعريف بنية: ملف واحد للتعريف الفعلي وملف <literal role="extension"
+>.desktop</literal
+> للبيانات الوصفية (المؤلف، الإصدار، إلخ).</para>
+          <para
+>في ذلك الدليل يوجد دليل فرعي لكل تعريف هيكل، يحتوي على ملف <literal role="extension"
+>.desktop</literal
+> وملف <literal role="extension"
+>.osd</literal
+> أو ملف <filename
+>main.js</filename
+> لذلك التعريف.</para>
+          <para
+>على سبيل المثال، مع دليل بيانات البرنامج <filename class="directory"
+><userinput
+><command
+>qtpaths</command
+> <option
+>--paths GenericDataLocation</option
+></userinput
+></filename
+> وتعريف هيكل باسم ExampleStructure يوجد الدليل <filename class="directory"
+>okteta/structures/ExampleStructure</filename
+> الذي يحتوي على ملف <filename
+>ExampleStructure.desktop</filename
+> وملف <filename
+>ExampleStructure.osd</filename
+>.</para>
+      </sect3>
+      <sect3>
+        <title
+>استخدام الهياكل المُثبَّتة حديثًا</title>
+        <para
+>بعد تثبيت تعريف هيكل جديد، تحتاج إلى إعادة تشغيل أكتيتا قبل استخدامه. بمجرد بدء أكتيتا، افتح حوار إعدادات أداة الهياكل. هناك اختر لسان <guilabel
+>إدارة الهياكل</guilabel
+> وتأكد من تحديد تعريف الهيكل المعني. ثم انتقل إلى لسان <guilabel
+>الهياكل</guilabel
+> وتأكد من إدراج العنصر المطلوب في الجانب الأيمن.</para>
+      </sect3>
+    </sect2>
+
+    <sect2>
+      <title
+>مشاركة تعريفات الهياكل</title>
+      <para
+>بالنسبة للهياكل الشائعة، قد لا تحتاج إلى إنشاء تعريف بنفسك، بل يمكنك إعادة استخدام تعريف موجود مسبقًا من أماكن مثل <ulink url="https://store.kde.org/browse/cat/214"
+>store.kde.org</ulink
+>.</para>
+      <para
+>قد ترغب أيضًا في مشاركة تعريف بنفسك. لفعل ذلك، أنشئ أرشيف ملفات (مثل أرشيف tar مضغوط، <literal role="extension"
+>.tar.gz</literal
+>) يحتوي فقط على الدليل الفرعي مع ملف <literal role="extension"
+>.desktop</literal
+> وملف تعريف الهيكل. بالنظر إلى المثال في القسم السابق، سيكون هذا هو الدليل <filename class="directory"
+>ExampleStructure</filename
+> بكل محتوياته. استخدام هذا التنسيق لمشاركة تعريفات الهياكل يسمح بتثبيتها داخل أكتيتا ولا يتطلب تثبيتًا يدويًا.</para>
+    </sect2>
+
+
+    <sect2>
+      <title
+>إنشاء تعريفات الهياكل</title>
+
+      <note
+><para
+>دليل أكثر حداثة، لكنه غير مكتمل، لكتابة تعريفات الهياكل يمكن العثور عليه <ulink url="https://userbase.kde.org/Okteta/Writing_structure_definitions"
+>على ويكي قاعدة مستخدمي كيدي</ulink
+>. </para
+></note>
+
+      <para
+>هناك طريقتان مختلفتان لإنشاء تعريفات الهياكل. الأولى هي كتابة التعريف بلغة &XML; والأخرى هي استخدام JavaScript. نهج JavaScript يسمح لك بإنشاء هياكل أكثر تعقيدًا بميزات مثل التحقق من صحة الهيكل. استخدام &XML; يعطيك ميزات أقل، لكن إذا كان الهيكل الثابت هو كل ما تحتاجه، فقد يكون هذا أسهل نهج. إذا كنت بحاجة إلى هيكل ديناميكي، أي حيث تعتمد أطوال المصفوفات على قيم أخرى في الهيكل أو يختلف تخطيط الهيكل عندما تتغير قيمة عضو ما، فسيتعين عليك كتابة تعريف الهيكل بلغة JavaScript. هناك استثناء واحد لهذه القاعدة: إذا كان لديك مصفوفة حيث يُفترض أن يكون طولها <emphasis role="bold"
+>مطابقًا تمامًا</emphasis
+> لقيمة أخرى في الهيكل، فيمكنك استخدام &XML;. لكن إذا كان شيئًا مثل <emphasis
+>length - 1</emphasis
+> فيجب أن يكون JavaScript.</para>
+    </sect2>
+
+
+    <sect2>
+      <title
+>تنسيق ملف تعريف الهيكل بلغة &XML;</title>
+      <note
+><para
+>دليل أكثر حداثة، لكنه غير مكتمل، لكتابة تعريفات الهياكل يمكن العثور عليه <ulink url="https://userbase.kde.org/Okteta/Writing_structure_definitions"
+>على ويكي قاعدة مستخدمي كيدي</ulink
+>. </para
+></note>
+      <para
+>ملف <literal role="extension"
+>.osd</literal
+> بلغة &XML; له عنصر جذر واحد: <emphasis
+>&lt;data&gt;</emphasis
+> بدون سمات. داخل هذا العنصر يجب أن يكون أحد العناصر التالية:</para>
+      <!-- TODO markup, though better than nothing this way-->
+      <variablelist>
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;primitive&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>لإنشاء أنواع بيانات بدائية مثل <emphasis
+>int</emphasis
+> و<emphasis
+>float</emphasis
+>. هذا العنصر لا يقبل عناصر فرعية ويمكن أن يحتوي على السمات التالية:</para>
+              <variablelist>
+                <varlistentry>
+                <term
+><emphasis role="bold"
+>نوع</emphasis
+></term>
+                <listitem>
+                  <para
+>نوع هذا النوع البدائي. يجب أن يكون واحدًا مما يلي:</para>
+                  <itemizedlist>
+                    <listitem
+><para
+><emphasis
+>char</emphasis
+> لحرف ASCII 8 بت</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>int8, int16, int32, int64</emphasis
+> لعدد صحيح مُشار إليه بهذا الحجم</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>uint8, uint16, uint32, uint64</emphasis
+> لعدد صحيح غير مُشار إليه بهذا الحجم</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>bool8, bool16, bool32, bool64</emphasis
+> لقيمة منطقية غير مُشار إليها (0 = خطأ، أي قيمة أخرى = صحيح) بهذا الحجم</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>float</emphasis
+> لرقم عائم IEEE754 32 بت</para
+></listitem>
+                    <listitem
+><para
+><emphasis
+>مزدوج</emphasis
+> لعدد فاصل عائم 64-بت وفق معيار IEEE754</para
+></listitem>
+                  </itemizedlist>
+                </listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;bitfield&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>لإنشاء حقل بتات. لا يقبل هذا العنصر عناصر فرعية ويمكن أن يحوي السمات التالية:</para>
+              <variablelist>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>عرض</emphasis
+></term>
+                  <listitem
+><para
+>عدد البتات المستخدمة في حقل البتات هذا. يجب أن يكون بين 1 و64.</para
+></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>نوع</emphasis
+></term>
+                  <listitem>
+                    <para
+>نوع حقل البتات هذا. يجب أن يكون أحد ما يلي:</para>
+                    <itemizedlist>
+                      <listitem
+><para
+><emphasis
+>غير موقع</emphasis
+> لحقل بتات تُفسَّر قيمته كقيمة غير موقعة (نطاق القيم من 0 إلى 2<superscript
+>العرض</superscript
+> - 1)</para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>موقع</emphasis
+> لحقل بتات تُفسَّر قيمته كقيمة موقعة (نطاق القيم من -2<superscript
+>العرض - 1</superscript
+> إلى 2<superscript
+>العرض - 1</superscript
+> - 1)</para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>منطقي</emphasis
+> لحقل بتات تُفسَّر قيمته كقيمة منطقية</para
+></listitem>
+                  </itemizedlist>
+                  <note
+><para
+>تذكَّر دائمًا إضافة حشو بعد <emphasis
+>&lt;bitfield&gt;</emphasis
+>، وإلا سيبدأ العنصر التالي (باستثناء السلاسل والمصفوفات، إذ تُضيف حشوًا آليًا) في منتصف بايت. من الواضح أن الحشو غير ضروري إذا أردت هذا السلوك.</para
+></note>
+                  </listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;enum&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>لإنشاء نوع بدائي، لكن حيث تُعرض القيم كأعضاء تعداد إذا أمكن. لا يقبل هذا العنصر عناصر فرعية (لكن ستحتاج وسم <emphasis
+>&lt;enumDef&gt;</emphasis
+> في الملف للإشارة إليه). يحوي السمات التالية:</para>
+              <variablelist>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>عناصر مجموعة</emphasis
+></term>
+                  <listitem
+><para
+>التعداد الأساسي لهذه القيمة. يجب أن يطابق سمة <emphasis
+>الاسم</emphasis
+> لأحد وسوم <emphasis
+>&lt;enumDef&gt;</emphasis
+> في هذا الملف.</para
+></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>نوع</emphasis
+></term>
+                  <listitem>
+                    <para
+>نوع هذا التعداد. انظر سمة النوع لـ<emphasis
+>&lt;primitive&gt;</emphasis
+>. الفرق الوحيد هو أن <emphasis
+>مزدوج</emphasis
+> و<emphasis
+>عائم</emphasis
+> لا معنى لهما.</para>
+                  </listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
+
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;flags&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>هذا مماثل لـ<emphasis
+>&lt;enum&gt;</emphasis
+> مع الفرق الوحيد أن القيم تُمثَّل كـ<emphasis
+>أو بتاتي</emphasis
+> لجميع قيم التعداد.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;struct&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>لإنشاء بنية. يمكن أن تكون جميع العناصر الأخرى (بما في ذلك <emphasis
+>&lt;struct&gt;</emphasis
+>) تابعة لهذا وستكون جزءًا من البنية الناتجة</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;union&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>لإنشاء اتحاد. مماثل أساسًا لـ<emphasis
+>&lt;struct&gt;</emphasis
+> باستثناء أن جميع العناصر التابعة ستبدأ من نفس الإزاحة. مفيد لتفسير نفس تسلسل البايتات بطرق متنوعة.</para
+></listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;array&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>لإنشاء مصفوفة. يقبل هذا العنصر تابعًا واحدًا بالضبط (النوع الأساسي للمصفوفة)، والذي يمكن أن يكون أيًا من العناصر، حتى <emphasis
+>&lt;array&gt;</emphasis
+> نفسه. يحوي أيضًا السمات التالية:</para>
+              <variablelist>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>طول</emphasis
+></term>
+                  <listitem
+><para
+>عدد العناصر في هذه المصفوفة كرقم عشري. بدلًا من ذلك يمكن أن يكون سلسلة تطابق سمة الاسم لعنصر <emphasis
+>&lt;primitive&gt;</emphasis
+> أو <emphasis
+>&lt;enum&gt;</emphasis
+> أو <emphasis
+>&lt;flags&gt;</emphasis
+> مُعرَّف سابقًا. عندها سيكون الطول هو قيمة ذلك العنصر. حاليًا محدود بـ10000، لأن المصفوفات الأكبر ستستخدم ذاكرة كثيرة وتبطئ الأداة كثيرًا. </para
+></listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
+
+          <varlistentry>
+            <term
+><emphasis role="bold"
+><emphasis
+>&lt;string&gt;</emphasis
+></emphasis
+></term>
+            <listitem
+><para
+>لإنشاء سلسلة بترميزات متنوعة. افتراضيًا تحصل على سلسلة بنمط C منتهية بـ<emphasis
+>NULL</emphasis
+>. لكن يمكن إنشاء أنواع مختلفة من السلاسل بالسمات التالية:</para>
+              <variablelist>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>terminatedBy</emphasis
+></term>
+                  <listitem
+><para
+>تحدد هذه السمة بنقطة الترميز يونيكود التي تُنهى بها السلسلة. يجب أن تكون رقمًا سداسي عشر (اختياريًا مع <emphasis
+>0x</emphasis
+> في البداية). عندما يكون الترميز ASCII، فقط القيم حتى 0x7f ذات معنى. إذا لم تُضبط هذه ولا <emphasis
+>maxCharCount</emphasis
+> ولا <emphasis
+>maxByteCount</emphasis
+>، يُفترض أنها مضبوطة على 0 (سلسلة بنمط C) </para
+></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>maxCharCount</emphasis
+></term>
+                  <listitem
+><para
+>الحد الأقصى لعدد المحارف التي يمكن أن تحويها هذه السلسلة. إذا ضُبط <emphasis
+>terminatedBy</emphasis
+> أيضًا، فما يُبلغ أولًا يُنهي السلسلة. هذا متعارض مع <emphasis
+>maxByteCount</emphasis
+></para
+></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>maxByteCount</emphasis
+></term>
+                  <listitem
+><para
+>الحد الأقصى لعدد البايتات التي يمكن أن تبلغها هذه السلسلة. إذا ضُبط <emphasis
+>terminatedBy</emphasis
+> أيضًا، فإن أيهما يُوصل أولًا يُنهي السلسلة. هذا حصري متبادل مع <emphasis
+>maxCharCount</emphasis
+>. مع ترميزات مثل <emphasis
+>ASCII</emphasis
+>، هذا مماثل لـ <emphasis
+>maxCharCount</emphasis
+>.</para
+></listitem>
+                </varlistentry>
+                <varlistentry>
+                  <term
+><emphasis role="bold"
+>نوع</emphasis
+></term>
+                  <listitem
+><para
+>ترميز هذه السلسلة. يمكن أن يكون أحد التالي:</para>
+                    <itemizedlist>
+                      <listitem
+><para
+><emphasis
+>ASCII</emphasis
+></para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>LATIN-1</emphasis
+></para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>UTF-8</emphasis
+></para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>UTF-16-LE</emphasis
+> أو <emphasis
+>UTF-16-BE</emphasis
+>. إذا لم يُعطَ لاحقة <emphasis
+>-LE</emphasis
+> أو <emphasis
+>-BE</emphasis
+>، يُفترض النمط الصغير (little endian). </para
+></listitem>
+                      <listitem
+><para
+><emphasis
+>UTF-32-LE</emphasis
+> أو <emphasis
+>UTF-32-BE</emphasis
+>. إذا لم يُعطَ لاحقة <emphasis
+>-LE</emphasis
+> أو <emphasis
+>-BE</emphasis
+>، يُفترض النمط الصغير (little endian). </para
+></listitem>
+                    </itemizedlist>
+                  </listitem>
+                </varlistentry>
+              </variablelist>
+            </listitem>
+          </varlistentry>
+      </variablelist>
+      <para
+>يقبل كل عنصر أيضًا سمة <emphasis
+>name</emphasis
+> تصبح مرئية في عرض الهياكل. </para>
+    </sect2>
+
+    <sect2>
+      <title
+>تعريف هيكل مثال في كل من &XML; وجافاسكريبت</title>
+      <note
+><para
+>دليل أكثر حداثة، لكنه غير مكتمل، لكتابة تعريفات الهياكل يمكن العثور عليه <ulink url="https://userbase.kde.org/Okteta/Writing_structure_definitions"
+>على ويكي قاعدة مستخدمي كيدي</ulink
+>. </para
+></note>
+
+      <sect3>
+        <title
+>الخطوة المشتركة بين كلا النهجين</title>
+        <para
+>يبدو ملف البيانات الوصفية لدينا كالتالي: <screen>
+        [Desktop Entry]
+        Icon=arrow-up<co id="icon" />
+        Type=Service
+        ServiceTypes=KPluginInfo
+
+        Name=Simple test structure
+        Comment=A very simple test structure containing only two items
+
+        X-KDE-PluginInfo-Author=Alex Richardson
+        X-KDE-PluginInfo-Email=foo.bar@email.org
+        X-KDE-PluginInfo-Name=simplestruct
+        X-KDE-PluginInfo-Version=1.0
+        X-KDE-PluginInfo-Website=https://www.plugin.org/
+        X-KDE-PluginInfo-Category=structure
+        X-KDE-PluginInfo-License=LGPL
+        X-KDE-PluginInfo-EnabledByDefault=false
+        </screen
+> <calloutlist
+> <callout arearefs="icon"
+> <para
+>يمكن أن تكون الأيقونة المعروضة في أكتيتا لهذا الهيكل أي أيقونة يتم العثور عليها بتنفيذ <userinput
+><command
+>kdialog</command
+> <option
+>--geticon</option
+></userinput
+> أو مسار أيقونة</para
+></callout
+> </calloutlist
+>جميع هذه الحقول واضحة إلى حد كبير، باستثناء <literal
+>X-KDE-PluginInfo-Name</literal
+>. يجب أن تتطابق قيمة هذا الحقل مع اسم المجلد الذي يحتوي على الملف، بالإضافة إلى اسم ملف <literal role="extension"
+>.desktop</literal
+>. عند إنشاء تعريفات هياكل XML، يجب أن يتطابق اسم ملف <literal role="extension"
+>.osd</literal
+> أيضًا. </para>
+
+        <para
+>في هذا المثال، سيكون لدينا دليل باسم <filename
+>simplestruct</filename
+> يحتوي على الملف <filename
+>simplestruct.desktop</filename
+>. عند تعريف الهياكل في &XML;، سيحتوي الدليل أيضًا على ملف باسم <filename
+>simplestruct.osd</filename
+>. باستخدام جافاسكريبت، سيكون لدينا ملف باسم <filename
+>main.js</filename
+> بدلًا من ذلك.</para>
+      </sect3>
+      <sect3>
+        <title
+>تعريف هيكل &XML; بسيط</title>
+        <para
+>لبدء، ننشئ تعريفًا لبنية اختبار بسيطة جدًا تحتوي على أنواع بيانات صحيحة فقط (حرف واحد، عدد صحيح واحد بعلامة 32 بت، وحقل بت). سيتم التعبير عن ذلك في C/C++ كالتالي: <screen
+>          struct simple {            char aChar;            int anInt;            bool bitFlag :1;            unsigned padding :7;          };          </screen
+> الخطوة الأولى هي كتابة ملف <literal role="extension"
+>.osd</literal
+> وفقًا لتنسيق الملف المُعرَّف في القسم السابق. سنسميه <filename
+>simplestruct.osd</filename
+>: <screen
+><markup
+>          &lt;?xml version="1.0" encoding="UTF-8"?&gt;          &lt;data&gt;            &lt;struct name="simple"&gt;              &lt;primitive name="aChar" type="Char"/&gt;              &lt;primitive name="anInt" type="Int32"/&gt;              &lt;bitfield name="bitFlag" type="bool" width="1"/&gt;              &lt;bitfield name="padding" type="unsigned" width="7"/&gt;            &lt;/struct&gt;          &lt;/data&gt;          </markup
+></screen
+> وهو مشابه إلى حد كبير لتعريف C/C++. </para>
+          <para
+>الآن أنشئ دليلًا <filename class="directory"
+>simplestruct</filename
+> داخل دليل تثبيت الهياكل (انظر تثبيت تعريفات الهياكل يدويًا) وانسخ الملفين إلى هذا الدليل. يمكنك الآن إعادة تشغيل أكتيتا واستخدام الهيكل الجديد.</para>
+      </sect3>
+      <sect3>
+        <title
+>الهيكل البسيط في جافاسكريبت</title>
+        <para
+>تطبيق البنية أعلاه في JavaScript، أنشئ ملفًا باسم <filename
+>main.js</filename
+> بدلًا من <filename
+>simplestruct.osd</filename
+> وغيّر X-KDE-PluginInfo-Category=structure إلى X-KDE-PluginInfo-Category=structure/js. يجب أن يكون محتوى ذلك الملف: <screen
+>        function init() {          var structure = struct({            aChar : char(),            anInt : int32(),            bitFlag : bitfield("bool", 1),            padding : bitfield("unsigned", 7),          })          return structure;        }        </screen
+> البنية المعروضة بواسطة أكتيتا هي دائمًا القيمة المُرجَعة لدالة <literal
+>init</literal
+>.</para>
+        <para
+>يمكن استدعاء الدوال التالية لإنشاء نوع بدائي: <itemizedlist
+> <listitem
+><para
+>char()</para
+></listitem
+> <listitem
+><para
+>int8(), int16(), int32() أو int64()</para
+></listitem
+> <listitem
+><para
+>uint8(), uint16(), uint32() أو uint64()</para
+></listitem
+> <listitem
+><para
+>bool8(), bool16(), bool32() أو bool64()</para
+></listitem
+> <listitem
+><para
+>float()</para
+></listitem
+> <listitem
+><para
+>double()</para
+></listitem
+> </itemizedlist
+> تأخذ دالة bitfield معلمتين، الأولى سلسلة تتكون من <literal
+>bool</literal
+> أو <literal
+>signed</literal
+> أو <literal
+>unsigned</literal
+>. المعلمة الثانية هي عدد صحيح يضبط العرض بالبتات. </para>
+      </sect3>
+      <sect3>
+        <title
+>هياكل أكثر تعقيدًا</title>
+        <para
+>بعد ذلك ننشئ تعريفًا لبنية أكثر تعقيدًا سنسميها "complex" ونحفظها في ملف باسم <filename
+>complex.osd</filename
+>. ستحتوي هذه البنية على مصفوفتين (واحدة بطول ثابت وأخرى يُحدد طولها وقت التشغيل) بالإضافة إلى بنية متداخلة واتحاد. <screen
+><markup
+>          &lt;?xml version="1.0" encoding="UTF-8"?&gt;          &lt;data&gt;            &lt;struct name="complex"&gt;              &lt;primitive name="size" type="UInt8" /&gt;              &lt;union name="aUnion"&gt;                &lt;array name="fourBytes" length="4"&gt;                  &lt;primitive type="Int8" /&gt;                &lt;/array&gt;              &lt;/union&gt;              &lt;struct name="nested"&gt;                &lt;array name="string" length="size"&gt; &lt;!-- يشير إلى الحقل size أعلاه --&gt;                  &lt;primitive type="Char" /&gt;                &lt;/array&gt;              &lt;/struct&gt;            &lt;/struct&gt;          &lt;/data&gt;          </markup
+></screen
+> سيتوافق هذا مع ما يلي في pseudo-C/C++ <screen
+>struct complex {
+            uint8_t size;
+            union aUnion {
+              int8_t fourBytes[4];
+            };
+            struct nested {
+              char string[size] //not valid C++, references value of the uint8 size
+            };
+          };
+          </screen>
+          </para>
+          <note
+><para
+>يمكنك بوضوح فقط أن تجعل المصفوفات ذات الطول الديناميكي تشير إلى الحقول قبل المصفوفة.</para
+></note>
+          <para
+>بعد ذلك ننشئ ملف <filename
+>complex.desktop</filename
+> تمامًا كما في المثال السابق (تأكد من ضبط <literal
+>X-KDE-PluginInfo-Name</literal
+> بشكل صحيح) ونفعل الشيء نفسه لتثبيت كلا الملفين.</para>
+      </sect3>
+      <sect3>
+        <title
+>معلومات إضافية</title>
+        <para
+>يمكن العثور على بعض تعريفات الهياكل المثال في <ulink url="https://commits.kde.org/okteta?path=kasten/controllers/view/structures/examples/okteta/structures/"
+>مستودع Git.</ulink
+> يتضمن هذا على سبيل المثال ترويسة ملف PNG وترويسة ملف ELF. يمكن العثور على مخطط &XML; يصف هيكل ملف  <literal role="extension"
+>.osd</literal
+> <ulink url="https://commits.kde.org/okteta?path=kasten/controllers/view/structures/schema/"
+>هنا.</ulink
+> إذا احتجت لمزيد من المعلومات تواصل معي عن طريق &Alex.Richardson.email; </para>
+      </sect3>
+    </sect2>
+<!--FIXME missing
+Extended structures definitions
+Structures Script Console-->
+</sect1>
+</chapter>
+
+<chapter id="interface-overview">
+<title
+>نظرة عامة على الواجهة</title>
+
+<sect1 id="menu-commands">
+<title
+>عناصر القائمة</title>
+
+<para
+>بالإضافة إلى قوائم كيدي الشائعة الموصوفة في فصل <ulink url="help:/fundamentals/menus.html"
+>القائمة</ulink
+> من وثائق أساسيات كيدي، لدى أكتيتا إدخالات القائمة الخاصة بالتطبيق التالية: </para>
+
+<sect2 id="file-menu">
+<title
+>قائمة ملف</title>
+
+<variablelist>
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>N</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>ملف</guimenu
+> <guimenuitem
+>جديد</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>أنشئ مصفوفة بايت جديدة...</action
+></para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>فارغة</guimenuitem
+>: ... كفارغة.</para>
+    </listitem>
+    <listitem
+><para
+><guimenuitem
+>من الحافظة</guimenuitem
+>: ... بمحتوى الحافظة الحالي.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>نمط...</guimenuitem
+>: ... بنمط معطى.</para>
+    </listitem>
+    <listitem
+><para
+><guimenuitem
+>بيانات عشوائية...</guimenuitem
+>: ...ببيانات عشوائية.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>تسلسل</guimenuitem
+>: ... بجميع البايتات من 0 إلى 255.</para
+></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>ملف</guimenu
+> <guimenuitem
+>صدّر</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+>صدّر البايتات المحددة إلى ملف...</para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>قيم</guimenuitem
+>: ... مشفرة كقيم بايت. مبدئيًا، تُفصل القيم بمسافة بيضاء واحدة. يمكن تغيير محارف <guilabel
+>الفصل</guilabel
+> في حوار <guilabel
+>التصدير</guilabel
+>. </para>
+    </listitem>
+    <listitem
+><para
+><guimenuitem
+>محارف</guimenuitem
+>: ... مشفرة كنص عادي. </para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Base64</guimenuitem
+>: ... مشفرة بصيغة <ulink url="https://en.wikipedia.org/wiki/Base64"
+>Base64</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Base32</guimenuitem
+>: ... مشفرة بصيغة <ulink url="https://en.wikipedia.org/wiki/Base32"
+>Base32</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Ascii85</guimenuitem
+>: ... مشفرة بصيغة <ulink url="https://en.wikipedia.org/wiki/Ascii85"
+>Ascii85</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Uuencoding</guimenuitem
+>: ... مشفرة بصيغة <ulink url="https://en.wikipedia.org/wiki/Uuencoding"
+>Uuencoding</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Xxencoding</guimenuitem
+>: ... مشفرة بصيغة <ulink url="https://en.wikipedia.org/wiki/Xxencoding"
+>Xxencoding</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>Intel Hex</guimenuitem
+>: ... مشفرة بصيغة <ulink url="https://en.wikipedia.org/wiki/Intel_Hex"
+>Intel Hex</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>S-Record</guimenuitem
+>: ... مشفرة بصيغة <ulink url="https://en.wikipedia.org/wiki/S-record"
+>S-Record</ulink
+>.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>مصفوفة C</guimenuitem
+>: ... معرّفة كمصفوفة في لغة البرمجة C.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>اعرض كنص عادي</guimenuitem
+>: ... كما في عرض البيانات مع الإزاحة وقيم البايت والمحارف. </para
+></listitem>
+    </itemizedlist>
+    </listitem>
+
+</varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>ملف</guimenu
+> <guisubmenu
+>أذون</guisubmenu
+><guimenuitem
+>تعيين للقراءة فقط</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+>عند التعيين، قد لا تُجرى تغييرات على مصفوفة البايت المُحمَّلة.</para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>ملف</guimenu
+> <guimenuitem
+>إغلاق كل الآخرين</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>أغلق كل ما عدا مصفوفة البايت الحالية.</action
+></para
+></listitem>
+    </varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="edit-menu">
+<title
+>قائمة التحرير</title>
+<variablelist>
+<para
+>النسخ والقص البسيطان يُرسلان البيانات إلى الحافظة بنوع MIME <quote
+>application/octetstream</quote
+>، &klipper; لا يستطيع عرض هذه البيانات. وتقريبًا لا تستطيع جميع التطبيقات الأخرى معالجتها أيضًا، لأنها ببساطة بيانات خام. لذا انظر أيضًا إلى القائمة الفرعية <guisubmenu
+>انسخ كـ</guisubmenu
+>.</para>
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>حرر</guimenu
+> <guisubmenu
+>انسخ كـ</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+>انسخ البايتات المُحدَّدة بأحد التنسيقات المختلفة إلى الحافظة. للحصول على قائمة بالتنسيقات المتاحة، انظر إلى عنصر القائمة <menuchoice
+><guimenu
+>ملف</guimenu
+> <guisubmenu
+>صدر</guisubmenu
+></menuchoice
+> </para>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>حرر</guimenu
+> <guisubmenu
+>أدرج</guisubmenu
+> </menuchoice
+></term>
+    <listitem>
+    <variablelist>
+    <varlistentry>
+    <term
+><menuchoice>
+    <guimenuitem
+>إدراج نمط...</guimenuitem>
+    </menuchoice
+></term>
+    <listitem
+><para
+><action
+>أدرج سلسلة محددة من البايتات عند المؤشر.</action
+></para>
+    <para
+>تتيح لك الخيارات في مربع الحوار تحديد عدد مرات إدراج النمط وتنسيقه (سداسي عشري، عشري، ثماني، ثنائي، حرف (أحرف) أو UTF-8).</para>
+    <!--FIXME Random Data + Sequence - use cases?-->
+    </listitem>
+    </varlistentry>
+    </variablelist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>A</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>حرر</guimenu
+> <guimenuitem
+>إلغاء التحديد</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>ألغِ تحديد التحديد الحالي.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>E</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>حرر</guimenu
+> <guimenuitem
+>حدد نطاق...</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>يفتح حوارًا مضمنًا لإدخال النطاق المراد تحديده.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+><keycap
+>Ins</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>حرر</guimenu
+> <guimenuitem
+>وضع الكتابة فوق</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>تبديل بين وضع الإدراج ووضع الاستبدال</action
+>. </para>
+    <note
+><para
+>وضع الاستبدال مُطبَّق ليكون صارمًا جدًا، فليس من الممكن تغيير حجم البيانات (لا إلحاق أو إزالة بايتات).</para
+></note>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>F</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>حرر</guimenu
+> <guimenuitem
+>ابحث...</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>ابحث عن نمط محدد في المستند.</action
+> يمكن البحث عن أنماط سداسية عشرية، أو عشرية، أو ثمانية، أو ثنائية، أو نصية.</para>
+    <para
+>تتيح الخيارات في مربع الحوار تحديد نقطة البداية والاتجاه ونطاق البحث.</para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;<keycap
+>G</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>تحرير</guimenu
+> <guimenuitem
+>اذهب إلى الإزاحة...</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>انقل المؤشر إلى إزاحة محددة.</action
+></para
+></listitem>
+    </varlistentry>
+
+</variablelist>
+</sect2>
+
+<sect2 id="view-menu">
+<title
+>قائمة عرض</title>
+
+<variablelist>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycap
+>F11</keycap
+> </shortcut
+> <guimenu
+>عرض</guimenu
+> <guimenuitem
+>أظهر إزاحة السطر</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>بدّل إظهار إزاحة السطر في لوحة إلى اليسار بين التشغيل والإيقاف.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>عرض</guimenu
+> <guisubmenu
+>إظهار القيم أو المحارف</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>اختر أي تفسيرات البايت تُعرض.</action
+> الممكنة هي:</para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>القيم</guimenuitem
+></para>
+    </listitem>
+    <listitem
+><para
+><guimenuitem
+>المحارف</guimenuitem
+></para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>القيم والمحارف</guimenuitem
+></para
+></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>عرض</guimenu
+> <guisubmenu
+>ترميز القيم</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>اختر ترميز القيم</action
+> من:</para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>ست عشري</guimenuitem
+></para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>عشري</guimenuitem
+></para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>ثماني</guimenuitem
+></para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>ثنائي</guimenuitem
+></para
+></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>عرض</guimenu
+> <guisubmenu
+>ترميز المحارف</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>اختر ترميز المحارف</action
+> من القائمة الفرعية. </para>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>عرض</guimenu
+> <guimenuitem
+>إظهار المحارف غير المطبوعة</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>بدّل إظهار المحارف غير المطبوعة بين التشغيل والإيقاف.</action
+> إذا أُطفئ العرض، يُعرض محرف بديل في الأماكن المقابلة في عمود المحارف بدلًا منها.</para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>عرض</guimenu
+> <guisubmenu
+>اضبط البايتات لكل سطر</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>اختر البايتات المعروضة لكل سطر</action
+> من الحوار، القيمة المبدئية هي 16 بايت. </para>
+    </listitem>
+    </varlistentry>
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>عرض</guimenu
+> <guisubmenu
+>اضبط البايتات لكل مجموعة</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>مبدئيًا، تُعرض القيم الست عشرية في مجموعات من 4 بايتات.</action
+> باستخدام عنصر القائمة هذا يمكنك تكييف ذلك حسب تفضيلاتك في حوار. </para>
+    </listitem>
+    </varlistentry>
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>عرض</guimenu
+> <guisubmenu
+>تخطيط ديناميكي</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>اضبط قواعد تخطيط عرض البيانات.</action
+> يُحدد هذا عدد البايتات المعروضة لكل سطر، اعتمادًا على عرض المنظر. القواعد الممكنة هي:</para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>إيقاف</guimenuitem
+>: التخطيط ثابت على العدد الحالي للبايتات لكل سطر ولا يُكيَّف عند تغيير حجم المنظر.</para>
+    </listitem>
+    <listitem
+><para
+><guimenuitem
+>التفاف فقط لمجموعات البايت الكاملة</guimenuitem
+>: يضع أكبر عدد ممكن من البايتات لكل سطر، طالما أن مجموعات البايت كاملة. </para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>تشغيل</guimenuitem
+>: مماثل للسابق، لكن يسمح أيضًا بمجموعات بايت غير كاملة.</para
+></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>عرض</guimenu
+> <guisubmenu
+>وضع العرض</guisubmenu
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>اختر تخطيط العرض</action
+> من:</para>
+    <itemizedlist>
+    <listitem
+><para
+><guimenuitem
+>أعمدة</guimenuitem
+>: تُعرض تفسيرات القيم والمحارف في التخطيط التقليدي مع إدراج كل منها في عمود منفصل.</para
+></listitem>
+    <listitem
+><para
+><guimenuitem
+>صفوف</guimenuitem
+>: يُعرض تفسير المحرف للبايت مباشرةً تحت تفسير القيمة.</para
+></listitem>
+    </itemizedlist>
+    </listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>T</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>عرض</guimenu
+> <guimenuitem
+>تقسيم أفقي</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>قسّم منطقة العرض مع العرض المركّز حاليًا إلى جزأين وأضف نسخة من العرض الحالي إلى المنطقة الجديدة السفلية.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>L</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>عرض</guimenu
+> <guimenuitem
+>تقسيم عمودي</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>قسّم منطقة العرض مع العرض المركّز حاليًا إلى جزأين وأضف نسخة من العرض الحالي إلى المنطقة الجديدة اليمنى.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>R</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>عرض</guimenu
+> <guimenuitem
+>إغلاق منطقة العرض</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>أغلق منطقة العرض مع العرض المركّز حاليًا.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>عرض</guimenu
+> <guimenuitem
+>تشكيلة عرض</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+>يمكن تخزين إعدادات العرض بشكل منفصل كتشكيلات عرض. يمكن تحديث التشكيلة المحددة حاليًا مباشرةً من إعدادات العرض الحالية، أو إنشاء تشكيلة جديدة منها. يمكن إدارة جميع تشكيلات العرض في حوار متاح من <menuchoice
+><guimenu
+>إعدادات</guimenu
+><guimenuitem
+>إدارة تشكيلات العرض...</guimenuitem
+></menuchoice
+>.</para
+></listitem>
+    </varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<sect2 id="windows-menu">
+<title
+>قائمة النوافذ</title>
+
+    <para
+>يوفر قائمة بالعروض الحالية. اختر النافذة النشطة.</para>
+
+</sect2>
+
+<sect2 id="bookmarks-menu">
+<title
+>قائمة العلامات</title>
+
+    <para
+>يمكن تعيين علامات متعددة لمصفوفة بايت واحدة. لكل مصفوفة بايت مجموعتها الخاصة من العلامات، وتُعرض المجموعة المناسبة في أسفل قائمة <guimenu
+>علامات</guimenu
+>. اختر علامة من القائمة لتحريك المؤشر والعرض إليها. <note
+><para
+>العلامات حاليًا مؤقتة فقط ولا تُحفظ إذا أغلقت مصفوفة بايت أو البرنامج بأكمله.</para
+></note
+></para>
+
+<variablelist>
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+><keycombo action="simul"
+>&Ctrl; <keycap
+>B</keycap
+></keycombo
+></shortcut
+> <guimenu
+>العلامات</guimenu
+> <guimenuitem
+>أضف علامة</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+>ضع علامة على موقع داخل مصفوفة البايت.</para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Ctrl;&Shift;<keycap
+>B</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>علامات</guimenu
+> <guimenuitem
+>إزالة علامة</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>أزل العلامة الحالية.</action
+> هذا الأمر متاح فقط إذا كان المؤشر في موقع موسوم.</para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>علامات</guimenu
+> <guimenuitem
+>إزالة كل العلامات</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>امسح قائمة العلامات.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Alt;<keycap
+>Up</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>علامات</guimenu
+> <guimenuitem
+>اذهب إلى العلامة السابقة</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>انقل المؤشر إلى العلامة السابقة.</action
+></para
+></listitem>
+    </varlistentry>
+
+    <varlistentry>
+    <term
+><menuchoice
+><shortcut
+> <keycombo action="simul"
+>&Alt;<keycap
+>Down</keycap
+></keycombo
+> </shortcut
+> <guimenu
+>علامات</guimenu
+> <guimenuitem
+>اذهب إلى العلامة التالية</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+><action
+>انقل المؤشر إلى العلامة التالية.</action
+></para
+></listitem>
+    </varlistentry>
+
+</variablelist>
+
+</sect2>
+
+<sect2 id="tools-menu">
+<title
+>قائمة أدوات</title>
+
+<para
+>يوفر قائمة بالأدوات المثبتة. بدّل عرض كل أداة تشغيلًا أو إيقافًا. وصفًا مفصلًا لكل أداة تجده في قسم <link linkend="tools"
+>الأدوات</link
+>.</para>
+
+</sect2>
+
+<sect2 id="settings-menu">
+<title
+>قائمة إعدادات</title>
+<variablelist>
+    <varlistentry>
+    <term
+><menuchoice
+><guimenu
+>إعدادات</guimenu
+> <guimenuitem
+>إدارة تشكيلات العرض...</guimenuitem
+> </menuchoice
+></term>
+    <listitem
+><para
+>افتح حوارًا لإنشاء تشكيلة عرض وتحريرها وحذفها وتعيينها كمبدئية.</para
+></listitem>
+    </varlistentry>
+</variablelist>
+
+</sect2>
+
+</sect1>
+
+</chapter>
+
+<chapter id="credits">
+    <title
+>الحقوق والترخيص</title>
+
+    <para
+>أكتيتا </para>
+
+    <!--List all the copyright holders here-->
+    <para
+>حقوق نشر البرنامج 2006-2012 &Friedrich.Kossebau; &Friedrich.Kossebau.email;</para>
+
+    <para
+>حقوق نشر التوثيق 2008,2010 &Friedrich.Kossebau; &Friedrich.Kossebau.email;, &Alex.Richardson; &Alex.Richardson.email;</para>
+
+    <para
+>الترجمة: زايد السعيدي <email
+>zayed.alsaidi@gmail.com</email
+></para
+> &underFDL; &underGPL; </chapter>
+
+&documentation.index;
+</book>
+<!--
+Local Variables:
+mode: sgml
+sgml-minimize-attributes:nil
+sgml-general-insert-case:lower
+sgml-omittag:t
+sgml-shorttag:t
+sgml-namecase-general:t
+sgml-always-quote-attributes:t
+sgml-indent-step:0
+sgml-indent-data:nil
+sgml-parent-document:nil
+sgml-exposed-tags:nil
+sgml-local-catalogs:nil
+sgml-local-ecat-files:nil
+End:
+-->
