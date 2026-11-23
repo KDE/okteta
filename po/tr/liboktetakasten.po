@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kdesdk-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-08-12 02:35+0000\n"
-"PO-Revision-Date: 2026-11-18 18:15+0300\n"
+"PO-Revision-Date: 2026-11-22 19:51+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -449,7 +449,7 @@ msgid ""
 "the source charset is not part of the target charset."
 msgstr ""
 "Eğer kaynak karakter kümesindeki karakteri hedef karakter kümesinin bir "
-"parçası değilse baytların öntanımlı bir bayt ile değiştirilip "
+"parçası değilse baytların varsayılan bir bayt ile değiştirilip "
 "değiştirilmeyeceğini seçer."
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:110
@@ -460,7 +460,7 @@ msgid ""
 "in the source charset is not part of the target charset."
 msgstr ""
 "Eğer kaynak karakter kümesindeki karakteri hedef karakter kümesinin bir "
-"parçası değilse baytların öntanımlı bir bayt ile değiştirilmesi için doğru "
+"parçası değilse baytların varsayılan bir bayt ile değiştirilmesi için doğru "
 "olarak ayarlayın."
 
 #: controllers/view/charsetconversion/charsetconversionview.cpp:126
@@ -3199,13 +3199,14 @@ msgstr ""
 #, kde-format
 msgctxt "@action:button"
 msgid "&Set as Default"
-msgstr "Ö&ntanımlı Olarak Ayarla"
+msgstr "&Varsayılan Olarak Ayarla"
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:91
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Sets the selected view profile as default for all views."
-msgstr "Seçili görünüm profilini tüm görünümler için öntanımlı olarak ayarlar."
+msgstr ""
+"Seçili görünüm profilini tüm görünümler için varsayılan olarak ayarlar."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:93
 #, kde-kuit-format
@@ -3214,8 +3215,8 @@ msgid ""
 "If you press the <interface>Set as Default</interface> button, the view "
 "profile you selected in the list is set as default for all views."
 msgstr ""
-"Eğer <interface>Öntanımlı Olarak Ayarla</interface> düğmesine basarsanız "
-"listeden seçtiğiniz görünüm profili tüm görünümler için öntanımlı olarak "
+"Eğer <interface>Varsayılan Olarak Ayarla</interface> düğmesine basarsanız "
+"listeden seçtiğiniz görünüm profili tüm görünümler için varsayılan olarak "
 "ayarlanacak."
 
 #: controllers/view/viewprofiles/viewprofilesmanagedialog.cpp:100
@@ -3518,7 +3519,7 @@ msgstr "Sıkıştırma düzeyi:"
 #, kde-format
 msgctxt "@item:inmenu compression level"
 msgid "Default"
-msgstr "Öntanımlı"
+msgstr "Varsayılan"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:41
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:43
@@ -3532,7 +3533,7 @@ msgstr "Sıkıştırma stratejisi:"
 #, kde-format
 msgctxt "@item:inmenu compression strategy"
 msgid "Default"
-msgstr "Öntanımlı"
+msgstr "Varsayılan"
 
 #: gui/io/streamcompressor/deflate/bytearraydeflatestreamcompressorconfigeditor.cpp:48
 #: gui/io/streamcompressor/gzip/bytearraygzipstreamcompressorconfigeditor.cpp:50
@@ -3620,7 +3621,7 @@ msgstr "Sıkıştırma önayarı düzeyi:"
 #, kde-format
 msgctxt "@item:inmenu compression preset level"
 msgid "Default"
-msgstr "Öntanımlı"
+msgstr "Varsayılan"
 
 #: gui/io/streamcompressor/xz/bytearrayxzstreamcompressorconfigeditor.cpp:42
 #, kde-format
