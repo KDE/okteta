@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: kdeutils\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-19 02:08+0000\n"
+"POT-Creation-Date: 2026-11-24 03:11+0000\n"
 "PO-Revision-Date: 2010-02-06 14:32+0000\n"
 "Last-Translator: Vilson Gjeci <vilsongjeci@gmail.com>\n"
 "Language-Team: Albanian <sq@li.org>\n"
@@ -81,27 +81,18 @@ msgctxt "@info:credit"
 msgid "Structures tool"
 msgstr ""
 
-#. i18n: ectx: Menu (permission)
-#: oktetaui.rc:15
-#, kde-format
-msgctxt "@title:menu"
-msgid "Permissions"
-msgstr "Lejet"
-
-#. i18n: ectx: Menu (windows)
-#: oktetaui.rc:67
-#, kde-format
-msgid "&Windows"
-msgstr "&Windows"
-
-#. i18n: ectx: ToolBar (mainToolBar)
-#: oktetaui.rc:80
-#, kde-format
-msgid "Main Toolbar"
-msgstr "Shiriti Kryesor"
-
 #: program.cpp:89
 #, kde-format
 msgctxt "@info"
 msgid "File(s) to load."
 msgstr ""
+
+#~ msgctxt "@title:menu"
+#~ msgid "Permissions"
+#~ msgstr "Lejet"
+
+#~ msgid "&Windows"
+#~ msgstr "&Windows"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "Shiriti Kryesor"

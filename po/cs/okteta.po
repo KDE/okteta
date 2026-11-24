@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-19 02:08+0000\n"
+"POT-Creation-Date: 2026-11-24 03:11+0000\n"
 "PO-Revision-Date: 2026-09-19 11:51+0200\n"
 "Last-Translator: Libor Filipek <libor.filipek@gmail.com>\n"
 "Language-Team: Czech <kde-i18n-doc@kde.org>\n"
@@ -76,27 +76,18 @@ msgctxt "@info:credit"
 msgid "Structures tool"
 msgstr "Nástroj struktur"
 
-#. i18n: ectx: Menu (permission)
-#: oktetaui.rc:15
-#, kde-format
-msgctxt "@title:menu"
-msgid "Permissions"
-msgstr "Oprávnění"
-
-#. i18n: ectx: Menu (windows)
-#: oktetaui.rc:67
-#, kde-format
-msgid "&Windows"
-msgstr "O&kna"
-
-#. i18n: ectx: ToolBar (mainToolBar)
-#: oktetaui.rc:80
-#, kde-format
-msgid "Main Toolbar"
-msgstr "Hlavní panel nástrojů"
-
 #: program.cpp:89
 #, kde-format
 msgctxt "@info"
 msgid "File(s) to load."
 msgstr "Soubor(y) k načtení."
+
+#~ msgctxt "@title:menu"
+#~ msgid "Permissions"
+#~ msgstr "Oprávnění"
+
+#~ msgid "&Windows"
+#~ msgstr "O&kna"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "Hlavní panel nástrojů"

@@ -17,7 +17,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: khexedit\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-19 02:08+0000\n"
+"POT-Creation-Date: 2026-11-24 03:11+0000\n"
 "PO-Revision-Date: 2026-09-27 09:27+0300\n"
 "Last-Translator: Alexander Yavorskiy <kekcuha@gmail.com>\n"
 "Language-Team: Russian <kde-russian@lists.kde.ru>\n"
@@ -90,30 +90,21 @@ msgctxt "@info:credit"
 msgid "Structures tool"
 msgstr "Инструмент структур"
 
-#. i18n: ectx: Menu (permission)
-#: oktetaui.rc:15
-#, kde-format
-msgctxt "@title:menu"
-msgid "Permissions"
-msgstr "Права доступа"
-
-#. i18n: ectx: Menu (windows)
-#: oktetaui.rc:67
-#, kde-format
-msgid "&Windows"
-msgstr "&Окна"
-
-#. i18n: ectx: ToolBar (mainToolBar)
-#: oktetaui.rc:80
-#, kde-format
-msgid "Main Toolbar"
-msgstr "Основная панель инструментов"
-
 #: program.cpp:89
 #, kde-format
 msgctxt "@info"
 msgid "File(s) to load."
 msgstr "Открываемые файлы."
+
+#~ msgctxt "@title:menu"
+#~ msgid "Permissions"
+#~ msgstr "Права доступа"
+
+#~ msgid "&Windows"
+#~ msgstr "&Окна"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "Основная панель инструментов"
 
 #, fuzzy
 #~ msgctxt "@title:menu submenu to select the view profile or change it"

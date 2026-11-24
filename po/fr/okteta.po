@@ -12,7 +12,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-19 02:08+0000\n"
+"POT-Creation-Date: 2026-11-24 03:11+0000\n"
 "PO-Revision-Date: 2026-09-20 10:05+0200\n"
 "Last-Translator: Xavier Besnard <xavier.besnard@kde.org>\n"
 "Language-Team: fr\n"
@@ -83,30 +83,21 @@ msgctxt "@info:credit"
 msgid "Structures tool"
 msgstr "Outil concernant les structures"
 
-#. i18n: ectx: Menu (permission)
-#: oktetaui.rc:15
-#, kde-format
-msgctxt "@title:menu"
-msgid "Permissions"
-msgstr "Droits d'accès"
-
-#. i18n: ectx: Menu (windows)
-#: oktetaui.rc:67
-#, kde-format
-msgid "&Windows"
-msgstr "&Fenêtres"
-
-#. i18n: ectx: ToolBar (mainToolBar)
-#: oktetaui.rc:80
-#, kde-format
-msgid "Main Toolbar"
-msgstr "Barre principale d'outils"
-
 #: program.cpp:89
 #, kde-format
 msgctxt "@info"
 msgid "File(s) to load."
 msgstr "Fichier(s) à charger."
+
+#~ msgctxt "@title:menu"
+#~ msgid "Permissions"
+#~ msgstr "Droits d'accès"
+
+#~ msgid "&Windows"
+#~ msgstr "&Fenêtres"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "Barre principale d'outils"
 
 #, fuzzy
 #~| msgctxt "@title:menu"

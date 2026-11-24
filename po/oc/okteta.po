@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: okteta\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-19 02:08+0000\n"
+"POT-Creation-Date: 2026-11-24 03:11+0000\n"
 "PO-Revision-Date: 2008-08-05 22:28+0200\n"
 "Last-Translator: Yannig Marchegay (Kokoyaya) <yannig@marchegay.org>\n"
 "Language-Team: Occitan (lengadocian) <ubuntu-l10n-oci@lists.ubuntu.com>\n"
@@ -76,31 +76,20 @@ msgctxt "@info:credit"
 msgid "Structures tool"
 msgstr ""
 
-#. i18n: ectx: Menu (permission)
-#: oktetaui.rc:15
-#, fuzzy, kde-format
-#| msgid "Permissions"
-msgctxt "@title:menu"
-msgid "Permissions"
-msgstr "Permissions"
-
-#. i18n: ectx: Menu (windows)
-#: oktetaui.rc:67
-#, kde-format
-msgid "&Windows"
-msgstr ""
-
-#. i18n: ectx: ToolBar (mainToolBar)
-#: oktetaui.rc:80
-#, kde-format
-msgid "Main Toolbar"
-msgstr "Barra d'espleches principala"
-
 #: program.cpp:89
 #, kde-format
 msgctxt "@info"
 msgid "File(s) to load."
 msgstr ""
+
+#, fuzzy
+#~| msgid "Permissions"
+#~ msgctxt "@title:menu"
+#~ msgid "Permissions"
+#~ msgstr "Permissions"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "Barra d'espleches principala"
 
 #~ msgctxt "@title:menu"
 #~ msgid "Insert"

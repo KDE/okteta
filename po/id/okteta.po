@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: \n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
-"POT-Creation-Date: 2026-09-19 02:08+0000\n"
+"POT-Creation-Date: 2026-11-24 03:11+0000\n"
 "PO-Revision-Date: 2022-09-27 17:35+0700\n"
 "Last-Translator: Wantoyèk <wantoyek@gmail.com>\n"
 "Language-Team: Indonesian <kde-i18n-doc@kde.org>\n"
@@ -84,28 +84,19 @@ msgctxt "@info:credit"
 msgid "Structures tool"
 msgstr "Perkakas struktur"
 
-#. i18n: ectx: Menu (permission)
-#: oktetaui.rc:15
-#, kde-format
-msgctxt "@title:menu"
-msgid "Permissions"
-msgstr "Perizinan"
-
-#. i18n: ectx: Menu (windows)
-#: oktetaui.rc:67
-#, kde-format
-msgid "&Windows"
-msgstr "&Jendela"
-
-#. i18n: ectx: ToolBar (mainToolBar)
-#: oktetaui.rc:80
-#, kde-format
-msgid "Main Toolbar"
-msgstr "Bilah Alat Utama"
-
 #: program.cpp:89
 #, fuzzy, kde-format
 #| msgid "File(s) to load."
 msgctxt "@info"
 msgid "File(s) to load."
 msgstr "File yang akan dimuat"
+
+#~ msgctxt "@title:menu"
+#~ msgid "Permissions"
+#~ msgstr "Perizinan"
+
+#~ msgid "&Windows"
+#~ msgstr "&Jendela"
+
+#~ msgid "Main Toolbar"
+#~ msgstr "Bilah Alat Utama"
