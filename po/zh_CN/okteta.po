@@ -79,13 +79,3 @@ msgstr ""
 msgctxt "@info"
 msgid "File(s) to load."
 msgstr ""
-
-#~ msgctxt "@title:menu"
-#~ msgid "Permissions"
-#~ msgstr "权限"
-
-#~ msgid "&Windows"
-#~ msgstr "窗口(&W)"
-
-#~ msgid "Main Toolbar"
-#~ msgstr "主工具栏"
