@@ -13,7 +13,7 @@ msgstr ""
 "Project-Id-Version: kdesdk-kde4\n"
 "Report-Msgid-Bugs-To: https://bugs.kde.org\n"
 "POT-Creation-Date: 2026-11-24 03:11+0000\n"
-"PO-Revision-Date: 2026-11-22 19:51+0300\n"
+"PO-Revision-Date: 2026-11-26 17:25+0300\n"
 "Last-Translator: Emir SARI <emir_sari@icloud.com>\n"
 "Language-Team: Turkish <kde-l10n-tr@kde.org>\n"
 "Language: tr\n"
@@ -587,7 +587,7 @@ msgid ""
 "the set minimum length."
 msgstr ""
 "Eğer <interface>Hesapla</interface> düğmesine basarsanız liste, seçili "
-"erimde bulunan ve en kısa uzunluğa sahip dizileri içerecek şekilde "
+"erimde bulunan ve en kısa uzunluğa sahip dizgeleri içerecek şekilde "
 "güncellenecektir."
 
 #: controllers/view/checksum/checksumview.cpp:92
@@ -1512,7 +1512,7 @@ msgstr "Değiştir"
 #, kde-format
 msgctxt "@info"
 msgid "Replace pattern not found in byte array."
-msgstr "Bayt dizilişinde bulunamayan dizgiyi değiştirin."
+msgstr "Bayt dizisinde bulunamayan dizgiyi değiştirin."
 
 #: controllers/view/replace/replacecontroller.cpp:81
 #: controllers/view/replace/replacecontroller.cpp:92
@@ -1535,14 +1535,14 @@ msgstr[1] "%1 değiştirme yapıldı."
 #, kde-kuit-format
 msgctxt "@info"
 msgid "End of byte array reached.<nl/>Continue from the beginning?"
-msgstr "Bayt dizilişinin sonuna gelindi.<nl/>En baştan başlanılsın mı?"
+msgstr "Bayt dizisinin sonuna gelindi.<nl/>En baştan başlanılsın mı?"
 
 #: controllers/view/replace/replacecontroller.cpp:96
 #: controllers/view/search/searchcontroller.cpp:125
 #, kde-kuit-format
 msgctxt "@info"
 msgid "Beginning of byte array reached.<nl/>Continue from the end?"
-msgstr "Bayt dizilişinin başına gelindi.<nl/>En sondan sürdürülsün mü?"
+msgstr "Bayt dizisinin başına gelindi.<nl/>En sondan sürdürülsün mü?"
 
 #: controllers/view/replace/replacedialog.cpp:30
 #, kde-format
@@ -1571,7 +1571,7 @@ msgid ""
 "replaced with the replacement bytes."
 msgstr ""
 "Eğer <interface>Değiştir</interface> düğmesine basarsanız yukarıda "
-"girdiğiniz baytlar bayt dizilişinde aranır ve bulunan kümeler değiştirme "
+"girdiğiniz baytlar bayt dizisinde aranır ve bulunan kümeler değiştirme "
 "baytlarıyla değiştirilir."
 
 #: controllers/view/replace/replacedialog.cpp:44
@@ -1636,7 +1636,7 @@ msgstr "Değiştir"
 #, kde-format
 msgctxt "@info"
 msgid "Search key not found in byte array."
-msgstr "Bayt dizilişinde arama anahtarı bulunamadı."
+msgstr "Bayt dizisinde arama anahtarı bulunamadı."
 
 #: controllers/view/search/searchdialog.cpp:26
 #, kde-format
@@ -1664,7 +1664,7 @@ msgid ""
 "above are searched for within the byte array."
 msgstr ""
 "Eğer <interface>Bul</interface> düğmesine basarsanız yukarıya yazılan "
-"baytlar bayt dizilişi içinde aranır."
+"baytlar bayt dizisi içinde aranır."
 
 #: controllers/view/search/searchtool.cpp:51
 #, kde-format
@@ -1734,25 +1734,25 @@ msgstr "Ofset"
 #, kde-format
 msgctxt "@title:column string extracted from the byte array"
 msgid "String"
-msgstr "Dizi"
+msgstr "Dizge"
 
 #: controllers/view/stringsextract/stringsextracttool.cpp:52
 #, kde-format
 msgctxt "@title:window of the tool to extract strings"
 msgid "Strings"
-msgstr "Diziler"
+msgstr "Dizgeler"
 
 #: controllers/view/stringsextract/stringsextracttoolviewfactory.cpp:25
 #, kde-format
 msgctxt "@title:window"
 msgid "Strings"
-msgstr "Diziler"
+msgstr "Dizgeler"
 
 #: controllers/view/stringsextract/stringsextractview.cpp:54
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Copies the selected strings to the clipboard."
-msgstr "Seçili diziyi panoya kopyalar."
+msgstr "Seçili dizgeyi panoya kopyalar."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:56
 #, kde-kuit-format
@@ -1762,7 +1762,7 @@ msgid ""
 "selected in the list are copied to the clipboard."
 msgstr ""
 "Eğer <interface>Kopyala</interface> düğmesine basarsanız listeden seçtiğiniz "
-"tüm diziler panoya kopyalanır."
+"tüm dizgeler panoya kopyalanır."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:62
 #, kde-format
@@ -1774,7 +1774,7 @@ msgstr "Göster"
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Shows the selected string in the view."
-msgstr "Görünümde seçili diziyi gösterir."
+msgstr "Görünümde seçili dizgeyi gösterir."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:66
 #, kde-kuit-format
@@ -1783,14 +1783,14 @@ msgid ""
 "If you press the <interface>Go to</interface> button, the string which was "
 "last selected is marked and shown in the view."
 msgstr ""
-"Eğer <interface>Atla</interface> düğmesine basarsanız son seçili dizi "
+"Eğer <interface>Atla</interface> düğmesine basarsanız son seçili dizge "
 "işaretlenir ve görüntülenir."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:81
 #, kde-format
 msgctxt "@info:tooltip"
 msgid "Selects the selected string in the view."
-msgstr "Görünümdeki seçili diziyi seçer."
+msgstr "Görünümdeki seçili dizgeyi seçer."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:99
 #, kde-format
@@ -1811,7 +1811,7 @@ msgctxt "@info:tooltip"
 msgid ""
 "Finds the strings contained in the selected range and lists them in the view "
 "below."
-msgstr "Seçili erimde bulunan dizileri bulur ve aşağıda listeler."
+msgstr "Seçili erimde bulunan dizgeleri bulur ve aşağıda listeler."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:116
 #, kde-kuit-format
@@ -1822,7 +1822,7 @@ msgid ""
 "found will be listed in the view below."
 msgstr ""
 "Eğer <interface>Çıkar</interface> düğmesine basarsanız seçili erimdeki en "
-"kısa uzunluğa sahip tüm diziler aranır. Bulunan diziler aşağıda listelenir."
+"kısa uzunluğa sahip tüm dizgeler aranır. Bulunan dizgeler aşağıda listelenir."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:127
 #, kde-format
@@ -1846,15 +1846,15 @@ msgstr "Dizi yok"
 #, kde-format
 msgctxt "@info"
 msgid "No strings extracted."
-msgstr "Çıkarılan dizi yok."
+msgstr "Çıkarılan dizge yok."
 
 #: controllers/view/stringsextract/stringsextractview.cpp:371
 #, kde-format
 msgctxt "@info"
 msgid "1 string extracted."
 msgid_plural "%1 strings extracted."
-msgstr[0] "1 dizi çıkarıldı."
-msgstr[1] "%1 dizi çıkarıldı."
+msgstr[0] "1 dizge çıkarıldı."
+msgstr[1] "%1 dizge çıkarıldı."
 
 #: controllers/view/structures/datatypes/array/complexarraydata.cpp:104
 #, kde-format
@@ -2111,7 +2111,7 @@ msgstr "ASCII karakteri"
 #: controllers/view/structures/datatypes/strings/asciistringdata.cpp:148
 #, kde-format
 msgid "ASCII string"
-msgstr "ASCII dizisi"
+msgstr "ASCII dizgesi"
 
 #: controllers/view/structures/datatypes/strings/ebcdicstringdata.cpp:136
 #, kde-format
@@ -2121,7 +2121,7 @@ msgstr "EBCDIC karakteri"
 #: controllers/view/structures/datatypes/strings/ebcdicstringdata.cpp:146
 #, kde-format
 msgid "EBCDIC string"
-msgstr "EBCDIC dizisi"
+msgstr "EBCDIC dizgesi"
 
 #: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:130
 #, kde-format
@@ -2131,7 +2131,7 @@ msgstr "Latin1 karakteri"
 #: controllers/view/structures/datatypes/strings/latin1stringdata.cpp:140
 #, kde-format
 msgid "Latin1 string"
-msgstr "Latin1 dizisi"
+msgstr "Latin1 dizgesi"
 
 #: controllers/view/structures/datatypes/strings/stringdatainformation.cpp:317
 #, kde-format
@@ -2151,12 +2151,12 @@ msgstr "UTF16-BE karakteri"
 #: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:35
 #, kde-format
 msgid "UTF16-LE string"
-msgstr "UTF16-LE dizisi"
+msgstr "UTF16-LE dizgesi"
 
 #: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:35
 #, kde-format
 msgid "UTF16-BE string"
-msgstr "UTF16-BE dizisi"
+msgstr "UTF16-BE dizgesi"
 
 #: controllers/view/structures/datatypes/strings/utf16stringdata.cpp:54
 #: controllers/view/structures/datatypes/strings/utf32stringdata.cpp:54
@@ -2188,12 +2188,12 @@ msgstr "UTF32-BE karakteri"
 #: controllers/view/structures/datatypes/strings/utf32stringdata.cpp:35
 #, kde-format
 msgid "UTF32-LE string"
-msgstr "UTF32-LE dizisi"
+msgstr "UTF32-LE dizgesi"
 
 #: controllers/view/structures/datatypes/strings/utf32stringdata.cpp:35
 #, kde-format
 msgid "UTF32-BE string"
-msgstr "UTF32-BE dizisi"
+msgstr "UTF32-BE dizgesi"
 
 #: controllers/view/structures/datatypes/strings/utf8stringdata.cpp:30
 #, kde-format
@@ -2203,7 +2203,7 @@ msgstr "UTF8 char"
 #: controllers/view/structures/datatypes/strings/utf8stringdata.cpp:35
 #, kde-format
 msgid "UTF8 string"
-msgstr "UTF8 dizisi"
+msgstr "UTF8 dizgesi"
 
 #: controllers/view/structures/datatypes/structuredatainformation.cpp:28
 #: controllers/view/structures/datatypes/taggeduniondatainformation.cpp:40
@@ -3273,7 +3273,7 @@ msgstr "&Boyut (bayt türünden):"
 #, kde-format
 msgctxt "@info:whatsthis"
 msgid "Enter the size of the bytearray to generate."
-msgstr "Oluşturulacak bayt dizilişinin boyutunu girin."
+msgstr "Oluşturulacak bayt dizisinin boyutunu girin."
 
 #: gui/io/generator/randomdata/bytearrayrandomdatageneratorconfigeditor.cpp:49
 #, kde-format
