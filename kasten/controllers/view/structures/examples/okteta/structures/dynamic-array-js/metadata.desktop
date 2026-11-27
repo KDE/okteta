@@ -22,7 +22,7 @@ Name[ru]=Пример массивов переменной длины (JS)
 Name[sk]=Testovaine polí dynamickej dĺžky
 Name[sl]=Preizkušanje polj dinamične dolžine (JS)
 Name[sv]=Testar fält med dynamisk längd (JS)
-Name[tr]=Hareketli uzunluk dizilişleri sınanıyor (JS)
+Name[tr]=Hareketli uzunluk dizileri sınanıyor (JS)
 Name[uk]=Тестування масивів зі змінною розмірністю (JS)
 Comment=A test structure for dynamic arrays (JS)
 Comment[ar]=بنية اختبار للمصفوفات الديناميكية (JS)
@@ -43,7 +43,7 @@ Comment[ru]=Пример структуры динамического масс�
 Comment[sk]=Testovacia štruktúra pre dynamické polia
 Comment[sl]=Preizkusna struktura za dinamična polja (JS)
 Comment[sv]=En teststruktur för dynamiska fält (JS)
-Comment[tr]=Hareketli uzunluk dizilişleri için bir sınama yapısı (JS)
+Comment[tr]=Hareketli uzunluk dizileri için bir sınama yapısı (JS)
 Comment[uk]=Тестова структура для динамічних масивів (JS)
 
 X-KDE-PluginInfo-Author=Alex Richardson
